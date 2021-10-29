@@ -1,0 +1,28 @@
+# [BE/FE] Type: Message 
+# Title은 최대 50글자 정도로만 입력
+# Title을 아랫줄에 작성, Title 끝에 마침표 금지, 무엇을 했는지 명확하게 작성
+### ex)
+### [FE] feat: message
+
+# --- Body ---
+# 본문 내용을 아랫줄에 작성 (commit의 상세내용, 부가적인 설명 등)
+### ex) 
+### - OOO 기능 구현
+### - XXX 기능 수정
+
+# --- Footer ---
+# 꼬릿말을 아랫줄에 작성 (해당 commit과 관련된 이슈 번호 등을 추가)
+### - issue (#1)
+### - ref (#2)
+
+# --- Type ---
+#   feat    : 새로운 기능 추가
+#   fix     : 버그 수정
+#   style   : 코드 의미에 영향을 주지 않는 변경사항 (세미콜론, 줄 간격 등등)
+#   design  : HTML, CSS, UI 수정
+#   refactor: 코드 리팩토링
+#   test    : 모든 테스트 작업
+#   docs    : 문서 추가 및 수정
+#   chore   : 빌드 부분, 패키지 매니저, 세팅 관련 파일 추가 및 수정
+#   rename  : 파일 네이밍 변경
+#   remove  : 파일 제거
