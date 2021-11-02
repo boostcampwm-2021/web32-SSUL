@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import Category from './input-contents/Category';
-import Personnel from './input-contents/Personnel';
-import TechStack from './input-contents/TeckStack';
-import GroupInfo from './input-contents/GroupInfo';
-import StartDate from './input-contents/StartDate';
+import Category from './Category';
+import Personnel from './Personnel';
+import TechStack from './TechStack';
+import GroupInfo from './GroupInfo';
+import StartDate from './StartDate';
 import GageBar from './GageBar';
 import styled from '@emotion/styled';
 
-function GroupCreate(): JSX.Element {
+function CreateGroupPage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   
   const getContents = () : JSX.Element | null =>{
@@ -62,4 +62,4 @@ const ButtonWrapper = styled.div`
   display: flex;
   
 `
-export default GroupCreate;
+export default CreateGroupPage;

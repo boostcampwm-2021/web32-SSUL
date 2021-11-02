@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
+
 function Category(): JSX.Element {
   return(
     <Contents>Category Input</Contents>
