@@ -23,13 +23,13 @@ export class ApplyGroup {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'user_id', referencedColumnName: 'userId' }])
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Group, (group) => group.applyGroups, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'groupId' }])
+  @JoinColumn({ name: 'group_id' })
   group: Group;
 }

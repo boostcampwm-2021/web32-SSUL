@@ -20,13 +20,13 @@ export class GroupEnrollment {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'user_id', referencedColumnName: 'id' }])
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Group, (group) => group.groupEnrollments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'id' }])
+  @JoinColumn({ name: 'group_id' })
   group: Group;
 }
