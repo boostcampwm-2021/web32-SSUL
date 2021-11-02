@@ -13,8 +13,8 @@ function Header(): JSX.Element {
         <Logo />
         <Navigation />
         <RoleSwitch />
-        <Notification />
         <Messanger />
+        <Notification />
         {/* 프로필 버튼 */}
       </Content>
     </Container>
