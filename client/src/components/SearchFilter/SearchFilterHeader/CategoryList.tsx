@@ -17,7 +17,8 @@ function CategoryList(): JSX.Element {
   return (
     <Container>
       {dummyData.map((category, idx) => {
-        return <CategoryListItem key={idx}>{category}</CategoryListItem>;
+        if (idx === 4) return <CategoryItemSelect key={idx}>{category}</CategoryItemSelect>;
+        else return <CategoryItem key={idx}>{category}</CategoryItem>;
       })}
     </Container>
   );
@@ -29,12 +30,24 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const CategoryListItem = styled.div`
+const CategoryItem = styled.div`
   display: flex;
   margin: 5px;
   padding: 10px;
 
-  background: ${(props) => props.theme.White};
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Gray5};
+  box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
+  border-radius: 10px;
+`;
+
+const CategoryItemSelect = styled.div`
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Primary};
   box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;

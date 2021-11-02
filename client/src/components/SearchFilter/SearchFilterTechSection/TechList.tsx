@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const dummyData = ['express', 'react', 'node.js', 'test'];
+const dummyData = ['express', 'react', 'node.js', 'javascript', 'typescript', 'java'];
 
 function TechList(): JSX.Element {
   return (
@@ -14,11 +14,14 @@ function TechList(): JSX.Element {
 }
 
 const Container = styled.div`
-  display: flex;
+  display: grid;
   margin: 10px;
 
+  grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
+  grid-template-rows: repeat(auo-fit, minmax(100px, 2fr));
+
   background: ${(props) => props.theme.White};
-  box-shadow: 5px 5px 25px 0px rgba(41, 36, 36, 0.25);
+  box-shadow: 0px 0px 30px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;
 
@@ -27,8 +30,9 @@ const TechListItem = styled.div`
   margin: 10px;
   padding: 10px;
 
-  background: ${(props) => props.theme.White};
-  box-shadow: 5px 5px 25px 0px rgba(41, 36, 36, 0.25);
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Gray5};
+  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;
 

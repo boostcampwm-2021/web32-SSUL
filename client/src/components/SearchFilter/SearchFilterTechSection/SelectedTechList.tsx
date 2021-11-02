@@ -27,8 +27,9 @@ const SelectItem = styled.div`
   margin: 10px;
   padding: 10px;
 
-  background: ${(props) => props.theme.White};
-  box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25);
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Primary};
+  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;
 
