@@ -33,7 +33,7 @@ function CreateGroupPage(): JSX.Element {
   
   return (
     <CreateForm>
-      <GageBar/>
+      <GageBar contentsNumber={contentsNumber}/>
       <ContentsContainer>
         {getContents()}
       </ContentsContainer>
@@ -47,10 +47,10 @@ function CreateGroupPage(): JSX.Element {
 
 const CreateForm = styled.div`
   position: relative;
-  margin: 100px auto;
+  padding: 20px;
+  margin: 100px auto 0 auto;
   width: 600px;
   height: 600px;
-  opacity: 0.4;
   box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25), -20px -20px 0px 6px #FFFFFF;
   border-radius: 40px;
 `;
