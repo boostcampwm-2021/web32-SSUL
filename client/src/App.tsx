@@ -1,7 +1,12 @@
 import React from 'react';
+import { Header } from './components';
 
 function App(): JSX.Element {
-  return <div> WEB_32 - SSUL</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
