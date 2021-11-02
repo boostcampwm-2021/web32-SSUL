@@ -34,8 +34,8 @@ const CategoryListItem = styled.div`
   margin: 5px;
   padding: 10px;
 
-  background: ${(props) => props.theme.Gray4};
-  box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25);
+  background: ${(props) => props.theme.White};
+  box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;
 

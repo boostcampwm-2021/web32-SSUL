@@ -19,8 +19,8 @@ const Container = styled.div`
   margin: 20px;
   padding: 10px;
 
-  background: ${(props) => props.theme.Gray4};
-  box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25);
+  background: ${(props) => props.theme.Primary};
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
 

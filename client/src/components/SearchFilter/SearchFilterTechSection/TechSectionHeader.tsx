@@ -16,8 +16,8 @@ const Container = styled.div`
   display: flex;
   margin: 10px;
 
-  background: ${(props) => props.theme.Gray4};
-  box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25);
+  background: ${(props) => props.theme.White};
+  box-shadow: 5px 5px 25px 0px rgba(41, 36, 36, 0.25);
   border-radius: 40px;
 `;
 
