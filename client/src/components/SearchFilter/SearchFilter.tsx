@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import SearchFilterHeader from './SearchFilterHeader';
-import SearchFilterTechSection from './SearchFilterTechSection';
+import SearchFilterHeader from './Header/SearchFilterHeader';
+import SearchFilterTechSection from './TechSection/SearchFilterTechSection';
 
 function SearchFilter(): JSX.Element {
   return (
