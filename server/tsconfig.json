@@ -10,7 +10,15 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "outDir": "./build",
+    "paths": {
+      "@domains/*": ["domains/*"],
+      "@common/*": ["common/*"],
+      "@utils/*": ["utils/*"],
+      "@infra/*": ["infra/*"],
+      "@api/*": ["api/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"]
