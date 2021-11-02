@@ -21,12 +21,12 @@ function CreateGroupPage(): JSX.Element {
     }
   }
   
-  const clickPrev = () =>{
+  const clickPrevContents = () =>{
     if(contentsNumber > 0)
       setContentsNumber(contentsNumber-1);
   }
   
-  const clickNext = () =>{
+  const clickNextContents = () =>{
     if(contentsNumber < 4)
       setContentsNumber(contentsNumber+1);
   }
@@ -34,10 +34,12 @@ function CreateGroupPage(): JSX.Element {
   return (
     <CreateForm>
       <GageBar/>
-      {getContents()}
+      <ContentsContainer>
+        {getContents()}
+      </ContentsContainer>
       <ButtonWrapper>
-        <button onClick={clickPrev}>이전</button>
-        <button onClick={clickNext}>다음</button>
+        <button onClick={clickPrevContents}>이전</button>
+        <button onClick={clickNextContents}>다음</button>
       </ButtonWrapper>
     </CreateForm>
   )
@@ -51,7 +53,13 @@ const CreateForm = styled.div`
   opacity: 0.4;
   box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25), -20px -20px 0px 6px #FFFFFF;
   border-radius: 40px;
-`
+`;
+
+const ContentsContainer = styled.div`
+  margin: 100px auto;
+  height: 400px;
+  text-align: center;
+`;
 
 const ButtonWrapper = styled.div`
   position: absolute;
