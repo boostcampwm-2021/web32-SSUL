@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import RoleSwitch from './RoleSwitch';
+import Notification from './Notification';
+import Messanger from './Messanger';
 
 function Header(): JSX.Element {
   return (
@@ -11,7 +13,8 @@ function Header(): JSX.Element {
         <Logo />
         <Navigation />
         <RoleSwitch />
-        {/* 알림 버튼 */}
+        <Notification />
+        <Messanger />
         {/* 프로필 버튼 */}
       </Content>
     </Container>
