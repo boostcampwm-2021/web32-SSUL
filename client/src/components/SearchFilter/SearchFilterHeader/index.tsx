@@ -16,6 +16,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80vw;
+  min-width: 1000px;
   margin: 20px;
   padding: 10px;
 
