@@ -1,14 +1,43 @@
-import React from 'react';
-import styled from "@emotion/styled";
+import React, {useState} from 'react';
+import Category from './input-contents/Category';
+import Personnel from './input-contents/Personnel';
+import TechStack from './input-contents/TeckStack';
+import GroupInfo from './input-contents/GroupInfo';
+import StartDate from './input-contents/StartDate';
+import GageBar from './GageBar';
+import styled from '@emotion/styled';
 
 function GroupCreate(): JSX.Element {
+  const [contentsNumber, setContentsNumber] = useState<number>(0);
+  
+  const getContents = () : JSX.Element | null =>{
+    switch (contentsNumber){
+      case 0: return <Category/>;
+      case 1: return <Personnel/>;
+      case 2: return <TechStack/>;
+      case 3: return <GroupInfo/>;
+      case 4: return <StartDate/>;
+      default: return null;
+    }
+  }
+  
+  const clickPrev = () =>{
+    if(contentsNumber > 0)
+      setContentsNumber(contentsNumber-1);
+  }
+  
+  const clickNext = () =>{
+    if(contentsNumber < 4)
+      setContentsNumber(contentsNumber+1);
+  }
+  
   return (
     <CreateForm>
-      <div>Gage bar</div>
-      <div>Contents</div>
+      <GageBar/>
+      {getContents()}
       <ButtonWrapper>
-        <button>이전</button>
-        <button>다음</button>
+        <button onClick={clickPrev}>이전</button>
+        <button onClick={clickNext}>다음</button>
       </ButtonWrapper>
     </CreateForm>
   )
