@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ChatIcon from '../../../assets/icon_chat.svg';
 
-function Messanger(): JSX.Element {
+function Messenger(): JSX.Element {
   return (
     <Container>
       <ChatButton src={ChatIcon} />
@@ -19,4 +19,4 @@ const ChatButton = styled.img`
   width: 19px;
 `;
 
-export default Messanger;
+export default Messenger;

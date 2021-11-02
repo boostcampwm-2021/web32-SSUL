@@ -4,7 +4,7 @@ import Logo from './Logo';
 import Navigation from './Navigation';
 import RoleSwitch from './RoleSwitch';
 import Notification from './Notification';
-import Messanger from './Messanger';
+import Messenger from './Messenger';
 import Profile from './Profile';
 
 function Header(): JSX.Element {
@@ -14,7 +14,7 @@ function Header(): JSX.Element {
         <Logo />
         <Navigation />
         <RoleSwitch />
-        <Messanger />
+        <Messenger />
         <Notification />
         <Profile />
       </Content>
