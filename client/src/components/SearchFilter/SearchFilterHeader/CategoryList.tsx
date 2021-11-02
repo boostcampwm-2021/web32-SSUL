@@ -14,14 +14,12 @@ const dummyData = [
 ];
 
 function CategoryList(): JSX.Element {
-  return (
-    <Container>
-      {dummyData.map((category, idx) => {
-        if (idx === 4) return <CategoryItemSelect key={idx}>{category}</CategoryItemSelect>;
-        else return <CategoryItem key={idx}>{category}</CategoryItem>;
-      })}
-    </Container>
-  );
+  const categoryItems = dummyData.map((category, idx) => {
+    if (idx === 4) return <CategoryItemSelect key={category}>{category}</CategoryItemSelect>;
+    else return <CategoryItem key={idx}>{category}</CategoryItem>;
+  });
+
+  return <Container>{categoryItems}</Container>;
 }
 
 const Container = styled.div`

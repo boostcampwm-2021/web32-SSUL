@@ -4,18 +4,16 @@ import styled from '@emotion/styled';
 const dummyData = ['express', 'react', 'node.js', 'test'];
 
 function SelectedTechList(): JSX.Element {
-  return (
-    <Container>
-      {dummyData.map((category, idx) => {
-        return (
-          <SelectItem key={idx}>
-            <h4>{category}</h4>
-            <EraseButton>X</EraseButton>
-          </SelectItem>
-        );
-      })}
-    </Container>
-  );
+  const selectedTechList = dummyData.map((category, idx) => {
+    return (
+      <SelectItem key={idx}>
+        <h4>{category}</h4>
+        <EraseButton>X</EraseButton>
+      </SelectItem>
+    );
+  });
+
+  return <Container>{selectedTechList}</Container>;
 }
 
 const Container = styled.div`

@@ -4,13 +4,11 @@ import styled from '@emotion/styled';
 const dummyData = ['express', 'react', 'node.js', 'javascript', 'typescript', 'java'];
 
 function TechList(): JSX.Element {
-  return (
-    <Container>
-      {dummyData.map((category, idx) => {
-        return <TechListItem key={idx}>{category}</TechListItem>;
-      })}
-    </Container>
-  );
+  const techList = dummyData.map((category, idx) => {
+    return <TechListItem key={idx}>{category}</TechListItem>;
+  });
+
+  return <Container>{techList}</Container>;
 }
 
 const Container = styled.div`
