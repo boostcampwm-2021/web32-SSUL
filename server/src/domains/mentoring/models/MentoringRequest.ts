@@ -1,15 +1,11 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { Mentor } from './Mentor';
-import { Group } from './Group';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Mentor } from '@domains/mentoring/models/Mentor';
+import { Group } from '@domains/group/models/Group';
 
-@Index('FK_GROUP_TO_MENTORING_REQUEST_1', ['groupId'], {})
-@Entity('mentoring_request', { schema: 'ssul-local' })
+@Entity('mentoring_request')
 export class MentoringRequest {
-  @Column('int', { primary: true, name: 'mentor_id' })
-  mentorId: number;
-
-  @Column('int', { primary: true, name: 'group_id' })
-  groupId: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
@@ -18,13 +14,13 @@ export class MentoringRequest {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'mentor_id', referencedColumnName: 'mentorId' }])
+  @JoinColumn({ name: 'mentor_id' })
   mentor: Mentor;
 
   @ManyToOne(() => Group, (group) => group.mentoringRequests, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'groupId' }])
+  @JoinColumn({ name: 'group_id' })
   group: Group;
 }

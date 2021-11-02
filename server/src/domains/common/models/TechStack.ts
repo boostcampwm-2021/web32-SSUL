@@ -1,14 +1,11 @@
-import { Column, Entity, OneToMany } from "typeorm";
-import { UsingTechStack } from "./UsingTechStack";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UsingTechStack } from './UsingTechStack';
 
-@Entity("tech_stack", { schema: "ssul-local" })
+@Entity('tech_stack')
 export class TechStack {
-  @Column("int", { primary: true, name: "tech_stack_id" })
-  techStackId: number;
+  @PrimaryGeneratedColumn({ name: 'tech_stack_id' })
+  id: number;
 
-  @Column("varchar", { name: "name", length: 255 })
+  @Column('varchar', { name: 'name', length: 255 })
   name: string;
-
-  @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.techStack)
-  usingTechStacks: UsingTechStack[];
 }

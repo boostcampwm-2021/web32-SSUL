@@ -1,18 +1,20 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { User } from '../../user/models/User';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '@domains/user/models/User';
 import { Group } from './Group';
 
-@Index('FK_GROUP_TO_APPLY_GROUP_1', ['groupId'], {})
-@Entity('apply_group', { schema: 'ssul-local' })
+export enum ApplyGroupState {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  DECLIEND = 'DECLINED',
+}
+
+@Entity('apply_group')
 export class ApplyGroup {
-  @Column('int', { primary: true, name: 'user_id' })
-  userId: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('int', { primary: true, name: 'group_id' })
-  groupId: number;
-
-  @Column('varchar', { name: 'state', length: 20 })
-  state: string;
+  @Column({ type: 'enum', enum: ApplyGroupState })
+  state: ApplyGroupState;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;

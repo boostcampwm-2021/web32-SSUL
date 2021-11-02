@@ -1,16 +1,26 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { AlarmType } from '@domains/common/enums';
+import { User } from '@domains/user/models/User';
 
-@Entity('alarm', { schema: 'ssul-local' })
+@Entity('alarm')
 export class Alarm {
-  @Column('int', { primary: true, name: 'alarm_id' })
-  alarmId: number;
+  @PrimaryGeneratedColumn({ name: 'alarm_id' })
+  id: number;
 
-  @Column('int', { name: 'sender_id' })
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'sender_id' })
   senderId: number;
 
-  @Column('int', { name: 'reciever_id' })
+  @ManyToOne(() => User)
+  @Column({ name: 'reciever_id' })
   recieverId: number;
+
+  @Column({
+    name: 'type',
+    type: 'enum',
+    enum: AlarmType,
+  })
+  type: AlarmType;
 
   @Column('varchar', { name: 'content', nullable: true, length: 255 })
   content: string | null;

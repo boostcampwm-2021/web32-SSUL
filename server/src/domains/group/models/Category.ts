@@ -1,9 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('category', { schema: 'ssul-local' })
+@Entity('category')
 export class Category {
-  @Column('int', { primary: true, name: 'category_id' })
-  categoryId: number;
+  @PrimaryGeneratedColumn({ name: 'category_id' })
+  id: number;
 
   @Column('int', { name: 'group_id' })
   groupId: number;

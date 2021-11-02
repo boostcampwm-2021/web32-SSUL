@@ -1,11 +1,13 @@
-import { Column, Entity, OneToMany } from 'typeorm';
-import { ApplyGroup } from '../../group/models/ApplyGroup';
-import { GroupEnrollment } from './GroupEnrollment';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { ApplyGroup } from '@domains/group/models/ApplyGroup';
+import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
+import { Profile } from './Profile';
+import { Alarm } from '@domains/alarm/models/Alarm';
 
-@Entity('user', { schema: 'ssul-local' })
+@Entity('user')
 export class User {
-  @Column('int', { primary: true, name: 'user_id' })
-  userId: number;
+  @PrimaryGeneratedColumn({ name: 'user_id' })
+  id: number;
 
   @Column('int', { name: 'github_id' })
   githubId: number;
@@ -24,4 +26,10 @@ export class User {
 
   @OneToMany(() => GroupEnrollment, (groupEnrollment) => groupEnrollment.user)
   groupEnrollments: GroupEnrollment[];
+
+  @OneToOne(() => Profile)
+  profile: Profile;
+
+  @OneToMany(() => Alarm, (alarm) => alarm.recieverId)
+  receivedAlarms: Alarm[];
 }

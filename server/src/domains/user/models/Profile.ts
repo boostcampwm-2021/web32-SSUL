@@ -1,13 +1,15 @@
-import { Column, Entity, OneToMany } from 'typeorm';
-import { UsingTechStack } from './UsingTechStack';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
+import { UsingTechStack } from '@domains/common/models/UsingTechStack';
+import { User } from '@domains/user/models/User';
 
-@Entity('profile', { schema: 'ssul-local' })
+@Entity('profile')
 export class Profile {
-  @Column('int', { primary: true, name: 'profile_id' })
-  profileId: number;
+  @PrimaryGeneratedColumn({ name: 'profile_id' })
+  id: number;
 
-  @Column('int', { name: 'user_id' })
-  userId: number;
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  userId: User;
 
   @Column('float', { name: 'fever_stack', precision: 12 })
   feverStack: number;

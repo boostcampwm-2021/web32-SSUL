@@ -1,13 +1,19 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
-import { GroupEnrollment } from '../../../../mm/entities/GroupEnrollment';
-import { MentoringRequest } from '../../mentoring/models/MentoringRequest';
-import { UsingTechStack } from '../../../../mm/entities/UsingTechStack';
+import { GroupEnrollment } from './GroupEnrollment';
+import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
+import { UsingTechStack } from '@domains/common/models/UsingTechStack';
+
+export enum GroupState {
+  READY = 'READY',
+  DOING = 'DOING',
+  END = 'END',
+}
 
 @Entity('group', { schema: 'ssul-local' })
 export class Group {
-  @Column('int', { primary: true, name: 'group_id' })
-  groupId: number;
+  @PrimaryGeneratedColumn({ name: 'group_id' })
+  id: number;
 
   @Column('int', { name: 'mentor_id' })
   mentorId: number;
@@ -33,8 +39,8 @@ export class Group {
   @Column('datetime', { name: 'end_at', nullable: true })
   endAt: Date | null;
 
-  @Column('varchar', { name: 'status', length: 10 })
-  status: string;
+  @Column({ name: 'status', type: 'enum', enum: GroupState, default: GroupState.READY })
+  status: GroupState;
 
   @OneToMany(() => ApplyGroup, (applyGroup) => applyGroup.group)
   applyGroups: ApplyGroup[];

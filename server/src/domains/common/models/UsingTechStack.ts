@@ -1,42 +1,32 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { Group } from './Group';
-import { Profile } from './Profile';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Group } from '@domains/group/models/Group';
+import { Profile } from '@domains/user/models/Profile';
 import { TechStack } from './TechStack';
+import { UsingTechAs } from '@domains/common/enums';
 
-@Index('FK_GROUP_TO_USING_TECH_STACK_1', ['groupId'], {})
-@Index('FK_TECH_STACK_TO_USING_TECH_STACK_1', ['techStackId'], {})
-@Entity('using_tech_stack', { schema: 'ssul-local' })
+@Entity('using_tech_stack')
 export class UsingTechStack {
-  @Column('int', { primary: true, name: 'profile_id' })
-  profileId: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('int', { primary: true, name: 'group_id' })
-  groupId: number;
-
-  @Column('int', { primary: true, name: 'tech_stack_id' })
-  techStackId: number;
-
-  @Column('varchar', { name: 'type', length: 20 })
+  @Column({ type: 'enum', enum: UsingTechAs })
   type: string;
 
   @ManyToOne(() => Group, (group) => group.usingTechStacks, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'groupId' }])
-  group: Group;
+  @JoinColumn([{ name: 'group_id', referencedColumnName: 'id' }])
+  group: Group | null;
 
   @ManyToOne(() => Profile, (profile) => profile.usingTechStacks, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'profile_id', referencedColumnName: 'profileId' }])
-  profile: Profile;
+  @JoinColumn([{ name: 'profile_id', referencedColumnName: 'id' }])
+  profile: Profile | null;
 
-  @ManyToOne(() => TechStack, (techStack) => techStack.usingTechStacks, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-  })
-  @JoinColumn([{ name: 'tech_stack_id', referencedColumnName: 'techStackId' }])
+  @OneToOne(() => TechStack)
+  @JoinColumn({ name: 'tech_stack_id' })
   techStack: TechStack;
 }

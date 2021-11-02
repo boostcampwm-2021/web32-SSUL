@@ -1,12 +1,15 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { JoinColumn, Entity, OneToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { MentoringRequest } from './MentoringRequest';
+import { User } from '@domains/user/models/User';
 
-@Entity('mentor', { schema: 'ssul-local' })
+@Entity('mentor')
 export class Mentor {
-  @Column('int', { primary: true, name: 'mentor_id' })
-  mentorId: number;
+  @PrimaryGeneratedColumn({ name: 'mentor_id' })
+  id: number;
 
-  @Column('int', { name: 'user_id' })
+  //TODO:need cascade
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
   userId: number;
 
   @OneToMany(() => MentoringRequest, (mentoringRequest) => mentoringRequest.mentor)

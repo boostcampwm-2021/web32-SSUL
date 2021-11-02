@@ -1,30 +1,32 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { User } from './User';
+import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { User } from '@domains/user/models/User';
 import { Group } from './Group';
 
-@Index('FK_GROUP_TO_GROUP_ENROLLMENT_1', ['groupId'], {})
-@Entity('group_enrollment', { schema: 'ssul-local' })
+export enum GroupEnrollmentAs {
+  OWNER = 'OWENR',
+  MENTOR = 'MENTOR',
+  MENTEE = 'MENTEE',
+}
+
+@Entity('group_enrollment')
 export class GroupEnrollment {
-  @Column('int', { primary: true, name: 'user_id' })
-  userId: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('int', { primary: true, name: 'group_id' })
-  groupId: number;
-
-  @Column('varchar', { name: 'type', length: 20 })
-  type: string;
+  @Column({ name: 'type', type: 'enum', enum: GroupEnrollmentAs })
+  type: GroupEnrollmentAs;
 
   @ManyToOne(() => User, (user) => user.groupEnrollments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'user_id', referencedColumnName: 'userId' }])
+  @JoinColumn([{ name: 'user_id', referencedColumnName: 'id' }])
   user: User;
 
   @ManyToOne(() => Group, (group) => group.groupEnrollments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'groupId' }])
+  @JoinColumn([{ name: 'group_id', referencedColumnName: 'id' }])
   group: Group;
 }
