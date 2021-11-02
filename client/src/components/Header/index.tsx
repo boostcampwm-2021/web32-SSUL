@@ -5,6 +5,7 @@ import Navigation from './Navigation';
 import RoleSwitch from './RoleSwitch';
 import Notification from './Notification';
 import Messanger from './Messanger';
+import Profile from './Profile';
 
 function Header(): JSX.Element {
   return (
@@ -15,7 +16,7 @@ function Header(): JSX.Element {
         <RoleSwitch />
         <Messanger />
         <Notification />
-        {/* 프로필 버튼 */}
+        <Profile />
       </Content>
     </Container>
   );
@@ -27,6 +28,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-width: 1040px;
   height: 80px;
   padding: 12px 32px 0px 32px;
   box-sizing: border-box;
@@ -39,8 +41,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   width: 75vw;
-  min-width: 800px;
-  box-sizing: border-box;
+  min-width: 1040px;
 `;
 
 export default Header;
