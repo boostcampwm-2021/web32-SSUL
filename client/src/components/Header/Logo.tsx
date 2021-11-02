@@ -8,6 +8,7 @@ function Logo(): JSX.Element {
 
 const Image = styled.img`
   height: 24px;
+  margin: 0px 24px 0px 24px;
 `;
 
 export default Logo;

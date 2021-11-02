@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Logo from './Logo';
 import Navigation from './Navigation';
+import RoleSwitch from './RoleSwitch';
 
 function Header(): JSX.Element {
   return (
@@ -9,7 +10,7 @@ function Header(): JSX.Element {
       <Content>
         <Logo />
         <Navigation />
-        {/* 역할 스위치 버튼 */}
+        <RoleSwitch />
         {/* 알림 버튼 */}
         {/* 프로필 버튼 */}
       </Content>
@@ -35,7 +36,6 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   width: 75vw;
-  height: 80px;
   min-width: 800px;
   box-sizing: border-box;
 `;
