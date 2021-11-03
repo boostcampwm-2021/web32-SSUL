@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
 
+const dummyData: string[] = ['clear', 'react', 'node.js', 'javascript', 'typescript', 'java'];
+
 function SearchFilterTechSection(): JSX.Element {
+  const [techListView, setTechListView] = useState([...dummyData]);
+  const [techStackInput, setTechStackInput] = useState<string>('');
+
+  const handleTechInput = (input: string) => {
+    setTechStackInput(input);
+  };
+
+  useEffect(() => {
+    const newTechList = dummyData.filter((tech) => {
+      return tech.includes(techStackInput);
+    });
+    setTechListView(newTechList);
+  }, [techStackInput]);
+
   return (
     <Container>
-      <TechSectionHeader />
-      <TechList />
+      <TechSectionHeader searchInput={techStackInput} handleSearchInput={handleTechInput} />
+      <TechList listView={techListView} />
     </Container>
   );
 }

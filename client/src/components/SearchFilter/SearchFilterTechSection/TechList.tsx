@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const dummyData = ['express', 'react', 'node.js', 'javascript', 'typescript', 'java'];
+interface Props {
+  listView: string[];
+}
 
-function TechList(): JSX.Element {
-  const techList = dummyData.map((category, idx) => {
+function TechList({ listView }: Props): JSX.Element {
+  const techList = listView.map((category, idx) => {
     return <TechListItem key={idx}>{category}</TechListItem>;
   });
 
