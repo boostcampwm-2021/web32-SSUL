@@ -1,8 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { UsingTechStack } from '@domains/common/models/UsingTechStack';
+import { Category } from '@domains/common/models/Category';
 
 export enum GroupState {
   READY = 'READY',
@@ -41,6 +42,10 @@ export class Group {
 
   @Column({ name: 'status', type: 'enum', enum: GroupState, default: GroupState.READY })
   status: GroupState;
+
+  @OneToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 
   @OneToMany(() => ApplyGroup, (applyGroup) => applyGroup.group)
   applyGroups: ApplyGroup[];
