@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-
-const dummyData: string[] = ['express', 'react', 'node.js', 'test'];
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import { popSelectedTechStack } from '../../../store/slices/selectedTechStack';
 
 function SelectedTechList(): JSX.Element {
-  const [selectedTechList, setSelectedTechList] = useState<string[]>(dummyData);
+  const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
+  const dispatch = useDispatch();
 
   const handleEraseButtonClick = (e: any) => {
     const nowTechStack = e.currentTarget.previousSibling.innerHTML;
-    const newSelectedTechList = selectedTechList.filter((tech) => tech !== nowTechStack);
-    setSelectedTechList(newSelectedTechList);
+    dispatch(popSelectedTechStack(nowTechStack));
   };
 
   const totalSelectedTechList = selectedTechList.map((category, idx) => {
