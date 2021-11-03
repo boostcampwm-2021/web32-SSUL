@@ -13,4 +13,7 @@ export class Post {
 
   @Column('varchar', { name: 'content', length: 500 })
   content: string;
+
+  @Column('datetime', { name: 'created_at', nullable: true })
+  createdAt: Date | null;
 }
