@@ -1,6 +1,14 @@
 import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
-import { AlarmType } from '@domains/common/enums';
 import { User } from '@domains/user/models/User';
+
+export enum AlarmType {
+  JOIN_GROUP_REQUEST = 'JOIN_GROUP_REQUEST',
+  MENTORING_REQUEST = 'MENTORING_REQUEST',
+  JOIN_GROUP_ACCEPTED = 'JOIN_GROUP_ACCEPTED',
+  JOIN_GROUP_DECLINED = 'JOIN_GROUP_DECLINED',
+  MENTORING_ACCEPTED = 'MENTORING_ACCEPTED',
+  METTORING_DECLIEND = 'METTORING_DECLIEND',
+}
 
 @Entity('alarm')
 export class Alarm {

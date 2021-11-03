@@ -2,7 +2,12 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, OneToOne
 import { Group } from '@domains/group/models/Group';
 import { Profile } from '@domains/user/models/Profile';
 import { TechStack } from './TechStack';
-import { UsingTechAs } from '@domains/common/enums';
+
+export enum UsingTechAs {
+  GROUP = 'GROUP',
+  MENTOR = 'MENTOR',
+  MENTEE = 'MENTEE',
+}
 
 @Entity('using_tech_stack')
 export class UsingTechStack {
