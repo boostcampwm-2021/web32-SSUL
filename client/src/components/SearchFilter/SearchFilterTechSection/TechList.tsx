@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
 import { pushSelectedTechStack } from '../../../store/slices/selectedTechStack';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
+  const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
   const selectedTechStackDispatch = useDispatch();
 
   const handleTechStackClick = (e: any) => {
@@ -16,11 +18,19 @@ function TechList({ listView }: Props): JSX.Element {
   };
 
   const techList = listView.map((category, idx) => {
-    return (
-      <TechListItem key={idx} onClick={handleTechStackClick}>
-        {category}
-      </TechListItem>
-    );
+    if (selectedTechList.includes(category))
+      return (
+        <SelectedTechListItem key={idx} onClick={handleTechStackClick}>
+          {category}
+        </SelectedTechListItem>
+      );
+    else {
+      return (
+        <TechListItem key={idx} onClick={handleTechStackClick}>
+          {category}
+        </TechListItem>
+      );
+    }
   });
 
   return <Container>{techList}</Container>;
@@ -45,6 +55,19 @@ const TechListItem = styled.button`
 
   color: ${(props) => props.theme.Gray3};
   background: ${(props) => props.theme.Gray5};
+  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+`;
+
+const SelectedTechListItem = styled.button`
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Primary};
   box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
   border: none;

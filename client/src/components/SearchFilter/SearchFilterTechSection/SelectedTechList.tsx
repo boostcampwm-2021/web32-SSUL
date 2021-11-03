@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
@@ -32,7 +32,7 @@ const Container = styled.div`
 const SelectItem = styled.div`
   display: flex;
   margin: 10px;
-  padding: 10px;
+  padding: 8px;
 
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
