@@ -5,7 +5,7 @@ import TechList from './TechList';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 
-const dummyData: string[] = ['clear', 'react', 'node.js', 'javascript', 'typescript', 'java'];
+const dummyData: string[] = ['clear', 'react', 'node.js', 'java', 'clear', 'clear'];
 
 function SearchFilterTechSection(): JSX.Element {
   const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);

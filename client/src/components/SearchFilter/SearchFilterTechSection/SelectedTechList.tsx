@@ -6,11 +6,11 @@ import { popSelectedTechStack } from '../../../store/slices/selectedTechStack';
 
 function SelectedTechList(): JSX.Element {
   const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
-  const dispatch = useDispatch();
+  const selectedTechStackDispatch = useDispatch();
 
   const handleEraseButtonClick = (e: any) => {
     const nowTechStack = e.currentTarget.previousSibling.innerHTML;
-    dispatch(popSelectedTechStack(nowTechStack));
+    selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
   };
 
   const totalSelectedTechList = selectedTechList.map((category, idx) => {
