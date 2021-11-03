@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const selectedTechStackSlice = createSlice({
   name: 'selectedTechStack',
-  initialState: ['express', 'react', 'node.js', 'test'] as string[],
+  initialState: ['react', 'node.js'] as string[],
   reducers: {
     pushSelectedTechStack(state, action) {
       const nextTechStack: string = action.payload;
-      return [...state, nextTechStack];
+      if (!state.includes(nextTechStack)) return [...state, nextTechStack];
     },
     popSelectedTechStack(state, action) {
       const popTechStack: string = action.payload;
