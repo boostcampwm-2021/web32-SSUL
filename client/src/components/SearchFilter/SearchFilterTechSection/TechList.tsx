@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { pushSelectedTechStack } from '../../../store/slices/selectedTechStack';
+
+const MAX_SELECTED_INDEX = 5;
 
 interface Props {
   listView: string[];
@@ -13,8 +16,14 @@ function TechList({ listView }: Props): JSX.Element {
   const selectedTechStackDispatch = useDispatch();
 
   const handleTechStackClick = (e: any) => {
-    const clickedTechStack = e.target.innerHTML;
-    selectedTechStackDispatch(pushSelectedTechStack(clickedTechStack));
+    const clickedTechStack = e.target;
+    const techStackName = clickedTechStack.innerText;
+    clickedTechStack.classList.remove('shake');
+    clickedTechStack.offsetWidth;
+
+    if (selectedTechList.length >= MAX_SELECTED_INDEX) {
+      clickedTechStack.classList.add('shake');
+    } else selectedTechStackDispatch(pushSelectedTechStack(techStackName));
   };
 
   const techList = listView.map((category, idx) => {
@@ -48,6 +57,21 @@ const Container = styled.div`
   border-radius: 10px;
 `;
 
+const shake = keyframes`
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+`;
+
 const TechListItem = styled.button`
   display: flex;
   margin: 10px;
@@ -59,6 +83,10 @@ const TechListItem = styled.button`
   border-radius: 10px;
   border: none;
   cursor: pointer;
+
+  &.shake {
+    animation: ${shake} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
 `;
 
 const SelectedTechListItem = styled.button`
