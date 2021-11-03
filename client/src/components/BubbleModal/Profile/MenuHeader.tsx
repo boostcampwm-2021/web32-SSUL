@@ -4,7 +4,6 @@ import { keyframes } from '@emotion/react';
 
 function MenuHeader(): JSX.Element {
   const handler = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log('heelo');
     e.stopPropagation();
   };
 

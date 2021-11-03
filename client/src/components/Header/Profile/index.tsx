@@ -1,11 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
+import BubbleModal from '../../BubbleModal';
+import { BubbleModalProfileItem } from '../../../types/Modal';
 
-function User(): JSX.Element {
-  return <Container></Container>;
+function Profile(): JSX.Element {
+  const history = useHistory();
+  const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+
+  const handleLoginMenuClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsLogin(true);
+    setIsModalClicked(false);
+  };
+  const handleProfileMenuClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsModalClicked(false);
+    history.push('/profile/ssuler'); // 임시 유저 닉네임
+  };
+  const handleLogoutMenuClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsLogin(false);
+    setIsModalClicked(false);
+    history.push('/');
+  };
+  const handleProfileButtonClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsModalClicked(!isModalClicked);
+  };
+  const handleWindowClick = () => setIsModalClicked(false);
+
+  const noSignBubbleModalProfileItems: BubbleModalProfileItem[] = [
+    { name: '로그인', handleModalItemClick: handleLoginMenuClick },
+  ];
+  const signBubbleModalProfileItems: BubbleModalProfileItem[] = [
+    { name: '프로필', handleModalItemClick: handleProfileMenuClick },
+    { name: '로그아웃', handleModalItemClick: handleLogoutMenuClick },
+  ];
+
+  useEffect(() => {
+    isModalClicked
+      ? window.addEventListener('click', handleWindowClick)
+      : window.removeEventListener('click', handleWindowClick);
+
+    return () => window.removeEventListener('click', handleWindowClick);
+  }, [isModalClicked]);
+
+  return (
+    <Container>
+      <Image onClick={handleProfileButtonClick} />
+      {isModalClicked && (
+        <BubbleModal
+          type="profile-modal"
+          items={isLogin ? signBubbleModalProfileItems : noSignBubbleModalProfileItems}
+          headerVisibility={isLogin}
+        />
+      )}
+    </Container>
+  );
 }
-
 const Container = styled.div`
+  position: relative;
+`;
+
+const Image = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 70%;
@@ -17,4 +76,4 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-export default User;
+export default Profile;
