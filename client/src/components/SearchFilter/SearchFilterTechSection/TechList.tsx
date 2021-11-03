@@ -34,6 +34,7 @@ const TechListItem = styled.div`
   background: ${(props) => props.theme.Gray5};
   box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export default TechList;

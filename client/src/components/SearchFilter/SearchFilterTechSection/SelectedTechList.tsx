@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
-const dummyData = ['express', 'react', 'node.js', 'test'];
+const dummyData: string[] = ['express', 'react', 'node.js', 'test'];
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechList = dummyData.map((category, idx) => {
+  const [selectedTechList, setSelectedTechList] = useState<string[]>(dummyData);
+
+  const handleEraseButtonClick = (e: any) => {
+    const nowTechStack = e.currentTarget.previousSibling.innerHTML;
+    const newSelectedTechList = selectedTechList.filter((tech) => tech !== nowTechStack);
+    setSelectedTechList(newSelectedTechList);
+  };
+
+  const totalSelectedTechList = selectedTechList.map((category, idx) => {
     return (
       <SelectItem key={idx}>
         <h4>{category}</h4>
-        <EraseButton>X</EraseButton>
+        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
   });
 
-  return <Container>{selectedTechList}</Container>;
+  return <Container>{totalSelectedTechList}</Container>;
 }
 
 const Container = styled.div`
@@ -36,6 +44,7 @@ const EraseButton = styled.button`
 
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px 30px 30px 30px;
+  cursor: pointer;
 `;
 
 export default SelectedTechList;
