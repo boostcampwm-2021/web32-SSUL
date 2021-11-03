@@ -12,7 +12,7 @@ export class Alarm {
   senderId: number;
 
   @ManyToOne(() => User)
-  @Column({ name: 'reciever_id' })
+  @JoinColumn({ name: 'reciever_id' })
   recieverId: number;
 
   @Column({
