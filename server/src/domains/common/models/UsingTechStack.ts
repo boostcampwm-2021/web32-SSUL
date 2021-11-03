@@ -16,14 +16,14 @@ export class UsingTechStack {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'group_id', referencedColumnName: 'id' }])
+  @JoinColumn({ name: 'group_id' })
   group: Group | null;
 
   @ManyToOne(() => Profile, (profile) => profile.usingTechStacks, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
-  @JoinColumn([{ name: 'profile_id', referencedColumnName: 'id' }])
+  @JoinColumn({ name: 'profile_id' })
   profile: Profile | null;
 
   @OneToOne(() => TechStack)

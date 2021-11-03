@@ -1,5 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { UsingTechStack } from './UsingTechStack';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tech_stack')
 export class TechStack {
