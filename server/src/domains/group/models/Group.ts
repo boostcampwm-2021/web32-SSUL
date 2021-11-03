@@ -11,7 +11,7 @@ export enum GroupState {
   END = 'END',
 }
 
-@Entity('group', { schema: 'ssul-local' })
+@Entity('group')
 export class Group {
   @PrimaryGeneratedColumn({ name: 'group_id' })
   id: number;
