@@ -41,8 +41,18 @@ function CreateGroupPage(): JSX.Element {
         {getContents()}
       </ContentsContainer>
       <ButtonWrapper>
-        <button onClick={clickPrevContents}>이전</button>
-        <button onClick={clickNextContents}>다음</button>
+        <CustomButton
+          label={'이전'}
+          color={'#00C5AA'}
+          backgroundColor={'#FFFFFF'}
+          clickBtn={clickPrevContents}
+        />
+        <CustomButton
+          label={'다음'}
+          color={'#FFFFFF'}
+          backgroundColor={'#00C5AA'}
+          clickBtn={clickNextContents}
+        />
       </ButtonWrapper>
     </CreateForm>
   )
