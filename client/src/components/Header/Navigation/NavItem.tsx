@@ -17,10 +17,14 @@ const Item = styled(Link)`
   align-items: center;
   height: 32px;
   margin: 0px 24px 0px 24px;
-  color: #323232;
+  color: ${(props) => props.theme.LightBlack};
   font-size: 1.05em;
   box-sizing: border-box;
   cursor: pointer;
+  text-decoration: none;
+  &: hover {
+    color: ${(props) => props.theme.Primary};
+  }
 `;
 
 export default NavItem;
