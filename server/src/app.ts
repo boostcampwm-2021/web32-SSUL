@@ -1,17 +1,18 @@
 import 'reflect-metadata';
 import * as express from 'express';
-import { join } from 'path';
-
 import * as dotenv from 'dotenv';
-dotenv.config({
-	path: join(__dirname, '../.env'),
-});
+dotenv.config();
+import loader from './loader';
 
-import indexRouter from './routes';
+async function main() {
+  const app = express();
+  await loader(app);
 
-const app = express();
+  const expressPort = 4000;
 
-app.use(express.json());
-app.use('/api', indexRouter);
+  app.listen(expressPort, () => {
+    console.log(`listening ${expressPort}...`);
+  });
+}
 
-export default app;
+main();

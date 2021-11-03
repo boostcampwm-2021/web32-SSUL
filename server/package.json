@@ -4,21 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "prod": "node -r tsconfig-paths/register bin/www.js"
+    "prod": "node -r tsconfig-paths/register build/app.js"
   },
   "dependencies": {
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
+    "mysql2": "^2.3.2",
     "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.38",
     "typescript": "^4.4.4"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.10.9",
-    "@types/dotenv": "^8.2.0",
     "nodemon": "^2.0.13",
     "ts-node": "^10.3.0",
     "tsconfig-paths": "^3.11.0"
