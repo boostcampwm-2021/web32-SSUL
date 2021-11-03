@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../store/rootReducer';
+import { changeTechStackInput } from '../../store/slices/techStackInput';
 
-interface Props {
-  searchText: string;
-  handleSearchInput: (changeInput: string) => void;
-}
+function SearchBar(): JSX.Element {
+  const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
+  const dispatch = useDispatch();
 
-function SearchBar({ searchText, handleSearchInput }: Props): JSX.Element {
   const handleInputText = (e: any) => {
-    handleSearchInput(e.currentTarget.value);
+    dispatch(changeTechStackInput(e.currentTarget.value));
   };
 
   return (
     <Container>
-      <InputValue placeholder="Search for.." value={searchText} onChange={handleInputText} />
+      <InputValue placeholder="Search for.." value={techStackInput} onChange={handleInputText} />
     </Container>
   );
 }

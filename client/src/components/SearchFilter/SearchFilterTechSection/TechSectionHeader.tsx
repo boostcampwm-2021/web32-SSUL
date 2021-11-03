@@ -3,15 +3,10 @@ import styled from '@emotion/styled';
 import SearchBar from '../SearchBar';
 import SelectedTechList from './SelectedTechList';
 
-interface Props {
-  searchInput: string;
-  handleSearchInput: (input: string) => void;
-}
-
-function TechSectionHeader({ searchInput, handleSearchInput }: Props): JSX.Element {
+function TechSectionHeader(): JSX.Element {
   return (
     <Container>
-      <SearchBar searchText={searchInput} handleSearchInput={handleSearchInput} />
+      <SearchBar />
       <SelectedTechList />
     </Container>
   );

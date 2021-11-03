@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
+import { useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
 
 const dummyData: string[] = ['clear', 'react', 'node.js', 'javascript', 'typescript', 'java'];
 
 function SearchFilterTechSection(): JSX.Element {
+  const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
   const [techListView, setTechListView] = useState([...dummyData]);
-  const [techStackInput, setTechStackInput] = useState<string>('');
-
-  const handleTechInput = (input: string) => {
-    setTechStackInput(input);
-  };
 
   useEffect(() => {
     const newTechList = dummyData.filter((tech) => {
@@ -22,7 +20,7 @@ function SearchFilterTechSection(): JSX.Element {
 
   return (
     <Container>
-      <TechSectionHeader searchInput={techStackInput} handleSearchInput={handleTechInput} />
+      <TechSectionHeader />
       <TechList listView={techListView} />
     </Container>
   );
