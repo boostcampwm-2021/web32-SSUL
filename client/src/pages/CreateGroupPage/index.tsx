@@ -5,7 +5,10 @@ import TechStack from './TechStack';
 import GroupInfo from './GroupInfo';
 import StartDate from './StartDate';
 import GageBar from './GageBar';
+import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
+
+const MAX_CONTENT_INDEX = 4;
 
 function CreateGroupPage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
@@ -27,19 +30,29 @@ function CreateGroupPage(): JSX.Element {
   }
   
   const clickNextContents = () =>{
-    if(contentsNumber < 4)
+    if(contentsNumber < MAX_CONTENT_INDEX)
       setContentsNumber(contentsNumber+1);
   }
   
   return (
     <CreateForm>
-      <GageBar/>
+      <GageBar contentsNumber={contentsNumber}/>
       <ContentsContainer>
         {getContents()}
       </ContentsContainer>
       <ButtonWrapper>
-        <button onClick={clickPrevContents}>이전</button>
-        <button onClick={clickNextContents}>다음</button>
+        <CustomButton
+          label={'이전'}
+          color={'#00C5AA'}
+          backgroundColor={'#FFFFFF'}
+          clickBtn={clickPrevContents}
+        />
+        <CustomButton
+          label={'다음'}
+          color={'#FFFFFF'}
+          backgroundColor={'#00C5AA'}
+          clickBtn={clickNextContents}
+        />
       </ButtonWrapper>
     </CreateForm>
   )
@@ -47,10 +60,10 @@ function CreateGroupPage(): JSX.Element {
 
 const CreateForm = styled.div`
   position: relative;
-  margin: 100px auto;
+  padding: 20px;
+  margin: 70px auto 0 auto;
   width: 600px;
   height: 600px;
-  opacity: 0.4;
   box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25), -20px -20px 0px 6px #FFFFFF;
   border-radius: 40px;
 `;
@@ -65,7 +78,6 @@ const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin-right: 40px;
   margin-bottom: 40px;
   display: flex;
   
