@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import ColorLogoImage from '../../assets/logo_title.png';
 
 function Logo(): JSX.Element {
-  return <Image src={ColorLogoImage} alt="메인 헤더 로고" />;
+  return (
+    <Link to="/">
+      <Image src={ColorLogoImage} alt="메인 헤더 로고" />
+    </Link>
+  );
 }
 
 const Image = styled.img`
