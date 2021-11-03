@@ -1,8 +1,11 @@
-import { createConnection, useContainer, ConnectionOptions } from 'typeorm';
-import Container from 'typedi';
+import { createConnection, ConnectionOptions, useContainer } from 'typeorm';
+import { Container } from 'typeorm-typedi-extensions';
 import config from '../config';
+import { join } from 'path';
 
 export default async function () {
+  useContainer(Container);
+
   const dbConfig: ConnectionOptions = {
     type: 'mysql',
     host: config.database.host,
@@ -12,10 +15,8 @@ export default async function () {
     password: config.database.password,
     synchronize: true,
     logging: true,
-    entities: ['../domains/**/models/*.ts'],
+    entities: [join(__dirname, '../domains/**/models/*.ts')],
   };
-
-  useContainer(Container);
 
   const connection = await createConnection(dbConfig);
   return connection;

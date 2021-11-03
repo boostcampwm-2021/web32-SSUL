@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
-import { UsingTechStack } from '@domains/common/models/UsingTechStack';
+import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
 import { User } from '@domains/user/models/User';
 
 @Entity('profile')
