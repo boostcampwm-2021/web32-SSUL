@@ -9,9 +9,9 @@ interface NavigationItem {
 
 function NavItemList(): JSX.Element {
   const navItemList: NavigationItem[] = [
-    { title: '그룹 탐색', path: 'recruit/group' },
-    { title: '멘토 찾기', path: 'recruit/mentors' },
-    { title: '참여 그룹', path: 'groups' },
+    { title: '그룹 탐색', path: '/recruit/group' },
+    { title: '멘토 찾기', path: '/recruit/mentor' },
+    { title: '참여 그룹', path: '/groups' },
   ];
 
   const navItems = navItemList.map((item, idx) => {
