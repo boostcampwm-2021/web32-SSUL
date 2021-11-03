@@ -63,13 +63,13 @@ const CreateForm = styled.div`
   padding: 20px;
   margin: 70px auto 0 auto;
   width: 600px;
-  height: 600px;
+  height: 500px;
   box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25), -20px -20px 0px 6px #FFFFFF;
   border-radius: 40px;
 `;
 
 const ContentsContainer = styled.div`
-  margin: 100px auto;
+  margin: auto;
   height: 400px;
   text-align: center;
 `;
