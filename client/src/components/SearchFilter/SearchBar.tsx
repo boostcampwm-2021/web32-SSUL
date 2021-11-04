@@ -2,10 +2,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../store/rootReducer';
-import { changeTechStackInput } from '../../store/slices/techStackInput';
+import {
+  changeTechStackInput,
+  groupRecruitType,
+  returnGroupTechStack,
+} from '../../store/slices/groupTechStackList';
 
 function SearchBar(): JSX.Element {
-  const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
   const dispatch = useDispatch();
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +18,11 @@ function SearchBar(): JSX.Element {
 
   return (
     <Container>
-      <InputValue placeholder="Search for.." value={techStackInput} onChange={handleInputText} />
+      <InputValue
+        placeholder="Search for.."
+        value={groupTechStackList.techStackInput}
+        onChange={handleInputText}
+      />
     </Container>
   );
 }

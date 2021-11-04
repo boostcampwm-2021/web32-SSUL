@@ -2,10 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
-import { popSelectedTechStack } from '../../../store/slices/selectedTechStack';
+import {
+  popSelectedTechStack,
+  groupRecruitType,
+  returnGroupTechStack,
+} from '../../../store/slices/groupTechStackList';
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+
   const selectedTechStackDispatch = useDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -14,7 +19,7 @@ function SelectedTechList(): JSX.Element {
     selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
   };
 
-  const totalSelectedTechList = selectedTechList.map((category, idx) => {
+  const totalSelectedTechList = groupTechStackList.selectedTechStack.map((category, idx) => {
     return (
       <SelectItem key={idx}>
         <h4>{category}</h4>
