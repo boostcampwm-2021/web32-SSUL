@@ -1,10 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import techStackInput from './slices/techStackInput';
-import selectedTechStack from './slices/selectedTechStack';
+import groupTechStack from './slices/groupTechStackList';
 
 const reducer = combineReducers({
-  techStackInput,
-  selectedTechStack,
+  groupTechStack,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;
