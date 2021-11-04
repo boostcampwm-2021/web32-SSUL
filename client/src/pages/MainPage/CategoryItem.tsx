@@ -3,15 +3,17 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 interface Props {
+  id: number;
   name: string;
   url: string;
 }
-export default function CategoryItem({ name, url }: Props): JSX.Element {
+export default function CategoryItem({ id, name, url }: Props): JSX.Element {
   return (
     <Container
       to={{
         pathname: `/groups`,
         state: {
+          id,
           category: name,
         },
       }}

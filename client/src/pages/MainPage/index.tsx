@@ -41,7 +41,7 @@ function MainPage(): JSX.Element {
             <IntroText>함께 성장할 동료를 찾아보세요!</IntroText>
             <GroupCatagoryContainer>
               {categories.map(({ id, name, imageUrl }) => (
-                <CategoryItem key={id} name={name} url={imageUrl} />
+                <CategoryItem key={id} id={id} name={name} url={imageUrl} />
               ))}
             </GroupCatagoryContainer>
           </GroupFindContainer>
