@@ -12,7 +12,7 @@ function Logo(): JSX.Element {
 }
 
 const Image = styled.img`
-  height: 24px;
+  height: 28px;
   margin: 0px 24px 0px 24px;
 `;
 
