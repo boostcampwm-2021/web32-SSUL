@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "typedi": "^0.10.0"
+  }
+}

@@ -2,8 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, OneToOne
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
-import { UsingTechStack } from '@domains/common/models/UsingTechStack';
-import { Category } from '@domains/common/models/Category';
+import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
+import { Category } from '@domains/category/models/Category';
 
 export enum GroupState {
   READY = 'READY',

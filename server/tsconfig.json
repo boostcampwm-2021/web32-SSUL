@@ -16,7 +16,6 @@
       "@domains/*": ["domains/*"],
       "@common/*": ["common/*"],
       "@utils/*": ["utils/*"],
-      "@infra/*": ["infra/*"],
       "@api/*": ["api/*"]
     }
   },
