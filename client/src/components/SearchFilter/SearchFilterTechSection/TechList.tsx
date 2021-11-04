@@ -4,11 +4,12 @@ import { keyframes } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { pushSelectedTechStack } from '../../../store/slices/selectedTechStack';
+import { TechStack } from '../../../types/TechStack';
 
 const MAX_SELECTED_INDEX = 5;
 
 interface Props {
-  listView: string[];
+  listView: TechStack[];
 }
 
 function TechList({ listView }: Props): JSX.Element {
@@ -26,17 +27,17 @@ function TechList({ listView }: Props): JSX.Element {
     } else selectedTechStackDispatch(pushSelectedTechStack(techStackName));
   };
 
-  const techList = listView.map((category, idx) => {
-    if (selectedTechList.includes(category))
+  const techList = listView.map((category) => {
+    if (selectedTechList.includes(category.name))
       return (
-        <SelectedTechListItem key={idx} onClick={handleTechStackClick}>
-          {category}
+        <SelectedTechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+          {category.name}
         </SelectedTechListItem>
       );
     else {
       return (
-        <TechListItem key={idx} onClick={handleTechStackClick}>
-          {category}
+        <TechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+          {category.name}
         </TechListItem>
       );
     }

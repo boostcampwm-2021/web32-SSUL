@@ -4,6 +4,8 @@ import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
+import { getTechStackList } from '../../../api/techStack';
+import { TechStack } from '../../../types/TechStack';
 
 const dummyData: string[] = [
   'clear',
@@ -19,14 +21,24 @@ const dummyData: string[] = [
 
 function SearchFilterTechSection(): JSX.Element {
   const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
-  const [techListView, setTechListView] = useState([...dummyData]);
+  const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
+  const [techListView, setTechListView] = useState<TechStack[]>([]);
 
   useEffect(() => {
-    const newTechList = dummyData.filter((tech) => {
-      return tech.includes(techStackInput);
+    const getData = async () => {
+      const data = await getTechStackList();
+      setBaseTechStackList(data);
+      return data;
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const newTechList = baseTechStackList.filter((tech) => {
+      return tech.name.includes(techStackInput);
     });
     setTechListView(newTechList);
-  }, [techStackInput]);
+  }, [techStackInput, baseTechStackList]);
 
   return (
     <Container>
