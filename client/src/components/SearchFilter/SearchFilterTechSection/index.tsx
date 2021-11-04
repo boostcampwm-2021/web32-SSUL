@@ -7,18 +7,6 @@ import { ReducerType } from '../../../store/rootReducer';
 import { getTechStackList } from '../../../api/techStack';
 import { TechStack } from '../../../types/TechStack';
 
-const dummyData: string[] = [
-  'clear',
-  'react',
-  'node.js',
-  'java',
-  'test1',
-  'test2',
-  'test3',
-  'test4',
-  'test5',
-];
-
 function SearchFilterTechSection(): JSX.Element {
   const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
