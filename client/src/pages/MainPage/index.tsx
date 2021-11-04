@@ -31,10 +31,10 @@ function MainPage(): JSX.Element {
     <CenterLayout>
       <InfoContainer>
         <Header>
-          <TextBtn selected={tab === Tab.GROUP} onClick={handleMentorTabClick}>
+          <TextBtn selected={tab === Tab.GROUP} onClick={handleGroupTabClick}>
             그룹 찾기
           </TextBtn>
-          <TextBtn selected={tab === Tab.MENTOR} onClick={handleGroupTabClick}>
+          <TextBtn selected={tab === Tab.MENTOR} onClick={handleMentorTabClick}>
             멘토 찾기
           </TextBtn>
         </Header>
