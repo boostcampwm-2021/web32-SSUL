@@ -11,4 +11,4 @@ export const requests = {
   get: (url: string): Promise<TechStack[]> => http.get(url).then(passResponse),
 };
 
-export const getTechStackList = (): Promise<TechStack[]> => requests.get(`/TechStack`);
+export const getTechStackList = (): Promise<TechStack[]> => requests.get(`/techstack`);
