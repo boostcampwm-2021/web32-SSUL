@@ -5,12 +5,12 @@ interface ItemProp {
   key: number,
   category: string,
   clicked: boolean,
-  clickCategory :() => void
+  handleCategoryClick :() => void
 }
 
-function CategoryItem({category, clicked, clickCategory}: ItemProp): JSX.Element {
+function CategoryItem({category, clicked, handleCategoryClick}: ItemProp): JSX.Element {
   return(
-    <div onClick={clickCategory}>
+    <div onClick={handleCategoryClick}>
       {clicked ? <ClickedItem/> : <Item/>}
       <ItemName>{category}</ItemName>
     </div>
@@ -18,17 +18,19 @@ function CategoryItem({category, clicked, clickCategory}: ItemProp): JSX.Element
 }
 
 const ClickedItem = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border-radius: 10px;
   box-shadow: inset 5px 5px 10px #8f8f8f,
     inset -5px -5px 10px #ffffff;
 `;
 
 const Item = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border-radius: 10px;
   box-shadow:  5px 5px 10px #8f8f8f,
     -5px -5px 10px #ffffff;
 `;

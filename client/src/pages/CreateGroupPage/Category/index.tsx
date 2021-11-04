@@ -21,7 +21,7 @@ function Category(): JSX.Element {
         key={idx}
         category={category}
         clicked={category === selection}
-        clickCategory={() => { setSelection(category)} }
+        handleCategoryClick={() => { setSelection(category)} }
       />)
     )
   }
@@ -42,7 +42,7 @@ const CategoryWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  margin: 0 70px;
+  margin: 0 80px;
 `;
 
 export default Category;
