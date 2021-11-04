@@ -3,7 +3,7 @@ import Category from './Category';
 import Personnel from './Personnel';
 import TechStack from './TechStack';
 import GroupInfo from './GroupInfo';
-import StartDate from './StartDate';
+import Date from './Date';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
@@ -18,8 +18,8 @@ function CreateGroupPage(): JSX.Element {
       case 0: return <Category/>;
       case 1: return <Personnel/>;
       case 2: return <TechStack/>;
-      case 3: return <GroupInfo/>;
-      case 4: return <StartDate/>;
+      case 3: return <Date/>;
+      case 4: return <GroupInfo/>;
       default: return null;
     }
   }
