@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { getTechStackList } from '../../../api/techStack';
 import { TechStack } from '../../../types/TechStack';
+import { groupRecruitType, returnGroupTechStack } from '../../../store/slices/groupTechStackList';
 
 function SearchFilterTechSection(): JSX.Element {
-  const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 
@@ -23,10 +24,10 @@ function SearchFilterTechSection(): JSX.Element {
 
   useEffect(() => {
     const newTechList = baseTechStackList.filter((tech) => {
-      return tech.name.includes(techStackInput);
+      return tech.name.includes(groupTechStackList.techStackInput);
     });
     setTechListView(newTechList);
-  }, [techStackInput, baseTechStackList]);
+  }, [groupTechStackList.techStackInput, baseTechStackList]);
 
   return (
     <Container>

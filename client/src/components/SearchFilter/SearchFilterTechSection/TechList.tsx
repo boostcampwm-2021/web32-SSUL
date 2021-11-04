@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
-import { pushSelectedTechStack } from '../../../store/slices/selectedTechStack';
+import {
+  pushSelectedTechStack,
+  groupRecruitType,
+  returnGroupTechStack,
+} from '../../../store/slices/groupTechStackList';
 import { TechStack } from '../../../types/TechStack';
 
 const MAX_SELECTED_INDEX = 5;
@@ -13,7 +17,7 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
   const selectedTechStackDispatch = useDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,13 +26,13 @@ function TechList({ listView }: Props): JSX.Element {
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
-    if (selectedTechList.length >= MAX_SELECTED_INDEX) {
+    if (groupTechStackList.selectedTechStack.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
     } else selectedTechStackDispatch(pushSelectedTechStack(techStackName));
   };
 
   const techList = listView.map((category) => {
-    if (selectedTechList.includes(category.name))
+    if (groupTechStackList.selectedTechStack.includes(category.name))
       return (
         <SelectedTechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
           {category.name}
