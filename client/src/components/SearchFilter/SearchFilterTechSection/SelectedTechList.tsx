@@ -8,8 +8,9 @@ function SelectedTechList(): JSX.Element {
   const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
   const selectedTechStackDispatch = useDispatch();
 
-  const handleEraseButtonClick = (e: any) => {
-    const nowTechStack = e.currentTarget.previousSibling.innerHTML;
+  const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const targetTechStack = e.currentTarget as HTMLButtonElement;
+    const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
     selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
   };
 

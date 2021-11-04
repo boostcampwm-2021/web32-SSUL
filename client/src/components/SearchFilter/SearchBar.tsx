@@ -8,7 +8,7 @@ function SearchBar(): JSX.Element {
   const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
   const dispatch = useDispatch();
 
-  const handleInputText = (e: any) => {
+  const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeTechStackInput(e.currentTarget.value));
   };
 

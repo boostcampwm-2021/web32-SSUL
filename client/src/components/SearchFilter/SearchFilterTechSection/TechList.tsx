@@ -16,8 +16,8 @@ function TechList({ listView }: Props): JSX.Element {
   const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
   const selectedTechStackDispatch = useDispatch();
 
-  const handleTechStackClick = (e: any) => {
-    const clickedTechStack = e.target;
+  const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const clickedTechStack = e.target as HTMLButtonElement;
     const techStackName = clickedTechStack.innerText;
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
