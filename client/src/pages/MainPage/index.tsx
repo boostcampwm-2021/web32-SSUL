@@ -24,14 +24,17 @@ function MainPage(): JSX.Element {
     fetchCategories();
   }, []);
 
+  const handleMentorTabClick = () => setTab(Tab.MENTOR);
+  const handleGroupTabClick = () => setTab(Tab.GROUP);
+
   return (
     <CenterLayout>
       <InfoContainer>
         <Header>
-          <TextBtn selected={tab === Tab.GROUP} onClick={() => setTab(Tab.GROUP)}>
+          <TextBtn selected={tab === Tab.GROUP} onClick={handleMentorTabClick}>
             그룹 찾기
           </TextBtn>
-          <TextBtn selected={tab === Tab.MENTOR} onClick={() => setTab(Tab.MENTOR)}>
+          <TextBtn selected={tab === Tab.MENTOR} onClick={handleGroupTabClick}>
             멘토 찾기
           </TextBtn>
         </Header>
