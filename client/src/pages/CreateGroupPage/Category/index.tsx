@@ -1,6 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from '@emotion/styled'
 import CategoryItem from './CategoryItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import { GroupData } from '../../../types/CreateGroup';
+import { setGroupData } from '../../../store/slices/createGroupInfo';
 
 const categoryList: string[] = [
   '대외활동',
@@ -14,17 +18,19 @@ const categoryList: string[] = [
 ];
 
 function Category(): JSX.Element {
-  const [selection, setSelection] = useState<string>('');
+  const { category } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
+  const dispatch = useDispatch();
+  
   const getList = () => {
-    return categoryList.map((category,idx) => (
+    return categoryList.map((categoryName,idx) => (
       <CategoryItem
         key={idx}
-        category={category}
-        clicked={category === selection}
-        handleCategoryClick={() => { setSelection(category)} }
+        category={categoryName}
+        clicked={categoryName === category}
+        handleCategoryClick={() => dispatch(setGroupData({category : categoryName}))}
       />)
     )
-  }
+  };
   return(
     <>
       <Title>카테고리를 선택해주세요.</Title>

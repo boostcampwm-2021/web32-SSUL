@@ -17,13 +17,12 @@ function CreateGroupPage(): JSX.Element {
     switch (contentsNumber){
       case 0: return <Category/>;
       case 1: return <Personnel/>;
-      case 2: return <TechStack/>;
+      case 2: return <GroupInfo/>
       case 3: return <Date/>;
-      case 4: return <GroupInfo/>;
+      case 4: return <TechStack/>;
       default: return null;
     }
   }
-  
   const clickPrevContents = () =>{
     if(contentsNumber > 0)
       setContentsNumber(contentsNumber-1);
