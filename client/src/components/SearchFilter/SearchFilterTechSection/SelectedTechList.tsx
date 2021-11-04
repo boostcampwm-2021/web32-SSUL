@@ -1,19 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
-const dummyData = ['express', 'react', 'node.js', 'test'];
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import { popSelectedTechStack } from '../../../store/slices/selectedTechStack';
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechList = dummyData.map((category, idx) => {
+  const selectedTechList = useSelector<ReducerType, string[]>((state) => state.selectedTechStack);
+  const selectedTechStackDispatch = useDispatch();
+
+  const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const targetTechStack = e.currentTarget as HTMLButtonElement;
+    const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
+    selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
+  };
+
+  const totalSelectedTechList = selectedTechList.map((category, idx) => {
     return (
       <SelectItem key={idx}>
         <h4>{category}</h4>
-        <EraseButton>X</EraseButton>
+        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
   });
 
-  return <Container>{selectedTechList}</Container>;
+  return <Container>{totalSelectedTechList}</Container>;
 }
 
 const Container = styled.div`
@@ -23,7 +33,7 @@ const Container = styled.div`
 const SelectItem = styled.div`
   display: flex;
   margin: 10px;
-  padding: 10px;
+  padding: 8px;
 
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
@@ -36,6 +46,7 @@ const EraseButton = styled.button`
 
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px 30px 30px 30px;
+  cursor: pointer;
 `;
 
 export default SelectedTechList;

@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
+import { useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import { getTechStackList } from '../../../api/techStack';
+import { TechStack } from '../../../types/TechStack';
 
 function SearchFilterTechSection(): JSX.Element {
+  const techStackInput = useSelector<ReducerType, string>((state) => state.techStackInput);
+  const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
+  const [techListView, setTechListView] = useState<TechStack[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getTechStackList();
+      setBaseTechStackList(data);
+      return data;
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const newTechList = baseTechStackList.filter((tech) => {
+      return tech.name.includes(techStackInput);
+    });
+    setTechListView(newTechList);
+  }, [techStackInput, baseTechStackList]);
+
   return (
     <Container>
       <TechSectionHeader />
-      <TechList />
+      <TechList listView={techListView} />
     </Container>
   );
 }
