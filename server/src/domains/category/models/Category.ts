@@ -8,6 +8,6 @@ export class Category {
   @Column('varchar', { name: 'name', nullable: true, length: 255 })
   name: string | null;
 
-  @Column('varchar', { name: 'image_url', nullable: true, length: 100 })
+  @Column('varchar', { name: 'image_url', nullable: true, length: 500 })
   imageUrl: string | null;
 }
