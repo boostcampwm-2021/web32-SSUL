@@ -10,6 +10,7 @@ import EvaluateGroupPage from '../../pages/EvaluateGroupPage';
 import ChatListPage from '../../pages/ChatListPage';
 import ChatPage from '../../pages/ChatPage';
 import ProfilePage from '../../pages/ProfilePage';
+import AuthCallback from '../../components/Auth/';
 
 function Router(): JSX.Element {
   return (
@@ -24,6 +25,7 @@ function Router(): JSX.Element {
       <Route path="/chat/list" component={ChatListPage} />
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile" component={ProfilePage} />
+      <Route path="/auth/callback" component={AuthCallback} />
       <Redirect to="/" />
     </Switch>
   );
