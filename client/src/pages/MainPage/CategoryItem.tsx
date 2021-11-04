@@ -9,7 +9,7 @@ interface Props {
 }
 export default function CategoryItem({ id, name, url }: Props): JSX.Element {
   return (
-    <Container
+    <LinkButton
       to={{
         pathname: `/groups`,
         state: {
@@ -20,11 +20,11 @@ export default function CategoryItem({ id, name, url }: Props): JSX.Element {
     >
       <CategoryIcon src={url} alt={name} />
       <CategoryName>{name}</CategoryName>
-    </Container>
+    </LinkButton>
   );
 }
 
-const Container = styled(Link)`
+const LinkButton = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
