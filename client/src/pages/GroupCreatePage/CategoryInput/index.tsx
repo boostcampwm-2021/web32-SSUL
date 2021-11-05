@@ -17,7 +17,7 @@ const categoryList: string[] = [
   '기타',
 ];
 
-function Category(): JSX.Element {
+function CategoryInput(): JSX.Element {
   const { category } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
   const dispatch = useDispatch();
 
@@ -49,4 +49,4 @@ const CategoryWrapper = styled.div`
   margin: 0 80px;
 `;
 
-export default Category;
+export default CategoryInput;

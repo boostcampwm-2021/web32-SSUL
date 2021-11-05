@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import AntDatePicker from './AntDatePicker';
 
-function Date(): JSX.Element {
+function DateInput(): JSX.Element {
   return (
     <>
       <Title>시작일, 종료일을 선택해주세요.</Title>
@@ -15,4 +15,4 @@ const Title = styled.p`
   margin: 30px;
 `;
 
-export default Date;
+export default DateInput;

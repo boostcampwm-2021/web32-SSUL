@@ -5,7 +5,7 @@ import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
 import { setGroupData } from '../../../store/slices/createGroupInfo';
 
-function GroupInfo(): JSX.Element {
+function GroupInfoInput(): JSX.Element {
   const { groupName, groupInfo } = useSelector<ReducerType, GroupData>(
     (state) => state.createGroupInfo,
   );
@@ -56,4 +56,4 @@ const NameText = styled.input`
     outline: none;
   }
 `;
-export default GroupInfo;
+export default GroupInfoInput;

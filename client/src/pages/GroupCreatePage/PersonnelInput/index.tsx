@@ -5,7 +5,7 @@ import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
 import { setGroupData } from '../../../store/slices/createGroupInfo';
 
-function Personnel(): JSX.Element {
+function PersonnelInput(): JSX.Element {
   const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
   const dispatch = useDispatch();
   const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,4 +57,4 @@ const RangeValue = styled.p`
   color: ${(props) => props.theme.Gray3};
   text-shadow: white 2px 2px 2px;
 `;
-export default Personnel;
+export default PersonnelInput;
