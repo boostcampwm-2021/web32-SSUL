@@ -6,8 +6,8 @@ import { ReducerType } from '../../../store/rootReducer';
 import {
   pushSelectedTechStack,
   groupRecruitType,
-  returnGroupTechStack,
-} from '../../../store/slices/groupTechStackList';
+  returnGroupRecruitState,
+} from '../../../store/slices/groupRecruitSlice';
 import { TechStack } from '../../../types/TechStack';
 
 const MAX_SELECTED_INDEX = 5;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
   const selectedTechStackDispatch = useDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {

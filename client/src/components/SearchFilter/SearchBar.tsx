@@ -5,11 +5,11 @@ import { ReducerType } from '../../store/rootReducer';
 import {
   changeTechStackInput,
   groupRecruitType,
-  returnGroupTechStack,
-} from '../../store/slices/groupTechStackList';
+  returnGroupRecruitState,
+} from '../../store/slices/groupRecruitSlice';
 
 function SearchBar(): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
   const dispatch = useDispatch();
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {

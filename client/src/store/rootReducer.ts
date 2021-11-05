@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import groupTechStack from './slices/groupTechStackList';
+import groupRecruit from './slices/groupRecruitSlice';
 
 const reducer = combineReducers({
-  groupTechStack,
+  groupRecruit,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;

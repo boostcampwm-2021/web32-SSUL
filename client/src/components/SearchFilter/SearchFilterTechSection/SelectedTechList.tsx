@@ -5,11 +5,11 @@ import { ReducerType } from '../../../store/rootReducer';
 import {
   popSelectedTechStack,
   groupRecruitType,
-  returnGroupTechStack,
-} from '../../../store/slices/groupTechStackList';
+  returnGroupRecruitState,
+} from '../../../store/slices/groupRecruitSlice';
 
 function SelectedTechList(): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
 
   const selectedTechStackDispatch = useDispatch();
 

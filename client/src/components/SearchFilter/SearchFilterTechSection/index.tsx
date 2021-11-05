@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { getTechStackList } from '../../../api/techStack';
 import { TechStack } from '../../../types/TechStack';
-import { groupRecruitType, returnGroupTechStack } from '../../../store/slices/groupTechStackList';
+import { groupRecruitType, returnGroupRecruitState } from '../../../store/slices/groupRecruitSlice';
 
 function SearchFilterTechSection(): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 
