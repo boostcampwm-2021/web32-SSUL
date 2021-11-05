@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-
-const dummyData = [
-  '공모전',
-  '프로젝트',
-  '대외활동',
-  '스터디',
-  '동아리',
-  '면접/인터뷰',
-  '토이프로젝트',
-  '구인/구직',
-  '기타',
-];
-
+import { getCategories } from '../../../api/category';
+import { Category } from '../../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import {
+  returnGroupRecruitState,
+  groupRecruitType,
+  checkCategory,
+} from '../../../store/slices/groupRecruitSlice';
 function CategoryList(): JSX.Element {
-  const categoryItems = dummyData.map((category, idx) => {
-    if (idx === 4) return <CategoryItemSelect key={category}>{category}</CategoryItemSelect>;
-    else return <CategoryItem key={idx}>{category}</CategoryItem>;
+  const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
+  const groupRecruitState = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
+  const groupRecruitDispatch = useDispatch();
+
+  useEffect(() => {
+    const { category } = history.state.state ?? { category: '' };
+    const getData = async () => {
+      const categoryList = await getCategories();
+      setBaseCategoryList(categoryList);
+      groupRecruitDispatch(checkCategory(category));
+    };
+    getData();
+  }, []);
+
+  const categoryItems = baseCategoryList.map((category) => {
+    if (category.name === groupRecruitState.selectedCategory)
+      return <CategoryItemSelect key={category.id}>{category.name}</CategoryItemSelect>;
+    else return <CategoryItem key={category.id}>{category.name}</CategoryItem>;
   });
 
   return <Container>{categoryItems}</Container>;

@@ -4,6 +4,7 @@ import { RootState } from '../index';
 export interface groupRecruitType {
   techStackInput: string;
   selectedTechStack: string[];
+  selectedCategory: string;
 }
 
 export const groupRecruitSlice = createSlice({
@@ -11,6 +12,7 @@ export const groupRecruitSlice = createSlice({
   initialState: {
     techStackInput: '' as string,
     selectedTechStack: [] as string[],
+    selectedCategory: '' as string,
   },
   reducers: {
     changeTechStackInput(state, action) {
@@ -29,10 +31,13 @@ export const groupRecruitSlice = createSlice({
       );
       return { ...state, selectedTechStack: newSelectedTechStackList };
     },
+    checkCategory(state, action) {
+      return { ...state, selectedCategory: action.payload };
+    },
   },
 });
 
-export const { changeTechStackInput, pushSelectedTechStack, popSelectedTechStack } =
+export const { changeTechStackInput, pushSelectedTechStack, popSelectedTechStack, checkCategory } =
   groupRecruitSlice.actions;
 export default groupRecruitSlice.reducer;
 export const returnGroupRecruitState = (state: RootState): groupRecruitType => state.groupRecruit;
