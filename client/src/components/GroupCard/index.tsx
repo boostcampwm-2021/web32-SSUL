@@ -11,18 +11,18 @@ const dummyData: Group = {
   name: 'REACT',
   maxUserCnt: 5,
   curUserCnt: 2,
-  intro: '',
+  intro: '안녕하세요 어서오세요',
   startAt: new Date(),
   endAt: new Date(),
   status: GroupState.DOING,
 };
 
 function GroupCard(): JSX.Element {
-  const { name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = dummyData;
+  const { id, name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = dummyData;
   return (
     <Card>
       <GroupCardHeader name={name} maxUserCnt={maxUserCnt} curUserCnt={curUserCnt} />
-      <GroupCardStatus ownerId={ownerId} intro={intro} startAt={startAt} endAt={endAt} />
+      <GroupCardStatus id={id} ownerId={ownerId} intro={intro} startAt={startAt} endAt={endAt} />
       <GroupApplyButton />
     </Card>
   );
