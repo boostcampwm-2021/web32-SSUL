@@ -1,21 +1,21 @@
 import React from 'react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 interface GageProps {
-  contentsNumber : number
+  contentsNumber: number;
 }
 
-function GageBar({contentsNumber}: GageProps): JSX.Element {
-  const percentage = Math.floor((contentsNumber+1)/5*100);
-  const style = { width: `${percentage}%`}
-  return(
+function GageBar({ contentsNumber }: GageProps): JSX.Element {
+  const percentage = Math.floor(((contentsNumber + 1) / 5) * 100);
+  const style = { width: `${percentage}%` };
+  return (
     <>
       <GageContainer>
-        <GageProgressBar style={style}/>
+        <GageProgressBar style={style} />
       </GageContainer>
       <GagePercentage>{percentage}%</GagePercentage>
     </>
-  )
+  );
 }
 
 const GageContainer = styled.div`
@@ -30,7 +30,7 @@ const GageProgressBar = styled.div`
   height: 10px;
   border-radius: 10px;
   background-color: ${(props) => props.theme.Primary};
-  transition: width .6s ease;
+  transition: width 0.6s ease;
 `;
 
 const GagePercentage = styled.p`

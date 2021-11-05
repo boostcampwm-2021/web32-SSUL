@@ -10,12 +10,12 @@ export const createGroupInfoSlice = createSlice({
     endDate: '',
     groupName: '',
     groupInfo: '',
-    techStack: []
+    techStack: [],
   } as GroupData,
-  reducers:{
+  reducers: {
     setGroupData(state, action) {
       const newData = action.payload;
-      return {...state, ...newData};
+      return { ...state, ...newData };
     },
   },
 });

@@ -3,12 +3,12 @@ import React from 'react';
 import AntDatePicker from './AntDatePicker';
 
 function Date(): JSX.Element {
-  return(
+  return (
     <>
       <Title>시작일, 종료일을 선택해주세요.</Title>
-      <AntDatePicker/>
+      <AntDatePicker />
     </>
-  )
+  );
 }
 
 const Title = styled.p`

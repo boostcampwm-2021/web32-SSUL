@@ -2,19 +2,19 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 interface ItemProp {
-  key: number,
-  category: string,
-  clicked: boolean,
-  handleCategoryClick :() => void
+  key: number;
+  category: string;
+  clicked: boolean;
+  handleCategoryClick: () => void;
 }
 
-function CategoryItem({category, clicked, handleCategoryClick}: ItemProp): JSX.Element {
-  return(
+function CategoryItem({ category, clicked, handleCategoryClick }: ItemProp): JSX.Element {
+  return (
     <div onClick={handleCategoryClick}>
-      {clicked ? <ClickedItem/> : <Item/>}
+      {clicked ? <ClickedItem /> : <Item />}
       <ItemName>{category}</ItemName>
     </div>
-  )
+  );
 }
 
 const ClickedItem = styled.div`
@@ -22,8 +22,7 @@ const ClickedItem = styled.div`
   height: 60px;
   margin: auto;
   border-radius: 10px;
-  box-shadow: inset 5px 5px 10px #8f8f8f,
-    inset -5px -5px 10px #ffffff;
+  box-shadow: inset 5px 5px 10px #8f8f8f, inset -5px -5px 10px #ffffff;
 `;
 
 const Item = styled.div`
@@ -31,8 +30,7 @@ const Item = styled.div`
   height: 60px;
   margin: auto;
   border-radius: 10px;
-  box-shadow:  5px 5px 10px #8f8f8f,
-    -5px -5px 10px #ffffff;
+  box-shadow: 5px 5px 10px #8f8f8f, -5px -5px 10px #ffffff;
 `;
 
 const ItemName = styled.p`

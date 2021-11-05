@@ -8,19 +8,18 @@ import { setGroupData } from '../../../store/slices/createGroupInfo';
 function Personnel(): JSX.Element {
   const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
   const dispatch = useDispatch();
-  const onChangeBar = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    dispatch(setGroupData({personnelCount: value}));
-  }
-  
-  return(
+    dispatch(setGroupData({ personnelCount: value }));
+  };
+
+  return (
     <>
       <Title>그룹의 정원을 선택해주세요.</Title>
-      <RangeValue>{ personnelCount }</RangeValue>
-      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={ personnelCount }/>
-      
+      <RangeValue>{personnelCount}</RangeValue>
+      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={personnelCount} />
     </>
-  )
+  );
 }
 
 const Title = styled.p`
@@ -36,16 +35,16 @@ const RangeBar = styled.input`
   border-radius: 5px;
   margin: 0 auto;
   outline: 0;
-  
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      background-color: ${(props) => props.theme.Primary};
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid white;
-      cursor: pointer;
-      transition: all .3s ease;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: ${(props) => props.theme.Primary};
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 `;
 
