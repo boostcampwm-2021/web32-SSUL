@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import CategoryItem from './CategoryItem';
-import { CenterLayout } from '../../styles/global';
+import { BaseLayout } from '../../styles/global';
 import { LinkButton } from '../../components';
 import DeveloperImg from '../../assets/images/developer-img.jpg';
 import { getCategories } from '../../api/category';
@@ -28,44 +28,50 @@ function MainPage(): JSX.Element {
   const handleGroupTabClick = () => setTab(Tab.GROUP);
 
   return (
-    <CenterLayout>
-      <InfoContainer>
-        <Header>
-          <TextBtn selected={tab === Tab.GROUP} onClick={handleMentorTabClick}>
-            그룹 찾기
-          </TextBtn>
-          <TextBtn selected={tab === Tab.MENTOR} onClick={handleGroupTabClick}>
-            멘토 찾기
-          </TextBtn>
-        </Header>
-
-        {tab === Tab.GROUP && (
-          <GroupFindContainer>
-            <IntroText>함께 성장할 동료를 찾아보세요!</IntroText>
-            <GroupCatagoryContainer>
-              {categories.map(({ id, name, imageUrl }) => (
-                <CategoryItem key={id} id={id} name={name} url={imageUrl} />
-              ))}
-            </GroupCatagoryContainer>
-          </GroupFindContainer>
-        )}
-        {tab === Tab.MENTOR && (
-          <MentorFindContainer>
-            <IntroText>인사이트를 넓힐 기회를 손쉽게</IntroText>
-            <IntroText>가져보세요!</IntroText>
-            <LinkButton to="/recruit/mentor" width={300} height={50}>
+    <BaseLayout>
+      <Container>
+        <InfoContainer>
+          <Header>
+            <TextBtn selected={tab === Tab.GROUP} onClick={handleGroupTabClick}>
+              그룹 찾기
+            </TextBtn>
+            <TextBtn selected={tab === Tab.MENTOR} onClick={handleMentorTabClick}>
               멘토 찾기
-            </LinkButton>
-          </MentorFindContainer>
-        )}
-      </InfoContainer>
+            </TextBtn>
+          </Header>
 
-      <ImageWrapper>
-        <DynamicImage src={DeveloperImg} alt="devloper" />
-      </ImageWrapper>
-    </CenterLayout>
+          {tab === Tab.GROUP && (
+            <GroupFindContainer>
+              <IntroText>함께 성장할 동료를 찾아보세요!</IntroText>
+              <GroupCatagoryContainer>
+                {categories.map(({ id, name, imageUrl }) => (
+                  <CategoryItem key={id} id={id} name={name} url={imageUrl} />
+                ))}
+              </GroupCatagoryContainer>
+            </GroupFindContainer>
+          )}
+          {tab === Tab.MENTOR && (
+            <MentorFindContainer>
+              <IntroText>인사이트를 넓힐 기회를 손쉽게</IntroText>
+              <IntroText>가져보세요!</IntroText>
+              <LinkButton to="/recruit/mentor" width={300} height={50}>
+                멘토 찾기
+              </LinkButton>
+            </MentorFindContainer>
+          )}
+        </InfoContainer>
+
+        <ImageWrapper>
+          <DynamicImage src={DeveloperImg} alt="devloper" />
+        </ImageWrapper>
+      </Container>
+    </BaseLayout>
   );
 }
+const Container = styled.div`
+  display: flex;
+  margin: 200px auto;
+`;
 
 const InfoContainer = styled.div`
   display: flex;
@@ -106,9 +112,7 @@ const MentorFindContainer = styled.div``;
 
 const ImageWrapper = styled.div`
   display: flex;
-  align-items: center;
   width: 400px;
-  height: 100%;
 `;
 
 const DynamicImage = styled.img`
