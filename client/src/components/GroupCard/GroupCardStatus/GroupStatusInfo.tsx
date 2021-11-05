@@ -9,7 +9,10 @@ interface Props {
 }
 
 function GroupStatusInfo({ id, intro, startAt, endAt }: Props): JSX.Element {
-  const getGroupTechStackList = () => {};
+  const getGroupTechStackList = () => {
+    // id를 이용해 가져오기
+    id;
+  };
   return (
     <Container>
       <GroupIntro>{intro}</GroupIntro>

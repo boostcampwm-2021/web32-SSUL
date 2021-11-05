@@ -2,11 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 function GroupApplyButton(): JSX.Element {
-  return <Container></Container>;
+  return <ApplyButton>보기</ApplyButton>;
 }
 
-const Container = styled.div`
+const ApplyButton = styled.button`
   display: flex;
+  padding: 10px;
+  margin-left: auto;
+  outline: none;
+  border: none;
+  cursor: pointer;
 `;
 
 export default GroupApplyButton;
