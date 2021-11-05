@@ -13,7 +13,7 @@ import { GroupData } from '../../types/CreateGroup';
 
 const MAX_CONTENT_INDEX = 4;
 
-function CreateGroupPage(): JSX.Element {
+function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   const [notificationText, setNotificationText] = useState<string>('');
   const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
@@ -119,4 +119,4 @@ const Notification = styled.div`
   margin-bottom: 40px;
   color: #e50707;
 `;
-export default CreateGroupPage;
+export default GroupCreatePage;
