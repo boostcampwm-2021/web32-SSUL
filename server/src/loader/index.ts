@@ -7,7 +7,8 @@ export default async function (app: express.Application) {
   const connection = await database();
   console.log('DB connected');
 
-  controller(app);
-  console.log('controller loaded');
   await server(app);
+
+  controller(app);
+  console.log('Controller loaded');
 }
