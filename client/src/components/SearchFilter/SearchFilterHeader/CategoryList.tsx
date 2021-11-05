@@ -9,6 +9,7 @@ import {
   groupRecruitType,
   checkCategory,
 } from '../../../store/slices/groupRecruitSlice';
+
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
   const groupRecruitState = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
@@ -27,7 +28,7 @@ function CategoryList(): JSX.Element {
   const categoryItems = baseCategoryList.map((category) => {
     if (category.name === groupRecruitState.selectedCategory)
       return <CategoryItemSelect key={category.id}>{category.name}</CategoryItemSelect>;
-    else return <CategoryItem key={category.id}>{category.name}</CategoryItem>;
+    else return <CategoryItemNonSelect key={category.id}>{category.name}</CategoryItemNonSelect>;
   });
 
   return <Container>{categoryItems}</Container>;
@@ -44,21 +45,18 @@ const CategoryItem = styled.div`
   margin: 5px;
   padding: 10px;
 
-  color: ${(props) => props.theme.White};
-  background: ${(props) => props.theme.Gray5};
   box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
 `;
 
-const CategoryItemSelect = styled.div`
-  display: flex;
-  margin: 5px;
-  padding: 10px;
+const CategoryItemNonSelect = styled(CategoryItem)`
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Gray5};
+`;
 
+const CategoryItemSelect = styled(CategoryItem)`
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
-  border-radius: 10px;
 `;
 
 export default CategoryList;
