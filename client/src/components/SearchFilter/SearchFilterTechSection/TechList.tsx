@@ -34,13 +34,13 @@ function TechList({ listView }: Props): JSX.Element {
   const techList = listView.map((category) => {
     if (groupTechStackList.selectedTechStack.includes(category.name))
       return (
-        <SelectedTechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+        <SelectedTechListItem key={category.id} onClick={handleTechStackClick}>
           {category.name}
         </SelectedTechListItem>
       );
     else {
       return (
-        <TechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+        <TechListItem key={category.id} onClick={handleTechStackClick}>
           {category.name}
         </TechListItem>
       );
