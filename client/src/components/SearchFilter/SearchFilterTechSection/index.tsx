@@ -5,7 +5,7 @@ import TechList from './TechList';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types/TechStack';
+import { TechStack } from '../../../types';
 import { groupRecruitType, returnGroupRecruitState } from '../../../store/slices/groupRecruitSlice';
 
 function SearchFilterTechSection(): JSX.Element {
@@ -17,7 +17,6 @@ function SearchFilterTechSection(): JSX.Element {
     const getData = async () => {
       const data = await getTechStackList();
       setBaseTechStackList(data);
-      return data;
     };
     getData();
   }, []);
