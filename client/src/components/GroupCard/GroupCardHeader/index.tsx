@@ -10,7 +10,7 @@ interface Props {
 function GroupCardHeader({ name, maxUserCnt, curUserCnt }: Props): JSX.Element {
   return (
     <Container>
-      <h2>{name}</h2>
+      <GroupName>{name}</GroupName>
       <UserCntStatus>
         {curUserCnt}/{maxUserCnt}
       </UserCntStatus>
@@ -20,9 +20,13 @@ function GroupCardHeader({ name, maxUserCnt, curUserCnt }: Props): JSX.Element {
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  margin: 10px;
   justify-content: space-between;
   align-items: center;
+`;
+
+const GroupName = styled.h2`
+  color: ${(props) => props.theme.Primary};
 `;
 
 const UserCntStatus = styled.div`

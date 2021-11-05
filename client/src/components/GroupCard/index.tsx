@@ -18,11 +18,11 @@ const dummyData: Group = {
 };
 
 function GroupCard(): JSX.Element {
-  const { name, maxUserCnt, curUserCnt } = dummyData;
+  const { name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = dummyData;
   return (
     <Card>
       <GroupCardHeader name={name} maxUserCnt={maxUserCnt} curUserCnt={curUserCnt} />
-      <GroupCardStatus />
+      <GroupCardStatus ownerId={ownerId} intro={intro} startAt={startAt} endAt={endAt} />
       <GroupApplyButton />
     </Card>
   );
@@ -30,6 +30,7 @@ function GroupCard(): JSX.Element {
 
 const Card = styled.div`
   display: flex;
+  flex-direction: column;
   margin: 10px;
   padding: 10px;
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
