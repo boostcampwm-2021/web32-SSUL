@@ -1,6 +1,5 @@
-export interface GithubLoginData {
-  githubId: string;
-  avatarUrl: string;
+export interface ExampleInterface {
+  somethingToRequestKey: number;
 }
 
-export type ResponseData = GithubLoginData;
+export type RequestBody = ExampleInterface;
