@@ -25,10 +25,28 @@ function CategoryList(): JSX.Element {
     getData();
   }, []);
 
+  const handleSelectedCategoryClick = () => {
+    groupRecruitDispatch(checkCategory(''));
+  };
+
+  const handleNonSelectedCategoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const selectedCategory = e.currentTarget.innerText;
+    groupRecruitDispatch(checkCategory(selectedCategory));
+  };
+
   const categoryItems = baseCategoryList.map((category) => {
     if (category.name === groupRecruitState.selectedCategory)
-      return <CategoryItemSelect key={category.id}>{category.name}</CategoryItemSelect>;
-    else return <CategoryItemNonSelect key={category.id}>{category.name}</CategoryItemNonSelect>;
+      return (
+        <CategoryItemSelect onClick={handleSelectedCategoryClick} key={category.id}>
+          {category.name}
+        </CategoryItemSelect>
+      );
+    else
+      return (
+        <CategoryItemNonSelect onClick={handleNonSelectedCategoryClick} key={category.id}>
+          {category.name}
+        </CategoryItemNonSelect>
+      );
   });
 
   return <Container>{categoryItems}</Container>;
@@ -40,13 +58,16 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const CategoryItem = styled.div`
+const CategoryItem = styled.button`
   display: flex;
   margin: 5px;
   padding: 10px;
 
   box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 `;
 
 const CategoryItemNonSelect = styled(CategoryItem)`
