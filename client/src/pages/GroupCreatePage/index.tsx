@@ -52,6 +52,7 @@ function GroupCreatePage(): JSX.Element {
     }
   };
   const clickPrevContents = () => {
+    setNotificationText('');
     if (contentsNumber > 0) setContentsNumber(contentsNumber - 1);
   };
 
