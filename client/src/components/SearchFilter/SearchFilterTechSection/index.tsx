@@ -5,11 +5,16 @@ import TechList from './TechList';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types/TechStack';
-import { groupRecruitType, returnGroupTechStack } from '../../../store/slices/groupTechStackList';
+import { TechStack } from '../../../types';
+import {
+  groupRecruitType,
+  returnGroupRecruitFilterState,
+} from '../../../store/slices/groupRecruitFilterSlice';
 
 function SearchFilterTechSection(): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const techStackInput = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).techStackInput;
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 
@@ -17,17 +22,16 @@ function SearchFilterTechSection(): JSX.Element {
     const getData = async () => {
       const data = await getTechStackList();
       setBaseTechStackList(data);
-      return data;
     };
     getData();
   }, []);
 
   useEffect(() => {
     const newTechList = baseTechStackList.filter((tech) => {
-      return tech.name.includes(groupTechStackList.techStackInput);
+      return tech.name.includes(techStackInput);
     });
     setTechListView(newTechList);
-  }, [groupTechStackList.techStackInput, baseTechStackList]);
+  }, [techStackInput, baseTechStackList]);
 
   return (
     <Container>

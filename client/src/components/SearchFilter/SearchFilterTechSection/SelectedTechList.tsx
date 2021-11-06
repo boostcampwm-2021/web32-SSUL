@@ -5,11 +5,13 @@ import { ReducerType } from '../../../store/rootReducer';
 import {
   popSelectedTechStack,
   groupRecruitType,
-  returnGroupTechStack,
-} from '../../../store/slices/groupTechStackList';
+  returnGroupRecruitFilterState,
+} from '../../../store/slices/groupRecruitFilterSlice';
 
 function SelectedTechList(): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const selectedTechStack = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).selectedTechStack;
 
   const selectedTechStackDispatch = useDispatch();
 
@@ -19,7 +21,7 @@ function SelectedTechList(): JSX.Element {
     selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
   };
 
-  const totalSelectedTechList = groupTechStackList.selectedTechStack.map((category, idx) => {
+  const totalSelectedTechList = selectedTechStack.map((category, idx) => {
     return (
       <SelectItem key={idx}>
         <h4>{category}</h4>

@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-
-const dummyData = [
-  '공모전',
-  '프로젝트',
-  '대외활동',
-  '스터디',
-  '동아리',
-  '면접/인터뷰',
-  '토이프로젝트',
-  '구인/구직',
-  '기타',
-];
+import { getCategories } from '../../../api/category';
+import { Category } from '../../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import {
+  returnGroupRecruitFilterState,
+  groupRecruitType,
+  checkCategory,
+} from '../../../store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
-  const categoryItems = dummyData.map((category, idx) => {
-    if (idx === 4) return <CategoryItemSelect key={category}>{category}</CategoryItemSelect>;
-    else return <CategoryItem key={idx}>{category}</CategoryItem>;
+  const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
+  const selectedCategory = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).selectedCategory;
+  const groupRecruitDispatch = useDispatch();
+
+  useEffect(() => {
+    const { category } = history.state.state ?? { category: '' };
+    const getCategoryListData = async () => {
+      const categoryList = await getCategories();
+      setBaseCategoryList(categoryList);
+      groupRecruitDispatch(checkCategory(category));
+    };
+    getCategoryListData();
+  }, []);
+
+  const handleSelectedCategoryClick = () => {
+    groupRecruitDispatch(checkCategory(''));
+  };
+
+  const handleNonSelectedCategoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const selectedCategory = e.currentTarget.innerText;
+    groupRecruitDispatch(checkCategory(selectedCategory));
+  };
+
+  const categoryItems = baseCategoryList.map((category) => {
+    if (category.name === selectedCategory)
+      return (
+        <CategoryItemSelect onClick={handleSelectedCategoryClick} key={category.id}>
+          {category.name}
+        </CategoryItemSelect>
+      );
+    else
+      return (
+        <CategoryItemNonSelect onClick={handleNonSelectedCategoryClick} key={category.id}>
+          {category.name}
+        </CategoryItemNonSelect>
+      );
   });
 
   return <Container>{categoryItems}</Container>;
@@ -28,26 +60,26 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const CategoryItem = styled.div`
+const CategoryItem = styled.button`
   display: flex;
   margin: 5px;
   padding: 10px;
 
-  color: ${(props) => props.theme.White};
-  background: ${(props) => props.theme.Gray5};
   box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 `;
 
-const CategoryItemSelect = styled.div`
-  display: flex;
-  margin: 5px;
-  padding: 10px;
+const CategoryItemNonSelect = styled(CategoryItem)`
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Gray5};
+`;
 
+const CategoryItemSelect = styled(CategoryItem)`
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
-  border-radius: 10px;
 `;
 
 export default CategoryList;

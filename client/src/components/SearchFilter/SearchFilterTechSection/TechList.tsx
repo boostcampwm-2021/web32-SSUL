@@ -6,8 +6,8 @@ import { ReducerType } from '../../../store/rootReducer';
 import {
   pushSelectedTechStack,
   groupRecruitType,
-  returnGroupTechStack,
-} from '../../../store/slices/groupTechStackList';
+  returnGroupRecruitFilterState,
+} from '../../../store/slices/groupRecruitFilterSlice';
 import { TechStack } from '../../../types/TechStack';
 
 const MAX_SELECTED_INDEX = 5;
@@ -17,7 +17,9 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const groupTechStackList = useSelector<ReducerType, groupRecruitType>(returnGroupTechStack);
+  const selectedTechStack = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).selectedTechStack;
   const selectedTechStackDispatch = useDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,21 +28,21 @@ function TechList({ listView }: Props): JSX.Element {
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
-    if (groupTechStackList.selectedTechStack.length >= MAX_SELECTED_INDEX) {
+    if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
     } else selectedTechStackDispatch(pushSelectedTechStack(techStackName));
   };
 
   const techList = listView.map((category) => {
-    if (groupTechStackList.selectedTechStack.includes(category.name))
+    if (selectedTechStack.includes(category.name))
       return (
-        <SelectedTechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+        <SelectedTechListItem key={category.id} onClick={handleTechStackClick}>
           {category.name}
         </SelectedTechListItem>
       );
     else {
       return (
-        <TechListItem key={category.tech_stack_id} onClick={handleTechStackClick}>
+        <TechListItem key={category.id} onClick={handleTechStackClick}>
           {category.name}
         </TechListItem>
       );
