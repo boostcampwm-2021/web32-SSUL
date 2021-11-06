@@ -19,12 +19,12 @@ function CategoryList(): JSX.Element {
 
   useEffect(() => {
     const { category } = history.state.state ?? { category: '' };
-    const getData = async () => {
+    const getCategoryListData = async () => {
       const categoryList = await getCategories();
       setBaseCategoryList(categoryList);
       groupRecruitDispatch(checkCategory(category));
     };
-    getData();
+    getCategoryListData();
   }, []);
 
   const handleSelectedCategoryClick = () => {
