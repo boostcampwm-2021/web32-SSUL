@@ -5,5 +5,5 @@ export interface GroupData {
   endDate: string,
   groupName: string,
   groupInfo: string,
-  techStack: string[]
+  selectedTechStack: string[]
 }
