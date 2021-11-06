@@ -1,33 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage('Init') {
+        stage("Init") {
             steps {
-                ehco 'init'
+                ehco "init"
             }
         }
-        stage('deploy for dev') {
+        stage("deploy for dev") {
             when {
                 branch "develop"
             }
             steps {
-                echo 'do deploy'
+                echo "do deploy"
             }
         }
-        stage('deploy for main') {
+        stage("deploy for main") {
             when {
                 branch "main"
             }
             steps {
-                echo 'do deploy'
+                echo "do deploy"
             }
         }
-        stage('ci test for PR'){
+        stage("ci test for PR"){
             when {
-                branch 'PR-*'
+                branch "PR-*"
             }
             steps {
-                echo 'just fine.'
+                echo "just fine."
             }
         }
     }
