@@ -2,9 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
-  onChange(e : React.ChangeEvent<HTMLInputElement>): void,
+  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
 }
-function SearchBar({onChange}: Props): JSX.Element {
+function SearchBar({ onChange }: Props): JSX.Element {
   return (
     <Container>
       <InputValue onChange={onChange} placeholder="Search for.." />
@@ -26,6 +26,9 @@ const Container = styled.div`
 const InputValue = styled.input`
   display: flex;
   border: none;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default SearchBar;

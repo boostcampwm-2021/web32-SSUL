@@ -34,6 +34,7 @@ const Item = styled.div`
 `;
 
 const ItemName = styled.p`
+  width: 80px;
   margin-top: 10px;
   font-size: 13px;
   color: ${(props) => props.theme.Gray3};

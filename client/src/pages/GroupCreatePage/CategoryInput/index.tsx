@@ -45,7 +45,7 @@ const Title = styled.p`
 const CategoryWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  gap: 30px;
   margin: 0 80px;
 `;
 
