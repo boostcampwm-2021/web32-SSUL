@@ -1,13 +1,31 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../../store/rootReducer';
+import { GroupData } from '../../../types/CreateGroup';
+import { setGroupData } from '../../../store/slices/createGroupInfo';
 
 function SelectedTechStackList(): JSX.Element {
-    const selectedList = ['javascript', 'css', 'html'];
-  const selectedTechListElements = selectedList.map((category, idx) => {
+  const { selectedTechStack } = useSelector<ReducerType, GroupData>(
+    (state) => state.createGroupInfo,
+  );
+  const dispatch = useDispatch();
+
+  const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) =>{
+    const targetTechStack = e.currentTarget as HTMLButtonElement;
+    const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
+    const newSelectedTechStack = selectedTechStack.filter((techStackName) =>{
+      return techStackName !== nowTechStack
+    });
+
+    dispatch(setGroupData({selectedTechStack: newSelectedTechStack}));
+
+  }
+  const selectedTechListElements = selectedTechStack.map((techStackName, idx) => {
     return (
       <SelectItem key={idx}>
-        <h4>{category}</h4>
-        <EraseButton>X</EraseButton>
+        <h4>{techStackName}</h4>
+        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
   });
