@@ -6,6 +6,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@reduxjs/toolkit": "^1.6.2",
+    "antd": "^4.16.13",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "qs": "^6.10.1",
