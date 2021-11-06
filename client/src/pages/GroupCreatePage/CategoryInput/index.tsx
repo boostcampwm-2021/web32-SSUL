@@ -1,40 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import CategoryItem from './CategoryItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
 import { setGroupData } from '../../../store/slices/createGroupData';
-
-const categoryList: string[] = [
-  '대외활동',
-  '공모전',
-  '스터디',
-  '동아리',
-  '면접/인터뷰',
-  '토이프로젝트',
-  '구인/구직',
-  '기타',
-];
+import { Category } from '../../../types';
+import CategoryItem from './CategoryItem';
+import { getCategories } from '../../../api/category';
 
 function CategoryInput(): JSX.Element {
-  const { category } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
+  const [categorys, setCategorys] = useState<Category[]>([]);
+  const { category: SelectedCategory } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
   const dispatch = useDispatch();
 
-  const getList = () => {
-    return categoryList.map((categoryName, idx) => (
+  useEffect(() =>{
+    const fetchCategoryList = async() => {
+      const newCategorys = await getCategories();
+      setCategorys(newCategorys);
+    }
+
+    fetchCategoryList();
+  },[]);
+
+  const getCategoryItemElements = () => {
+    return categorys.map((category) => (
       <CategoryItem
-        key={idx}
-        category={categoryName}
-        clicked={categoryName === category}
-        handleCategoryClick={() => dispatch(setGroupData({ category: categoryName }))}
+        key={category.id}
+        category={category.name}
+        image={category.imageUrl}
+        clicked={category.name === SelectedCategory}
+        handleCategoryClick={() => dispatch(setGroupData({ category: category.name }))}
       />
     ));
   };
   return (
     <>
       <Title>카테고리를 선택해주세요.</Title>
-      <CategoryWrapper>{getList()}</CategoryWrapper>
+      <CategoryWrapper>{getCategoryItemElements()}</CategoryWrapper>
     </>
   );
 }
