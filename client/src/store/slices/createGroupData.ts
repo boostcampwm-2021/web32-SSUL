@@ -17,8 +17,20 @@ export const createGroupDataSlice = createSlice({
       const newData = action.payload;
       return { ...state, ...newData };
     },
+    clearGroupData() {
+      const clearState: GroupData = {
+        category: '',
+        personnelCount: 1,
+        startDate: '',
+        endDate: '',
+        groupName: '',
+        groupInfo: '',
+        selectedTechStack: [],
+      };
+      return { ...clearState };
+    },
   },
 });
 
-export const { setGroupData } = createGroupDataSlice.actions;
+export const { setGroupData, clearGroupData } = createGroupDataSlice.actions;
 export default createGroupDataSlice.reducer;

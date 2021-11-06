@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import Category from './Category';
-import Personnel from './Personnel';
-import TechStack from './TechStack';
-import GroupInfo from './GroupInfo';
-import Date from './Date';
+import React, { useEffect, useState } from 'react';
+import Category from './CategoryInput';
+import Personnel from './PersonnelInput';
+import TechStack from './TechStackInput';
+import GroupInfo from './GroupInfoInput';
+import Date from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../store/rootReducer';
 import { GroupData } from '../../types/CreateGroup';
+import { clearGroupData } from '../../store/slices/createGroupData';
 
 const MAX_CONTENT_INDEX = 4;
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   const [notificationText, setNotificationText] = useState<string>('');
-  const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
+  const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
+  const dispatch = useDispatch();
 
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
@@ -44,7 +46,7 @@ function GroupCreatePage(): JSX.Element {
       case 3:
         return groupData.startDate !== '' && groupData.endDate !== '';
       case 4:
-        return <TechStack />;
+        return groupData.selectedTechStack.length > 0;
       default:
         return true;
     }
@@ -63,6 +65,13 @@ function GroupCreatePage(): JSX.Element {
     if (contentsNumber < MAX_CONTENT_INDEX) setContentsNumber(contentsNumber + 1);
   };
 
+  const cleanUp = () =>{
+    dispatch(clearGroupData());
+  }
+  
+  useEffect(() =>{
+    return () => cleanUp();
+  },[])
   return (
     <CreateForm>
       <GageBar contentsNumber={contentsNumber} />
