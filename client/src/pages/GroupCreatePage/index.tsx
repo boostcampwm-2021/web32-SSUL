@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Category from './CategoryInput';
-import Personnel from './PersonnelInput';
-import TechStack from './TechStackInput';
-import GroupInfo from './GroupInfoInput';
-import Date from './DateInput';
+import CategoryInput from './CategoryInput';
+import PersonnelInput from './PersonnelInput';
+import TechStackInput from './TechStackInput';
+import GroupInfoInput from './GroupInfoInput';
+import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
@@ -11,27 +11,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../store/rootReducer';
 import { GroupData } from '../../types/CreateGroup';
 import { clearGroupData } from '../../store/slices/createGroupData';
+import { Category, TechStack } from '../../types';
+import { getCategories } from '../../api/category';
+import { getTechStackList } from '../../api/techStack';
 
 const MAX_CONTENT_INDEX = 4;
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   const [notificationText, setNotificationText] = useState<string>('');
+  const [categorys, setCategorys] = useState<Category[]>([]);
+  const [techStacks, setTechStacks] = useState<TechStack[]>([]);
   const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
   const dispatch = useDispatch();
 
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
       case 0:
-        return <Category />;
+        return <CategoryInput categorys={categorys} />;
       case 1:
-        return <Personnel />;
+        return <PersonnelInput />;
       case 2:
-        return <GroupInfo />;
+        return <GroupInfoInput />;
       case 3:
-        return <Date />;
+        return <DateInput />;
       case 4:
-        return <TechStack />;
+        return <TechStackInput techStacks={techStacks} />;
       default:
         return null;
     }
@@ -51,6 +56,7 @@ function GroupCreatePage(): JSX.Element {
         return true;
     }
   };
+
   const clickPrevContents = () => {
     setNotificationText('');
     if (contentsNumber > 0) setContentsNumber(contentsNumber - 1);
@@ -66,13 +72,26 @@ function GroupCreatePage(): JSX.Element {
     if (contentsNumber < MAX_CONTENT_INDEX) setContentsNumber(contentsNumber + 1);
   };
 
-  const cleanUp = () =>{
+  const cleanUp = () => {
     dispatch(clearGroupData());
-  }
-  
-  useEffect(() =>{
+  };
+
+  useEffect(() => {
+    const fetchCategoryList = async () => {
+      const response: Category[] = await getCategories();
+      setCategorys(response);
+    };
+
+    const fetechTechStackList = async () => {
+      const response: TechStack[] = await getTechStackList();
+      setTechStacks(response);
+    };
+
+    fetchCategoryList();
+    fetechTechStackList();
+
     return () => cleanUp();
-  },[])
+  }, []);
   return (
     <CreateForm>
       <GageBar contentsNumber={contentsNumber} />
