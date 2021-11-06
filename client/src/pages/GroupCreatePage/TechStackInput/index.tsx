@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { getTechStackList } from '../../../api/techStack';
 import { TechStack } from '../../../types/TechStack';
 import SearchBar from './SearchBar';
@@ -8,7 +8,11 @@ import TechStackList from './TechStackList';
 function TechStackInput(): JSX.Element {
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [filteredTechStackList, setFilteredTechStackList] = useState<TechStack[]>([]);
-  const techStackInput = '';
+  const [techStackInput, setTechStackInput] = useState<string>('');
+
+  const handleTechStackInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setTechStackInput(e.target.value);
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -23,11 +27,11 @@ function TechStackInput(): JSX.Element {
       return techStack.name.includes(techStackInput) && idx < 10;
     });
     setFilteredTechStackList(newFilteredTechStackList);
-  }, [baseTechStackList]);
+  }, [baseTechStackList, techStackInput]);
   return (
     <>
-      <SearchBar></SearchBar>
-      <SelectedTechStackList/>
+      <SearchBar onChange={handleTechStackInputChange}></SearchBar>
+      <SelectedTechStackList />
       <TechStackList techStackList={filteredTechStackList} />
     </>
   );

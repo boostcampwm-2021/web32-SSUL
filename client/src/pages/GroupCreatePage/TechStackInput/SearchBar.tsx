@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-function SearchBar(): JSX.Element {
+interface Props {
+  onChange(e : React.ChangeEvent<HTMLInputElement>): void,
+}
+function SearchBar({onChange}: Props): JSX.Element {
   return (
     <Container>
-      <InputValue placeholder="Search for.." />
+      <InputValue onChange={onChange} placeholder="Search for.." />
     </Container>
   );
 }
