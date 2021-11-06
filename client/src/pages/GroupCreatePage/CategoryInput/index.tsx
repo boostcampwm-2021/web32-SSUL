@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
@@ -6,21 +6,16 @@ import { GroupData } from '../../../types/CreateGroup';
 import { setGroupData } from '../../../store/slices/createGroupData';
 import { Category } from '../../../types';
 import CategoryItem from './CategoryItem';
-import { getCategories } from '../../../api/category';
 
-function CategoryInput(): JSX.Element {
-  const [categorys, setCategorys] = useState<Category[]>([]);
-  const { category: SelectedCategory } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
+interface Props {
+  categorys: Category[];
+}
+
+function CategoryInput({ categorys }: Props): JSX.Element {
+  const { category: SelectedCategory } = useSelector<ReducerType, GroupData>(
+    (state) => state.createGroupData,
+  );
   const dispatch = useDispatch();
-
-  useEffect(() =>{
-    const fetchCategoryList = async() => {
-      const newCategorys = await getCategories();
-      setCategorys(newCategorys);
-    }
-
-    fetchCategoryList();
-  },[]);
 
   const getCategoryItemElements = () => {
     return categorys.map((category) => (
