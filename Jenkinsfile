@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                ehco "init"
+                echo "init"
             }
         }
         stage("deploy for dev") {
