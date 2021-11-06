@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupInfo';
+import { setGroupData } from '../../../store/slices/createGroupData';
 
 const categoryList: string[] = [
   '대외활동',
@@ -18,7 +18,7 @@ const categoryList: string[] = [
 ];
 
 function CategoryInput(): JSX.Element {
-  const { category } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
+  const { category } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
   const dispatch = useDispatch();
 
   const getList = () => {

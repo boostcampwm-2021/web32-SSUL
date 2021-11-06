@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
-import { setGroupData } from '../../../store/slices/createGroupInfo';
+import { setGroupData } from '../../../store/slices/createGroupData';
 import { GroupData } from '../../../types/CreateGroup';
 import { TechStack } from '../../../types/TechStack';
 
@@ -14,7 +14,7 @@ interface Props {
 }
 function TechStackList({ techStackList }: Props): JSX.Element {
   const { selectedTechStack } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupInfo,
+    (state) => state.createGroupData,
   );
   const dispatch = useDispatch();
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {

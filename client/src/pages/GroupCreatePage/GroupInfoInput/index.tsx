@@ -3,11 +3,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupInfo';
+import { setGroupData } from '../../../store/slices/createGroupData';
 
 function GroupInfoInput(): JSX.Element {
   const { groupName, groupInfo } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupInfo,
+    (state) => state.createGroupData,
   );
   const dispatch = useDispatch();
 

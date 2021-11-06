@@ -3,10 +3,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupInfo';
+import { setGroupData } from '../../../store/slices/createGroupData';
 
 function PersonnelInput(): JSX.Element {
-  const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupInfo);
+  const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
   const dispatch = useDispatch();
   const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
