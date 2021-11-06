@@ -7,7 +7,7 @@ export interface groupRecruitType {
   selectedCategory: string;
 }
 
-export const groupRecruitSlice = createSlice({
+export const groupRecruitFilterSlice = createSlice({
   name: 'groupRecruit',
   initialState: {
     techStackInput: '' as string,
@@ -38,6 +38,7 @@ export const groupRecruitSlice = createSlice({
 });
 
 export const { changeTechStackInput, pushSelectedTechStack, popSelectedTechStack, checkCategory } =
-  groupRecruitSlice.actions;
-export default groupRecruitSlice.reducer;
-export const returnGroupRecruitState = (state: RootState): groupRecruitType => state.groupRecruit;
+  groupRecruitFilterSlice.actions;
+export default groupRecruitFilterSlice.reducer;
+export const returnGroupRecruitFilterState = (state: RootState): groupRecruitType =>
+  state.groupRecruit;

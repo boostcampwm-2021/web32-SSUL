@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import groupRecruit from './slices/groupRecruitSlice';
+import groupRecruit from './slices/groupRecruitFilterSlice';
 
 const reducer = combineReducers({
   groupRecruit,

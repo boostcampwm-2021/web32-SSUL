@@ -5,14 +5,16 @@ import { Category } from '../../../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../../store/rootReducer';
 import {
-  returnGroupRecruitState,
+  returnGroupRecruitFilterState,
   groupRecruitType,
   checkCategory,
-} from '../../../store/slices/groupRecruitSlice';
+} from '../../../store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
-  const groupRecruitState = useSelector<ReducerType, groupRecruitType>(returnGroupRecruitState);
+  const selectedCategory = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).selectedCategory;
   const groupRecruitDispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function CategoryList(): JSX.Element {
   };
 
   const categoryItems = baseCategoryList.map((category) => {
-    if (category.name === groupRecruitState.selectedCategory)
+    if (category.name === selectedCategory)
       return (
         <CategoryItemSelect onClick={handleSelectedCategoryClick} key={category.id}>
           {category.name}
