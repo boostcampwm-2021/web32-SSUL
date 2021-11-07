@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useAppDispatch } from '@hooks';
 import qs from 'qs';
+import { setUser } from '../../store/slices/userSlice';
+import { useHistory } from 'react-router-dom';
 import { getAccessToken } from '@api/auth';
 
 function Auth(): JSX.Element {
+  const dispatch = useAppDispatch();
   const history = useHistory();
   const getGithubToken = async () => {
     const query = qs.parse(location.search, {
@@ -13,7 +16,8 @@ function Auth(): JSX.Element {
 
     try {
       const data = await getAccessToken(code);
-      console.log(data);
+      const { githubId: id, name, avatarUrl: image } = data;
+      dispatch(setUser({ id, name, image }));
       history.push('/');
     } catch (error) {
       console.error(error);

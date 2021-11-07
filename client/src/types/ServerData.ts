@@ -3,3 +3,9 @@ export interface ExampleInterface {
 }
 
 export type RequestBody = ExampleInterface;
+
+export interface ResponseGithubUserData {
+  githubId: string;
+  name: string;
+  avatarUrl: string;
+}

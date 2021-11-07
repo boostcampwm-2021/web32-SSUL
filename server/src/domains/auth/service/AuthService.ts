@@ -1,14 +1,16 @@
 import { Service } from 'typedi';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
-
-interface GithubUserData {
-  githubId: string;
-  githubName: string;
-  avatarUrl: string;
-}
+import { AuthRepository } from '../repository/AuthRepository';
+import { GithubUserData } from '../auth.interface';
 
 @Service()
 export class AuthService {
+  constructor(
+    @InjectRepository()
+    private readonly authRepository: AuthRepository,
+  ) {}
+
   public async getGithubAccessToken(code: string) {
     const { GITHUB_CI: clientId, GITHUB_CS: clientSecret } = process.env;
     const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token';
@@ -33,10 +35,20 @@ export class AuthService {
 
     const {
       login: githubId,
-      name: githubName,
+      name: name,
       avatar_url: avatarUrl,
     }: GithubUserOriginData = userResponse.data;
 
-    return { githubId, githubName, avatarUrl };
+    return { githubId, name, avatarUrl };
+  }
+
+  public async findOrInsertUser(user: GithubUserData): Promise<GithubUserData> {
+    const { githubId, name, avatarUrl } = user;
+    let userData = await this.authRepository.findOneById(githubId);
+    if (!userData) {
+      await this.authRepository.insertUser(user);
+      userData = await this.authRepository.findOneById(githubId);
+    }
+    return userData as GithubUserData;
   }
 }
