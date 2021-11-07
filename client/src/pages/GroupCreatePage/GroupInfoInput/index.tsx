@@ -4,20 +4,20 @@ import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDat
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 function GroupInfoInput(): JSX.Element {
-  const { groupName, groupInfo } = useAppSelector(groupCreateDataState);
+  const { name, intro } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
 
   const setGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setGroupData({ groupName: e.target.value }));
+    dispatch(setGroupData({ name: e.target.value }));
   };
 
   const setGroupInfo = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setGroupData({ groupInfo: e.target.value }));
+    dispatch(setGroupData({ intro: e.target.value }));
   };
   return (
     <>
-      <NameText onChange={setGroupName} value={groupName} placeholder="그룹명을 작성해주세요." />
-      <InfoText onChange={setGroupInfo} value={groupInfo} placeholder="그룹소개를 작성해주세요." />
+      <NameText onChange={setGroupName} value={name} placeholder="그룹명을 작성해주세요." />
+      <InfoText onChange={setGroupInfo} value={intro} placeholder="그룹소개를 작성해주세요." />
     </>
   );
 }

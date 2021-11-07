@@ -4,18 +4,18 @@ import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDat
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 function PersonnelInput(): JSX.Element {
-  const { personnelCount } = useAppSelector(groupCreateDataState);
+  const { maxUserCnt } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
   const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    dispatch(setGroupData({ personnelCount: value }));
+    dispatch(setGroupData({ maxUserCnt: value }));
   };
 
   return (
     <>
       <Title>그룹의 정원을 선택해주세요.</Title>
-      <RangeValue>{personnelCount}</RangeValue>
-      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={personnelCount} />
+      <RangeValue>{maxUserCnt}</RangeValue>
+      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={maxUserCnt} />
     </>
   );
 }

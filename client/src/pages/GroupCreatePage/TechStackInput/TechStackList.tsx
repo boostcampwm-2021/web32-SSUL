@@ -11,7 +11,7 @@ interface Props {
   techStackList: TechStack[];
 }
 function TechStackList({ techStackList }: Props): JSX.Element {
-  const { selectedTechStack } = useAppSelector(groupCreateDataState);
+  const { usingTechStacks } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;
@@ -20,17 +20,17 @@ function TechStackList({ techStackList }: Props): JSX.Element {
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
-    if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
+    if (usingTechStacks.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
-    } else if (!selectedTechStack.includes(techStackName)) {
-      const newTechStack: string[] = [...selectedTechStack];
+    } else if (!usingTechStacks.includes(techStackName)) {
+      const newTechStack: string[] = [...usingTechStacks];
 
       newTechStack.push(techStackName);
-      dispatch(setGroupData({ selectedTechStack: newTechStack }));
+      dispatch(setGroupData({ usingTechStacks: newTechStack }));
     }
   };
   const techStackElements = techStackList.map((techStack, idx) => {
-    return selectedTechStack.includes(techStack.name) ? (
+    return usingTechStacks.includes(techStack.name) ? (
       <SelectedTechListItem key={idx}>{techStack.name}</SelectedTechListItem>
     ) : (
       <TechListItem key={idx} onClick={handleTechStackClick}>
