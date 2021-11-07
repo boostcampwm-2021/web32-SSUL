@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch } from 'react-redux';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+const MAX_INPUT_CNT = 10;
 
 interface searchBarProps {
   searchBarInput: string;
@@ -12,7 +13,9 @@ function SearchBar({ searchBarInput, changeInputEvent }: searchBarProps): JSX.El
   const dispatch = useDispatch();
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeInputEvent(e.currentTarget.value));
+    const nowInputText = e.currentTarget.value;
+    if (nowInputText.length === MAX_INPUT_CNT) alert('10글자 이상 입력이 불가능합니다.');
+    else dispatch(changeInputEvent(e.currentTarget.value));
   };
 
   return (
