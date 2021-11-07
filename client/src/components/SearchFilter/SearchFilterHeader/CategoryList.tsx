@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { getCategories } from '../../../api/category';
-import { Category } from '../../../types';
+import { getCategories } from '@api/category';
+import { Category } from '@types';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import {
   returnGroupRecruitFilterState,
   groupRecruitType,

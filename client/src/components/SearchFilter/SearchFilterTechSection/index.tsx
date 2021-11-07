@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
 import { useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types';
+import { ReducerType } from '@store/rootReducer';
+import { getTechStackList } from '@api/techStack';
+import { TechStack } from '@types';
 import {
   groupRecruitType,
   returnGroupRecruitFilterState,
-} from '../../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function SearchFilterTechSection(): JSX.Element {
   const techStackInput = useSelector<ReducerType, groupRecruitType>(

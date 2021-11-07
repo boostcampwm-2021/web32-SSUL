@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import {
   popSelectedTechStack,
   groupRecruitType,
   returnGroupRecruitFilterState,
-} from '../../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function SelectedTechList(): JSX.Element {
   const selectedTechStack = useSelector<ReducerType, groupRecruitType>(

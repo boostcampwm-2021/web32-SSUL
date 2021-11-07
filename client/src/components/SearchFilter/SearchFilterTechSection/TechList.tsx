@@ -2,13 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import {
   pushSelectedTechStack,
   groupRecruitType,
   returnGroupRecruitFilterState,
-} from '../../../store/slices/groupRecruitFilterSlice';
-import { TechStack } from '../../../types/TechStack';
+} from '@store/slices/groupRecruitFilterSlice';
+import { TechStack } from '@types';
 
 const MAX_SELECTED_INDEX = 5;
 

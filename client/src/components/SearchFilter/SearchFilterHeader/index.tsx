@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
 import SearchBar from '../SearchBar';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import { useSelector } from 'react-redux';
 import {
   groupRecruitType,
