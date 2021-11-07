@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import userSlice from './slices/userSlice';
+import user from './slices/userSlice';
 import groupRecruit from './slices/groupRecruitFilterSlice';
 import createGroupData from './slices/createGroupData';
 
 const reducer = combineReducers({
-  userSlice,
+  user,
   createGroupData,
   groupRecruit,
 });
