@@ -9,8 +9,8 @@ export class User {
   @PrimaryGeneratedColumn({ name: 'user_id' })
   id: number;
 
-  @Column('int', { name: 'github_id' })
-  githubId: number;
+  @Column('varchar', { name: 'github_id', length: 50 })
+  githubId: string;
 
   @Column('varchar', { name: 'name', length: 50 })
   name: string;
