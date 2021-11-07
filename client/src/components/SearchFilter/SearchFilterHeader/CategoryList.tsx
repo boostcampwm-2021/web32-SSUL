@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { getCategories } from '@api/category';
 import { Category } from '@types';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   returnGroupRecruitFilterState,
   groupRecruitType,
@@ -12,10 +11,10 @@ import {
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
-  const selectedCategory = useSelector<ReducerType, groupRecruitType>(
+  const selectedCategory = useAppSelector<groupRecruitType>(
     returnGroupRecruitFilterState,
   ).selectedCategory;
-  const groupRecruitDispatch = useDispatch();
+  const groupRecruitDispatch = useAppDispatch();
 
   useEffect(() => {
     const { category } = history.state.state ?? { category: '' };

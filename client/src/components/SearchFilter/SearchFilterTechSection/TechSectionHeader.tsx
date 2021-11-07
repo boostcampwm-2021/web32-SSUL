@@ -2,16 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import SearchBar from '../SearchBar';
 import SelectedTechList from './SelectedTechList';
-import { ReducerType } from '@store/rootReducer';
+import { useAppSelector } from '@hooks';
 import {
   groupRecruitType,
   returnGroupRecruitFilterState,
   changeTechStackInput,
 } from '@store/slices/groupRecruitFilterSlice';
-import { useSelector } from 'react-redux';
 
 function TechSectionHeader(): JSX.Element {
-  const techStackInput = useSelector<ReducerType, groupRecruitType>(
+  const techStackInput = useAppSelector<groupRecruitType>(
     returnGroupRecruitFilterState,
   ).techStackInput;
 

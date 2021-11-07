@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   pushSelectedTechStack,
   groupRecruitType,
@@ -17,10 +16,10 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const selectedTechStack = useSelector<ReducerType, groupRecruitType>(
+  const selectedTechStack = useAppSelector<groupRecruitType>(
     returnGroupRecruitFilterState,
   ).selectedTechStack;
-  const selectedTechStackDispatch = useDispatch();
+  const selectedTechStackDispatch = useAppDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;

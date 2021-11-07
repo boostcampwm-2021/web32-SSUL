@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@hooks';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 const MAX_INPUT_CNT = 10;
 
@@ -10,7 +10,7 @@ interface searchBarProps {
 }
 
 function SearchBar({ searchBarInput, changeInputEvent }: searchBarProps): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nowInputText = e.currentTarget.value;
