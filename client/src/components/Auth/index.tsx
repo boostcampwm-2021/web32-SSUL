@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '@hooks';
 import qs from 'qs';
 import { setUser } from '../../store/slices/userSlice';
 import { useHistory } from 'react-router-dom';

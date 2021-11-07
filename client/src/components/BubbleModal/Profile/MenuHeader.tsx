@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '@hooks';
 import { selectUser } from '../../../store/slices/userSlice';
 
 function MenuHeader(): JSX.Element {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '@hooks';
 import styled from '@emotion/styled';
 import BubbleModal from '../../BubbleModal';
 import { BubbleModalProfileItem } from '../../../types/Modal';
