@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { RootState } from '../index';
+import { RootState } from '../index';
 
 enum UserType {
   MENTI = 'MENTI',
@@ -21,9 +21,18 @@ export const userSlice = createSlice({
     image: '',
     type: UserType.MENTI,
   } as UserState,
-  reducers: {},
+  reducers: {
+    setUser(state, action) {
+      const { id, name, image } = action.payload;
+      return { ...state, id, name, image };
+    },
+    changeUserType(state) {
+      const type = state.type == UserType.MENTI ? UserType.MENTOR : UserType.MENTI;
+      return { ...state, type };
+    },
+  },
 });
 
+export const { setUser, changeUserType } = userSlice.actions;
 export default userSlice.reducer;
-// export const returnGroupRecruitFilterState = (state: RootState): groupRecruitType =>
-//   state.groupRecruit;
+export const selectUser = (state: RootState): UserState => state.user;

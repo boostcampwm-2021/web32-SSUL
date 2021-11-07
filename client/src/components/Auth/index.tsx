@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import qs from 'qs';
 import { setUser } from '../../store/slices/userSlice';
 import { useHistory } from 'react-router-dom';
 import { getAccessToken } from '@api/auth';
 
 function Auth(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
   const getGithubToken = async () => {
     const query = qs.parse(location.search, {

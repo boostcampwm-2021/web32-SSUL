@@ -1,12 +1,16 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAppSelector } from '../../../hooks';
 import styled from '@emotion/styled';
 import BubbleModal from '../../BubbleModal';
 import { BubbleModalProfileItem } from '../../../types/Modal';
 import { loginWithGithub } from '@utils/Auth';
+import { selectUser } from '../../../store/slices/userSlice';
 
 function Profile(): JSX.Element {
   const history = useHistory();
+  const user = useAppSelector(selectUser);
+  console.log(user);
   const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
