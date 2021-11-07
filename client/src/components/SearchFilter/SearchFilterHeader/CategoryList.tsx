@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   returnGroupRecruitFilterState,
   checkCategory,
-} from '../../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
