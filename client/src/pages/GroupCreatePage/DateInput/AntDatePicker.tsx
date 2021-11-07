@@ -9,7 +9,7 @@ import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDat
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 function AntDatePicker(): JSX.Element {
-  const { startDate, endDate } = useAppSelector(groupCreateDataState);
+  const { startAt, endAt } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
 
   const checkDate = (current: moment.Moment) => {
@@ -25,7 +25,7 @@ function AntDatePicker(): JSX.Element {
     formatString: [string, string],
   ) => {
     const [newStartDate, newEndDate] = formatString;
-    dispatch(setGroupData({ startDate: newStartDate, endDate: newEndDate }));
+    dispatch(setGroupData({ startAt: newStartDate, endAt: newEndDate }));
   };
   return (
     <CustomPicker
@@ -33,10 +33,7 @@ function AntDatePicker(): JSX.Element {
       size="large"
       disabledDate={checkDate}
       onChange={handleCalendarChange}
-      defaultValue={[
-        startDate !== '' ? moment(startDate) : null,
-        endDate !== '' ? moment(endDate) : null,
-      ]}
+      defaultValue={[startAt !== '' ? moment(startAt) : null, endAt !== '' ? moment(endAt) : null]}
       style={{
         width: '100%',
         textAlign: 'center',

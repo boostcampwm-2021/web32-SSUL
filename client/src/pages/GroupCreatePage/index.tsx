@@ -11,7 +11,6 @@ import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateD
 import { Category, TechStack } from '@types';
 import { getCategories } from '@api/category';
 import { getTechStackList } from '@api/techStack';
-import { GroupCreateInterface } from '@types';
 import { postGroupCreate } from '@api/group';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
@@ -47,11 +46,11 @@ function GroupCreatePage(): JSX.Element {
       case 0:
         return groupData.category !== '';
       case 2:
-        return groupData.groupName !== '' && groupData.groupInfo !== '';
+        return groupData.name !== '' && groupData.intro !== '';
       case 3:
-        return groupData.startDate !== '' && groupData.endDate !== '';
+        return groupData.startAt !== '' && groupData.endAt !== '';
       case 4:
-        return groupData.selectedTechStack.length > 0;
+        return groupData.usingTechStacks.length > 0;
       default:
         return true;
     }
@@ -74,19 +73,8 @@ function GroupCreatePage(): JSX.Element {
   };
 
   const requestGroupCreate = async () => {
-    const groupCreateData: GroupCreateInterface = {
-      ownerId: 0,
-      name: groupData.groupName,
-      maxUserCnt: groupData.personnelCount,
-      curUserCnt: 1,
-      intro: groupData.groupInfo,
-      startAt: groupData.startDate,
-      endAt: groupData.endDate,
-      category: groupData.category,
-      usingTechStacks: groupData.selectedTechStack,
-    };
     try {
-      await postGroupCreate(groupCreateData);
+      await postGroupCreate(groupData);
       window.location.href = '/';
     } catch (e) {
       console.log(e);
