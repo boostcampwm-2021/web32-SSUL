@@ -14,6 +14,8 @@ import { clearGroupData } from '../../store/slices/createGroupData';
 import { Category, TechStack } from '../../types';
 import { getCategories } from '../../api/category';
 import { getTechStackList } from '../../api/techStack';
+import { GroupCreateInterface } from '../../types/ServerData';
+import { postGroupCreate } from '../../api/group';
 
 const MAX_CONTENT_INDEX = 4;
 
@@ -70,8 +72,28 @@ function GroupCreatePage(): JSX.Element {
 
     setNotificationText('');
     if (contentsNumber < MAX_CONTENT_INDEX) setContentsNumber(contentsNumber + 1);
+    else if (contentsNumber === MAX_CONTENT_INDEX) requestGroupCreate();
   };
 
+  const requestGroupCreate = async () => {
+    const groupCreateData: GroupCreateInterface = {
+      ownerId: 0,
+      name: groupData.groupName,
+      maxUserCnt: groupData.personnelCount,
+      curUserCnt: 1,
+      intro: groupData.groupInfo,
+      startAt: groupData.startDate,
+      endAt: groupData.endDate,
+      category: groupData.category,
+      usingTechStacks: groupData.selectedTechStack,
+    };
+    try {
+      await postGroupCreate(groupCreateData);
+      window.location.href = '/';
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const cleanUp = () => {
     dispatch(clearGroupData());
   };
@@ -92,6 +114,7 @@ function GroupCreatePage(): JSX.Element {
 
     return () => cleanUp();
   }, []);
+
   return (
     <CreateForm>
       <GageBar contentsNumber={contentsNumber} />

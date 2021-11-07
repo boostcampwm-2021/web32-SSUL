@@ -11,6 +11,7 @@ import ChatListPage from '@pages/ChatListPage';
 import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
 import { Auth as AuthCallback } from '@components';
+import GroupCreatePage from '../../pages/GroupCreatePage';
 
 function Router(): JSX.Element {
   return (
@@ -21,6 +22,7 @@ function Router(): JSX.Element {
       <Route path="/groups" component={GroupsPage} exact />
       <Route path="/group/status" component={GroupStatusPage} />
       <Route path="/group/owner" component={GroupOwnerPage} />
+      <Route path="/group/create" component={GroupCreatePage} />
       <Route path="/group/evaluate" component={EvaluateGroupPage} />
       <Route path="/chat/list" component={ChatListPage} />
       <Route path="/chat" component={ChatPage} />
