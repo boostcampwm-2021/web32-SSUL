@@ -11,11 +11,11 @@ export interface groupRecruitType {
 export const groupRecruitFilterSlice = createSlice({
   name: 'groupRecruit',
   initialState: {
-    techStackInput: '' as string,
-    groupNameInput: '' as string,
-    selectedTechStack: [] as string[],
-    selectedCategory: '' as string,
-  },
+    techStackInput: '',
+    groupNameInput: '',
+    selectedTechStack: [],
+    selectedCategory: '',
+  } as groupRecruitType,
   reducers: {
     changeTechStackInput(state, action) {
       return { ...state, techStackInput: action.payload };
