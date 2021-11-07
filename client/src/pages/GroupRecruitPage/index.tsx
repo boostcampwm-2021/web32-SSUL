@@ -1,13 +1,26 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import SearchFilter from '../../components/SearchFilter';
-import GroupCard from '../../components/GroupCard';
+import { SearchFilter, GroupCard } from '@components';
 import { Group } from '@types';
 import { dummyData } from './dummy';
+import { useAppSelector } from '@hooks';
+import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
 
 function GroupRecruitPage(): JSX.Element {
+  const { selectedCategory } = useAppSelector(returnGroupRecruitFilterState);
+
+  const isFilterdData = (groupData: Group) => {
+    const { name } = groupData;
+    if (containGroupInput(name)) return true;
+    else return false;
+  };
+
+  const containGroupInput = (groupName: string | null) => {
+    return groupName?.includes('');
+  };
+
   const renderGroupCards = dummyData.map((groupData: Group) => {
-    return <GroupCard key={groupData.id} groupContents={groupData} />;
+    if (isFilterdData(groupData)) return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
   return (
