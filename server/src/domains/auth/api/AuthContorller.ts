@@ -16,8 +16,9 @@ export class AuthController {
   ) {
     const accessToken = await this.authService.getGithubAccessToken(code);
     const githubUserData = await this.authService.getGithubUserData(accessToken);
+    const userData = await this.authService.findOrInsertUser(githubUserData);
     if (!githubId) session.githubId = githubUserData.githubId;
 
-    return githubUserData;
+    return userData;
   }
 }
