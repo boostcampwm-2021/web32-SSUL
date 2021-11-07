@@ -6,6 +6,6 @@ export type RequestBody = ExampleInterface;
 
 export interface ResponseGithubUserData {
   githubId: string;
-  githubName: string;
+  name: string;
   avatarUrl: string;
 }

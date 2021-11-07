@@ -16,7 +16,7 @@ function Auth(): JSX.Element {
 
     try {
       const data = await getAccessToken(code);
-      const { githubId: id, githubName: name, avatarUrl: image } = data;
+      const { githubId: id, name, avatarUrl: image } = data;
       dispatch(setUser({ id, name, image }));
       history.push('/');
     } catch (error) {
