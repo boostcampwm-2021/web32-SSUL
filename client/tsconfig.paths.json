@@ -2,8 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components": ["src/components/index.ts"],
+      "@core/*": ["src/core/*"],
+      "@pages/*": ["src/pages/*"],
+      "@store/*": ["src/store/*"],
+      "@styles": ["src/styles/global.tsx"],
       "@types": ["src/types/index.ts"],
-      "@assets/*": ["src/assets/*"]
+      "@utils/*": ["src/utils/*"]
     }
   }
 }
