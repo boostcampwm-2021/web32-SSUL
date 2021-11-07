@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
-import { useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types';
-import {
-  groupRecruitType,
-  returnGroupRecruitFilterState,
-} from '../../../store/slices/groupRecruitFilterSlice';
+import { useAppSelector } from '@hooks';
+import { getTechStackList } from '@api/techStack';
+import { TechStack } from '@types';
+import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
 
 function SearchFilterTechSection(): JSX.Element {
-  const techStackInput = useSelector<ReducerType, groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).techStackInput;
+  const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 

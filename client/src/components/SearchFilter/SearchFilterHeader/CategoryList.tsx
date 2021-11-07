@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { getCategories } from '../../../api/category';
-import { Category } from '../../../types';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { getCategories } from '@api/category';
+import { Category } from '@types';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   returnGroupRecruitFilterState,
-  groupRecruitType,
   checkCategory,
-} from '../../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
-  const selectedCategory = useSelector<ReducerType, groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).selectedCategory;
-  const groupRecruitDispatch = useDispatch();
+  const selectedCategory = useAppSelector(returnGroupRecruitFilterState).selectedCategory;
+  const groupRecruitDispatch = useAppDispatch();
 
   useEffect(() => {
     const { category } = history.state.state ?? { category: '' };

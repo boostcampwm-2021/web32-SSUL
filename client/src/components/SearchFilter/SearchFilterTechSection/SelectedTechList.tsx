@@ -1,19 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   popSelectedTechStack,
-  groupRecruitType,
   returnGroupRecruitFilterState,
-} from '../../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechStack = useSelector<ReducerType, groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).selectedTechStack;
-
-  const selectedTechStackDispatch = useDispatch();
+  const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
+  const selectedTechStackDispatch = useAppDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;

@@ -2,11 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 import SearchBar from '../SearchBar';
 import SelectedTechList from './SelectedTechList';
+import { useAppSelector } from '@hooks';
+import {
+  returnGroupRecruitFilterState,
+  changeTechStackInput,
+} from '@store/slices/groupRecruitFilterSlice';
 
 function TechSectionHeader(): JSX.Element {
+  const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;
+
   return (
     <Container>
-      <SearchBar />
+      <SearchBar searchBarInput={techStackInput} changeInputEvent={changeTechStackInput} />
       <SelectedTechList />
     </Container>
   );
