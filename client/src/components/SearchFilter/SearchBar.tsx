@@ -6,7 +6,7 @@ import {
   changeTechStackInput,
   groupRecruitType,
   returnGroupRecruitFilterState,
-} from '../../store/slices/groupRecruitFilterSlice';
+} from '@store/slices/groupRecruitFilterSlice';
 
 function SearchBar(): JSX.Element {
   const techStackInput = useSelector<ReducerType, groupRecruitType>(

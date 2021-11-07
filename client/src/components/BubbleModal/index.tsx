@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import MenuHeader from './Profile/MenuHeader';
 import MenuItem from './Profile/MenuItem';
-import { BubbleModalProfileItem } from '../../types/Modal';
+import { BubbleModalProfileItem } from '@types';
 
 interface Props {
   type: string;

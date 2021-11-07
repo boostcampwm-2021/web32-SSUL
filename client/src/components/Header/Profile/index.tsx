@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import BubbleModal from '../../BubbleModal';
 import { BubbleModalProfileItem } from '../../../types/Modal';
-import { loginWithGithub } from '../../../utils/Auth';
+import { loginWithGithub } from '@utils/Auth';
 
 function Profile(): JSX.Element {
   const history = useHistory();

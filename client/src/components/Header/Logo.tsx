@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import ColorLogoImage from '../../assets/logo_title.png';
+import ColorLogoImage from '@assets/logo_title.png';
 
 function Logo(): JSX.Element {
   return (

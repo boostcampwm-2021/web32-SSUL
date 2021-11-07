@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import CategoryItem from './CategoryItem';
-import { BaseLayout } from '../../styles/global';
+import { BaseLayout } from '@styles';
 import { LinkButton } from '../../components';
 import DeveloperImg from '../../assets/images/developer-img.jpg';
 import { getCategories } from '../../api/category';
