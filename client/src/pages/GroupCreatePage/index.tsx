@@ -7,15 +7,13 @@ import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../types/CreateGroup';
-import { clearGroupData } from '@store/slices/createGroupData';
+import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateDataSlice';
 import { Category, TechStack } from '@types';
 import { getCategories } from '@api/category';
 import { getTechStackList } from '@api/techStack';
 import { GroupCreateInterface } from '@types';
 import { postGroupCreate } from '@api/group';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 const MAX_CONTENT_INDEX = 4;
 
@@ -24,8 +22,8 @@ function GroupCreatePage(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
   const [categorys, setCategorys] = useState<Category[]>([]);
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
-  const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
-  const dispatch = useDispatch();
+  const groupData = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {

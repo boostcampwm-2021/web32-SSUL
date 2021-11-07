@@ -1,13 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '@store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function PersonnelInput(): JSX.Element {
-  const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
-  const dispatch = useDispatch();
+  const { personnelCount } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
   const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     dispatch(setGroupData({ personnelCount: value }));

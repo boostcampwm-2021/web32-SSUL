@@ -5,16 +5,12 @@ import styled from '@emotion/styled';
 import { RangeValue } from 'rc-picker/lib/interface';
 const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '@store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function AntDatePicker(): JSX.Element {
-  const { startDate, endDate } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { startDate, endDate } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const checkDate = (current: moment.Moment) => {
     const now = new Date();

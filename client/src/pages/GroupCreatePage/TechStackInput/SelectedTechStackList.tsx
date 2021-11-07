@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '@store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function SelectedTechStackList(): JSX.Element {
-  const { selectedTechStack } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { selectedTechStack } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;

@@ -1,21 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '@store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
 import { Category } from '@types';
 import CategoryItem from './CategoryItem';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 interface Props {
   categorys: Category[];
 }
 
 function CategoryInput({ categorys }: Props): JSX.Element {
-  const { category: SelectedCategory } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { category: SelectedCategory } = useAppSelector(groupCreateDataState)
+  const dispatch = useAppDispatch();
 
   const getCategoryItemElements = () => {
     return categorys.map((category) => (

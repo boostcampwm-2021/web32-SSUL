@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GroupData } from '../../types/CreateGroup';
+import { RootState } from '../index';
 
-export const createGroupDataSlice = createSlice({
-  name: 'createGroupData',
+export const groupCreateDataSlice = createSlice({
+  name: 'groupCreateData',
   initialState: {
     category: '',
     personnelCount: 1,
@@ -32,5 +33,6 @@ export const createGroupDataSlice = createSlice({
   },
 });
 
-export const { setGroupData, clearGroupData } = createGroupDataSlice.actions;
-export default createGroupDataSlice.reducer;
+export const { setGroupData, clearGroupData } = groupCreateDataSlice.actions;
+export default groupCreateDataSlice.reducer;
+export const groupCreateDataState = (state: RootState): GroupData => state.createGroupData;
