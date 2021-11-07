@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { setGroupData } from '@store/slices/createGroupData';
 
 function SelectedTechStackList(): JSX.Element {
   const { selectedTechStack } = useSelector<ReducerType, GroupData>(

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { setGroupData } from '@store/slices/createGroupData';
 
 function GroupInfoInput(): JSX.Element {
   const { groupName, groupInfo } = useSelector<ReducerType, GroupData>(

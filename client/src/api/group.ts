@@ -1,4 +1,4 @@
-import { GroupCreateInterface } from '../types/ServerData';
+import { GroupCreateInterface } from '@types';
 import { requests } from './index';
 
 export const postGroupCreate = <T>(groupData: GroupCreateInterface): Promise<T> =>

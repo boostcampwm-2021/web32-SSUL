@@ -2,10 +2,10 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { ReducerType } from '@store/rootReducer';
+import { setGroupData } from '@store/slices/createGroupData';
 import { GroupData } from '../../../types/CreateGroup';
-import { TechStack } from '../../../types/TechStack';
+import { TechStack } from '@types';
 
 const MAX_SELECTED_INDEX = 5;
 

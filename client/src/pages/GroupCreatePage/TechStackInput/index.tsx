@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TechStack } from '../../../types/TechStack';
+import { TechStack } from '@types';
 import SearchBar from './SearchBar';
 import SelectedTechStackList from './SelectedTechStackList';
 import TechStackList from './TechStackList';

@@ -6,9 +6,9 @@ import { RangeValue } from 'rc-picker/lib/interface';
 const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { setGroupData } from '@store/slices/createGroupData';
 
 function AntDatePicker(): JSX.Element {
   const { startDate, endDate } = useSelector<ReducerType, GroupData>(
