@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import qs from 'qs';
-import { getAccessToken } from '../../api/auth';
+import { getAccessToken } from '@api/auth';
 
 function Auth(): JSX.Element {
   const history = useHistory();

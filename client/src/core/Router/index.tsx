@@ -1,16 +1,16 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import MainPage from '../../pages/MainPage';
-import GroupRecruitPage from '../../pages/GroupRecruitPage';
-import MentorRecruitPage from '../../pages/MentorRecruitPage';
-import GroupsPage from '../../pages/GroupsPage';
-import GroupStatusPage from '../../pages/GroupStatusPage';
-import GroupOwnerPage from '../../pages/GroupOwnerPage';
-import EvaluateGroupPage from '../../pages/EvaluateGroupPage';
-import ChatListPage from '../../pages/ChatListPage';
-import ChatPage from '../../pages/ChatPage';
-import ProfilePage from '../../pages/ProfilePage';
-import AuthCallback from '../../components/Auth/';
+import MainPage from '@pages/MainPage';
+import GroupRecruitPage from '@pages/GroupRecruitPage';
+import MentorRecruitPage from '@pages/MentorRecruitPage';
+import GroupsPage from '@pages/GroupsPage';
+import GroupStatusPage from '@pages/GroupStatusPage';
+import GroupOwnerPage from '@pages/GroupOwnerPage';
+import EvaluateGroupPage from '@pages/EvaluateGroupPage';
+import ChatListPage from '@pages/ChatListPage';
+import ChatPage from '@pages/ChatPage';
+import ProfilePage from '@pages/ProfilePage';
+import { Auth as AuthCallback } from '@components';
 
 function Router(): JSX.Element {
   return (
