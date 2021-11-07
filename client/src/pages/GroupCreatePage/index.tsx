@@ -8,14 +8,14 @@ import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../store/rootReducer';
+import { ReducerType } from '@store/rootReducer';
 import { GroupData } from '../../types/CreateGroup';
-import { clearGroupData } from '../../store/slices/createGroupData';
-import { Category, TechStack } from '../../types';
-import { getCategories } from '../../api/category';
-import { getTechStackList } from '../../api/techStack';
-import { GroupCreateInterface } from '../../types/ServerData';
-import { postGroupCreate } from '../../api/group';
+import { clearGroupData } from '@store/slices/createGroupData';
+import { Category, TechStack } from '@types';
+import { getCategories } from '@api/category';
+import { getTechStackList } from '@api/techStack';
+import { GroupCreateInterface } from '@types';
+import { postGroupCreate } from '@api/group';
 
 const MAX_CONTENT_INDEX = 4;
 

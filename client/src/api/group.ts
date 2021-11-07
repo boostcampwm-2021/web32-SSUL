@@ -1,5 +1,5 @@
 import { GroupResponse } from '@types';
-import { GroupCreateInterface } from '../types/ServerData';
+import { GroupCreateInterface } from '@types';
 import { requests } from './index';
 
 export const getAllGroupList = (): Promise<GroupResponse> => requests.get(`/group`);
