@@ -4,7 +4,6 @@ import { keyframes } from '@emotion/react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   pushSelectedTechStack,
-  groupRecruitType,
   returnGroupRecruitFilterState,
 } from '@store/slices/groupRecruitFilterSlice';
 import { TechStack } from '@types';
@@ -16,9 +15,7 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const selectedTechStack = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).selectedTechStack;
+  const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
   const selectedTechStackDispatch = useAppDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {

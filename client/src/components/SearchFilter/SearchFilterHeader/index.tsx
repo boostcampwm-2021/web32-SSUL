@@ -4,15 +4,12 @@ import CategoryList from './CategoryList';
 import SearchBar from '../SearchBar';
 import { useAppSelector } from '@hooks';
 import {
-  groupRecruitType,
   returnGroupRecruitFilterState,
   changeGroupNameInput,
 } from '@store/slices/groupRecruitFilterSlice';
 
 function SearchFilterHeader(): JSX.Element {
-  const groupNameInput = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).groupNameInput;
+  const groupNameInput = useAppSelector(returnGroupRecruitFilterState).groupNameInput;
   return (
     <Container>
       <CategoryList />

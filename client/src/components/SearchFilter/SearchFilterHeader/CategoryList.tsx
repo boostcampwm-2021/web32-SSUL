@@ -5,15 +5,12 @@ import { Category } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   returnGroupRecruitFilterState,
-  groupRecruitType,
   checkCategory,
 } from '../../../store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
-  const selectedCategory = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).selectedCategory;
+  const selectedCategory = useAppSelector(returnGroupRecruitFilterState).selectedCategory;
   const groupRecruitDispatch = useAppDispatch();
 
   useEffect(() => {

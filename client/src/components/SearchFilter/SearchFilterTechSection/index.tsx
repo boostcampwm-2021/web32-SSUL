@@ -5,15 +5,10 @@ import TechList from './TechList';
 import { useAppSelector } from '@hooks';
 import { getTechStackList } from '@api/techStack';
 import { TechStack } from '@types';
-import {
-  groupRecruitType,
-  returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
 
 function SearchFilterTechSection(): JSX.Element {
-  const techStackInput = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).techStackInput;
+  const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 

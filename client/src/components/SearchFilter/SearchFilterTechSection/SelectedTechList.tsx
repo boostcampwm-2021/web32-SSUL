@@ -3,15 +3,11 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   popSelectedTechStack,
-  groupRecruitType,
   returnGroupRecruitFilterState,
 } from '@store/slices/groupRecruitFilterSlice';
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechStack = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).selectedTechStack;
-
+  const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
   const selectedTechStackDispatch = useAppDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {

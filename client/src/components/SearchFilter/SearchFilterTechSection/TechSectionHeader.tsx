@@ -4,15 +4,12 @@ import SearchBar from '../SearchBar';
 import SelectedTechList from './SelectedTechList';
 import { useAppSelector } from '@hooks';
 import {
-  groupRecruitType,
   returnGroupRecruitFilterState,
   changeTechStackInput,
 } from '@store/slices/groupRecruitFilterSlice';
 
 function TechSectionHeader(): JSX.Element {
-  const techStackInput = useAppSelector<groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).techStackInput;
+  const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;
 
   return (
     <Container>
