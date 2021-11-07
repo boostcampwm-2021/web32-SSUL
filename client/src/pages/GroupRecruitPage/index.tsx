@@ -2,16 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 import SearchFilter from '../../components/SearchFilter';
 import GroupCard from '../../components/GroupCard';
+import { Group } from '@types';
+import { dummyData } from './dummy';
 
 function GroupRecruitPage(): JSX.Element {
+  const renderGroupCards = dummyData.map((groupData: Group) => {
+    return <GroupCard key={groupData.id} groupContents={groupData} />;
+  });
+
   return (
     <Container>
       <SearchFilter />
-      <GroupCardList>
-        <GroupCard />
-        <GroupCard />
-        <GroupCard />
-      </GroupCardList>
+      <GroupCardList>{renderGroupCards}</GroupCardList>
     </Container>
   );
 }

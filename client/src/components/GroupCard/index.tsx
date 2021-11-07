@@ -3,22 +3,14 @@ import styled from '@emotion/styled';
 import GroupCardHeader from './GroupCardHeader';
 import GroupCardStatus from './GroupCardStatus';
 import GroupApplyButton from './GroupApplyButton';
-import { Group, GroupState } from '../../types/Group';
-const dummyData: Group = {
-  id: 1,
-  mentorId: 1010,
-  ownerId: 2020,
-  name: 'REACT',
-  maxUserCnt: 5,
-  curUserCnt: 2,
-  intro: '안녕하세요 어서오세요',
-  startAt: new Date(),
-  endAt: new Date(),
-  status: GroupState.DOING,
-};
+import { Group } from '../../types/Group';
 
-function GroupCard(): JSX.Element {
-  const { id, name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = dummyData;
+interface Props {
+  groupContents: Group;
+}
+
+function GroupCard({ groupContents }: Props): JSX.Element {
+  const { id, name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = groupContents;
   return (
     <Card>
       <GroupCardHeader name={name} maxUserCnt={maxUserCnt} curUserCnt={curUserCnt} />
