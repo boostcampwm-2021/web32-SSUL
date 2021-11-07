@@ -1,15 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '@store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '@store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function GroupInfoInput(): JSX.Element {
-  const { groupName, groupInfo } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { groupName, groupInfo } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const setGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setGroupData({ groupName: e.target.value }));
