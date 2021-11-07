@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
 
 enum UserType {
-  MENTI = 'MENTI',
+  MENTEE = 'MENTEE',
   MENTOR = 'MENTOR',
 }
 
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
     id: '',
     name: '',
     image: '',
-    type: UserType.MENTI,
+    type: UserType.MENTEE,
   } as UserState,
   reducers: {
     setUser(state, action) {
@@ -27,7 +27,7 @@ export const userSlice = createSlice({
       return { ...state, id, name, image };
     },
     changeUserType(state) {
-      const type = state.type == UserType.MENTI ? UserType.MENTOR : UserType.MENTI;
+      const type = state.type == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
       return { ...state, type };
     },
   },
