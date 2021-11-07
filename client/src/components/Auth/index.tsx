@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch } from '@hooks';
-import qs from 'qs';
-import { setUser } from '../../store/slices/userSlice';
 import { useHistory } from 'react-router-dom';
+import qs from 'qs';
+import { useAppDispatch } from '@hooks';
 import { getAccessToken } from '@api/auth';
+import { setUser } from '@store/slices/userSlice';
+import { Loader } from '@components';
 
 function Auth(): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
+
   const getGithubToken = async () => {
     const query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
@@ -27,7 +29,7 @@ function Auth(): JSX.Element {
     getGithubToken();
   }, []);
 
-  return <div />;
+  return <Loader />;
 }
 
 export default Auth;

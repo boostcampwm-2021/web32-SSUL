@@ -22,6 +22,9 @@ export const userSlice = createSlice({
     type: UserType.MENTEE,
   } as UserState,
   reducers: {
+    initUser(state) {
+      return { ...state, id: '', name: '', image: '' };
+    },
     setUser(state, action) {
       const { id, name, image } = action.payload;
       return { ...state, id, name, image };
@@ -33,6 +36,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, changeUserType } = userSlice.actions;
+export const { initUser, setUser, changeUserType } = userSlice.actions;
 export default userSlice.reducer;
 export const selectUser = (state: RootState): UserState => state.user;
