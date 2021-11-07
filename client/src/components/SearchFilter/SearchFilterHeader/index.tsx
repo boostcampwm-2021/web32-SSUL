@@ -2,12 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
 import SearchBar from '../SearchBar';
+import { ReducerType } from '../../../store/rootReducer';
+import { useSelector } from 'react-redux';
+import {
+  groupRecruitType,
+  returnGroupRecruitFilterState,
+  changeGroupNameInput,
+} from '../../../store/slices/groupRecruitFilterSlice';
 
 function SearchFilterHeader(): JSX.Element {
+  const groupNameInput = useSelector<ReducerType, groupRecruitType>(
+    returnGroupRecruitFilterState,
+  ).groupNameInput;
   return (
     <Container>
       <CategoryList />
-      <SearchBar />
+      <SearchBar searchBarInput={groupNameInput} changeInputEvent={changeGroupNameInput} />
     </Container>
   );
 }

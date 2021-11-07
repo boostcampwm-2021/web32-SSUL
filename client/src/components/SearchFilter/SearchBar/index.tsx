@@ -1,26 +1,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import {
-  changeTechStackInput,
-  groupRecruitType,
-  returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+import { useDispatch } from 'react-redux';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
-function SearchBar(): JSX.Element {
-  const techStackInput = useSelector<ReducerType, groupRecruitType>(
-    returnGroupRecruitFilterState,
-  ).techStackInput;
+interface searchBarProps {
+  searchBarInput: string;
+  changeInputEvent: ActionCreatorWithPayload<string>;
+}
+
+function SearchBar({ searchBarInput, changeInputEvent }: searchBarProps): JSX.Element {
   const dispatch = useDispatch();
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeTechStackInput(e.currentTarget.value));
+    dispatch(changeInputEvent(e.currentTarget.value));
   };
 
   return (
     <Container>
-      <InputValue placeholder="Search for.." value={techStackInput} onChange={handleInputText} />
+      <InputValue placeholder="Search for.." value={searchBarInput} onChange={handleInputText} />
     </Container>
   );
 }

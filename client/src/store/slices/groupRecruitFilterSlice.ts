@@ -3,6 +3,7 @@ import { RootState } from '../index';
 
 export interface groupRecruitType {
   techStackInput: string;
+  groupNameInput: string;
   selectedTechStack: string[];
   selectedCategory: string;
 }
@@ -11,12 +12,16 @@ export const groupRecruitFilterSlice = createSlice({
   name: 'groupRecruit',
   initialState: {
     techStackInput: '' as string,
+    groupNameInput: '' as string,
     selectedTechStack: [] as string[],
     selectedCategory: '' as string,
   },
   reducers: {
     changeTechStackInput(state, action) {
       return { ...state, techStackInput: action.payload };
+    },
+    changeGroupNameInput(state, action) {
+      return { ...state, groupNameInput: action.payload };
     },
     pushSelectedTechStack(state, action) {
       const nextTechStack: string = action.payload;
@@ -37,8 +42,13 @@ export const groupRecruitFilterSlice = createSlice({
   },
 });
 
-export const { changeTechStackInput, pushSelectedTechStack, popSelectedTechStack, checkCategory } =
-  groupRecruitFilterSlice.actions;
+export const {
+  changeTechStackInput,
+  pushSelectedTechStack,
+  popSelectedTechStack,
+  checkCategory,
+  changeGroupNameInput,
+} = groupRecruitFilterSlice.actions;
 export default groupRecruitFilterSlice.reducer;
 export const returnGroupRecruitFilterState = (state: RootState): groupRecruitType =>
   state.groupRecruit;
