@@ -1,14 +1,16 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAppSelector } from '@hooks';
 import styled from '@emotion/styled';
-import BubbleModal from '../../BubbleModal';
-import { BubbleModalProfileItem } from '../../../types/Modal';
+import { BubbleModalProfileItem } from '@types';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { getLogout } from '@api/auth';
 import { loginWithGithub } from '@utils/Auth';
-import { selectUser } from '../../../store/slices/userSlice';
+import { initUser, selectUser } from '@store/slices/userSlice';
+import BubbleModal from '../../BubbleModal';
 
 function Profile(): JSX.Element {
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -24,8 +26,10 @@ function Profile(): JSX.Element {
     setIsModalClicked(false);
     history.push(`/profile/${user.id}`);
   };
-  const handleLogoutMenuClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+    await getLogout();
+    dispatch(initUser());
     setIsLogin(false);
     setIsModalClicked(false);
     history.push('/');
