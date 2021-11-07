@@ -33,9 +33,16 @@ pipeline {
                         sh 'docker rmi $frontImageName'
                     }
                 }
-                // TODO: ssh docker pull
+                stage('Run docker over SSH'){
+                   steps {
+                       sshagent(['ssul-ssh-key']){
+                           sh "ssh -p 4781 -o StrictHostKeyChecking=no root@106.10.34.157 'docker pull whoishu/ssul-front'"
+                           sh "ssh -p 4781 -o StrictHostKeyChecking=no root@106.10.34.157 'docker pull whoishu/ssul-api'"
+                           sh "ssh -p 4781 -o StrictHostKeyChecking=no root@106.10.34.157 'cd /root/web32-SSUL && docker-compose up -d'"
+                       }
+                   }
+                }
             }
-            
         }
         stage("deploy for main") {
             when {
