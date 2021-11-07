@@ -1,4 +1,11 @@
-import { Controller, Get, QueryParam, Session, SessionParam } from 'routing-controllers';
+import {
+  Controller,
+  Get,
+  QueryParam,
+  Session,
+  SessionParam,
+  OnUndefined,
+} from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
 
@@ -20,5 +27,11 @@ export class AuthController {
     if (!githubId) session.githubId = githubUserData.githubId;
 
     return userData;
+  }
+
+  @Get('/logout')
+  @OnUndefined(204)
+  async postLogout(@Session() session: any) {
+    session.destroy();
   }
 }
