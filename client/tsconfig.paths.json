@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@types": ["src/types/index.ts"],
+      "@assets/*": ["src/assets/*"]
+    }
+  }
+}
