@@ -45,10 +45,9 @@ export class AuthService {
   public async findOrInsertUser(user: GithubUserDto): Promise<GithubUserDto> {
     const { githubId, name, avatarUrl } = user;
     let userData = await this.userRepository.findOneById(githubId);
-    if (!userData) {
-      await this.userRepository.insertUser(user);
-      userData = await this.userRepository.findOneById(githubId);
-    }
+    if (!userData) 
+      userData= await this.userRepository.insertUser(user);
+    
     return userData as GithubUserDto;
   }
 }
