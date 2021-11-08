@@ -1,4 +1,4 @@
-import { User } from '../../user/models/User';
+import { User } from '../models/User';
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
 import { GithubUserDto } from '../../auth/dto/AuthDto';
