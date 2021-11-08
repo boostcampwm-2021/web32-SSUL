@@ -1,12 +1,12 @@
-version: 3.9
+version: '3.9'
 services:
   fe:
-    image: whoishu/ssul-fe
+    image: whoishu/ssul-front:0.1
     container_name: ssul-fe
     ports:
       - '80:80'
   be:
-    image: whoishu/ssul-be
+    image: whoishu/ssul-api:0.1
     container_name: ssul-be
     ports:
       - '5000:5000'
