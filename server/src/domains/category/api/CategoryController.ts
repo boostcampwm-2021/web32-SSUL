@@ -5,8 +5,10 @@ import { CategoryService } from '../service/CategoryService';
 @Service()
 @Controller('/category')
 export class CategoryController {
-  @Inject()
-  private readonly categoryService: CategoryService;
+  constructor(
+    @Inject()
+    private readonly categoryService: CategoryService,
+  ) {}
 
   @Get('/')
   getAll() {
