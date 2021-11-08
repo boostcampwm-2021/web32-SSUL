@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "module": "commonjs",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "strictPropertyInitialization": false,
+    "outDir": "./build",
+    "paths": {
+      "@domains/*": ["domains/*"],
+      "@common/*": ["common/*"],
+      "@utils/*": ["utils/*"],
+      "@api/*": ["api/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

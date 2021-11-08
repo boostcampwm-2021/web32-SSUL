@@ -1,0 +1,14 @@
+version: 3.9
+services:
+  fe:
+    image: whoishu/ssul-fe
+    container_name: ssul-fe
+    ports:
+      - '80:80'
+  be:
+    image: whoishu/ssul-be
+    container_name: ssul-be
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./server/.env
