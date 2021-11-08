@@ -12,8 +12,17 @@ import { AuthService } from '../service/AuthService';
 @Service()
 @Controller('/auth')
 export class AuthController {
-  @Inject()
-  private readonly authService: AuthService;
+  constructor(
+    @Inject()
+    private readonly authService: AuthService,
+  ) {}
+
+  @Get('/slient-refresh')
+  @OnUndefined(203)
+  async getAuthentification(@SessionParam('githubId') githubId: string) {
+    if (!githubId) return;
+    return await this.authService.getUserProfile(githubId);
+  }
 
   @Get('/token')
   async getGithubAccessToken(

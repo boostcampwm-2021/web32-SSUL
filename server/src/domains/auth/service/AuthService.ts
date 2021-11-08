@@ -58,4 +58,9 @@ export class AuthService {
     const userData = destructObject(profileData);
     return userData as UserDto;
   }
+
+  public async getUserProfile(id: string): Promise<UserDto> {
+    let userData = await this.profileRepository.findOneByUserId(id);
+    return destructObject(userData) as UserDto;
+  }
 }
