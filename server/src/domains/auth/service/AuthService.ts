@@ -1,14 +1,14 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
-import { AuthRepository } from '../repository/AuthRepository';
-import { GithubUserData } from '../auth.interface';
+import { UserRepository } from '../../user/repository/UserRepository';
+import { GithubUserDto } from '../Dto/AuthDto';
 
 @Service()
 export class AuthService {
   constructor(
     @InjectRepository()
-    private readonly authRepository: AuthRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   public async getGithubAccessToken(code: string) {
@@ -20,7 +20,7 @@ export class AuthService {
     return accessToken;
   }
 
-  public async getGithubUserData(accessToken: string): Promise<GithubUserData> {
+  public async getGithubUserData(accessToken: string): Promise<GithubUserDto> {
     interface GithubUserOriginData {
       login: string;
       name: string;
@@ -42,13 +42,13 @@ export class AuthService {
     return { githubId, name, avatarUrl };
   }
 
-  public async findOrInsertUser(user: GithubUserData): Promise<GithubUserData> {
+  public async findOrInsertUser(user: GithubUserDto): Promise<GithubUserDto> {
     const { githubId, name, avatarUrl } = user;
-    let userData = await this.authRepository.findOneById(githubId);
+    let userData = await this.userRepository.findOneById(githubId);
     if (!userData) {
-      await this.authRepository.insertUser(user);
-      userData = await this.authRepository.findOneById(githubId);
+      await this.userRepository.insertUser(user);
+      userData = await this.userRepository.findOneById(githubId);
     }
-    return userData as GithubUserData;
+    return userData as GithubUserDto;
   }
 }
