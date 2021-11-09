@@ -27,7 +27,7 @@ export class ProfileRepository extends Repository<Profile> {
         'profile.feverStack',
         'profile.shareStack',
       ])
-      .leftJoin('profile.userId', 'user')
+      .leftJoin('profile.user', 'user')
       .getOne();
 
     return profile;

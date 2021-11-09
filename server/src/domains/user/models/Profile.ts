@@ -7,9 +7,8 @@ export class Profile {
   @PrimaryGeneratedColumn({ name: 'profile_id' })
   id: number;
 
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  userId: User;
+  @Column('int', { name: 'user_id' })
+  userId: number;
 
   @Column('float', { name: 'fever_stack', precision: 12 })
   feverStack: number;
@@ -19,6 +18,10 @@ export class Profile {
 
   @Column('varchar', { name: 'intro', nullable: true, length: 500 })
   intro: string | null;
+
+  @OneToOne(() => User, (user) => user.profile)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.profile)
   usingTechStacks: UsingTechStack[];

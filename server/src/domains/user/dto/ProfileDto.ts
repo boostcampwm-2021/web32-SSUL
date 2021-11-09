@@ -1,6 +1,5 @@
-import { User } from '../models/User';
 export interface ProfileDto {
-  userId: User;
+  userId: int;
   feverStack: number;
   shareStack: number;
   introduction: string;
