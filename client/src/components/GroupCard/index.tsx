@@ -3,18 +3,39 @@ import styled from '@emotion/styled';
 import GroupCardHeader from './GroupCardHeader';
 import GroupCardStatus from './GroupCardStatus';
 import GroupApplyButton from './GroupApplyButton';
-import { Group } from '../../types/Group';
+import { GroupResponse } from '@types';
 
-interface Props {
-  groupContents: Group;
+interface CardProps {
+  groupContents: GroupResponse;
 }
 
-function GroupCard({ groupContents }: Props): JSX.Element {
-  const { id, name, maxUserCnt, curUserCnt, ownerId, intro, startAt, endAt } = groupContents;
+function GroupCard({ groupContents }: CardProps): JSX.Element {
+  const {
+    id,
+    name,
+    maxUserCnt,
+    curUserCnt,
+    intro,
+    startAt,
+    endAt,
+    ownerFeverStack,
+    techStackList,
+    ownerName,
+  } = groupContents;
+  const headerProps = { name, curUserCnt, maxUserCnt };
+  const statusProps = {
+    id,
+    ownerFeverStack,
+    intro,
+    startAt,
+    endAt,
+    techStackList,
+    ownerName,
+  };
   return (
     <Card>
-      <GroupCardHeader name={name} maxUserCnt={maxUserCnt} curUserCnt={curUserCnt} />
-      <GroupCardStatus id={id} ownerId={ownerId} intro={intro} startAt={startAt} endAt={endAt} />
+      <GroupCardHeader headerProps={headerProps} />
+      <GroupCardStatus statusProps={statusProps} />
       <GroupApplyButton />
     </Card>
   );
@@ -23,6 +44,7 @@ function GroupCard({ groupContents }: Props): JSX.Element {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 280px;
   margin: 10px;
   padding: 10px;
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
