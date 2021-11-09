@@ -1,19 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppSelector, useAppDispatch } from '@hooks';
+import { selectUserRole, changeUserRole } from '@store/slices/userSlice';
 
 function RoleSwitch(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const role = useAppSelector(selectUserRole);
+
+  const handleSwitchButtonClick = () => dispatch(changeUserRole());
+
   return (
-    <Container>
-      <Range />
-      <Button />
+    <Container onClick={handleSwitchButtonClick}>
+      <Range role={role} />
+      <Button role={role} />
     </Container>
   );
 }
 
+interface StyledProps {
+  role: string;
+}
+
 const Container = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: left;
   align-items: center;
   width: 48px;
   height: 24px;
@@ -22,18 +32,23 @@ const Container = styled.div`
   margin: 0px 24px 0px 24px;
   box-sizing: border-box;
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  cursor: pointer;
 `;
 
 const Range = styled.div`
   position: absolute;
   width: 32px;
   height: 12px;
-  background-color: ${(props) => props.theme.Gray6};
+  background-color: ${(props: StyledProps) => (props.role === 'MENTEE' ? '#F2F2F2' : '#BDBDBD')};
   border-radius: 24px;
   box-sizing: border-box;
+  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  transition: all 0.75s ease-in;
 `;
 
 const Button = styled.div`
+  position: absolute;
+  left: ${(props: StyledProps) => (props.role === 'MENTEE' ? '15%' : '55%')};
   width: 16px;
   height: 16px;
   background-color: ${(props) => props.theme.Primary};
@@ -41,6 +56,7 @@ const Button = styled.div`
   box-sizing: border-box;
   z-index: 999;
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  transition: left 0.5s ease-in;
 `;
 
 export default RoleSwitch;

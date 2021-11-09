@@ -10,7 +10,7 @@ export interface UserState {
   id: string;
   name: string;
   image: string;
-  type: UserType;
+  role: UserType;
 }
 
 export const userSlice = createSlice({
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
     id: '',
     name: '',
     image: '',
-    type: UserType.MENTEE,
+    role: UserType.MENTEE,
   } as UserState,
   reducers: {
     initUser(state) {
@@ -29,13 +29,14 @@ export const userSlice = createSlice({
       const { id, name, image } = action.payload;
       return { ...state, id, name, image };
     },
-    changeUserType(state) {
-      const type = state.type == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
-      return { ...state, type };
+    changeUserRole(state) {
+      const role = state.role == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
+      return { ...state, role };
     },
   },
 });
 
-export const { initUser, setUser, changeUserType } = userSlice.actions;
+export const { initUser, setUser, changeUserRole } = userSlice.actions;
 export default userSlice.reducer;
 export const selectUser = (state: RootState): UserState => state.user;
+export const selectUserRole = (state: RootState): UserType => state.user.role;
