@@ -12,6 +12,9 @@ const Loader = (): JSX.Element => {
 };
 
 const Content = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
