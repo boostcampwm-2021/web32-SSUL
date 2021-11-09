@@ -37,8 +37,18 @@ export const userSlice = createSlice({
       };
     },
     setUser(state, action) {
-      const { id, oAuthId, name, image, feverStack, shareStack } = action.payload;
-      return { ...state, id, oAuthId, name, image, feverStack, shareStack, isLogin: true };
+      const { id, oAuthId, name, image, feverStack, shareStack, role } = action.payload;
+      return {
+        ...state,
+        id,
+        oAuthId,
+        name,
+        image,
+        feverStack,
+        shareStack,
+        isLogin: true,
+        role: role ?? UserType.MENTEE,
+      };
     },
     changeUserRole(state) {
       const role = state.role == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
