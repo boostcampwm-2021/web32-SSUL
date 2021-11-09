@@ -19,8 +19,8 @@ function Auth(): JSX.Element {
 
     try {
       const data = await getAccessToken(code);
-      const { githubId: id, name, avatarUrl: image } = data;
-      dispatch(setUser({ id, name, image }));
+      const { id, githubId: oAuthId, name, avatarUrl: image, feverStack, shareStack } = data;
+      dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack }));
       toggleLoader();
       history.push('/');
     } catch (error) {

@@ -15,9 +15,12 @@ export interface GroupCreateInterface {
 }
 
 export interface ResponseGithubUserData {
+  id: number;
   githubId: string;
   name: string;
   avatarUrl: string;
+  feverStack: number;
+  shareStack: number;
 }
 
 export type RequestBody = ExampleInterface | GroupCreateInterface;

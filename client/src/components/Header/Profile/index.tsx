@@ -24,7 +24,7 @@ function Profile(): JSX.Element {
   const handleProfileMenuClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsModalClicked(false);
-    history.push(`/profile/${user.id}`);
+    history.push(`/profile/${user.oAuthId}`);
   };
   const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

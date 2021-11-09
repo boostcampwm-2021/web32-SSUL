@@ -7,27 +7,27 @@ enum UserType {
 }
 
 export interface UserState {
-  id: string;
-  name: string;
-  image: string;
+  id?: number;
+  oAuthId?: string;
+  name?: string;
+  image?: string;
+  feverStack?: number;
+  shareStack?: number;
   role: UserType;
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    id: '',
-    name: '',
-    image: '',
     role: UserType.MENTEE,
   } as UserState,
   reducers: {
     initUser(state) {
-      return { ...state, id: '', name: '', image: '' };
+      return { ...state, id: 0, oAuthId: '', name: '', image: '', feverStack: 0, shareStack: 0 };
     },
     setUser(state, action) {
-      const { id, name, image } = action.payload;
-      return { ...state, id, name, image };
+      const { id, oAuthId, name, image, feverStack, shareStack } = action.payload;
+      return { ...state, id, oAuthId, name, image, feverStack, shareStack };
     },
     changeUserRole(state) {
       const role = state.role == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
