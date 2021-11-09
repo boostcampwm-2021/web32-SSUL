@@ -5,16 +5,12 @@ import styled from '@emotion/styled';
 import { RangeValue } from 'rc-picker/lib/interface';
 const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function AntDatePicker(): JSX.Element {
-  const { startDate, endDate } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { startAt, endAt } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const checkDate = (current: moment.Moment) => {
     const now = new Date();
@@ -29,7 +25,7 @@ function AntDatePicker(): JSX.Element {
     formatString: [string, string],
   ) => {
     const [newStartDate, newEndDate] = formatString;
-    dispatch(setGroupData({ startDate: newStartDate, endDate: newEndDate }));
+    dispatch(setGroupData({ startAt: newStartDate, endAt: newEndDate }));
   };
   return (
     <CustomPicker
@@ -37,10 +33,7 @@ function AntDatePicker(): JSX.Element {
       size="large"
       disabledDate={checkDate}
       onChange={handleCalendarChange}
-      defaultValue={[
-        startDate !== '' ? moment(startDate) : null,
-        endDate !== '' ? moment(endDate) : null,
-      ]}
+      defaultValue={[startAt !== '' ? moment(startAt) : null, endAt !== '' ? moment(endAt) : null]}
       style={{
         width: '100%',
         textAlign: 'center',

@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types/TechStack';
+import { TechStack } from '@types';
 import SearchBar from './SearchBar';
 import SelectedTechStackList from './SelectedTechStackList';
 import TechStackList from './TechStackList';
 
-function TechStackInput(): JSX.Element {
-  const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
+interface Props {
+  techStacks: TechStack[];
+}
+
+function TechStackInput({ techStacks: baseTechStackList }: Props): JSX.Element {
   const [filteredTechStackList, setFilteredTechStackList] = useState<TechStack[]>([]);
   const [techStackInput, setTechStackInput] = useState<string>('');
 
   const handleTechStackInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTechStackInput(e.target.value);
   };
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getTechStackList();
-      setBaseTechStackList(data);
-    };
-    getData();
-  }, []);
 
   useEffect(() => {
     const newFilteredTechStackList = baseTechStackList.filter((techStack, idx) => {

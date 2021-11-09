@@ -1,26 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function SelectedTechStackList(): JSX.Element {
-  const { selectedTechStack } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { usingTechStacks } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;
     const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
-    const newSelectedTechStack = selectedTechStack.filter((techStackName) => {
+    const newSelectedTechStack = usingTechStacks.filter((techStackName) => {
       return techStackName !== nowTechStack;
     });
 
-    dispatch(setGroupData({ selectedTechStack: newSelectedTechStack }));
+    dispatch(setGroupData({ usingTechStacks: newSelectedTechStack }));
   };
-  const selectedTechListElements = selectedTechStack.map((techStackName, idx) => {
+  const selectedTechListElements = usingTechStacks.map((techStackName, idx) => {
     return (
       <SelectItem key={idx}>
         <h4>{techStackName}</h4>

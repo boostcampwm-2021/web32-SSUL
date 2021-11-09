@@ -1,23 +1,21 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { GroupData } from '../../../types/CreateGroup';
-import { setGroupData } from '../../../store/slices/createGroupData';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 function PersonnelInput(): JSX.Element {
-  const { personnelCount } = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
-  const dispatch = useDispatch();
+  const { maxUserCnt } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
   const onChangeBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    dispatch(setGroupData({ personnelCount: value }));
+    dispatch(setGroupData({ maxUserCnt: value }));
   };
 
   return (
     <>
       <Title>그룹의 정원을 선택해주세요.</Title>
-      <RangeValue>{personnelCount}</RangeValue>
-      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={personnelCount} />
+      <RangeValue>{maxUserCnt}</RangeValue>
+      <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={maxUserCnt} />
     </>
   );
 }

@@ -1,11 +1,9 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../../store/rootReducer';
-import { setGroupData } from '../../../store/slices/createGroupData';
-import { GroupData } from '../../../types/CreateGroup';
-import { TechStack } from '../../../types/TechStack';
+import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { TechStack } from '@types';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 const MAX_SELECTED_INDEX = 5;
 
@@ -13,10 +11,8 @@ interface Props {
   techStackList: TechStack[];
 }
 function TechStackList({ techStackList }: Props): JSX.Element {
-  const { selectedTechStack } = useSelector<ReducerType, GroupData>(
-    (state) => state.createGroupData,
-  );
-  const dispatch = useDispatch();
+  const { usingTechStacks } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;
     const techStackName = clickedTechStack.innerText;
@@ -24,17 +20,17 @@ function TechStackList({ techStackList }: Props): JSX.Element {
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
-    if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
+    if (usingTechStacks.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
-    } else if (!selectedTechStack.includes(techStackName)) {
-      const newTechStack: string[] = [...selectedTechStack];
+    } else if (!usingTechStacks.includes(techStackName)) {
+      const newTechStack: string[] = [...usingTechStacks];
 
       newTechStack.push(techStackName);
-      dispatch(setGroupData({ selectedTechStack: newTechStack }));
+      dispatch(setGroupData({ usingTechStacks: newTechStack }));
     }
   };
   const techStackElements = techStackList.map((techStack, idx) => {
-    return selectedTechStack.includes(techStack.name) ? (
+    return usingTechStacks.includes(techStack.name) ? (
       <SelectedTechListItem key={idx}>{techStack.name}</SelectedTechListItem>
     ) : (
       <TechListItem key={idx} onClick={handleTechStackClick}>

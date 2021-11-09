@@ -8,4 +8,7 @@ export class GroupRepository extends Repository<Group> {
   public findAll() {
     return this.find();
   }
+  public createGroup(group: Group) {
+    return this.save(group);
+  }
 }

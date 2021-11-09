@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import Category from './CategoryInput';
-import Personnel from './PersonnelInput';
-import TechStack from './TechStackInput';
-import GroupInfo from './GroupInfoInput';
-import Date from './DateInput';
+import CategoryInput from './CategoryInput';
+import PersonnelInput from './PersonnelInput';
+import TechStackInput from './TechStackInput';
+import GroupInfoInput from './GroupInfoInput';
+import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducerType } from '../../store/rootReducer';
-import { GroupData } from '../../types/CreateGroup';
-import { clearGroupData } from '../../store/slices/createGroupData';
+import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateDataSlice';
+import { Category, TechStack } from '@types';
+import { getCategories } from '@api/category';
+import { getTechStackList } from '@api/techStack';
+import { postGroupCreate } from '@api/group';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 const MAX_CONTENT_INDEX = 4;
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   const [notificationText, setNotificationText] = useState<string>('');
-  const groupData = useSelector<ReducerType, GroupData>((state) => state.createGroupData);
-  const dispatch = useDispatch();
+  const [categorys, setCategorys] = useState<Category[]>([]);
+  const [techStacks, setTechStacks] = useState<TechStack[]>([]);
+  const groupData = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
 
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
       case 0:
-        return <Category />;
+        return <CategoryInput categorys={categorys} />;
       case 1:
-        return <Personnel />;
+        return <PersonnelInput />;
       case 2:
-        return <GroupInfo />;
+        return <GroupInfoInput />;
       case 3:
-        return <Date />;
+        return <DateInput />;
       case 4:
-        return <TechStack />;
+        return <TechStackInput techStacks={techStacks} />;
       default:
         return null;
     }
@@ -42,15 +46,16 @@ function GroupCreatePage(): JSX.Element {
       case 0:
         return groupData.category !== '';
       case 2:
-        return groupData.groupName !== '' && groupData.groupInfo !== '';
+        return groupData.name !== '' && groupData.intro !== '';
       case 3:
-        return groupData.startDate !== '' && groupData.endDate !== '';
+        return groupData.startAt !== '' && groupData.endAt !== '';
       case 4:
-        return groupData.selectedTechStack.length > 0;
+        return groupData.usingTechStacks.length > 0;
       default:
         return true;
     }
   };
+
   const clickPrevContents = () => {
     setNotificationText('');
     if (contentsNumber > 0) setContentsNumber(contentsNumber - 1);
@@ -64,15 +69,38 @@ function GroupCreatePage(): JSX.Element {
 
     setNotificationText('');
     if (contentsNumber < MAX_CONTENT_INDEX) setContentsNumber(contentsNumber + 1);
+    else if (contentsNumber === MAX_CONTENT_INDEX) requestGroupCreate();
   };
 
-  const cleanUp = () =>{
+  const requestGroupCreate = async () => {
+    try {
+      await postGroupCreate(groupData);
+      window.location.href = '/';
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const cleanUp = () => {
     dispatch(clearGroupData());
-  }
-  
-  useEffect(() =>{
+  };
+
+  useEffect(() => {
+    const fetchCategoryList = async () => {
+      const response: Category[] = await getCategories();
+      setCategorys(response);
+    };
+
+    const fetechTechStackList = async () => {
+      const response: TechStack[] = await getTechStackList();
+      setTechStacks(response);
+    };
+
+    fetchCategoryList();
+    fetechTechStackList();
+
     return () => cleanUp();
-  },[])
+  }, []);
+
   return (
     <CreateForm>
       <GageBar contentsNumber={contentsNumber} />
