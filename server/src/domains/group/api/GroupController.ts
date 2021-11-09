@@ -2,6 +2,7 @@ import { UsingTechStackService } from '@domains/techstack/service/UsingTechStack
 import { ProfileService } from '@domains/user/service/ProfileService';
 import { Controller, Get } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
+import { Group } from '../dto/groupDto';
 import { GroupService } from '../service/GroupService';
 
 @Service()
@@ -18,16 +19,16 @@ export class GroupController {
 
   @Get('/')
   async getAll() {
-    const groups: any = await this.groupService.getGroups();
+    const groups: Group[] = await this.groupService.getGroups();
     const addedOtherGroupInfo = await this.addOtherGroupInfo(groups);
     return addedOtherGroupInfo;
   }
 
-  addOtherGroupInfo(groups: any) {
+  addOtherGroupInfo(groups: Group[]) {
     return Promise.all(
-      groups.map(async (group: any) => {
+      groups.map(async (group: Group) => {
         const techStackList = await this.usingTechStackService.getGroupsTechStackList(group.id);
-        const ownerFeverStack = await this.profileService.getUserFeverStack(group.onwerId);
+        const ownerFeverStack = await this.profileService.getUserFeverStack(group.ownerId);
         return { ...group, techStackList, ownerFeverStack };
       }),
     );

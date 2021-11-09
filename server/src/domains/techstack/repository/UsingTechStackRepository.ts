@@ -9,7 +9,7 @@ export class UsingTechStackRepository extends Repository<UsingTechStack> {
     return this.find();
   }
 
-  public async findUsingTechStackListByGroupId(groupId: number): Promise<any[]> {
+  public async findUsingTechStackListByGroupId(groupId: number): Promise<UsingTechStack[]> {
     const groupTechStackJoinResult = await this.createQueryBuilder('using_tech_stack')
       .innerJoinAndSelect('using_tech_stack.techStack', 'tech_stack')
       .where('using_tech_stack.type = :type', { type: 'GROUP' })

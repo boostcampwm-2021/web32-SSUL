@@ -17,6 +17,7 @@ export class UsingTechStackService {
     );
     return Promise.all(
       techStackList.map((techStack) => {
+        console.log(JSON.stringify(destructObject(techStack)));
         const { name } = destructObject(techStack) as GroupTechStackListDto;
         return name;
       }),
