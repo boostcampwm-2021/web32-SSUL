@@ -16,3 +16,18 @@ export interface Group {
   endAt: Date | null;
   status: GroupState;
 }
+
+export interface GroupResponse {
+  id: number;
+  mentorId: number;
+  ownerId: number;
+  name: string;
+  maxUserCnt: number;
+  curUserCnt: number;
+  intro: string;
+  startAt: Date;
+  endAt: Date;
+  status: string;
+  techStackList: string[];
+  ownerFeverStack: number;
+}

@@ -9,15 +9,15 @@ import { ProfileDto } from '../dto/ProfileDto';
 export class ProfileRepository extends Repository<Profile> {
   public async insertProfile(user: User) {
     const defaultProfile: ProfileDto = {
-      userId: user,
+      userId: user.id,
       feverStack: 36.5,
       shareStack: 0,
       introduction: '',
     };
     await this.insert(defaultProfile);
-    return await this.findOneByUserId(user.githubId);
+    return await this.findOneByGithubId(user.githubId);
   }
-  public async findOneByUserId(id: string) {
+  public async findOneByGithubId(githubId: string) {
     const profile = await this.createQueryBuilder('profile')
       .select([
         'user.id',
@@ -28,8 +28,16 @@ export class ProfileRepository extends Repository<Profile> {
         'profile.shareStack',
       ])
       .leftJoin('profile.user', 'user')
+      .where('user.githubId = :githubId', { githubId })
       .getOne();
 
+    return profile;
+  }
+
+  public async findOneByUserId(id: number) {
+    const profile = await this.createQueryBuilder('profile')
+      .where('profile.userId = :id', { id })
+      .getOne();
     return profile;
   }
 }
