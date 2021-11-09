@@ -14,20 +14,31 @@ export interface UserState {
   feverStack?: number;
   shareStack?: number;
   role: UserType;
+  isLogin: boolean;
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     role: UserType.MENTEE,
+    isLogin: false,
   } as UserState,
   reducers: {
     initUser(state) {
-      return { ...state, id: 0, oAuthId: '', name: '', image: '', feverStack: 0, shareStack: 0 };
+      return {
+        ...state,
+        id: 0,
+        oAuthId: '',
+        name: '',
+        image: '',
+        feverStack: 0,
+        shareStack: 0,
+        isLogin: false,
+      };
     },
     setUser(state, action) {
       const { id, oAuthId, name, image, feverStack, shareStack } = action.payload;
-      return { ...state, id, oAuthId, name, image, feverStack, shareStack };
+      return { ...state, id, oAuthId, name, image, feverStack, shareStack, isLogin: true };
     },
     changeUserRole(state) {
       const role = state.role == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;

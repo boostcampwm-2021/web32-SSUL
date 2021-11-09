@@ -49,7 +49,7 @@ function Profile(): JSX.Element {
   ];
 
   useEffect(() => {
-    user.id ? setIsLogin(true) : setIsLogin(false);
+    user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [user]);
 
   useEffect(() => {

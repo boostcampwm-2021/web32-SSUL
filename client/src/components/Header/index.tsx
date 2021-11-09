@@ -17,7 +17,7 @@ function Header(): JSX.Element {
         <Logo />
         <Navigation />
         <ControllContent>
-          {user.id && (
+          {user.isLogin && (
             <>
               <RoleSwitch />
               <Messenger />
