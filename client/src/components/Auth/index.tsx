@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 import qs from 'qs';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useLoader } from '@hooks';
 import { getAccessToken } from '@api/auth';
 import { setUser } from '@store/slices/userSlice';
-import { Loader } from '@components';
 
 function Auth(): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const toggleLoader = useLoader();
 
   const getGithubToken = async () => {
     const query = qs.parse(location.search, {
@@ -21,20 +21,18 @@ function Auth(): JSX.Element {
       const data = await getAccessToken(code);
       const { githubId: id, name, avatarUrl: image } = data;
       dispatch(setUser({ id, name, image }));
+      toggleLoader();
       history.push('/');
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
+    toggleLoader();
     getGithubToken();
   }, []);
 
-  return (
-    <Content>
-      <Loader />
-    </Content>
-  );
+  return <Content />;
 }
 
 const Content = styled.div`
