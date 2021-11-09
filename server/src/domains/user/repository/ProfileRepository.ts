@@ -17,7 +17,7 @@ export class ProfileRepository extends Repository<Profile> {
     await this.insert(defaultProfile);
     return await this.findOneByUserId(user.githubId);
   }
-  public async findOneByUserId(id: string) {
+  public async findOneByUserId(id: string | number) {
     const profile = await this.createQueryBuilder('profile')
       .select([
         'user.id',
