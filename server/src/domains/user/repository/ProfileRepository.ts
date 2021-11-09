@@ -15,9 +15,25 @@ export class ProfileRepository extends Repository<Profile> {
       introduction: '',
     };
     await this.insert(defaultProfile);
-    return await this.findOneByUserId(user.githubId);
+    return await this.findOneByGithubId(user.githubId);
   }
-  public async findOneByUserId(id: string | number) {
+  public async findOneByGithubId(id: string) {
+    const profile = await this.createQueryBuilder('profile')
+      .select([
+        'user.id',
+        'user.githubId',
+        'user.name',
+        'user.avatarUrl',
+        'profile.feverStack',
+        'profile.shareStack',
+      ])
+      .leftJoin('profile.user', 'user')
+      .getOne();
+
+    return profile;
+  }
+
+  public async findOneByUserId(id: number) {
     const profile = await this.createQueryBuilder('profile')
       .select([
         'user.id',

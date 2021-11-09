@@ -49,7 +49,7 @@ export class AuthService {
 
   public async findOrInsertUser(user: GithubUserDto): Promise<UserDto> {
     const { githubId } = user;
-    let profileData = await this.profileRepository.findOneByUserId(githubId);
+    let profileData = await this.profileRepository.findOneByGithubId(githubId);
     if (!profileData) {
       const userData = await this.userRepository.insertUser(user);
       profileData = await this.profileRepository.insertProfile(userData);
@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   public async getUserProfile(id: string): Promise<UserDto> {
-    let userData = await this.profileRepository.findOneByUserId(id);
+    let userData = await this.profileRepository.findOneByGithubId(id);
     return destructObject(userData) as UserDto;
   }
 }
