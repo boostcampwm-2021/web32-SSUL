@@ -7,9 +7,8 @@ function ProfileHeader(): JSX.Element {
     <Container>
       <ProfileImage src="https://avatars.githubusercontent.com/u/55623688?v=4"></ProfileImage>
       <CommonInfo>
-        <GitHubInfo>깃허브 ID</GitHubInfo>
+        <GitHubInfo>ChanYangYu</GitHubInfo>
         <FeverSharingBar></FeverSharingBar>
-        <GitHubInfo>깃허브 URL</GitHubInfo>
       </CommonInfo>
     </Container>
   );
@@ -17,12 +16,15 @@ function ProfileHeader(): JSX.Element {
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
   max-width: 650px;
-  margin: auto;
+  margin: 40px auto;
+  box-shadow: inset 0px 0px 4px rgb(0 0 0 / 25%);
+  border-radius: 10px;
 `;
 
 const ProfileImage = styled.img`
-  margin-top: 40px;
+  margin: 40px 0px;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -30,6 +32,7 @@ const ProfileImage = styled.img`
 
 const CommonInfo = styled.div`
   display: flex;
+  width: 300px;
   margin: 40px;
   flex-direction: column;
   justify-content: center;
@@ -37,6 +40,7 @@ const CommonInfo = styled.div`
 
 const GitHubInfo = styled.p`
   margin: 20px 0;
+  font-size: 25px;
   font-weight: bold;
 `;
 
