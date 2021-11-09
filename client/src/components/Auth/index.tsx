@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { useAppDispatch } from '@hooks';
@@ -29,7 +30,20 @@ function Auth(): JSX.Element {
     getGithubToken();
   }, []);
 
-  return <Loader />;
+  return (
+    <Content>
+      <Loader />
+    </Content>
+  );
 }
+
+const Content = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+`;
 
 export default Auth;
