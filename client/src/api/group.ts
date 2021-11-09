@@ -1,3 +1,4 @@
+import { GroupResponse } from '@types';
 import { requests } from './index';
 
-export const getAllGroupList = (): Promise<any> => requests.get(`/group`);
+export const getAllGroupList = (): Promise<GroupResponse> => requests.get(`/group`);
