@@ -9,6 +9,6 @@ export class GroupRepository extends Repository<Group> {
     return this.find();
   }
   public createGroup(group: Group) {
-    return this.insert(group);
+    return this.save(group);
   }
 }
