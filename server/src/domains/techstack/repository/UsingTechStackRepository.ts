@@ -18,4 +18,7 @@ export class UsingTechStackRepository extends Repository<UsingTechStack> {
 
     return groupTechStackJoinResult;
   }
+  public createUsingTechStack(usingTechStack: UsingTechStack) {
+    return this.save(usingTechStack);
+  }
 }
