@@ -5,7 +5,6 @@ import { Repository, EntityRepository } from 'typeorm';
 
 @Service()
 @EntityRepository(TechStack)
-@EntityRepository(UsingTechStack)
 export class TechStackRepository extends Repository<TechStack> {
   public findAll() {
     return this.find();
