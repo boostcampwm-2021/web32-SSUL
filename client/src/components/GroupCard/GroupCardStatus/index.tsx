@@ -2,20 +2,29 @@ import React from 'react';
 import styled from '@emotion/styled';
 import GroupOwnerStatus from './GroupOwnerStatus';
 import GroupStatusInfo from './GroupStatusInfo';
+import GroupTechStackList from './GroupTechStackList';
 
-interface Props {
+interface StatusProps {
+  statusProps: Status;
+}
+
+interface Status {
   id: number;
-  ownerId: number;
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
+  techStackList: string[];
+  ownerFeverStack: number;
+  ownerName: string;
 }
 
-function GroupCardStatus({ id, ownerId, intro, startAt, endAt }: Props): JSX.Element {
+function GroupCardStatus({ statusProps }: StatusProps): JSX.Element {
+  const { intro, startAt, endAt, techStackList, ownerFeverStack, ownerName } = statusProps;
   return (
     <Container>
-      <GroupOwnerStatus ownerId={ownerId} />
-      <GroupStatusInfo id={id} intro={intro} startAt={startAt} endAt={endAt} />
+      <GroupOwnerStatus ownerName={ownerName} ownerFeverStack={ownerFeverStack} />
+      <GroupStatusInfo intro={intro} startAt={startAt} endAt={endAt} />
+      <GroupTechStackList techStackList={techStackList} />
     </Container>
   );
 }
