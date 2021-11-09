@@ -9,7 +9,7 @@ function ProfileBox({ title }: Props): JSX.Element {
     <Container>
       <BoxHeader>
         <p>{title}</p>
-        <button>편집</button>
+        <EditButton>편집</EditButton>
       </BoxHeader>
       <ProfileText></ProfileText>
     </Container>
@@ -37,4 +37,12 @@ const ProfileText = styled.p`
   text-align: left;
 `;
 
+const EditButton = styled.button`
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.Primary};
+  color: ${(props) => props.theme.White};
+`;
 export default ProfileBox;
