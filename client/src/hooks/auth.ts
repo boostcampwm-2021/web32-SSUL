@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { getSlientRefresh } from '@api/auth';
+import { getSilentRefresh } from '@api/auth';
 import { useAppDispatch } from '@hooks';
 import { setUser } from '@store/slices/userSlice';
 
-export function useSlientRefresh(): void {
+export function useSilentRefresh(): void {
   const dispatch = useAppDispatch();
   useEffect(() => {
     (async () => {
-      const userData = await getSlientRefresh();
+      const userData = await getSilentRefresh();
       if (!userData) return;
       const { githubId: id, name, avatarUrl: image } = userData;
       dispatch(setUser({ id, name, image }));

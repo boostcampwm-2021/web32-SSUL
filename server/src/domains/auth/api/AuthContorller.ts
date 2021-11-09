@@ -17,7 +17,7 @@ export class AuthController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get('/slient-refresh')
+  @Get('/silent-refresh')
   @OnUndefined(203)
   async getAuthentification(@SessionParam('githubId') githubId: string) {
     if (!githubId) return;
