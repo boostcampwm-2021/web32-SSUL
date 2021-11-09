@@ -1,9 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import util from './slices/utilSlice';
 import user from './slices/userSlice';
 import groupRecruit from './slices/groupRecruitFilterSlice';
 import createGroupData from './slices/groupCreateDataSlice';
 
 const reducer = combineReducers({
+  util,
   user,
   createGroupData,
   groupRecruit,
