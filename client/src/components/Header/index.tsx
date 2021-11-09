@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppSelector } from '@hooks';
+import { selectUser } from '@store/slices/userSlice';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import RoleSwitch from './RoleSwitch';
@@ -8,14 +10,21 @@ import Messenger from './Messenger';
 import Profile from './Profile';
 
 function Header(): JSX.Element {
+  const user = useAppSelector(selectUser);
   return (
     <Container>
       <Content>
         <Logo />
         <Navigation />
-        <RoleSwitch />
-        <Messenger />
-        <Notification />
+        <ControllContent>
+          {user.id && (
+            <>
+              <RoleSwitch />
+              <Messenger />
+              <Notification />
+            </>
+          )}
+        </ControllContent>
         <Profile />
       </Content>
     </Container>
@@ -42,6 +51,15 @@ const Content = styled.div`
   align-items: center;
   width: 75vw;
   min-width: 1040px;
+`;
+
+const ControllContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 20vw;
+  min-width: 240px;
 `;
 
 export default Header;
