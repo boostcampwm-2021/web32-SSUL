@@ -1,5 +1,6 @@
 import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
+import { TechStackService } from '@domains/techstack/service/TechStackService';
 import { Body, Controller, Post } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { Group } from '../dto/groupDto';
@@ -26,8 +27,11 @@ export class GroupController {
   }
 
   @Post('/create')
-  create(@Body() groupData: CreateGroupDto) {
-    return this.groupService.createGroup(groupData);
+  async create(@Body() groupData: CreateGroupDto) {
+    const createdGroup = await this.groupService.createGroup(groupData);
+    this.techStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
+
+    return createdGroup;
   }
 
   addOtherGroupInfo(groups: Group[]) {

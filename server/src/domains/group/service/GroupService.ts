@@ -17,10 +17,6 @@ export class GroupService {
     private readonly groupRepository: GroupRepository,
     @InjectRepository()
     private readonly categoryRepository: CategoryRepository,
-    @InjectRepository()
-    private readonly usingTechStackRepository: UsingTechStackRepository,
-    @InjectRepository()
-    private readonly techStackRepository: TechStackRepository,
   ) {}
 
   public async getGroups() {
@@ -44,19 +40,6 @@ export class GroupService {
     group.endAt = new Date(groupData.endAt);
 
     const createdGroup = await this.groupRepository.createGroup(group);
-
-    groupData.usingTechStacks.forEach(async (techStackName) => {
-      const techStack: TechStack = await this.techStackRepository.findOneOrFail({
-        where: { name: techStackName },
-      });
-      const usingTechStack: UsingTechStack = new UsingTechStack();
-
-      usingTechStack.group = createdGroup;
-      usingTechStack.techStack = techStack;
-      usingTechStack.type = UsingTechAs.GROUP;
-
-      this.usingTechStackRepository.createUsingTechStack(usingTechStack);
-    });
 
     return createdGroup;
   }
