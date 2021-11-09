@@ -1,4 +1,4 @@
-import { TechStackService } from '@domains/techstack/service/TechStackService';
+import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
 import { Controller, Get } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
@@ -11,7 +11,7 @@ export class GroupController {
     @Inject()
     private readonly groupService: GroupService,
     @Inject()
-    private readonly techStackService: TechStackService,
+    private readonly usingTechStackService: UsingTechStackService,
     @Inject()
     private readonly profileService: ProfileService,
   ) {}
@@ -26,7 +26,7 @@ export class GroupController {
   addOtherGroupInfo(groups: any) {
     return Promise.all(
       groups.map(async (group: any) => {
-        const techStackList = await this.techStackService.getGroupsTechStackList(group.id);
+        const techStackList = await this.usingTechStackService.getGroupsTechStackList(group.id);
         const ownerFeverStack = await this.profileService.getUserFeverStack(group.onwerId);
         return { ...group, techStackList, ownerFeverStack };
       }),
