@@ -9,7 +9,7 @@ import { ProfileDto } from '../dto/ProfileDto';
 export class ProfileRepository extends Repository<Profile> {
   public async insertProfile(user: User) {
     const defaultProfile: ProfileDto = {
-      userId: user,
+      userId: user.id,
       feverStack: 36.5,
       shareStack: 0,
       introduction: '',

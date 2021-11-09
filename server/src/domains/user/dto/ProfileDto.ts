@@ -1,5 +1,5 @@
 export interface ProfileDto {
-  userId: int;
+  userId: number;
   feverStack: number;
   shareStack: number;
   introduction: string;
