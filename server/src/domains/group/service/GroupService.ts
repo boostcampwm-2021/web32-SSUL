@@ -5,10 +5,6 @@ import { Category } from "@domains/category/models/Category";
 import { CategoryRepository } from "@domains/category/repository/CategoryRepository";
 import { CreateGroupDto } from "../dto/CreateGroupDto";
 import { Group } from "../models/Group";
-import { TechStack } from '@domains/techstack/models/TechStack';
-import { UsingTechAs, UsingTechStack } from '@domains/techstack/models/UsingTechStack';
-import { TechStackRepository } from '@domains/techstack/repository/TechStackRepository';
-import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 
 @Service()
 export class GroupService {
