@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-interface Props {
+interface HeaderProps {
+  headerProps: Header;
+}
+interface Header {
   name: string | null;
-  maxUserCnt: number | null;
   curUserCnt: number | null;
+  maxUserCnt: number | null;
 }
 
-function GroupCardHeader({ name, maxUserCnt, curUserCnt }: Props): JSX.Element {
+function GroupCardHeader({ headerProps }: HeaderProps): JSX.Element {
   return (
     <Container>
-      <GroupName>{name}</GroupName>
+      <GroupName>{headerProps.name}</GroupName>
       <UserCntStatus>
-        {curUserCnt}/{maxUserCnt}
+        {headerProps.curUserCnt}/{headerProps.maxUserCnt}
       </UserCntStatus>
     </Container>
   );
