@@ -24,9 +24,10 @@ export class GroupController {
     @QueryParam('category') category: string,
     @QueryParam('techstack') techstack: string,
   ) {
+    const filterdTechStack = techstack.split(',');
     const groups: Group[] = await this.groupService.getGroups(name, category);
-    const addedOtherGroupInfo = await this.addOtherGroupInfo(groups);
-    return addedOtherGroupInfo;
+    const addedOtherGroupInfo = await this.addOtherGroupInfo(groups, filterdTechStack);
+    return addedOtherGroupInfo.filter((item) => item);
   }
 
   @Post('/create')
@@ -36,14 +37,17 @@ export class GroupController {
     this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
   }
 
-  addOtherGroupInfo(groups: Group[]) {
+  addOtherGroupInfo(groups: Group[], filterdTechStack: string[]) {
     return Promise.all(
       groups.map(async (group: Group) => {
         const techStackList = await this.usingTechStackService.getGroupsTechStackList(group.id);
-        const [ownerFeverStack, ownerName] = await this.profileService.getGroupOwnerInfo(
-          group.ownerId,
-        );
-        return { ...group, techStackList, ownerFeverStack, ownerName };
+        const isIncludeStackList = techStackList.some((r) => filterdTechStack.includes(r));
+        if (isIncludeStackList) {
+          const [ownerFeverStack, ownerName] = await this.profileService.getGroupOwnerInfo(
+            group.ownerId,
+          );
+          return { ...group, techStackList, ownerFeverStack, ownerName };
+        }
       }),
     );
   }
