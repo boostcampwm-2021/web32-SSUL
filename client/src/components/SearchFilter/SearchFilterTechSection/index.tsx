@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import TechSectionHeader from './TechSectionHeader';
 import TechList from './TechList';
 import { useAppSelector } from '@hooks';
-import { getTechStackList } from '@api/techStack';
+import { techStackClient } from '@api';
 import { TechStack } from '@types';
 import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
 
@@ -14,7 +14,7 @@ function SearchFilterTechSection(): JSX.Element {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getTechStackList();
+      const data = await techStackClient.getTechStackList();
       setBaseTechStackList(data);
     };
     getData();

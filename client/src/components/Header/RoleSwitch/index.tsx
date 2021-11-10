@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { patchRole } from '@api/user';
+import { userClient } from '@api';
 import { useAppSelector, useAppDispatch } from '@hooks';
 import { selectUserRole, changeUserRole } from '@store/slices/userSlice';
 
@@ -9,7 +9,7 @@ function RoleSwitch(): JSX.Element {
   const role = useAppSelector(selectUserRole);
 
   const handleSwitchButtonClick = () => {
-    patchRole();
+    userClient.patchRole();
     dispatch(changeUserRole());
   };
 

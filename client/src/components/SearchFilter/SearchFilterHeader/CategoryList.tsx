@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { getCategories } from '@api/category';
+import { categoryClient } from '@api';
 import { Category } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
@@ -16,7 +16,7 @@ function CategoryList(): JSX.Element {
   useEffect(() => {
     const { category } = history.state.state ?? { category: '' };
     const getCategoryListData = async () => {
-      const categoryList = await getCategories();
+      const categoryList = await categoryClient.getCategories();
       setBaseCategoryList(categoryList);
       groupRecruitDispatch(checkCategory(category));
     };
