@@ -11,4 +11,4 @@ export const requests = {
   get: (url: string): Promise<Category[]> => http.get(url).then(passResponse),
 };
 
-export const getCategories = (): Promise<Category[]> => requests.get(`/category`);
+export const getCategories = (): Promise<Category[]> => requests.get(`/api/category`);
