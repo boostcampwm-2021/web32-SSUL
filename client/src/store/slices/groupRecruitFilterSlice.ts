@@ -6,6 +6,7 @@ export interface groupRecruitType {
   groupNameInput: string;
   selectedTechStack: string[];
   selectedCategory: string;
+  filterdQuery: string;
 }
 
 export const groupRecruitFilterSlice = createSlice({
@@ -15,6 +16,7 @@ export const groupRecruitFilterSlice = createSlice({
     groupNameInput: '',
     selectedTechStack: [],
     selectedCategory: '',
+    filterdQuery: '',
   } as groupRecruitType,
   reducers: {
     changeTechStackInput(state, action) {
@@ -39,6 +41,14 @@ export const groupRecruitFilterSlice = createSlice({
     checkCategory(state, action) {
       return { ...state, selectedCategory: action.payload };
     },
+    createdFilterdQuery(state) {
+      const { groupNameInput, selectedCategory, selectedTechStack } = state;
+      const nameQuery = groupNameInput ? `&name=${groupNameInput}` : '';
+      const categoryQuery = selectedCategory ? `&category=${selectedCategory}` : '';
+      const techStackQuery =
+        selectedTechStack.length > 0 ? `&techstack=${selectedTechStack.join(',')}` : '';
+      return { ...state, filterdQuery: `?${nameQuery}${categoryQuery}${techStackQuery}` };
+    },
   },
 });
 
@@ -48,6 +58,7 @@ export const {
   popSelectedTechStack,
   checkCategory,
   changeGroupNameInput,
+  createdFilterdQuery,
 } = groupRecruitFilterSlice.actions;
 export default groupRecruitFilterSlice.reducer;
 export const returnGroupRecruitFilterState = (state: RootState): groupRecruitType =>

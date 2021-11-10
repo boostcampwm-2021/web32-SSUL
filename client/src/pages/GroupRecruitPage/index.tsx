@@ -4,31 +4,23 @@ import { SearchFilter, GroupCard } from '@components';
 import { GroupResponse } from '@types';
 import { useAppSelector } from '@hooks';
 import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
-import { getAllGroupList } from '@api/group';
+import { getFilterdGroupList } from '@api/group';
 
 function GroupRecruitPage(): JSX.Element {
-  const { selectedCategory } = useAppSelector(returnGroupRecruitFilterState);
-  const [groupList, setGroupList] = useState<GroupResponse[]>([]);
+  const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
+  const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
+
   useEffect(() => {
     const getGroupsList = async () => {
-      const allGroupList = await getAllGroupList();
-      setGroupList(allGroupList);
+      const allGroupList = await getFilterdGroupList(filterdQuery);
+      setFilterdGroupList(allGroupList);
+      console.log(filterdQuery);
     };
     getGroupsList();
-  }, []);
+  }, [filterdQuery]);
 
-  const isFilterdData = (groupData: GroupResponse) => {
-    const { name } = groupData;
-    if (containGroupInput(name)) return true;
-    else return false;
-  };
-
-  const containGroupInput = (groupName: string | null) => {
-    return groupName?.includes('');
-  };
-
-  const renderGroupCards = groupList.map((groupData: GroupResponse) => {
-    if (isFilterdData(groupData)) return <GroupCard key={groupData.id} groupContents={groupData} />;
+  const renderGroupCards = filterdGroupList.map((groupData: GroupResponse) => {
+    return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
   return (
