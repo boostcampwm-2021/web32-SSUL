@@ -24,7 +24,7 @@ function Profile(): JSX.Element {
   const handleProfileMenuClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsModalClicked(false);
-    history.push(`/profile/${user.id}`);
+    history.push(`/profile/${user.oAuthId}`);
   };
   const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -49,7 +49,7 @@ function Profile(): JSX.Element {
   ];
 
   useEffect(() => {
-    user.id ? setIsLogin(true) : setIsLogin(false);
+    user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [user]);
 
   useEffect(() => {

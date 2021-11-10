@@ -11,13 +11,25 @@ export interface GroupCreateInterface {
   startAt: string;
   endAt: string;
   category: string;
-	usingTechStacks: string[];
+  usingTechStacks: string[];
 }
 
 export interface ResponseGithubUserData {
+  id: number;
   githubId: string;
   name: string;
   avatarUrl: string;
+  feverStack: number;
+  shareStack: number;
+}
+export interface ResponseUserData {
+  id: number;
+  githubId: string;
+  name: string;
+  avatarUrl: string;
+  feverStack: number;
+  shareStack: number;
+  role: string;
 }
 
-export type RequestBody = ExampleInterface | GroupCreateInterface;
+export type RequestBody = ExampleInterface | GroupCreateInterface | null;

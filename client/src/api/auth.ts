@@ -1,6 +1,6 @@
 import { requests } from './index';
-import { ResponseGithubUserData } from '../types';
-export const getSilentRefresh = (): Promise<ResponseGithubUserData> =>
+import { ResponseGithubUserData, ResponseUserData } from '../types';
+export const getSilentRefresh = (): Promise<ResponseUserData> =>
   requests.get(`/auth/silent-refresh`);
 export const getAccessToken = (code: string): Promise<ResponseGithubUserData> =>
   requests.get(`/auth/token?code=${code}`);

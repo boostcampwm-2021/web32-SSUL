@@ -9,8 +9,16 @@ export function useSilentRefresh(): void {
     (async () => {
       const userData = await getSilentRefresh();
       if (!userData) return;
-      const { githubId: id, name, avatarUrl: image } = userData;
-      dispatch(setUser({ id, name, image }));
+      const {
+        id,
+        githubId: oAuthId,
+        name,
+        avatarUrl: image,
+        feverStack,
+        shareStack,
+        role,
+      } = userData;
+      dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack, role }));
     })();
   }, []);
 }

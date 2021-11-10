@@ -19,9 +19,13 @@ export class AuthController {
 
   @Get('/silent-refresh')
   @OnUndefined(203)
-  async getAuthentification(@SessionParam('githubId') githubId: string) {
+  async getAuthentification(
+    @SessionParam('githubId') githubId: string,
+    @SessionParam('role') role: string,
+  ) {
     if (!githubId) return;
-    return await this.authService.getUserProfile(githubId);
+    const userData = await this.authService.getUserProfile(githubId);
+    return { ...userData, role: role };
   }
 
   @Get('/token')
@@ -33,7 +37,10 @@ export class AuthController {
     const accessToken = await this.authService.getGithubAccessToken(code);
     const githubUserData = await this.authService.getGithubUserData(accessToken);
     const userData = await this.authService.findOrInsertUser(githubUserData);
-    if (!githubId) session.githubId = githubUserData.githubId;
+    if (!githubId) {
+      session.githubId = githubUserData.githubId;
+      session.role = 'MENTEE';
+    }
 
     return userData;
   }

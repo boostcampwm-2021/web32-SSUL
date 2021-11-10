@@ -12,12 +12,15 @@ const Loader = (): JSX.Element => {
 };
 
 const Content = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
 `;
 const rotate = keyframes`
   0% {
