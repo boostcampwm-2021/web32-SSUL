@@ -13,7 +13,7 @@ function ProfileSideContents(): JSX.Element {
       <BaseInfo>
         <NickName>GOODTSS</NickName>
         <GithubName>ChanYangYu</GithubName>
-        <FeverSharingBar></FeverSharingBar>
+        <FeverSharingBar />
         <GithubURLContainer>
           <GithubIcon src={GithubLogo} alt="GithubIcon"></GithubIcon>
           <GithubURL href="https://github.com/ChanYangYu">GitHub Storage</GithubURL>
