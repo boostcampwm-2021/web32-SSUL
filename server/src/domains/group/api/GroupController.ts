@@ -24,7 +24,7 @@ export class GroupController {
     @QueryParam('category') category: string,
     @QueryParam('techstack') techstack: string,
   ) {
-    const filterdTechStack = techstack.split(',');
+    const filterdTechStack = techstack ? techstack.split(',') : [];
     const groups: Group[] = await this.groupService.getGroups(name, category);
     const addedOtherGroupInfo = await this.addOtherGroupInfo(groups, filterdTechStack);
     return addedOtherGroupInfo.filter((item) => item);
@@ -42,7 +42,7 @@ export class GroupController {
       groups.map(async (group: Group) => {
         const techStackList = await this.usingTechStackService.getGroupsTechStackList(group.id);
         const isIncludeStackList = techStackList.some((r) => filterdTechStack.includes(r));
-        if (isIncludeStackList) {
+        if (filterdTechStack.length === 0 || isIncludeStackList) {
           const [ownerFeverStack, ownerName] = await this.profileService.getGroupOwnerInfo(
             group.ownerId,
           );
