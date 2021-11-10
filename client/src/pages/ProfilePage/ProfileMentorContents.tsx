@@ -19,6 +19,7 @@ const Container = styled.div`
 `;
 
 const Divider = styled.div`
+  margin-top: 40px;
   height: 1px;
   background-color: ${(props) => props.theme.Gray5};
 `;

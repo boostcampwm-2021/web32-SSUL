@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 interface Props {
   title: string;
 }
-function ProfileBox({ title }: Props): JSX.Element {
+function ProfileContentsBox({ title }: Props): JSX.Element {
   const [editState, setEditState] = useState<boolean>(false);
 
   const handleEditButtonClick = () => {
@@ -28,7 +28,7 @@ function ProfileBox({ title }: Props): JSX.Element {
 }
 
 const Container = styled.div`
-  margin: 40px auto;
+  margin: 40px auto 0 auto;
   width: 650px;
   min-height: 100px;
   border-radius: 10px;
@@ -69,4 +69,4 @@ const EditButton = styled.button`
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
 `;
-export default ProfileBox;
+export default ProfileContentsBox;

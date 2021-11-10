@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileBox from './ProfileBox';
+import ProfileBox from './ProfileContentsBox';
 
 function ProfileUserContents(): JSX.Element {
   return (
