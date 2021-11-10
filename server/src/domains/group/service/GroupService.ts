@@ -1,10 +1,10 @@
 import { Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { Category } from "@domains/category/models/Category";
-import { CategoryRepository } from "@domains/category/repository/CategoryRepository";
-import { CreateGroupDto } from "../dto/CreateGroupDto";
-import { Group } from "../models/Group";
+import { Category } from '@domains/category/models/Category';
+import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
+import { CreateGroupDto } from '../dto/CreateGroupDto';
+import { Group } from '../models/Group';
 
 @Service()
 export class GroupService {
@@ -15,8 +15,9 @@ export class GroupService {
     private readonly categoryRepository: CategoryRepository,
   ) {}
 
-  public async getGroups() {
-    const groups = await this.groupRepository.findAll();
+  public async getGroups(name: string = '', category: string = '') {
+    const categoryRecord = await this.categoryRepository.findOneByCategoryName(category);
+    const groups = await this.groupRepository.findGroupByNameAndCategory(name, categoryRecord?.id);
     return groups;
   }
 

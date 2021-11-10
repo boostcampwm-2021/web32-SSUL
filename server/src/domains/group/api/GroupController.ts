@@ -1,6 +1,6 @@
 import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
-import { Body, Controller, Get, OnUndefined, Post } from 'routing-controllers';
+import { Body, Controller, Get, OnUndefined, Post, QueryParam } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
@@ -19,8 +19,12 @@ export class GroupController {
   ) {}
 
   @Get('/')
-  async getAll() {
-    const groups: Group[] = await this.groupService.getGroups();
+  async getAll(
+    @QueryParam('name') name: string,
+    @QueryParam('category') category: string,
+    @QueryParam('techstack') techstack: string,
+  ) {
+    const groups: Group[] = await this.groupService.getGroups(name, category);
     const addedOtherGroupInfo = await this.addOtherGroupInfo(groups);
     return addedOtherGroupInfo;
   }
@@ -36,8 +40,10 @@ export class GroupController {
     return Promise.all(
       groups.map(async (group: Group) => {
         const techStackList = await this.usingTechStackService.getGroupsTechStackList(group.id);
-        const ownerFeverStack = await this.profileService.getUserFeverStack(group.ownerId);
-        return { ...group, techStackList, ownerFeverStack };
+        const [ownerFeverStack, ownerName] = await this.profileService.getGroupOwnerInfo(
+          group.ownerId,
+        );
+        return { ...group, techStackList, ownerFeverStack, ownerName };
       }),
     );
   }
