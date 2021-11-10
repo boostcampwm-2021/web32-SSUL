@@ -36,6 +36,15 @@ export class ProfileRepository extends Repository<Profile> {
 
   public async findOneByUserId(id: number) {
     const profile = await this.createQueryBuilder('profile')
+      .select([
+        'user.id',
+        'user.githubId',
+        'user.name',
+        'user.avatarUrl',
+        'profile.feverStack',
+        'profile.shareStack',
+      ])
+      .leftJoin('profile.user', 'user')
       .where('profile.userId = :id', { id })
       .getOne();
     return profile;

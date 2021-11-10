@@ -9,8 +9,8 @@ export class ProfileService {
     private readonly profileRepository: ProfileRepository,
   ) {}
 
-  public async getUserFeverStack(userId: number) {
+  public async getGroupOwnerInfo(userId: number) {
     const userInfo = await this.profileRepository.findOneByUserId(userId);
-    return userInfo?.feverStack;
+    return [userInfo?.feverStack, userInfo?.user.name];
   }
 }
