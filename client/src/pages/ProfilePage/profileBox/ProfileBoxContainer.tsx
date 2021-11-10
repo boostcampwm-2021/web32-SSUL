@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 interface Props {
   title: string;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 function ProfileBoxContainer({ title, children }: Props): JSX.Element {
   return (
