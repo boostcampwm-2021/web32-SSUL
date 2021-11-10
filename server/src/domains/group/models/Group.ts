@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, OneToOne, ManyToOne } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
@@ -39,6 +39,9 @@ export class Group {
 
   @Column('datetime', { name: 'end_at', nullable: true })
   endAt: Date | null;
+
+  @Column('int', { name: 'category_id', nullable: true })
+  categoryId: number | null;
 
   @Column({ name: 'status', type: 'enum', enum: GroupState, default: GroupState.READY })
   status: GroupState;
