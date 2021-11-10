@@ -13,7 +13,11 @@ function SearchFilterHeader(): JSX.Element {
   return (
     <Container>
       <CategoryList />
-      <SearchBar searchBarInput={groupNameInput} changeInputEvent={changeGroupNameInput} />
+      <SearchBar
+        searchBarInput={groupNameInput}
+        changeInputEvent={changeGroupNameInput}
+        inputValue={'GROUP_NAME'}
+      />
     </Container>
   );
 }

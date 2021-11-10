@@ -13,7 +13,11 @@ function TechSectionHeader(): JSX.Element {
 
   return (
     <Container>
-      <SearchBar searchBarInput={techStackInput} changeInputEvent={changeTechStackInput} />
+      <SearchBar
+        searchBarInput={techStackInput}
+        changeInputEvent={changeTechStackInput}
+        inputValue={'TECH_STACK'}
+      />
       <SelectedTechList />
     </Container>
   );
