@@ -1,10 +1,12 @@
 import React from 'react';
-import ProfileIntroBox from './ProfileIntroBox';
+import { ProfileIntroBox, ProfileTechStackBox, ProfileActivityListBox } from './profileBox';
 
 function ProfileUserContents(): JSX.Element {
   return (
     <>
-      <ProfileIntroBox></ProfileIntroBox>
+      <ProfileIntroBox />
+      <ProfileTechStackBox />
+      <ProfileActivityListBox />
     </>
   );
 }

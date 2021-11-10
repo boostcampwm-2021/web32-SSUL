@@ -20,7 +20,6 @@ const Container = styled.div`
   width: 650px;
   min-height: 100px;
   border-radius: 10px;
-  border: 1px ${(props) => props.theme.White} solid;
   box-shadow: inset 0px 0px 4px rgb(0 0 0 / 25%);
 `;
 
