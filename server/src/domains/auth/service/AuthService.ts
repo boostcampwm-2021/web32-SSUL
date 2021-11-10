@@ -3,7 +3,7 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
 import { UserRepository } from '../../user/repository/UserRepository';
 import { ProfileRepository } from '../../user/repository/ProfileRepository';
-import { GithubUserDto } from '../Dto/AuthDto';
+import { GithubUserDto } from '../dto/AuthDto';
 import { UserDto } from '../../user/dto/UserDto';
 import { destructObject } from '../../../utils/Object';
 
