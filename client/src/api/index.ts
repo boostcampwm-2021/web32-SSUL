@@ -1,15 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
-import { RequestBody } from '../types/ServerData';
-
-const http = axios.create({
-  timeout: 15000,
-});
-
-const passResponse = (response: AxiosResponse) => response.data;
-
-export const requests = {
-  get: <T>(url: string): Promise<T> => http.get(url).then(passResponse),
-  post: <T>(url: string, body: RequestBody): Promise<T> => http.post(url, body).then(passResponse),
-  patch: <T>(url: string, body: RequestBody): Promise<T> =>
-    http.patch(url, body).then(passResponse),
-};
+export * from './authHttpClient';
+export * from './userHttpClient';
+export * from './categoryHttpClient';
+export * from './groupHttpClient';
+export * from './techStackHttpClient';

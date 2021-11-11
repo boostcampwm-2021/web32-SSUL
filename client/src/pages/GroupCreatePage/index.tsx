@@ -9,9 +9,9 @@ import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
 import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateDataSlice';
 import { Category, TechStack } from '@types';
-import { getCategories } from '@api/category';
-import { getTechStackList } from '@api/techStack';
-import { postGroupCreate } from '@api/group';
+import { categoryHttpClient } from '@api';
+import { techStackHttpClient } from '@api';
+import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 const MAX_CONTENT_INDEX = 4;
@@ -74,7 +74,7 @@ function GroupCreatePage(): JSX.Element {
 
   const requestGroupCreate = async () => {
     try {
-      await postGroupCreate(groupData);
+      await groupHttpClient.postGroupCreate(groupData);
       window.location.href = '/';
     } catch (e) {
       console.log(e);
@@ -86,12 +86,12 @@ function GroupCreatePage(): JSX.Element {
 
   useEffect(() => {
     const fetchCategoryList = async () => {
-      const response: Category[] = await getCategories();
+      const response: Category[] = await categoryHttpClient.getCategories();
       setCategorys(response);
     };
 
     const fetechTechStackList = async () => {
-      const response: TechStack[] = await getTechStackList();
+      const response: TechStack[] = await techStackHttpClient.getTechStackList();
       setTechStacks(response);
     };
 

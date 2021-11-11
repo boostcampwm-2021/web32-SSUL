@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { BubbleModalProfileItem } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { getLogout } from '@api/auth';
+import { authHttpClient } from '@api';
 import { loginWithGithub } from '@utils/Auth';
 import { initUser, selectUser } from '@store/slices/userSlice';
 import BubbleModal from '../../BubbleModal';
@@ -28,7 +28,7 @@ function Profile(): JSX.Element {
   };
   const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    await getLogout();
+    await authHttpClient.getLogout();
     dispatch(initUser());
     setIsLogin(false);
     setIsModalClicked(false);
