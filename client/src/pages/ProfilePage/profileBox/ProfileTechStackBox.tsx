@@ -29,7 +29,7 @@ function ProfileTechStackBox(): JSX.Element {
             height: '400px',
             padding: '50px 50px 50px 50px',
           }}
-          element={<EditTechStack currentUsingTechStacks={[]}/>}
+          element={<EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />}
           onCancel={handleModalBackgroundClick}
         />
       )}

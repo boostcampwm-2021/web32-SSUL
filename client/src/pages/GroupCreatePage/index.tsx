@@ -114,11 +114,22 @@ function GroupCreatePage(): JSX.Element {
       <ContentsContainer>{getContents()}</ContentsContainer>
       <Notification>{notificationText}</Notification>
       <ButtonWrapper>
-        <CustomButton label={'이전'} color={'#00C5AA'} backgroundColor={'#FFFFFF'} clickBtn={clickPrevContents} />
         <CustomButton
+          style={{
+            color: '#00C5AA',
+            backgroundColor: '#FFFFFF',
+            margin: '0 40px 0 0',
+          }}
+          label={'이전'}
+          clickBtn={clickPrevContents}
+        />
+        <CustomButton
+          style={{
+            color: '#FFFFFF',
+            backgroundColor: '#00C5AA',
+            margin: '0 40px 0 0',
+          }}
           label={contentsNumber === MAX_CONTENT_INDEX ? '완료' : '다음'}
-          color={'#FFFFFF'}
-          backgroundColor={'#00C5AA'}
           clickBtn={clickNextContents}
         />
       </ButtonWrapper>

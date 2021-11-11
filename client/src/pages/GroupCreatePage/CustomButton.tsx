@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+interface Style {
+  color?: string;
+  backgroundColor?: string;
+  margin?: string;
+}
 interface BtnProps {
+  style?: Style;
   label: string;
-  color: string;
-  backgroundColor: string;
   clickBtn: () => void;
 }
 
-function CustomButton({ label, color, backgroundColor, clickBtn }: BtnProps): JSX.Element {
-  const style = {
-    backgroundColor: backgroundColor,
-    color: color,
-  };
+function CustomButton({ label, style, clickBtn }: BtnProps): JSX.Element {
   return (
     <Button style={style} onClick={clickBtn}>
       {label}
@@ -25,7 +25,6 @@ const Button = styled.button`
   outline: none;
   width: 80px;
   height: 40px;
-  margin-right: 40px;
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 0px 5px 7px #8f8f8f, -5px -5px 10px #ffffff;
