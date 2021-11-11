@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  mode: process.env.NODE_ENV,
+  mode: process.env.NODE_ENV ?? 'dev',
   port: process.env.PORT,
   session: process.env.SESSION_SECRET,
   database: {
