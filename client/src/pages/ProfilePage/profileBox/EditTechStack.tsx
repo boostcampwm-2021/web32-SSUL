@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
 import { TechStack } from '@types';
-import { getTechStackList } from '@api/techStack';
+import { techStackHttpClient } from '@api';
 
 function EditTechStack(): JSX.Element {
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
 
   useEffect(() => {
     const fetechTechStackList = async () => {
-      const response: TechStack[] = await getTechStackList();
+      const response: TechStack[] = await techStackHttpClient.getTechStackList();
       setTechStacks(response);
     };
 

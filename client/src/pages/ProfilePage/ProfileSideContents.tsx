@@ -2,21 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 import FeverSharingBar from './FeverSharingBar';
 import GithubLogo from '@assets/icon_github_logo.png';
+import { useAppSelector } from '@hooks';
+import { selectUser } from '@store/slices/userSlice';
 
 function ProfileSideContents(): JSX.Element {
+  const user = useAppSelector(selectUser);
+
   return (
     <Container>
-      <ProfileImage
-        src="https://avatars.githubusercontent.com/u/55623688?v=4"
-        alt="GithubProfifleImage"
-      ></ProfileImage>
+      <ProfileImage src={user.image} alt="GithubProfifleImage" />
       <BaseInfo>
-        <NickName>GOODTSS</NickName>
-        <GithubName>ChanYangYu</GithubName>
+        <NickName>{user.name}</NickName>
+        <GithubName>{user.oAuthId}</GithubName>
         <FeverSharingBar />
         <GithubURLContainer>
           <GithubIcon src={GithubLogo} alt="GithubIcon"></GithubIcon>
-          <GithubURL href="https://github.com/ChanYangYu">GitHub Storage</GithubURL>
+          <GithubURL href={`https://github.com/${user.oAuthId}`}>GitHub Storage</GithubURL>
         </GithubURLContainer>
       </BaseInfo>
     </Container>
@@ -44,7 +45,7 @@ const BaseInfo = styled.div`
 `;
 
 const NickName = styled.p`
-  margin-left: 50px;
+  margin: 0 0 10px 50px;
   font-size: 26px;
   font-weight: bold;
 `;
