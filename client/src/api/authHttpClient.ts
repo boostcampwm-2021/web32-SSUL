@@ -1,7 +1,7 @@
 import HttpClient from './HttpClient';
 import { ResponseGithubUserData, ResponseUserData } from '@types';
 
-class AuthClient extends HttpClient {
+class AuthHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/auth' });
   }
@@ -12,4 +12,4 @@ class AuthClient extends HttpClient {
   public getLogout = (): Promise<null> => this.httpClient.get('/logout');
 }
 
-export const authClient = new AuthClient();
+export const authHttpClient = new AuthHttpClient();

@@ -1,6 +1,6 @@
 import HttpClient from './HttpClient';
 
-class UserClient extends HttpClient {
+class UserHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/user' });
   }
@@ -8,4 +8,4 @@ class UserClient extends HttpClient {
   public patchRole = (): Promise<null> => this.httpClient.patch('/user/role');
 }
 
-export const userClient = new UserClient();
+export const userHttpClient = new UserHttpClient();

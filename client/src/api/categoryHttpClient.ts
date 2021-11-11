@@ -1,7 +1,7 @@
 import HttpClient from './HttpClient';
 import { Category } from '@types';
 
-class CategoryClient extends HttpClient {
+class CategoryHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/category' });
   }
@@ -9,4 +9,4 @@ class CategoryClient extends HttpClient {
   public getCategories = (): Promise<Category[]> => this.httpClient.get('/');
 }
 
-export const categoryClient = new CategoryClient();
+export const categoryHttpClient = new CategoryHttpClient();

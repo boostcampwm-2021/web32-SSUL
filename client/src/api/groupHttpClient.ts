@@ -1,7 +1,7 @@
 import HttpClient from './HttpClient';
 import { GroupResponse, GroupCreateInterface } from '@types';
 
-class GroupClient extends HttpClient {
+class GroupHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/group' });
   }
@@ -11,4 +11,4 @@ class GroupClient extends HttpClient {
     this.httpClient.post('/create', groupData);
 }
 
-export const groupClient = new GroupClient();
+export const groupHttpClient = new GroupHttpClient();

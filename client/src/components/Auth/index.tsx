@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { useAppDispatch, useLoader } from '@hooks';
-import { authClient } from '@api';
+import { authHttpClient } from '@api';
 import { setUser } from '@store/slices/userSlice';
 
 function Auth(): JSX.Element {
@@ -18,7 +18,7 @@ function Auth(): JSX.Element {
     const code = query.code as string;
 
     try {
-      const data = await authClient.getAccessToken(code);
+      const data = await authHttpClient.getAccessToken(code);
       const { id, githubId: oAuthId, name, avatarUrl: image, feverStack, shareStack } = data;
       dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack }));
       toggleLoader();

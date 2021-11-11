@@ -1,7 +1,7 @@
 import HttpClient from './HttpClient';
 import { TechStack } from '@types';
 
-class TechStackClient extends HttpClient {
+class TechStackHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/techstack' });
   }
@@ -9,4 +9,4 @@ class TechStackClient extends HttpClient {
   public getTechStackList = (): Promise<TechStack[]> => this.httpClient.get('/');
 }
 
-export const techStackClient = new TechStackClient();
+export const techStackHttpClient = new TechStackHttpClient();
