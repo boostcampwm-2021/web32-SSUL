@@ -8,4 +8,10 @@ export class CategoryRepository extends Repository<Category> {
   public findAll() {
     return this.find();
   }
+
+  public async findOneByCategoryName(name: string) {
+    return await this.createQueryBuilder('category')
+      .where('category.name = :name', { name })
+      .getOne();
+  }
 }

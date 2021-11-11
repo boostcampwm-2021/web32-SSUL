@@ -34,10 +34,12 @@ export class ProfileRepository extends Repository<Profile> {
     return profile;
   }
 
-  public async findOneByUserId(id: number) {
+  public async findNameAndFeverStackByUserId(id: number) {
     const profile = await this.createQueryBuilder('profile')
+      .select(['user.name', 'profile.feverStack'])
+      .leftJoin('profile.user', 'user')
       .where('profile.userId = :id', { id })
       .getOne();
-    return profile;
+    return [profile?.user.name, profile?.feverStack];
   }
 }

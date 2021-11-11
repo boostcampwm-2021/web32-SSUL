@@ -11,4 +11,15 @@ export class GroupRepository extends Repository<Group> {
   public createGroup(group: Group) {
     return this.save(group);
   }
+  public async findGroupByNameAndCategory(name: string, categoryId?: number) {
+    const findByName = await this.createQueryBuilder('group').where(
+      'group.name like :filterdName',
+      {
+        filterdName: `%${name}%`,
+      },
+    );
+
+    if (categoryId === undefined) return findByName.getMany();
+    else return findByName.where('group.categoryId = :categoryId', { categoryId }).getMany();
+  }
 }
