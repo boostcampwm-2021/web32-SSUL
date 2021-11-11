@@ -5,6 +5,8 @@ import { Category } from '@domains/category/models/Category';
 import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { Group } from '../models/Group';
+import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
+import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 
 @Service()
 export class GroupService {
@@ -13,12 +15,36 @@ export class GroupService {
     private readonly groupRepository: GroupRepository,
     @InjectRepository()
     private readonly categoryRepository: CategoryRepository,
+    @InjectRepository()
+    private readonly usingTechStackRepository: UsingTechStackRepository,
+    @InjectRepository()
+    private readonly profilekRepository: ProfileRepository,
   ) {}
 
-  public async getGroups(name: string = '', category: string = '') {
-    const categoryRecord = await this.categoryRepository.findOneByCategoryName(category);
-    const groups = await this.groupRepository.findGroupByNameAndCategory(name, categoryRecord?.id);
-    return groups;
+  public async getFilterdGroups(name: string = '', category: number, techstack: string) {
+    const filterdTechStack = techstack ? techstack.split(',') : [];
+    const groups = await this.groupRepository.findGroupByNameAndCategory(name, category);
+    const addedGroupsInfo = await this.addGrpupInfo(groups, filterdTechStack);
+    return addedGroupsInfo;
+  }
+
+  public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {
+    return Promise.all(
+      groups.map(async (group: Group) => {
+        const techStackList = await this.usingTechStackRepository.findUsingTechStackListByGroupId(
+          group.id,
+        );
+        const isIncludeStackList = techStackList.some((techStack) =>
+          filterdTechStack.includes(techStack),
+        );
+
+        if (filterdTechStack.length === 0 || isIncludeStackList) {
+          const [ownerFeverStack, ownerName] =
+            await this.profilekRepository.findNameAndFeverStackByUserId(group.ownerId);
+          return { ...group, techStackList, ownerFeverStack, ownerName };
+        }
+      }),
+    ).then((data) => data.filter((group) => group !== undefined));
   }
 
   public async createGroup(groupData: CreateGroupDto) {

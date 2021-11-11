@@ -34,19 +34,12 @@ export class ProfileRepository extends Repository<Profile> {
     return profile;
   }
 
-  public async findOneByUserId(id: number) {
+  public async findNameAndFeverStackByUserId(id: number) {
     const profile = await this.createQueryBuilder('profile')
-      .select([
-        'user.id',
-        'user.githubId',
-        'user.name',
-        'user.avatarUrl',
-        'profile.feverStack',
-        'profile.shareStack',
-      ])
+      .select(['user.name', 'profile.feverStack'])
       .leftJoin('profile.user', 'user')
       .where('profile.userId = :id', { id })
       .getOne();
-    return profile;
+    return [profile?.user.name, profile?.feverStack];
   }
 }
