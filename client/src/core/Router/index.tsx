@@ -27,7 +27,7 @@ function Router(): JSX.Element {
       <Route path="/chat/list" component={ChatListPage} />
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile" component={ProfilePage} />
-      <Route path="/auth/github/callback" component={AuthCallback} />
+      <Route path="/auth/callback" component={AuthCallback} />
       <Redirect to="/" />
     </Switch>
   );
