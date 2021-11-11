@@ -1,18 +1,16 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
-import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
 import { TechStack } from '@types';
-import { useAppDispatch, useAppSelector } from '@hooks';
 
 const MAX_SELECTED_INDEX = 5;
 
 interface Props {
   techStackList: TechStack[];
+  usingTechStacks: string[];
+  setUsingTechStacks: (newTechStacks: string[]) => void;
 }
-function TechStackList({ techStackList }: Props): JSX.Element {
-  const { usingTechStacks } = useAppSelector(groupCreateDataState);
-  const dispatch = useAppDispatch();
+function TechStackList({ techStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;
     const techStackName = clickedTechStack.innerText;
@@ -26,7 +24,7 @@ function TechStackList({ techStackList }: Props): JSX.Element {
       const newTechStack: string[] = [...usingTechStacks];
 
       newTechStack.push(techStackName);
-      dispatch(setGroupData({ usingTechStacks: newTechStack }));
+      setUsingTechStacks(newTechStack);
     }
   };
   const techStackElements = techStackList.map((techStack, idx) => {

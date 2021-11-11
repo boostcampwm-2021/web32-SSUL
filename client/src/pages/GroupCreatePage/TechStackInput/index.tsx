@@ -5,10 +5,12 @@ import SelectedTechStackList from './SelectedTechStackList';
 import TechStackList from './TechStackList';
 
 interface Props {
-  techStacks: TechStack[];
+  baseTechStackList: TechStack[];
+  usingTechStacks: string[];
+  setUsingTechStacks: (newTechStacks: string[]) => void;
 }
 
-function TechStackInput({ techStacks: baseTechStackList }: Props): JSX.Element {
+function TechStackInput({ baseTechStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
   const [filteredTechStackList, setFilteredTechStackList] = useState<TechStack[]>([]);
   const [techStackInput, setTechStackInput] = useState<string>('');
 
@@ -25,8 +27,8 @@ function TechStackInput({ techStacks: baseTechStackList }: Props): JSX.Element {
   return (
     <>
       <SearchBar onChange={handleTechStackInputChange}></SearchBar>
-      <SelectedTechStackList />
-      <TechStackList techStackList={filteredTechStackList} />
+      <SelectedTechStackList usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
+      <TechStackList techStackList={filteredTechStackList} usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
     </>
   );
 }

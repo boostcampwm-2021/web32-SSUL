@@ -25,11 +25,11 @@ function ProfileTechStackBox(): JSX.Element {
       {isModal && (
         <BoxModal
           style={{
-            width: '600px',
+            width: '700px',
             height: '400px',
-            padding: '24px 0px 24px 0px',
+            padding: '50px 50px 50px 50px',
           }}
-          element={<EditTechStack />}
+          element={<EditTechStack currentUsingTechStacks={[]}/>}
           onCancel={handleModalBackgroundClick}
         />
       )}

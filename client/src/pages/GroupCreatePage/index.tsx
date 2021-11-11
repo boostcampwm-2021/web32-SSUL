@@ -7,7 +7,7 @@ import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateDataSlice';
+import { clearGroupData, groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
 import { Category, TechStack } from '@types';
 import { categoryHttpClient } from '@api';
 import { techStackHttpClient } from '@api';
@@ -24,6 +24,7 @@ function GroupCreatePage(): JSX.Element {
   const groupData = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
 
+  const setUsingTechStacks = (newTechStacks: string[]) => dispatch(setGroupData({ usingTechStacks: newTechStacks }));
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
       case 0:
@@ -35,7 +36,13 @@ function GroupCreatePage(): JSX.Element {
       case 3:
         return <DateInput />;
       case 4:
-        return <TechStackInput techStacks={techStacks} />;
+        return (
+          <TechStackInput
+            baseTechStackList={techStacks}
+            usingTechStacks={groupData.usingTechStacks}
+            setUsingTechStacks={setUsingTechStacks}
+          />
+        );
       default:
         return null;
     }
@@ -107,12 +114,7 @@ function GroupCreatePage(): JSX.Element {
       <ContentsContainer>{getContents()}</ContentsContainer>
       <Notification>{notificationText}</Notification>
       <ButtonWrapper>
-        <CustomButton
-          label={'이전'}
-          color={'#00C5AA'}
-          backgroundColor={'#FFFFFF'}
-          clickBtn={clickPrevContents}
-        />
+        <CustomButton label={'이전'} color={'#00C5AA'} backgroundColor={'#FFFFFF'} clickBtn={clickPrevContents} />
         <CustomButton
           label={contentsNumber === MAX_CONTENT_INDEX ? '완료' : '다음'}
           color={'#FFFFFF'}

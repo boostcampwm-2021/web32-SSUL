@@ -4,9 +4,12 @@ import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
 import { TechStack } from '@types';
 import { techStackHttpClient } from '@api';
 
-function EditTechStack(): JSX.Element {
+interface Props{
+  currentUsingTechStacks: string[];
+}
+function EditTechStack({currentUsingTechStacks}: Props): JSX.Element {
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
-
+  const [usingStacks, setUsingStacks] = useState<string[]>(currentUsingTechStacks);
   useEffect(() => {
     const fetechTechStackList = async () => {
       const response: TechStack[] = await techStackHttpClient.getTechStackList();
@@ -19,7 +22,11 @@ function EditTechStack(): JSX.Element {
 
   return (
     <Container>
-      <TechStackInput techStacks={techStacks}/>
+      <TechStackInput
+            baseTechStackList={techStacks}
+            usingTechStacks={usingStacks}
+            setUsingTechStacks={setUsingStacks}
+      />
     </Container>
   );
 }
