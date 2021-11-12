@@ -70,4 +70,12 @@ export class GroupService {
 
     return createdGroup;
   }
+
+  public async getEndGroupList(userId: number) {
+    const res = await this.groupRepository.findEndGroupByUserId(userId);
+
+    return res.map(({ name, startAt, endAt }) => {
+      return { name, startAt, endAt };
+    });
+  }
 }
