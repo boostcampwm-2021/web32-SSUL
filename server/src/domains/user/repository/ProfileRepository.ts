@@ -42,4 +42,8 @@ export class ProfileRepository extends Repository<Profile> {
       .getOne();
     return [profile?.user.name, profile?.feverStack];
   }
+
+  public async findOneOrFailByUserId(id: number) {
+    return this.findOneOrFail({ where: { userId: id } });
+  }
 }
