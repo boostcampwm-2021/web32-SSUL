@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ProfileSideContents from './ProfileSideContents';
-import ProfileUserContents from './ProfileUserContents';
-import ProfileMentorContents from './ProfileMentorContents';
+import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
+import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 
 function ProfilePage(): JSX.Element {
   return (
     <Container>
       <ProfileSideContents />
-      <ContentsContainer>
-        <ProfileUserContents />
-        <ProfileMentorContents />
-      </ContentsContainer>
+      <MainContents>
+        <ProfileIntroBox />
+        <ProfileTechStackBox />
+        <ProfileActivityListBox />
+        <Divider />
+        <ProfileMentorStackBox/>
+      </MainContents>
     </Container>
   );
 }
@@ -21,8 +24,14 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const ContentsContainer = styled.div`
+const MainContents = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Divider = styled.div`
+  margin-top: 40px;
+  height: 1px;
+  background-color: ${(props) => props.theme.Gray5};
 `;
 export default ProfilePage;
