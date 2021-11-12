@@ -6,42 +6,53 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   returnGroupRecruitFilterState,
   checkCategory,
+  createdFilterdQuery,
 } from '@store/slices/groupRecruitFilterSlice';
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
-  const selectedCategory = useAppSelector(returnGroupRecruitFilterState).selectedCategory;
+  const { selectedCategoryId } = useAppSelector(returnGroupRecruitFilterState);
   const groupRecruitDispatch = useAppDispatch();
 
   useEffect(() => {
-    const { category } = history.state.state ?? { category: '' };
+    const { id } = history.state.state ?? { id: 0 };
     const getCategoryListData = async () => {
       const categoryList = await categoryHttpClient.getCategories();
       setBaseCategoryList(categoryList);
-      groupRecruitDispatch(checkCategory(category));
+      groupRecruitDispatch(checkCategory(id));
     };
     getCategoryListData();
   }, []);
 
   const handleSelectedCategoryClick = () => {
-    groupRecruitDispatch(checkCategory(''));
+    groupRecruitDispatch(checkCategory(0));
+    groupRecruitDispatch(createdFilterdQuery());
   };
 
   const handleNonSelectedCategoryClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const selectedCategory = e.currentTarget.innerText;
-    groupRecruitDispatch(checkCategory(selectedCategory));
+    const selectedCategoryId = Number(e.currentTarget.id);
+    groupRecruitDispatch(checkCategory(selectedCategoryId));
+    groupRecruitDispatch(createdFilterdQuery());
   };
 
   const categoryItems = baseCategoryList.map((category) => {
-    if (category.name === selectedCategory)
+    if (category.id === selectedCategoryId)
       return (
-        <CategoryItemSelect onClick={handleSelectedCategoryClick} key={category.id}>
+        <CategoryItemSelect
+          onClick={handleSelectedCategoryClick}
+          key={category.id}
+          id={String(category.id)}
+        >
           {category.name}
         </CategoryItemSelect>
       );
     else
       return (
-        <CategoryItemNonSelect onClick={handleNonSelectedCategoryClick} key={category.id}>
+        <CategoryItemNonSelect
+          onClick={handleNonSelectedCategoryClick}
+          key={category.id}
+          id={String(category.id)}
+        >
           {category.name}
         </CategoryItemNonSelect>
       );
