@@ -14,9 +14,8 @@ function ProfileSideContents(): JSX.Element {
       <BaseInfo>
         <NickName>{user.name}</NickName>
         <GithubName>{user.oAuthId}</GithubName>
-        
         <GithubURLContainer>
-          <GithubIcon src={GithubLogo} alt="GithubIcon"></GithubIcon>
+          <GithubIcon src={GithubLogo} alt="GithubIcon" />
           <GithubURL href={`https://github.com/${user.oAuthId}`}>GitHub Storage</GithubURL>
         </GithubURLContainer>
         <FeverSharingBar />
@@ -39,7 +38,7 @@ const ProfileImage = styled.img`
   margin: 40px auto;
   width: 180px;
   height: 180px;
-  border-radius: 50%; 
+  border-radius: 50%;
 `;
 
 const BaseInfo = styled.div`

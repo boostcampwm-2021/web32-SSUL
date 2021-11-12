@@ -13,7 +13,7 @@ function ProfilePage(): JSX.Element {
         <ProfileTechStackBox />
         <ProfileActivityListBox />
         <Divider />
-        <ProfileMentorStackBox/>
+        <ProfileMentorStackBox />
       </MainContents>
     </Container>
   );

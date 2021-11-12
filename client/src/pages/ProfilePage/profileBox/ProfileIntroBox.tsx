@@ -35,8 +35,8 @@ function ProfileIntroBox(): JSX.Element {
   return (
     <>
       <ProfileContainer title="자기소개">
-          <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>
-          {getTextElement()}
+        <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>
+        {getTextElement()}
       </ProfileContainer>
     </>
   );

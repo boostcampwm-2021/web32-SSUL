@@ -7,7 +7,7 @@ function ProfileMentorStackBox(): JSX.Element {
   return (
     <>
       <ProfileContainer title="멘토링스택">
-      <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
+        <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
         <TechStackContainer>
           {techStackList.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>
