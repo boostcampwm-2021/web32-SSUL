@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { BoxModal } from '@components';
-import EditTechStack from './EditTechStack';
 
-function ProfileTechStackBox(): JSX.Element {
+interface Props {
+  handleEditButtonClick: () => void;
+}
+
+function ProfileTechStackBox({ handleEditButtonClick }: Props): JSX.Element {
   const techStackList = ['c++', 'java', 'javascript'];
-  const [isModal, setIsModal] = useState<boolean>(false);
-
-  const handleModalBackgroundClick = () => setIsModal(false);
-
-  const handleEditButtonClick = () => setIsModal(true);
   return (
     <>
       <ProfileContainer title="기술스택">
@@ -21,20 +18,6 @@ function ProfileTechStackBox(): JSX.Element {
           ))}
         </TechStackContainer>
       </ProfileContainer>
-
-      {isModal && (
-        <BoxModal
-          style={{
-            width: '700px',
-            height: '400px',
-            padding: '50px 50px 50px 50px',
-          }}
-          element={
-            <EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />
-          }
-          onCancel={handleModalBackgroundClick}
-        />
-      )}
     </>
   );
 }
