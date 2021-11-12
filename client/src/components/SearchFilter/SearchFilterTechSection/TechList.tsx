@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   pushSelectedTechStack,
   returnGroupRecruitFilterState,
+  createdFilterdQuery,
 } from '@store/slices/groupRecruitFilterSlice';
 import { TechStack } from '@types';
 
@@ -26,7 +27,10 @@ function TechList({ listView }: Props): JSX.Element {
 
     if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
-    } else selectedTechStackDispatch(pushSelectedTechStack(techStackName));
+    } else {
+      selectedTechStackDispatch(pushSelectedTechStack(techStackName));
+      selectedTechStackDispatch(createdFilterdQuery());
+    }
   };
 
   const techList = listView.map((category) => {
