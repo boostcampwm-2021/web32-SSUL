@@ -10,10 +10,8 @@ import { toggleLoadingState } from '@store/slices/utilSlice';
 function GroupRecruitPage(): JSX.Element {
   const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
-  const ss = useAppSelector(returnGroupRecruitFilterState);
 
   useEffect(() => {
-    console.log(ss);
     toggleLoadingState();
     const getGroupsList = async () => {
       const allGroupList = await groupHttpClient.getFilterdGroupList(filterdQuery);
