@@ -4,17 +4,21 @@ import { SearchFilter, GroupCard } from '@components';
 import { GroupResponse } from '@types';
 import { useAppSelector } from '@hooks';
 import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
-import { getFilterdGroupList } from '@api/group';
+import { groupHttpClient } from '@api';
+import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupRecruitPage(): JSX.Element {
   const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
+  const ss = useAppSelector(returnGroupRecruitFilterState);
 
   useEffect(() => {
+    console.log(ss);
+    toggleLoadingState();
     const getGroupsList = async () => {
-      const allGroupList = await getFilterdGroupList(filterdQuery);
+      const allGroupList = await groupHttpClient.getFilterdGroupList(filterdQuery);
       setFilterdGroupList(allGroupList);
-      console.log(filterdQuery);
+      toggleLoadingState();
     };
     getGroupsList();
   }, [filterdQuery]);
