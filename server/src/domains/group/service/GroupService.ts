@@ -23,7 +23,10 @@ export class GroupService {
 
   public async getFilterdGroups(name: string = '', category: number, techstack: string) {
     const filterdTechStack = techstack ? techstack.split(',') : [];
-    const groups = await this.groupRepository.findGroupByNameAndCategory(name, category);
+    const groups =
+      category !== undefined
+        ? await this.groupRepository.findGroupByNameAndCategory(name, category)
+        : await this.groupRepository.findGroupByName(name);
     const addedGroupsInfo = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
   }
