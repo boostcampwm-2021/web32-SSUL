@@ -9,9 +9,13 @@ export class ProfileService {
     @InjectRepository()
     private readonly profileRepository: ProfileRepository,
   ){}
-  
+
   public async getUserIntro(userId: number) {
     const { intro }: Profile = await this.profileRepository.findOneOrFailByUserId(userId);
     return intro;
+  }
+
+  public async getUserProfile(userId: number){
+    return await this.profileRepository.findOneOrFailByUserId(userId);
   }
 }

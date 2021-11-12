@@ -1,4 +1,4 @@
-import { UsingTechStack } from '../models/UsingTechStack';
+import { UsingTechAs, UsingTechStack } from '../models/UsingTechStack';
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
 import { destructObject } from '@utils/Object';
@@ -28,5 +28,13 @@ export class UsingTechStackRepository extends Repository<UsingTechStack> {
 
   public createUsingTechStack(usingTechStack: UsingTechStack) {
     return this.save(usingTechStack);
+  }
+
+  public async findUsingTechStackByProfileId(profileId: number,type: UsingTechAs): Promise<UsingTechStack[]> {
+    return await this.createQueryBuilder('using_tech_stack')
+      .innerJoinAndSelect('using_tech_stack.techStack', 'tech_stack')
+      .where('using_tech_stack.type = :type', { type: type })
+      .andWhere('using_tech_stack.profileId = :profileId', { profileId })
+      .getMany();
   }
 }

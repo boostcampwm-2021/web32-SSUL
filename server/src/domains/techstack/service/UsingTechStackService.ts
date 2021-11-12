@@ -29,4 +29,9 @@ export class UsingTechStackService {
       this.usingTechStackRepository.createUsingTechStack(usingTechStack);
     });
   }
+
+  public async getUserTechStack(profileId: number, type: UsingTechAs) {
+    const res = await this.usingTechStackRepository.findUsingTechStackByProfileId(profileId, type);
+    return res.map(({ techStack }) => techStack);
+  }
 }
