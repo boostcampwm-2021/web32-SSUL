@@ -71,7 +71,7 @@ const EditButton = styled.button`
   width: 50px;
   height: 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
 `;

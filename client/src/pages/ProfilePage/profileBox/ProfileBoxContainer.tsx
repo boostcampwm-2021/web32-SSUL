@@ -20,11 +20,12 @@ const Container = styled.div`
   width: 650px;
   min-height: 100px;
   border-radius: 10px;
-  box-shadow: inset 0px 0px 4px rgb(0 0 0 / 25%);
+  border: 1px ${(props) => props.theme.Gray5} solid;
 `;
 
 const BoxTitle = styled.p`
   margin: 20px 0 0 20px;
+  font-size: 16px;
   line-height: 30px;
 `;
 

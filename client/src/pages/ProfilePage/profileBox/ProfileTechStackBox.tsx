@@ -46,10 +46,10 @@ const TechStackItem = styled.div`
   display: flex;
   margin: 10px;
   padding: 10px;
-  background-color: ${(props) => props.theme.Primary};
-  color: ${(props) => props.theme.White};
+  font-weight: 500;
+  color: ${(props) => props.theme.Primary};
+  border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 10px;
-  border: none;
 `;
 
 const EditButton = styled.button`
@@ -60,7 +60,7 @@ const EditButton = styled.button`
   width: 50px;
   height: 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
 `;
