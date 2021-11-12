@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { SearchFilter, GroupCard } from '@components';
 import { GroupResponse } from '@types';
-import { useAppSelector } from '@hooks';
-import { returnGroupRecruitFilterState } from '@store/slices/groupRecruitFilterSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import {
+  initFilterState,
+  returnGroupRecruitFilterState,
+} from '@store/slices/groupRecruitFilterSlice';
 import { groupHttpClient } from '@api';
 import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupRecruitPage(): JSX.Element {
   const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(initFilterState());
+  }, []);
 
   useEffect(() => {
     toggleLoadingState();

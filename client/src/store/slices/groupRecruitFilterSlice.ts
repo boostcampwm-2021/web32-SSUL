@@ -64,6 +64,7 @@ export const {
   checkCategory,
   changeGroupNameInput,
   createdFilterdQuery,
+  initFilterState,
 } = groupRecruitFilterSlice.actions;
 export default groupRecruitFilterSlice.reducer;
 export const returnGroupRecruitFilterState = (state: RootState): groupRecruitType =>
