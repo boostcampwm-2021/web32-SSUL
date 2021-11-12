@@ -18,4 +18,11 @@ export class ProfileService {
   public async getUserProfile(userId: number){
     return await this.profileRepository.findOneOrFailByUserId(userId);
   }
+
+  public async updateUserIntro(userId: number, intro: string) {
+    const targetProfile: Profile = await this.profileRepository.findOneOrFailByUserId(userId);
+
+    targetProfile.intro = intro;
+    this.profileRepository.updateIntro(targetProfile);
+  }
 }

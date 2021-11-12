@@ -46,4 +46,8 @@ export class ProfileRepository extends Repository<Profile> {
   public async findOneOrFailByUserId(id: number) {
     return this.findOneOrFail({ where: { userId: id } });
   }
+
+  public async updateIntro(profile: Profile) {
+    await this.save(profile);
+  }
 }

@@ -7,9 +7,11 @@ import {
   OnUndefined,
   Get,
   Param,
+  Body,
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { UpdateIntroDto } from '../dto/UpdateIntroDto';
 import { ProfileService } from '../service/ProfileService';
 
 @OpenAPI({ tags: ['사용자'] })
@@ -43,5 +45,11 @@ export class UserController {
   @Get('/intro/:uid')
   public getIntro(@Param('uid') userId: number) {
     return this.profileService.getUserIntro(userId);
+  }
+
+  @Patch('/intro/update')
+  @OnUndefined(200)
+  public patchIntro(@Body() {id, intro}: UpdateIntroDto) {
+    this.profileService.updateUserIntro(id, intro);
   }
 }
