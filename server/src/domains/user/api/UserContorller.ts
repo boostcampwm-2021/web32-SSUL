@@ -1,7 +1,6 @@
 import {
   Controller,
   Patch,
-  QueryParam,
   Session,
   SessionParam,
   OnUndefined,
@@ -49,7 +48,7 @@ export class UserController {
 
   @Patch('/intro/update')
   @OnUndefined(200)
-  public patchIntro(@Body() {id, intro}: UpdateIntroDto) {
+  public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
     this.profileService.updateUserIntro(id, intro);
   }
 }

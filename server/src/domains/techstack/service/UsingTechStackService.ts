@@ -38,7 +38,11 @@ export class UsingTechStackService {
 
   public async updateUserTechStack(profile: Profile, type: UsingTechAs, techStacks: string[]) {
     await this.usingTechStackRepository.deleteUsingTechStackByProfileId(profile.id, type);
-    techStacks.forEach(async (techStackName) => {
+    this.createUserTechStack(profile, type, techStacks);
+  }
+
+  public async createUserTechStack(profile: Profile, type: UsingTechAs, usingTechStacks: string[]) {
+    usingTechStacks.forEach(async (techStackName) => {
       const techStack: TechStack = await this.techStackRepository.findOneOrFail({
         where: { name: techStackName },
       });
