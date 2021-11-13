@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "prod": "ts-node -r tsconfig-paths/register ./src/app.ts"
+    "prod": "ts-node -r tsconfig-paths/register ./src/app.ts",
+    "seed": "ts-node -r tsconfig-paths/register ./bin/seed.ts"
   },
   "dependencies": {
     "axios": "^0.24.0",
