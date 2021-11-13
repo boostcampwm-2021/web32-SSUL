@@ -26,6 +26,7 @@ const Container = styled.div`
 const BoxTitle = styled.p`
   margin: 20px 0 0 20px;
   font-size: 16px;
+  font-weight: bold;
   line-height: 30px;
 `;
 

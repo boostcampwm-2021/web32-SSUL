@@ -25,7 +25,7 @@ const TechStackContainer = styled.div`
 
 const TechStackItem = styled.div`
   display: flex;
-  margin: 10px;
+  margin: 0 10px;
   padding: 10px;
   font-weight: 500;
   color: ${(props) => props.theme.Primary};
