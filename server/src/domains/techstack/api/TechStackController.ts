@@ -1,5 +1,5 @@
 import { ProfileService } from '@domains/user/service/ProfileService';
-import { Body, Controller, Get, Param, Put } from 'routing-controllers';
+import { Body, Controller, Get, Param, Put, OnUndefined } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { updateTechStackDto } from '../dto/updateTechStackDto';
 import { UsingTechAs } from '../models/UsingTechStack';
@@ -35,9 +35,10 @@ export class CategoryController {
   }
 
   @Put('/mentee')
+  @OnUndefined(200)
   public async updateMenteeTechStack(@Body() { id, techStacks }: updateTechStackDto) {
     const profile = await this.profileService.getUserProfile(id);
-    return await this.usingTechStackService.updateUserTechStack(
+    await this.usingTechStackService.updateUserTechStack(
       profile,
       UsingTechAs.MENTEE,
       techStacks,
