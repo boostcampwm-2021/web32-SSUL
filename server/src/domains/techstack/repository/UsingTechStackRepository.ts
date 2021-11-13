@@ -37,4 +37,8 @@ export class UsingTechStackRepository extends Repository<UsingTechStack> {
       .andWhere('using_tech_stack.profileId = :profileId', { profileId })
       .getMany();
   }
+
+  public async deleteUsingTechStackByProfileId(profileId: number,type: UsingTechAs){
+    return await this.delete({profileId: profileId, type: type});
+  }
 }
