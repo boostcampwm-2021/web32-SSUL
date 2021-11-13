@@ -26,4 +26,10 @@ export class CategoryController {
     const { id: profileId } = await this.profileService.getUserProfile(userId);
     return await this.usingTechStackService.getUserTechStack(profileId, UsingTechAs.MENTEE);
   }
+
+  @Get('/mentor/:uid')
+  public async getMentorTechStack(@Param('uid') userId: number) {
+    const { id: profileId } = await this.profileService.getUserProfile(userId);
+    return await this.usingTechStackService.getUserTechStack(profileId, UsingTechAs.MENTOR);
+  }
 }
