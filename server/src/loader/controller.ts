@@ -3,7 +3,7 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
 import { join } from 'path';
 
-export default function (app: express.Application) {
+export function setControllers(app: express.Application) {
   useContainer(Container);
   useExpressServer(app, {
     routePrefix: '/api',
