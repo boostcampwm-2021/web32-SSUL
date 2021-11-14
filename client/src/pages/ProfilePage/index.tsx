@@ -6,6 +6,12 @@ import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import { BoxModal } from '@components';
 import EditTechStack from './modal/EditTechStack';
 
+const MODAL_STYLE = {
+  width: '700px',
+  height: '400px',
+  padding: '50px 50px 50px 50px',
+}
+
 function ProfilePage(): JSX.Element {
   const [isModal, setIsModal] = useState<boolean>(false);
 
@@ -24,14 +30,8 @@ function ProfilePage(): JSX.Element {
 
       {isModal && (
         <BoxModal
-          style={{
-            width: '700px',
-            height: '400px',
-            padding: '50px 50px 50px 50px',
-          }}
-          element={
-            <EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />
-          }
+          style={MODAL_STYLE}
+          element={<EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />}
           onCancel={handleModalBackgroundClick}
         />
       )}
