@@ -30,23 +30,8 @@ function EditTechStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element
         setUsingTechStacks={setUsingStacks}
       />
       <ButtonWrapper>
-        <CustomButton
-          style={{
-            color: '#00C5AA',
-            backgroundColor: '#FFFFFF',
-            margin: '0 20px 0 0',
-          }}
-          label={'취소'}
-          clickBtn={onCancel}
-        />
-        <CustomButton
-          style={{
-            color: '#FFFFFF',
-            backgroundColor: '#00C5AA',
-          }}
-          label={'확인'}
-          clickBtn={onCancel}
-        />
+        <CustomButton label={'취소'} clickBtn={onCancel} />
+        <CustomButton label={'확인'} clickBtn={onCancel} />
       </ButtonWrapper>
     </Container>
   );
@@ -62,5 +47,7 @@ const ButtonWrapper = styled.div`
   bottom: 0;
   right: 0;
   display: flex;
+  justify-content: space-between;
+  width: 200px;
 `;
 export default EditTechStack;
