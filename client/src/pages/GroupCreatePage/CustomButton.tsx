@@ -1,26 +1,42 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-interface Style {
-  color?: string;
-  backgroundColor?: string;
-  margin?: string;
-}
 interface BtnProps {
-  style?: Style;
   label: string;
   clickBtn: () => void;
 }
 
-function CustomButton({ label, style, clickBtn }: BtnProps): JSX.Element {
+const COLORED_BUTTON = {
+  color: '#FFFFFF',
+  backgroundColor: '#00C5AA',
+};
+
+const WHITE_BUTTON = {
+  color: '#00C5AA',
+  backgroundColor: '#FFFFFF',
+};
+
+function CustomButton({ label, clickBtn }: BtnProps): JSX.Element {
+  const getStyle = () => { 
+    switch(label){
+      case '이전' :
+        return WHITE_BUTTON;
+      case '취소' :
+          return WHITE_BUTTON;
+      default :
+        return COLORED_BUTTON;
+    }
+  }
+
   return (
-    <Button style={style} onClick={clickBtn}>
+    <Button style={getStyle()} onClick={clickBtn}>
       {label}
     </Button>
   );
 }
 
 const Button = styled.button`
+  cursor: pointer;
   border: none;
   outline: none;
   width: 80px;
