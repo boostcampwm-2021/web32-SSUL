@@ -8,7 +8,7 @@ import { UsingTechStackService } from '../service/UsingTechStackService';
 
 @Service()
 @Controller('/techstack')
-export class CategoryController {
+export class TechStackController {
   @Inject()
   private readonly techStackService: TechStackService;
   @Inject()
