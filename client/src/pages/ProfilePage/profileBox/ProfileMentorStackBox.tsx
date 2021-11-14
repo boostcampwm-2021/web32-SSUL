@@ -1,22 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 
 function ProfileMentorStackBox(): JSX.Element {
   const techStackList = ['c++', 'java', 'javascript'];
+  const [isMentor] = useState<boolean>(false);
   return (
     <>
-      <ProfileContainer title="멘토링스택">
-        <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
-        <TechStackContainer>
-          {techStackList.map((techStackName, idx) => (
-            <TechStackItem key={idx}>{techStackName}</TechStackItem>
-          ))}
-        </TechStackContainer>
-      </ProfileContainer>
+      {isMentor?
+         <ProfileContainer title="멘토링스택">
+         <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
+         <TechStackContainer>
+           {techStackList.map((techStackName, idx) => (
+             <TechStackItem key={idx}>{techStackName}</TechStackItem>
+           ))}
+         </TechStackContainer>
+       </ProfileContainer>
+       :
+       <ProfileContainer title="">
+         <MentorRegisterTitle>멘토가 되어주세요!</MentorRegisterTitle>
+          <MentorRegisterDesc>간단한 기술스택을 등록을 통해 멘토가 될 수 있어요!</MentorRegisterDesc>
+          <MentorRegisterButton>멘토 신청하기</MentorRegisterButton>
+        </ProfileContainer>
+      }
     </>
   );
 }
+
+const MentorRegisterTitle = styled.h3`
+  margin-top: 30px;
+  font-weight: bold;
+  text-align: center;
+`
+
+const MentorRegisterDesc = styled.p`
+  color: #b5b5b5;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+`
+
+const MentorRegisterButton = styled.button`
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  margin-left: 225px;
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 5px;
+  color: ${(props) => props.theme.White};
+  background-color: ${(props) => props.theme.Primary};
+  font-weight: bold;
+
+  &:hover{
+    background-color: #00a18d;
+  }
+`
 
 const TechStackContainer = styled.div`
   display: flex;
@@ -25,7 +64,7 @@ const TechStackContainer = styled.div`
 
 const TechStackItem = styled.div`
   display: flex;
-  margin: 0 10px;
+  margin: 10px;
   padding: 10px;
   font-weight: 500;
   color: ${(props) => props.theme.Primary};
