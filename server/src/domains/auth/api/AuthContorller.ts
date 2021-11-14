@@ -62,6 +62,14 @@ export class AuthController {
 
   @Get('/logout')
   @OnUndefined(204)
+  @OpenAPI({
+    summary: '사용자 로그아웃하는 API',
+    responses: {
+      '204': {
+        description: '로그아웃 완료',
+      },
+    },
+  })
   async postLogout(@Session() session: any) {
     session.destroy();
   }
