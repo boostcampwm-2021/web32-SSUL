@@ -46,7 +46,7 @@ export class UserController {
     return this.profileService.getUserIntro(userId);
   }
 
-  @Patch('/intro/update')
+  @Patch('/intro')
   @OnUndefined(200)
   public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
     this.profileService.updateUserIntro(id, intro);

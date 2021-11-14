@@ -43,7 +43,7 @@ export class GroupController {
     return filterdGroups;
   }
 
-  @Post('/create')
+  @Post('/')
   @OnUndefined(200)
   @OpenAPI({
     summary: '그룹을 생성하는 API',
