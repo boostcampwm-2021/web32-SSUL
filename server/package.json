@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "seed": "ts-node -r tsconfig-paths/register ./bin/seed.ts"
-    "prod": "ts-node -r tsconfig-paths/register ./src/app.ts",
-    "test": "jest"
+    "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
+    "test": "cross-env NODE_ENV=test jest --setupFiles dotenv/config --forceExit"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -14,6 +13,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "class-validator-jsonschema": "^3.1.0",
+    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",

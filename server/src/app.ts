@@ -3,13 +3,24 @@ import express from 'express';
 import config from './config';
 import loader from './loader';
 
-async function main() {
-  const app = express();
-  await loader(app);
+class App {
+  private app: express.Application;
 
-  app.listen(config.port, () => {
-    console.log(`listening ${config.port}...`);
-  });
+  constructor() {
+    this.app = express();
+  }
+
+  async run() {
+    await loader(this.app);
+    this.app.listen(config.port, () => {
+      console.log(`listening ${config.port}...`);
+    });
+  }
+
+  async getInstance() {
+    await loader(this.app);
+    return this.app;
+  }
 }
 
-main();
+export default new App();
