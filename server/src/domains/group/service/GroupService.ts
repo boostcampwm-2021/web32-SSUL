@@ -52,20 +52,10 @@ export class GroupService {
   }
 
   public async createGroup(groupData: CreateGroupDto) {
-    const group: Group = new Group();
     const category: Category = await this.categoryRepository.findOneOrFail({
       where: { name: groupData.category },
     });
-
-    group.category = category;
-    group.ownerId = groupData.ownerId;
-    group.name = groupData.name;
-    group.maxUserCnt = groupData.maxUserCnt;
-    group.curUserCnt = groupData.curUserCnt;
-    group.intro = groupData.intro;
-    group.startAt = new Date(groupData.startAt);
-    group.endAt = new Date(groupData.endAt);
-
+    const group: Group = groupData.toGroup(category);
     const createdGroup = await this.groupRepository.createGroup(group);
 
     return createdGroup;
