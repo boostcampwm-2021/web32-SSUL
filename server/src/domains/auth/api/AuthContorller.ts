@@ -8,7 +8,11 @@ import {
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
+import { UserDto } from '@domains/user/dto/UserDto';
+import { NobodyDto } from '../dto/AuthDto';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
+@OpenAPI({ tags: ['인증'] })
 @Service()
 @Controller('/auth')
 export class AuthController {
@@ -18,6 +22,15 @@ export class AuthController {
   ) {}
 
   @Get('/silent-refresh')
+  @OpenAPI({
+    summary: '유저 세션 정보를 조회하는 API',
+    responses: {
+      '203': {
+        description: '유저 세션 정보 없음',
+      },
+    },
+  })
+  @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
   @OnUndefined(203)
   async getAuthentification(
     @SessionParam('githubId') githubId: string,
@@ -25,7 +38,7 @@ export class AuthController {
   ) {
     if (!githubId) return;
     const userData = await this.authService.getUserProfile(githubId);
-    return { ...userData, role: role };
+    return { ...userData, role: role } as UserDto;
   }
 
   @Get('/token')
