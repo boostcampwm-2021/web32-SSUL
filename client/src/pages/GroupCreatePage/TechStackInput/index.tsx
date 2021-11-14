@@ -19,8 +19,9 @@ function TechStackInput({ baseTechStackList, usingTechStacks, setUsingTechStacks
   };
 
   useEffect(() => {
-    const newFilteredTechStackList = baseTechStackList.filter((techStack, idx) => {
-      return techStack.name.includes(techStackInput) && idx < 10;
+    let selectCount = 0;
+    const newFilteredTechStackList = baseTechStackList.filter((techStack) => {
+      return techStack.name.includes(techStackInput) && selectCount++ < 10;
     });
     setFilteredTechStackList(newFilteredTechStackList);
   }, [baseTechStackList, techStackInput]);
