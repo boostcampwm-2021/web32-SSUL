@@ -3,7 +3,11 @@ import { Body, Controller, Get, OnUndefined, Post, QueryParam } from 'routing-co
 import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
+import { OpenAPI } from 'routing-controllers-openapi';
 
+@OpenAPI({
+  tags: ['그룹'],
+})
 @Service()
 @Controller('/group')
 export class GroupController {
@@ -26,6 +30,9 @@ export class GroupController {
 
   @Post('/create')
   @OnUndefined(200)
+  @OpenAPI({
+    summary: '그룹을 생성하는 API',
+  })
   async create(@Body() groupData: CreateGroupDto) {
     const createdGroup = await this.groupService.createGroup(groupData);
     this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
