@@ -8,8 +8,8 @@ import {
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
+import { GithubUserDto } from '../dto/AuthDto';
 import { UserDto } from '@domains/user/dto/UserDto';
-import { NobodyDto } from '../dto/AuthDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
 @OpenAPI({ tags: ['인증'] })
@@ -22,6 +22,7 @@ export class AuthController {
   ) {}
 
   @Get('/silent-refresh')
+  @OnUndefined(203)
   @OpenAPI({
     summary: '유저 세션 정보를 조회하는 API',
     responses: {
@@ -31,7 +32,6 @@ export class AuthController {
     },
   })
   @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
-  @OnUndefined(203)
   async getAuthentification(
     @SessionParam('githubId') githubId: string,
     @SessionParam('role') role: string,
@@ -42,6 +42,8 @@ export class AuthController {
   }
 
   @Get('/token')
+  @OpenAPI({ summary: 'Github OAuth 토큰을 발급받는 API' })
+  @ResponseSchema(GithubUserDto, { description: '토큰 정상 발급' })
   async getGithubAccessToken(
     @Session() session: any,
     @SessionParam('githubId') githubId: string,
