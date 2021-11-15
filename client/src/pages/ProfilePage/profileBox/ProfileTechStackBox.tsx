@@ -3,15 +3,15 @@ import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 
 interface Props {
-  handleEditButtonClick: () => void;
+  showModal: () => void;
 }
 
-function ProfileTechStackBox({ handleEditButtonClick }: Props): JSX.Element {
+function ProfileTechStackBox({ showModal }: Props): JSX.Element {
   const techStackList = ['c++', 'java', 'javascript'];
   return (
     <>
       <ProfileContainer title="기술스택">
-        <EditButton onClick={handleEditButtonClick}>편집</EditButton>
+        <EditButton onClick={showModal}>편집</EditButton>
         <TechStackContainer>
           {techStackList.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>
