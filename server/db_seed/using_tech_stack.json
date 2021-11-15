@@ -1,0 +1,602 @@
+[
+ {
+   "id": 1,
+   "type": "GROUP",
+   "groupId": 20,
+   "techStackId": 9
+ },
+ {
+   "id": 2,
+   "type": "GROUP",
+   "groupId": 17,
+   "techStackId": 5
+ },
+ {
+   "id": 3,
+   "type": "GROUP",
+   "groupId": 71,
+   "techStackId": 3
+ },
+ {
+   "id": 4,
+   "type": "GROUP",
+   "groupId": 58,
+   "techStackId": 8
+ },
+ {
+   "id": 5,
+   "type": "GROUP",
+   "groupId": 37,
+   "techStackId": 2
+ },
+ {
+   "id": 6,
+   "type": "GROUP",
+   "groupId": 76,
+   "techStackId": 10
+ },
+ {
+   "id": 7,
+   "type": "GROUP",
+   "groupId": 51,
+   "techStackId": 1
+ },
+ {
+   "id": 8,
+   "type": "GROUP",
+   "groupId": 2,
+   "techStackId": 3
+ },
+ {
+   "id": 9,
+   "type": "GROUP",
+   "groupId": 33,
+   "techStackId": 1
+ },
+ {
+   "id": 10,
+   "type": "GROUP",
+   "groupId": 11,
+   "techStackId": 8
+ },
+ {
+   "id": 11,
+   "type": "GROUP",
+   "groupId": 99,
+   "techStackId": 12
+ },
+ {
+   "id": 12,
+   "type": "GROUP",
+   "groupId": 37,
+   "techStackId": 9
+ },
+ {
+   "id": 13,
+   "type": "GROUP",
+   "groupId": 68,
+   "techStackId": 3
+ },
+ {
+   "id": 14,
+   "type": "GROUP",
+   "groupId": 55,
+   "techStackId": 9
+ },
+ {
+   "id": 15,
+   "type": "GROUP",
+   "groupId": 3,
+   "techStackId": 9
+ },
+ {
+   "id": 16,
+   "type": "GROUP",
+   "groupId": 17,
+   "techStackId": 5
+ },
+ {
+   "id": 17,
+   "type": "GROUP",
+   "groupId": 14,
+   "techStackId": 9
+ },
+ {
+   "id": 18,
+   "type": "GROUP",
+   "groupId": 6,
+   "techStackId": 11
+ },
+ {
+   "id": 19,
+   "type": "GROUP",
+   "groupId": 19,
+   "techStackId": 2
+ },
+ {
+   "id": 20,
+   "type": "GROUP",
+   "groupId": 82,
+   "techStackId": 11
+ },
+ {
+   "id": 21,
+   "type": "GROUP",
+   "groupId": 86,
+   "techStackId": 2
+ },
+ {
+   "id": 22,
+   "type": "GROUP",
+   "groupId": 35,
+   "techStackId": 6
+ },
+ {
+   "id": 23,
+   "type": "GROUP",
+   "groupId": 61,
+   "techStackId": 4
+ },
+ {
+   "id": 24,
+   "type": "GROUP",
+   "groupId": 41,
+   "techStackId": 9
+ },
+ {
+   "id": 25,
+   "type": "GROUP",
+   "groupId": 1,
+   "techStackId": 9
+ },
+ {
+   "id": 26,
+   "type": "GROUP",
+   "groupId": 95,
+   "techStackId": 8
+ },
+ {
+   "id": 27,
+   "type": "GROUP",
+   "groupId": 100,
+   "techStackId": 4
+ },
+ {
+   "id": 28,
+   "type": "GROUP",
+   "groupId": 73,
+   "techStackId": 6
+ },
+ {
+   "id": 29,
+   "type": "GROUP",
+   "groupId": 41,
+   "techStackId": 10
+ },
+ {
+   "id": 30,
+   "type": "GROUP",
+   "groupId": 15,
+   "techStackId": 5
+ },
+ {
+   "id": 31,
+   "type": "GROUP",
+   "groupId": 44,
+   "techStackId": 3
+ },
+ {
+   "id": 32,
+   "type": "GROUP",
+   "groupId": 19,
+   "techStackId": 7
+ },
+ {
+   "id": 33,
+   "type": "GROUP",
+   "groupId": 34,
+   "techStackId": 10
+ },
+ {
+   "id": 34,
+   "type": "GROUP",
+   "groupId": 93,
+   "techStackId": 9
+ },
+ {
+   "id": 35,
+   "type": "GROUP",
+   "groupId": 9,
+   "techStackId": 5
+ },
+ {
+   "id": 36,
+   "type": "GROUP",
+   "groupId": 20,
+   "techStackId": 9
+ },
+ {
+   "id": 37,
+   "type": "GROUP",
+   "groupId": 42,
+   "techStackId": 7
+ },
+ {
+   "id": 38,
+   "type": "GROUP",
+   "groupId": 36,
+   "techStackId": 6
+ },
+ {
+   "id": 39,
+   "type": "GROUP",
+   "groupId": 29,
+   "techStackId": 12
+ },
+ {
+   "id": 40,
+   "type": "GROUP",
+   "groupId": 16,
+   "techStackId": 9
+ },
+ {
+   "id": 41,
+   "type": "GROUP",
+   "groupId": 11,
+   "techStackId": 12
+ },
+ {
+   "id": 42,
+   "type": "GROUP",
+   "groupId": 59,
+   "techStackId": 9
+ },
+ {
+   "id": 43,
+   "type": "GROUP",
+   "groupId": 56,
+   "techStackId": 4
+ },
+ {
+   "id": 44,
+   "type": "GROUP",
+   "groupId": 98,
+   "techStackId": 5
+ },
+ {
+   "id": 45,
+   "type": "GROUP",
+   "groupId": 84,
+   "techStackId": 4
+ },
+ {
+   "id": 46,
+   "type": "GROUP",
+   "groupId": 76,
+   "techStackId": 8
+ },
+ {
+   "id": 47,
+   "type": "GROUP",
+   "groupId": 3,
+   "techStackId": 4
+ },
+ {
+   "id": 48,
+   "type": "GROUP",
+   "groupId": 87,
+   "techStackId": 8
+ },
+ {
+   "id": 49,
+   "type": "GROUP",
+   "groupId": 87,
+   "techStackId": 8
+ },
+ {
+   "id": 50,
+   "type": "GROUP",
+   "groupId": 53,
+   "techStackId": 1
+ },
+ {
+   "id": 51,
+   "type": "GROUP",
+   "groupId": 76,
+   "techStackId": 6
+ },
+ {
+   "id": 52,
+   "type": "GROUP",
+   "groupId": 18,
+   "techStackId": 5
+ },
+ {
+   "id": 53,
+   "type": "GROUP",
+   "groupId": 11,
+   "techStackId": 2
+ },
+ {
+   "id": 54,
+   "type": "GROUP",
+   "groupId": 71,
+   "techStackId": 10
+ },
+ {
+   "id": 55,
+   "type": "GROUP",
+   "groupId": 14,
+   "techStackId": 2
+ },
+ {
+   "id": 56,
+   "type": "GROUP",
+   "groupId": 93,
+   "techStackId": 5
+ },
+ {
+   "id": 57,
+   "type": "GROUP",
+   "groupId": 66,
+   "techStackId": 6
+ },
+ {
+   "id": 58,
+   "type": "GROUP",
+   "groupId": 22,
+   "techStackId": 9
+ },
+ {
+   "id": 59,
+   "type": "GROUP",
+   "groupId": 2,
+   "techStackId": 5
+ },
+ {
+   "id": 60,
+   "type": "GROUP",
+   "groupId": 38,
+   "techStackId": 8
+ },
+ {
+   "id": 61,
+   "type": "GROUP",
+   "groupId": 55,
+   "techStackId": 11
+ },
+ {
+   "id": 62,
+   "type": "GROUP",
+   "groupId": 20,
+   "techStackId": 9
+ },
+ {
+   "id": 63,
+   "type": "GROUP",
+   "groupId": 17,
+   "techStackId": 3
+ },
+ {
+   "id": 64,
+   "type": "GROUP",
+   "groupId": 45,
+   "techStackId": 10
+ },
+ {
+   "id": 65,
+   "type": "GROUP",
+   "groupId": 100,
+   "techStackId": 1
+ },
+ {
+   "id": 66,
+   "type": "GROUP",
+   "groupId": 49,
+   "techStackId": 2
+ },
+ {
+   "id": 67,
+   "type": "GROUP",
+   "groupId": 84,
+   "techStackId": 7
+ },
+ {
+   "id": 68,
+   "type": "GROUP",
+   "groupId": 45,
+   "techStackId": 6
+ },
+ {
+   "id": 69,
+   "type": "GROUP",
+   "groupId": 95,
+   "techStackId": 1
+ },
+ {
+   "id": 70,
+   "type": "GROUP",
+   "groupId": 6,
+   "techStackId": 4
+ },
+ {
+   "id": 71,
+   "type": "GROUP",
+   "groupId": 59,
+   "techStackId": 6
+ },
+ {
+   "id": 72,
+   "type": "GROUP",
+   "groupId": 2,
+   "techStackId": 8
+ },
+ {
+   "id": 73,
+   "type": "GROUP",
+   "groupId": 84,
+   "techStackId": 2
+ },
+ {
+   "id": 74,
+   "type": "GROUP",
+   "groupId": 67,
+   "techStackId": 7
+ },
+ {
+   "id": 75,
+   "type": "GROUP",
+   "groupId": 61,
+   "techStackId": 9
+ },
+ {
+   "id": 76,
+   "type": "GROUP",
+   "groupId": 95,
+   "techStackId": 2
+ },
+ {
+   "id": 77,
+   "type": "GROUP",
+   "groupId": 48,
+   "techStackId": 10
+ },
+ {
+   "id": 78,
+   "type": "GROUP",
+   "groupId": 39,
+   "techStackId": 8
+ },
+ {
+   "id": 79,
+   "type": "GROUP",
+   "groupId": 97,
+   "techStackId": 4
+ },
+ {
+   "id": 80,
+   "type": "GROUP",
+   "groupId": 21,
+   "techStackId": 12
+ },
+ {
+   "id": 81,
+   "type": "GROUP",
+   "groupId": 36,
+   "techStackId": 7
+ },
+ {
+   "id": 82,
+   "type": "GROUP",
+   "groupId": 14,
+   "techStackId": 12
+ },
+ {
+   "id": 83,
+   "type": "GROUP",
+   "groupId": 30,
+   "techStackId": 2
+ },
+ {
+   "id": 84,
+   "type": "GROUP",
+   "groupId": 80,
+   "techStackId": 7
+ },
+ {
+   "id": 85,
+   "type": "GROUP",
+   "groupId": 69,
+   "techStackId": 9
+ },
+ {
+   "id": 86,
+   "type": "GROUP",
+   "groupId": 93,
+   "techStackId": 11
+ },
+ {
+   "id": 87,
+   "type": "GROUP",
+   "groupId": 72,
+   "techStackId": 3
+ },
+ {
+   "id": 88,
+   "type": "GROUP",
+   "groupId": 85,
+   "techStackId": 5
+ },
+ {
+   "id": 89,
+   "type": "GROUP",
+   "groupId": 54,
+   "techStackId": 9
+ },
+ {
+   "id": 90,
+   "type": "GROUP",
+   "groupId": 26,
+   "techStackId": 4
+ },
+ {
+   "id": 91,
+   "type": "GROUP",
+   "groupId": 5,
+   "techStackId": 2
+ },
+ {
+   "id": 92,
+   "type": "GROUP",
+   "groupId": 61,
+   "techStackId": 6
+ },
+ {
+   "id": 93,
+   "type": "GROUP",
+   "groupId": 66,
+   "techStackId": 7
+ },
+ {
+   "id": 94,
+   "type": "GROUP",
+   "groupId": 50,
+   "techStackId": 3
+ },
+ {
+   "id": 95,
+   "type": "GROUP",
+   "groupId": 8,
+   "techStackId": 12
+ },
+ {
+   "id": 96,
+   "type": "GROUP",
+   "groupId": 34,
+   "techStackId": 6
+ },
+ {
+   "id": 97,
+   "type": "GROUP",
+   "groupId": 50,
+   "techStackId": 2
+ },
+ {
+   "id": 98,
+   "type": "GROUP",
+   "groupId": 47,
+   "techStackId": 10
+ },
+ {
+   "id": 99,
+   "type": "GROUP",
+   "groupId": 100,
+   "techStackId": 12
+ },
+ {
+   "id": 100,
+   "type": "GROUP",
+   "groupId": 16,
+   "techStackId": 4
+ }
+]
