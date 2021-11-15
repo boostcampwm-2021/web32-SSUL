@@ -18,7 +18,8 @@
       "@root/*": ["../*"],
       "@domains/*": ["domains/*"],
       "@common/*": ["common/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],

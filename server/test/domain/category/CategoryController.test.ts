@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as request from 'supertest';
+import express from 'express';
+import request from 'supertest';
 import appWrapper from '../../../src/app';
 
 describe('카테고리 api test', () => {
