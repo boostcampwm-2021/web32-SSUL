@@ -9,14 +9,18 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "strictPropertyInitialization": false,
     "outDir": "./build",
+    "baseUrl": "./src",
     "paths": {
+      "@root/*": ["../*"],
       "@domains/*": ["domains/*"],
       "@common/*": ["common/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"]
+      "@api/*": ["api/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],

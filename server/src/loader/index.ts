@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import typeorm from './typeorm';
 import server from './express';
 import { setControllers } from './controller';
