@@ -7,6 +7,8 @@ pipeline {
         version = '0.1'
     }
     agent any
+    tools {nodejs "nodejs-16"}
+
     stages {
         stage("deploy for dev") {
             when {
@@ -59,7 +61,9 @@ pipeline {
                 branch "PR-*"
             }
             steps {
-                echo "just fine."
+                sh 'cd server'
+                sh 'npm install'
+                sh 'npm run test'
             }
         }
     }
