@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
+import { User } from '@domains/user/models/User';
+import { Group } from './Group';
+
+export enum PostType {
+  NORMAL = 'NORMAL',
+  NOTICE = 'NOTICE',
+}
 
 @Entity('post')
 export class Post {
@@ -8,6 +15,9 @@ export class Post {
   @Column('int', { name: 'group_id' })
   groupId: number;
 
+  @Column('int', { name: 'user_id' })
+  userId: number;
+
   @Column('varchar', { name: 'title', length: 100 })
   title: string;
 
@@ -16,4 +26,13 @@ export class Post {
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
+
+  @Column({ name: 'type', type: 'enum', enum: PostType })
+  type: PostType;
+
+  @JoinColumn({ name: 'group_id' })
+  group: Group;
+
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }
