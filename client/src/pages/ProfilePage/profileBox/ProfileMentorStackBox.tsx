@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { useAppSelector } from '@hooks';
+import { selectProfileData } from '@store/slices/profileDataSlice';
 
 interface Props {
   showModal: () => void;
 }
 
 function ProfileMentorStackBox({ showModal }: Props): JSX.Element {
-  const techStackList = ['c++', 'java', 'javascript'];
+  const { techStacks } = useAppSelector(selectProfileData);
   const [isMentor] = useState<boolean>(false);
   return (
     <>
@@ -15,7 +17,7 @@ function ProfileMentorStackBox({ showModal }: Props): JSX.Element {
         <ProfileContainer title="멘토링스택">
           <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
           <TechStackContainer>
-            {techStackList.map((techStackName, idx) => (
+            {techStacks.map((techStackName, idx) => (
               <TechStackItem key={idx}>{techStackName}</TechStackItem>
             ))}
           </TechStackContainer>
@@ -26,9 +28,7 @@ function ProfileMentorStackBox({ showModal }: Props): JSX.Element {
           <MentorRegisterDesc>
             간단한 기술스택을 등록을 통해 멘토가 될 수 있어요!
           </MentorRegisterDesc>
-          <MentorRegisterButton onClick={showModal}>
-            멘토 신청하기
-          </MentorRegisterButton>
+          <MentorRegisterButton onClick={showModal}>멘토 신청하기</MentorRegisterButton>
         </ProfileContainer>
       )}
     </>

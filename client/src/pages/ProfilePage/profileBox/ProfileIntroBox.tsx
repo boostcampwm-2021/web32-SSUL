@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
 
 function ProfileIntroBox(): JSX.Element {
+  const { intro } = useAppSelector(selectProfileData);
+  const dispatch = useAppDispatch();
   const [editState, setEditState] = useState<boolean>(false);
-  const [text, setText] = useState<string>('');
 
   const handleEditButtonClick = () => {
-    setEditState(!editState);
+     setEditState(!editState);
   };
 
   const handleEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.currentTarget.value;
-    setText(newText);
+    dispatch(setProfileData({ intro: newText }));
   };
-  function handleEditTextResize(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+
+  const handleEditTextResize = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const textArea: HTMLTextAreaElement = e.currentTarget;
     textArea.style.height = '1px';
     textArea.style.height = 10 + textArea.scrollHeight + 'px';
-  }
+  };
 
   const getTextElement = (): JSX.Element => {
     return editState ? (
       <ProfileEditText
         onKeyDown={handleEditTextResize}
         onChange={handleEditTextChange}
-        value={text}
+        value={intro}
       ></ProfileEditText>
     ) : (
-      <ProfileText>{text}</ProfileText>
+      <ProfileText>{intro}</ProfileText>
     );
   };
 

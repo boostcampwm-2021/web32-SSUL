@@ -1,19 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
 
 interface Props {
   showModal: () => void;
 }
 
 function ProfileTechStackBox({ showModal }: Props): JSX.Element {
-  const techStackList = ['c++', 'java', 'javascript'];
+  const { techStacks } = useAppSelector(selectProfileData);
   return (
     <>
       <ProfileContainer title="기술스택">
         <EditButton onClick={showModal}>편집</EditButton>
         <TechStackContainer>
-          {techStackList.map((techStackName, idx) => (
+          {techStacks.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>
           ))}
         </TechStackContainer>
