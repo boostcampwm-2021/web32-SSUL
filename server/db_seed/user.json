@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "githubId": "yuchanleeme",
+    "name": "이유찬",
+    "avatarUrl" : "https://avatars.githubusercontent.com/u/48426909?v=4",
+    "createdAt" : "2020-11-10 12:39:51"
+  },
+  {
+    "id": 2,
+    "githubId": "Donggggg",
+    "name": "김동규",
+    "avatarUrl" : "https://avatars.githubusercontent.com/u/54929514?v=4",
+    "createdAt" : "2020-11-11 12:39:51"
+  },
+  {
+    "id": 3,
+    "githubId": "who-is-hu",
+    "name": "김용후",
+    "avatarUrl" : "https://avatars.githubusercontent.com/u/6914465?v=4",
+    "createdAt" : "2020-11-12 12:39:51"
+  },
+  {
+    "id": 4,
+    "githubId": "ChanYangYu",
+    "name": "유찬양",
+    "avatarUrl" : "https://avatars.githubusercontent.com/u/55623688?v=4",
+    "createdAt" : "2020-11-13 12:39:51"
+  }
+]
