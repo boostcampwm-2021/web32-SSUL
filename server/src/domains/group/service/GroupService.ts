@@ -7,6 +7,7 @@ import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { Group } from '../models/Group';
 import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
+import { FilterdGroupDto } from '../dto/FilterdGroupDto';
 
 @Service()
 export class GroupService {
@@ -27,12 +28,12 @@ export class GroupService {
       category !== undefined
         ? await this.groupRepository.findGroupByNameAndCategory(name, category)
         : await this.groupRepository.findGroupByName(name);
-    const addedGroupsInfo = await this.addGrpupInfo(groups, filterdTechStack);
+    const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
   }
 
   public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {
-    return Promise.all(
+    return Promise.all<any>(
       groups.map(async (group: Group) => {
         const techStackList = await this.usingTechStackRepository.findUsingTechStackListByGroupId(
           group.id,
