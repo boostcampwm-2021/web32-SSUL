@@ -10,7 +10,6 @@ import {
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
-import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { UpdateIntroDto } from '../dto/UpdateIntroDto';
 import { ProfileService } from '../service/ProfileService';
 

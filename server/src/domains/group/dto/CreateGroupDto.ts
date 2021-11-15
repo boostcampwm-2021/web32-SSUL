@@ -1,5 +1,5 @@
 import { Category } from '@domains/category/models/Category';
-import { IsArray, IsDate, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsDate, IsDateString, IsNumber, IsString } from 'class-validator';
 import { Group } from '../models/Group';
 
 export class CreateGroupDto {
@@ -13,10 +13,10 @@ export class CreateGroupDto {
   curUserCnt: number;
   @IsString()
   intro: string;
-  @IsDate()
+  @IsDateString()
   startAt: string;
-  @IsDate()
-  endAt: string;
+  @IsDateString()
+  endAt: Date;
   @IsString()
   category: string;
   @IsArray()
