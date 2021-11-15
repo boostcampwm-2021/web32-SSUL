@@ -3,16 +3,18 @@ import config from '@config/index';
 import { ormConfig } from '@config/ormconfig';
 
 import { Category } from '@domains/category/models/Category';
+import { Group } from '@domains/group/models/Group';
 
-import { catagorySeedData } from '@root/db_seed';
+import { catagorySeedData, groupSeedData } from '@root/db_seed';
 
 export async function seed() {
   const connection = await createConnection(ormConfig[config.mode]);
-  await seedCategory(connection);
+  await seedDatabase(connection);
 
   console.log('seeding done.');
 }
 
-async function seedCategory(connection: Connection) {
+async function seedDatabase(connection: Connection) {
   await connection.createQueryBuilder().insert().into(Category).values(catagorySeedData).execute();
+  await connection.createQueryBuilder().insert().into(Group).values(groupSeedData).execute();
 }
