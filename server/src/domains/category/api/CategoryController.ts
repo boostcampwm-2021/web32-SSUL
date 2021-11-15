@@ -1,16 +1,23 @@
 import { Controller, Get } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { CategoryService } from '../service/CategoryService';
+import { ResponseSchema } from 'routing-controllers-openapi';
+import { Category } from '../models/Category';
 
 @Service()
 @Controller('/category')
 export class CategoryController {
-  @Inject()
-  private readonly categoryService: CategoryService;
+  constructor(
+    @Inject()
+    private readonly categoryService: CategoryService,
+  ) {}
 
   @Get('/')
-  getAll() {
-    const categories = this.categoryService.getCategories();
+  @ResponseSchema(Category, {
+    isArray: true,
+  })
+  async getAll() {
+    const categories = await this.categoryService.getCategories();
     return categories;
   }
 }

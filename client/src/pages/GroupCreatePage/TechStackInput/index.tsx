@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { getTechStackList } from '../../../api/techStack';
-import { TechStack } from '../../../types/TechStack';
+import { TechStack } from '@types';
 import SearchBar from './SearchBar';
 import SelectedTechStackList from './SelectedTechStackList';
 import TechStackList from './TechStackList';
 
-function TechStackInput(): JSX.Element {
-  const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
+interface Props {
+  baseTechStackList: TechStack[];
+  usingTechStacks: string[];
+  setUsingTechStacks: (newTechStacks: string[]) => void;
+}
+
+function TechStackInput({ baseTechStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
   const [filteredTechStackList, setFilteredTechStackList] = useState<TechStack[]>([]);
   const [techStackInput, setTechStackInput] = useState<string>('');
 
@@ -15,24 +19,17 @@ function TechStackInput(): JSX.Element {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await getTechStackList();
-      setBaseTechStackList(data);
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const newFilteredTechStackList = baseTechStackList.filter((techStack, idx) => {
-      return techStack.name.includes(techStackInput) && idx < 10;
+    let selectCount = 0;
+    const newFilteredTechStackList = baseTechStackList.filter((techStack) => {
+      return techStack.name.includes(techStackInput) && selectCount++ < 10;
     });
     setFilteredTechStackList(newFilteredTechStackList);
   }, [baseTechStackList, techStackInput]);
   return (
     <>
       <SearchBar onChange={handleTechStackInputChange}></SearchBar>
-      <SelectedTechStackList />
-      <TechStackList techStackList={filteredTechStackList} />
+      <SelectedTechStackList usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
+      <TechStackList techStackList={filteredTechStackList} usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
     </>
   );
 }

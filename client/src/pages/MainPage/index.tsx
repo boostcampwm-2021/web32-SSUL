@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem';
 import { BaseLayout } from '@styles';
 import { LinkButton } from '../../components';
 import DeveloperImg from '../../assets/images/developer-img.jpg';
-import { getCategories } from '../../api/category';
+import { categoryHttpClient } from '@api';
 import { Category } from '../../types/Category';
 
 const Tab = Object.freeze({
@@ -18,7 +18,7 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const categories = await getCategories();
+      const categories = await categoryHttpClient.getCategories();
       setCategories(categories);
     };
     fetchCategories();

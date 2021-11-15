@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
-  ownerId: number;
+  ownerName: string;
+  ownerFeverStack: number;
 }
 
-function GroupOwnerStatus({ ownerId }: Props): JSX.Element {
-  const [groupOwner, setGroupOwner] = useState<string>('홍길동');
-  const [groupOwnerFeverStack, setGroupOwnerFeverStack] = useState<number>(0);
-
+function GroupOwnerStatus({ ownerName, ownerFeverStack }: Props): JSX.Element {
   return (
     <Container>
-      <GroupOwnerName>{groupOwner}</GroupOwnerName>
-      <GroupOnwerFeverStack>{groupOwnerFeverStack}</GroupOnwerFeverStack>
+      <GroupOwnerName>{ownerName}</GroupOwnerName>
+      <GroupOnwerFeverStack>{ownerFeverStack}</GroupOnwerFeverStack>
     </Container>
   );
 }

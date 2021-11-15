@@ -1,14 +1,19 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
-import { AuthRepository } from '../repository/AuthRepository';
-import { GithubUserData } from '../auth.interface';
+import { UserRepository } from '../../user/repository/UserRepository';
+import { ProfileRepository } from '../../user/repository/ProfileRepository';
+import { GithubUserDto } from '../dto/AuthDto';
+import { UserDto } from '../../user/dto/UserDto';
+import { destructObject } from '../../../utils/Object';
 
 @Service()
 export class AuthService {
   constructor(
     @InjectRepository()
-    private readonly authRepository: AuthRepository,
+    private readonly userRepository: UserRepository,
+    @InjectRepository()
+    private readonly profileRepository: ProfileRepository,
   ) {}
 
   public async getGithubAccessToken(code: string) {
@@ -20,7 +25,7 @@ export class AuthService {
     return accessToken;
   }
 
-  public async getGithubUserData(accessToken: string): Promise<GithubUserData> {
+  public async getGithubUserData(accessToken: string): Promise<GithubUserDto> {
     interface GithubUserOriginData {
       login: string;
       name: string;
@@ -42,13 +47,20 @@ export class AuthService {
     return { githubId, name, avatarUrl };
   }
 
-  public async findOrInsertUser(user: GithubUserData): Promise<GithubUserData> {
-    const { githubId, name, avatarUrl } = user;
-    let userData = await this.authRepository.findOneById(githubId);
-    if (!userData) {
-      await this.authRepository.insertUser(user);
-      userData = await this.authRepository.findOneById(githubId);
+  public async findOrInsertUser(user: GithubUserDto): Promise<UserDto> {
+    const { githubId } = user;
+    let profileData = await this.profileRepository.findOneByGithubId(githubId);
+    if (!profileData) {
+      const userData = await this.userRepository.insertUser(user);
+      profileData = await this.profileRepository.insertProfile(userData);
     }
-    return userData as GithubUserData;
+
+    const userData = destructObject(profileData);
+    return userData as UserDto;
+  }
+
+  public async getUserProfile(id: string): Promise<UserDto> {
+    let userData = await this.profileRepository.findOneByGithubId(id);
+    return destructObject(userData) as UserDto;
   }
 }

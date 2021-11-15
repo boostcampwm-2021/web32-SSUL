@@ -27,7 +27,7 @@ export class User {
   @OneToMany(() => GroupEnrollment, (groupEnrollment) => groupEnrollment.user)
   groupEnrollments: GroupEnrollment[];
 
-  @OneToOne(() => Profile)
+  @OneToOne(() => Profile, (profile) => profile.user)
   profile: Profile;
 
   @OneToMany(() => Alarm, (alarm) => alarm.recieverId)

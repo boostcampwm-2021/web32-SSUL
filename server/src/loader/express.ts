@@ -1,6 +1,7 @@
-import * as express from 'express';
-import * as session from 'express-session';
+import express from 'express';
+import session from 'express-session';
 import config from '../config';
+import morgan from 'morgan';
 
 export default function (app: express.Application) {
   const sessionConfig = {
@@ -11,4 +12,5 @@ export default function (app: express.Application) {
 
   app.use(express.json());
   app.use(session(sessionConfig));
+  app.use(morgan('dev'));
 }

@@ -17,6 +17,15 @@ export class UsingTechStack {
   @Column({ type: 'enum', enum: UsingTechAs })
   type: string;
 
+  @Column('int', { name: 'group_id', nullable: true })
+  groupId: number;
+
+  @Column('int', { name: 'profile_id', nullable: true })
+  profileId: number;
+
+  @Column('int', { name: 'tech_stack_id', nullable: true })
+  techStackId: number;
+
   @ManyToOne(() => Group, (group) => group.usingTechStacks, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
@@ -31,7 +40,7 @@ export class UsingTechStack {
   @JoinColumn({ name: 'profile_id' })
   profile: Profile | null;
 
-  @OneToOne(() => TechStack)
+  @ManyToOne(() => TechStack, (techStack) => techStack.id)
   @JoinColumn({ name: 'tech_stack_id' })
   techStack: TechStack;
 }

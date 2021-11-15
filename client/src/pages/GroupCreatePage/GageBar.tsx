@@ -34,6 +34,8 @@ const GageProgressBar = styled.div`
 `;
 
 const GagePercentage = styled.p`
+  font-weight: bold;
+  color: ${(props) => props.theme.Primary};
   margin-top: 10px;
   text-align: center;
 `;
