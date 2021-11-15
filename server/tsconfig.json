@@ -9,6 +9,8 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "strictPropertyInitialization": false,
     "outDir": "./build",
     "baseUrl": "./src",

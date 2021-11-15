@@ -1,7 +1,7 @@
-import * as express from 'express';
-import * as session from 'express-session';
+import express from 'express';
+import session from 'express-session';
 import config from '../config';
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 
 export default function (app: express.Application) {
   const sessionConfig = {

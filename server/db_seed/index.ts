@@ -1,1 +1,1 @@
-export { default as catagorySeedData } from './category';
+export { default as catagorySeedData } from './category.json';
