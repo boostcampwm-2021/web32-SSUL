@@ -8,6 +8,7 @@ import {
   Param,
   Body,
 } from 'routing-controllers';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { UpdateIntroDto } from '../dto/UpdateIntroDto';
@@ -42,12 +43,15 @@ export class UserController {
   }
 
   @Get('/intro/:uid')
+  @OpenAPI({ summary: '유저 자기소개를 가져오는 API' })
+  @ResponseSchema(String)
   public getIntro(@Param('uid') userId: number) {
     return this.profileService.getUserIntro(userId);
   }
 
   @Patch('/intro')
   @OnUndefined(200)
+  @OpenAPI({ summary: '자기소개를 업데이트하는 API' })
   public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
     this.profileService.updateUserIntro(id, intro);
   }

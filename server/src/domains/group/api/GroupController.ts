@@ -5,6 +5,7 @@ import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdGroupDto } from '../dto/FilterdGroupDto';
+import { GroupActiviryDto } from '../dto/GroupActivityDto';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -53,6 +54,8 @@ export class GroupController {
     this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
   }
 
+  @OpenAPI({ summary: '그룹활동 리스트를 가져오는 API' })
+  @ResponseSchema(GroupActiviryDto, { isArray: true })
   @Get('/activity/:uid')
   public async getGroupActivity(@Param('uid') userId: number) {
     return await this.groupService.getEndGroupList(userId);
