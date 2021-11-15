@@ -7,14 +7,26 @@ import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import { clearGroupData, groupCreateDataState } from '@store/slices/groupCreateDataSlice';
+import {
+  clearGroupData,
+  groupCreateDataState,
+  setGroupData,
+} from '@store/slices/groupCreateDataSlice';
 import { Category, TechStack } from '@types';
 import { categoryHttpClient } from '@api';
 import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectUser } from '@store/slices/userSlice';
 
 const MAX_CONTENT_INDEX = 4;
+enum PAGE_NUMBER {
+  CATEGORY,
+  PERSONNEL,
+  GROUP_INFO,
+  DATE,
+  TECH_STACK,
+}
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
@@ -22,20 +34,29 @@ function GroupCreatePage(): JSX.Element {
   const [categorys, setCategorys] = useState<Category[]>([]);
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
   const groupData = useAppSelector(groupCreateDataState);
+  const { id: ownerId } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
+  const setUsingTechStacks = (newTechStacks: string[]) =>
+    dispatch(setGroupData({ usingTechStacks: newTechStacks }));
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
-      case 0:
+      case PAGE_NUMBER.CATEGORY:
         return <CategoryInput categorys={categorys} />;
-      case 1:
+      case PAGE_NUMBER.PERSONNEL:
         return <PersonnelInput />;
-      case 2:
+      case PAGE_NUMBER.GROUP_INFO:
         return <GroupInfoInput />;
-      case 3:
+      case PAGE_NUMBER.DATE:
         return <DateInput />;
-      case 4:
-        return <TechStackInput techStacks={techStacks} />;
+      case PAGE_NUMBER.TECH_STACK:
+        return (
+          <TechStackInput
+            baseTechStackList={techStacks}
+            usingTechStacks={groupData.usingTechStacks}
+            setUsingTechStacks={setUsingTechStacks}
+          />
+        );
       default:
         return null;
     }
@@ -43,13 +64,13 @@ function GroupCreatePage(): JSX.Element {
 
   const checkInput = () => {
     switch (contentsNumber) {
-      case 0:
+      case PAGE_NUMBER.CATEGORY:
         return groupData.category !== '';
-      case 2:
+      case PAGE_NUMBER.GROUP_INFO:
         return groupData.name !== '' && groupData.intro !== '';
-      case 3:
+      case PAGE_NUMBER.DATE:
         return groupData.startAt !== '' && groupData.endAt !== '';
-      case 4:
+      case PAGE_NUMBER.TECH_STACK:
         return groupData.usingTechStacks.length > 0;
       default:
         return true;
@@ -58,7 +79,8 @@ function GroupCreatePage(): JSX.Element {
 
   const clickPrevContents = () => {
     setNotificationText('');
-    if (contentsNumber > 0) setContentsNumber(contentsNumber - 1);
+    if (contentsNumber > PAGE_NUMBER.CATEGORY) setContentsNumber(contentsNumber - 1);
+    else window.history.back();
   };
 
   const clickNextContents = () => {
@@ -74,10 +96,16 @@ function GroupCreatePage(): JSX.Element {
 
   const requestGroupCreate = async () => {
     try {
-      await groupHttpClient.postGroupCreate(groupData);
+      if (ownerId === undefined) {
+        setNotificationText('로그인 정보가 없습니다...');
+        return;
+      }
+      const postGroupData = { ...groupData };
+      postGroupData.ownerId = ownerId;
+      await groupHttpClient.postGroupCreate(postGroupData);
       window.location.href = '/';
     } catch (e) {
-      console.log(e);
+      setNotificationText('그룹생성에 실패했습니다...');
     }
   };
   const cleanUp = () => {
@@ -107,16 +135,9 @@ function GroupCreatePage(): JSX.Element {
       <ContentsContainer>{getContents()}</ContentsContainer>
       <Notification>{notificationText}</Notification>
       <ButtonWrapper>
-        <CustomButton
-          label={'이전'}
-          color={'#00C5AA'}
-          backgroundColor={'#FFFFFF'}
-          clickBtn={clickPrevContents}
-        />
+        <CustomButton label={'이전'} clickBtn={clickPrevContents} />
         <CustomButton
           label={contentsNumber === MAX_CONTENT_INDEX ? '완료' : '다음'}
-          color={'#FFFFFF'}
-          backgroundColor={'#00C5AA'}
           clickBtn={clickNextContents}
         />
       </ButtonWrapper>
@@ -130,7 +151,7 @@ const CreateForm = styled.div`
   margin: 70px auto 0 auto;
   width: 600px;
   height: 500px;
-  box-shadow: 20px 20px 40px 4px rgba(41, 36, 36, 0.25), -20px -20px 0px 6px #ffffff;
+  box-shadow: 5px 5px 10px 1px rgba(41, 36, 36, 0.25), -10px -10px 0px 3px #ffffff;
   border-radius: 40px;
 `;
 
@@ -144,8 +165,10 @@ const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin-bottom: 40px;
   display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin: 0 40px 40px 0;
 `;
 
 const Notification = styled.div`

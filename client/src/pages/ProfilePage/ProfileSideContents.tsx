@@ -2,22 +2,23 @@ import React from 'react';
 import styled from '@emotion/styled';
 import FeverSharingBar from './FeverSharingBar';
 import GithubLogo from '@assets/icon_github_logo.png';
+import { useAppSelector } from '@hooks';
+import { selectUser } from '@store/slices/userSlice';
 
 function ProfileSideContents(): JSX.Element {
+  const user = useAppSelector(selectUser);
+
   return (
     <Container>
-      <ProfileImage
-        src="https://avatars.githubusercontent.com/u/55623688?v=4"
-        alt="GithubProfifleImage"
-      ></ProfileImage>
+      <ProfileImage src={user.image} alt="GithubProfifleImage" />
       <BaseInfo>
-        <NickName>GOODTSS</NickName>
-        <GithubName>ChanYangYu</GithubName>
-        <FeverSharingBar />
+        <NickName>{user.name}</NickName>
+        <GithubName>{user.oAuthId}</GithubName>
         <GithubURLContainer>
-          <GithubIcon src={GithubLogo} alt="GithubIcon"></GithubIcon>
-          <GithubURL href="https://github.com/ChanYangYu">GitHub Storage</GithubURL>
+          <GithubIcon src={GithubLogo} alt="GithubIcon" />
+          <GithubURL href={`https://github.com/${user.oAuthId}`}>GitHub Storage</GithubURL>
         </GithubURLContainer>
+        <FeverSharingBar />
       </BaseInfo>
     </Container>
   );
@@ -26,10 +27,15 @@ function ProfileSideContents(): JSX.Element {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  margin-top: 40px;
+  margin-right: 40px;
+  border-radius: 10px;
+  border: 1px ${(props) => props.theme.Gray5} solid;
 `;
 
 const ProfileImage = styled.img`
-  margin: 40px 70px;
+  margin: 40px auto;
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -37,20 +43,21 @@ const ProfileImage = styled.img`
 
 const BaseInfo = styled.div`
   display: flex;
-  width: 300px;
-  margin: 0 20px;
+  width: 250px;
   flex-direction: column;
   justify-content: center;
 `;
 
 const NickName = styled.p`
-  margin-left: 50px;
+  margin-bottom: 10px;
+  text-align: center;
   font-size: 26px;
   font-weight: bold;
 `;
 
 const GithubName = styled.p`
-  margin: 0 0 20px 50px;
+  margin-bottom: 10px;
+  text-align: center;
   font-size: 20px;
   font-style: normal;
   font-weight: 300;
@@ -59,7 +66,7 @@ const GithubName = styled.p`
 
 const GithubURLContainer = styled.div`
   display: flex;
-  margin: 20px 0 0 50px;
+  margin: 10px auto 40px auto;
 `;
 
 const GithubURL = styled.a`

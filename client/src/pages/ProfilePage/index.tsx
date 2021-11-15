@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileSideContents from './ProfileSideContents';
-import ProfileUserContents from './ProfileUserContents';
-import ProfileMentorContents from './ProfileMentorContents';
+import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
+import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
+import { BoxModal } from '@components';
+import EditTechStack from './modal/EditTechStack';
+
+const MODAL_STYLE = {
+  width: '700px',
+  height: '400px',
+  padding: '50px 50px 50px 50px',
+}
 
 function ProfilePage(): JSX.Element {
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const handleModalBackgroundClick = () => setIsModal(false);
+  const handleEditButtonClick = () => setIsModal(true);
   return (
     <Container>
       <ProfileSideContents />
-      <ContentsContainer>
-        <ProfileUserContents />
-        <ProfileMentorContents />
-      </ContentsContainer>
+      <MainContents>
+        <ProfileIntroBox />
+        <ProfileTechStackBox handleEditButtonClick={handleEditButtonClick}/>
+        <ProfileActivityListBox />
+        <Divider />
+        <ProfileMentorStackBox />
+      </MainContents>
+
+      {isModal && (
+        <BoxModal
+          style={MODAL_STYLE}
+          element={<EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />}
+          onCancel={handleModalBackgroundClick}
+        />
+      )}
     </Container>
   );
 }
@@ -21,8 +44,14 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const ContentsContainer = styled.div`
+const MainContents = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Divider = styled.div`
+  margin-top: 40px;
+  height: 1px;
+  background-color: ${(props) => props.theme.Gray5};
 `;
 export default ProfilePage;

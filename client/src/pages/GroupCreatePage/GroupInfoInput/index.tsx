@@ -30,7 +30,7 @@ const NameText = styled.input`
   height: 50px;
   resize: none;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px #8f8f8f, -5px -5px 10px #ffffff;
+  box-shadow: inset 0px 0px 4px rgb(0 0 0 / 25%);
   &:focus {
     outline: none;
   }
@@ -42,7 +42,7 @@ const InfoText = styled.textarea`
   height: 150px;
   resize: none;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px #8f8f8f, -5px -5px 10px #ffffff;
+  box-shadow: inset 0px 0px 4px rgb(0 0 0 / 25%);
   &:focus {
     outline: none;
   }

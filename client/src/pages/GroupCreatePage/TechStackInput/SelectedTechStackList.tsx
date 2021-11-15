@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
-import { useAppDispatch, useAppSelector } from '@hooks';
 
-function SelectedTechStackList(): JSX.Element {
-  const { usingTechStacks } = useAppSelector(groupCreateDataState);
-  const dispatch = useAppDispatch();
+interface Props {
+  usingTechStacks: string[];
+  setUsingTechStacks: (newTechStacks: string[]) => void;
+}
+
+function SelectedTechStackList({ usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;
@@ -13,8 +14,7 @@ function SelectedTechStackList(): JSX.Element {
     const newSelectedTechStack = usingTechStacks.filter((techStackName) => {
       return techStackName !== nowTechStack;
     });
-
-    dispatch(setGroupData({ usingTechStacks: newSelectedTechStack }));
+    setUsingTechStacks(newSelectedTechStack);
   };
   const selectedTechListElements = usingTechStacks.map((techStackName, idx) => {
     return (
