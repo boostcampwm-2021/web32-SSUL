@@ -3,7 +3,8 @@ import { Body, Controller, Get, OnUndefined, Post, QueryParam } from 'routing-co
 import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
-import { OpenAPI } from 'routing-controllers-openapi';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { FilterdGroupDto } from '../dto/FilterdGroupDto';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -19,12 +20,26 @@ export class GroupController {
   ) {}
 
   @Get('/')
+  @OnUndefined(200)
+  @OpenAPI({
+    summary: '필터링된 그룹을 조회하는 API',
+    responses: {
+      '200': {
+        description: '그룹 조회 완료',
+      },
+    },
+  })
+  @ResponseSchema(FilterdGroupDto, { description: '필터링 그룹 조회 결과' })
   async getAll(
     @QueryParam('name') name: string,
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
-    const filterdGroups = await this.groupService.getFilterdGroups(name, category, techstack);
+    const filterdGroups: FilterdGroupDto[] = await this.groupService.getFilterdGroups(
+      name,
+      category,
+      techstack,
+    );
     return filterdGroups;
   }
 

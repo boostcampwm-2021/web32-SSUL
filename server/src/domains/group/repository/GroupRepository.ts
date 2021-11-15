@@ -12,14 +12,15 @@ export class GroupRepository extends Repository<Group> {
     return this.save(group);
   }
   public async findGroupByNameAndCategory(name: string, categoryId?: number) {
-    const findByName = await this.createQueryBuilder('group').where(
-      'group.name like :filterdName',
-      {
-        filterdName: `%${name}%`,
-      },
-    );
+    return await this.createQueryBuilder('group')
+      .where('group.name like :filterdName', { filterdName: `%${name}%` })
+      .andWhere('group.categoryId = :categoryId', { categoryId })
+      .getMany();
+  }
 
-    if (categoryId === undefined) return findByName.getMany();
-    else return findByName.where('group.categoryId = :categoryId', { categoryId }).getMany();
+  public async findGroupByName(name: string) {
+    return await this.createQueryBuilder('group')
+      .where('group.name like :filterdName', { filterdName: `%${name}%` })
+      .getMany();
   }
 }

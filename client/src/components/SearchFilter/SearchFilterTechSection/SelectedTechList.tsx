@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
+  createdFilterdQuery,
   popSelectedTechStack,
   returnGroupRecruitFilterState,
 } from '@store/slices/groupRecruitFilterSlice';
@@ -14,12 +15,13 @@ function SelectedTechList(): JSX.Element {
     const targetTechStack = e.currentTarget as HTMLButtonElement;
     const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
     selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
+    selectedTechStackDispatch(createdFilterdQuery());
   };
 
-  const totalSelectedTechList = selectedTechStack.map((category, idx) => {
+  const totalSelectedTechList = selectedTechStack.map((techStack, idx) => {
     return (
       <SelectItem key={idx}>
-        <h4>{category}</h4>
+        <h4>{techStack}</h4>
         <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );

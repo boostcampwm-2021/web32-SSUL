@@ -1,23 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { formatDateToString } from '@utils/Date';
 
 interface Props {
-  id: number;
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
 }
 
-function GroupStatusInfo({ id, intro, startAt, endAt }: Props): JSX.Element {
-  const getGroupTechStackList = () => {
-    // id를 이용해 가져오기
-    id;
-  };
+function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
   return (
     <Container>
       <GroupIntro>{intro}</GroupIntro>
       <GroupDate>
-        {startAt?.toLocaleDateString()} ~ {endAt?.toLocaleDateString()}
+        {formatDateToString(startAt)} ~ {formatDateToString(endAt)}
       </GroupDate>
     </Container>
   );
