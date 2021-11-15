@@ -1,6 +1,6 @@
 import React from 'react';
-import moment from 'moment';
 import styled from '@emotion/styled';
+import { formatDateToString } from '@utils/Date';
 
 interface Props {
   intro: string | null;
@@ -9,14 +9,11 @@ interface Props {
 }
 
 function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
-  const formatDate = (date: Date | null) => {
-    return moment(date).format('YYYY-MM-DD');
-  };
   return (
     <Container>
       <GroupIntro>{intro}</GroupIntro>
       <GroupDate>
-        {formatDate(startAt)} ~ {formatDate(endAt)}
+        {formatDateToString(startAt)} ~ {formatDateToString(endAt)}
       </GroupDate>
     </Container>
   );
