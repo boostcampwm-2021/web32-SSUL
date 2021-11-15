@@ -55,7 +55,7 @@ export class GroupService {
     const category: Category = await this.categoryRepository.findOneOrFail({
       where: { name: groupData.category },
     });
-    const group: Group = groupData.toGroup(category);
+    const group: Group = groupData.toEntity(category);
     const createdGroup = await this.groupRepository.createGroup(group);
 
     return createdGroup;

@@ -16,13 +16,13 @@ export class CreateGroupDto {
   @IsDateString()
   startAt: string;
   @IsDateString()
-  endAt: Date;
+  endAt: string;
   @IsString()
   category: string;
   @IsArray()
   usingTechStacks: string[];
 
-  toGroup(category: Category){
+  toEntity(category: Category){
     const group: Group = new Group();
 
     group.category = category;

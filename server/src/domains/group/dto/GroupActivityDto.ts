@@ -1,10 +1,10 @@
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsDateString, IsString } from "class-validator";
 
 export class GroupActiviryDto{
   @IsString()
   name: string;
-  @IsDate()
-  startAt: Date;
-  @IsDate()
-  endAt: Date;
+  @IsDateString()
+  startAt: string;
+  @IsDateString()
+  endAt: string;
 }
