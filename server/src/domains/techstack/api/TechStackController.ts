@@ -8,6 +8,9 @@ import { UsingTechAs } from '../models/UsingTechStack';
 import { TechStackService } from '../service/TechStackService';
 import { UsingTechStackService } from '../service/UsingTechStackService';
 
+@OpenAPI({
+  tags: ['기술스택'],
+})
 @Service()
 @Controller('/techstack')
 export class TechStackController {

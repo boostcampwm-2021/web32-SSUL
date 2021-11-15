@@ -7,6 +7,9 @@ import { Inject, Service } from 'typedi';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentorService } from '../service/MentorService';
 
+@OpenAPI({
+  tags: ['멘토링'],
+})
 @Service()
 @Controller('/mentoring')
 export class MentoringController {
