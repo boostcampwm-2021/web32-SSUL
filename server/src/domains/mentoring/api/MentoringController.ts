@@ -16,7 +16,9 @@ export class MentoringController {
   constructor(
     @Inject()
     private readonly mentorService: MentorService,
+    @Inject()
     private readonly usingTechStackService: UsingTechStackService,
+    @Inject()
     private readonly profileService: ProfileService,
   ) {}
 

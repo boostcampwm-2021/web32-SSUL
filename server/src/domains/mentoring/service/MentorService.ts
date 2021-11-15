@@ -12,9 +12,7 @@ export class MentorService {
   ) {}
 
   public async createMentor(userId: number) {
-    const mentor: Mentor = new Mentor();
-    mentor.userId = userId;
-
+    const mentor: Mentor = this.mentorRepository.create({userId:userId});
     return await this.mentorRepository.save(mentor);
   }
 }
