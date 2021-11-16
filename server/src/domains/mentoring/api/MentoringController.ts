@@ -1,9 +1,10 @@
 import { UsingTechAs } from '@domains/techstack/models/UsingTechStack';
 import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
-import { Controller, OnUndefined, Body, Post, Get, Param } from 'routing-controllers';
+import { Controller, OnUndefined, Body, Post, Get, Param, Patch, Delete } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
+import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentorService } from '../service/MentorService';
@@ -37,5 +38,12 @@ export class MentoringController {
   @ResponseSchema(MentoringRequestListDto)
   public async getRequest(@Param('mid') mentorId: number){
     return await this.mentorService.getRequestListByMentorId(mentorId);
+  }
+
+  @Delete('/request')
+  @OpenAPI({summary: '멘토링 요청 리스트를 수락/거절하는 API'})
+  @OnUndefined(200)
+  public async deleteRequest(@Body() requestData: DeleteRequestDto){
+    await this.mentorService.processingDeleteRequest(requestData);
   }
 }

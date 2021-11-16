@@ -1,7 +1,9 @@
 import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
+import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
+import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
 import { MentorRepository } from '../repository/MentorRepository';
@@ -17,6 +19,8 @@ export class MentorService {
     private readonly categoryRepository: CategoryRepository,
     @InjectRepository()
     private readonly userRepository: UserRepository,
+    @InjectRepository()
+    private readonly groupRepository: GroupRepository,
   ) {}
 
   public async createMentor(userId: number) {
@@ -28,19 +32,27 @@ export class MentorService {
     const results = await this.mentoringRequestRepository.findAllByMentorId(mentorId);
 
     return Promise.all<any>(
-      results.map(async ({ group, createdAt }) => {
+      results.map(async ({ id, group, createdAt}) => {
         const groupName = group.name;
-
+        const groupId = group.id;
         const { imageUrl: categoryImage } = await this.categoryRepository.findOneOrFail({
           where: { id: group.categoryId },
         });
-
         const { name: ownerName } = await this.userRepository.findOneOrFail({
           where: { id: group.ownerId },
         });
 
-        return { groupName, categoryImage, ownerName, createdAt };
+        return { id, groupId, groupName, categoryImage, ownerName, createdAt };
       }),
     );
+  }
+
+  public async processingDeleteRequest(requestData: DeleteRequestDto){
+    if(requestData.accept){
+      const group = await this.groupRepository.findOneOrFail({id: requestData.groupId});
+      group.mentorId = requestData.mentorId;
+      await this.groupRepository.save(group);
+    }
+    await this.mentoringRequestRepository.delete({id: requestData.id});
   }
 }
