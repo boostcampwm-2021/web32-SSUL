@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { userHttpClient } from '@api';
+import { selectUser } from '@store/slices/userSlice';
+import { UpdateIntroRequest } from '@types';
 
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+  const [prevIntro, setPrevIntro] = useState<string>('');
   const [editState, setEditState] = useState<boolean>(false);
 
-  const handleEditButtonClick = () => {
-     setEditState(!editState);
+  const handleEditButtonClick = async () => {
+    if (editState === true && prevIntro !== intro) {
+      const request = {
+        id: user.id,
+        intro: intro,
+      } as UpdateIntroRequest;
+      setPrevIntro(intro);
+      userHttpClient.patchIntro(request);
+    }
+    setEditState(!editState);
   };
 
   const handleEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,6 +37,17 @@ function ProfileIntroBox(): JSX.Element {
     textArea.style.height = 10 + textArea.scrollHeight + 'px';
   };
 
+  useEffect(() => {
+    const fetchProfileIntro = async () => {
+      if (user.id !== undefined) {
+        const fetchedIntro = await userHttpClient.getIntro(user.id);
+        setPrevIntro(fetchedIntro);
+        dispatch(setProfileData({ intro: fetchedIntro }));
+      }
+    };
+
+    fetchProfileIntro();
+  }, [user]);
   const getTextElement = (): JSX.Element => {
     return editState ? (
       <ProfileEditText

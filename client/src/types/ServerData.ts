@@ -32,4 +32,9 @@ export interface ResponseUserData {
   role: string;
 }
 
+export interface UpdateIntroRequest {
+  id: number;
+  intro: string;
+}
+
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;

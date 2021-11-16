@@ -1,3 +1,4 @@
+import { UpdateIntroRequest } from '@types';
 import HttpClient from './HttpClient';
 
 class UserHttpClient extends HttpClient {
@@ -6,6 +7,9 @@ class UserHttpClient extends HttpClient {
   }
 
   public patchRole = (): Promise<null> => this.httpClient.patch('/user/role');
+  public getIntro = (userId: number): Promise<string> => this.httpClient.get(`/intro/${userId}`);
+  public patchIntro = (request: UpdateIntroRequest): Promise<null> =>
+    this.httpClient.patch('/intro/',request);
 }
 
 export const userHttpClient = new UserHttpClient();
