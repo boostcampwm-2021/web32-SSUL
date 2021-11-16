@@ -3,7 +3,7 @@ import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { CheckMentorDto } from '../dto/CheckMentorDto';
+import { MentorInfoDto } from '../dto/MentorInfoDto';
 import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
@@ -32,8 +32,8 @@ export class MentorService {
   public async getMentorIdByUserId(userId: number) {
     const mentor = await this.mentorRepository.findOne({ userId: userId });
 
-    if (mentor === undefined) return { isMentor: false, mentorId: -1 } as CheckMentorDto;
-    else return { isMentor: true, mentorId: mentor.id } as CheckMentorDto;
+    if (mentor === undefined) return { isMentor: false, mentorId: -1 } as MentorInfoDto;
+    else return { isMentor: true, mentorId: mentor.id } as MentorInfoDto;
   }
 
   public async getRequestListByMentorId(mentorId: number) {
