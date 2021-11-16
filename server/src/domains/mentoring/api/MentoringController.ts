@@ -2,8 +2,9 @@ import { UsingTechAs } from '@domains/techstack/models/UsingTechStack';
 import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
 import { Controller, OnUndefined, Body, Post, Get, Param } from 'routing-controllers';
-import { OpenAPI } from 'routing-controllers-openapi';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
+import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentorService } from '../service/MentorService';
 
@@ -33,6 +34,7 @@ export class MentoringController {
 
   @Get('/request/:mid')
   @OpenAPI({summary: '멘토링 요청 리스트를 가져오는 API'})
+  @ResponseSchema(MentoringRequestListDto)
   public async getRequest(@Param('mid') mentorId: number){
     return await this.mentorService.getRequestListByMentorId(mentorId);
   }
