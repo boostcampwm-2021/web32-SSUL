@@ -65,7 +65,6 @@ export class GroupService {
         if (filterdTechStack.length === 0 || isIncludeStackList) {
           const [ownerName, ownerFeverStack, ownerAvatarUrl] =
             await this.profilekRepository.findOwnerInfoByUserId(group.ownerId);
-          console.log(ownerAvatarUrl);
           return { ...group, techStackList, ownerName, ownerFeverStack, ownerAvatarUrl };
         }
       }),
