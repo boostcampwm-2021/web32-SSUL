@@ -1,5 +1,6 @@
 import React from 'react';
 import { BoxModal } from '@components';
+import PostModal from './PostModal';
 import { useAppDispatch } from '@hooks';
 import { changeGroupModalState } from '@store/slices/utilSlice';
 
@@ -7,11 +8,29 @@ interface Props {
   type: string;
 }
 
+const selectModalComponent = (type: string): JSX.Element | undefined => {
+  switch (type) {
+    case 'POST':
+      return <PostModal />;
+  }
+};
+
 function GroupPageModal({ type }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const handleClickModalBackground = () => dispatch(changeGroupModalState('NONE'));
+  const modalElement = selectModalComponent(type);
 
-  return <>{type !== 'NONE' && <BoxModal onCancel={handleClickModalBackground} />}</>;
+  return (
+    <>
+      {type !== 'NONE' && (
+        <BoxModal
+          style={{ height: '480px' }}
+          element={modalElement}
+          onCancel={handleClickModalBackground}
+        />
+      )}
+    </>
+  );
 }
 
 export default GroupPageModal;
