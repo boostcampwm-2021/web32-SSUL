@@ -40,7 +40,7 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     <Card>
       <GroupCardHeader headerProps={headerProps} />
       <GroupCardStatus statusProps={statusProps} />
-      <GroupApplyButton />
+      <GroupApplyButton dueDate={calculateRemainTimeFromNow(startAt)} />
     </Card>
   );
 }
