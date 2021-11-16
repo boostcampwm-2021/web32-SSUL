@@ -63,9 +63,10 @@ export class GroupService {
         );
 
         if (filterdTechStack.length === 0 || isIncludeStackList) {
-          const [ownerFeverStack, ownerName] =
-            await this.profilekRepository.findNameAndFeverStackByUserId(group.ownerId);
-          return { ...group, techStackList, ownerFeverStack, ownerName };
+          const [ownerName, ownerFeverStack, ownerAvatarUrl] =
+            await this.profilekRepository.findOwnerInfoByUserId(group.ownerId);
+          console.log(ownerAvatarUrl);
+          return { ...group, techStackList, ownerName, ownerFeverStack, ownerAvatarUrl };
         }
       }),
     ).then((data) => data.filter((group) => group !== undefined));
