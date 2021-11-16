@@ -6,7 +6,7 @@ class GroupHttpClient extends HttpClient {
     super({ baseURL: '/api/group' });
   }
 
-  public getFilterdGroupList = (query: string): Promise<GroupResponse[]> => {
+  public getFilterdGroupList = (query: string): Promise<GroupResponse> => {
     return this.httpClient.get(`${query}`);
   };
   public postGroupCreate = <T>(groupData: GroupCreateInterface): Promise<T> =>
