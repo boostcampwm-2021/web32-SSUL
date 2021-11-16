@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { rangeArray } from '@utils/Range';
+import { makeRangeNumberArray } from '@utils/Range';
 import { useAppDispatch } from '@hooks';
 import { checkPageNumber, createdFilterdQuery } from '@store/slices/groupRecruitFilterSlice';
 
@@ -29,22 +29,28 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
     dispatch(createdFilterdQuery());
   };
 
-  const handleMovePageButton = (type: string) => {
+  const handlePrevButton = () => {
+    dispatch(checkPageNumber(firstPageNumber - 1));
+    dispatch(createdFilterdQuery());
+  };
+
+  const handleNextButton = () => {
+    dispatch(checkPageNumber(lastPageNumber + 1));
+    dispatch(createdFilterdQuery());
+  };
+
+  const movePageButtonType = (type: string) => {
     switch (type) {
       case 'PREV':
-        dispatch(checkPageNumber(firstPageNumber - 1));
-        dispatch(createdFilterdQuery());
-        break;
+        return handlePrevButton;
       case 'NEXT':
-        dispatch(checkPageNumber(lastPageNumber + 1));
-        dispatch(createdFilterdQuery());
-        break;
+        return handleNextButton;
       default:
         break;
     }
   };
 
-  const renderPagination = rangeArray(pageCnt, firstPageNumber).map((pageNum: number) => {
+  const renderPagination = makeRangeNumberArray(pageCnt, firstPageNumber).map((pageNum: number) => {
     if (pageNum === curPage)
       return (
         <SelectedPageNumber onClick={handlePageNumberButton} key={pageNum}>
@@ -69,11 +75,11 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
   return (
     <Container>
       {!isFirstPageNumber && (
-        <PageHadleButton onClick={() => handleMovePageButton('PREV')}>{'<'}</PageHadleButton>
+        <PageHadleButton onClick={movePageButtonType('PREV')}>{'<'}</PageHadleButton>
       )}
       {renderPagination}
       {!isLastPageNumber && (
-        <PageHadleButton onClick={() => handleMovePageButton('NEXT')}>{'>'}</PageHadleButton>
+        <PageHadleButton onClick={movePageButtonType('NEXT')}>{'>'}</PageHadleButton>
       )}
     </Container>
   );
