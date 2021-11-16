@@ -8,13 +8,16 @@ interface Props {
 }
 
 function GroupOwnerStatus({ ownerName, ownerFeverStack, ownerAvatarUrl }: Props): JSX.Element {
+  const DEFAULT_INDEX = 30;
   return (
     <Container>
       <GroupOwnerProfile>
         <ProfileImage src={ownerAvatarUrl} />
         <ProfileName>{ownerName}</ProfileName>
       </GroupOwnerProfile>
-      <GroupOnwerFeverStack>{ownerFeverStack}</GroupOnwerFeverStack>
+      <GroupOwnerFeverStack style={{ width: `${ownerFeverStack + DEFAULT_INDEX}px` }}>
+        <FeverNum>{ownerFeverStack}</FeverNum>
+      </GroupOwnerFeverStack>
     </Container>
   );
 }
@@ -31,9 +34,23 @@ const GroupOwnerProfile = styled.div`
   justify-content: space-between;
 `;
 
-const GroupOnwerFeverStack = styled.h3`
-  display: flex;
-  margin: 10px 0;
+const GroupOwnerFeverStack = styled.div`
+  height: 20px;
+  width: ${(props) => props.style?.width};
+  align-self: center;
+  background-color: ${(props) => props.theme?.Fever};
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover > span {
+    display: flex;
+    color: ${(props) => props.theme?.White};
+  }
+`;
+
+const FeverNum = styled.span`
+  display: none;
+  justify-content: center;
 `;
 
 const ProfileImage = styled.img`
