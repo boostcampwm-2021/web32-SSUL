@@ -42,4 +42,10 @@ export interface updateTechStackRequest {
   techStacks: string[];
 }
 
+export interface GroupActivity{
+  name: string;
+  startAt: string;
+  endAt: string;
+}
+
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;

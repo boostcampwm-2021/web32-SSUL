@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GroupActivity } from '@types';
 import { RootState } from '../index';
-
-interface GroupActivity {
-  name: string;
-  startAt: string;
-  endAt: string;
-}
 
 interface ProfileData {
   intro: string;
