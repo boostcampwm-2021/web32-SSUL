@@ -1,6 +1,7 @@
 import React from 'react';
 import { BoxModal } from '@components';
 import PostModal from './PostModal';
+import ReadModal from './ReadModal';
 import { useAppDispatch } from '@hooks';
 import { changeGroupModalState } from '@store/slices/utilSlice';
 
@@ -12,6 +13,8 @@ const selectModalComponent = (type: string): JSX.Element | undefined => {
   switch (type) {
     case 'POST':
       return <PostModal />;
+    case 'READ':
+      return <ReadModal />;
   }
 };
 
