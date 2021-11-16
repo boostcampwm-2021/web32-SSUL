@@ -19,7 +19,6 @@
       "@domains/*": ["domains/*"],
       "@common/*": ["common/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"],
       "@config/*": ["config/*"]
     }
   },

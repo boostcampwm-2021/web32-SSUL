@@ -7,6 +7,8 @@ pipeline {
         version = '0.1'
     }
     agent any
+    tools {nodejs "nodejs-16"}
+
     stages {
         stage("deploy for dev") {
             when {
@@ -59,7 +61,17 @@ pipeline {
                 branch "PR-*"
             }
             steps {
-                echo "just fine."
+                configFileProvider([
+                    configFile(fileId: 'dotenvtest', variable:'dotenvFile')
+                ]){
+                    sh '''
+                        cd server
+                        cp $dotenvFile .env.test
+                        npm install
+                        npm run test
+                    '''
+                }
+                
             }
         }
     }
