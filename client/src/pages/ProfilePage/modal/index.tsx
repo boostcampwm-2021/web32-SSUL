@@ -24,9 +24,9 @@ function ProfilePageModal({ type, onCancel }: Props): JSX.Element {
   const getModalElement = () => {
     switch (type) {
       case 'EDIT_TECH_STACK':
-        return <EditTechStack currentUsingTechStacks={[]} onCancel={onCancel} />;
+        return <EditTechStack onCancel={onCancel} />;
       case 'CREATE_MENTOR_STACK':
-        return <CreateMentorStack currentUsingTechStacks={[]} onCancel={onCancel} />;
+        return <CreateMentorStack onCancel={onCancel} />;
       default:
         return undefined;
     }

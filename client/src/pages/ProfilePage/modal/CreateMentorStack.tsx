@@ -6,17 +6,28 @@ import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 
 interface Props {
-  currentUsingTechStacks: string[];
   onCancel: () => void;
 }
-function CreateMentorStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element {
-  const [techStacks, setTechStacks] = useState<TechStack[]>([]);
-  const [usingStacks, setUsingStacks] = useState<string[]>(currentUsingTechStacks);
+function CreateMentorStack({ onCancel }: Props): JSX.Element {
+  const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
+  const [usingStacks, setUsingStacks] = useState<string[]>([]);
+  const [notificationText, setNotificationText] = useState<string>('');
+
+  const checkMentorStack = () => usingStacks.length > 0;
+
+  const requestCreateMentor = () =>{
+    if(!checkMentorStack()){
+      setNotificationText('최소 1개 이상 기술스택을 선택해주세요!');
+      return;
+    }
+    setNotificationText('');
+    //TODO: POST
+  }
 
   useEffect(() => {
     const fetechTechStackList = async () => {
       const response: TechStack[] = await techStackHttpClient.getTechStackList();
-      setTechStacks(response);
+      setBaseTechStacks(response);
     };
 
     fetechTechStackList();
@@ -26,14 +37,15 @@ function CreateMentorStack({ currentUsingTechStacks, onCancel }: Props): JSX.Ele
     <Container>
       <ModalTitle>멘토링을 원하는 기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
-        baseTechStackList={techStacks}
+        baseTechStackList={baseTechStacks}
         usingTechStacks={usingStacks}
         setUsingTechStacks={setUsingStacks}
       />
       <ButtonWrapper>
         <CustomButton label={'취소'} clickBtn={onCancel} />
-        <CustomButton label={'확인'} clickBtn={onCancel} />
+        <CustomButton label={'확인'} clickBtn={requestCreateMentor} />
       </ButtonWrapper>
+      <Notification>{notificationText}</Notification>
     </Container>
   );
 }
@@ -55,5 +67,15 @@ const ModalTitle = styled.p`
   margin-left: 10px;
   margin-bottom: 20px;
   font-weight: bold;
+`;
+
+const Notification = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 13px;
+  line-height: 40px;
+  margin-left: 20px;
+  color: #e50707;
 `;
 export default CreateMentorStack;

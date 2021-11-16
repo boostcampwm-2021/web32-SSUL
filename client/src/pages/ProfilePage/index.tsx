@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileSideContents from './ProfileSideContents';
 import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import ProfilePageModal from './modal';
+import { useAppDispatch } from '@hooks';
+import { clearProfileData } from '@store/slices/profileDataSlice';
 
 function ProfilePage(): JSX.Element {
   const [modalType, setModalType] = useState<string>('NONE');
   const showModal = (type: string) => () => setModalType(type);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearProfileData());
+    };
+  }, []);
+
   return (
     <Container>
       <ProfileSideContents />
