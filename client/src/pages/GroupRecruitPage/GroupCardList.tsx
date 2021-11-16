@@ -11,7 +11,7 @@ import { groupHttpClient } from '@api';
 import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupCardList(): JSX.Element {
-  const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
+  const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ function GroupCardList(): JSX.Element {
   return (
     <>
       <CardList>{renderGroupCards}</CardList>
-      <Pagination totalPages={totalPages} curPage={1} />
+      <Pagination totalPages={totalPages} curPage={selectedPage} />
     </>
   );
 }

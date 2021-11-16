@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { rangeArray } from '@utils/Range';
+import { useAppDispatch } from '@hooks';
+import { checkPageNumber, createdFilterdQuery } from '@store/slices/groupRecruitFilterSlice';
 
 interface PaginationProps {
   totalPages: number;
@@ -11,8 +13,9 @@ const FIRST_PAGE_NUM = 1;
 const PAGE_OFFSET_CNT = 5;
 
 function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const [isFirstPageNumber, setIsFirstPageNumber] = useState<boolean>(true);
-  const [isLastPageNumber, setIsLastPageNumberstate] = useState<boolean>(false);
+  const [isLastPageNumber, setIsLastPageNumberstate] = useState<boolean>(true);
   const firstPageNumber = Math.floor((curPage - 1) / PAGE_OFFSET_CNT) * PAGE_OFFSET_CNT + 1;
   const lastPageNumber =
     firstPageNumber + PAGE_OFFSET_CNT - 1 > totalPages
@@ -20,10 +23,29 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
       : firstPageNumber + PAGE_OFFSET_CNT - 1;
   const pageCnt: number = lastPageNumber - firstPageNumber + 1;
 
+  const handlePageNumberButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const number = Number(e.currentTarget.innerText);
+    dispatch(checkPageNumber(number));
+    dispatch(createdFilterdQuery());
+  };
+
+  const handleMovePageButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const type = e.currentTarget.innerHTML;
+  };
+
   const renderPagination = rangeArray(pageCnt, firstPageNumber).map((pageNum: number) => {
     if (pageNum === curPage)
-      return <SelectedPageNumber key={pageNum}>{pageNum}</SelectedPageNumber>;
-    else return <NonSelectedPageNumber key={pageNum}>{pageNum}</NonSelectedPageNumber>;
+      return (
+        <SelectedPageNumber onClick={handlePageNumberButton} key={pageNum}>
+          {pageNum}
+        </SelectedPageNumber>
+      );
+    else
+      return (
+        <NonSelectedPageNumber onClick={handlePageNumberButton} key={pageNum}>
+          {pageNum}
+        </NonSelectedPageNumber>
+      );
   });
 
   useEffect(() => {
@@ -31,13 +53,15 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
     lastPageNumber === totalPages
       ? setIsLastPageNumberstate(true)
       : setIsLastPageNumberstate(false);
-  }, [curPage]);
+  });
 
   return (
     <Container>
-      {!isFirstPageNumber && <PageHadleButton>{'<'}</PageHadleButton>}
+      {!isFirstPageNumber && (
+        <PageHadleButton onClick={handleMovePageButton}>{'<'}</PageHadleButton>
+      )}
       {renderPagination}
-      {!isLastPageNumber && <PageHadleButton>{'>'}</PageHadleButton>}
+      {!isLastPageNumber && <PageHadleButton onClick={handleMovePageButton}>{'>'}</PageHadleButton>}
     </Container>
   );
 }
