@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
-import { TechStack, UpdateTechStackRequest } from '@types';
+import { TechStack } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -23,7 +23,7 @@ function EditTechStack({ onCancel }: Props): JSX.Element {
       const request = {
         id: user.id,
         techStacks: selectedTechStacks,
-      } as UpdateTechStackRequest;
+      };
 
       techStackHttpClient.putMenteeTechStack(request);
     }

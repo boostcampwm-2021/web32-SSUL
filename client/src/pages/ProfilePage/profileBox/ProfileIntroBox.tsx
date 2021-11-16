@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
 import { userHttpClient } from '@api';
 import { selectUser } from '@store/slices/userSlice';
-import { UpdateIntroRequest } from '@types';
+import { UpdateIntroData } from '@types';
 
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
@@ -19,7 +19,7 @@ function ProfileIntroBox(): JSX.Element {
       const request = {
         id: user.id,
         intro: intro,
-      } as UpdateIntroRequest;
+      } as UpdateIntroData;
       setPrevIntro(intro);
       userHttpClient.patchIntro(request);
     }
