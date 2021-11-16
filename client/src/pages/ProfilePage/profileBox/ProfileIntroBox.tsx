@@ -92,6 +92,7 @@ const ProfileEditText = styled.textarea`
   }
 `;
 const EditButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
@@ -102,5 +103,8 @@ const EditButton = styled.button`
   border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
+  &:hover {
+    background-color: #00a18d;
+  }
 `;
 export default ProfileIntroBox;
