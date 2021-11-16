@@ -26,7 +26,10 @@ function ProfilePage(): JSX.Element {
         <ProfileTechStackBox showModal={showModal('EDIT_TECH_STACK')} />
         <ProfileActivityListBox />
         <Divider />
-        <ProfileMentorStackBox showModal={showModal('CREATE_MENTOR_STACK')} />
+        <ProfileMentorStackBox
+          showRequestModal={showModal('REQUEST_MENTORING')}
+          showCreateModal={showModal('CREATE_MENTOR_STACK')}
+        />
       </MainContents>
       <ProfilePageModal type={modalType} onCancel={showModal('NONE')} />
     </Container>

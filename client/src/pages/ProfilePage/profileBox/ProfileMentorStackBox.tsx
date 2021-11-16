@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { useAppSelector } from '@hooks';
 import { selectProfileData } from '@store/slices/profileDataSlice';
 
 interface Props {
-  showModal: () => void;
+  showRequestModal: () => void;
+  showCreateModal: () => void;
 }
 
-function ProfileMentorStackBox({ showModal }: Props): JSX.Element {
-  const { techStacks } = useAppSelector(selectProfileData);
-  const [isMentor] = useState<boolean>(false);
+function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JSX.Element {
+  const { isMentor, mentoringStack } = useAppSelector(selectProfileData);
   return (
     <>
       {isMentor ? (
         <ProfileContainer title="멘토링스택">
-          <MentoringRequestButton>멘토요청 리스트</MentoringRequestButton>
+          <MentoringRequestButton onClick={showRequestModal}>멘토요청 리스트</MentoringRequestButton>
           <TechStackContainer>
-            {techStacks.map((techStackName, idx) => (
+            {mentoringStack.map((techStackName, idx) => (
               <TechStackItem key={idx}>{techStackName}</TechStackItem>
             ))}
           </TechStackContainer>
@@ -28,7 +28,7 @@ function ProfileMentorStackBox({ showModal }: Props): JSX.Element {
           <MentorRegisterDesc>
             간단한 기술스택을 등록을 통해 멘토가 될 수 있어요!
           </MentorRegisterDesc>
-          <MentorRegisterButton onClick={showModal}>멘토 신청하기</MentorRegisterButton>
+          <MentorRegisterButton onClick={showCreateModal}>멘토 신청하기</MentorRegisterButton>
         </ProfileContainer>
       )}
     </>
@@ -81,6 +81,7 @@ const TechStackItem = styled.div`
 `;
 
 const MentoringRequestButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
@@ -91,5 +92,9 @@ const MentoringRequestButton = styled.button`
   border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
+
+  &:hover {
+    background-color: #00a18d;
+  }
 `;
 export default ProfileMentorStackBox;

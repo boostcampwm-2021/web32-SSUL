@@ -6,11 +6,17 @@ interface ProfileData {
   intro: string;
   techStacks: string[];
   groupActivitys: GroupActivity[];
+  isMentor: boolean;
+  mentorId: number;
+  mentoringStack: string[];
 }
 const initialState: ProfileData = {
   intro: '',
   techStacks: [],
   groupActivitys: [],
+  isMentor: false,
+  mentorId: -1,
+  mentoringStack: [],
 };
 
 export const profileDataSlice = createSlice({
