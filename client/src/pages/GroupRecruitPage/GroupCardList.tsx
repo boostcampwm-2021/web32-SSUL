@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { GroupCard } from '@components';
+import { GroupCard, Pagination } from '@components';
 import { Group, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
@@ -13,6 +13,7 @@ import { toggleLoadingState } from '@store/slices/utilSlice';
 function GroupCardList(): JSX.Element {
   const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function GroupCardList(): JSX.Element {
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
       setFilterdGroupList(allGroupList.groups);
+      setTotalPages(allGroupList.totalPages);
       toggleLoadingState();
     };
     getGroupsList();
@@ -33,10 +35,15 @@ function GroupCardList(): JSX.Element {
     return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
-  return <Container>{renderGroupCards}</Container>;
+  return (
+    <>
+      <CardList>{renderGroupCards}</CardList>
+      <Pagination totalPages={totalPages} curPage={1} />
+    </>
+  );
 }
 
-const Container = styled.div`
+const CardList = styled.div`
   display: grid;
   margin: 10px auto;
   min-width: 1000px;

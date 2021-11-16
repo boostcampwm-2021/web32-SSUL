@@ -7,3 +7,4 @@ export { default as Auth } from './Auth';
 export { default as Loader } from './Loader';
 export { default as SearchFilter } from './SearchFilter';
 export { default as GroupCard } from './GroupCard';
+export { default as Pagination } from './Pagination';
