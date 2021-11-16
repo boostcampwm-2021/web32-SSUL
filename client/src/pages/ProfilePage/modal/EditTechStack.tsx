@@ -1,37 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
-import { TechStack } from '@types';
+import { TechStack, updateTechStackRequest } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { selectUser } from '@store/slices/userSlice';
 
 interface Props {
-  currentUsingTechStacks: string[];
   onCancel: () => void;
 }
-function EditTechStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element {
-  const [techStacks, setTechStacks] = useState<TechStack[]>([]);
-  const [usingStacks, setUsingStacks] = useState<string[]>(currentUsingTechStacks);
+function EditTechStack({ onCancel }: Props): JSX.Element {
+  const { techStacks } = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
+  const [selectedTechStacks, setSelectedStacks] = useState<string[]>(techStacks);
+  
+  const putProfileTechStack = async () => {
+    if (user.id !== undefined) {
+      const request = {
+        id: user.id,
+        techStacks: selectedTechStacks,
+      } as updateTechStackRequest;
+
+      techStackHttpClient.putMenteeTechStack(request);
+    }
+  };
+
+  const handleConfirmButtonClick = () =>{
+    dispatch(setProfileData({techStacks: selectedTechStacks}));
+    putProfileTechStack();
+    onCancel();
+  }
 
   useEffect(() => {
     const fetechTechStackList = async () => {
       const response: TechStack[] = await techStackHttpClient.getTechStackList();
-      setTechStacks(response);
+      setBaseTechStacks(response);
     };
-
     fetechTechStackList();
   }, []);
 
   return (
     <Container>
+      <ModalTitle>기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
-        baseTechStackList={techStacks}
-        usingTechStacks={usingStacks}
-        setUsingTechStacks={setUsingStacks}
+        baseTechStackList={baseTechStacks}
+        usingTechStacks={selectedTechStacks}
+        setUsingTechStacks={setSelectedStacks}
       />
       <ButtonWrapper>
         <CustomButton label={'취소'} clickBtn={onCancel} />
-        <CustomButton label={'확인'} clickBtn={onCancel} />
+        <CustomButton label={'확인'} clickBtn={handleConfirmButtonClick} />
       </ButtonWrapper>
     </Container>
   );
@@ -40,7 +62,7 @@ function EditTechStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element
 const Container = styled.div`
   position: relative;
   width: 600px;
-  height: 300px;
+  height: 350px;
 `;
 const ButtonWrapper = styled.div`
   position: absolute;
@@ -49,5 +71,10 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 200px;
+`;
+
+const ModalTitle = styled.p`
+  margin-left: 10px;
+  font-weight: bold;
 `;
 export default EditTechStack;

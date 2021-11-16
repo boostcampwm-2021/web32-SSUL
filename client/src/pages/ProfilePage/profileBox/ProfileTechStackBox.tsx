@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectUser } from '@store/slices/userSlice';
+import { techStackHttpClient } from '@api';
 
 interface Props {
-  handleEditButtonClick: () => void;
+  showModal: () => void;
 }
 
-function ProfileTechStackBox({ handleEditButtonClick }: Props): JSX.Element {
-  const techStackList = ['c++', 'java', 'javascript'];
+function ProfileTechStackBox({ showModal }: Props): JSX.Element {
+  const { techStacks } = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchProfileTechStack = async () => {
+      if (user.id !== undefined) {
+        const fetchedTechStack = await techStackHttpClient.getMenteeTechStackList(user.id);
+        const techStackList = fetchedTechStack.map(({ name }) => name);
+        dispatch(setProfileData({ techStacks: techStackList }));
+      }
+    };
+
+    fetchProfileTechStack();
+  }, [user]);
   return (
     <>
       <ProfileContainer title="기술스택">
-        <EditButton onClick={handleEditButtonClick}>편집</EditButton>
+        <EditButton onClick={showModal}>편집</EditButton>
         <TechStackContainer>
-          {techStackList.map((techStackName, idx) => (
+          {techStacks.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>
           ))}
         </TechStackContainer>
@@ -38,6 +56,7 @@ const TechStackItem = styled.div`
 `;
 
 const EditButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
@@ -48,6 +67,10 @@ const EditButton = styled.button`
   border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
+
+  &:hover {
+    background-color: #00a18d;
+  }
 `;
 
 export default ProfileTechStackBox;

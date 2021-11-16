@@ -19,7 +19,7 @@ function SelectedTechStackList({ usingTechStacks, setUsingTechStacks }: Props): 
   const selectedTechListElements = usingTechStacks.map((techStackName, idx) => {
     return (
       <SelectItem key={idx}>
-        <h4>{techStackName}</h4>
+        <ItemText>{techStackName}</ItemText>
         <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
@@ -43,11 +43,15 @@ const SelectItem = styled.div`
   border-radius: 10px;
 `;
 
+const ItemText = styled.p`
+  margin: 0;
+  color: ${(props) => props.theme.White};
+  font-weight: bold;
+`
 const EraseButton = styled.button`
   margin-left: 10px;
-
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px 30px 30px 30px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 `;
 

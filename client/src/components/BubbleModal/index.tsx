@@ -38,6 +38,7 @@ const ProfileModalContainer = styled.div`
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.Gray6};
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  z-index: 9999;
 `;
 
 const NotificationModalContainer = styled.div`

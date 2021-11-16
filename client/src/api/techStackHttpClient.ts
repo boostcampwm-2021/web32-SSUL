@@ -1,5 +1,5 @@
 import HttpClient from './HttpClient';
-import { TechStack } from '@types';
+import { TechStack, updateTechStackRequest } from '@types';
 
 class TechStackHttpClient extends HttpClient {
   public constructor() {
@@ -7,6 +7,12 @@ class TechStackHttpClient extends HttpClient {
   }
 
   public getTechStackList = (): Promise<TechStack[]> => this.httpClient.get('/');
+  public getMenteeTechStackList = (userId: number): Promise<TechStack[]> =>{
+    return this.httpClient.get(`/mentee/${userId}`);
+  }
+  public putMenteeTechStack =(request: updateTechStackRequest): Promise<null> =>{
+    return this.httpClient.put('/mentee',request)
+  } 
 }
 
 export const techStackHttpClient = new TechStackHttpClient();

@@ -32,4 +32,20 @@ export interface ResponseUserData {
   role: string;
 }
 
+export interface UpdateIntroRequest {
+  id: number;
+  intro: string;
+}
+
+export interface updateTechStackRequest {
+  id: number;
+  techStacks: string[];
+}
+
+export interface GroupActivity{
+  name: string;
+  startAt: string;
+  endAt: string;
+}
+
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;

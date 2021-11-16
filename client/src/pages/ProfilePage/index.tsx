@@ -1,40 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileSideContents from './ProfileSideContents';
 import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
-import { BoxModal } from '@components';
-import EditTechStack from './modal/EditTechStack';
-
-const MODAL_STYLE = {
-  width: '700px',
-  height: '400px',
-  padding: '50px 50px 50px 50px',
-}
+import ProfilePageModal from './modal';
+import { useAppDispatch } from '@hooks';
+import { clearProfileData } from '@store/slices/profileDataSlice';
 
 function ProfilePage(): JSX.Element {
-  const [isModal, setIsModal] = useState<boolean>(false);
+  const [modalType, setModalType] = useState<string>('NONE');
+  const showModal = (type: string) => () => setModalType(type);
+  const dispatch = useAppDispatch();
 
-  const handleModalBackgroundClick = () => setIsModal(false);
-  const handleEditButtonClick = () => setIsModal(true);
+  useEffect(() => {
+    return () => {
+      dispatch(clearProfileData());
+    };
+  }, []);
+
   return (
     <Container>
       <ProfileSideContents />
       <MainContents>
         <ProfileIntroBox />
-        <ProfileTechStackBox handleEditButtonClick={handleEditButtonClick}/>
+        <ProfileTechStackBox showModal={showModal('EDIT_TECH_STACK')} />
         <ProfileActivityListBox />
         <Divider />
-        <ProfileMentorStackBox />
+        <ProfileMentorStackBox showModal={showModal('CREATE_MENTOR_STACK')} />
       </MainContents>
-
-      {isModal && (
-        <BoxModal
-          style={MODAL_STYLE}
-          element={<EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />}
-          onCancel={handleModalBackgroundClick}
-        />
-      )}
+      <ProfilePageModal type={modalType} onCancel={showModal('NONE')} />
     </Container>
   );
 }
