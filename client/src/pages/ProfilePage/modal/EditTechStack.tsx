@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
-import { TechStack } from '@types';
+import { TechStack, updateTechStackRequest } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { selectUser } from '@store/slices/userSlice';
 
 interface Props {
   onCancel: () => void;
 }
 function EditTechStack({ onCancel }: Props): JSX.Element {
   const { techStacks } = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
-  const [usingStacks, setUsingStacks] = useState<string[]>(techStacks);
+  const [selectedTechStacks, setSelectedStacks] = useState<string[]>(techStacks);
+  
+  const putProfileTechStack = async () => {
+    if (user.id !== undefined) {
+      const request = {
+        id: user.id,
+        techStacks: selectedTechStacks,
+      } as updateTechStackRequest;
+
+      techStackHttpClient.putMenteeTechStack(request);
+    }
+  };
 
   const handleConfirmButtonClick = () =>{
-    dispatch(setProfileData({techStacks: usingStacks}));
-    //TODO : PUT
+    dispatch(setProfileData({techStacks: selectedTechStacks}));
+    putProfileTechStack();
     onCancel();
   }
+
   useEffect(() => {
     const fetechTechStackList = async () => {
       const response: TechStack[] = await techStackHttpClient.getTechStackList();
@@ -34,8 +48,8 @@ function EditTechStack({ onCancel }: Props): JSX.Element {
       <ModalTitle>기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
         baseTechStackList={baseTechStacks}
-        usingTechStacks={usingStacks}
-        setUsingTechStacks={setUsingStacks}
+        usingTechStacks={selectedTechStacks}
+        setUsingTechStacks={setSelectedStacks}
       />
       <ButtonWrapper>
         <CustomButton label={'취소'} clickBtn={onCancel} />

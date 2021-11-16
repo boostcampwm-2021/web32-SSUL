@@ -37,4 +37,9 @@ export interface UpdateIntroRequest {
   intro: string;
 }
 
+export interface updateTechStackRequest {
+  id: number;
+  techStacks: string[];
+}
+
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;
