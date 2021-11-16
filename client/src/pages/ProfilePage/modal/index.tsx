@@ -10,7 +10,7 @@ interface Props {
 
 const TECHSTACK_STYLE = {
   width: '700px',
-  height: '400px',
+  height: '450px',
   padding: '50px 50px 50px 50px',
 };
 

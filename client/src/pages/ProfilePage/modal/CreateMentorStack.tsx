@@ -24,7 +24,7 @@ function CreateMentorStack({ currentUsingTechStacks, onCancel }: Props): JSX.Ele
 
   return (
     <Container>
-      <p>멘토링 스택을 입력해주세요!</p>
+      <ModalTitle>멘토링을 원하는 기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
         baseTechStackList={techStacks}
         usingTechStacks={usingStacks}
@@ -41,7 +41,7 @@ function CreateMentorStack({ currentUsingTechStacks, onCancel }: Props): JSX.Ele
 const Container = styled.div`
   position: relative;
   width: 600px;
-  height: 300px;
+  height: 350px;
 `;
 const ButtonWrapper = styled.div`
   position: absolute;
@@ -50,5 +50,10 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 200px;
+`;
+const ModalTitle = styled.p`
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
 `;
 export default CreateMentorStack;

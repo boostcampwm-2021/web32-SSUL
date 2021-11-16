@@ -24,6 +24,7 @@ function EditTechStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element
 
   return (
     <Container>
+      <ModalTitle>기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
         baseTechStackList={techStacks}
         usingTechStacks={usingStacks}
@@ -40,7 +41,7 @@ function EditTechStack({ currentUsingTechStacks, onCancel }: Props): JSX.Element
 const Container = styled.div`
   position: relative;
   width: 600px;
-  height: 300px;
+  height: 350px;
 `;
 const ButtonWrapper = styled.div`
   position: absolute;
@@ -50,4 +51,9 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
   width: 200px;
 `;
+
+const ModalTitle = styled.p`
+  margin-left: 10px;
+  font-weight: bold;
+`
 export default EditTechStack;
