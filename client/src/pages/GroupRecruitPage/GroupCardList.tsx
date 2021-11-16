@@ -2,31 +2,31 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { GroupCard, Pagination } from '@components';
 import { Group, GroupResponse } from '@types';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import {
   initFilterState,
   returnGroupRecruitFilterState,
 } from '@store/slices/groupRecruitFilterSlice';
 import { groupHttpClient } from '@api';
-import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
+  const toggleLoader = useLoader();
 
   useEffect(() => {
     dispatch(initFilterState());
   }, []);
 
   useEffect(() => {
-    toggleLoadingState();
+    toggleLoader();
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
-      toggleLoadingState();
+      toggleLoader();
     };
     getGroupsList();
   }, [filterdQuery]);
