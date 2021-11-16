@@ -2,19 +2,23 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { VerticalLayout } from '@styles';
 import GroupInfo from './GroupInfo';
-import GroupBoard from './GroupInfo';
+import GroupBoard from './GroupBoard';
 import SettingButton from './SettingButton';
 
 function GroupsPage(): JSX.Element {
   return (
-    <VerticalLayout>
+    <Container>
       <SettingButton />
       <GroupInfo />
       <GroupBoard />
-    </VerticalLayout>
+    </Container>
   );
 }
 
-const Container = styled.div``;
+const Container = styled(VerticalLayout)`
+  position: relative;
+  padding: 48px;
+  height: max-content;
+`;
 
 export default GroupsPage;
