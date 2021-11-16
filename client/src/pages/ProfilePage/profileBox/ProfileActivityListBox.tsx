@@ -9,7 +9,7 @@ function ProfileActivityListBox(): JSX.Element {
 
   const getActivityList = () => {
     const listItems = groupActivitys.map(({ name, startAt, endAt }, idx) => {
-      return <ActivityListItem key={idx}>{`${name} : ${startAt} ~ ${endAt}`}</ActivityListItem>;
+      return <ActivityListItem key={idx}>{`${name} : [ ${startAt} ~ ${endAt} ]`}</ActivityListItem>;
     });
     return <ActivityList>{listItems}</ActivityList>;
   };
@@ -26,6 +26,6 @@ const ActivityList = styled.ul`
 
 const ActivityListItem = styled.li`
   color: ${(props) => props.theme.Gray3};
-  margin-top: 3px;
+  margin-top: 5px;
 `;
 export default ProfileActivityListBox;
