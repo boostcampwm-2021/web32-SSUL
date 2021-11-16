@@ -53,4 +53,9 @@ export interface MentorInfoResponse {
   mentorId: number;
 }
 
+export interface RegisterMentorRequest {
+  userId: number;
+  techStacks: string[];
+}
+
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;

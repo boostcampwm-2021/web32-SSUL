@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
 import { TechStack } from '@types';
-import { techStackHttpClient } from '@api';
+import { mentoringHttpClient, techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { setProfileData } from '@store/slices/profileDataSlice';
+import { selectUser } from '@store/slices/userSlice';
 
 interface Props {
   onCancel: () => void;
@@ -14,18 +15,27 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
   const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
   const [notificationText, setNotificationText] = useState<string>('');
+  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const checkMentorStack = () => selectedTechStacks.length > 0;
 
-  const requestCreateMentor = () => {
+  const requestCreateMentor = async () => {
     if (!checkMentorStack()) {
       setNotificationText('최소 1개 이상 기술스택을 선택해주세요!');
       return;
     }
+    if (user.id === undefined) {
+      setNotificationText('로그인 정보가 없습니다!');
+      return;
+    }
     setNotificationText('');
     dispatch(setProfileData({ mentoringStack: selectedTechStacks, isMentor: true }));
-    onCancel();
-    //TODO: POST
+    try {
+      await mentoringHttpClient.registerMentor({ userId: user.id, techStacks: selectedTechStacks });
+      onCancel();
+    } catch (e) {
+      setNotificationText('멘토 신청에 실패했습니다!');
+    }
   };
 
   useEffect(() => {
