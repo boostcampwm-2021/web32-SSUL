@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectUser } from '@store/slices/userSlice';
-import { techStackHttpClient } from '@api';
+import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
 
 interface Props {
   showModal: () => void;
@@ -12,20 +10,7 @@ interface Props {
 
 function ProfileTechStackBox({ showModal }: Props): JSX.Element {
   const { techStacks } = useAppSelector(selectProfileData);
-  const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const fetchProfileTechStack = async () => {
-      if (user.id !== undefined) {
-        const fetchedTechStack = await techStackHttpClient.getMenteeTechStackList(user.id);
-        const techStackList = fetchedTechStack.map(({ name }) => name);
-        dispatch(setProfileData({ techStacks: techStackList }));
-      }
-    };
-
-    fetchProfileTechStack();
-  }, [user]);
   return (
     <>
       <ProfileContainer title="기술스택">

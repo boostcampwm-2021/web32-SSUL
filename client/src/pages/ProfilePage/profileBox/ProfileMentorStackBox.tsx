@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
-import { selectUser } from '@store/slices/userSlice';
-import { mentoringHttpClient, techStackHttpClient } from '@api';
+import {  useAppSelector } from '@hooks';
+import { selectProfileData } from '@store/slices/profileDataSlice';
 
 interface Props {
   showRequestModal: () => void;
@@ -12,29 +10,8 @@ interface Props {
 }
 
 function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JSX.Element {
-  const user = useAppSelector(selectUser);
   const { isMentor, mentoringStack } = useAppSelector(selectProfileData);
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const fetchMentoringStack = async () => {
-      if (user.id !== undefined) {
-        const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(user.id);
-        const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
-
-        dispatch(setProfileData({ mentoringStack: mentoringStacks }));
-      }
-    };
-
-    const fetchMentorInfo = async () => {
-      if (user.id !== undefined) {
-        const { mentorId, isMentor } = await mentoringHttpClient.getMentorId(user.id);
-        dispatch(setProfileData({ mentorId, isMentor }));
-      }
-    };
-    fetchMentoringStack();
-    fetchMentorInfo();
-  }, [user]);
   return (
     <>
       {isMentor ? (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -37,17 +37,6 @@ function ProfileIntroBox(): JSX.Element {
     textArea.style.height = 10 + textArea.scrollHeight + 'px';
   };
 
-  useEffect(() => {
-    const fetchProfileIntro = async () => {
-      if (user.id !== undefined) {
-        const fetchedIntro = await userHttpClient.getIntro(user.id);
-        setPrevIntro(fetchedIntro);
-        dispatch(setProfileData({ intro: fetchedIntro }));
-      }
-    };
-
-    fetchProfileIntro();
-  }, [user]);
   const getTextElement = (): JSX.Element => {
     return editState ? (
       <ProfileEditText

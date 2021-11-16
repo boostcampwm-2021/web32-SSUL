@@ -1,34 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
+import { selectProfileData } from '@store/slices/profileDataSlice';
 import ProfileBoxContainer from './ProfileBoxContainer';
-import { selectUser } from '@store/slices/userSlice';
-import { groupHttpClient } from '@api';
-import { formatDateToString } from '@utils/Date';
 
 function ProfileActivityListBox(): JSX.Element {
   const { groupActivitys } = useAppSelector(selectProfileData);
-  const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const fetchGroupActivityTechStack = async () => {
-      if (user.id !== undefined) {
-        const fetchedGroupActivity = await groupHttpClient.getGroupActivity(user.id);
-        const groupActivitys = fetchedGroupActivity.map(({name, startAt, endAt}) =>{
-          return {
-            name: name,
-            startAt: formatDateToString(startAt),
-            endAt: formatDateToString(endAt)
-          }
-        }) 
-        dispatch(setProfileData({groupActivitys: groupActivitys}))
-      }
-    }
-
-    fetchGroupActivityTechStack();
-  }, [user]);
   const getActivityList = () => {
     const listItems = groupActivitys.map(({ name, startAt, endAt }, idx) => {
       return <ActivityListItem key={idx}>{`${name} : ${startAt} ~ ${endAt}`}</ActivityListItem>;
