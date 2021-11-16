@@ -35,5 +35,5 @@ export class FilterdPageGroupDto {
   @IsArray()
   groups: FilterdGroupDto[];
   @IsNumber()
-  totalGroups: number;
+  totalPages: number;
 }
