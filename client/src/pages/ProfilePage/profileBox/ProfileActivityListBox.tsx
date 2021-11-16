@@ -5,7 +5,7 @@ import { selectProfileData, setProfileData } from '@store/slices/profileDataSlic
 import ProfileBoxContainer from './ProfileBoxContainer';
 import { selectUser } from '@store/slices/userSlice';
 import { groupHttpClient } from '@api';
-import moment from 'moment';
+import { formatDateToString } from '@utils/Date';
 
 function ProfileActivityListBox(): JSX.Element {
   const { groupActivitys } = useAppSelector(selectProfileData);
@@ -19,8 +19,8 @@ function ProfileActivityListBox(): JSX.Element {
         const groupActivitys = fetchedGroupActivity.map(({name, startAt, endAt}) =>{
           return {
             name: name,
-            startAt: moment(startAt).format('YYYY-MM-DD'),
-            endAt: moment(endAt).format('YYYY-MM-DD'),
+            startAt: formatDateToString(startAt),
+            endAt: formatDateToString(endAt)
           }
         }) 
         dispatch(setProfileData({groupActivitys: groupActivitys}))
