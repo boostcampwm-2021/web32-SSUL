@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch } from '@hooks';
+import { changeGroupModalState } from '@store/slices/utilSlice';
 
-function GroupBoard(): JSX.Element {
+function Post(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const handlePostItemClick = () => dispatch(changeGroupModalState('READ'));
   return (
-    <Container>
+    <Container onClick={handlePostItemClick}>
       <MainInfoBox>
         <Type>공지</Type>
         <Title>리액트 공부할 때 도움되는 레퍼런스 모음집</Title>
@@ -63,4 +67,4 @@ const Date = styled.span`
   color: ${(props) => props.theme.Gray2};
 `;
 
-export default GroupBoard;
+export default Post;

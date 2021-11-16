@@ -4,13 +4,19 @@ import { VerticalLayout } from '@styles';
 import GroupInfo from './GroupInfo';
 import GroupBoard from './GroupBoard';
 import SettingButton from './SettingButton';
+import GroupPageModal from './Modal';
+import { useAppSelector } from '@hooks';
+import { selectGroupModalState } from '@store/slices/utilSlice';
 
 function GroupsPage(): JSX.Element {
+  const modalType = useAppSelector(selectGroupModalState);
+
   return (
     <Container>
       <SettingButton />
       <GroupInfo />
       <GroupBoard />
+      <GroupPageModal type={modalType} />
     </Container>
   );
 }

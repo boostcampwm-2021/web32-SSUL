@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PlusIcon from '@assets/icon_plus.png';
+import { useAppDispatch } from '@hooks';
+import { changeGroupModalState } from '@store/slices/utilSlice';
 
 function GroupBoardHeader(): JSX.Element {
+  const dipatch = useAppDispatch();
+  const handlePostButtonClick = () => dipatch(changeGroupModalState('POST'));
+
   return (
     <Container>
       <GroupDate>그룹 게시판</GroupDate>
-      <Image src={PlusIcon} />
+      <Image src={PlusIcon} onClick={handlePostButtonClick} alt="그룹 게시판 글쓰기 버튼" />
     </Container>
   );
 }

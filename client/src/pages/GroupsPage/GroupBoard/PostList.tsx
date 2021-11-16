@@ -2,9 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Post from './Post';
 
-function GroupBoard(): JSX.Element {
+function PostList(): JSX.Element {
   const NUM = 12;
   const postList = [...Array(NUM)].map((_, idx) => <Post key={idx} />);
+
   return (
     <Container>
       {postList.length ? <>{postList}</> : <NoGroupNoti>아직 작성된 글이 없습니다!</NoGroupNoti>}
@@ -28,4 +29,4 @@ const NoGroupNoti = styled.span`
   margin: 0px;
 `;
 
-export default GroupBoard;
+export default PostList;
