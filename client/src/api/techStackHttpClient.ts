@@ -10,6 +10,9 @@ class TechStackHttpClient extends HttpClient {
   public getMenteeTechStackList = (userId: number): Promise<TechStack[]> =>{
     return this.httpClient.get(`/mentee/${userId}`);
   }
+  public getMentorTechStackList = (userId: number): Promise<TechStack[]> =>{
+    return this.httpClient.get(`/mentor/${userId}`);
+  }
   public putMenteeTechStack =(request: UpdateTechStackRequest): Promise<null> =>{
     return this.httpClient.put('/mentee',request)
   } 

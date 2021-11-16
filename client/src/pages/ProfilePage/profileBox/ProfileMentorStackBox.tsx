@@ -4,7 +4,7 @@ import ProfileContainer from './ProfileBoxContainer';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
 import { selectUser } from '@store/slices/userSlice';
-import { mentoringHttpClient } from '@api';
+import { mentoringHttpClient, techStackHttpClient } from '@api';
 
 interface Props {
   showRequestModal: () => void;
@@ -17,13 +17,22 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const fetchMentoringStack = async () => {
+      if (user.id !== undefined) {
+        const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(user.id);
+        const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
+
+        dispatch(setProfileData({ mentoringStack: mentoringStacks }));
+      }
+    };
+
     const fetchMentorInfo = async () => {
       if (user.id !== undefined) {
         const { mentorId, isMentor } = await mentoringHttpClient.getMentorId(user.id);
         dispatch(setProfileData({ mentorId, isMentor }));
       }
     };
-
+    fetchMentoringStack();
     fetchMentorInfo();
   }, [user]);
   return (
