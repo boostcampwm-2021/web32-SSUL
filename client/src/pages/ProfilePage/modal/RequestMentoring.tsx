@@ -4,12 +4,35 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
 import { selectProfileData } from '@store/slices/profileDataSlice';
 import { useAppSelector } from '@hooks';
-import { MentoringRequestData } from '@types';
+import { DeleteRequestInfo, MentoringRequestData } from '@types';
 import { formatDateToString } from '@utils/Date';
 
 function RequestMentoring(): JSX.Element {
   const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
   const { mentorId } = useAppSelector(selectProfileData);
+
+  const fetchMentoringRequests = async () => {
+    const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(
+      mentorId,
+    );
+    setRequestList(fetchedData);
+  };
+
+  const handleButtonClick = (data: MentoringRequestData, accept: boolean) => async () => {
+    const requestData: DeleteRequestInfo = {
+      id: data.id,
+      mentorId: mentorId,
+      groupId: data.groupId,
+      accept: accept,
+    };
+    await mentoringHttpClient.deleteMentoringRequest(requestData);
+    try {
+      await mentoringHttpClient.deleteMentoringRequest(requestData);
+      fetchMentoringRequests();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
     return (
@@ -23,25 +46,29 @@ function RequestMentoring(): JSX.Element {
         </GroupInfo>
         <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
-          <CustomButton label={'거절'} clickBtn={() => console.log('hi')} />
-          <CustomButton label={'수락'} clickBtn={() => console.log('hi')} />
+          <CustomButton label={'거절'} clickBtn={handleButtonClick(data, false)} />
+          <CustomButton label={'수락'} clickBtn={handleButtonClick(data, true)} />
         </ButtonWrapper>
       </BoxContainer>
     );
   };
 
   useEffect(() => {
-    const fetchMentoringRequests = async () => {
-      const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(mentorId);
-      setRequestList(fetchedData);
-    };
-
     fetchMentoringRequests();
-  });
+  }, []);
   return (
     <Container>
       <ModalTitle>멘토링 신청 리스트</ModalTitle>
-      <ScrollContainer>{requestList.map((data, idx) => makeRequestBox(data, idx))}</ScrollContainer>
+      {requestList.length > 0 ? (
+        <ScrollContainer>
+          {requestList.map((data, idx) => makeRequestBox(data, idx))}
+        </ScrollContainer>
+      ) : (
+        <>
+          <EmptyMessage>아직 멘토링 요청이 없어요...</EmptyMessage>
+          <SubMessage>멘티를 직접 찾아보시는것은 어떨까요?</SubMessage>
+        </>
+      )}
     </Container>
   );
 }
@@ -61,7 +88,7 @@ const ScrollContainer = styled.div`
   }
 `;
 const ModalTitle = styled.p`
-  margin: 0 0 20px 40px;
+  margin: 0 0 20px 20px;
   font-size: 18px;
   font-weight: bold;
 `;
@@ -117,9 +144,22 @@ const GroupInfo = styled.div`
 const GroupText = styled.p`
   width: 150px;
   margin-bottom: 5px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 100px;
+`;
+const SubMessage = styled.div`
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: ${(props) => props.theme.Gray3};
+  margin-top: 20px;
+`;
 export default RequestMentoring;
