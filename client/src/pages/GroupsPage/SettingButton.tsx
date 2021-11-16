@@ -16,7 +16,7 @@ function SettingButton(): JSX.Element {
 const Container = styled.div`
   position: absolute;
   top: 62px;
-  right: 15.5%;
+  left: calc(50% + 480px);
 `;
 
 const Image = styled.img`

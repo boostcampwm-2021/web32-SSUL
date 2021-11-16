@@ -22,6 +22,7 @@ const Container = styled.div`
   min-height: 360px;
   padding: 20px 24px 20px 24px;
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  margin-bottom: 64px;
 `;
 
 const BoxContainer = styled(HorizontalLayout)`
