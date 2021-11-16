@@ -30,3 +30,10 @@ export class FilterdGroupDto {
   @IsNumber()
   ownerName: number | null;
 }
+
+export class FilterdPageGroupDto {
+  @IsArray()
+  groups: FilterdGroupDto[];
+  @IsNumber()
+  totalGroups: number;
+}

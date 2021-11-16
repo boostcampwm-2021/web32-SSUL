@@ -7,7 +7,7 @@ import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { Group } from '../models/Group';
 import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
-import { FilterdGroupDto } from '../dto/FilterdGroupDto';
+import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 
 @Service()
 export class GroupService {
@@ -22,7 +22,21 @@ export class GroupService {
     private readonly profilekRepository: ProfileRepository,
   ) {}
 
-  public async getFilterdGroups(name: string = '', category: number, techstack: string) {
+  public async getFilterdPageGroups(
+    page: number,
+    name: string = '',
+    category: number,
+    techstack: string,
+  ): Promise<FilterdPageGroupDto> {
+    const totalFilterdGroups = await this.getFilterdGroups(name, category, techstack);
+    return { groups: totalFilterdGroups, totalGroups: totalFilterdGroups.length };
+  }
+
+  public async getFilterdGroups(
+    name: string,
+    category: number,
+    techstack: string,
+  ): Promise<FilterdGroupDto[]> {
     const filterdTechStack = techstack ? techstack.split(',') : [];
     const groups =
       category !== undefined
