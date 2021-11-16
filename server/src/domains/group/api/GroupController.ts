@@ -4,7 +4,7 @@ import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
-import { FilterdGroupDto } from '../dto/FilterdGroupDto';
+import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActiviryDto } from '../dto/GroupActivityDto';
 
 @OpenAPI({
@@ -30,13 +30,15 @@ export class GroupController {
       },
     },
   })
-  @ResponseSchema(FilterdGroupDto, { description: '필터링 그룹 조회 결과' })
+  @ResponseSchema(FilterdPageGroupDto, { description: '필터링 그룹 조회 결과' })
   async getAll(
+    @QueryParam('page') page: number,
     @QueryParam('name') name: string,
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
-    const filterdGroups: FilterdGroupDto[] = await this.groupService.getFilterdGroups(
+    const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
+      page,
       name,
       category,
       techstack,
