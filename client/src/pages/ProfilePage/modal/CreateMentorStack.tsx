@@ -4,25 +4,29 @@ import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
 import { TechStack } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
+import { useAppDispatch } from '@hooks';
+import { setProfileData } from '@store/slices/profileDataSlice';
 
 interface Props {
   onCancel: () => void;
 }
 function CreateMentorStack({ onCancel }: Props): JSX.Element {
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
-  const [usingStacks, setUsingStacks] = useState<string[]>([]);
+  const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
   const [notificationText, setNotificationText] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const checkMentorStack = () => selectedTechStacks.length > 0;
 
-  const checkMentorStack = () => usingStacks.length > 0;
-
-  const requestCreateMentor = () =>{
-    if(!checkMentorStack()){
+  const requestCreateMentor = () => {
+    if (!checkMentorStack()) {
       setNotificationText('최소 1개 이상 기술스택을 선택해주세요!');
       return;
     }
     setNotificationText('');
+    dispatch(setProfileData({ mentoringStack: selectedTechStacks, isMentor: true }));
+    onCancel();
     //TODO: POST
-  }
+  };
 
   useEffect(() => {
     const fetechTechStackList = async () => {
@@ -38,8 +42,8 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
       <ModalTitle>멘토링을 원하는 기술스택을 선택해주세요!</ModalTitle>
       <TechStackInput
         baseTechStackList={baseTechStacks}
-        usingTechStacks={usingStacks}
-        setUsingTechStacks={setUsingStacks}
+        usingTechStacks={selectedTechStacks}
+        setUsingTechStacks={setSelectedTechStacks}
       />
       <ButtonWrapper>
         <CustomButton label={'취소'} clickBtn={onCancel} />
@@ -76,6 +80,6 @@ const Notification = styled.div`
   font-size: 13px;
   line-height: 40px;
   margin-left: 20px;
-  color: #e50707;
+  color: ${(props) => props.theme.Error};
 `;
 export default CreateMentorStack;
