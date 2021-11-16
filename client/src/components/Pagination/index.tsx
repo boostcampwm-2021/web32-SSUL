@@ -35,9 +35,9 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
 
   return (
     <Container>
-      {!isFirstPageNumber && 'prev'}
+      {!isFirstPageNumber && <PageHadleButton>{'<'}</PageHadleButton>}
       {renderPagination}
-      {!isLastPageNumber && 'next'}
+      {!isLastPageNumber && <PageHadleButton>{'>'}</PageHadleButton>}
     </Container>
   );
 }
@@ -59,6 +59,11 @@ const SelectedPageNumber = styled(PageNumber)`
 `;
 
 const NonSelectedPageNumber = styled(PageNumber)`
+  color: ${(props) => props.theme.Black};
+  background: ${(props) => props.theme.Gray5};
+`;
+
+const PageHadleButton = styled(PageNumber)`
   color: ${(props) => props.theme.Black};
   background: ${(props) => props.theme.Gray5};
 `;
