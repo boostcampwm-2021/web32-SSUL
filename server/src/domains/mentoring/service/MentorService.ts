@@ -3,6 +3,7 @@ import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
+import { CheckMentorDto } from '../dto/CheckMentorDto';
 import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
@@ -28,11 +29,18 @@ export class MentorService {
     return await this.mentorRepository.save(mentor);
   }
 
+  public async getMentorIdByUserId(userId: number) {
+    const mentor = await this.mentorRepository.findOne({ userId: userId });
+
+    if (mentor === undefined) return { isMentor: false, mentorId: -1 } as CheckMentorDto;
+    else return { isMentor: true, mentorId: mentor.id } as CheckMentorDto;
+  }
+
   public async getRequestListByMentorId(mentorId: number) {
     const results = await this.mentoringRequestRepository.findAllByMentorId(mentorId);
 
     return Promise.all<any>(
-      results.map(async ({ id, group, createdAt}) => {
+      results.map(async ({ id, group, createdAt }) => {
         const groupName = group.name;
         const groupId = group.id;
         const { imageUrl: categoryImage } = await this.categoryRepository.findOneOrFail({
@@ -47,12 +55,12 @@ export class MentorService {
     );
   }
 
-  public async processingDeleteRequest(requestData: DeleteRequestDto){
-    if(requestData.accept){
-      const group = await this.groupRepository.findOneOrFail({id: requestData.groupId});
+  public async processingDeleteRequest(requestData: DeleteRequestDto) {
+    if (requestData.accept) {
+      const group = await this.groupRepository.findOneOrFail({ id: requestData.groupId });
       group.mentorId = requestData.mentorId;
       await this.groupRepository.save(group);
     }
-    await this.mentoringRequestRepository.delete({id: requestData.id});
+    await this.mentoringRequestRepository.delete({ id: requestData.id });
   }
 }

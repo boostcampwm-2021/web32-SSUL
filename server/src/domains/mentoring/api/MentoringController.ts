@@ -4,6 +4,7 @@ import { ProfileService } from '@domains/user/service/ProfileService';
 import { Controller, OnUndefined, Body, Post, Get, Param, Patch, Delete } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
+import { CheckMentorDto } from '../dto/CheckMentorDto';
 import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
@@ -23,6 +24,13 @@ export class MentoringController {
     @Inject()
     private readonly profileService: ProfileService,
   ) {}
+
+  @Get('/mentor/:uid')
+  @OpenAPI({ summary: '멘토 id를 가져오는 API' })
+  @ResponseSchema(CheckMentorDto)
+  public async getMentorId(@Param('uid') userId: number){
+    return await this.mentorService.getMentorIdByUserId(userId);
+  }
 
   @Post('/mentor')
   @OpenAPI({ summary: '멘토를 생성하는 API' })
