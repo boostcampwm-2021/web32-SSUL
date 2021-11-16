@@ -1,21 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
 
+export enum ModalType {
+  NONE = 'NONE',
+  READ = 'READ',
+  POST = 'POST',
+}
+
 export interface UtilState {
   isLoading: boolean;
+  groupModalState: ModalType;
 }
+
+const initialState: UtilState = {
+  isLoading: false,
+  groupModalState: ModalType.NONE,
+};
+
 export const utilSlice = createSlice({
   name: 'util',
-  initialState: {
-    isLoading: false,
-  } as UtilState,
+  initialState,
   reducers: {
     toggleLoadingState(state) {
       return { ...state, isLoading: !state.isLoading };
     },
+    changeGroupModalState(state, { payload }) {
+      return { ...state, groupModalState: payload };
+    },
   },
 });
 
-export const { toggleLoadingState } = utilSlice.actions;
+export const { toggleLoadingState, changeGroupModalState } = utilSlice.actions;
 export default utilSlice.reducer;
 export const selectLoadingState = (state: RootState): boolean => state.util.isLoading;
+export const selectGroupModalState = (state: RootState): ModalType => state.util.groupModalState;
