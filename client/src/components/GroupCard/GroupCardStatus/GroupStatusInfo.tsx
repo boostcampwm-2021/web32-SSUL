@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { formatDateToString } from '@utils/Date';
+import { calculateStudyTime, formatDateToString } from '@utils/Date';
 
 interface Props {
   intro: string | null;
@@ -13,7 +13,8 @@ function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
     <Container>
       <GroupIntro>{intro}</GroupIntro>
       <GroupDate>
-        {formatDateToString(startAt)} ~ {formatDateToString(endAt)}
+        {formatDateToString(startAt)} ~ {formatDateToString(endAt)}(
+        {calculateStudyTime(startAt, endAt)})
       </GroupDate>
     </Container>
   );
