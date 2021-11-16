@@ -61,9 +61,11 @@ pipeline {
                 branch "PR-*"
             }
             steps {
-                sh 'cd server'
-                sh 'npm install'
-                sh 'npm run test'
+                sh '''
+                    cd server
+                    npm install
+                    npm run test
+                '''
             }
         }
     }
