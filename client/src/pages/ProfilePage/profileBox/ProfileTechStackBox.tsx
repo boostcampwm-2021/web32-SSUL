@@ -69,7 +69,7 @@ const EditButton = styled.button`
   color: ${(props) => props.theme.White};
 
   &:hover {
-    background-color: #00a18d;
+    background-color: ${(props) => props.theme.PrimaryHover};
   }
 `;
 

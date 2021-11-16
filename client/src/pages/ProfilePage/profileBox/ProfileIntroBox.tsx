@@ -104,7 +104,7 @@ const EditButton = styled.button`
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
   &:hover {
-    background-color: #00a18d;
+    background-color: ${(props) => props.theme.PrimaryHover};
   }
 `;
 export default ProfileIntroBox;
