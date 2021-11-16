@@ -43,8 +43,9 @@ export class Group {
   @Column('int', { name: 'category_id', nullable: true })
   categoryId: number | null;
 
-  @Column({ name: 'status', type: 'enum', enum: GroupState, default: GroupState.READY })
-  status: GroupState;
+  // @Column({ name: 'status', type: 'enum', enum: GroupState, default: GroupState.READY })
+  @Column('varchar', { name: 'status', nullable: true, length: 500, default: 'READY' })
+  status: string;
 
   @ManyToOne((type) => Category)
   @JoinColumn({ name: 'category_id' })

@@ -14,6 +14,7 @@ export const ormConfig: OrmConfig = {
     username: config.database.username,
     password: config.database.password,
     synchronize: true,
+    dropSchema: true,
     logging: true,
     entities: [join(__dirname, '../domains/**/models/*.ts')],
   },
