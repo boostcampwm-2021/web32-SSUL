@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { GroupCard } from '@components';
-import { GroupResponse } from '@types';
+import { Group, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   initFilterState,
@@ -12,7 +12,7 @@ import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
-  const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
+  const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,14 +22,14 @@ function GroupCardList(): JSX.Element {
   useEffect(() => {
     toggleLoadingState();
     const getGroupsList = async () => {
-      const allGroupList = await groupHttpClient.getFilterdGroupList(filterdQuery);
-      setFilterdGroupList(allGroupList);
+      const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
+      setFilterdGroupList(allGroupList.groups);
       toggleLoadingState();
     };
     getGroupsList();
   }, [filterdQuery]);
 
-  const renderGroupCards = filterdGroupList.map((groupData: GroupResponse) => {
+  const renderGroupCards = filterdGroupList.map((groupData: Group) => {
     return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 

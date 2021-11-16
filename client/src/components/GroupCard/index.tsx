@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import GroupCardHeader from './GroupCardHeader';
 import GroupCardStatus from './GroupCardStatus';
 import GroupApplyButton from './GroupApplyButton';
-import { GroupResponse } from '@types';
+import { Group } from '@types';
 
 interface CardProps {
-  groupContents: GroupResponse;
+  groupContents: Group;
 }
 
 function GroupCard({ groupContents }: CardProps): JSX.Element {
