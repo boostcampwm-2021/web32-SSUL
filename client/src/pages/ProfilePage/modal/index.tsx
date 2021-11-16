@@ -15,7 +15,6 @@ const MODAL_STYLE = {
   padding: '50px 50px 50px 50px',
 };
 
-
 function ProfilePageModal({ type, onCancel }: Props): JSX.Element {
   const getModalElement = () => {
     switch (type) {
@@ -24,7 +23,7 @@ function ProfilePageModal({ type, onCancel }: Props): JSX.Element {
       case 'CREATE_MENTOR_STACK':
         return <CreateMentorStack onCancel={onCancel} />;
       case 'REQUEST_MENTORING':
-        return <RequestMentoring onCancel={onCancel} />;
+        return <RequestMentoring />;
       default:
         return undefined;
     }
@@ -33,11 +32,7 @@ function ProfilePageModal({ type, onCancel }: Props): JSX.Element {
   return (
     <>
       {type !== 'NONE' && (
-        <BoxModal 
-          style={MODAL_STYLE} 
-          element={getModalElement()} 
-          onCancel={onCancel}
-        />
+        <BoxModal style={MODAL_STYLE} element={getModalElement()} onCancel={onCancel} />
       )}
     </>
   );

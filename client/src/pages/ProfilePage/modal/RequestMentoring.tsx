@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
+import { mentoringHttpClient } from '@api';
+import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
+import { MentoringRequestData } from '@types';
+import { formatDateToString } from '@utils/Date';
 
-interface Props {
-  onCancel: () => void;
-}
-function RequestMentoring({ onCancel }: Props): JSX.Element {
-  const dummyData = ['테스트1', '테스트2', '테스트3', '테스트4', '테스트5'];
-  const handleCloseButtonClick = () => onCancel();
-  const makeRequestBox = (name: string, idx: number): JSX.Element => {
+function RequestMentoring(): JSX.Element {
+  const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
+  const { mentorId } = useAppSelector(selectProfileData);
+
+  const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
     return (
       <BoxContainer key={idx}>
         <ImageContainer>
-          <CategoryImage src="https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F075b46f8-ebd6-43ef-80b0-1cc1f2c6ebe0%2Ficon-study.png?table=block&id=45def0e6-f405-4184-93d8-ee69afa3ea23&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2" />
+          <CategoryImage src={data.categoryImage} />
         </ImageContainer>
         <GroupInfo>
-          <GroupText>{name}</GroupText>
-          <GroupText>그룹장명</GroupText>
+          <GroupText>{data.groupName}</GroupText>
+          <GroupText>{data.ownerName}</GroupText>
         </GroupInfo>
-        <RequestDate>2021.11.15</RequestDate>
+        <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
           <CustomButton label={'거절'} clickBtn={() => console.log('hi')} />
           <CustomButton label={'수락'} clickBtn={() => console.log('hi')} />
@@ -27,20 +30,18 @@ function RequestMentoring({ onCancel }: Props): JSX.Element {
     );
   };
 
+  useEffect(() => {
+    const fetchMentoringRequests = async () => {
+      const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(mentorId);
+      setRequestList(fetchedData);
+    };
+
+    fetchMentoringRequests();
+  });
   return (
     <Container>
-      <CloseButton
-        onClick={handleCloseButtonClick}
-        width="24"
-        height="24"
-        xmlns="http://www.w3.org/2000/svg"
-        fillRule="evenodd"
-        clipRule="evenodd"
-      >
-        <path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-      </CloseButton>
       <ModalTitle>멘토링 신청 리스트</ModalTitle>
-      <ScrollContainer>{dummyData.map((name, idx) => makeRequestBox(name, idx))}</ScrollContainer>
+      <ScrollContainer>{requestList.map((data, idx) => makeRequestBox(data, idx))}</ScrollContainer>
     </Container>
   );
 }
@@ -64,11 +65,12 @@ const ModalTitle = styled.p`
   font-size: 18px;
   font-weight: bold;
 `;
+
 const BoxContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 500px;
+  width: 550px;
   height: 90px;
   margin: 0 auto 20px auto;
   border-radius: 5px;
@@ -82,12 +84,14 @@ const ImageContainer = styled.div`
   border-radius: 50%;
   border: 1px ${(props) => props.theme.Gray5} solid;
 `;
+
 const CategoryImage = styled.img`
   width: 40px;
   height: 40px;
   margin: 10px 0 0 10px;
   object-fit: fill;
 `;
+
 const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0;
@@ -95,14 +99,7 @@ const ButtonWrapper = styled.div`
   margin: 15px;
   display: flex;
   justify-content: space-between;
-  width: 180px;
-`;
-
-const CloseButton = styled.svg`
-  position: absolute;
-  right: 0;
-  margin-right: 40px;
-  cursor: pointer;
+  width: 200px;
 `;
 
 const RequestDate = styled.p`
@@ -112,9 +109,17 @@ const RequestDate = styled.p`
   margin-top: 5px;
   margin-right: 20px;
 `;
-const GroupInfo = styled.div``;
+
+const GroupInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const GroupText = styled.p`
+  width: 150px;
   margin-bottom: 5px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 `;
 
 export default RequestMentoring;
