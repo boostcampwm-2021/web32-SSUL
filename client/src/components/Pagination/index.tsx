@@ -29,22 +29,22 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
     dispatch(createdFilterdQuery());
   };
 
-  const handlePrevButton = () => {
+  const handlePrevButtonClick = () => {
     dispatch(checkPageNumber(firstPageNumber - 1));
     dispatch(createdFilterdQuery());
   };
 
-  const handleNextButton = () => {
+  const handleNextButtonClick = () => {
     dispatch(checkPageNumber(lastPageNumber + 1));
     dispatch(createdFilterdQuery());
   };
 
-  const movePageButtonType = (type: string) => {
+  const handleMovePageButtonClick = (type: string) => {
     switch (type) {
       case 'PREV':
-        return handlePrevButton;
+        return handlePrevButtonClick;
       case 'NEXT':
-        return handleNextButton;
+        return handleNextButtonClick;
       default:
         break;
     }
@@ -75,11 +75,11 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
   return (
     <Container>
       {!isFirstPageNumber && (
-        <PageHadleButton onClick={movePageButtonType('PREV')}>{'<'}</PageHadleButton>
+        <PageHadleButton onClick={handleMovePageButtonClick('PREV')}>{'<'}</PageHadleButton>
       )}
       {renderPagination}
       {!isLastPageNumber && (
-        <PageHadleButton onClick={movePageButtonType('NEXT')}>{'>'}</PageHadleButton>
+        <PageHadleButton onClick={handleMovePageButtonClick('NEXT')}>{'>'}</PageHadleButton>
       )}
     </Container>
   );
