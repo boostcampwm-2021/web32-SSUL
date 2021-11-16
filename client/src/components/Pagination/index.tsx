@@ -29,8 +29,19 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
     dispatch(createdFilterdQuery());
   };
 
-  const handleMovePageButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const type = e.currentTarget.innerHTML;
+  const handleMovePageButton = (type: string) => {
+    switch (type) {
+      case 'PREV':
+        dispatch(checkPageNumber(firstPageNumber - 1));
+        dispatch(createdFilterdQuery());
+        break;
+      case 'NEXT':
+        dispatch(checkPageNumber(lastPageNumber + 1));
+        dispatch(createdFilterdQuery());
+        break;
+      default:
+        break;
+    }
   };
 
   const renderPagination = rangeArray(pageCnt, firstPageNumber).map((pageNum: number) => {
@@ -58,13 +69,20 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
   return (
     <Container>
       {!isFirstPageNumber && (
-        <PageHadleButton onClick={handleMovePageButton}>{'<'}</PageHadleButton>
+        <PageHadleButton onClick={() => handleMovePageButton('PREV')}>{'<'}</PageHadleButton>
       )}
       {renderPagination}
-      {!isLastPageNumber && <PageHadleButton onClick={handleMovePageButton}>{'>'}</PageHadleButton>}
+      {!isLastPageNumber && (
+        <PageHadleButton onClick={() => handleMovePageButton('NEXT')}>{'>'}</PageHadleButton>
+      )}
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const PageNumber = styled.button`
   width: 40px;
@@ -90,11 +108,6 @@ const NonSelectedPageNumber = styled(PageNumber)`
 const PageHadleButton = styled(PageNumber)`
   color: ${(props) => props.theme.Black};
   background: ${(props) => props.theme.Gray5};
-`;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 export default Pagination;
