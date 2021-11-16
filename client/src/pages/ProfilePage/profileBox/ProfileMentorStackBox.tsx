@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { useAppSelector } from '@hooks';
-import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { selectUser } from '@store/slices/userSlice';
+import { mentoringHttpClient } from '@api';
 
 interface Props {
   showRequestModal: () => void;
@@ -10,12 +12,27 @@ interface Props {
 }
 
 function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JSX.Element {
+  const user = useAppSelector(selectUser);
   const { isMentor, mentoringStack } = useAppSelector(selectProfileData);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchMentorInfo = async () => {
+      if (user.id !== undefined) {
+        const { mentorId, isMentor } = await mentoringHttpClient.getMentorId(user.id);
+        dispatch(setProfileData({ mentorId, isMentor }));
+      }
+    };
+
+    fetchMentorInfo();
+  }, [user]);
   return (
     <>
       {isMentor ? (
         <ProfileContainer title="멘토링스택">
-          <MentoringRequestButton onClick={showRequestModal}>멘토요청 리스트</MentoringRequestButton>
+          <MentoringRequestButton onClick={showRequestModal}>
+            멘토요청 리스트
+          </MentoringRequestButton>
           <TechStackContainer>
             {mentoringStack.map((techStackName, idx) => (
               <TechStackItem key={idx}>{techStackName}</TechStackItem>
@@ -61,7 +78,7 @@ const MentorRegisterButton = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: #00a18d;
+    background-color: ${(props) => props.theme.PrimaryHover};
   }
 `;
 

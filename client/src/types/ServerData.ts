@@ -37,7 +37,7 @@ export interface UpdateIntroRequest {
   intro: string;
 }
 
-export interface updateTechStackRequest {
+export interface UpdateTechStackRequest {
   id: number;
   techStacks: string[];
 }
@@ -46,6 +46,11 @@ export interface GroupActivity{
   name: string;
   startAt: string;
   endAt: string;
+}
+
+export interface MentorInfoResponse {
+  isMentor: boolean;
+  mentorId: number;
 }
 
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;
