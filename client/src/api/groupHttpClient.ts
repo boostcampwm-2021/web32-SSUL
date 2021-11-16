@@ -10,7 +10,7 @@ class GroupHttpClient extends HttpClient {
     return this.httpClient.get(`${query}`);
   };
   public postGroupCreate = <T>(groupData: GroupCreateInterface): Promise<T> =>
-    this.httpClient.post('/create', groupData);
+    this.httpClient.post('/', groupData);
 }
 
 export const groupHttpClient = new GroupHttpClient();
