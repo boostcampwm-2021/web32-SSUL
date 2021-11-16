@@ -5,7 +5,6 @@ import { selectProfileData, setProfileData } from '@store/slices/profileDataSlic
 import ProfileBoxContainer from './ProfileBoxContainer';
 import { selectUser } from '@store/slices/userSlice';
 import { groupHttpClient } from '@api';
-import { formatDateToString } from '@utils/Date';
 import moment from 'moment';
 
 function ProfileActivityListBox(): JSX.Element {
