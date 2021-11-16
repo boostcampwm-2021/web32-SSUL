@@ -1,3 +1,3 @@
 export { BadRequestErrorHandler } from './BadRequestErrorHandler';
-export { BusinessErrorHandler } from './BusinessErrorHandler';
-export {ServerInternalErrorHandler} from './ServerInternalErrorHandler'
+export { BusinessLogicErrorHandler } from './BusinessLogicErrorHandler';
+export { ServerInternalErrorHandler } from './ServerInternalErrorHandler';
