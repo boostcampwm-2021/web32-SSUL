@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PostList from './PostList';
+import Post from './Post';
 
 function GroupBoard(): JSX.Element {
   return (
     <Container>
-      <PostList />
+      <Post />
     </Container>
   );
 }
