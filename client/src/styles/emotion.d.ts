@@ -14,5 +14,7 @@ declare module '@emotion/react' {
     Primary: string;
     PramaryLight: string;
     PramaryDark: string;
+    Green: string;
+    Red: string;
   }
 }
