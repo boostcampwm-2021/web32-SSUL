@@ -21,7 +21,7 @@ export class GroupService {
     @InjectRepository()
     private readonly usingTechStackRepository: UsingTechStackRepository,
     @InjectRepository()
-    private readonly profilekRepository: ProfileRepository,
+    private readonly profileRepository: ProfileRepository,
   ) {}
 
   public async getFilterdPageGroups(

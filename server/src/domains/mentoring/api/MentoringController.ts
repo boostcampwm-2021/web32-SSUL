@@ -1,7 +1,7 @@
 import { UsingTechAs } from '@domains/techstack/models/UsingTechStack';
 import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { ProfileService } from '@domains/user/service/ProfileService';
-import { Controller, OnUndefined, Body, Post } from 'routing-controllers';
+import { Controller, OnUndefined, Body, Post, Get, Param } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
@@ -29,5 +29,11 @@ export class MentoringController {
     await this.mentorService.createMentor(userId);
     const profile = await this.profileService.getUserProfile(userId);
     this.usingTechStackService.createUserTechStack(profile, UsingTechAs.MENTOR, techStacks);
+  }
+
+  @Get('/request/:mid')
+  @OpenAPI({summary: '멘토링 요청 리스트를 가져오는 API'})
+  public async getRequest(@Param('mid') mentorId: number){
+    return await this.mentorService.getRequestListByMentorId(mentorId);
   }
 }
