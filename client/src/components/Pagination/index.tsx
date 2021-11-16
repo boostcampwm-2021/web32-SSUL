@@ -1,31 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { rangeArray } from '@utils/Range';
 
 interface PaginationProps {
   totalPages: number;
   curPage: number;
 }
 
+const FIRST_PAGE_NUM = 1;
 const PAGE_OFFSET_CNT = 5;
 
 function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
+  const [isFirstPageNumber, setIsFirstPageNumber] = useState<boolean>(true);
+  const [isLastPageNumber, setIsLastPageNumberstate] = useState<boolean>(false);
   const firstPageNumber = Math.floor((curPage - 1) / PAGE_OFFSET_CNT) * PAGE_OFFSET_CNT + 1;
   const lastPageNumber =
     firstPageNumber + PAGE_OFFSET_CNT - 1 > totalPages
       ? totalPages
       : firstPageNumber + PAGE_OFFSET_CNT - 1;
   const pageCnt: number = lastPageNumber - firstPageNumber + 1;
-  function range(numCnt: number, start = 1) {
-    return [...Array.from(Array(numCnt).keys())].map((idx) => idx + start);
-  }
 
-  const renderPagination = range(pageCnt, firstPageNumber).map((pageNum: number) => {
+  const renderPagination = rangeArray(pageCnt, firstPageNumber).map((pageNum: number) => {
     if (pageNum === curPage)
       return <SelectedPageNumber key={pageNum}>{pageNum}</SelectedPageNumber>;
     else return <NonSelectedPageNumber key={pageNum}>{pageNum}</NonSelectedPageNumber>;
   });
 
-  return <Container>{renderPagination}</Container>;
+  useEffect(() => {
+    firstPageNumber === FIRST_PAGE_NUM ? setIsFirstPageNumber(true) : setIsFirstPageNumber(false);
+    lastPageNumber === totalPages
+      ? setIsLastPageNumberstate(true)
+      : setIsLastPageNumberstate(false);
+  }, [curPage]);
+
+  return (
+    <Container>
+      {!isFirstPageNumber && 'prev'}
+      {renderPagination}
+      {!isLastPageNumber && 'next'}
+    </Container>
+  );
 }
 
 const PageNumber = styled.button`
