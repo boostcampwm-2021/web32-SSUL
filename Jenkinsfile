@@ -61,11 +61,17 @@ pipeline {
                 branch "PR-*"
             }
             steps {
-                sh '''
-                    cd server
-                    npm install
-                    npm run test
-                '''
+                configFileProvider([
+                    configFile(fileId: 'dotenvtest', variable:'dotenvFile')
+                ]){
+                    sh '''
+                        cd server
+                        cp $dotenvFile .env.test
+                        npm install
+                        npm run test
+                    '''
+                }
+                
             }
         }
     }
