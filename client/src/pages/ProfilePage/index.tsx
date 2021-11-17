@@ -37,14 +37,18 @@ function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
 
   useEffect(() => {
     const fetchAllData = async (userId: number) => {
-      await fetchMentorInfo(userId, handler);
-      await fetchMentoringStack(userId, handler);
-      await fetchProfileIntro(userId, handler);
-      await fetchProfileTechStack(userId, handler);
-      await fetchGroupActivityTechStack(userId, handler);
-
-      setFetchState(true);
-      dispatch(toggleLoadingState());
+      try {
+        await fetchMentorInfo(userId, handler);
+        await fetchMentoringStack(userId, handler);
+        await fetchProfileIntro(userId, handler);
+        await fetchProfileTechStack(userId, handler);
+        await fetchGroupActivityTechStack(userId, handler);
+        setFetchState(true);
+        dispatch(toggleLoadingState());
+        
+      } catch (e) {
+        location.href = '/';
+      }
     };
 
     if (profile.gitHubId === id) fetchAllData(profile.userId);

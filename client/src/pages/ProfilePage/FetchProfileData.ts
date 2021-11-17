@@ -19,22 +19,16 @@ export interface ProfileState {
 
 type DispatchHandler = (state: ProfileState) => void;
 
-const checkValidId = (id: number | undefined) => id;
-
 const fetchBaseUserData = async (handler: DispatchHandler, gitHubId: string): Promise<void> => {
   const { feverStack, shareStack, id, name, avatarUrl } = await userHttpClient.getProfile(gitHubId);
 
-  if (!checkValidId(id)) {
-    window.location.href = '/';
-  }
-
   handler({
-    feverStack: feverStack,
-    shareStack: shareStack,
     userId: id,
-    gitHubId: gitHubId,
-    name: name,
-    avatarUrl: avatarUrl,
+    feverStack,
+    shareStack,
+    gitHubId,
+    name,
+    avatarUrl,
   });
 };
 
