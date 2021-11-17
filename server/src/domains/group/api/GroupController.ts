@@ -6,6 +6,7 @@ import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActiviryDto } from '../dto/GroupActivityDto';
+import { GroupDetailDto } from '../dto/groupDto';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -44,6 +45,13 @@ export class GroupController {
       techstack,
     );
     return filterdGroups;
+  }
+
+  @Get('/:gid')
+  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
+  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
+  async getGroupData(@Param('gid') gid: number) {
+    return this.groupService.getGroupDetails(gid);
   }
 
   @Post('/')
