@@ -38,8 +38,7 @@ function SearchFilterTechSection(): JSX.Element {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  min-width: 1000px;
+  width: 1000px;
   padding: 10px;
 
   background: ${(props) => props.theme.White};
