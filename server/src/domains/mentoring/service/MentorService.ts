@@ -8,6 +8,7 @@ import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
 import { MentorRepository } from '../repository/MentorRepository';
+import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
 @Service()
 export class MentorService {
@@ -29,11 +30,12 @@ export class MentorService {
     return await this.mentorRepository.save(mentor);
   }
 
-  public async getMentorIdByUserId(userId: number) {
+  public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
     const mentor = await this.mentorRepository.findOne({ userId });
-
-    if (mentor === undefined) return { isMentor: false, mentorId: -1 } as MentorInfoDto;
-    else return { isMentor: true, mentorId: mentor.id } as MentorInfoDto;
+    if (mentor === undefined) {
+      throw new UserIsNotMentorError(userId);
+    }
+    return { mentorId: mentor.id };
   }
 
   public async getRequestListByMentorId(mentorId: number) {
