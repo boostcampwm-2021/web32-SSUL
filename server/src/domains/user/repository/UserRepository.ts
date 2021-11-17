@@ -1,7 +1,7 @@
 import { User } from '../models/User';
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
-import { GithubUserDto } from '../../auth/dto/AuthDto';
+import { GithubUserDto } from '../../auth/dto/GithubUserDto';
 
 @Service()
 @EntityRepository(User)
