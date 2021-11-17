@@ -5,7 +5,7 @@ import { UsingTechStack } from './UsingTechStack';
 @Entity('tech_stack')
 export class TechStack {
   @IsNumber()
-  @PrimaryGeneratedColumn({ name: 'tech_stack_id' })
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
   @IsString()
@@ -14,4 +14,11 @@ export class TechStack {
 
   @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.techStack)
   usingTechStack: UsingTechStack[];
+}
+
+export class GroupUsingTechStackDto {
+  @IsNumber()
+  techStackId: number;
+  @IsString()
+  name: string;
 }

@@ -17,7 +17,13 @@ export class UserDto {
   role?: string;
 }
 
-export class UserGroupRoleDto extends UserDto {
+export class GroupUserDto {
+  @IsNumber()
+  userId: number;
   @IsString()
-  groupRole: string;
+  githubId: string;
+  @IsString()
+  name: string;
+  @IsString()
+  avatarUrl: string;
 }

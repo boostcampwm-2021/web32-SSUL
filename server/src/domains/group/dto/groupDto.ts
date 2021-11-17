@@ -1,5 +1,6 @@
 import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
-import { UserGroupRoleDto } from '@domains/user/dto/UserDto';
+import { GroupUserDto } from '@domains/user/dto/UserDto';
+import { GroupUsingTechStackDto } from '@domains/techstack/models/TechStack';
 
 export enum GroupState {
   READY = 'READY',
@@ -24,7 +25,7 @@ export class GroupDetailDto {
   @IsNumber()
   id: number;
   @IsNumber()
-  mentorId: number;
+  mentorId?: number;
   @IsNumber()
   ownerId: number;
   @IsString()
@@ -42,7 +43,7 @@ export class GroupDetailDto {
   @IsEnum(GroupState)
   status: string;
   @IsArray()
-  techStackList: string[];
+  usingTechStacks: GroupUsingTechStackDto[];
   @IsArray()
-  groupUserList: UserGroupRoleDto[];
+  groupEnrollments: GroupUserDto[];
 }
