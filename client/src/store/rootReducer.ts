@@ -13,6 +13,7 @@ const reducer = combineReducers({
   groupRecruit,
   groupDetail,
   profileDataSlice,
+  groupCardDetail,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;
