@@ -10,6 +10,7 @@ import { UpdateIntroData } from '@types';
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
   const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfileData);
   const dispatch = useAppDispatch();
   const [prevIntro, setPrevIntro] = useState<string>('');
   const [editState, setEditState] = useState<boolean>(false);
@@ -49,10 +50,18 @@ function ProfileIntroBox(): JSX.Element {
     );
   };
 
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>;
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <>
       <ProfileContainer title="자기소개">
-        <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>
+        {getEditButtonElement()}
         {getTextElement()}
       </ProfileContainer>
     </>

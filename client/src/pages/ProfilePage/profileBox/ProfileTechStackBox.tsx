@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { selectProfileData } from '@store/slices/profileDataSlice';
 import { useAppSelector } from '@hooks';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@store/slices/userSlice';
 
 interface Props {
   showModal: () => void;
@@ -10,11 +12,21 @@ interface Props {
 
 function ProfileTechStackBox({ showModal }: Props): JSX.Element {
   const { techStacks } = useAppSelector(selectProfileData);
+  const user = useSelector(selectUser);
+  const profile = useSelector(selectProfileData);
+
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={showModal}>편집</EditButton>
+    } else {
+      return <></>;
+    }
+  };
 
   return (
     <>
       <ProfileContainer title="기술스택">
-        <EditButton onClick={showModal}>편집</EditButton>
+        {getEditButtonElement()}
         <TechStackContainer>
           {techStacks.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>

@@ -1,39 +1,75 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import {  useAppSelector } from '@hooks';
+import { useAppSelector } from '@hooks';
 import { selectProfileData } from '@store/slices/profileDataSlice';
+import { selectUser } from '@store/slices/userSlice';
 
 interface Props {
   showRequestModal: () => void;
   showCreateModal: () => void;
 }
 
-function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JSX.Element {
-  const { isMentor, mentoringStack } = useAppSelector(selectProfileData);
+enum ViewType {
+  OTHER,
+  ME_MENTOR,
+  ME_NOT_MENTOR,
+}
 
-  return (
-    <>
-      {isMentor ? (
-        <ProfileContainer title="멘토링스택">
-          <MentoringRequestButton onClick={showRequestModal}>
-            멘토요청 리스트
-          </MentoringRequestButton>
+function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JSX.Element {
+  const profile = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
+
+  const getContentsElement = (type: number) =>{
+    switch(type){
+      case ViewType.OTHER:
+        return (
+          <ProfileContainer title="멘토링스택">
           <TechStackContainer>
-            {mentoringStack.map((techStackName, idx) => (
+            {profile.mentoringStack.map((techStackName, idx) => (
               <TechStackItem key={idx}>{techStackName}</TechStackItem>
             ))}
           </TechStackContainer>
         </ProfileContainer>
-      ) : (
-        <ProfileContainer title="">
+        )
+      case ViewType.ME_MENTOR:
+        return (
+          <ProfileContainer title="멘토링스택">
+          <MentoringRequestButton onClick={showRequestModal}>
+            멘토요청 리스트
+          </MentoringRequestButton>
+          <TechStackContainer>
+            {profile.mentoringStack.map((techStackName, idx) => (
+              <TechStackItem key={idx}>{techStackName}</TechStackItem>
+            ))}
+          </TechStackContainer>
+        </ProfileContainer>
+        )
+      case ViewType.ME_NOT_MENTOR:
+        return (
+          <ProfileContainer title="">
           <MentorRegisterTitle>멘토가 되어주세요!</MentorRegisterTitle>
           <MentorRegisterDesc>
             간단한 기술스택을 등록을 통해 멘토가 될 수 있어요!
           </MentorRegisterDesc>
           <MentorRegisterButton onClick={showCreateModal}>멘토 신청하기</MentorRegisterButton>
         </ProfileContainer>
-      )}
+        )
+    }
+
+  }
+  const getViewType = ():number =>{
+    if(profile.userId !== user.id)
+      return ViewType.OTHER;
+    else if(profile.isMentor)
+      return ViewType.ME_MENTOR;
+    else
+      return ViewType.ME_NOT_MENTOR;
+  }
+
+  return (
+    <>
+      {getContentsElement(getViewType())}
     </>
   );
 }
