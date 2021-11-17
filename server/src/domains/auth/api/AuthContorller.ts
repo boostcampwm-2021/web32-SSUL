@@ -5,10 +5,10 @@ import {
   Session,
   SessionParam,
   OnUndefined,
+  Post,
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
-import { GithubUserDto } from '../dto/AuthDto';
 import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 

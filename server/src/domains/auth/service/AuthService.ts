@@ -1,11 +1,13 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
-import { UserRepository } from '../../user/repository/UserRepository';
-import { ProfileRepository } from '../../user/repository/ProfileRepository';
-import { GithubUserDto } from '../dto/AuthDto';
-import { UserDto } from '../../user/dto/UserDto';
-import { destructObject } from '../../../utils/Object';
+import { UserRepository } from '@domains/user/repository/UserRepository';
+import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
+import { GithubUserDto } from '../dto/GithubUserDto';
+import { UserDto } from '@domains/user/dto/UserDto';
+import { destructObject } from '@utils/Object';
+import { BusinessLogicError } from '@common/error/BusinessLogicError';
+import { ErrorCode } from '@error/ErrorCode';
 
 @Service()
 export class AuthService {
