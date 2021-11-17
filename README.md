@@ -57,10 +57,11 @@
 <br>
 
 ## 🔧 기술 스택
-![image](https://user-images.githubusercontent.com/6914465/139236371-c5e171a5-0416-4737-a3a2-66aaecb6e057.png)
+![ssul_stack](https://user-images.githubusercontent.com/6914465/142112752-e9ceac22-8d1d-4d37-83da-24795c799ea8.jpg)
 
 <br>
 
-## 📄 ERD
-
-![10/28](https://i.imgur.com/SCC0gCm.png)
+## 프로젝트 아키텍쳐
+<p align='center'>
+    <img src="https://user-images.githubusercontent.com/6914465/142121531-1fa4ea3c-b570-4426-bbf5-8c9c7efd4361.jpg"/>
+ </p>
