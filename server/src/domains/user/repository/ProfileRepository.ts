@@ -34,13 +34,13 @@ export class ProfileRepository extends Repository<Profile> {
     return profile;
   }
 
-  public async findNameAndFeverStackByUserId(id: number) {
+  public async findOwnerInfoByUserId(id: number) {
     const profile = await this.createQueryBuilder('profile')
-      .select(['user.name', 'profile.feverStack'])
+      .select(['user.name', 'profile.feverStack', 'user.avatarUrl'])
       .leftJoin('profile.user', 'user')
       .where('profile.userId = :id', { id })
       .getOne();
-    return [profile?.user.name, profile?.feverStack];
+    return [profile?.user.name, profile?.feverStack, profile?.user.avatarUrl];
   }
 
   public async findOneOrFailByUserId(id: number) {

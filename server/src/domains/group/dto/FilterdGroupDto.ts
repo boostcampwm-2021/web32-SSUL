@@ -25,10 +25,12 @@ export class FilterdGroupDto {
   status: string | null;
   @IsArray()
   techStackList: string[];
-  @IsString()
-  ownerFeverStack: string | null;
   @IsNumber()
   ownerName: number | null;
+  @IsString()
+  ownerFeverStack: string | null;
+  @IsString()
+  ownerAvatarUrl: string | null;
 }
 
 export class FilterdPageGroupDto {

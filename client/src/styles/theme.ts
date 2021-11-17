@@ -7,6 +7,7 @@ const theme = {
   Gray6: '#F2F2F2',
   White: '#FFFFFF',
   Black: '#000000',
+  Fever: '#ee7262',
   LightBlack: '#323232',
   Primary: '#00C5AA',
   PrimaryLight: '#01E3C4',

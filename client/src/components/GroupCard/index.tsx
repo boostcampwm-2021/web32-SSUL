@@ -4,6 +4,7 @@ import GroupCardHeader from './GroupCardHeader';
 import GroupCardStatus from './GroupCardStatus';
 import GroupApplyButton from './GroupApplyButton';
 import { Group } from '@types';
+import { calculateRemainTimeFromNow } from '@utils/Date';
 
 interface CardProps {
   groupContents: Group;
@@ -21,6 +22,7 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     ownerFeverStack,
     techStackList,
     ownerName,
+    ownerAvatarUrl,
   } = groupContents;
   const headerProps = { name, curUserCnt, maxUserCnt };
   const statusProps = {
@@ -31,12 +33,14 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     endAt,
     techStackList,
     ownerName,
+    ownerAvatarUrl,
   };
+
   return (
     <Card>
       <GroupCardHeader headerProps={headerProps} />
       <GroupCardStatus statusProps={statusProps} />
-      <GroupApplyButton />
+      <GroupApplyButton dueDate={calculateRemainTimeFromNow(startAt)} />
     </Card>
   );
 }

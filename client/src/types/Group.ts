@@ -18,6 +18,7 @@ export interface Group {
   techStackList: string[];
   ownerFeverStack: number;
   ownerName: string;
+  ownerAvatarUrl: string;
 }
 
 export interface GroupResponse {

@@ -16,13 +16,19 @@ interface Status {
   techStackList: string[];
   ownerFeverStack: number;
   ownerName: string;
+  ownerAvatarUrl: string;
 }
 
 function GroupCardStatus({ statusProps }: StatusProps): JSX.Element {
-  const { intro, startAt, endAt, techStackList, ownerFeverStack, ownerName } = statusProps;
+  const { intro, startAt, endAt, techStackList, ownerFeverStack, ownerName, ownerAvatarUrl } =
+    statusProps;
   return (
     <Container>
-      <GroupOwnerStatus ownerName={ownerName} ownerFeverStack={ownerFeverStack} />
+      <GroupOwnerStatus
+        ownerName={ownerName}
+        ownerFeverStack={ownerFeverStack}
+        ownerAvatarUrl={ownerAvatarUrl}
+      />
       <GroupStatusInfo intro={intro} startAt={startAt} endAt={endAt} />
       <GroupTechStackList techStackList={techStackList} />
     </Container>
