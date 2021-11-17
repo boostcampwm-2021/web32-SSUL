@@ -21,6 +21,18 @@ export interface Group {
   ownerAvatarUrl: string;
 }
 
+export interface GroupDetail {
+  name: string | null;
+  maxUserCnt: number | null;
+  curUserCnt: number | null;
+  intro: string | null;
+  startAt: Date | null;
+  endAt: Date | null;
+  techStackList: string[];
+  ownerName: string;
+  ownerAvatarUrl: string;
+}
+
 export interface GroupResponse {
   groups: Group[];
   totalPages: number;
