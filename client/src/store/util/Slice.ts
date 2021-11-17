@@ -5,6 +5,7 @@ export enum ModalType {
   NONE = 'NONE',
   READ = 'READ',
   POST = 'POST',
+  GROUP_DETAIL = 'GROUP_DETAIL',
 }
 
 export interface UtilState {

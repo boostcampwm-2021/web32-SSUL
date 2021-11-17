@@ -1,15 +1,26 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch } from '@hooks';
+import { changeGroupModalState } from '@store/slices/utilSlice';
+import { setGroupDetail } from '@store/slices/groupCardDetailSlice';
+import { GroupDetail } from '@types';
 
 interface Props {
+  contents: GroupDetail;
   dueDate: number;
 }
 
-function GroupApplyButton({ dueDate }: Props): JSX.Element {
+function GroupApplyButton({ contents, dueDate }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
+  const handleShowDetailButtonClick = () => {
+    dispatch(setGroupDetail(contents));
+    dispatch(changeGroupModalState('GROUP_DETAIL'));
+  };
+
   return (
     <Container>
       <Text>{dueDate < 0 ? 'Alreday Start' : `모집 D-${dueDate}`}</Text>
-      <ApplyButton>보기</ApplyButton>
+      <ApplyButton onClick={handleShowDetailButtonClick}>보기</ApplyButton>
     </Container>
   );
 }
