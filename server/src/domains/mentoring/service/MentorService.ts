@@ -25,12 +25,12 @@ export class MentorService {
   ) {}
 
   public async createMentor(userId: number) {
-    const mentor: Mentor = this.mentorRepository.create({ userId: userId });
+    const mentor: Mentor = this.mentorRepository.create({ userId });
     return await this.mentorRepository.save(mentor);
   }
 
   public async getMentorIdByUserId(userId: number) {
-    const mentor = await this.mentorRepository.findOne({ userId: userId });
+    const mentor = await this.mentorRepository.findOne({ userId });
 
     if (mentor === undefined) return { isMentor: false, mentorId: -1 } as MentorInfoDto;
     else return { isMentor: true, mentorId: mentor.id } as MentorInfoDto;
