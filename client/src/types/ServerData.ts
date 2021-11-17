@@ -32,20 +32,46 @@ export interface ResponseUserData {
   role: string;
 }
 
-export interface UpdateIntroRequest {
+export interface UpdateIntroData {
   id: number;
   intro: string;
 }
 
-export interface updateTechStackRequest {
+export interface UpdateTechStackData {
   id: number;
   techStacks: string[];
 }
 
-export interface GroupActivity{
+export interface GroupActivity {
   name: string;
   startAt: string;
   endAt: string;
+}
+
+export interface MentorInfo {
+  isMentor: boolean;
+  mentorId: number;
+}
+
+export interface RegisterMentorData {
+  userId: number;
+  techStacks: string[];
+}
+
+export interface MentoringRequestData {
+  id: number;
+  groupId: number;
+  groupName: string;
+  categoryImage: string;
+  ownerName: string;
+  createdAt: string;
+}
+
+export interface DeleteRequestInfo {
+  id: number;
+  mentorId: number;
+  groupId: number;
+  accept: boolean;
 }
 
 export type RequestBody = ExampleInterface | GroupCreateInterface | null;

@@ -1,30 +1,85 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
+import { mentoringHttpClient } from '@api';
+import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
+import { DeleteRequestInfo, MentoringRequestData } from '@types';
+import { formatDateToString } from '@utils/Date';
 
 function RequestMentoring(): JSX.Element {
-  const dummyData = ['테스트1', '테스트2', '테스트3', '테스트4', '테스트5'];
-  const RequestBox = (name: string): JSX.Element => {
+  const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
+  const { mentorId } = useAppSelector(selectProfileData);
+
+  const fetchMentoringRequests = async () => {
+    const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(
+      mentorId,
+    );
+    setRequestList(fetchedData);
+  };
+
+  const handleButtonClick = (data: MentoringRequestData, accept: boolean) => async () => {
+    const requestData: DeleteRequestInfo = {
+      id: data.id,
+      mentorId: mentorId,
+      groupId: data.groupId,
+      accept: accept,
+    };
+    await mentoringHttpClient.deleteMentoringRequest(requestData);
+    try {
+      await mentoringHttpClient.deleteMentoringRequest(requestData);
+      fetchMentoringRequests();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
     return (
-      <BoxContainer>
-        <CategoryImage />
+      <BoxContainer key={idx}>
+        <ImageContainer>
+          <CategoryImage src={data.categoryImage} />
+        </ImageContainer>
         <GroupInfo>
-          <p>{name}</p>
-          <p>그룹장명</p>
+          <GroupText>{data.groupName}</GroupText>
+          <GroupText>{data.ownerName}</GroupText>
         </GroupInfo>
-        <RequestDate>2021.11.15</RequestDate>
+        <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
-          <CustomButton label={'취소'} clickBtn={()=> console.log('hi')} />
-          <CustomButton label={'확인'} clickBtn={()=> console.log('hi')} />
+          <CustomButton label={'거절'} clickBtn={handleButtonClick(data, false)} />
+          <CustomButton label={'수락'} clickBtn={handleButtonClick(data, true)} />
         </ButtonWrapper>
       </BoxContainer>
     );
   };
-  return <Container>{dummyData.map((name) => RequestBox(name))}</Container>;
+
+  useEffect(() => {
+    fetchMentoringRequests();
+  }, []);
+  return (
+    <Container>
+      <ModalTitle>멘토링 신청 리스트</ModalTitle>
+      {requestList.length > 0 ? (
+        <ScrollContainer>
+          {requestList.map((data, idx) => makeRequestBox(data, idx))}
+        </ScrollContainer>
+      ) : (
+        <>
+          <EmptyMessage>아직 멘토링 요청이 없어요...</EmptyMessage>
+          <SubMessage>멘티를 직접 찾아보시는것은 어떨까요?</SubMessage>
+        </>
+      )}
+    </Container>
+  );
 }
 
 const Container = styled.div`
   position: relative;
+  width: 600px;
+  height: 350px;
+`;
+
+const ScrollContainer = styled.div`
   width: 600px;
   height: 300px;
   overflow-y: scroll;
@@ -32,30 +87,43 @@ const Container = styled.div`
     display: none;
   }
 `;
+const ModalTitle = styled.p`
+  margin: 0 0 20px 20px;
+  font-size: 18px;
+  font-weight: bold;
+`;
 
 const BoxContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 500px;
-  height: 80px;
-  margin: 20px auto;
+  width: 550px;
+  height: 90px;
+  margin: 0 auto 20px auto;
   border-radius: 5px;
-  border: 1px black solid;
+  border: 1px ${(props) => props.theme.Gray5} solid;
 `;
 
-const CategoryImage = styled.div`
-  width: 50px;
-  height: 50px;
+const ImageContainer = styled.div`
+  width: 60px;
+  height: 60px;
   margin: 20px;
-  border: 1px black solid;
   border-radius: 50%;
+  border: 1px ${(props) => props.theme.Gray5} solid;
 `;
+
+const CategoryImage = styled.img`
+  width: 40px;
+  height: 40px;
+  margin: 10px 0 0 10px;
+  object-fit: fill;
+`;
+
 const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 10px;
+  margin: 15px;
   display: flex;
   justify-content: space-between;
   width: 200px;
@@ -65,9 +133,33 @@ const RequestDate = styled.p`
   position: absolute;
   top: 0;
   right: 0;
+  margin-top: 5px;
   margin-right: 20px;
-`
+`;
+
 const GroupInfo = styled.div`
-  
-`
+  display: flex;
+  flex-direction: column;
+`;
+const GroupText = styled.p`
+  width: 150px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 100px;
+`;
+const SubMessage = styled.div`
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: ${(props) => props.theme.Gray3};
+  margin-top: 20px;
+`;
 export default RequestMentoring;

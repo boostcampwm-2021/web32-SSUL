@@ -178,6 +178,6 @@ const Notification = styled.div`
   font-size: 13px;
   margin-left: 40px;
   margin-bottom: 40px;
-  color: #e50707;
+  color: ${(props) => props.theme.Error};;
 `;
 export default GroupCreatePage;

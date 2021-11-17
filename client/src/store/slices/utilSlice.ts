@@ -27,10 +27,13 @@ export const utilSlice = createSlice({
     changeGroupModalState(state, { payload }) {
       return { ...state, groupModalState: payload };
     },
+    setLoadingState(state, { payload }) {
+      return { ...state, isLoading: payload };
+    },
   },
 });
 
-export const { toggleLoadingState, changeGroupModalState } = utilSlice.actions;
+export const { toggleLoadingState, changeGroupModalState, setLoadingState } = utilSlice.actions;
 export default utilSlice.reducer;
 export const selectLoadingState = (state: RootState): boolean => state.util.isLoading;
 export const selectGroupModalState = (state: RootState): ModalType => state.util.groupModalState;

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectProfileData } from '@store/slices/profileDataSlice';
+import { useAppSelector } from '@hooks';
+import { useSelector } from 'react-redux';
 import { selectUser } from '@store/slices/userSlice';
-import { techStackHttpClient } from '@api';
 
 interface Props {
   showModal: () => void;
@@ -12,24 +12,21 @@ interface Props {
 
 function ProfileTechStackBox({ showModal }: Props): JSX.Element {
   const { techStacks } = useAppSelector(selectProfileData);
-  const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
+  const profile = useSelector(selectProfileData);
 
-  useEffect(() => {
-    const fetchProfileTechStack = async () => {
-      if (user.id !== undefined) {
-        const fetchedTechStack = await techStackHttpClient.getMenteeTechStackList(user.id);
-        const techStackList = fetchedTechStack.map(({ name }) => name);
-        dispatch(setProfileData({ techStacks: techStackList }));
-      }
-    };
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={showModal}>편집</EditButton>
+    } else {
+      return <></>;
+    }
+  };
 
-    fetchProfileTechStack();
-  }, [user]);
   return (
     <>
       <ProfileContainer title="기술스택">
-        <EditButton onClick={showModal}>편집</EditButton>
+        {getEditButtonElement()}
         <TechStackContainer>
           {techStacks.map((techStackName, idx) => (
             <TechStackItem key={idx}>{techStackName}</TechStackItem>
@@ -69,7 +66,7 @@ const EditButton = styled.button`
   color: ${(props) => props.theme.White};
 
   &:hover {
-    background-color: #00a18d;
+    background-color: ${(props) => props.theme.PrimaryHover};
   }
 `;
 

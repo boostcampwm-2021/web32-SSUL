@@ -9,6 +9,8 @@ const theme = {
   Black: '#000000',
   Fever: '#ee7262',
   LightBlack: '#323232',
+  Error: '#E50707',
+  PrimaryHover: '#00A18D',
   Primary: '#00C5AA',
   PrimaryLight: '#01E3C4',
   PrimaryDark: '#007A69',

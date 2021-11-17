@@ -23,6 +23,8 @@ function CustomButton({ label, clickBtn }: BtnProps): JSX.Element {
         return WHITE_BUTTON;
       case '취소' :
           return WHITE_BUTTON;
+      case '거절' :
+            return WHITE_BUTTON;
       default :
         return COLORED_BUTTON;
     }

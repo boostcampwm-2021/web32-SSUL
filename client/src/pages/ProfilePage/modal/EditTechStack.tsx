@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
-import { TechStack, updateTechStackRequest } from '@types';
+import { TechStack } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -17,23 +17,23 @@ function EditTechStack({ onCancel }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
   const [selectedTechStacks, setSelectedStacks] = useState<string[]>(techStacks);
-  
+
   const putProfileTechStack = async () => {
     if (user.id !== undefined) {
       const request = {
         id: user.id,
         techStacks: selectedTechStacks,
-      } as updateTechStackRequest;
+      };
 
       techStackHttpClient.putMenteeTechStack(request);
     }
   };
 
-  const handleConfirmButtonClick = () =>{
-    dispatch(setProfileData({techStacks: selectedTechStacks}));
+  const handleConfirmButtonClick = () => {
+    dispatch(setProfileData({ techStacks: selectedTechStacks }));
     putProfileTechStack();
     onCancel();
-  }
+  };
 
   useEffect(() => {
     const fetechTechStackList = async () => {

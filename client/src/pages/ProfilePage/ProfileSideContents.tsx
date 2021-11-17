@@ -3,20 +3,20 @@ import styled from '@emotion/styled';
 import FeverSharingBar from './FeverSharingBar';
 import GithubLogo from '@assets/icon_github_logo.png';
 import { useAppSelector } from '@hooks';
-import { selectUser } from '@store/slices/userSlice';
+import { selectProfileData } from '@store/slices/profileDataSlice';
 
 function ProfileSideContents(): JSX.Element {
-  const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfileData);
 
   return (
     <Container>
-      <ProfileImage src={user.image} alt="GithubProfifleImage" />
+      <ProfileImage src={profile.avatarUrl} alt="GithubProfifleImage" />
       <BaseInfo>
-        <NickName>{user.name}</NickName>
-        <GithubName>{user.oAuthId}</GithubName>
+        <NickName>{profile.name}</NickName>
+        <GithubName>{profile.gitHubId}</GithubName>
         <GithubURLContainer>
           <GithubIcon src={GithubLogo} alt="GithubIcon" />
-          <GithubURL href={`https://github.com/${user.oAuthId}`}>GitHub Storage</GithubURL>
+          <GithubURL href={`https://github.com/${profile.gitHubId}`}>GitHub Storage</GithubURL>
         </GithubURLContainer>
         <FeverSharingBar />
       </BaseInfo>
@@ -72,6 +72,7 @@ const GithubURLContainer = styled.div`
 const GithubURL = styled.a`
   text-decoration: none;
   margin-left: 10px;
+  color: ${(props) => props.theme.Black};
   &:visited {
     color: ${(props) => props.theme.Black};
   }

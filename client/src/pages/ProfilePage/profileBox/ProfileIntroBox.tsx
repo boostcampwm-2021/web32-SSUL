@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
 import { userHttpClient } from '@api';
 import { selectUser } from '@store/slices/userSlice';
-import { UpdateIntroRequest } from '@types';
+import { UpdateIntroData } from '@types';
 
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
   const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfileData);
   const dispatch = useAppDispatch();
   const [prevIntro, setPrevIntro] = useState<string>('');
   const [editState, setEditState] = useState<boolean>(false);
@@ -19,7 +20,7 @@ function ProfileIntroBox(): JSX.Element {
       const request = {
         id: user.id,
         intro: intro,
-      } as UpdateIntroRequest;
+      } as UpdateIntroData;
       setPrevIntro(intro);
       userHttpClient.patchIntro(request);
     }
@@ -37,17 +38,6 @@ function ProfileIntroBox(): JSX.Element {
     textArea.style.height = 10 + textArea.scrollHeight + 'px';
   };
 
-  useEffect(() => {
-    const fetchProfileIntro = async () => {
-      if (user.id !== undefined) {
-        const fetchedIntro = await userHttpClient.getIntro(user.id);
-        setPrevIntro(fetchedIntro);
-        dispatch(setProfileData({ intro: fetchedIntro }));
-      }
-    };
-
-    fetchProfileIntro();
-  }, [user]);
   const getTextElement = (): JSX.Element => {
     return editState ? (
       <ProfileEditText
@@ -60,10 +50,18 @@ function ProfileIntroBox(): JSX.Element {
     );
   };
 
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>;
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <>
       <ProfileContainer title="자기소개">
-        <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>
+        {getEditButtonElement()}
         {getTextElement()}
       </ProfileContainer>
     </>
@@ -104,7 +102,7 @@ const EditButton = styled.button`
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
   &:hover {
-    background-color: #00a18d;
+    background-color: ${(props) => props.theme.PrimaryHover};
   }
 `;
 export default ProfileIntroBox;

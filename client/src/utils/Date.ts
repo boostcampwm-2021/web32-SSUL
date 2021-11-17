@@ -4,7 +4,7 @@ const DAYS_OF_WEEK = 7;
 const DAYS_OF_MONTH = 31;
 const DAYS_OF_YEAR = 365;
 
-export const formatDateToString = (date: Date | null): string => {
+export const formatDateToString = (date: Date | null | string): string => {
   return moment(date).format('YYYY-MM-DD');
 };
 
