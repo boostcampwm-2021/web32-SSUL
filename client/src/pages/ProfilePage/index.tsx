@@ -5,7 +5,7 @@ import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import ProfilePageModal from './modal';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { toggleLoadingState } from '@store/slices/utilSlice';
+import { setLoadingState } from '@store/slices/utilSlice';
 import {
   clearProfileData,
   selectProfileData,
@@ -44,8 +44,7 @@ function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
         await fetchProfileTechStack(userId, handler);
         await fetchGroupActivityTechStack(userId, handler);
         setFetchState(true);
-        dispatch(toggleLoadingState());
-        
+        dispatch(setLoadingState(false));
       } catch (e) {
         location.href = '/';
       }
@@ -55,10 +54,14 @@ function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
   }, [profile.gitHubId]);
 
   useEffect(() => {
-    dispatch(toggleLoadingState());
+    dispatch(setLoadingState(true));
     setFetchState(false);
     dispatch(clearProfileData());
     fetchBaseUserData(handler, id);
+
+    return () => {
+      dispatch(clearProfileData());
+    }
   }, [id]);
 
   return (
