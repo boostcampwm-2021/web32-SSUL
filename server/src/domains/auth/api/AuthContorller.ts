@@ -32,10 +32,8 @@ export class AuthController {
     },
   })
   @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
-  async getAuthentification(
-    @SessionParam('githubId') githubId: string,
-    @SessionParam('role') role: string,
-  ) {
+  async getAuthentification(@Session() session: any) {
+    const { githubId, role } = session.user;
     if (!githubId) return;
     const userData = await this.authService.getUserProfile(githubId);
     return { ...userData, role } as UserDto;
@@ -52,6 +50,7 @@ export class AuthController {
       session.user = {
         githubId: githubUserData.githubId,
         role: 'MENTEE',
+        id: userData.id,
       };
     }
 
