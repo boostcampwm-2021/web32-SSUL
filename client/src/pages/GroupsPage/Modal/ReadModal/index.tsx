@@ -50,7 +50,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 16px;
-  border-bottom: 1.75px solid ${(props) => props.theme.Gray2};
+  border-bottom: 1.75px solid ${(props) => props.theme.Gray4};
   margin-bottom: 7px;
 `;
 

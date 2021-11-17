@@ -41,7 +41,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 16px;
-  border-bottom: 1.75px solid ${(props) => props.theme.Gray2};
+  border-bottom: 1.75px solid ${(props) => props.theme.Gray4};
 `;
 
 const Title = styled.span`
@@ -65,7 +65,7 @@ const TextInput = styled.textarea`
   width: 100%;
   height: 300px;
   padding: 8px;
-  border: 1.75px solid ${(props) => props.theme.Gray2};
+  border: 1.75px solid ${(props) => props.theme.Gray4};
   border-radius: 18px;
   resize: none;
   box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
