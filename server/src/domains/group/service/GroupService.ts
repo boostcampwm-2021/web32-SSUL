@@ -21,7 +21,7 @@ export class GroupService {
     @InjectRepository()
     private readonly usingTechStackRepository: UsingTechStackRepository,
     @InjectRepository()
-    private readonly profilekRepository: ProfileRepository,
+    private readonly profileRepository: ProfileRepository,
   ) {}
 
   public async getFilterdPageGroups(
@@ -64,7 +64,7 @@ export class GroupService {
 
         if (filterdTechStack.length === 0 || isIncludeStackList) {
           const [ownerName, ownerFeverStack, ownerAvatarUrl] =
-            await this.profilekRepository.findOwnerInfoByUserId(group.ownerId);
+            await this.profileRepository.findOwnerInfoByUserId(group.ownerId);
           return { ...group, techStackList, ownerName, ownerFeverStack, ownerAvatarUrl };
         }
       }),
