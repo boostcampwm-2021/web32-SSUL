@@ -1,3 +1,6 @@
+import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
+import { UserGroupRoleDto } from '@domains/user/dto/UserDto';
+
 export enum GroupState {
   READY = 'READY',
   DOING = 'DOING',
@@ -15,4 +18,31 @@ export interface Group {
   startAt: Date | null;
   endAt: Date | null;
   status: GroupState;
+}
+
+export class GroupDetailDto {
+  @IsNumber()
+  id: number;
+  @IsNumber()
+  mentorId: number;
+  @IsNumber()
+  ownerId: number;
+  @IsString()
+  name: string | null;
+  @IsNumber()
+  maxUserCnt: number | null;
+  @IsNumber()
+  curUserCnt: number | null;
+  @IsString()
+  intro: string | null;
+  @IsDate()
+  startAt: Date | null;
+  @IsDate()
+  endAt: Date | null;
+  @IsEnum(GroupState)
+  status: string;
+  @IsArray()
+  techStackList: string[];
+  @IsArray()
+  groupUserList: UserGroupRoleDto[];
 }

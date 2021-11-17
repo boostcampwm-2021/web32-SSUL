@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, isString, IsString } from 'class-validator';
 
 export class UserDto {
   @IsNumber()
@@ -15,4 +15,9 @@ export class UserDto {
   shareStack: number;
   @IsString()
   role?: string;
+}
+
+export class UserGroupRoleDto extends UserDto {
+  @IsString()
+  groupRole: string;
 }
