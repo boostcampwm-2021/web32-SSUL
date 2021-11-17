@@ -5,74 +5,45 @@ import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import ProfilePageModal from './modal';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { clearProfileData, setProfileData } from '@store/slices/profileDataSlice';
 import { toggleLoadingState } from '@store/slices/utilSlice';
-import { selectUser } from '@store/slices/userSlice';
-import { groupHttpClient, mentoringHttpClient, techStackHttpClient, userHttpClient } from '@api';
-import { formatDateToString } from '@utils/Date';
+import {
+  clearProfileData,
+  selectProfileData,
+  setProfileData,
+} from '@store/slices/profileDataSlice';
+import {
+  fetchGroupActivityTechStack,
+  fetchMentorInfo,
+  fetchMentoringStack,
+  fetchProfileIntro,
+  fetchProfileTechStack,
+  fetchSideContents,
+  ProfileState,
+} from './FetchProfileData';
 
 function ProfilePage(): JSX.Element {
   const [modalType, setModalType] = useState<string>('NONE');
-  const [fetchState, setFetchState] = useState<boolean>(  false);
-  const user = useAppSelector(selectUser);
+  const [fetchState, setFetchState] = useState<boolean>(false);
+  const profile = useAppSelector(selectProfileData);
   const showModal = (type: string) => () => setModalType(type);
   const dispatch = useAppDispatch();
-
-  const fetchProfileIntro = async (userId: number) => {
-    const fetchedIntro = await userHttpClient.getIntro(userId);
-    dispatch(setProfileData({ intro: fetchedIntro }));
-  };
-
-  const fetchMentoringStack = async (userId: number) => {
-      const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(userId);
-      const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
-
-      dispatch(setProfileData({ mentoringStack: mentoringStacks }));
-  };
-
-  const fetchMentorInfo = async (userId: number) => {
-      const { mentorId, isMentor } = await mentoringHttpClient.getMentorId(userId);
-      dispatch(setProfileData({ mentorId, isMentor }));
-  };
-
-  const fetchProfileTechStack = async (userId: number) => {
-      const fetchedTechStack = await techStackHttpClient.getMenteeTechStackList(userId);
-      const techStackList = fetchedTechStack.map(({ name }) => name);
-      dispatch(setProfileData({ techStacks: techStackList }));
-  };
-
-  const fetchGroupActivityTechStack = async (userId: number) => {
-      const fetchedGroupActivity = await groupHttpClient.getGroupActivity(userId);
-      const groupActivitys = fetchedGroupActivity.map(({name, startAt, endAt}) =>{
-        return {
-          name: name,
-          startAt: formatDateToString(startAt),
-          endAt: formatDateToString(endAt)
-        }
-      }) 
-      dispatch(setProfileData({groupActivitys: groupActivitys}))
-  }
+  const handler = (newState: ProfileState) => dispatch(setProfileData(newState));
 
   useEffect(() => {
     const fetchAllData = async (userId: number) => {
-      try{
-        await fetchMentorInfo(userId);
-        await fetchMentoringStack(userId);
-        await fetchProfileIntro(userId);
-        await fetchProfileTechStack(userId);
-        await fetchGroupActivityTechStack(userId);
+      await fetchMentorInfo(userId, handler);
+      await fetchMentoringStack(userId, handler);
+      await fetchProfileIntro(userId, handler);
+      await fetchProfileTechStack(userId, handler);
+      await fetchGroupActivityTechStack(userId, handler);
 
-        setFetchState(true);
-        dispatch(toggleLoadingState());
-      }catch(e){
-        console.log(e);
-      }
+      setFetchState(true);
+      dispatch(toggleLoadingState());
     };
-    
-    if(user.id !== undefined){
-      fetchAllData(user.id);
-    }
-  }, [user]);
+
+    if (profile.userId !== -1) fetchAllData(profile.userId);
+    else fetchSideContents(handler);
+  }, [profile.userId]);
 
   useEffect(() => {
     dispatch(toggleLoadingState());
