@@ -17,11 +17,17 @@ import {
   fetchMentoringStack,
   fetchProfileIntro,
   fetchProfileTechStack,
-  fetchSideContents,
+  fetchBaseUserData,
   ProfileState,
 } from './FetchProfileData';
+import { RouteComponentProps } from 'react-router';
 
-function ProfilePage(): JSX.Element {
+export interface MatchParams {
+  id: string;
+}
+
+function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
+  const { id } = match.params;
   const [modalType, setModalType] = useState<string>('NONE');
   const [fetchState, setFetchState] = useState<boolean>(false);
   const profile = useAppSelector(selectProfileData);
@@ -41,16 +47,15 @@ function ProfilePage(): JSX.Element {
       dispatch(toggleLoadingState());
     };
 
-    if (profile.userId !== -1) fetchAllData(profile.userId);
-    else fetchSideContents(handler);
-  }, [profile.userId]);
+    if (profile.gitHubId === id) fetchAllData(profile.userId);
+  }, [profile.gitHubId]);
 
   useEffect(() => {
     dispatch(toggleLoadingState());
-    return () => {
-      dispatch(clearProfileData());
-    };
-  }, []);
+    setFetchState(false);
+    dispatch(clearProfileData());
+    fetchBaseUserData(handler, id);
+  }, [id]);
 
   return (
     <Container>

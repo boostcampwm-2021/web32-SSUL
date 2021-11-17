@@ -26,7 +26,7 @@ function Router(): JSX.Element {
       <Route path="/group/evaluate" component={EvaluateGroupPage} />
       <Route path="/chat/list" component={ChatListPage} />
       <Route path="/chat" component={ChatPage} />
-      <Route path="/profile" component={ProfilePage} />
+      <Route path="/profile/:id" component={ProfilePage} />
       <Route path="/auth/callback" component={AuthCallback} />
       <Redirect to="/" />
     </Switch>
