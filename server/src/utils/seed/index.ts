@@ -5,6 +5,10 @@ import { ormConfig } from '@config/ormconfig';
 import { Category } from '@domains/category/models/Category';
 import { Group } from '@domains/group/models/Group';
 import { TechStack } from '@domains/techstack/models/TechStack';
+import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
+import { User } from '@domains/user/models/User';
+import { Profile } from '@domains/user/models/Profile';
+import { Mentor } from '@domains/mentoring/models/Mentor';
 
 import {
   catagorySeedData,
@@ -50,4 +54,5 @@ async function seedDatabase(connection: Connection) {
     .into(UsingTechStack)
     .values(usingTechStackData)
     .execute();
+  await connection.createQueryBuilder().insert().into(Mentor).values(mentorData).execute();
 }
