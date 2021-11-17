@@ -23,7 +23,8 @@ import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Mentor } from '@domains/mentoring/models/Mentor';
 
 export async function seed() {
-  const connection = await createConnection(ormConfig[config.mode]);
+  const seedConfig = { ...ormConfig[config.mode], dropSchema: true };
+  const connection = await createConnection(seedConfig);
   await seedDatabase(connection);
 
   console.log('seeding done.');
