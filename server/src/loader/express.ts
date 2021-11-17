@@ -2,7 +2,9 @@ import express from 'express';
 import session from 'express-session';
 import config from '../config';
 import morgan from 'morgan';
+import { stream, logger } from '@utils/logger';
 
+const httpLogFormat = ':remote-addr - :remote-user ":method :url" :status :res[content-length]';
 export default function (app: express.Application) {
   const sessionConfig = {
     secret: config.session as string,
@@ -12,5 +14,5 @@ export default function (app: express.Application) {
 
   app.use(express.json());
   app.use(session(sessionConfig));
-  app.use(morgan('dev'));
+  app.use(morgan(httpLogFormat, { stream }));
 }
