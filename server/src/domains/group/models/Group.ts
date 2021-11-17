@@ -4,6 +4,7 @@ import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
 import { Category } from '@domains/category/models/Category';
+import { Post } from './Post';
 
 export enum GroupState {
   READY = 'READY',
@@ -62,4 +63,7 @@ export class Group {
 
   @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.group)
   usingTechStacks: UsingTechStack[];
+
+  @OneToMany(() => Post, (post) => post.group)
+  posts: Post[];
 }

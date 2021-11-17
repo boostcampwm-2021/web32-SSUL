@@ -9,6 +9,10 @@ const theme = {
   Black: '#000000',
   LightBlack: '#323232',
   Primary: '#00C5AA',
+  PrimaryLight: '#01E3C4',
+  PrimaryDark: '#007A69',
+  Green: '#9CDE84',
+  Red: '#EE7262',
 };
 
 export default theme;

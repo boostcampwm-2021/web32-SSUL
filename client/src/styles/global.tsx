@@ -28,11 +28,16 @@ const VerticalLayout = styled(BaseLayout)`
   align-items: center;
 `;
 
+const HorizontalLayout = styled(BaseLayout)`
+  flex-direction: row;
+  align-items: center;
+`;
+
 const CenterLayout = styled(BaseLayout)`
   justify-content: center;
   align-items: center;
 `;
 
-export { BaseLayout, VerticalLayout, CenterLayout };
+export { BaseLayout, VerticalLayout, HorizontalLayout, CenterLayout };
 
 export default GlobalStyle;

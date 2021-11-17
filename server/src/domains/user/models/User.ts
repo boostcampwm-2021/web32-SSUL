@@ -3,6 +3,7 @@ import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Profile } from './Profile';
 import { Alarm } from '@domains/alarm/models/Alarm';
+import { Post } from '@domains/group/models/Post';
 
 @Entity('user')
 export class User {
@@ -32,4 +33,7 @@ export class User {
 
   @OneToMany(() => Alarm, (alarm) => alarm.recieverId)
   receivedAlarms: Alarm[];
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 }

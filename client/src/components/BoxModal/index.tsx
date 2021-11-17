@@ -46,6 +46,8 @@ const Background = styled.div`
 `;
 
 const Modal = styled.div`
+  position: fixed;
+  top: calc(50vh - ${(props) => props?.style?.height ?? '600px'} / 2);
   width: ${(props) => props?.style?.width ?? '480px'};
   height: ${(props) => props?.style?.height ?? '600px'};
   background: ${(props) => props?.style?.background ?? 'white'};

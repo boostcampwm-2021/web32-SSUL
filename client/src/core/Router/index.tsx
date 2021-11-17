@@ -19,7 +19,7 @@ function Router(): JSX.Element {
       <Route path="/" component={MainPage} exact />
       <Route path="/recruit/group" component={GroupRecruitPage} exact />
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
-      <Route path="/groups" component={GroupsPage} exact />
+      <Route path="/group/:id" component={GroupsPage} exact />
       <Route path="/group/status" component={GroupStatusPage} />
       <Route path="/group/owner" component={GroupOwnerPage} />
       <Route path="/group/create" component={GroupCreatePage} />

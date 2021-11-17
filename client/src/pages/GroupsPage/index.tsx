@@ -1,10 +1,30 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { VerticalLayout } from '@styles';
+import GroupInfo from './GroupInfo';
+import GroupBoard from './GroupBoard';
+import SettingButton from './SettingButton';
+import GroupPageModal from './Modal';
+import { useAppSelector } from '@hooks';
+import { selectGroupModalState } from '@store/slices/utilSlice';
 
 function GroupsPage(): JSX.Element {
-  return <Container></Container>;
+  const modalType = useAppSelector(selectGroupModalState);
+
+  return (
+    <Container>
+      <SettingButton />
+      <GroupInfo />
+      <GroupBoard />
+      <GroupPageModal type={modalType} />
+    </Container>
+  );
 }
 
-const Container = styled.div``;
+const Container = styled(VerticalLayout)`
+  position: relative;
+  padding: 48px;
+  height: max-content;
+`;
 
 export default GroupsPage;
