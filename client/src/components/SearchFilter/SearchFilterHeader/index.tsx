@@ -30,7 +30,7 @@ const Container = styled.div`
   padding: 10px;
 
   background: ${(props) => props.theme.White};
-  box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
 
   border-radius: 10px;
 `;
