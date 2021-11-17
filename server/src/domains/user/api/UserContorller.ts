@@ -1,3 +1,4 @@
+import { AuthService } from '@domains/auth/service/AuthService';
 import {
   Controller,
   Patch,
@@ -20,6 +21,8 @@ export class UserController {
   constructor(
     @Inject()
     private readonly profileService: ProfileService,
+    @Inject()
+    private readonly authService: AuthService,
   ) {}
 
   @Patch('/role')
@@ -53,5 +56,12 @@ export class UserController {
   @OpenAPI({ summary: '자기소개를 업데이트하는 API' })
   public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
     this.profileService.updateUserIntro(id, intro);
+  }
+
+  @Get('/profile/:gid')
+  @OpenAPI({ summary: '유저 프로필 정보를 가져오는 API' })
+  @ResponseSchema(String)
+  public async getProfile(@Param('gid') githubId: string) {
+    return await this.authService.getUserProfile(githubId);
   }
 }
