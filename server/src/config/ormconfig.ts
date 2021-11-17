@@ -37,6 +37,5 @@ export const ormConfig: OrmConfig = {
     entities: [join(__dirname, '../domains/**/models/*.ts')],
     logging: false,
     synchronize: true,
-    dropSchema: true,
   },
 };
