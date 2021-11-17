@@ -8,10 +8,20 @@ interface Props {
   endAt: Date | null;
 }
 
+const MAX_INTRO_LENGTH = 25;
+
 function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
+  const printIntro = (baseIntro: string) => {
+    const changeIntro =
+      baseIntro.length > MAX_INTRO_LENGTH
+        ? `${baseIntro?.substring(0, MAX_INTRO_LENGTH)}...`
+        : baseIntro;
+    return `${changeIntro}`;
+  };
+
   return (
     <Container>
-      <GroupIntro>{intro}</GroupIntro>
+      <GroupIntro>{printIntro(String(intro))}</GroupIntro>
       <GroupDate>
         {formatDateToString(startAt)} ~ {formatDateToString(endAt)}(
         {calculateStudyTime(startAt, endAt)})
