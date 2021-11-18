@@ -1,4 +1,5 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsEnum } from 'class-validator';
+import { UsingTechAs } from '@domains/techstack/models/UsingTechStack';
 
 export class UserDto {
   @IsNumber()
@@ -26,4 +27,6 @@ export class GroupUserDto {
   name: string;
   @IsString()
   avatarUrl: string;
+  @IsEnum(UsingTechAs)
+  type: string;
 }
