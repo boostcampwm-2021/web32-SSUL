@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '@hooks';
+import { selectGroupDetail } from '@store/group/detailSlice';
 import SettingIcon from '@assets/icon_setting.png';
 
 function SettingButton(): JSX.Element {
+  const groupDetail = useAppSelector(selectGroupDetail);
+
   return (
     <Container>
-      <Link to="/group/owner/:id">
+      <Link to={`/group/owner/${groupDetail.id}`}>
         <Image src={SettingIcon} alt="세팅 아이콘" />
       </Link>
     </Container>
