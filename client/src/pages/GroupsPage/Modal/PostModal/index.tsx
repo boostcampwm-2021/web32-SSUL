@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PostTypeNav from './PostTypeNav';
 import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
-import { changeGroupModalState } from '@store/slices/utilSlice';
+import { changeGroupModalState } from '@store/util/Slice';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function PostModal(): JSX.Element {

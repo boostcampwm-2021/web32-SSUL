@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 function GroupInfoInput(): JSX.Element {

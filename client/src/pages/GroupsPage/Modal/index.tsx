@@ -3,7 +3,7 @@ import { BoxModal } from '@components';
 import PostModal from './PostModal';
 import ReadModal from './ReadModal';
 import { useAppDispatch } from '@hooks';
-import { changeGroupModalState } from '@store/slices/utilSlice';
+import { changeGroupModalState } from '@store/util/Slice';
 
 interface Props {
   type: string;

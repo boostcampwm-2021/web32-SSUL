@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
+import { selectProfileData, setProfileData } from '@store/user/profileSlice';
 import { userHttpClient } from '@api';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 import { UpdateIntroData } from '@types';
 
 function ProfileIntroBox(): JSX.Element {

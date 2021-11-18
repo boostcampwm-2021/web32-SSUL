@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { useAppDispatch, useLoader } from '@hooks';
 import { authHttpClient } from '@api';
-import { setUser } from '@store/slices/userSlice';
+import { setUser } from '@store/user/globalSlice';
 
 function Auth(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
-import { selectProfileData } from '@store/slices/profileDataSlice';
+import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
 import { DeleteRequestInfo, MentoringRequestData } from '@types';
 import { formatDateToString } from '@utils/Date';

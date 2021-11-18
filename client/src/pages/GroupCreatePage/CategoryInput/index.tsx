@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { Category } from '@types';
 import CategoryItem from './CategoryItem';
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 function CategoryInput({ categorys }: Props): JSX.Element {
-  const { category: SelectedCategory } = useAppSelector(groupCreateDataState)
+  const { category: SelectedCategory } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
 
   const getCategoryItemElements = () => {

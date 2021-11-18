@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import SearchIcon from '@assets/icon_search.png';
-import { createdFilterdQuery } from '@store/slices/groupRecruitFilterSlice';
+import { createdFilterdQuery } from '@store/group/filterSlice';
 
 const MAX_INPUT_CNT = 10;
 

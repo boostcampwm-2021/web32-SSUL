@@ -5,8 +5,8 @@ import { TechStack } from '@types';
 import { techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectProfileData, setProfileData } from '@store/slices/profileDataSlice';
-import { selectUser } from '@store/slices/userSlice';
+import { selectProfileData, setProfileData } from '@store/user/profileSlice';
+import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
   onCancel: () => void;

@@ -5,12 +5,8 @@ import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import ProfilePageModal from './modal';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setLoadingState } from '@store/slices/utilSlice';
-import {
-  clearProfileData,
-  selectProfileData,
-  setProfileData,
-} from '@store/slices/profileDataSlice';
+import { setLoadingState } from '@store/util/Slice';
+import { clearProfileData, selectProfileData, setProfileData } from '@store/user/profileSlice';
 import {
   fetchGroupActivityTechStack,
   fetchMentorInfo,
@@ -61,7 +57,7 @@ function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
 
     return () => {
       dispatch(clearProfileData());
-    }
+    };
   }, [id]);
 
   return (

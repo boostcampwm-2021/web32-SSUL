@@ -6,7 +6,7 @@ import {
   pushSelectedTechStack,
   returnGroupRecruitFilterState,
   createdFilterdQuery,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 import { TechStack } from '@types';
 
 const MAX_SELECTED_INDEX = 5;

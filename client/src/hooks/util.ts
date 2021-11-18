@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@hooks';
-import { toggleLoadingState } from '@store/slices/utilSlice';
+import { toggleLoadingState } from '@store/util/Slice';
 
 export function useLoader(): () => void {
   const dispatch = useAppDispatch();

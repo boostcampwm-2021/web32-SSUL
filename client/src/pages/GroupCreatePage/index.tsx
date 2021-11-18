@@ -7,17 +7,13 @@ import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import {
-  clearGroupData,
-  groupCreateDataState,
-  setGroupData,
-} from '@store/slices/groupCreateDataSlice';
+import { clearGroupData, groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { Category, TechStack } from '@types';
 import { categoryHttpClient } from '@api';
 import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 
 const MAX_CONTENT_INDEX = 4;
 enum PAGE_NUMBER {
@@ -178,6 +174,6 @@ const Notification = styled.div`
   font-size: 13px;
   margin-left: 40px;
   margin-bottom: 40px;
-  color: ${(props) => props.theme.Error};;
+  color: ${(props) => props.theme.Error}; ;
 `;
 export default GroupCreatePage;

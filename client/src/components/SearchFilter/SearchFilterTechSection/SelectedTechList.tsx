@@ -5,7 +5,7 @@ import {
   createdFilterdQuery,
   popSelectedTechStack,
   returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 
 function SelectedTechList(): JSX.Element {
   const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;

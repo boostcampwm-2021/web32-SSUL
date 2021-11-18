@@ -3,10 +3,7 @@ import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
 import SearchBar from '../SearchBar';
 import { useAppSelector } from '@hooks';
-import {
-  returnGroupRecruitFilterState,
-  changeGroupNameInput,
-} from '@store/slices/groupRecruitFilterSlice';
+import { returnGroupRecruitFilterState, changeGroupNameInput } from '@store/group/filterSlice';
 
 function SearchFilterHeader(): JSX.Element {
   const groupNameInput = useAppSelector(returnGroupRecruitFilterState).groupNameInput;

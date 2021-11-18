@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { useAppSelector } from '@hooks';
-import { selectUser } from '../../../store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 
 function MenuHeader(): JSX.Element {
   const user = useAppSelector(selectUser);

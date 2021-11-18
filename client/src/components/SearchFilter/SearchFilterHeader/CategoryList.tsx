@@ -7,7 +7,7 @@ import {
   returnGroupRecruitFilterState,
   checkCategory,
   createdFilterdQuery,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 import { useHistory } from 'react-router';
 
 interface CategorySate {

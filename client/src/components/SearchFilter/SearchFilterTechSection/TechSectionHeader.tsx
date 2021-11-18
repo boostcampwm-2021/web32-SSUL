@@ -3,10 +3,7 @@ import styled from '@emotion/styled';
 import SearchBar from '../SearchBar';
 import SelectedTechList from './SelectedTechList';
 import { useAppSelector } from '@hooks';
-import {
-  returnGroupRecruitFilterState,
-  changeTechStackInput,
-} from '@store/slices/groupRecruitFilterSlice';
+import { returnGroupRecruitFilterState, changeTechStackInput } from '@store/group/filterSlice';
 
 function TechSectionHeader(): JSX.Element {
   const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;

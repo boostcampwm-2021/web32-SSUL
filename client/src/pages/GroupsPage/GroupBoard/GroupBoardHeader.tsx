@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PlusIcon from '@assets/icon_plus.png';
 import { useAppDispatch } from '@hooks';
-import { changeGroupModalState } from '@store/slices/utilSlice';
+import { changeGroupModalState } from '@store/util/Slice';
 
 function GroupBoardHeader(): JSX.Element {
   const dipatch = useAppDispatch();

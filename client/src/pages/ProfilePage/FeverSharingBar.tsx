@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 import { useAppSelector } from '@hooks';
 
 const DEFAULT_INDEX = 30;

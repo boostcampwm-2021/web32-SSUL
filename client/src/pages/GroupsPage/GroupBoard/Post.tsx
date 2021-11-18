@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
-import { changeGroupModalState } from '@store/slices/utilSlice';
+import { changeGroupModalState } from '@store/util/Slice';
 
 function Post(): JSX.Element {
   const dispatch = useAppDispatch();
