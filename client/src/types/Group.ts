@@ -34,8 +34,8 @@ export interface GroupDetail {
   maxUserCnt: number;
   curUserCnt: number;
   intro: string;
-  startAt: string;
-  endAt: string;
+  startAt: Date | null;
+  endAt: Date | null;
   status: string;
 }
 
