@@ -1,24 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { GroupEnrollment } from '@types';
 
 interface Props {
   user: GroupEnrollment;
 }
+
+const makeBadgeByRole = (role: string): string => {
+  switch (role) {
+    case 'OWNER':
+      return '👑';
+    case 'MENTOR':
+      return '💡';
+    default:
+      return '';
+  }
+};
+
 function GroupUserBoxItem({ user }: Props): JSX.Element {
-  const makeBadgeByRole = (role: string): string => {
-    switch (role) {
-      case 'OWNER':
-        return '👑';
-      case 'MENTOR':
-        return '💡';
-      default:
-        return '';
-    }
-  };
   return (
     <Container>
-      <Image url={user.avatarUrl} />
+      <Link to={`/profile/${user.githubId}`}>
+        <Image url={user.avatarUrl} />
+      </Link>
       <Name>{`${user.name} ${makeBadgeByRole(user.type)}`}</Name>
     </Container>
   );
