@@ -10,7 +10,12 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('set', () => {
+  cy.intercept('GET', '/api/category', { fixture: 'category.json' });
+  cy.intercept('GET', '/api/techstack', { fixture: 'techstack.json' });
+  cy.intercept('GET', '/api/auth/silent-refresh', { fixture: 'silent-refresh.json' });
+});
+
 //
 //
 // -- This is a child command --
