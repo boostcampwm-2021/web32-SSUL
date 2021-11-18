@@ -10,21 +10,11 @@ interface Header {
   maxUserCnt: number | null;
 }
 
-const MAX_NAME_LENGTH = 10;
-
 function GroupCardHeader({ headerProps }: HeaderProps): JSX.Element {
   const { name, curUserCnt, maxUserCnt } = headerProps;
-  const printGroupName = (baseGroupName: string) => {
-    const changeGroupName =
-      baseGroupName.length > MAX_NAME_LENGTH
-        ? `${baseGroupName?.substring(0, MAX_NAME_LENGTH)}...`
-        : baseGroupName;
-    return `${changeGroupName}`;
-  };
-
   return (
     <Container>
-      <GroupName>{printGroupName(String(name))}</GroupName>
+      <GroupName>{name}</GroupName>
       <UserCntStatus>
         {curUserCnt}/{maxUserCnt}
       </UserCntStatus>
@@ -40,6 +30,9 @@ const Container = styled.div`
 `;
 
 const GroupName = styled.h2`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${(props) => props.theme.Primary};
 `;
 

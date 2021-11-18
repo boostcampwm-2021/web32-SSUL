@@ -8,20 +8,10 @@ interface Props {
   endAt: Date | null;
 }
 
-const MAX_INTRO_LENGTH = 25;
-
 function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
-  const printIntro = (baseIntro: string) => {
-    const changeIntro =
-      baseIntro.length > MAX_INTRO_LENGTH
-        ? `${baseIntro?.substring(0, MAX_INTRO_LENGTH)}...`
-        : baseIntro;
-    return `${changeIntro}`;
-  };
-
   return (
     <Container>
-      <GroupIntro>{printIntro(String(intro))}</GroupIntro>
+      <GroupIntro>{intro}</GroupIntro>
       <GroupDate>
         {formatDateToString(startAt)} ~ {formatDateToString(endAt)}(
         {calculateStudyTime(startAt, endAt)})
@@ -33,12 +23,15 @@ function GroupStatusInfo({ intro, startAt, endAt }: Props): JSX.Element {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 50px;
+  height: 70px;
   padding: 10px;
   justify-content: space-between;
 `;
 
 const GroupIntro = styled.h5`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${(props) => props.theme.Gray4};
 `;
 
