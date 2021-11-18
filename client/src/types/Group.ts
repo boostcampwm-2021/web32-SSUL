@@ -49,4 +49,5 @@ export interface GroupEnrollment {
   githubId: string;
   name: string;
   avatarUrl: string;
+  type: string;
 }

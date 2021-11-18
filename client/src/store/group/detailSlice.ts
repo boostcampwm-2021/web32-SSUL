@@ -22,7 +22,7 @@ const initialState = {
     status: '',
   },
   usingTechStack: [{ techStackId: 0, name: '' }],
-  groupEnrollment: [{ userId: 0, githubId: '', name: '', avatarUrl: '' }],
+  groupEnrollment: [{ userId: 0, githubId: '', name: '', avatarUrl: '', type: '' }],
 };
 
 export const detailSlice = createSlice({
