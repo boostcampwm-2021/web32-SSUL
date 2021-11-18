@@ -1,21 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppSelector } from '@hooks';
+import { selectGroupDetail, selectGroupTechStack } from '@store/group/detailSlice';
+import { formatDateToString, classifyDate } from '@utils/Date';
 
 function GroupInfoHeader(): JSX.Element {
+  const groupDetail = useAppSelector(selectGroupDetail);
+  const groupTechStack = useAppSelector(selectGroupTechStack);
+  const groupTechStackList = groupTechStack.map((stack, idx) => (
+    <GroupTag key={idx}>#{stack.name}</GroupTag>
+  ));
+
   return (
     <Container>
-      <GroupDate>2021-11-15 ~ 2021-12-31</GroupDate>
-      <GroupStatus>진행중</GroupStatus>
-      <GroupTitle>
-        나는야 임시 제목, 그룹이죠. 근데 사실 이렇게 그룹 제목이 길수도 있는거잖아요?
-      </GroupTitle>
-      <GroupTagBar>
-        <GroupTag>#Javascript</GroupTag>
-        <GroupTag>#React</GroupTag>
-        <GroupTag>#Redux</GroupTag>
-        <GroupTag>#Cypress</GroupTag>
-        <GroupTag>#Figma</GroupTag>
-      </GroupTagBar>
+      <GroupDate>
+        {formatDateToString(groupDetail.startAt)} ~ {formatDateToString(groupDetail.endAt)}
+      </GroupDate>
+      <GroupStatus>{classifyDate(groupDetail.startAt, groupDetail.endAt)}</GroupStatus>
+      <GroupTitle>{groupDetail.name}</GroupTitle>
+      <GroupTagBar>{groupTechStackList}</GroupTagBar>
     </Container>
   );
 }
