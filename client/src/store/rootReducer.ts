@@ -3,6 +3,7 @@ import util from './util/Slice';
 import user from './user/globalSlice';
 import groupRecruit from './group/filterSlice';
 import createGroupData from './group/makerSlice';
+import groupDetail from './group/detailSlice';
 import profileDataSlice from './user/profileSlice';
 
 const reducer = combineReducers({
@@ -10,6 +11,7 @@ const reducer = combineReducers({
   user,
   createGroupData,
   groupRecruit,
+  groupDetail,
   profileDataSlice,
 });
 
