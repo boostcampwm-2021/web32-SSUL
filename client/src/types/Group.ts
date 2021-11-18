@@ -25,3 +25,28 @@ export interface GroupResponse {
   groups: Group[];
   totalPages: number;
 }
+
+export interface GroupDetail {
+  id: number;
+  mentorId?: number;
+  ownerId: number;
+  name: string;
+  maxUserCnt: number;
+  curUserCnt: number;
+  intro: string;
+  startAt: string;
+  endAt: string;
+  status: string;
+}
+
+export interface GroupUsingTechStack {
+  techStackId: number;
+  name: string;
+}
+
+export interface GroupEnrollment {
+  userId: number;
+  githubId: string;
+  name: string;
+  avatarUrl: string;
+}

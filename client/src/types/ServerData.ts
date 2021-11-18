@@ -1,3 +1,5 @@
+import { GroupEnrollment, GroupUsingTechStack } from '@types';
+
 export interface ExampleInterface {
   somethingToRequestKey: number;
 }
@@ -85,18 +87,6 @@ export interface GroupDetailData {
   startAt: string;
   endAt: string;
   status: string;
-  usingTechStacks: groupUsingTechStack[];
-  groupEnrollments: groupEnrollment[];
-}
-
-export interface groupUsingTechStack {
-  techStackId: number;
-  name: string;
-}
-
-export interface groupEnrollment {
-  userId: number;
-  githubId: string;
-  name: string;
-  avatarUrl: string;
+  usingTechStacks: GroupUsingTechStack[];
+  groupEnrollments: GroupEnrollment[];
 }
