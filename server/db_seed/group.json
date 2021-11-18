@@ -1298,5 +1298,18 @@
    "endAt": "2022-09-08 14:02:35",
    "categoryId": 7,
    "status": "READY"
- }
+ },
+ {
+  "id": 101,
+  "mentorId": 0,
+  "ownerId": 2,
+  "name": "리액트와 함께하는 프론트엔드 학습",
+  "maxUserCnt": 5,
+  "curUserCnt": 1,
+  "intro": "소개말입니다람쥐",
+  "startAt": "2021-11-29 00:05:56",
+  "endAt": "2021-12-31 14:02:35",
+  "categoryId": 2,
+  "status": "READY"
+}
 ]

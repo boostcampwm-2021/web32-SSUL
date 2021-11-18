@@ -4,10 +4,14 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { Category } from '@domains/category/models/Category';
 import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
+import { GroupDetailDto } from '../dto/groupDto';
 import { Group } from '../models/Group';
 import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
+import { GroupUserDto } from '@domains/user/dto/UserDto';
+import { destructObject } from '@utils/Object';
 
 const EACH_PAGE_CNT = 12;
 
@@ -50,6 +54,18 @@ export class GroupService {
         : await this.groupRepository.findGroupByName(name);
     const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
+  }
+
+  public async getGroupDetails(gid: number): Promise<GroupDetailDto> {
+    const groupDetails = await this.groupRepository.findGroupDetailByGroupId(gid);
+    const usingTechStacks = groupDetails?.usingTechStacks.map((techStack) =>
+      destructObject(techStack),
+    ) as GroupUsingTechStackDto[];
+    const groupEnrollments = groupDetails?.groupEnrollments.map((enrollment) =>
+      destructObject(enrollment),
+    ) as GroupUserDto[];
+    const grupDetailData = { ...groupDetails, usingTechStacks, groupEnrollments } as GroupDetailDto;
+    return grupDetailData;
   }
 
   public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {

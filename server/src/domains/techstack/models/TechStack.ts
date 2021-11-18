@@ -5,7 +5,7 @@ import { UsingTechStack } from './UsingTechStack';
 @Entity('tech_stack')
 export class TechStack {
   @IsNumber()
-  @PrimaryGeneratedColumn({ name: 'tech_stack_id' })
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
   @IsString()
