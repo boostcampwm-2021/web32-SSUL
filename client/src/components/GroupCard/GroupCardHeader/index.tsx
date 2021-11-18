@@ -11,11 +11,12 @@ interface Header {
 }
 
 function GroupCardHeader({ headerProps }: HeaderProps): JSX.Element {
+  const { name, curUserCnt, maxUserCnt } = headerProps;
   return (
     <Container>
-      <GroupName>{headerProps.name}</GroupName>
+      <GroupName>{name}</GroupName>
       <UserCntStatus>
-        {headerProps.curUserCnt}/{headerProps.maxUserCnt}
+        {curUserCnt}/{maxUserCnt}
       </UserCntStatus>
     </Container>
   );
@@ -27,8 +28,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
 const GroupName = styled.h2`
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${(props) => props.theme.Primary};
 `;
 

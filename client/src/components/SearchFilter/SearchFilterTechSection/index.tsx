@@ -28,22 +28,21 @@ function SearchFilterTechSection(): JSX.Element {
   }, [techStackInput, baseTechStackList]);
 
   return (
-    <Container>
+    <TechStackSection>
       <TechSectionHeader />
       <TechList listView={techListView} />
-    </Container>
+    </TechStackSection>
   );
 }
 
-const Container = styled.div`
+const TechStackSection = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  min-width: 1000px;
+  width: 1000px;
   padding: 10px;
 
   background: ${(props) => props.theme.White};
-  box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
 

@@ -20,6 +20,15 @@ interface StyledProps {
 function SearchBar({ searchBarInput, changeInputEvent, inputValue }: searchBarProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const returnPlaceholderText = (type: string) => {
+    switch (type) {
+      case 'GROUP_NAME':
+        return '그룹 이름 검색';
+      case 'TECH_STACK':
+        return '기술 이름 검색';
+    }
+  };
+
   const handleSearchButtonClick = async () => {
     dispatch(createdFilterdQuery());
   };
@@ -32,7 +41,11 @@ function SearchBar({ searchBarInput, changeInputEvent, inputValue }: searchBarPr
 
   return (
     <Container>
-      <InputValue placeholder="Search for.." value={searchBarInput} onChange={handleInputText} />
+      <InputValue
+        placeholder={returnPlaceholderText(inputValue)}
+        value={searchBarInput}
+        onChange={handleInputText}
+      />
       <SearchButton inputValue={inputValue} onClick={handleSearchButtonClick}>
         <Image src={SearchIcon} />
       </SearchButton>
@@ -51,7 +64,7 @@ const Container = styled.div`
   padding: 10px;
 
   background: ${(props) => props.theme.White};
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 30px 30px 30px 30px;
 `;
 
@@ -59,6 +72,7 @@ const InputValue = styled.input`
   display: flex;
   border: none;
   border-radius: 30px 30px 30px 30px;
+
   &:focus {
     outline: 0;
   }
