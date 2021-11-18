@@ -1,46 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppSelector } from '@hooks';
+import { selectGroupDetail } from '@store/group/detailSlice';
 
 function GroupIntrodction(): JSX.Element {
+  const introducton = useAppSelector(selectGroupDetail).intro;
   return (
     <Container>
-      <Content>
-        술 한잔 했습니다..
-        <br /> 개인사 하나만 기억해주세요 진심을 다해 전합니다. <br />
-        밤낮으로 고민하고 개발했습니다 ...
-        <br />
-        최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다... <br />
-        그만큼 서비스가 재밌다는.. ㅋㅋ
-        <br />
-        술 한잔 했습니다..
-        <br /> 개인사 하나만 기억해주세요 진심을 다해 전합니다. <br />
-        밤낮으로 고민하고 개발했습니다 ...
-        <br />
-        최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다... <br />
-        그만큼 서비스가 재밌다는.. ㅋㅋ
-        <br />
-        술 한잔 했습니다..
-        <br /> 개인사 하나만 기억해주세요 진심을 다해 전합니다. <br />
-        밤낮으로 고민하고 개발했습니다 ...
-        <br />
-        최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다... <br />
-        그만큼 서비스가 재밌다는.. ㅋㅋ
-        <br />
-        술 한잔 했습니다..
-        <br /> 개인사 하나만 기억해주세요 진심을 다해 전합니다. <br />
-        밤낮으로 고민하고 개발했습니다 ...
-        <br />
-        최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다... <br />
-        그만큼 서비스가 재밌다는.. ㅋㅋ
-        <br />
-        술 한잔 했습니다..
-        <br /> 개인사 하나만 기억해주세요 진심을 다해 전합니다. <br />
-        밤낮으로 고민하고 개발했습니다 ...
-        <br />
-        최선을 다했고 열심히 했습니다 저의 진심이 느껴지길 바랍니다 고맙습니다... <br />
-        그만큼 서비스가 재밌다는.. ㅋㅋ
-        <br />
-      </Content>
+      <Content>{introducton}</Content>
     </Container>
   );
 }
