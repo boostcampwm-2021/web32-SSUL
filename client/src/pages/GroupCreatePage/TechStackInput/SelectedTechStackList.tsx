@@ -20,7 +20,7 @@ function SelectedTechStackList({ usingTechStacks, setUsingTechStacks }: Props): 
     return (
       <SelectItem key={idx}>
         <ItemText>{techStackName}</ItemText>
-        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
+        <EraseButton data-test="erase-button" onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
   });

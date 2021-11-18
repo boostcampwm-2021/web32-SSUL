@@ -66,16 +66,16 @@ describe('그룹 정보 입력', () => {
     cy.react('CustomButton').contains('다음').click();
     cy.contains('필수 입력사항을 입력해주세요!');
 
-    cy.react('GroupInfoInput').first().type('Group Title');
+    cy.get('[data-test=group-name]').type('Group Title');
     cy.react('CustomButton').contains('다음').click();
     cy.contains('필수 입력사항을 입력해주세요!');
 
-    cy.react('GroupInfoInput').first().clear();
-    cy.react('GroupInfoInput').last().type('Group Intro');
+    cy.get('[data-test=group-name]').clear();
+    cy.get('[data-test=group-intro]').type('Group Intro');
     cy.react('CustomButton').contains('다음').click();
     cy.contains('필수 입력사항을 입력해주세요!');
 
-    cy.react('GroupInfoInput').first().type('Group Title');
+    cy.get('[data-test=group-name]').type('Group Title');
   });
 
   it('다음버튼 클릭시 시작,종료일 선택 화면으로 이동한다', () => {
@@ -149,22 +149,21 @@ describe('그룹 기술스택 입력', () => {
   });
 
   it('기술스택은 검색을 할 수 있다.', () => {
-    cy.react('SearchBar').first().type('javascript');
-    cy.react('TechStackList').children().should('have.length', 1);
-    cy.react('SearchBar').first().clear();
-    cy.react('TechStackList').children().should('have.length', 10);
+    cy.get('[data-test=search-bar]').type('javascript');
+    cy.get('[data-test=tech-item]').should('have.length', 1);
+    cy.get('[data-test=search-bar]').clear();
+    cy.get('[data-test=tech-item]').should('have.length', 10);
   });
 
   it('기술스택을 선택할 경우 선택된 기술스택이 표시된다.', () => {
-    cy.react('TechStackList').children().first().last().click();
-    cy.react('TechStackList').children().first().next().click();
-    cy.react('TechStackList').children().last().click();
-    cy.get('.css-fvk2st > :nth-child(5)').click();
+    cy.get('[data-test=tech-item]').first().click();
+    cy.get('[data-test=tech-item]').first().next().click();
+    cy.get('[data-test=tech-item]').first().click();
   });
 
   it('선택된 기술스택은 제거할 수 있어야한다.', () => {
-    cy.react('SelectedTechStackList').children().first().find('button').click();
-    cy.react('SelectedTechStackList').children().first().find('button').click();
+    cy.get('[data-test=erase-button]').first().click();
+    cy.get('[data-test=erase-button]').last().click();
   });
 
   it('기술선택 후 완료버튼을 누르면 그룹생성 페이지를 벗어난다.', () => {
