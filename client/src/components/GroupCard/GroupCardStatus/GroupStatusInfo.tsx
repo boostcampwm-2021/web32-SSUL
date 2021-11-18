@@ -29,6 +29,7 @@ const Container = styled.div`
 `;
 
 const GroupIntro = styled.h5`
+  width: 70%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
