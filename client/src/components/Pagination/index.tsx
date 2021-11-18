@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { makeRangeNumberArray } from '@utils/Range';
 import { useAppDispatch } from '@hooks';
-import { checkPageNumber, createdFilterdQuery } from '@store/slices/groupRecruitFilterSlice';
+import { checkPageNumber, createdFilterdQuery } from '@store/group/filterSlice';
 
 interface PaginationProps {
   totalPages: number;

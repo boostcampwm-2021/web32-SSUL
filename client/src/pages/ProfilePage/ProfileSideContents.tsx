@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import FeverSharingBar from './FeverSharingBar';
 import GithubLogo from '@assets/icon_github_logo.png';
 import { useAppSelector } from '@hooks';
-import { selectProfileData } from '@store/slices/profileDataSlice';
+import { selectProfileData } from '@store/user/profileSlice';
 
 function ProfileSideContents(): JSX.Element {
   const profile = useAppSelector(selectProfileData);

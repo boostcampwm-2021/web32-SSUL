@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
-import { selectProfileData } from '@store/slices/profileDataSlice';
+import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
 import { useSelector } from 'react-redux';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
   showModal: () => void;
@@ -17,7 +17,7 @@ function ProfileTechStackBox({ showModal }: Props): JSX.Element {
 
   const getEditButtonElement = (): JSX.Element => {
     if (user.id === profile.userId) {
-      return <EditButton onClick={showModal}>편집</EditButton>
+      return <EditButton onClick={showModal}>편집</EditButton>;
     } else {
       return <></>;
     }

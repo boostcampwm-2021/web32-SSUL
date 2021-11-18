@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector } from '@hooks';
-import { selectProfileData } from '@store/slices/profileDataSlice';
+import { selectProfileData } from '@store/user/profileSlice';
 import ProfileBoxContainer from './ProfileBoxContainer';
 
 function ProfileActivityListBox(): JSX.Element {

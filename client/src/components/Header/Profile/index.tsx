@@ -5,7 +5,7 @@ import { BubbleModalProfileItem } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { authHttpClient } from '@api';
 import { loginWithGithub } from '@utils/Auth';
-import { initUser, selectUser } from '@store/slices/userSlice';
+import { initUser, selectUser } from '@store/user/globalSlice';
 import BubbleModal from '../../BubbleModal';
 
 function Profile(): JSX.Element {

@@ -6,7 +6,7 @@ import GroupBoard from './GroupBoard';
 import SettingButton from './SettingButton';
 import GroupPageModal from './Modal';
 import { useAppSelector } from '@hooks';
-import { selectGroupModalState } from '@store/slices/utilSlice';
+import { selectGroupModalState } from '@store/util/Slice';
 
 function GroupsPage(): JSX.Element {
   const modalType = useAppSelector(selectGroupModalState);

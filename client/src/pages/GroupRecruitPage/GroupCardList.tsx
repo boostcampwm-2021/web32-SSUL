@@ -3,10 +3,7 @@ import styled from '@emotion/styled';
 import { GroupCard, Pagination } from '@components';
 import { Group, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
-import {
-  initFilterState,
-  returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+import { initFilterState, returnGroupRecruitFilterState } from '@store/group/filterSlice';
 import { groupHttpClient } from '@api';
 
 function GroupCardList(): JSX.Element {

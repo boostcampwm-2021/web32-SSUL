@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { authHttpClient } from '@api';
 import { useAppDispatch } from '@hooks';
-import { setUser } from '@store/slices/userSlice';
+import { setUser } from '@store/user/globalSlice';
 
 export function useSilentRefresh(): void {
   const dispatch = useAppDispatch();
