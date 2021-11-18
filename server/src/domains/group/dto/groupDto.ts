@@ -1,6 +1,6 @@
 import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
-import { GroupUsingTechStackDto } from '@domains/techstack/models/TechStack';
+import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 
 export enum GroupState {
   READY = 'READY',

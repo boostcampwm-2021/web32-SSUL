@@ -9,7 +9,7 @@ import { Group } from '../models/Group';
 import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupUsingTechStackDto } from '@domains/techstack/models/TechStack';
+import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { destructObject } from '@utils/Object';
 

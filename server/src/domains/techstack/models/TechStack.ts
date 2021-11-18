@@ -15,10 +15,3 @@ export class TechStack {
   @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.techStack)
   usingTechStack: UsingTechStack[];
 }
-
-export class GroupUsingTechStackDto {
-  @IsNumber()
-  techStackId: number;
-  @IsString()
-  name: string;
-}
