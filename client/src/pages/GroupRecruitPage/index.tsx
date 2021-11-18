@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { SearchFilter } from '@components';
 import GroupCardList from './GroupCardList';
+import ICON_PLUS from '@assets/icon_plus.png';
 import { Link } from 'react-router-dom';
 
 function GroupRecruitPage(): JSX.Element {
@@ -13,7 +14,9 @@ function GroupRecruitPage(): JSX.Element {
         <GroupCardList />
       </Contents>
       <SideLayout>
-        <FloatingButton to={{ pathname: `/group/create` }}>+</FloatingButton>
+        <FloatingButton to={{ pathname: `/group/create` }}>
+          <FloatingImg src={ICON_PLUS} />
+        </FloatingButton>
       </SideLayout>
     </Container>
   );
@@ -40,11 +43,13 @@ const Contents = styled.div`
 `;
 
 const FloatingButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   width: 60px;
   height: 60px;
   bottom: 100px;
-  font-size: 40px;
   margin: 10px;
   border: none;
   border-radius: 50px;
@@ -58,6 +63,11 @@ const FloatingButton = styled(Link)`
   &:hover {
     color: ${(props) => props.theme.White};
   }
+`;
+
+const FloatingImg = styled.img`
+  width: 24px;
+  filter: invert();
 `;
 
 export default GroupRecruitPage;
