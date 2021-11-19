@@ -5,10 +5,10 @@ import {
   Session,
   SessionParam,
   OnUndefined,
+  Post,
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
-import { GithubUserDto } from '../dto/AuthDto';
 import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
@@ -32,29 +32,26 @@ export class AuthController {
     },
   })
   @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
-  async getAuthentification(
-    @SessionParam('githubId') githubId: string,
-    @SessionParam('role') role: string,
-  ) {
+  async getAuthentification(@Session() session: any) {
+    const { githubId, role } = session.user;
     if (!githubId) return;
     const userData = await this.authService.getUserProfile(githubId);
-    return { ...userData, role: role } as UserDto;
+    return { ...userData, role } as UserDto;
   }
 
-  @Get('/token')
-  @OpenAPI({ summary: 'Github OAuth 토큰을 발급받는 API' })
-  @ResponseSchema(GithubUserDto, { description: '토큰 정상 발급' })
-  async getGithubAccessToken(
-    @Session() session: any,
-    @SessionParam('githubId') githubId: string,
-    @QueryParam('code') code: string,
-  ) {
+  @Post('/login/social')
+  @OpenAPI({ summary: 'Github OAuth 로그인 API' })
+  @ResponseSchema(UserDto)
+  async socialLogin(@Session() session: any, @QueryParam('code') code: string) {
     const accessToken = await this.authService.getGithubAccessToken(code);
     const githubUserData = await this.authService.getGithubUserData(accessToken);
     const userData = await this.authService.findOrInsertUser(githubUserData);
-    if (!githubId) {
-      session.githubId = githubUserData.githubId;
-      session.role = 'MENTEE';
+    if (!session.user) {
+      session.user = {
+        githubId: githubUserData.githubId,
+        role: 'MENTEE',
+        id: userData.id,
+      };
     }
 
     return userData;

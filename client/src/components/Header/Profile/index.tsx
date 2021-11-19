@@ -28,7 +28,7 @@ function Profile(): JSX.Element {
   };
   const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    await authHttpClient.getLogout();
+    await authHttpClient.logout();
     dispatch(initUser());
     setIsLogin(false);
     setIsModalClicked(false);

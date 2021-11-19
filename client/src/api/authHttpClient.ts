@@ -7,9 +7,9 @@ class AuthHttpClient extends HttpClient {
   }
 
   public getSilentRefresh = (): Promise<ResponseUserData> => this.httpClient.get('/silent-refresh');
-  public getAccessToken = (code: string): Promise<ResponseGithubUserData> =>
-    this.httpClient.get(`/token?code=${code}`);
-  public getLogout = (): Promise<null> => this.httpClient.get('/logout');
+  public login = (code: string): Promise<ResponseGithubUserData> =>
+    this.httpClient.post(`/login/social?code=${code}`);
+  public logout = (): Promise<null> => this.httpClient.get('/logout');
 }
 
 export const authHttpClient = new AuthHttpClient();

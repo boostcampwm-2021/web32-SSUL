@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cp .env.dev .env && nodemon",
-    "prod": "cp .env.prod .env && ts-node -r tsconfig-paths/register ./bin/www.ts",
+    "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
     "test": "npm run seed:test & jest --setupFiles dotenv/config --forceExit",
     "seed:test": "cp .env.test .env && ts-node -r tsconfig-paths/register ./bin/seed.ts",
     "seed:dev": "cp .env.dev .env && ts-node -r tsconfig-paths/register ./bin/seed.ts"
@@ -15,6 +15,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "class-validator-jsonschema": "^3.1.0",
+    "cookie-session": "^1.4.0",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.19.1",
+    "@types/cookie-session": "^2.0.43",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/express-session": "^1.17.4",

@@ -5,6 +5,11 @@ import { ormConfig } from '@config/ormconfig';
 import { Category } from '@domains/category/models/Category';
 import { Group } from '@domains/group/models/Group';
 import { TechStack } from '@domains/techstack/models/TechStack';
+import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
+import { User } from '@domains/user/models/User';
+import { Profile } from '@domains/user/models/Profile';
+import { Mentor } from '@domains/mentoring/models/Mentor';
+import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 
 import {
   catagorySeedData,
@@ -16,11 +21,6 @@ import {
   groupEnrollmentData,
   mentorData,
 } from '@root/db_seed';
-import { UsingTechStack } from '@domains/techstack/models/UsingTechStack';
-import { User } from '@domains/user/models/User';
-import { Profile } from '@domains/user/models/Profile';
-import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
-import { Mentor } from '@domains/mentoring/models/Mentor';
 
 export async function seed() {
   const seedConfig = { ...ormConfig[config.mode], dropSchema: true };

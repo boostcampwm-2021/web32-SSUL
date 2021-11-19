@@ -18,7 +18,7 @@ function Auth(): JSX.Element {
     const code = query.code as string;
 
     try {
-      const data = await authHttpClient.getAccessToken(code);
+      const data = await authHttpClient.login(code);
       const { id, githubId: oAuthId, name, avatarUrl: image, feverStack, shareStack } = data;
       dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack }));
       toggleLoader();
