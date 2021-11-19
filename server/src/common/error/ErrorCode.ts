@@ -11,5 +11,6 @@ export const ErrorCode = Object.freeze({
   USER_NOT_MENTOR: new ErrorSpec('T000', '멘토 유저가 아닙니다.'),
   USER_NOT_OWNER: new ErrorSpec('T001', '그룹 소유자가 아닙니다.'),
   // group
-  DUP_ENROLLMENT: new ErrorSpec('G000', '이미 그룹에 등록된 유저입니다.')
+  DUP_ENROLLMENT: new ErrorSpec('G000', '이미 그룹에 등록된 유저입니다.'),
+  INVALID_GROUP_ID: new ErrorSpec('G0001', '잘못된 그룹ID 입니다.'),
 });
