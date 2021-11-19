@@ -16,7 +16,7 @@ describe('/mentoring', () => {
       const response = await request(app).get('/api/mentoring/mentor/1');
       //then
       expect(response.statusCode).toBe(200);
-      expect(response.body.mentorId).toBe(1);
+      expect(response.body.mentorId).toBe(10);
     });
 
     test('멘토 등록X 유저는 실패', async () => {
