@@ -31,7 +31,7 @@ function TechStackList({ techStackList, usingTechStacks, setUsingTechStacks }: P
     return usingTechStacks.includes(techStack.name) ? (
       <SelectedTechListItem key={idx}>{techStack.name}</SelectedTechListItem>
     ) : (
-      <TechListItem key={idx} onClick={handleTechStackClick}>
+      <TechListItem data-test="tech-item" key={idx} onClick={handleTechStackClick}>
         {techStack.name}
       </TechListItem>
     );

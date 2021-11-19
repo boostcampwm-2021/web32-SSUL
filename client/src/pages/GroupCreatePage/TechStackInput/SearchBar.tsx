@@ -7,7 +7,7 @@ interface Props {
 function SearchBar({ onChange }: Props): JSX.Element {
   return (
     <Container>
-      <InputValue onChange={onChange} placeholder="Search for.." />
+      <InputValue data-test="search-bar" onChange={onChange} placeholder="Search for.." />
     </Container>
   );
 }
