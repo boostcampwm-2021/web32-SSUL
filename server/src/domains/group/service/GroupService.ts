@@ -113,8 +113,6 @@ export class GroupService {
       throw new InvalidGroupIdError();
     }
     group.mentorId = mentorId;
-
-    console.log(group);
     this.groupRepository.save(group);
   }
 }
