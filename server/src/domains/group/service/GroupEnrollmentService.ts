@@ -4,7 +4,8 @@ import { CategoryRepository } from '@domains/category/repository/CategoryReposit
 import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
 import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
-import { GroupEnrollment } from '../models/GroupEnrollment';
+import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 
 @Service()
 export class GroupEnrollmentService {
@@ -13,17 +14,11 @@ export class GroupEnrollmentService {
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
   ) {}
 
-  public async addGroupEnrollment(groupId: number, userId: number) {
+  public async addGroupEnrollment(groupId: number, userId: number, type: GroupEnrollmentAs) {
     const searchResult = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
     if(searchResult !== undefined){
-      //throw Error('이미 추가된 생성자입니다.')
+      throw new DuplicateEnrollmentError();
     }
-
-    const groupEnrollment = new GroupEnrollment();
-    groupEnrollment.groupId = groupId;
-    groupEnrollment.userId = userId;
-    groupEnrollment.type = 'OWNER';
-
-    await this.groupEnrollmentRepository.save(groupEnrollment);
+    await this.groupEnrollmentRepository.insert({groupId, userId, type});
   }
 }
