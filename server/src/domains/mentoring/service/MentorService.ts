@@ -4,7 +4,6 @@ import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { DeleteRequestDto } from '../dto/DeleteRequestDto';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
 import { MentorRepository } from '../repository/MentorRepository';
@@ -57,12 +56,7 @@ export class MentorService {
     );
   }
 
-  public async processingDeleteRequest(requestData: DeleteRequestDto) {
-    if (requestData.accept) {
-      const group = await this.groupRepository.findOneOrFail({ id: requestData.groupId });
-      group.mentorId = requestData.mentorId;
-      await this.groupRepository.save(group);
-    }
-    await this.mentoringRequestRepository.delete({ id: requestData.id });
+  public async deleteRequest(requestId: number) {
+    return await this.mentoringRequestRepository.delete({ id:requestId });
   }
 }
