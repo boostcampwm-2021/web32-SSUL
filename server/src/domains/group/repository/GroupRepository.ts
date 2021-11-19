@@ -40,10 +40,11 @@ export class GroupRepository extends Repository<Group> {
       .innerJoin('ge.user', 'u')
       .select('group')
       .addSelect('uts.techStackId')
-      .addSelect('ge.userId')
+      .addSelect(['ge.userId', 'ge.type'])
       .addSelect('ts.name')
       .addSelect(['u.githubId', 'u.name', 'u.avatarUrl'])
       .where('group.id = :gid', { gid: groupId })
+      .orderBy('ge.type', 'ASC')
       .getOne();
   }
 }

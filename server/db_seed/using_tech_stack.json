@@ -819,6 +819,12 @@
     "id": 138,
     "type": "GROUP",
     "groupId": 101,
-    "techStackId": 4
+    "techStackId": 1
+  },
+  {
+    "id": 139,
+    "type": "GROUP",
+    "groupId": 101,
+    "techStackId": 3
   }
 ]
