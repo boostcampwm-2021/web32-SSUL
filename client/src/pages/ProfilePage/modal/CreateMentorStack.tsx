@@ -29,9 +29,9 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
       return;
     }
     setNotificationText('');
-    dispatch(setProfileData({ mentoringStack: selectedTechStacks, isMentor: true }));
     try {
       await mentoringHttpClient.registerMentor({ userId: user.id, techStacks: selectedTechStacks });
+      dispatch(setProfileData({ mentoringStack: selectedTechStacks, isMentor: true }));
       onCancel();
     } catch (e) {
       setNotificationText('멘토 신청에 실패했습니다!');

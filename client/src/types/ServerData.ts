@@ -51,7 +51,6 @@ export interface GroupActivity {
 }
 
 export interface MentorInfo {
-  isMentor: boolean;
   mentorId: number;
 }
 
@@ -69,11 +68,10 @@ export interface MentoringRequestData {
   createdAt: string;
 }
 
-export interface DeleteRequestInfo {
+export interface AcceptRequestInfo {
   id: number;
-  mentorId: number;
+  userId: number;
   groupId: number;
-  accept: boolean;
 }
 
 export interface GroupDetailData {

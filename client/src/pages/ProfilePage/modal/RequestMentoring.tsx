@@ -4,12 +4,12 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
 import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
-import { DeleteRequestInfo, MentoringRequestData } from '@types';
+import {  AcceptRequestInfo, MentoringRequestData } from '@types';
 import { formatDateToString } from '@utils/Date';
 
 function RequestMentoring(): JSX.Element {
   const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
-  const { mentorId } = useAppSelector(selectProfileData);
+  const { mentorId, userId } = useAppSelector(selectProfileData);
 
   const fetchMentoringRequests = async () => {
     const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(
@@ -18,16 +18,23 @@ function RequestMentoring(): JSX.Element {
     setRequestList(fetchedData);
   };
 
-  const handleButtonClick = (data: MentoringRequestData, accept: boolean) => async () => {
-    const requestData: DeleteRequestInfo = {
+  const handleAcceptButtonClick = ((data: MentoringRequestData) => async () => {
+    const acceptRequest: AcceptRequestInfo = {
       id: data.id,
-      mentorId: mentorId,
       groupId: data.groupId,
-      accept: accept,
+      userId: userId,
     };
-    await mentoringHttpClient.deleteMentoringRequest(requestData);
     try {
-      await mentoringHttpClient.deleteMentoringRequest(requestData);
+      await mentoringHttpClient.acceptMentoringRequest(acceptRequest);
+      fetchMentoringRequests();
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  const handleRejectButtonClick = (data: MentoringRequestData) => async () => {
+    try {
+      await mentoringHttpClient.rejectMentoringRequest(data.id);
       fetchMentoringRequests();
     } catch (e) {
       console.log(e);
@@ -46,8 +53,8 @@ function RequestMentoring(): JSX.Element {
         </GroupInfo>
         <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
-          <CustomButton label={'거절'} clickBtn={handleButtonClick(data, false)} />
-          <CustomButton label={'수락'} clickBtn={handleButtonClick(data, true)} />
+          <CustomButton label={'거절'} clickBtn={handleRejectButtonClick(data)} />
+          <CustomButton label={'수락'} clickBtn={handleAcceptButtonClick(data)} />
         </ButtonWrapper>
       </BoxContainer>
     );
@@ -66,7 +73,7 @@ function RequestMentoring(): JSX.Element {
       ) : (
         <>
           <EmptyMessage>아직 멘토링 요청이 없어요...</EmptyMessage>
-          <SubMessage>멘티를 직접 찾아보시는것은 어떨까요?</SubMessage>
+          <SubMessage>프로필을 업데이트 해보는건 어떨까요?</SubMessage>
         </>
       )}
     </Container>
