@@ -32,7 +32,7 @@ export class MentorService {
 
   public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
     const mentor = await this.mentorRepository.findOne({ userId });
-    if (mentor === undefined) {
+    if (!mentor) {
       throw new UserIsNotMentorError(userId);
     }
     return { mentorId: mentor.id };
