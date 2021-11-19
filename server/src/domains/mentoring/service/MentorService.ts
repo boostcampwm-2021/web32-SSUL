@@ -1,5 +1,4 @@
 import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
-import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
@@ -20,8 +19,6 @@ export class MentorService {
     private readonly categoryRepository: CategoryRepository,
     @InjectRepository()
     private readonly userRepository: UserRepository,
-    @InjectRepository()
-    private readonly groupRepository: GroupRepository,
   ) {}
 
   public async createMentor(userId: number) {

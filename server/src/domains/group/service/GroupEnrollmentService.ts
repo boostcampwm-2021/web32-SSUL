@@ -1,10 +1,7 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
-import { UsingTechStackRepository } from '@domains/techstack/repository/UsingTechStackRepository';
-import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
-import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 
 @Service()

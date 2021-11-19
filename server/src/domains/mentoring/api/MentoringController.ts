@@ -10,7 +10,6 @@ import {
   Get,
   Param,
   UseBefore,
-  Patch,
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
