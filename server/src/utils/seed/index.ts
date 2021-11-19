@@ -50,5 +50,4 @@ async function seedDatabase(connection: Connection) {
     .into(UsingTechStack)
     .values(usingTechStackData)
     .execute();
-  await connection.createQueryBuilder().insert().into(Mentor).values(mentorData).execute();
 }
