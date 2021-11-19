@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import GroupUserBoxItem from './GroupUserBoxItem';
+import { useAppSelector } from '@hooks';
+import { selectGroupEnrollment } from '@store/group/detailSlice';
 
 function GroupUserBox(): JSX.Element {
-  const boxItems = [...Array(12)].map((_, idx) => <GroupUserBoxItem key={idx} />);
+  const groupEnrollment = useAppSelector(selectGroupEnrollment);
+
+  const boxItems = groupEnrollment.map((item) => (
+    <GroupUserBoxItem key={item.userId} user={item} />
+  ));
   return <Container>{boxItems}</Container>;
 }
 

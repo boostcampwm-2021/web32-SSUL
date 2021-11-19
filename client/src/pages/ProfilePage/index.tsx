@@ -16,14 +16,14 @@ import {
   fetchBaseUserData,
   ProfileState,
 } from './FetchProfileData';
-import { RouteComponentProps } from 'react-router';
+import { useParams } from 'react-router-dom';
 
-export interface MatchParams {
+export interface Param {
   id: string;
 }
 
-function ProfilePage({ match }: RouteComponentProps<MatchParams>): JSX.Element {
-  const { id } = match.params;
+function ProfilePage(): JSX.Element {
+  const { id } = useParams<Param>();
   const [modalType, setModalType] = useState<string>('NONE');
   const [fetchState, setFetchState] = useState<boolean>(false);
   const profile = useAppSelector(selectProfileData);

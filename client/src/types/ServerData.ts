@@ -1,3 +1,5 @@
+import { GroupEnrollment, GroupUsingTechStack } from '@types';
+
 export interface ExampleInterface {
   somethingToRequestKey: number;
 }
@@ -74,4 +76,17 @@ export interface DeleteRequestInfo {
   accept: boolean;
 }
 
-export type RequestBody = ExampleInterface | GroupCreateInterface | null;
+export interface GroupDetailData {
+  id: number;
+  mentorId: number;
+  ownerId: number;
+  name: string;
+  maxUserCnt: number;
+  curUserCnt: number;
+  intro: string;
+  startAt: string;
+  endAt: string;
+  status: string;
+  usingTechStacks: GroupUsingTechStack[];
+  groupEnrollments: GroupEnrollment[];
+}
