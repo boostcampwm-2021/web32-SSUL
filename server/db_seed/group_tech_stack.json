@@ -1,0 +1,6 @@
+[
+  { "id": 1, "groupId": 1, "techStackId": 1, "name": "React" },
+  { "id": 2, "groupId": 1, "techStackId": 2, "name": "Express" },
+  { "id": 3, "groupId": 1, "techStackId": 3, "name": "node.js" },
+  { "id": 4, "groupId": 1, "techStackId": 5, "name": "javascript" }
+]
