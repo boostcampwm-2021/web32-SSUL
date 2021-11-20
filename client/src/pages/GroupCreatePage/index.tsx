@@ -33,8 +33,8 @@ function GroupCreatePage(): JSX.Element {
   const { id: ownerId } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
-  const setUsingTechStacks = (newTechStacks: string[]) =>
-    dispatch(setGroupData({ usingTechStacks: newTechStacks }));
+  const setUsingTechStacks = (newTechStacks: TechStack[]) =>
+    dispatch(setGroupData({ techStacks: newTechStacks }));
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
       case PAGE_NUMBER.CATEGORY:
@@ -49,7 +49,7 @@ function GroupCreatePage(): JSX.Element {
         return (
           <TechStackInput
             baseTechStackList={techStacks}
-            usingTechStacks={groupData.usingTechStacks}
+            usingTechStacks={groupData.techStacks}
             setUsingTechStacks={setUsingTechStacks}
           />
         );
@@ -61,13 +61,13 @@ function GroupCreatePage(): JSX.Element {
   const checkInput = () => {
     switch (contentsNumber) {
       case PAGE_NUMBER.CATEGORY:
-        return groupData.category !== '';
+        return groupData.categoryId !== 0;
       case PAGE_NUMBER.GROUP_INFO:
         return groupData.name !== '' && groupData.intro !== '';
       case PAGE_NUMBER.DATE:
         return groupData.startAt !== '' && groupData.endAt !== '';
       case PAGE_NUMBER.TECH_STACK:
-        return groupData.usingTechStacks.length > 0;
+        return groupData.techStacks.length > 0;
       default:
         return true;
     }

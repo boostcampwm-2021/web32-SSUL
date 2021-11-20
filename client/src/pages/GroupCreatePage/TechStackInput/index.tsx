@@ -6,8 +6,8 @@ import TechStackList from './TechStackList';
 
 interface Props {
   baseTechStackList: TechStack[];
-  usingTechStacks: string[];
-  setUsingTechStacks: (newTechStacks: string[]) => void;
+  usingTechStacks: TechStack[];
+  setUsingTechStacks: (newTechStacks: TechStack[]) => void;
 }
 
 function TechStackInput({
