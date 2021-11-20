@@ -12,6 +12,7 @@ import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { destructObject } from '@utils/Object';
+import { GroupNotFoundError } from '../error/GroupNotFoundError';
 
 const EACH_PAGE_CNT = 12;
 
@@ -103,5 +104,15 @@ export class GroupService {
     return res.map(({ name, startAt, endAt }) => {
       return { name, startAt, endAt };
     });
+  }
+
+  public async addGroupMentor(mentorId: number, groupId: number) {
+    const group = await this.groupRepository.findOne({ id: groupId });
+
+    if(group === undefined){
+      throw new GroupNotFoundError();
+    }
+    group.mentorId = mentorId;
+    this.groupRepository.save(group);
   }
 }

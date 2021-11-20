@@ -1,4 +1,4 @@
-import { DeleteRequestInfo, MentorInfo, MentoringRequestData, RegisterMentorData } from '@types';
+import { AcceptRequestInfo, MentorInfo, MentoringRequestData, RegisterMentorData } from '@types';
 import HttpClient from './HttpClient';
 
 class MentoringHttpClient extends HttpClient {
@@ -18,8 +18,11 @@ class MentoringHttpClient extends HttpClient {
     return this.httpClient.get(`/request/${mentorId}`);
   };
 
-  public deleteMentoringRequest = (requestData: DeleteRequestInfo) => {
-    return this.httpClient.delete('/request', { data: requestData });
+  public rejectMentoringRequest = (requestId: number) => {
+    return this.httpClient.post(`/request/reject/${requestId}`);
+  };
+  public acceptMentoringRequest = (requestData: AcceptRequestInfo) => {
+    return this.httpClient.post('/request/accept', requestData);
   };
 }
 

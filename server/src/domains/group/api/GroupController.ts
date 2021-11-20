@@ -7,6 +7,8 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActiviryDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
+import { GroupEnrollmentService } from '../service/GroupEnrollmentService';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -17,6 +19,8 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
+    @Inject()
+    private readonly groupEnrollmentService: GroupEnrollmentService,
     @Inject()
     private readonly usingTechStackService: UsingTechStackService,
   ) {}
@@ -61,7 +65,12 @@ export class GroupController {
   })
   async create(@Body() groupData: CreateGroupDto) {
     const createdGroup = await this.groupService.createGroup(groupData);
-    this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
+    await this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
+    await this.groupEnrollmentService.addGroupEnrollment(
+      createdGroup.id,
+      groupData.ownerId,
+      GroupEnrollmentAs.OWNER,
+    );
   }
 
   @OpenAPI({ summary: '그룹활동 리스트를 가져오는 API' })
