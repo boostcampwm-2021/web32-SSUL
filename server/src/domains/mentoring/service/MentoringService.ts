@@ -27,7 +27,7 @@ export class MentoringService {
   }
 
   public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
-    const mentor = await this.mentorRepository.findOne({ userId });
+    const mentor = await this.mentorRepository.findOne({ where: { userId } });
     if (!mentor) {
       throw new UserIsNotMentorError(userId);
     }

@@ -1,6 +1,3 @@
-import { UsingTechAs } from '@domains/techstack/models/UsingTechStack';
-import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
-import { ProfileService } from '@domains/user/service/ProfileService';
 import {
   Session,
   Controller,
@@ -16,13 +13,14 @@ import { Inject, Service } from 'typedi';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
 import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
-import { MentorService } from '../service/MentorService';
+import { MentoringService } from '../service/MentoringService';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { NotAuthorizedError } from '@error/NotAuthorizedError';
 import { AcceptRequestDto } from '../dto/AcceptRequestDto';
-import { GroupEnrollmentService } from '@domains/group/service/GroupEnrollmentService';
 import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
 import { GroupService } from '@domains/group/service/GroupService';
+import { TechStackService } from '@domains/techstack/service/TechStackService';
+import { UserService } from '@domains/user/service/UserService';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -32,15 +30,13 @@ import { GroupService } from '@domains/group/service/GroupService';
 export class MentoringController {
   constructor(
     @Inject()
-    private readonly mentorService: MentorService,
+    private readonly mentorService: MentoringService,
     @Inject()
-    private readonly usingTechStackService: UsingTechStackService,
+    private readonly techStackService: TechStackService,
     @Inject()
-    private readonly profileService: ProfileService,
+    private readonly userService: UserService,
     @Inject()
     private readonly groupService: GroupService,
-    @Inject()
-    private readonly groupEnrollmentService: GroupEnrollmentService,
   ) {}
 
   @Get('/mentor/:uid')
@@ -63,8 +59,8 @@ export class MentoringController {
     }
     //TODO: using TechStack.id instead of Techstack.name
     await this.mentorService.createMentor(userId);
-    const profile = await this.profileService.getUserProfile(userId);
-    this.usingTechStackService.createUserTechStack(profile, UsingTechAs.MENTOR, techStacks);
+    const { mentorId } = await this.mentorService.getMentorIdByUserId(userId);
+    this.techStackService.createMentorTechStack(mentorId, techStacks);
   }
 
   @Get('/request/:mid')
@@ -81,13 +77,13 @@ export class MentoringController {
     await this.mentorService.deleteRequest(requestId);
   }
 
-  @Post('/request/accept')
-  @OpenAPI({ summary: '멘토링 요청을 수락하는 API' })
-  @OnUndefined(200)
-  public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
-    const { mentorId } = await this.mentorService.getMentorIdByUserId(userId);
-    await this.groupService.addGroupMentor(mentorId, groupId);
-    await this.groupEnrollmentService.addGroupEnrollment(groupId, userId, GroupEnrollmentAs.MENTOR);
-    await this.mentorService.deleteRequest(id);
-  }
+  // @Post('/request/accept')
+  // @OpenAPI({ summary: '멘토링 요청을 수락하는 API' })
+  // @OnUndefined(200)
+  // public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
+  //   const { mentorId } = await this.mentorService.getMentorIdByUserId(userId);
+  //   await this.groupService.addGroupMentor(mentorId, groupId);
+  //   await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
+  //   await this.mentorService.deleteRequest(id);
+  // }
 }
