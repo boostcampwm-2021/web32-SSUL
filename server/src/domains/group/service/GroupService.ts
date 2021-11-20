@@ -6,8 +6,8 @@ import { CategoryRepository } from '@domains/category/repository/CategoryReposit
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
 import { Group } from '../models/Group';
+import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
@@ -55,7 +55,7 @@ export class GroupService {
       category !== undefined
         ? await this.groupRepository.findGroupByNameAndCategory(name, category)
         : await this.groupRepository.findGroupByName(name);
-    console.log(groups[0].techStacks);
+
     const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
   }
@@ -75,7 +75,7 @@ export class GroupService {
         const groupsTechStacks = group.techStacks;
         const { githubId, name, feverStack, avatarUrl } = group.ownerInfo;
         const isIncludeStackList = group.techStacks.some((techStack) =>
-          filterdTechStack.includes(String(techStack.techStackId)),
+          filterdTechStack.includes(techStack.name),
         );
 
         if (filterdTechStack.length === 0 || isIncludeStackList) {
@@ -95,20 +95,22 @@ export class GroupService {
     ).then((data) => data.filter((group) => group !== undefined));
   }
 
-  // public async createGroup(createGroupDto: CreateGroupDto) {
-  //   //TODO: transaction
-  //   const { categoryId, ownerId } = createGroupDto;
-  //   const category: Category = await this.categoryRepository.findOneOrFail(categoryId);
-  //   const group: Group = createGroupDto.toEntity(categoryId);
-  //   const createdGroup = await this.groupRepository.save(group);
-
-  //   const groupTechStacks = createGroupDto.techStacks.map(techStack => {createdGroup.id, ...techStack});
-  //   createdGroup.techStacks = await groupTechStackRepository.saveAll(groupTechStacks);
-
-  //   await this.enroll(createdGroup.id, ownerId, GroupEnrollmentAs.OWNER);
-
-  //   return createdGroup;
-  // }
+  public async createGroup(createGroupDto: CreateGroupDto): Promise<void> {
+    //TODO: transaction
+    const { categoryId, ownerId } = createGroupDto;
+    const group = await this.groupRepository.save(createGroupDto.toEntity(categoryId));
+    const groupTechStacks: GroupTechStack[] = createGroupDto.techStacks.map((techStack) => {
+      const groupTechStack = new GroupTechStack();
+      groupTechStack.groupId = group.id;
+      groupTechStack.techStackId = techStack.id;
+      groupTechStack.name = techStack.name;
+      return groupTechStack;
+    });
+    ////const createdGroup = await this.groupRepository.create();
+    group.techStacks = await this.groupTechStackRepository.saveAll(groupTechStacks);
+    await this.groupRepository.save(group);
+    await this.enroll(group.id, ownerId, GroupEnrollmentAs.OWNER);
+  }
 
   public async getEndGroupList(userId: number) {
     const res = await this.groupRepository.findEndGroupByUserId(userId);
@@ -118,21 +120,21 @@ export class GroupService {
     });
   }
 
-  // public async addGroupMentor(mentorId: number, groupId: number) {
-  //   const group = await this.groupRepository.findOne({ id: groupId });
+  public async addGroupMentor(mentorId: number, groupId: number) {
+    const group = await this.groupRepository.findOne({ id: groupId });
 
-  //   if (group === undefined) {
-  //     throw new GroupNotFoundError();
-  //   }
-  //   group.mentorId = mentorId;
-  //   this.groupRepository.save(group);
-  // }
+    if (group === undefined) {
+      throw new GroupNotFoundError();
+    }
+    group.mentorId = mentorId;
+    this.groupRepository.save(group);
+  }
 
-  // public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {
-  //   const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
-  //   if (enrollment !== undefined) {
-  //     throw new DuplicateEnrollmentError();
-  //   }
-  //   await this.groupEnrollmentRepository.save({ groupId, userId, type });
-  // }
+  public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {
+    const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
+    if (enrollment !== undefined) {
+      throw new DuplicateEnrollmentError();
+    }
+    await this.groupEnrollmentRepository.save({ groupId, userId, type });
+  }
 }

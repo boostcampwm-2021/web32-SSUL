@@ -4,7 +4,7 @@ import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupActiviryDto } from '../dto/GroupActivityDto';
+import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
 
 @OpenAPI({
@@ -62,11 +62,11 @@ export class GroupController {
     summary: '그룹을 생성하는 API',
   })
   async create(@Body() createGroupDto: CreateGroupDto) {
-    // const group = await this.groupService.createGroup(createGroupDto);
+    await this.groupService.createGroup(createGroupDto);
   }
 
   @OpenAPI({ summary: '그룹활동 리스트를 가져오는 API' })
-  @ResponseSchema(GroupActiviryDto, { isArray: true })
+  @ResponseSchema(GroupActivityDto, { isArray: true })
   @Get('/activity/:uid')
   public async getGroupActivity(@Param('uid') userId: number) {
     return await this.groupService.getEndGroupList(userId);

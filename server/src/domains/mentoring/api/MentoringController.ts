@@ -30,7 +30,7 @@ import { UserService } from '@domains/user/service/UserService';
 export class MentoringController {
   constructor(
     @Inject()
-    private readonly mentorService: MentoringService,
+    private readonly mentoringService: MentoringService,
     @Inject()
     private readonly techStackService: TechStackService,
     @Inject()
@@ -43,7 +43,7 @@ export class MentoringController {
   @OpenAPI({ summary: '멘토 id를 가져오는 API' })
   @ResponseSchema(MentorInfoDto)
   public async getMentorId(@Param('uid') userId: number) {
-    return await this.mentorService.getMentorIdByUserId(userId);
+    return await this.mentoringService.getMentorIdByUserId(userId);
   }
 
   @Post('/mentor')
@@ -58,32 +58,32 @@ export class MentoringController {
       throw new NotAuthorizedError();
     }
     //TODO: using TechStack.id instead of Techstack.name
-    await this.mentorService.createMentor(userId);
-    const { mentorId } = await this.mentorService.getMentorIdByUserId(userId);
-    this.techStackService.createMentorTechStack(mentorId, techStacks);
+    await this.mentoringService.createMentor(userId);
+    const { mentorId } = await this.mentoringService.getMentorIdByUserId(userId);
+    await this.techStackService.createMentorTechStack(mentorId, techStacks);
   }
 
   @Get('/request/:mid')
   @OpenAPI({ summary: '멘토링 요청 리스트를 가져오는 API' })
   @ResponseSchema(MentoringRequestListDto)
   public async getRequest(@Param('mid') mentorId: number) {
-    return await this.mentorService.getRequestListByMentorId(mentorId);
+    return await this.mentoringService.getRequestListByMentorId(mentorId);
   }
 
   @Post('/request/reject/:id')
   @OpenAPI({ summary: '멘토링 요청을 거절하는 API' })
   @OnUndefined(200)
   public async rejectRequest(@Param('id') requestId: number) {
-    await this.mentorService.deleteRequest(requestId);
+    await this.mentoringService.deleteRequest(requestId);
   }
 
-  // @Post('/request/accept')
-  // @OpenAPI({ summary: '멘토링 요청을 수락하는 API' })
-  // @OnUndefined(200)
-  // public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
-  //   const { mentorId } = await this.mentorService.getMentorIdByUserId(userId);
-  //   await this.groupService.addGroupMentor(mentorId, groupId);
-  //   await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
-  //   await this.mentorService.deleteRequest(id);
-  // }
+  @Post('/request/accept')
+  @OpenAPI({ summary: '멘토링 요청을 수락하는 API' })
+  @OnUndefined(200)
+  public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
+    const { mentorId } = await this.mentoringService.getMentorIdByUserId(userId);
+    await this.groupService.addGroupMentor(mentorId, groupId);
+    await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
+    await this.mentoringService.deleteRequest(id);
+  }
 }

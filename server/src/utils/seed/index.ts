@@ -12,7 +12,6 @@ import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import {
   catagorySeedData,
   groupSeedData,
-  profileData,
   techStackData,
   userData,
   groupTechStackData,
@@ -33,6 +32,7 @@ async function seedDatabase(connection: Connection) {
   await connection.createQueryBuilder().insert().into(Category).values(catagorySeedData).execute();
   await connection.createQueryBuilder().insert().into(Group).values(groupSeedData).execute();
   await connection.createQueryBuilder().insert().into(TechStack).values(techStackData).execute();
+  await connection.createQueryBuilder().insert().into(Mentor).values(mentorData).execute();
   await connection
     .createQueryBuilder()
     .insert()

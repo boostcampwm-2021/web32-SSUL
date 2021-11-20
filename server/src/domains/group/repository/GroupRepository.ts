@@ -8,9 +8,7 @@ export class GroupRepository extends Repository<Group> {
   public findAll() {
     return this.find();
   }
-  public createGroup(group: Group) {
-    return this.save(group);
-  }
+
   public async findGroupByNameAndCategory(name: string, categoryId?: number) {
     return await this.createQueryBuilder('group')
       .select([

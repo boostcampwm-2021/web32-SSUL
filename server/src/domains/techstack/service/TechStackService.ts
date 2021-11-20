@@ -23,11 +23,8 @@ export class TechStackService {
     return await this.techStackRepository.findAll();
   }
 
-  public async createMentorTechStack(mentorId: number, usingTechStacks: string[]) {
-    usingTechStacks.forEach(async (techStackName) => {
-      const techStack: TechStack = await this.techStackRepository.findOneOrFail({
-        where: { name: techStackName },
-      });
+  public async createMentorTechStack(mentorId: number, usingTechStacks: TechStack[]) {
+    usingTechStacks.forEach(async (techStack) => {
       const mentorTechStack: MentorTechStack = new MentorTechStack();
 
       mentorTechStack.mentorId = mentorId;
@@ -43,7 +40,14 @@ export class TechStackService {
   }
 
   public async getMentorTechStack(mentorId: number) {
-    return await this.mentorTechStackRepository.find({ where: { mentorId } });
+    const mentorTechStackList = await this.mentorTechStackRepository.find({ where: { mentorId } });
+
+    return mentorTechStackList.map((mentorTechStack) => {
+      return {
+        id: mentorTechStack.techStackId,
+        name: mentorTechStack.name,
+      };
+    });
   }
 
   public async updateMenteeTechStack(userInfo: User, techStacks: string[]) {
