@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  QueryParam,
-  Session,
-  SessionParam,
-  OnUndefined,
-  Post,
-} from 'routing-controllers';
+import { Controller, Get, QueryParam, Session, OnUndefined, Post } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
 import { UserDto } from '@domains/user/dto/UserDto';
