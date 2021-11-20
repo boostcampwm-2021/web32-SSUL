@@ -1,9 +1,18 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { Category } from '@domains/category/models/Category';
+import { User } from '@domains/user/models/User';
 import { Post } from './Post';
 
 export enum GroupState {
@@ -46,6 +55,9 @@ export class Group {
 
   @Column('varchar', { name: 'status', nullable: true, length: 10, default: 'READY' })
   status: string;
+
+  @OneToOne(() => User)
+  ownerInfo: User;
 
   @ManyToOne((type) => Category)
   @JoinColumn({ name: 'category_id' })

@@ -7,7 +7,7 @@ export class MenteeTechStack {
   id: number;
 
   @Column('int', { name: 'user_id', nullable: true })
-  groupId: number;
+  menteeId: number;
 
   @Column('int', { name: 'tech_stack_id', nullable: true })
   techStackId: number;
