@@ -1,4 +1,3 @@
-import { UsingTechStackService } from '@domains/techstack/service/UsingTechStackService';
 import { Body, Controller, Get, OnUndefined, Param, Post, QueryParam } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
@@ -7,8 +6,6 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActiviryDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
-import { GroupEnrollmentService } from '../service/GroupEnrollmentService';
-import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -19,10 +16,6 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
-    @Inject()
-    private readonly groupEnrollmentService: GroupEnrollmentService,
-    @Inject()
-    private readonly usingTechStackService: UsingTechStackService,
   ) {}
 
   @Get('/')
@@ -42,12 +35,17 @@ export class GroupController {
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
+    //
+    const startDate = new Date();
     const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
       page,
       name,
       category,
       techstack,
     );
+    //
+    const endDate = new Date();
+    console.log(endDate.getTime() - startDate.getTime());
     return filterdGroups;
   }
 
@@ -63,14 +61,8 @@ export class GroupController {
   @OpenAPI({
     summary: '그룹을 생성하는 API',
   })
-  async create(@Body() groupData: CreateGroupDto) {
-    const createdGroup = await this.groupService.createGroup(groupData);
-    await this.usingTechStackService.createGroupUsingStack(createdGroup, groupData.usingTechStacks);
-    await this.groupEnrollmentService.addGroupEnrollment(
-      createdGroup.id,
-      groupData.ownerId,
-      GroupEnrollmentAs.OWNER,
-    );
+  async create(@Body() createGroupDto: CreateGroupDto) {
+    // const group = await this.groupService.createGroup(createGroupDto);
   }
 
   @OpenAPI({ summary: '그룹활동 리스트를 가져오는 API' })

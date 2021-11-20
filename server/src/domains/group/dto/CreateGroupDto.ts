@@ -1,6 +1,7 @@
 import { Category } from '@domains/category/models/Category';
 import { IsArray, IsDate, IsDateString, IsNumber, IsString } from 'class-validator';
 import { Group } from '../models/Group';
+import { TechStack } from '@domains/techstack/models/TechStack';
 
 export class CreateGroupDto {
   @IsNumber()
@@ -17,15 +18,15 @@ export class CreateGroupDto {
   startAt: string;
   @IsDateString()
   endAt: string;
-  @IsString()
-  category: string;
+  @IsNumber()
+  categoryId: number;
   @IsArray()
-  usingTechStacks: string[];
+  techStacks: TechStack[];
 
-  toEntity(category: Category){
+  toEntity(categoryId: number) {
     const group: Group = new Group();
 
-    group.category = category;
+    group.categoryId = categoryId;
     group.ownerId = this.ownerId;
     group.name = this.name;
     group.maxUserCnt = this.maxUserCnt;
@@ -33,7 +34,7 @@ export class CreateGroupDto {
     group.intro = this.intro;
     group.startAt = new Date(this.startAt);
     group.endAt = new Date(this.endAt);
-    
-   return group;
- }
+
+    return group;
+  }
 }

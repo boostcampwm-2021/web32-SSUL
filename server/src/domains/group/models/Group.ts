@@ -56,7 +56,8 @@ export class Group {
   @Column('varchar', { name: 'status', nullable: true, length: 10, default: 'READY' })
   status: string;
 
-  @OneToOne(() => User)
+  @JoinColumn({ name: 'owner_id' })
+  @ManyToOne(() => User, (user) => user.groups)
   ownerInfo: User;
 
   @ManyToOne((type) => Category)
@@ -72,7 +73,7 @@ export class Group {
   @OneToMany(() => MentoringRequest, (mentoringRequest) => mentoringRequest.group)
   mentoringRequests: MentoringRequest[];
 
-  @OneToMany(() => GroupTechStack, (usingTechStack) => usingTechStack.group)
+  @OneToMany(() => GroupTechStack, (groupTechStack) => groupTechStack.group)
   techStacks: GroupTechStack[];
 
   @OneToMany(() => Post, (post) => post.group)
