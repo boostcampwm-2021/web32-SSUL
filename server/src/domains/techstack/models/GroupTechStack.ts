@@ -13,8 +13,9 @@ export class GroupTechStack {
   techStackId: number;
 
   @Column('varchar', { name: 'tech_stack_name', length: 255, nullable: true })
-  techStackName: string;
+  name: string;
 
+  @JoinColumn({ name: 'group_id' })
   @ManyToOne(() => Group, (group) => group.techStacks)
   group: Group | null;
 }
