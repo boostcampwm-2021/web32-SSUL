@@ -1,6 +1,6 @@
-import { IsDate, IsDateString, IsString } from "class-validator";
+import { IsDate, IsDateString, IsString } from 'class-validator';
 
-export class GroupActiviryDto{
+export class GroupActivityDto {
   @IsString()
   name: string;
   @IsDateString()

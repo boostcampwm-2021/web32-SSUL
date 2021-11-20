@@ -9,7 +9,7 @@ import { MentorRepository } from '../repository/MentorRepository';
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
 @Service()
-export class MentorService {
+export class MentoringService {
   constructor(
     @InjectRepository()
     private readonly mentorRepository: MentorRepository,
@@ -27,7 +27,7 @@ export class MentorService {
   }
 
   public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
-    const mentor = await this.mentorRepository.findOne({ userId });
+    const mentor = await this.mentorRepository.findOne({ where: { userId } });
     if (!mentor) {
       throw new UserIsNotMentorError(userId);
     }
@@ -54,6 +54,6 @@ export class MentorService {
   }
 
   public async deleteRequest(requestId: number) {
-    return await this.mentoringRequestRepository.delete({ id:requestId });
+    return await this.mentoringRequestRepository.delete({ id: requestId });
   }
 }

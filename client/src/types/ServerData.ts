@@ -1,4 +1,4 @@
-import { GroupEnrollment, GroupUsingTechStack } from '@types';
+import { GroupEnrollment, GroupUsingTechStack, TechStack } from '@types';
 
 export interface ExampleInterface {
   somethingToRequestKey: number;
@@ -12,8 +12,8 @@ export interface GroupCreateInterface {
   intro: string;
   startAt: string;
   endAt: string;
-  category: string;
-  usingTechStacks: string[];
+  categoryId: number;
+  techStacks: TechStack[];
 }
 
 export interface ResponseGithubUserData {
@@ -41,7 +41,7 @@ export interface UpdateIntroData {
 
 export interface UpdateTechStackData {
   id: number;
-  techStacks: string[];
+  techStacks: TechStack[];
 }
 
 export interface GroupActivity {
@@ -56,7 +56,7 @@ export interface MentorInfo {
 
 export interface RegisterMentorData {
   userId: number;
-  techStacks: string[];
+  techStacks: TechStack[];
 }
 
 export interface MentoringRequestData {

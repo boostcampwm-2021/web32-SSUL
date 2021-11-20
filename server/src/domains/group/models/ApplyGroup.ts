@@ -13,6 +13,12 @@ export class ApplyGroup {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column('int', { name: 'user_id' })
+  userId: number;
+
+  @Column('int', { name: 'group_id' })
+  groupId: number;
+
   @Column({ type: 'enum', enum: ApplyGroupState })
   state: ApplyGroupState;
 

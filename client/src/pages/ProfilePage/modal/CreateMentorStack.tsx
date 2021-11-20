@@ -13,7 +13,7 @@ interface Props {
 }
 function CreateMentorStack({ onCancel }: Props): JSX.Element {
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
-  const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
+  const [selectedTechStacks, setSelectedTechStacks] = useState<TechStack[]>([]);
   const [notificationText, setNotificationText] = useState<string>('');
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();

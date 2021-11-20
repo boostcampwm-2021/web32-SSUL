@@ -1,9 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
-import { Profile } from './Profile';
 import { Alarm } from '@domains/alarm/models/Alarm';
-import { Post } from '@domains/group/models/Post';
+import { MenteeTechStack } from '@domains/techstack/models/MenteeTechStack';
+import { Group } from '@domains/group/models/Group';
 
 @Entity('user')
 export class User {
@@ -16,11 +16,23 @@ export class User {
   @Column('varchar', { name: 'name', length: 50 })
   name: string;
 
-  @Column('varchar', { name: 'avatar_url', nullable: true, length: 100 })
+  @Column('varchar', { name: 'avatar_url', nullable: true, length: 511 })
   avatarUrl: string | null;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
+
+  @Column('float', { name: 'fever_stack', nullable: true, precision: 2 })
+  feverStack: number;
+
+  @Column('float', { name: 'share_stack', nullable: true, precision: 2 })
+  shareStack: number;
+
+  @Column('varchar', { name: 'intro', nullable: true, length: 1023 })
+  intro: string | null;
+
+  @OneToMany(() => Group, (group) => group.ownerInfo)
+  groups: Group[];
 
   @OneToMany(() => ApplyGroup, (applyGroup) => applyGroup.user)
   applyGroups: ApplyGroup[];
@@ -28,12 +40,9 @@ export class User {
   @OneToMany(() => GroupEnrollment, (groupEnrollment) => groupEnrollment.user)
   groupEnrollments: GroupEnrollment[];
 
-  @OneToOne(() => Profile, (profile) => profile.user)
-  profile: Profile;
-
   @OneToMany(() => Alarm, (alarm) => alarm.recieverId)
   receivedAlarms: Alarm[];
 
-  @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
+  @OneToMany(() => MenteeTechStack, (menteeTechStack) => menteeTechStack.user)
+  techStacks: MenteeTechStack[];
 }

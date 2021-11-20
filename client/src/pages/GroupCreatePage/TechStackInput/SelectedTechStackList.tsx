@@ -1,26 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TechStack } from '@types';
 
 interface Props {
-  usingTechStacks: string[];
-  setUsingTechStacks: (newTechStacks: string[]) => void;
+  usingTechStacks: TechStack[];
+  setUsingTechStacks: (newTechStacks: TechStack[]) => void;
 }
 
 function SelectedTechStackList({ usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
-
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;
     const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
-    const newSelectedTechStack = usingTechStacks.filter((techStackName) => {
-      return techStackName !== nowTechStack;
+    const newSelectedTechStack = usingTechStacks.filter((techstack) => {
+      return techstack.name !== nowTechStack;
     });
     setUsingTechStacks(newSelectedTechStack);
   };
-  const selectedTechListElements = usingTechStacks.map((techStackName, idx) => {
+  const selectedTechListElements = usingTechStacks.map((techStack) => {
     return (
-      <SelectItem key={idx}>
-        <ItemText>{techStackName}</ItemText>
-        <EraseButton data-test="erase-button" onClick={handleEraseButtonClick}>X</EraseButton>
+      <SelectItem key={techStack.id} id={String(techStack.id)}>
+        <ItemText>{techStack.name}</ItemText>
+        <EraseButton data-test="erase-button" onClick={handleEraseButtonClick}>
+          X
+        </EraseButton>
       </SelectItem>
     );
   });
@@ -47,7 +49,7 @@ const ItemText = styled.p`
   margin: 0;
   color: ${(props) => props.theme.White};
   font-weight: bold;
-`
+`;
 const EraseButton = styled.button`
   margin-left: 10px;
   border: none;

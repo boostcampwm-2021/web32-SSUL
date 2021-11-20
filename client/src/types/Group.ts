@@ -17,8 +17,8 @@ export interface Group {
   categoryId: number | null;
   status: GroupState;
   category: string | null;
-  techStackList: string[];
   ownerName: string;
+  techStacks: string[];
   ownerFeverStack: number;
   ownerAvatarUrl: string;
   ownerGithubId: string;

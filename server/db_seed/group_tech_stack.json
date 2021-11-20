@@ -1,0 +1,5102 @@
+[
+  {
+    "id": 1,
+    "groupId": 1,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 2,
+    "groupId": 1,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 3,
+    "groupId": 1,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 4,
+    "groupId": 1,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 5,
+    "groupId": 1,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 6,
+    "groupId": 2,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 7,
+    "groupId": 2,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 8,
+    "groupId": 2,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 9,
+    "groupId": 2,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 10,
+    "groupId": 2,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 11,
+    "groupId": 3,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 12,
+    "groupId": 3,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 13,
+    "groupId": 3,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 14,
+    "groupId": 3,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 15,
+    "groupId": 3,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 16,
+    "groupId": 4,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 17,
+    "groupId": 4,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 18,
+    "groupId": 4,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 19,
+    "groupId": 4,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 20,
+    "groupId": 4,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 21,
+    "groupId": 5,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 22,
+    "groupId": 5,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 23,
+    "groupId": 5,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 24,
+    "groupId": 5,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 25,
+    "groupId": 5,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 26,
+    "groupId": 6,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 27,
+    "groupId": 6,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 28,
+    "groupId": 6,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 29,
+    "groupId": 6,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 30,
+    "groupId": 6,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 31,
+    "groupId": 7,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 32,
+    "groupId": 7,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 33,
+    "groupId": 7,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 34,
+    "groupId": 7,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 35,
+    "groupId": 7,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 36,
+    "groupId": 8,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 37,
+    "groupId": 8,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 38,
+    "groupId": 8,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 39,
+    "groupId": 8,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 40,
+    "groupId": 8,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 41,
+    "groupId": 9,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 42,
+    "groupId": 9,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 43,
+    "groupId": 9,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 44,
+    "groupId": 9,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 45,
+    "groupId": 9,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 46,
+    "groupId": 10,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 47,
+    "groupId": 10,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 48,
+    "groupId": 10,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 49,
+    "groupId": 10,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 50,
+    "groupId": 10,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 51,
+    "groupId": 11,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 52,
+    "groupId": 11,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 53,
+    "groupId": 11,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 54,
+    "groupId": 11,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 55,
+    "groupId": 11,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 56,
+    "groupId": 12,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 57,
+    "groupId": 12,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 58,
+    "groupId": 12,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 59,
+    "groupId": 12,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 60,
+    "groupId": 12,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 61,
+    "groupId": 13,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 62,
+    "groupId": 13,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 63,
+    "groupId": 13,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 64,
+    "groupId": 13,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 65,
+    "groupId": 13,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 66,
+    "groupId": 14,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 67,
+    "groupId": 14,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 68,
+    "groupId": 14,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 69,
+    "groupId": 14,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 70,
+    "groupId": 14,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 71,
+    "groupId": 15,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 72,
+    "groupId": 15,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 73,
+    "groupId": 15,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 74,
+    "groupId": 15,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 75,
+    "groupId": 15,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 76,
+    "groupId": 16,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 77,
+    "groupId": 16,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 78,
+    "groupId": 16,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 79,
+    "groupId": 16,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 80,
+    "groupId": 16,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 81,
+    "groupId": 17,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 82,
+    "groupId": 17,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 83,
+    "groupId": 17,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 84,
+    "groupId": 17,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 85,
+    "groupId": 17,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 86,
+    "groupId": 18,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 87,
+    "groupId": 18,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 88,
+    "groupId": 18,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 89,
+    "groupId": 18,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 90,
+    "groupId": 18,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 91,
+    "groupId": 19,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 92,
+    "groupId": 19,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 93,
+    "groupId": 19,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 94,
+    "groupId": 19,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 95,
+    "groupId": 19,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 96,
+    "groupId": 20,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 97,
+    "groupId": 20,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 98,
+    "groupId": 20,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 99,
+    "groupId": 20,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 100,
+    "groupId": 20,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 101,
+    "groupId": 21,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 102,
+    "groupId": 21,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 103,
+    "groupId": 21,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 104,
+    "groupId": 21,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 105,
+    "groupId": 21,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 106,
+    "groupId": 22,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 107,
+    "groupId": 22,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 108,
+    "groupId": 22,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 109,
+    "groupId": 22,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 110,
+    "groupId": 22,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 111,
+    "groupId": 23,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 112,
+    "groupId": 23,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 113,
+    "groupId": 23,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 114,
+    "groupId": 23,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 115,
+    "groupId": 23,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 116,
+    "groupId": 24,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 117,
+    "groupId": 24,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 118,
+    "groupId": 24,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 119,
+    "groupId": 24,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 120,
+    "groupId": 24,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 121,
+    "groupId": 25,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 122,
+    "groupId": 25,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 123,
+    "groupId": 25,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 124,
+    "groupId": 25,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 125,
+    "groupId": 25,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 126,
+    "groupId": 26,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 127,
+    "groupId": 26,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 128,
+    "groupId": 26,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 129,
+    "groupId": 26,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 130,
+    "groupId": 26,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 131,
+    "groupId": 27,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 132,
+    "groupId": 27,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 133,
+    "groupId": 27,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 134,
+    "groupId": 27,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 135,
+    "groupId": 27,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 136,
+    "groupId": 28,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 137,
+    "groupId": 28,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 138,
+    "groupId": 28,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 139,
+    "groupId": 28,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 140,
+    "groupId": 28,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 141,
+    "groupId": 29,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 142,
+    "groupId": 29,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 143,
+    "groupId": 29,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 144,
+    "groupId": 29,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 145,
+    "groupId": 29,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 146,
+    "groupId": 30,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 147,
+    "groupId": 30,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 148,
+    "groupId": 30,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 149,
+    "groupId": 30,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 150,
+    "groupId": 30,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 151,
+    "groupId": 31,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 152,
+    "groupId": 31,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 153,
+    "groupId": 31,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 154,
+    "groupId": 31,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 155,
+    "groupId": 31,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 156,
+    "groupId": 32,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 157,
+    "groupId": 32,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 158,
+    "groupId": 32,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 159,
+    "groupId": 32,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 160,
+    "groupId": 32,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 161,
+    "groupId": 33,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 162,
+    "groupId": 33,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 163,
+    "groupId": 33,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 164,
+    "groupId": 33,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 165,
+    "groupId": 33,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 166,
+    "groupId": 34,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 167,
+    "groupId": 34,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 168,
+    "groupId": 34,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 169,
+    "groupId": 34,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 170,
+    "groupId": 34,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 171,
+    "groupId": 35,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 172,
+    "groupId": 35,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 173,
+    "groupId": 35,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 174,
+    "groupId": 35,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 175,
+    "groupId": 35,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 176,
+    "groupId": 36,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 177,
+    "groupId": 36,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 178,
+    "groupId": 36,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 179,
+    "groupId": 36,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 180,
+    "groupId": 36,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 181,
+    "groupId": 37,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 182,
+    "groupId": 37,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 183,
+    "groupId": 37,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 184,
+    "groupId": 37,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 185,
+    "groupId": 37,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 186,
+    "groupId": 38,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 187,
+    "groupId": 38,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 188,
+    "groupId": 38,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 189,
+    "groupId": 38,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 190,
+    "groupId": 38,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 191,
+    "groupId": 39,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 192,
+    "groupId": 39,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 193,
+    "groupId": 39,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 194,
+    "groupId": 39,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 195,
+    "groupId": 39,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 196,
+    "groupId": 40,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 197,
+    "groupId": 40,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 198,
+    "groupId": 40,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 199,
+    "groupId": 40,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 200,
+    "groupId": 40,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 201,
+    "groupId": 41,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 202,
+    "groupId": 41,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 203,
+    "groupId": 41,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 204,
+    "groupId": 41,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 205,
+    "groupId": 41,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 206,
+    "groupId": 42,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 207,
+    "groupId": 42,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 208,
+    "groupId": 42,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 209,
+    "groupId": 42,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 210,
+    "groupId": 42,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 211,
+    "groupId": 43,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 212,
+    "groupId": 43,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 213,
+    "groupId": 43,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 214,
+    "groupId": 43,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 215,
+    "groupId": 43,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 216,
+    "groupId": 44,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 217,
+    "groupId": 44,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 218,
+    "groupId": 44,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 219,
+    "groupId": 44,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 220,
+    "groupId": 44,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 221,
+    "groupId": 45,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 222,
+    "groupId": 45,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 223,
+    "groupId": 45,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 224,
+    "groupId": 45,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 225,
+    "groupId": 45,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 226,
+    "groupId": 46,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 227,
+    "groupId": 46,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 228,
+    "groupId": 46,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 229,
+    "groupId": 46,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 230,
+    "groupId": 46,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 231,
+    "groupId": 47,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 232,
+    "groupId": 47,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 233,
+    "groupId": 47,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 234,
+    "groupId": 47,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 235,
+    "groupId": 47,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 236,
+    "groupId": 48,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 237,
+    "groupId": 48,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 238,
+    "groupId": 48,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 239,
+    "groupId": 48,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 240,
+    "groupId": 48,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 241,
+    "groupId": 49,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 242,
+    "groupId": 49,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 243,
+    "groupId": 49,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 244,
+    "groupId": 49,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 245,
+    "groupId": 49,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 246,
+    "groupId": 50,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 247,
+    "groupId": 50,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 248,
+    "groupId": 50,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 249,
+    "groupId": 50,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 250,
+    "groupId": 50,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 251,
+    "groupId": 51,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 252,
+    "groupId": 51,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 253,
+    "groupId": 51,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 254,
+    "groupId": 51,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 255,
+    "groupId": 51,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 256,
+    "groupId": 52,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 257,
+    "groupId": 52,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 258,
+    "groupId": 52,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 259,
+    "groupId": 52,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 260,
+    "groupId": 52,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 261,
+    "groupId": 53,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 262,
+    "groupId": 53,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 263,
+    "groupId": 53,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 264,
+    "groupId": 53,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 265,
+    "groupId": 53,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 266,
+    "groupId": 54,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 267,
+    "groupId": 54,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 268,
+    "groupId": 54,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 269,
+    "groupId": 54,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 270,
+    "groupId": 54,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 271,
+    "groupId": 55,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 272,
+    "groupId": 55,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 273,
+    "groupId": 55,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 274,
+    "groupId": 55,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 275,
+    "groupId": 55,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 276,
+    "groupId": 56,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 277,
+    "groupId": 56,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 278,
+    "groupId": 56,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 279,
+    "groupId": 56,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 280,
+    "groupId": 56,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 281,
+    "groupId": 57,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 282,
+    "groupId": 57,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 283,
+    "groupId": 57,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 284,
+    "groupId": 57,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 285,
+    "groupId": 57,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 286,
+    "groupId": 58,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 287,
+    "groupId": 58,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 288,
+    "groupId": 58,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 289,
+    "groupId": 58,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 290,
+    "groupId": 58,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 291,
+    "groupId": 59,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 292,
+    "groupId": 59,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 293,
+    "groupId": 59,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 294,
+    "groupId": 59,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 295,
+    "groupId": 59,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 296,
+    "groupId": 60,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 297,
+    "groupId": 60,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 298,
+    "groupId": 60,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 299,
+    "groupId": 60,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 300,
+    "groupId": 60,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 301,
+    "groupId": 61,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 302,
+    "groupId": 61,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 303,
+    "groupId": 61,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 304,
+    "groupId": 61,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 305,
+    "groupId": 61,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 306,
+    "groupId": 62,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 307,
+    "groupId": 62,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 308,
+    "groupId": 62,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 309,
+    "groupId": 62,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 310,
+    "groupId": 62,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 311,
+    "groupId": 63,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 312,
+    "groupId": 63,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 313,
+    "groupId": 63,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 314,
+    "groupId": 63,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 315,
+    "groupId": 63,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 316,
+    "groupId": 64,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 317,
+    "groupId": 64,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 318,
+    "groupId": 64,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 319,
+    "groupId": 64,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 320,
+    "groupId": 64,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 321,
+    "groupId": 65,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 322,
+    "groupId": 65,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 323,
+    "groupId": 65,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 324,
+    "groupId": 65,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 325,
+    "groupId": 65,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 326,
+    "groupId": 66,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 327,
+    "groupId": 66,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 328,
+    "groupId": 66,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 329,
+    "groupId": 66,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 330,
+    "groupId": 66,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 331,
+    "groupId": 67,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 332,
+    "groupId": 67,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 333,
+    "groupId": 67,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 334,
+    "groupId": 67,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 335,
+    "groupId": 67,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 336,
+    "groupId": 68,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 337,
+    "groupId": 68,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 338,
+    "groupId": 68,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 339,
+    "groupId": 68,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 340,
+    "groupId": 68,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 341,
+    "groupId": 69,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 342,
+    "groupId": 69,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 343,
+    "groupId": 69,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 344,
+    "groupId": 69,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 345,
+    "groupId": 69,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 346,
+    "groupId": 70,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 347,
+    "groupId": 70,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 348,
+    "groupId": 70,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 349,
+    "groupId": 70,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 350,
+    "groupId": 70,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 351,
+    "groupId": 71,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 352,
+    "groupId": 71,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 353,
+    "groupId": 71,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 354,
+    "groupId": 71,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 355,
+    "groupId": 71,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 356,
+    "groupId": 72,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 357,
+    "groupId": 72,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 358,
+    "groupId": 72,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 359,
+    "groupId": 72,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 360,
+    "groupId": 72,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 361,
+    "groupId": 73,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 362,
+    "groupId": 73,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 363,
+    "groupId": 73,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 364,
+    "groupId": 73,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 365,
+    "groupId": 73,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 366,
+    "groupId": 74,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 367,
+    "groupId": 74,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 368,
+    "groupId": 74,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 369,
+    "groupId": 74,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 370,
+    "groupId": 74,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 371,
+    "groupId": 75,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 372,
+    "groupId": 75,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 373,
+    "groupId": 75,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 374,
+    "groupId": 75,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 375,
+    "groupId": 75,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 376,
+    "groupId": 76,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 377,
+    "groupId": 76,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 378,
+    "groupId": 76,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 379,
+    "groupId": 76,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 380,
+    "groupId": 76,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 381,
+    "groupId": 77,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 382,
+    "groupId": 77,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 383,
+    "groupId": 77,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 384,
+    "groupId": 77,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 385,
+    "groupId": 77,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 386,
+    "groupId": 78,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 387,
+    "groupId": 78,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 388,
+    "groupId": 78,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 389,
+    "groupId": 78,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 390,
+    "groupId": 78,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 391,
+    "groupId": 79,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 392,
+    "groupId": 79,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 393,
+    "groupId": 79,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 394,
+    "groupId": 79,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 395,
+    "groupId": 79,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 396,
+    "groupId": 80,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 397,
+    "groupId": 80,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 398,
+    "groupId": 80,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 399,
+    "groupId": 80,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 400,
+    "groupId": 80,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 401,
+    "groupId": 81,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 402,
+    "groupId": 81,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 403,
+    "groupId": 81,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 404,
+    "groupId": 81,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 405,
+    "groupId": 81,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 406,
+    "groupId": 82,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 407,
+    "groupId": 82,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 408,
+    "groupId": 82,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 409,
+    "groupId": 82,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 410,
+    "groupId": 82,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 411,
+    "groupId": 83,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 412,
+    "groupId": 83,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 413,
+    "groupId": 83,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 414,
+    "groupId": 83,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 415,
+    "groupId": 83,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 416,
+    "groupId": 84,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 417,
+    "groupId": 84,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 418,
+    "groupId": 84,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 419,
+    "groupId": 84,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 420,
+    "groupId": 84,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 421,
+    "groupId": 85,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 422,
+    "groupId": 85,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 423,
+    "groupId": 85,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 424,
+    "groupId": 85,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 425,
+    "groupId": 85,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 426,
+    "groupId": 86,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 427,
+    "groupId": 86,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 428,
+    "groupId": 86,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 429,
+    "groupId": 86,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 430,
+    "groupId": 86,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 431,
+    "groupId": 87,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 432,
+    "groupId": 87,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 433,
+    "groupId": 87,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 434,
+    "groupId": 87,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 435,
+    "groupId": 87,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 436,
+    "groupId": 88,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 437,
+    "groupId": 88,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 438,
+    "groupId": 88,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 439,
+    "groupId": 88,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 440,
+    "groupId": 88,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 441,
+    "groupId": 89,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 442,
+    "groupId": 89,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 443,
+    "groupId": 89,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 444,
+    "groupId": 89,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 445,
+    "groupId": 89,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 446,
+    "groupId": 90,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 447,
+    "groupId": 90,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 448,
+    "groupId": 90,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 449,
+    "groupId": 90,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 450,
+    "groupId": 90,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 451,
+    "groupId": 91,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 452,
+    "groupId": 91,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 453,
+    "groupId": 91,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 454,
+    "groupId": 91,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 455,
+    "groupId": 91,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 456,
+    "groupId": 92,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 457,
+    "groupId": 92,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 458,
+    "groupId": 92,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 459,
+    "groupId": 92,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 460,
+    "groupId": 92,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 461,
+    "groupId": 93,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 462,
+    "groupId": 93,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 463,
+    "groupId": 93,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 464,
+    "groupId": 93,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 465,
+    "groupId": 93,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 466,
+    "groupId": 94,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 467,
+    "groupId": 94,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 468,
+    "groupId": 94,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 469,
+    "groupId": 94,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 470,
+    "groupId": 94,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 471,
+    "groupId": 95,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 472,
+    "groupId": 95,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 473,
+    "groupId": 95,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 474,
+    "groupId": 95,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 475,
+    "groupId": 95,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 476,
+    "groupId": 96,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 477,
+    "groupId": 96,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 478,
+    "groupId": 96,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 479,
+    "groupId": 96,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 480,
+    "groupId": 96,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 481,
+    "groupId": 97,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 482,
+    "groupId": 97,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 483,
+    "groupId": 97,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 484,
+    "groupId": 97,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 485,
+    "groupId": 97,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 486,
+    "groupId": 98,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 487,
+    "groupId": 98,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 488,
+    "groupId": 98,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 489,
+    "groupId": 98,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 490,
+    "groupId": 98,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 491,
+    "groupId": 99,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 492,
+    "groupId": 99,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 493,
+    "groupId": 99,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 494,
+    "groupId": 99,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 495,
+    "groupId": 99,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 496,
+    "groupId": 100,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 497,
+    "groupId": 100,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 498,
+    "groupId": 100,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 499,
+    "groupId": 100,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 500,
+    "groupId": 100,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 501,
+    "groupId": 101,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 502,
+    "groupId": 101,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 503,
+    "groupId": 101,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 504,
+    "groupId": 101,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 505,
+    "groupId": 101,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 506,
+    "groupId": 102,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 507,
+    "groupId": 102,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 508,
+    "groupId": 102,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 509,
+    "groupId": 102,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 510,
+    "groupId": 102,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 511,
+    "groupId": 103,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 512,
+    "groupId": 103,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 513,
+    "groupId": 103,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 514,
+    "groupId": 103,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 515,
+    "groupId": 103,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 516,
+    "groupId": 104,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 517,
+    "groupId": 104,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 518,
+    "groupId": 104,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 519,
+    "groupId": 104,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 520,
+    "groupId": 104,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 521,
+    "groupId": 105,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 522,
+    "groupId": 105,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 523,
+    "groupId": 105,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 524,
+    "groupId": 105,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 525,
+    "groupId": 105,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 526,
+    "groupId": 106,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 527,
+    "groupId": 106,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 528,
+    "groupId": 106,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 529,
+    "groupId": 106,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 530,
+    "groupId": 106,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 531,
+    "groupId": 107,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 532,
+    "groupId": 107,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 533,
+    "groupId": 107,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 534,
+    "groupId": 107,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 535,
+    "groupId": 107,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 536,
+    "groupId": 108,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 537,
+    "groupId": 108,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 538,
+    "groupId": 108,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 539,
+    "groupId": 108,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 540,
+    "groupId": 108,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 541,
+    "groupId": 109,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 542,
+    "groupId": 109,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 543,
+    "groupId": 109,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 544,
+    "groupId": 109,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 545,
+    "groupId": 109,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 546,
+    "groupId": 110,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 547,
+    "groupId": 110,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 548,
+    "groupId": 110,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 549,
+    "groupId": 110,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 550,
+    "groupId": 110,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 551,
+    "groupId": 111,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 552,
+    "groupId": 111,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 553,
+    "groupId": 111,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 554,
+    "groupId": 111,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 555,
+    "groupId": 111,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 556,
+    "groupId": 112,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 557,
+    "groupId": 112,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 558,
+    "groupId": 112,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 559,
+    "groupId": 112,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 560,
+    "groupId": 112,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 561,
+    "groupId": 113,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 562,
+    "groupId": 113,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 563,
+    "groupId": 113,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 564,
+    "groupId": 113,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 565,
+    "groupId": 113,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 566,
+    "groupId": 114,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 567,
+    "groupId": 114,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 568,
+    "groupId": 114,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 569,
+    "groupId": 114,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 570,
+    "groupId": 114,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 571,
+    "groupId": 115,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 572,
+    "groupId": 115,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 573,
+    "groupId": 115,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 574,
+    "groupId": 115,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 575,
+    "groupId": 115,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 576,
+    "groupId": 116,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 577,
+    "groupId": 116,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 578,
+    "groupId": 116,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 579,
+    "groupId": 116,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 580,
+    "groupId": 116,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 581,
+    "groupId": 117,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 582,
+    "groupId": 117,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 583,
+    "groupId": 117,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 584,
+    "groupId": 117,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 585,
+    "groupId": 117,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 586,
+    "groupId": 118,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 587,
+    "groupId": 118,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 588,
+    "groupId": 118,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 589,
+    "groupId": 118,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 590,
+    "groupId": 118,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 591,
+    "groupId": 119,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 592,
+    "groupId": 119,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 593,
+    "groupId": 119,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 594,
+    "groupId": 119,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 595,
+    "groupId": 119,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 596,
+    "groupId": 120,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 597,
+    "groupId": 120,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 598,
+    "groupId": 120,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 599,
+    "groupId": 120,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 600,
+    "groupId": 120,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 601,
+    "groupId": 121,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 602,
+    "groupId": 121,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 603,
+    "groupId": 121,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 604,
+    "groupId": 121,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 605,
+    "groupId": 121,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 606,
+    "groupId": 122,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 607,
+    "groupId": 122,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 608,
+    "groupId": 122,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 609,
+    "groupId": 122,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 610,
+    "groupId": 122,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 611,
+    "groupId": 123,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 612,
+    "groupId": 123,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 613,
+    "groupId": 123,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 614,
+    "groupId": 123,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 615,
+    "groupId": 123,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 616,
+    "groupId": 124,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 617,
+    "groupId": 124,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 618,
+    "groupId": 124,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 619,
+    "groupId": 124,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 620,
+    "groupId": 124,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 621,
+    "groupId": 125,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 622,
+    "groupId": 125,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 623,
+    "groupId": 125,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 624,
+    "groupId": 125,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 625,
+    "groupId": 125,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 626,
+    "groupId": 126,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 627,
+    "groupId": 126,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 628,
+    "groupId": 126,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 629,
+    "groupId": 126,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 630,
+    "groupId": 126,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 631,
+    "groupId": 127,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 632,
+    "groupId": 127,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 633,
+    "groupId": 127,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 634,
+    "groupId": 127,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 635,
+    "groupId": 127,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 636,
+    "groupId": 128,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 637,
+    "groupId": 128,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 638,
+    "groupId": 128,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 639,
+    "groupId": 128,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 640,
+    "groupId": 128,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 641,
+    "groupId": 129,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 642,
+    "groupId": 129,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 643,
+    "groupId": 129,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 644,
+    "groupId": 129,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 645,
+    "groupId": 129,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 646,
+    "groupId": 130,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 647,
+    "groupId": 130,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 648,
+    "groupId": 130,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 649,
+    "groupId": 130,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 650,
+    "groupId": 130,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 651,
+    "groupId": 131,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 652,
+    "groupId": 131,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 653,
+    "groupId": 131,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 654,
+    "groupId": 131,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 655,
+    "groupId": 131,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 656,
+    "groupId": 132,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 657,
+    "groupId": 132,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 658,
+    "groupId": 132,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 659,
+    "groupId": 132,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 660,
+    "groupId": 132,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 661,
+    "groupId": 133,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 662,
+    "groupId": 133,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 663,
+    "groupId": 133,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 664,
+    "groupId": 133,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 665,
+    "groupId": 133,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 666,
+    "groupId": 134,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 667,
+    "groupId": 134,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 668,
+    "groupId": 134,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 669,
+    "groupId": 134,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 670,
+    "groupId": 134,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 671,
+    "groupId": 135,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 672,
+    "groupId": 135,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 673,
+    "groupId": 135,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 674,
+    "groupId": 135,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 675,
+    "groupId": 135,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 676,
+    "groupId": 136,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 677,
+    "groupId": 136,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 678,
+    "groupId": 136,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 679,
+    "groupId": 136,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 680,
+    "groupId": 136,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 681,
+    "groupId": 137,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 682,
+    "groupId": 137,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 683,
+    "groupId": 137,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 684,
+    "groupId": 137,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 685,
+    "groupId": 137,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 686,
+    "groupId": 138,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 687,
+    "groupId": 138,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 688,
+    "groupId": 138,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 689,
+    "groupId": 138,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 690,
+    "groupId": 138,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 691,
+    "groupId": 139,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 692,
+    "groupId": 139,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 693,
+    "groupId": 139,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 694,
+    "groupId": 139,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 695,
+    "groupId": 139,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 696,
+    "groupId": 140,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 697,
+    "groupId": 140,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 698,
+    "groupId": 140,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 699,
+    "groupId": 140,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 700,
+    "groupId": 140,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 701,
+    "groupId": 141,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 702,
+    "groupId": 141,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 703,
+    "groupId": 141,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 704,
+    "groupId": 141,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 705,
+    "groupId": 141,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 706,
+    "groupId": 142,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 707,
+    "groupId": 142,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 708,
+    "groupId": 142,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 709,
+    "groupId": 142,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 710,
+    "groupId": 142,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 711,
+    "groupId": 143,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 712,
+    "groupId": 143,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 713,
+    "groupId": 143,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 714,
+    "groupId": 143,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 715,
+    "groupId": 143,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 716,
+    "groupId": 144,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 717,
+    "groupId": 144,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 718,
+    "groupId": 144,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 719,
+    "groupId": 144,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 720,
+    "groupId": 144,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 721,
+    "groupId": 145,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 722,
+    "groupId": 145,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 723,
+    "groupId": 145,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 724,
+    "groupId": 145,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 725,
+    "groupId": 145,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 726,
+    "groupId": 146,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 727,
+    "groupId": 146,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 728,
+    "groupId": 146,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 729,
+    "groupId": 146,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 730,
+    "groupId": 146,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 731,
+    "groupId": 147,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 732,
+    "groupId": 147,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 733,
+    "groupId": 147,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 734,
+    "groupId": 147,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 735,
+    "groupId": 147,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 736,
+    "groupId": 148,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 737,
+    "groupId": 148,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 738,
+    "groupId": 148,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 739,
+    "groupId": 148,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 740,
+    "groupId": 148,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 741,
+    "groupId": 149,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 742,
+    "groupId": 149,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 743,
+    "groupId": 149,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 744,
+    "groupId": 149,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 745,
+    "groupId": 149,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 746,
+    "groupId": 150,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 747,
+    "groupId": 150,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 748,
+    "groupId": 150,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 749,
+    "groupId": 150,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 750,
+    "groupId": 150,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 751,
+    "groupId": 151,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 752,
+    "groupId": 151,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 753,
+    "groupId": 151,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 754,
+    "groupId": 151,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 755,
+    "groupId": 151,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 756,
+    "groupId": 152,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 757,
+    "groupId": 152,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 758,
+    "groupId": 152,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 759,
+    "groupId": 152,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 760,
+    "groupId": 152,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 761,
+    "groupId": 153,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 762,
+    "groupId": 153,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 763,
+    "groupId": 153,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 764,
+    "groupId": 153,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 765,
+    "groupId": 153,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 766,
+    "groupId": 154,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 767,
+    "groupId": 154,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 768,
+    "groupId": 154,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 769,
+    "groupId": 154,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 770,
+    "groupId": 154,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 771,
+    "groupId": 155,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 772,
+    "groupId": 155,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 773,
+    "groupId": 155,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 774,
+    "groupId": 155,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 775,
+    "groupId": 155,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 776,
+    "groupId": 156,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 777,
+    "groupId": 156,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 778,
+    "groupId": 156,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 779,
+    "groupId": 156,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 780,
+    "groupId": 156,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 781,
+    "groupId": 157,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 782,
+    "groupId": 157,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 783,
+    "groupId": 157,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 784,
+    "groupId": 157,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 785,
+    "groupId": 157,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 786,
+    "groupId": 158,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 787,
+    "groupId": 158,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 788,
+    "groupId": 158,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 789,
+    "groupId": 158,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 790,
+    "groupId": 158,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 791,
+    "groupId": 159,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 792,
+    "groupId": 159,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 793,
+    "groupId": 159,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 794,
+    "groupId": 159,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 795,
+    "groupId": 159,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 796,
+    "groupId": 160,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 797,
+    "groupId": 160,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 798,
+    "groupId": 160,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 799,
+    "groupId": 160,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 800,
+    "groupId": 160,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 801,
+    "groupId": 161,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 802,
+    "groupId": 161,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 803,
+    "groupId": 161,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 804,
+    "groupId": 161,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 805,
+    "groupId": 161,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 806,
+    "groupId": 162,
+    "techstackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 807,
+    "groupId": 162,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 808,
+    "groupId": 162,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 809,
+    "groupId": 162,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 810,
+    "groupId": 162,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 811,
+    "groupId": 163,
+    "techstackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 812,
+    "groupId": 163,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 813,
+    "groupId": 163,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 814,
+    "groupId": 163,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 815,
+    "groupId": 163,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 816,
+    "groupId": 164,
+    "techstackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 817,
+    "groupId": 164,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 818,
+    "groupId": 164,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 819,
+    "groupId": 164,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 820,
+    "groupId": 164,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 821,
+    "groupId": 165,
+    "techstackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 822,
+    "groupId": 165,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 823,
+    "groupId": 165,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 824,
+    "groupId": 165,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 825,
+    "groupId": 165,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 826,
+    "groupId": 166,
+    "techstackId": 12,
+    "name": "css"
+  },
+  {
+    "id": 827,
+    "groupId": 166,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 828,
+    "groupId": 166,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 829,
+    "groupId": 166,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 830,
+    "groupId": 166,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 831,
+    "groupId": 167,
+    "techstackId": 1,
+    "name": "React"
+  },
+  {
+    "id": 832,
+    "groupId": 167,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 833,
+    "groupId": 167,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 834,
+    "groupId": 167,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 835,
+    "groupId": 167,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 836,
+    "groupId": 168,
+    "techstackId": 2,
+    "name": "Express"
+  },
+  {
+    "id": 837,
+    "groupId": 168,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 838,
+    "groupId": 168,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 839,
+    "groupId": 168,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 840,
+    "groupId": 168,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 841,
+    "groupId": 169,
+    "techstackId": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 842,
+    "groupId": 169,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 843,
+    "groupId": 169,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 844,
+    "groupId": 169,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 845,
+    "groupId": 169,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 846,
+    "groupId": 170,
+    "techstackId": 4,
+    "name": "Java"
+  },
+  {
+    "id": 847,
+    "groupId": 170,
+    "techstackId": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 848,
+    "groupId": 170,
+    "techstackId": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 849,
+    "groupId": 170,
+    "techstackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 850,
+    "groupId": 170,
+    "techstackId": 8,
+    "name": "C++"
+  }
+]

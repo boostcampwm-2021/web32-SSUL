@@ -1,6 +1,5 @@
 import { IsNumber, IsString } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { UsingTechStack } from './UsingTechStack';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tech_stack')
 export class TechStack {
@@ -11,7 +10,4 @@ export class TechStack {
   @IsString()
   @Column('varchar', { name: 'name', length: 255 })
   name: string;
-
-  @OneToMany(() => UsingTechStack, (usingTechStack) => usingTechStack.techStack)
-  usingTechStack: UsingTechStack[];
 }

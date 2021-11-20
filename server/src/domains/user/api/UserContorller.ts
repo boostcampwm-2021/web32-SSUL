@@ -12,7 +12,7 @@ import {
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { UpdateIntroDto } from '../dto/UpdateIntroDto';
-import { ProfileService } from '../service/ProfileService';
+import { UserService } from '../service/UserService';
 
 @OpenAPI({ tags: ['사용자'] })
 @Service()
@@ -20,7 +20,7 @@ import { ProfileService } from '../service/ProfileService';
 export class UserController {
   constructor(
     @Inject()
-    private readonly profileService: ProfileService,
+    private readonly userService: UserService,
     @Inject()
     private readonly authService: AuthService,
   ) {}
@@ -48,14 +48,14 @@ export class UserController {
   @OpenAPI({ summary: '유저 자기소개를 가져오는 API' })
   @ResponseSchema(String)
   public getIntro(@Param('uid') userId: number) {
-    return this.profileService.getUserIntro(userId);
+    return this.userService.getUserIntro(userId);
   }
 
   @Patch('/intro')
   @OnUndefined(200)
   @OpenAPI({ summary: '자기소개를 업데이트하는 API' })
   public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
-    this.profileService.updateUserIntro(id, intro);
+    this.userService.updateUserIntro(id, intro);
   }
 
   @Get('/profile/:gid')
