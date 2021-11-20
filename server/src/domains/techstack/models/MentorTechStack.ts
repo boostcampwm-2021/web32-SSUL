@@ -15,6 +15,6 @@ export class MentorTechStack {
   @Column('varchar', { name: 'tech_stack_name', length: 255, nullable: true })
   techStackName: number;
 
-  @ManyToOne(() => Mentor, (mentor) => mentor.techStack)
+  @ManyToOne(() => Mentor, (mentor) => mentor.techStacks)
   mentor: Mentor | null;
 }
