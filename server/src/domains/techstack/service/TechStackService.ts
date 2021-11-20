@@ -50,13 +50,10 @@ export class TechStackService {
     });
   }
 
-  public async updateMenteeTechStack(userInfo: User, techStacks: string[]) {
+  public async updateMenteeTechStack(userInfo: User, techStacks: TechStack[]) {
     await this.menteeTechStackRepository.deleteMenteeTechStackListByUserId(userInfo.id);
 
-    techStacks.forEach(async (techStackName) => {
-      const techStack: TechStack = await this.techStackRepository.findOneOrFail({
-        where: { name: techStackName },
-      });
+    techStacks.forEach(async (techStack) => {
       const menteeTechStack: MenteeTechStack = new MenteeTechStack();
 
       menteeTechStack.userId = userInfo.id;
