@@ -4,7 +4,7 @@ import { formatDateToString } from '@utils/Date';
 
 export interface ProfileState {
   intro?: string;
-  techStacks?: string[];
+  techStacks?: TechStack[];
   groupActivitys?: GroupActivity[];
   isMentor?: boolean;
   mentorId?: number;
@@ -62,8 +62,7 @@ export const fetchProfileTechStack = async (
   handler: DispatchHandler,
 ): Promise<void> => {
   const fetchedTechStack = await techStackHttpClient.getMenteeTechStackList(id);
-  const techStackList = fetchedTechStack.map(({ name }) => name);
-  handler({ techStacks: techStackList });
+  handler({ techStacks: fetchedTechStack });
 };
 
 export const fetchGroupActivityTechStack = async (
