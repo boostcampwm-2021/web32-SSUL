@@ -1,5 +1,5 @@
 import { groupHttpClient, mentoringHttpClient, techStackHttpClient, userHttpClient } from '@api';
-import { GroupActivity } from '@types';
+import { GroupActivity, TechStack } from '@types';
 import { formatDateToString } from '@utils/Date';
 
 export interface ProfileState {
@@ -8,7 +8,7 @@ export interface ProfileState {
   groupActivitys?: GroupActivity[];
   isMentor?: boolean;
   mentorId?: number;
-  mentoringStack?: string[];
+  mentoringStack?: TechStack[];
   feverStack?: number;
   shareStack?: number;
   userId?: number;
@@ -42,8 +42,7 @@ export const fetchProfileIntro = async (id: number, handler: DispatchHandler): P
 export const fetchMentoringStack = async (id: number, handler: DispatchHandler): Promise<void> => {
   try {
     const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(id);
-    const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
-    handler({ mentoringStack: mentoringStacks });
+    handler({ mentoringStack: fetchedMentoringStacks });
   } catch (e) {
     handler({ mentoringStack: [] });
   }
