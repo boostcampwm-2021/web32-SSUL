@@ -7,34 +7,56 @@ const MAX_SELECTED_INDEX = 5;
 
 interface Props {
   techStackList: TechStack[];
-  usingTechStacks: string[];
-  setUsingTechStacks: (newTechStacks: string[]) => void;
+  usingTechStacks: TechStack[];
+  setUsingTechStacks: (newTechStacks: TechStack[]) => void;
 }
 function TechStackList({ techStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;
     const techStackName = clickedTechStack.innerText;
+    const techStackId = Number(clickedTechStack.id);
 
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
     if (usingTechStacks.length >= MAX_SELECTED_INDEX) {
       clickedTechStack.classList.add('shake');
-    } else if (!usingTechStacks.includes(techStackName)) {
-      const newTechStack: string[] = [...usingTechStacks];
+    } else if (!usingTechStacks.some((techStack) => techStack.name === techStackName)) {
+      const newTechStack: TechStack[] = [...usingTechStacks];
 
-      newTechStack.push(techStackName);
+      const selectedTechStack: TechStack = {
+        id: techStackId,
+        name: techStackName,
+      };
+
+      newTechStack.push(selectedTechStack);
       setUsingTechStacks(newTechStack);
     }
   };
-  const techStackElements = techStackList.map((techStack, idx) => {
-    return usingTechStacks.includes(techStack.name) ? (
-      <SelectedTechListItem key={idx}>{techStack.name}</SelectedTechListItem>
-    ) : (
-      <TechListItem data-test="tech-item" key={idx} onClick={handleTechStackClick}>
-        {techStack.name}
-      </TechListItem>
+
+  const techStackElements = techStackList.map((techStack) => {
+    const isSelectedTechStack = usingTechStacks.some(
+      (usingTechStack) => techStack.name === usingTechStack.name,
     );
+
+    if (isSelectedTechStack) {
+      return (
+        <SelectedTechListItem key={techStack.id} id={String(techStack.id)}>
+          {techStack.name}
+        </SelectedTechListItem>
+      );
+    } else {
+      return (
+        <TechListItem
+          data-test="tech-item"
+          id={String(techStack.id)}
+          key={techStack.id}
+          onClick={handleTechStackClick}
+        >
+          {techStack.name}
+        </TechListItem>
+      );
+    }
   });
 
   return <Container>{techStackElements}</Container>;

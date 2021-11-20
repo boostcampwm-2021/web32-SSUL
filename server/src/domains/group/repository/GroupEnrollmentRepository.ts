@@ -4,5 +4,4 @@ import { GroupEnrollment } from '../models/GroupEnrollment';
 
 @Service()
 @EntityRepository(GroupEnrollment)
-export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {
-}
+export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {}

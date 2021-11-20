@@ -13,14 +13,14 @@ interface Status {
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
-  techStackList: string[];
+  techStacks: string[];
   ownerFeverStack: number;
   ownerName: string;
   ownerAvatarUrl: string;
 }
 
 function GroupCardStatus({ statusProps }: StatusProps): JSX.Element {
-  const { intro, startAt, endAt, techStackList, ownerFeverStack, ownerName, ownerAvatarUrl } =
+  const { intro, startAt, endAt, techStacks, ownerFeverStack, ownerName, ownerAvatarUrl } =
     statusProps;
   return (
     <Container>
@@ -30,7 +30,7 @@ function GroupCardStatus({ statusProps }: StatusProps): JSX.Element {
         ownerAvatarUrl={ownerAvatarUrl}
       />
       <GroupStatusInfo intro={intro} startAt={startAt} endAt={endAt} />
-      <GroupTechStackList techStackList={techStackList} />
+      <GroupTechStackList techStackList={techStacks} />
     </Container>
   );
 }

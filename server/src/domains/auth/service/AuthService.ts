@@ -2,10 +2,8 @@ import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
 import { UserRepository } from '@domains/user/repository/UserRepository';
-import { ProfileRepository } from '@domains/user/repository/ProfileRepository';
 import { GithubUserDto } from '../dto/GithubUserDto';
 import { UserDto } from '@domains/user/dto/UserDto';
-import { destructObject } from '@utils/Object';
 import { BusinessLogicError } from '@common/error/BusinessLogicError';
 import { ErrorCode } from '@error/ErrorCode';
 
@@ -14,8 +12,6 @@ export class AuthService {
   constructor(
     @InjectRepository()
     private readonly userRepository: UserRepository,
-    @InjectRepository()
-    private readonly profileRepository: ProfileRepository,
   ) {}
 
   public async getGithubAccessToken(code: string): Promise<string> {
@@ -49,18 +45,12 @@ export class AuthService {
 
   public async findOrInsertUser(user: GithubUserDto): Promise<UserDto> {
     const { githubId } = user;
-    let profileData = await this.profileRepository.findOneByGithubId(githubId);
-    if (!profileData) {
-      //TODO: transaction need
-      const userData = await this.userRepository.insertUser(user);
-      profileData = await this.profileRepository.insertProfile(userData);
-    }
-
-    return destructObject(profileData) as UserDto;
+    let userData = await this.userRepository.findOneById(githubId);
+    if (!userData) userData = await this.userRepository.insertUser(user);
+    return userData as UserDto;
   }
 
   public async getUserProfile(id: string): Promise<UserDto> {
-    let userData = await this.profileRepository.findOneByGithubId(id);
-    return destructObject(userData) as UserDto;
+    return (await this.userRepository.findOneById(id)) as UserDto;
   }
 }

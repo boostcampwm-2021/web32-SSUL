@@ -24,7 +24,7 @@ export class FilterdGroupDto {
   @IsString()
   status: string | null;
   @IsArray()
-  techStackList: string[];
+  techStacks: string[];
   @IsNumber()
   ownerName: number | null;
   @IsString()

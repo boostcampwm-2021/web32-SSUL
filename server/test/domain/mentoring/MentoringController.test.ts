@@ -35,7 +35,10 @@ describe('/mentoring', () => {
       });
       const mentorRegstDto = {
         userId: 3,
-        techStacks: ['express', 'react'],
+        techStacks: [
+          { id: 1, name: 'react' },
+          { id: 2, name: 'express' },
+        ],
       };
 
       //when
@@ -55,7 +58,10 @@ describe('/mentoring', () => {
       });
       const mentorRegstDto = {
         userId: 3,
-        techStacks: ['express', 'react'],
+        techStacks: [
+          { id: 1, name: 'react' },
+          { id: 2, name: 'express' },
+        ],
       };
 
       //when

@@ -10,7 +10,7 @@ interface Props {
 }
 
 function CategoryInput({ categorys }: Props): JSX.Element {
-  const { category: SelectedCategory } = useAppSelector(groupCreateDataState);
+  const { categoryId: SelectedCategory } = useAppSelector(groupCreateDataState);
   const dispatch = useAppDispatch();
 
   const getCategoryItemElements = () => {
@@ -19,8 +19,8 @@ function CategoryInput({ categorys }: Props): JSX.Element {
         key={category.id}
         category={category.name}
         image={category.imageUrl}
-        clicked={category.name === SelectedCategory}
-        handleCategoryClick={() => dispatch(setGroupData({ category: category.name }))}
+        clicked={category.id === SelectedCategory}
+        handleCategoryClick={() => dispatch(setGroupData({ categoryId: category.id }))}
       />
     ));
   };

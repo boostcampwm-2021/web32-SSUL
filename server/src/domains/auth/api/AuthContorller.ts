@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  QueryParam,
-  Session,
-  SessionParam,
-  OnUndefined,
-  Post,
-} from 'routing-controllers';
+import { Controller, Get, QueryParam, Session, OnUndefined, Post } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
 import { UserDto } from '@domains/user/dto/UserDto';
@@ -33,8 +25,8 @@ export class AuthController {
   })
   @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
   async getAuthentification(@Session() session: any) {
+    if (!session.user) return;
     const { githubId, role } = session.user;
-    if (!githubId) return;
     const userData = await this.authService.getUserProfile(githubId);
     return { ...userData, role } as UserDto;
   }

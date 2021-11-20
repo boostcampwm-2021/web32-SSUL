@@ -16,7 +16,7 @@ function EditTechStack({ onCancel }: Props): JSX.Element {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
-  const [selectedTechStacks, setSelectedStacks] = useState<string[]>(techStacks);
+  const [selectedTechStacks, setSelectedStacks] = useState<TechStack[]>(techStacks);
 
   const putProfileTechStack = async () => {
     if (user.id !== undefined) {

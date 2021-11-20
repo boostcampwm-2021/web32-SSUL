@@ -1,5 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
-import { User } from '@domains/user/models/User';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Group } from './Group';
 
 export enum PostType {
@@ -21,7 +20,7 @@ export class Post {
   @Column('varchar', { name: 'title', length: 100 })
   title: string;
 
-  @Column('varchar', { name: 'content', length: 500 })
+  @Column('varchar', { name: 'content', length: 1023 })
   content: string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
@@ -30,9 +29,9 @@ export class Post {
   @Column({ name: 'type', type: 'enum', enum: PostType })
   type: PostType;
 
-  @JoinColumn({ name: 'group_id' })
-  group: Group;
+  @Column('int', { name: 'hit' })
+  hit: number;
 
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @ManyToOne(() => Group, (group) => group.posts)
+  group: Group;
 }

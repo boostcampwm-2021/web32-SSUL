@@ -26,8 +26,8 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
         return (
           <ProfileContainer title="멘토링스택">
             <TechStackContainer>
-              {profile.mentoringStack.map((techStackName, idx) => (
-                <TechStackItem key={idx}>{techStackName}</TechStackItem>
+              {profile.mentoringStack.map((techStack) => (
+                <TechStackItem key={techStack.id}>{techStack.name}</TechStackItem>
               ))}
             </TechStackContainer>
           </ProfileContainer>
@@ -39,8 +39,8 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
               멘토요청 리스트
             </MentoringRequestButton>
             <TechStackContainer>
-              {profile.mentoringStack.map((techStackName, idx) => (
-                <TechStackItem key={idx}>{techStackName}</TechStackItem>
+              {profile.mentoringStack.map((techStack) => (
+                <TechStackItem key={techStack.id}>{techStack.name}</TechStackItem>
               ))}
             </TechStackContainer>
           </ProfileContainer>

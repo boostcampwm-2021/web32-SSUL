@@ -1,3 +1,4 @@
+import { TechStack } from '@domains/techstack/models/TechStack';
 import { ArrayMinSize, IsArray, IsNumber, ArrayMaxSize } from 'class-validator';
 
 export class RegisterMentoDto {
@@ -7,5 +8,5 @@ export class RegisterMentoDto {
   @IsArray()
   @ArrayMinSize(1)
   @ArrayMaxSize(5)
-  techStacks: string[];
+  techStacks: TechStack[];
 }

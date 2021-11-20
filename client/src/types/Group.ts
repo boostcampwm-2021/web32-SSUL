@@ -15,7 +15,7 @@ export interface Group {
   startAt: Date | null;
   endAt: Date | null;
   status: GroupState;
-  techStackList: string[];
+  techStacks: string[];
   ownerFeverStack: number;
   ownerName: string;
   ownerAvatarUrl: string;
