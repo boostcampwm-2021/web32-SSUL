@@ -3,6 +3,7 @@ import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Alarm } from '@domains/alarm/models/Alarm';
 import { MenteeTechStack } from '@domains/techstack/models/MenteeTechStack';
+import { Group } from '@domains/group/models/Group';
 
 @Entity('user')
 export class User {
@@ -29,6 +30,9 @@ export class User {
 
   @Column('varchar', { name: 'intro', nullable: true, length: 1023 })
   intro: string | null;
+
+  @OneToMany(() => Group, (group) => group.ownerInfo)
+  groups: Group[];
 
   @OneToMany(() => ApplyGroup, (applyGroup) => applyGroup.user)
   applyGroups: ApplyGroup[];
