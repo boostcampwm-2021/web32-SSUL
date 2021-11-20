@@ -40,9 +40,13 @@ export const fetchProfileIntro = async (id: number, handler: DispatchHandler): P
 };
 
 export const fetchMentoringStack = async (id: number, handler: DispatchHandler): Promise<void> => {
-  const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(id);
-  const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
-  handler({ mentoringStack: mentoringStacks });
+  try {
+    const fetchedMentoringStacks = await techStackHttpClient.getMentorTechStackList(id);
+    const mentoringStacks = fetchedMentoringStacks.map(({ name }) => name);
+    handler({ mentoringStack: mentoringStacks });
+  } catch (e) {
+    handler({ mentoringStack: [] });
+  }
 };
 
 export const fetchMentorId = async (id: number, handler: DispatchHandler): Promise<void> => {

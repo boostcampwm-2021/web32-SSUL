@@ -20,7 +20,7 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     startAt,
     endAt,
     ownerFeverStack,
-    techStackList,
+    techStacks,
     ownerName,
     ownerAvatarUrl,
   } = groupContents;
@@ -31,7 +31,7 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     intro,
     startAt,
     endAt,
-    techStackList,
+    techStacks,
     ownerName,
     ownerAvatarUrl,
   };

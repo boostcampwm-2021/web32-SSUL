@@ -10,7 +10,11 @@ interface Props {
   setUsingTechStacks: (newTechStacks: string[]) => void;
 }
 
-function TechStackInput({ baseTechStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
+function TechStackInput({
+  baseTechStackList,
+  usingTechStacks,
+  setUsingTechStacks,
+}: Props): JSX.Element {
   const [filteredTechStackList, setFilteredTechStackList] = useState<TechStack[]>([]);
   const [techStackInput, setTechStackInput] = useState<string>('');
 
@@ -28,8 +32,15 @@ function TechStackInput({ baseTechStackList, usingTechStacks, setUsingTechStacks
   return (
     <>
       <SearchBar onChange={handleTechStackInputChange}></SearchBar>
-      <SelectedTechStackList usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
-      <TechStackList techStackList={filteredTechStackList} usingTechStacks={usingTechStacks} setUsingTechStacks={setUsingTechStacks} />
+      <SelectedTechStackList
+        usingTechStacks={usingTechStacks}
+        setUsingTechStacks={setUsingTechStacks}
+      />
+      <TechStackList
+        techStackList={filteredTechStackList}
+        usingTechStacks={usingTechStacks}
+        setUsingTechStacks={setUsingTechStacks}
+      />
     </>
   );
 }

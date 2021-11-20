@@ -44,7 +44,7 @@ function ProfilePage(): JSX.Element {
         setFetchState(true);
         dispatch(setLoadingState(false));
       } catch (e) {
-        location.href = '/';
+        // location.href = '/';
       }
     };
 
