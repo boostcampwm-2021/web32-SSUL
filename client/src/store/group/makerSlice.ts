@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { GroupCreateInterface } from '@types';
 import { RootState } from '../index';
 
-const INTIIAL_STATE = {
+const INTIIAL_STATE: GroupCreateInterface = {
   ownerId: 0,
   name: '',
   maxUserCnt: 1,
@@ -10,9 +10,9 @@ const INTIIAL_STATE = {
   intro: '',
   startAt: '',
   endAt: '',
-  category: '',
-  usingTechStacks: [],
-} as GroupCreateInterface;
+  categoryId: 0,
+  techStacks: [],
+};
 
 export const groupCreateDataSlice = createSlice({
   name: 'groupCreateData',

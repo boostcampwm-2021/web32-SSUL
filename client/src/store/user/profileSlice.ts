@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GroupActivity } from '@types';
+import { GroupActivity, TechStack } from '@types';
 import { RootState } from '../index';
 
 interface ProfileData {
   intro: string;
-  techStacks: string[];
+  techStacks: TechStack[];
   groupActivitys: GroupActivity[];
   isMentor: boolean;
   mentorId: number;
-  mentoringStack: string[];
+  mentoringStack: TechStack[];
   feverStack: number;
   shareStack: number;
   userId: number;
