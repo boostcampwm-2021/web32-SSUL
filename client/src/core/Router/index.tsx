@@ -12,6 +12,7 @@ import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
 import { Auth as AuthCallback } from '@components';
 import GroupCreatePage from '../../pages/GroupCreatePage';
+import AuthGuardRoute from './routes/AuthGuardRoute';
 
 function Router(): JSX.Element {
   return (
@@ -21,7 +22,7 @@ function Router(): JSX.Element {
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
       <Route path="/group/status" component={GroupStatusPage} />
       <Route path="/group/owner" component={GroupOwnerPage} />
-      <Route path="/group/create" component={GroupCreatePage} />
+      <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
       <Route path="/group/evaluate" component={EvaluateGroupPage} />
       <Route path="/group/:id" component={GroupsPage} exact />
       <Route path="/chat/list" component={ChatListPage} />
