@@ -1,13 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { RouteProps, useHistory } from 'react-router-dom';
-import { useAppSelector } from '@hooks';
-import { selectLoginFlag } from '@store/user/globalSlice';
+import { RouteProps, useHistory, useParams } from 'react-router-dom';
+import { authHttpClient } from '@api';
+
+interface ParamProps {
+  gid: string;
+}
 
 export enum RouteGuardTypes {
   AUTH = 'AUTH',
   GROUP_BELONG = 'GROUP_BELONG',
   GROUP_OWNER = 'GROUP_OWNER',
 }
+
 /**
  * @param {React.FC} Page 라우트될 페이지 컴포넌트
  * @param {RouteGuardTypes} type 보호 범위
@@ -20,18 +25,26 @@ export default function RouteGuard(
   return function guardRoute(props: RouteProps): JSX.Element {
     const Component = Page as React.FC;
     const history = useHistory();
-    const isLogin = useAppSelector(selectLoginFlag);
+    const { gid } = useParams<ParamProps>();
 
-    switch (type) {
-      case RouteGuardTypes.AUTH:
-        if (!isLogin) history.go(-1);
-        return <Component {...props} />;
-        break;
-      case RouteGuardTypes.GROUP_BELONG:
-        break;
-      case RouteGuardTypes.GROUP_OWNER:
-        break;
-    }
+    (async () => {
+      try {
+        switch (type) {
+          case RouteGuardTypes.AUTH:
+            await authHttpClient.isAuthUser();
+            break;
+          case RouteGuardTypes.GROUP_BELONG:
+            await authHttpClient.isGroupBelong(gid);
+            break;
+          case RouteGuardTypes.GROUP_OWNER:
+            await authHttpClient.isGroupOwner(gid);
+            break;
+        }
+      } catch (e: any) {
+        history.go(-1);
+      }
+    })();
+
     return <Component {...props} />;
   };
 }
