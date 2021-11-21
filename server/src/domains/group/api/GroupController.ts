@@ -35,17 +35,12 @@ export class GroupController {
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
-    //
-    const startDate = new Date();
     const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
       page,
       name,
       category,
       techstack,
     );
-    //
-    const endDate = new Date();
-    console.log(endDate.getTime() - startDate.getTime());
     return filterdGroups;
   }
 
