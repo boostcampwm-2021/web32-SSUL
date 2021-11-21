@@ -7,7 +7,7 @@ interface ParamProps {
   gid: string;
 }
 
-export enum RouteGuardTypes {
+export enum RouteGuardScopes {
   AUTH = 'AUTH',
   GROUP_BELONG = 'GROUP_BELONG',
   GROUP_OWNER = 'GROUP_OWNER',
@@ -15,12 +15,12 @@ export enum RouteGuardTypes {
 
 /**
  * @param {React.FC} Page 라우트될 페이지 컴포넌트
- * @param {RouteGuardTypes} type 보호 범위
+ * @param {RouteGuardScopes} scope 보호 범위
  * @returns 검증 처리 후 컴포넌트
  */
 export default function RouteGuard(
   Page: RouteProps['component'],
-  type?: RouteGuardTypes,
+  scope?: RouteGuardScopes,
 ): (props: RouteProps) => JSX.Element {
   return function guardRoute(props: RouteProps): JSX.Element {
     const Component = Page as React.FC;
@@ -29,14 +29,14 @@ export default function RouteGuard(
 
     (async () => {
       try {
-        switch (type) {
-          case RouteGuardTypes.AUTH:
+        switch (scope) {
+          case RouteGuardScopes.AUTH:
             await authHttpClient.isAuthUser();
             break;
-          case RouteGuardTypes.GROUP_BELONG:
+          case RouteGuardScopes.GROUP_BELONG:
             await authHttpClient.isGroupBelong(gid);
             break;
-          case RouteGuardTypes.GROUP_OWNER:
+          case RouteGuardScopes.GROUP_OWNER:
             await authHttpClient.isGroupOwner(gid);
             break;
         }
