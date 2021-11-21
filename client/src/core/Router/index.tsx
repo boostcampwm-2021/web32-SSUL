@@ -12,7 +12,7 @@ import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
 import { Auth as AuthCallback } from '@components';
 import GroupCreatePage from '../../pages/GroupCreatePage';
-import AuthGuardRoute from './routes/AuthGuardRoute';
+import { AuthGuardRoute, GroupBelongGuardRoute, GroupOwnerGuardRoute } from './routes';
 
 function Router(): JSX.Element {
   return (
@@ -21,10 +21,10 @@ function Router(): JSX.Element {
       <Route path="/recruit/group" component={GroupRecruitPage} exact />
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
       <Route path="/group/status" component={GroupStatusPage} />
-      <Route path="/group/owner" component={GroupOwnerPage} />
+      <GroupOwnerGuardRoute path="/group/owner/:gid" component={GroupOwnerPage} />
       <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
-      <Route path="/group/evaluate" component={EvaluateGroupPage} />
-      <Route path="/group/:id" component={GroupsPage} exact />
+      <GroupBelongGuardRoute path="/group/evaluate" component={EvaluateGroupPage} />
+      <GroupBelongGuardRoute path="/group/:gid" component={GroupsPage} exact />
       <Route path="/chat/list" component={ChatListPage} />
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile/:id" component={ProfilePage} />
