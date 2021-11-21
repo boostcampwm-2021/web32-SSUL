@@ -26,8 +26,6 @@ export class GroupService {
     @InjectRepository()
     private readonly groupRepository: GroupRepository,
     @InjectRepository()
-    private readonly categoryRepository: CategoryRepository,
-    @InjectRepository()
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
     @InjectRepository()
     private readonly groupTechStackRepository: GroupTechStackRepository,
@@ -109,7 +107,7 @@ export class GroupService {
       groupTechStack.name = techStack.name;
       return groupTechStack;
     });
-    ////const createdGroup = await this.groupRepository.create();
+
     group.techStacks = await this.groupTechStackRepository.saveAll(groupTechStacks);
     await this.groupRepository.save(group);
     await this.enroll(group.id, ownerId, GroupEnrollmentAs.OWNER);
