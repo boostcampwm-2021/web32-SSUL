@@ -31,7 +31,7 @@ export class TechStackService {
       mentorTechStack.techStackId = techStack.id;
       mentorTechStack.name = techStack.name;
 
-      this.mentorTechStackRepository.save(mentorTechStack);
+      await this.mentorTechStackRepository.save(mentorTechStack);
     });
   }
 

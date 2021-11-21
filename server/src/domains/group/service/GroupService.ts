@@ -128,7 +128,7 @@ export class GroupService {
       throw new GroupNotFoundError();
     }
     group.mentorId = mentorId;
-    this.groupRepository.save(group);
+    await this.groupRepository.save(group);
   }
 
   public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {

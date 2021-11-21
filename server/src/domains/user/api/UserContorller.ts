@@ -47,15 +47,15 @@ export class UserController {
   @Get('/intro/:uid')
   @OpenAPI({ summary: '유저 자기소개를 가져오는 API' })
   @ResponseSchema(String)
-  public getIntro(@Param('uid') userId: number) {
-    return this.userService.getUserIntro(userId);
+  public async getIntro(@Param('uid') userId: number) {
+    return await this.userService.getUserIntro(userId);
   }
 
   @Patch('/intro')
   @OnUndefined(200)
   @OpenAPI({ summary: '자기소개를 업데이트하는 API' })
-  public updateIntro(@Body() { id, intro }: UpdateIntroDto) {
-    this.userService.updateUserIntro(id, intro);
+  public async updateIntro(@Body() { id, intro }: UpdateIntroDto) {
+    await this.userService.updateUserIntro(id, intro);
   }
 
   @Get('/profile/:gid')
