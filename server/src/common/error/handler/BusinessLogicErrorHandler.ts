@@ -9,7 +9,7 @@ import { logger } from '@utils/logger';
 export class BusinessLogicErrorHandler implements ExpressErrorMiddlewareInterface {
   error(error: any, request: any, response: any, next: (err: any) => any) {
     if (error instanceof BusinessLogicError) {
-      logger.error(`[CODE${error.errorSpec.code}] ${error.name} ${error.message}`);
+      logger.error(`[CODE:${error.errorSpec.code}] ${error.name} ${error.message}`);
       console.log(error);
       response.status(error.httpCode).send(ErrorResponse.fromBusniessLogicError(error));
     } else {
