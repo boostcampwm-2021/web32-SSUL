@@ -10,10 +10,10 @@ function ProfileSideContents(): JSX.Element {
 
   return (
     <Container>
-      <ProfileImage src={profile.avatarUrl} alt="GithubProfifleImage" />
+      <ProfileImage data-test="profile-image" src={profile.avatarUrl} alt="GithubProfifleImage" />
       <BaseInfo>
-        <NickName>{profile.name}</NickName>
-        <GithubName>{profile.gitHubId}</GithubName>
+        <GithubName>{profile.name}</GithubName>
+        <GithubID data-test="github-id">{profile.gitHubId}</GithubID>
         <GithubURLContainer>
           <GithubIcon src={GithubLogo} alt="GithubIcon" />
           <GithubURL href={`https://github.com/${profile.gitHubId}`}>GitHub Storage</GithubURL>
@@ -48,14 +48,14 @@ const BaseInfo = styled.div`
   justify-content: center;
 `;
 
-const NickName = styled.p`
+const GithubName = styled.p`
   margin-bottom: 10px;
   text-align: center;
   font-size: 26px;
   font-weight: bold;
 `;
 
-const GithubName = styled.p`
+const GithubID = styled.p`
   margin-bottom: 10px;
   text-align: center;
   font-size: 20px;

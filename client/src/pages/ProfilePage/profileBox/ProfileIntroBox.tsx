@@ -40,7 +40,7 @@ function ProfileIntroBox(): JSX.Element {
 
   const getTextElement = (): JSX.Element => {
     return editState ? (
-      <ProfileEditText
+      <ProfileEditText data-test="edit-intro"
         onKeyDown={handleEditTextResize}
         onChange={handleEditTextChange}
         value={intro}
