@@ -1,11 +1,15 @@
-import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
-import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { Mentor } from '../models/Mentor';
-import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
+
+import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
+import { UserRepository } from '@domains/user/repository/UserRepository';
 import { MentorRepository } from '../repository/MentorRepository';
+import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
+
+import { MentorInfoDto } from '../dto/MentorInfoDto';
+
+import { Mentor } from '../models/Mentor';
+
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
 @Service()
