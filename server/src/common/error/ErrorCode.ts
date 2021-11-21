@@ -13,4 +13,5 @@ export const ErrorCode = Object.freeze({
   // group
   DUP_ENROLLMENT: new ErrorSpec('G000', '이미 그룹에 등록된 유저입니다.'),
   GROUP_NOT_FOUND: new ErrorSpec('G001', '잘못된 그룹ID 입니다.'),
+  GROUP_INVALID: new ErrorSpec('G002', '정상적이지 않은 그룹입니다.'),
 });
