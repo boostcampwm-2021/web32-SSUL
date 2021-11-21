@@ -26,8 +26,7 @@ export class MentoringService {
   ) {}
 
   public async createMentor(userId: number) {
-    const mentor: Mentor = this.mentorRepository.create({ userId });
-    return await this.mentorRepository.save(mentor);
+    return await this.mentorRepository.save({ userId });
   }
 
   public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
