@@ -23,15 +23,21 @@ export const fetchBaseUserData = async (
   handler: DispatchHandler,
   gitHubId: string,
 ): Promise<void> => {
-  const { feverStack, shareStack, id, name, avatarUrl } = await userHttpClient.getProfile(gitHubId);
-  handler({
-    userId: id,
-    feverStack,
-    shareStack,
-    gitHubId,
-    name,
-    avatarUrl,
-  });
+  try {
+    const { feverStack, shareStack, id, name, avatarUrl } = await userHttpClient.getProfile(
+      gitHubId,
+    );
+    handler({
+      userId: id,
+      feverStack,
+      shareStack,
+      gitHubId,
+      name,
+      avatarUrl,
+    });
+  } catch (e) {
+    location.href = '/';
+  }
 };
 
 export const fetchProfileIntro = async (id: number, handler: DispatchHandler): Promise<void> => {

@@ -33,19 +33,15 @@ function ProfilePage(): JSX.Element {
 
   useEffect(() => {
     const fetchAllData = async (userId: number) => {
-      try {
-        await Promise.all([
-          fetchMentorId(userId, handler),
-          fetchMentoringStack(userId, handler),
-          fetchProfileIntro(userId, handler),
-          fetchProfileTechStack(userId, handler),
-          fetchGroupActivityTechStack(userId, handler),
-        ]);
-        setFetchState(true);
-        dispatch(setLoadingState(false));
-      } catch (e) {
-        // location.href = '/';
-      }
+      await Promise.all([
+        fetchMentorId(userId, handler),
+        fetchMentoringStack(userId, handler),
+        fetchProfileIntro(userId, handler),
+        fetchProfileTechStack(userId, handler),
+        fetchGroupActivityTechStack(userId, handler),
+      ]);
+      setFetchState(true);
+      dispatch(setLoadingState(false));
     };
 
     if (profile.gitHubId === id) fetchAllData(profile.userId);
@@ -54,7 +50,6 @@ function ProfilePage(): JSX.Element {
   useEffect(() => {
     dispatch(setLoadingState(true));
     setFetchState(false);
-    dispatch(clearProfileData());
     fetchBaseUserData(handler, id);
 
     return () => {
