@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { VerticalLayout } from '@styles';
@@ -9,20 +10,27 @@ import { useAppSelector, useAppDispatch } from '@hooks';
 import { selectGroupModalState } from '@store/util/Slice';
 import { setGroupDetail } from '@store/group/detailSlice';
 import { groupHttpClient } from '@api';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 interface Param {
   id: string;
 }
 
 function GroupsPage(): JSX.Element {
+  const history = useHistory();
   const { id } = useParams<Param>();
   const dispatch = useAppDispatch();
   const modalType = useAppSelector(selectGroupModalState);
 
   const fetchGroupDetail = async () => {
-    const groupDetailData = await groupHttpClient.getGroupDetail(Number(id));
-    dispatch(setGroupDetail(groupDetailData));
+    try {
+      const groupDetailData = await groupHttpClient.getGroupDetail(Number(id));
+      dispatch(setGroupDetail(groupDetailData));
+    } catch (e: any) {
+      console.log(e.description);
+      // TODO: 404 Page Redirect
+      history.push('/');
+    }
   };
 
   useEffect(() => {

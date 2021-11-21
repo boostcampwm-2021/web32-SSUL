@@ -11,6 +11,7 @@ import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
+import { GroupInvalidError } from '../error/GroupInvalidError';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
@@ -65,6 +66,7 @@ export class GroupService {
     const groupEnrollments = groupDetails?.groupEnrollments.map((enrollment) =>
       destructObject(enrollment),
     ) as GroupUserDto[];
+    if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
     const grupDetailData = { ...groupDetails, groupEnrollments } as GroupDetailDto;
     return grupDetailData;
   }

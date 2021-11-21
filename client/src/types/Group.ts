@@ -30,6 +30,7 @@ export interface GroupDetail {
   id: number;
   mentorId?: number;
   ownerId: number;
+  categoryId: number;
   name: string;
   maxUserCnt: number;
   curUserCnt: number;
