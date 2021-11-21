@@ -43,7 +43,7 @@ export class GroupDetailDto {
   @IsEnum(GroupState)
   status: string;
   @IsArray()
-  usingTechStacks: GroupUsingTechStackDto[];
+  techStacks: GroupUsingTechStackDto[];
   @IsArray()
   groupEnrollments: GroupUserDto[];
 }
