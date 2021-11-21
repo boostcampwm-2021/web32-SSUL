@@ -13,6 +13,7 @@ const initialState = {
     id: 0,
     mentorId: 0,
     ownerId: 0,
+    categoryId: 0,
     name: '',
     maxUserCnt: 0,
     curUserCnt: 0,
@@ -21,8 +22,8 @@ const initialState = {
     endAt: null,
     status: '',
   },
-  usingTechStack: [{ techStackId: 0, name: '' }],
-  groupEnrollment: [{ userId: 0, githubId: '', name: '', avatarUrl: '', type: '' }],
+  techStacks: [{ techStackId: 0, name: '' }],
+  groupEnrollments: [{ userId: 0, githubId: '', name: '', avatarUrl: '', type: '' }],
 };
 
 export const detailSlice = createSlice({
@@ -30,11 +31,11 @@ export const detailSlice = createSlice({
   initialState,
   reducers: {
     setGroupDetail(state, { payload }) {
-      const { usingTechStacks: usingTechStack, groupEnrollments: groupEnrollment } = payload;
-      delete payload['usingTechStacks'];
+      const { techStacks, groupEnrollments } = payload;
+      delete payload['techStacks'];
       delete payload['groupEnrollments'];
-      const detail = payload;
-      return { ...state, detail, usingTechStack, groupEnrollment };
+      const detail = { ...payload };
+      return { ...state, detail, techStacks, groupEnrollments };
     },
   },
 });
@@ -43,6 +44,6 @@ export const { setGroupDetail } = detailSlice.actions;
 export default detailSlice.reducer;
 export const selectGroupDetail = (state: RootState): GroupDetail => state.groupDetail.detail;
 export const selectGroupTechStack = (state: RootState): GroupUsingTechStack[] =>
-  state.groupDetail.usingTechStack;
+  state.groupDetail.techStacks;
 export const selectGroupEnrollment = (state: RootState): GroupEnrollment[] =>
-  state.groupDetail.groupEnrollment;
+  state.groupDetail.groupEnrollments;
