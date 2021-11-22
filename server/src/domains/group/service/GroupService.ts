@@ -186,7 +186,9 @@ export class GroupService {
       where: { groupId, userId },
       select: ['type'],
     });
-    if (!enrollment) throw new GroupNotInvolve();
+    if (!enrollment) {
+      await this.checkApplyGroup(groupId, userId);
+    }
     return enrollment;
   }
 }
