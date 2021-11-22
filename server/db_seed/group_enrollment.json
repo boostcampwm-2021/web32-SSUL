@@ -22,5 +22,17 @@
     "userId": 1,
     "groupId": 1,
     "type": "MENTOR"
+  },
+  {
+    "id": 5,
+    "userId": 4,
+    "groupId": 2,
+    "type": "OWNER"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "groupId": 2,
+    "type": "MENTEE"
   }
 ]
