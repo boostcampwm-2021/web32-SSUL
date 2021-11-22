@@ -19,7 +19,7 @@ import { Inject, Service } from 'typedi';
 import { GroupService } from '../service/GroupService';
 import { PostService } from '../service/PostService';
 
-import { GroupDetailDto, GroupParam, PostParam } from '../dto/groupDto';
+import { GroupDetailDto, GroupParam, GroupPostParam, PostParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
@@ -133,9 +133,16 @@ export class GroupController {
   @Delete('/post')
   @UseBefore(isLoggedIn)
   @OnUndefined(200)
-  public async deletePost(@Session() session: any, @QueryParams() { gid, pid }: PostParam) {
+  public async deletePost(@Session() session: any, @QueryParams() { gid, pid }: GroupPostParam) {
     const { id: userId } = session.user;
     await this.groupService.checkGroupBelong(userId, gid);
     await this.postService.deletePost(userId, pid);
+  }
+
+  @OpenAPI({ summary: '그룹 게시글 조회수를 업데이트하는 API' })
+  @Patch('/post/hit/:pid')
+  @OnUndefined(200)
+  public async increasePostHit(@Params() { pid }: PostParam) {
+    await this.postService.increaseHit(pid);
   }
 }

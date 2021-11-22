@@ -50,4 +50,9 @@ export class PostService {
     const post = await this.postRepository.findOne({ where: { id: postId, userId } });
     return post !== undefined;
   }
+
+  public async increaseHit(postId: number): Promise<void> {
+    const post = await this.postRepository.findOneOrFail({ where: { id: postId } });
+    this.postRepository.update({ id: postId }, { hit: post.hit + 1 });
+  }
 }

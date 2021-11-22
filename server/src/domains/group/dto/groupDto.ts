@@ -61,9 +61,14 @@ export class GroupParam {
   gid: number;
 }
 
-export class PostParam {
+export class GroupPostParam {
   @IsNumber({ allowNaN: false })
   gid: number;
+  @IsNumber({ allowNaN: false })
+  pid: number;
+}
+
+export class PostParam {
   @IsNumber({ allowNaN: false })
   pid: number;
 }
