@@ -90,3 +90,10 @@ export interface GroupDetailData {
   usingTechStacks: GroupUsingTechStack[];
   groupEnrollments: GroupEnrollment[];
 }
+
+export interface GroupApplyData {
+  groupId: number;
+  userId?: number;
+}
+
+export type RequestBody = ExampleInterface | GroupCreateInterface | null;
