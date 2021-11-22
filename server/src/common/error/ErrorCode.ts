@@ -3,6 +3,7 @@ import { ErrorSpec } from './ErrorSpec';
 export const ErrorCode = Object.freeze({
   // basic
   BAD_REQUEST: new ErrorSpec('B100', '사용자 입력 에러'),
+  ENTITY_NOT_FOUND: new ErrorSpec('B101', ''),
   // auth
   NOT_LOGGED_IN: new ErrorSpec('A000', '로그인이 필요합니다.'),
   NOT_AUTHORIZED: new ErrorSpec('A001', '잘못된 권한입니다.'),
