@@ -20,22 +20,17 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     startAt,
     endAt,
     category,
-    ownerFeverStack,
+    ownerInfo,
     techStacks,
-    ownerName,
-    ownerAvatarUrl,
-    ownerGithubId,
   } = groupContents;
   const headerProps = { name, curUserCnt, maxUserCnt };
   const statusProps = {
     id,
-    ownerFeverStack,
     intro,
     startAt,
     endAt,
     techStacks,
-    ownerName,
-    ownerAvatarUrl,
+    ownerInfo,
   };
 
   const contents = {
@@ -47,10 +42,8 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     startAt,
     endAt,
     category,
-    techStackList,
-    ownerName,
-    ownerAvatarUrl,
-    ownerGithubId,
+    ownerInfo,
+    techStacks,
   };
 
   return (

@@ -18,10 +18,8 @@ function GroupModal({ contents }: Props): JSX.Element {
     curUserCnt,
     maxUserCnt,
     category,
-    techStackList,
-    ownerName,
-    ownerAvatarUrl,
-    ownerGithubId,
+    ownerInfo,
+    techStacks,
     intro,
     endAt,
     startAt,
@@ -33,10 +31,8 @@ function GroupModal({ contents }: Props): JSX.Element {
       <GroupDetailHeader {...{ name, curUserCnt, maxUserCnt }} />
       <GroupDetailStatus
         {...{
-          techStackList,
-          ownerName,
-          ownerAvatarUrl,
-          ownerGithubId,
+          techStacks,
+          ownerInfo,
           intro,
           endAt,
           startAt,

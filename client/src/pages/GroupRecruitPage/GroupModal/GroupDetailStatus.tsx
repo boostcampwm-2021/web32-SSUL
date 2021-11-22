@@ -2,37 +2,28 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { calculateStudyTime, formatDateToString } from '@utils/Date';
+import { OwnerInfo } from '@types';
 
 interface Props {
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
-  techStackList: string[];
-  ownerName: string;
-  ownerAvatarUrl: string;
-  ownerGithubId: string;
+  techStacks: string[];
+  ownerInfo: OwnerInfo;
 }
 
-function GroupDetailStatus({
-  techStackList,
-  ownerName,
-  ownerAvatarUrl,
-  ownerGithubId,
-  intro,
-  startAt,
-  endAt,
-}: Props): JSX.Element {
-  const renderTechStackList = techStackList.map((techStack, idx) => {
+function GroupDetailStatus({ techStacks, ownerInfo, intro, startAt, endAt }: Props): JSX.Element {
+  const renderTechStackList = techStacks.map((techStack, idx) => {
     return <TechListItem key={idx}>{techStack} </TechListItem>;
   });
   return (
     <Container>
       <StatusHeader>
         <GroupOwnerProfile>
-          <ProfileLink to={{ pathname: `/profile/${ownerGithubId}` }}>
-            <ProfileImage src={ownerAvatarUrl} alt="깃허브 이미지"></ProfileImage>
+          <ProfileLink to={{ pathname: `/profile/${ownerInfo.githubId}` }}>
+            <ProfileImage src={ownerInfo.avatarUrl} alt="깃허브 이미지"></ProfileImage>
           </ProfileLink>
-          <ProfileName>{ownerName}</ProfileName>
+          <ProfileName>{ownerInfo.name}</ProfileName>
         </GroupOwnerProfile>
         <TechList>{renderTechStackList}</TechList>
       </StatusHeader>

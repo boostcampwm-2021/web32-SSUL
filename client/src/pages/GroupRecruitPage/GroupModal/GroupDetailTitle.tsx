@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { CategoryData } from '@types';
 
 interface Props {
-  category: string | null;
+  category: CategoryData;
 }
 
 function GroupDetailTitle({ category }: Props): JSX.Element {
   return (
     <Container>
       <h2>그룹 소개</h2>
-      <CategoryName>{category}</CategoryName>
+      <CategoryName>{category.name}</CategoryName>
     </Container>
   );
 }
