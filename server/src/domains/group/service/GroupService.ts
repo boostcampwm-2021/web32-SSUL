@@ -76,7 +76,6 @@ export class GroupService {
     return Promise.all<any>(
       groups.map(async (group: Group) => {
         const groupsTechStacks = group.techStacks;
-        const { githubId, name, feverStack, avatarUrl } = group.ownerInfo;
         const isIncludeStackList = group.techStacks.some((techStack) =>
           filterdTechStack.includes(techStack.name),
         );
@@ -88,10 +87,6 @@ export class GroupService {
           return {
             ...group,
             techStacks: newTechStackNames,
-            ownerGithubId: githubId,
-            ownerName: name,
-            ownerFeverStack: feverStack,
-            ownerAvatarUrl: avatarUrl,
           };
         }
       }),
