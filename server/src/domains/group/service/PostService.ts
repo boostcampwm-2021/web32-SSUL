@@ -4,6 +4,8 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { PostRepository } from '../repository/PostRepository';
 import { Post } from '../models/Post';
 import { PostUpdateDto } from '../dto/PostDto';
+import { UserIsNotWriterError } from '../error/UserIsNotWriterError';
+import { GroupPostNotFoundError } from '../error/GroupPostNotFoundError';
 
 @Service()
 export class PostService {
@@ -25,10 +27,10 @@ export class PostService {
   public async updatePost(userId: number, post: PostUpdateDto): Promise<void> {
     const { id: postId, groupId } = post;
     const postData = await this.postRepository.findOne({ where: { id: postId, groupId } });
-    if (!postData) console.log('throw NO EXIST POST');
+    if (!postData) throw new GroupPostNotFoundError();
 
     const isWriter = await this.isWriter(postId, userId);
-    if (!isWriter) console.log('throw NO WRITER');
+    if (!isWriter) throw new UserIsNotWriterError();
 
     const { title, content, type } = post;
     await this.postRepository.update({ id: postId }, { title, content, type });
