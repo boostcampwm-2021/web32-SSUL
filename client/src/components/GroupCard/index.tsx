@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import GroupCardHeader from './GroupCardHeader';
 import GroupCardStatus from './GroupCardStatus';
 import GroupApplyButton from './GroupApplyButton';
-import { Group, GroupDetail } from '@types';
+import { Group } from '@types';
 import { calculateRemainTimeFromNow } from '@utils/Date';
 
 interface CardProps {
@@ -19,10 +19,12 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     intro,
     startAt,
     endAt,
+    category,
     ownerFeverStack,
     techStacks,
     ownerName,
     ownerAvatarUrl,
+    ownerGithubId,
   } = groupContents;
   const headerProps = { name, curUserCnt, maxUserCnt };
   const statusProps = {
@@ -36,23 +38,26 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     ownerAvatarUrl,
   };
 
-  const groupCardDetail: GroupDetail = {
+  const contents = {
+    id,
     name,
     maxUserCnt,
     curUserCnt,
     intro,
     startAt,
     endAt,
+    category,
     techStackList,
     ownerName,
     ownerAvatarUrl,
+    ownerGithubId,
   };
 
   return (
     <Card>
       <GroupCardHeader headerProps={headerProps} />
       <GroupCardStatus statusProps={statusProps} />
-      <GroupApplyButton contents={groupCardDetail} dueDate={calculateRemainTimeFromNow(startAt)} />
+      <GroupApplyButton contents={contents} dueDate={calculateRemainTimeFromNow(startAt)} />
     </Card>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
-import { changeGroupModalState } from '@store/slices/utilSlice';
-import { setGroupDetail } from '@store/slices/groupCardDetailSlice';
-import { GroupDetail } from '@types';
+import { changeGroupModalState } from '@store/util/Slice';
+import { setGroupDetail } from '@store/group/cardDetailSlice';
+import { GroupCardDetail } from '@types';
 
 interface Props {
-  contents: GroupDetail;
+  contents: GroupCardDetail;
   dueDate: number;
 }
 

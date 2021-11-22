@@ -1,21 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { GroupDetail } from '@types';
+import { GroupCardDetail } from '@types';
 import GroupDetailHeader from './GroupDetailHeader';
 import GroupDetailStatus from './GroupDetailStatus';
+import GroupDetailTitle from './GroupDetailTitle';
+import GroupDetailFooter from './GroupDetailFooter';
+import { calculateRemainTimeFromNow } from '@utils/Date';
 
 interface Props {
-  contents: GroupDetail;
+  contents: GroupCardDetail;
 }
 
 function GroupModal({ contents }: Props): JSX.Element {
   const {
+    id,
     name,
     curUserCnt,
     maxUserCnt,
+    category,
     techStackList,
     ownerName,
     ownerAvatarUrl,
+    ownerGithubId,
     intro,
     endAt,
     startAt,
@@ -23,9 +29,20 @@ function GroupModal({ contents }: Props): JSX.Element {
 
   return (
     <Container>
-      <h3>그룹 소개</h3>
+      <GroupDetailTitle {...{ category }} />
       <GroupDetailHeader {...{ name, curUserCnt, maxUserCnt }} />
-      <GroupDetailStatus {...{ techStackList, ownerName, ownerAvatarUrl, intro, endAt, startAt }} />
+      <GroupDetailStatus
+        {...{
+          techStackList,
+          ownerName,
+          ownerAvatarUrl,
+          ownerGithubId,
+          intro,
+          endAt,
+          startAt,
+        }}
+      />
+      <GroupDetailFooter groupId={id} remainDate={calculateRemainTimeFromNow(startAt)} />
     </Container>
   );
 }
