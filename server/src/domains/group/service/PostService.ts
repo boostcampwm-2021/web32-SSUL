@@ -3,6 +3,7 @@ import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { PostRepository } from '../repository/PostRepository';
 import { Post } from '../models/Post';
+import { PostContentDto } from '../dto/PostDto';
 
 @Service()
 export class PostService {
@@ -13,7 +14,11 @@ export class PostService {
     private readonly postRepository: PostRepository,
   ) {}
 
-  public async getGroupPosts(groupId: number): Promise<Post[]> {
+  public async getPostsByGroupId(groupId: number): Promise<Post[]> {
     return await this.postRepository.find({ where: { groupId } });
+  }
+
+  public async createPost(post: Post): Promise<void> {
+    await this.postRepository.insert(post);
   }
 }

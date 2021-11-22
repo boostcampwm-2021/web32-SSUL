@@ -4,6 +4,7 @@ import {
   Get,
   OnUndefined,
   Param,
+  Params,
   Post,
   QueryParam,
   Session,
@@ -11,17 +12,18 @@ import {
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
+import { IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 
 import { GroupService } from '../service/GroupService';
 import { PostService } from '../service/PostService';
 
+import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
-import { GroupDetailDto } from '../dto/groupDto';
-import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
-import { PostDto } from '../dto/PostDto';
+import { PostContentDto, PostDto } from '../dto/PostDto';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -97,9 +99,20 @@ export class GroupController {
   @ResponseSchema(PostDto, { isArray: true })
   @Get('/post/:gid')
   @UseBefore(isLoggedIn)
-  public async getPostsByGroupId(@Session() session: any, @Param('gid') groupId: number) {
+  public async getPostsByGroupId(@Session() session: any, @Params() { gid }: GroupParam) {
     const { id: userid } = session.user;
-    await this.groupService.checkGroupBelong(userid, groupId);
-    return await this.postService.getPostsByGroupId(groupId);
+    await this.groupService.checkGroupBelong(userid, gid);
+    return await this.postService.getPostsByGroupId(gid);
+  }
+
+  @OpenAPI({ summary: '그룹 게시글을 생성하는 API' })
+  @Post('/post')
+  @UseBefore(isLoggedIn)
+  @OnUndefined(200)
+  public async createPost(@Session() session: any, @Body() postContent: PostContentDto) {
+    const { id: userId } = session.user;
+    const { groupId } = postContent;
+    await this.groupService.checkGroupBelong(userId, groupId);
+    await this.postService.createPost(postContent.toEntity(userId));
   }
 }
