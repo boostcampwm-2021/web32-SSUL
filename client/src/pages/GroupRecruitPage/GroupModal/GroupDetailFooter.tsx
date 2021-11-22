@@ -6,11 +6,12 @@ import { groupHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
+  notfication: string;
   groupId: number;
   remainDate: number | null;
 }
 
-function GroupDetailFooter({ groupId, remainDate }: Props): JSX.Element {
+function GroupDetailFooter({ notfication, groupId, remainDate }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const { id: userId } = useAppSelector(selectUser);
 
@@ -22,7 +23,8 @@ function GroupDetailFooter({ groupId, remainDate }: Props): JSX.Element {
   return (
     <Container>
       <RemainDays>D-{remainDate}</RemainDays>
-      {userId !== 0 && (
+      <Notification>{notfication}</Notification>
+      {userId !== 0 && !notfication && (
         <GroupApplyButton onClick={handleApplyButtonClick}>신청하기</GroupApplyButton>
       )}
     </Container>
@@ -49,6 +51,11 @@ const GroupApplyButton = styled.button`
 const RemainDays = styled.h3`
   margin: 10px 0;
   color: ${(props) => props.theme.Gray4};
+`;
+
+const Notification = styled.h4`
+  margin: 10px 0;
+  color: ${(props) => props.theme.Red};
 `;
 
 export default GroupDetailFooter;

@@ -26,6 +26,8 @@ class GroupHttpClient extends HttpClient {
 
   public postApplyGroup = <T>(applyInfo: GroupApplyData): Promise<T> =>
     this.httpClient.post('/apply', applyInfo);
+
+  public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();
