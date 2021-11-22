@@ -23,6 +23,6 @@
       "@error/*": ["common/error/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "test"],
   "exclude": ["node_modules"]
 }
