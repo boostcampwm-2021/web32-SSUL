@@ -9,15 +9,19 @@ import {
   Session,
   UseBefore,
 } from 'routing-controllers';
-import { Inject, Service } from 'typedi';
-import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { Inject, Service } from 'typedi';
+
+import { GroupService } from '../service/GroupService';
+import { PostService } from '../service/PostService';
+
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
+import { PostDto } from '../dto/PostDto';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -28,6 +32,8 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
+    @Inject()
+    private readonly postService: PostService,
   ) {}
 
   @Get('/')
@@ -85,5 +91,15 @@ export class GroupController {
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
     return await this.groupService.getGroupDetails(gid);
+  }
+
+  @OpenAPI({ summary: '그룹 전체 게시글을 조회하는 API' })
+  @ResponseSchema(PostDto, { isArray: true })
+  @Get('/post/:gid')
+  @UseBefore(isLoggedIn)
+  public async getPostsByGroupId(@Session() session: any, @Param('gid') groupId: number) {
+    const { id: userid } = session.user;
+    await this.groupService.checkGroupBelong(userid, groupId);
+    return await this.postService.getPostsByGroupId(groupId);
   }
 }
