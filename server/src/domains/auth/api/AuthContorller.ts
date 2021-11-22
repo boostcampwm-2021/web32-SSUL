@@ -6,6 +6,7 @@ import {
   OnUndefined,
   Post,
   UseBefore,
+  Body,
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
@@ -13,6 +14,8 @@ import { GroupService } from '@domains/group/service/GroupService';
 import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import config from '@config/index';
+import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 
 @OpenAPI({ tags: ['인증'] })
 @Service()
@@ -41,6 +44,16 @@ export class AuthController {
     const { githubId, role } = session.user;
     const userData = await this.authService.getUserProfile(githubId);
     return { ...userData, role } as UserDto;
+  }
+
+  @Post('/test-login')
+  @OnUndefined(200)
+  public async testLogin(@Session() session: any, @Body() loginDto: any) {
+    if (config.mode !== 'prod') {
+      session.user = loginDto;
+    } else {
+      throw new NotAuthorizedError();
+    }
   }
 
   @Post('/login/social')
