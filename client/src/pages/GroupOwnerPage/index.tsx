@@ -15,9 +15,8 @@ function GroupOwnerPage(): JSX.Element {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 40px auto;
-  width: 840px;
-
+  margin: 50px auto;
+  width: 1100px;
 `;
 
 export default GroupOwnerPage;

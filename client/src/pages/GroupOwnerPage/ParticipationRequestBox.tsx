@@ -54,7 +54,6 @@ function ParticipationRequestBox(): JSX.Element {
       createdAt: '2021-11-22',
       feverStack: 39.5,
     },
-    
   ]);
 
   const handleAcceptButtonClick = () => async () => {
@@ -86,7 +85,7 @@ function ParticipationRequestBox(): JSX.Element {
   };
   return (
     <Container>
-      <ModalTitle>그룹참가 요청 리스트</ModalTitle>
+      <Title>📃그룹참가 요청 리스트</Title>
       {requestList.length > 0 ? (
         <ScrollContainer>
           {requestList.map((data, idx) => makeRequestBox(data, idx))}
@@ -103,21 +102,22 @@ function ParticipationRequestBox(): JSX.Element {
 
 const Container = styled.div`
   position: relative;
-  width: 400px;
+  min-width: 470px;
+  height: 550px;
   border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 5px;
 `;
 
 const ScrollContainer = styled.div`
   overflow-y: scroll;
-  height: 400px;
+  height: 480px;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
-const ModalTitle = styled.p`
+const Title = styled.p`
   margin: 10px 0 20px 20px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
 `;
 
@@ -125,10 +125,10 @@ const BoxContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 380px;
+  width: 420px;
   height: 80px;
   border-radius: 5px;
-  margin: 0 0 20px 10px;
+  margin: 0 auto 30px auto;
   border: 1px ${(props) => props.theme.Gray5} solid;
 `;
 
@@ -145,7 +145,7 @@ const ProfileInfo = styled.div`
   flex-direction: column;
 `;
 const ProfileText = styled.p`
-  width: 150px;
+  width: 200px;
   margin: 0 5px;
   font-weight: bold;
   text-align: center;
@@ -155,7 +155,7 @@ const ProfileText = styled.p`
 `;
 const ProfileFeverStack = styled.div`
   height: 20px;
-  width: 70px;
+  width: 80px;
   align-self: center;
   background-color: ${(props) => props.theme?.Fever};
   border-radius: 10px;
@@ -208,7 +208,7 @@ const Button = styled.button`
   width: 50px;
   height: 30px;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 3px 5px #8f8f8f, -5px -5px 10px #ffffff;
   &:active {
     box-shadow: inset 5px 5px 10px #8f8f8f, inset -5px -5px 10px #ffffff;
