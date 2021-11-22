@@ -1,3 +1,5 @@
+import { CategoryData, OwnerInfo } from '@types';
+
 export enum GroupState {
   READY = 'READY',
   DOING = 'DOING',
@@ -16,12 +18,9 @@ export interface Group {
   endAt: Date | null;
   categoryId: number | null;
   status: GroupState;
-  category: string | null;
-  ownerName: string;
+  category: CategoryData;
+  ownerInfo: OwnerInfo;
   techStacks: string[];
-  ownerFeverStack: number;
-  ownerAvatarUrl: string;
-  ownerGithubId: string;
 }
 
 export interface GroupCardDetail {
@@ -32,11 +31,9 @@ export interface GroupCardDetail {
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
-  category: string | null;
-  techStackList: string[];
-  ownerName: string;
-  ownerAvatarUrl: string;
-  ownerGithubId: string;
+  techStacks: string[];
+  category: CategoryData;
+  ownerInfo: OwnerInfo;
 }
 
 export interface GroupDetail {

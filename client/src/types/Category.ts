@@ -3,3 +3,7 @@ export interface Category {
   name: string;
   imageUrl: string;
 }
+
+export interface CategoryName {
+  name: string;
+}
