@@ -2,12 +2,12 @@
   {
     "id": 1,
     "mentorId": 1,
-    "ownerId": 4,
-    "name": "Tapada das Mercês",
+    "ownerId": 2,
+    "name": "프로그래밍 고수가 되는 길",
     "maxUserCnt": 8,
-    "curUserCnt": 3,
-    "intro": "synthesize virtual bandwidth",
-    "startAt": "2022-08-17 01:06:55",
+    "curUserCnt": 1,
+    "intro": "프로그래밍의 고수가 되고싶으신가요?\n 여기로 모시겠습니다.",
+    "startAt": "2021-12-17 01:06:55",
     "endAt": "2022-09-03 06:44:08",
     "categoryId": 1,
     "status": "READY"
