@@ -25,8 +25,8 @@ export class PostService {
   }
 
   public async updatePost(userId: number, post: PostUpdateDto): Promise<void> {
-    const { id: postId, groupId } = post;
-    const postData = await this.postRepository.findOne({ where: { id: postId, groupId } });
+    const { id: postId } = post;
+    const postData = await this.postRepository.findOne({ where: { id: postId } });
     if (!postData) throw new GroupPostNotFoundError();
 
     const isWriter = await this.isWriter(postId, userId);
@@ -36,8 +36,18 @@ export class PostService {
     await this.postRepository.update({ id: postId }, { title, content, type });
   }
 
+  public async deletePost(userId: number, postId: number): Promise<void> {
+    const postData = await this.postRepository.findOne({ where: { id: postId } });
+    if (!postData) throw new GroupPostNotFoundError();
+
+    const isWriter = await this.isWriter(postId, userId);
+    if (!isWriter) throw new UserIsNotWriterError();
+
+    await this.postRepository.delete({ id: postId });
+  }
+
   public async isWriter(postId: number, userId: number): Promise<boolean> {
-    const post = await this.postRepository.findOne({ where: { userId } });
-    return !post && post!.id === postId;
+    const post = await this.postRepository.findOne({ where: { id: postId, userId } });
+    return post !== undefined;
   }
 }

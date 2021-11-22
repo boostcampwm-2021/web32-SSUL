@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   OnUndefined,
   Param,
@@ -8,6 +9,7 @@ import {
   Patch,
   Post,
   QueryParam,
+  QueryParams,
   Session,
   UseBefore,
 } from 'routing-controllers';
@@ -17,7 +19,7 @@ import { Inject, Service } from 'typedi';
 import { GroupService } from '../service/GroupService';
 import { PostService } from '../service/PostService';
 
-import { GroupDetailDto, GroupParam } from '../dto/groupDto';
+import { GroupDetailDto, GroupParam, PostParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
@@ -125,5 +127,15 @@ export class GroupController {
     const { groupId } = postContent;
     await this.groupService.checkGroupBelong(userId, groupId);
     await this.postService.updatePost(userId, postContent);
+  }
+
+  @OpenAPI({ summary: '그룹 게시글을 삭제하는 API' })
+  @Delete('/post')
+  @UseBefore(isLoggedIn)
+  @OnUndefined(200)
+  public async deletePost(@Session() session: any, @QueryParams() { gid, pid }: PostParam) {
+    const { id: userId } = session.user;
+    await this.groupService.checkGroupBelong(userId, gid);
+    await this.postService.deletePost(userId, pid);
   }
 }
