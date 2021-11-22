@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 import { useAppSelector } from '@hooks';
 
+const DEFAULT_INDEX = 30;
 function FeverSharingBar(): JSX.Element {
   const { feverStack, shareStack } = useAppSelector(selectUser);
-
+  const feverIndex = feverStack !== undefined ? feverStack + DEFAULT_INDEX : DEFAULT_INDEX;
+  const shareIndex = shareStack !== undefined ? shareStack + DEFAULT_INDEX : DEFAULT_INDEX;
   return (
     <Container>
       <FeverNumber>{feverStack}</FeverNumber>
-      <FeverIndex style={{ width: `${feverStack}px` }} />
-      <SharingIndex style={{ width: `${shareStack}px` }} />
+      <FeverIndex style={{ width: `${feverIndex}px` }} />
+      <SharingIndex style={{ width: `${shareIndex}px` }} />
       <ShareNumber>{shareStack}</ShareNumber>
     </Container>
   );

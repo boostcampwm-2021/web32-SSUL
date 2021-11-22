@@ -1,40 +1,80 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileSideContents from './ProfileSideContents';
 import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
-import { BoxModal } from '@components';
-import EditTechStack from './modal/EditTechStack';
+import ProfilePageModal from './modal';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { setLoadingState } from '@store/util/Slice';
+import { clearProfileData, selectProfileData, setProfileData } from '@store/user/profileSlice';
+import {
+  fetchGroupActivityTechStack,
+  fetchMentorId,
+  fetchMentoringStack,
+  fetchProfileIntro,
+  fetchProfileTechStack,
+  fetchBaseUserData,
+  ProfileState,
+} from './FetchProfileData';
+import { useParams } from 'react-router-dom';
 
-const MODAL_STYLE = {
-  width: '700px',
-  height: '400px',
-  padding: '50px 50px 50px 50px',
+export interface Param {
+  id: string;
 }
 
 function ProfilePage(): JSX.Element {
-  const [isModal, setIsModal] = useState<boolean>(false);
+  const { id } = useParams<Param>();
+  const [modalType, setModalType] = useState<string>('NONE');
+  const [fetchState, setFetchState] = useState<boolean>(false);
+  const profile = useAppSelector(selectProfileData);
+  const showModal = (type: string) => () => setModalType(type);
+  const dispatch = useAppDispatch();
+  const handler = (newState: ProfileState) => dispatch(setProfileData(newState));
 
-  const handleModalBackgroundClick = () => setIsModal(false);
-  const handleEditButtonClick = () => setIsModal(true);
+  useEffect(() => {
+    const fetchAllData = async (userId: number) => {
+      await Promise.all([
+        fetchMentorId(userId, handler),
+        fetchMentoringStack(userId, handler),
+        fetchProfileIntro(userId, handler),
+        fetchProfileTechStack(userId, handler),
+        fetchGroupActivityTechStack(userId, handler),
+      ]);
+      setFetchState(true);
+      dispatch(setLoadingState(false));
+    };
+
+    if (profile.gitHubId === id) fetchAllData(profile.userId);
+  }, [profile.gitHubId]);
+
+  useEffect(() => {
+    dispatch(setLoadingState(true));
+    setFetchState(false);
+    fetchBaseUserData(handler, id);
+
+    return () => {
+      dispatch(clearProfileData());
+    };
+  }, [id]);
+
   return (
     <Container>
-      <ProfileSideContents />
-      <MainContents>
-        <ProfileIntroBox />
-        <ProfileTechStackBox handleEditButtonClick={handleEditButtonClick}/>
-        <ProfileActivityListBox />
-        <Divider />
-        <ProfileMentorStackBox />
-      </MainContents>
-
-      {isModal && (
-        <BoxModal
-          style={MODAL_STYLE}
-          element={<EditTechStack currentUsingTechStacks={[]} onCancel={handleModalBackgroundClick} />}
-          onCancel={handleModalBackgroundClick}
-        />
-      )}
+      {fetchState ? (
+        <>
+          <ProfileSideContents />
+          <MainContents>
+            <ProfileIntroBox />
+            <ProfileTechStackBox showModal={showModal('EDIT_TECH_STACK')} />
+            <ProfileActivityListBox />
+            <Divider />
+            <ProfileMentorStackBox
+              showRequestModal={showModal('REQUEST_MENTORING')}
+              showCreateModal={showModal('CREATE_MENTOR_STACK')}
+            />
+          </MainContents>
+          <ProfilePageModal type={modalType} onCancel={showModal('NONE')} />
+        </>
+      ) : null}
     </Container>
   );
 }

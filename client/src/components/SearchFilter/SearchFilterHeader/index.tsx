@@ -3,10 +3,7 @@ import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
 import SearchBar from '../SearchBar';
 import { useAppSelector } from '@hooks';
-import {
-  returnGroupRecruitFilterState,
-  changeGroupNameInput,
-} from '@store/slices/groupRecruitFilterSlice';
+import { returnGroupRecruitFilterState, changeGroupNameInput } from '@store/group/filterSlice';
 
 function SearchFilterHeader(): JSX.Element {
   const groupNameInput = useAppSelector(returnGroupRecruitFilterState).groupNameInput;
@@ -25,13 +22,12 @@ function SearchFilterHeader(): JSX.Element {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 80vw;
-  min-width: 1000px;
+  width: 1000px;
   margin: 20px;
   padding: 10px;
 
   background: ${(props) => props.theme.White};
-  box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
 
   border-radius: 10px;
 `;

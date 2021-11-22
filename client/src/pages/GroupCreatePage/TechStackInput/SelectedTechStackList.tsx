@@ -1,26 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TechStack } from '@types';
 
 interface Props {
-  usingTechStacks: string[];
-  setUsingTechStacks: (newTechStacks: string[]) => void;
+  usingTechStacks: TechStack[];
+  setUsingTechStacks: (newTechStacks: TechStack[]) => void;
 }
 
 function SelectedTechStackList({ usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
-
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetTechStack = e.currentTarget as HTMLButtonElement;
     const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
-    const newSelectedTechStack = usingTechStacks.filter((techStackName) => {
-      return techStackName !== nowTechStack;
+    const newSelectedTechStack = usingTechStacks.filter((techstack) => {
+      return techstack.name !== nowTechStack;
     });
     setUsingTechStacks(newSelectedTechStack);
   };
-  const selectedTechListElements = usingTechStacks.map((techStackName, idx) => {
+  const selectedTechListElements = usingTechStacks.map((techStack) => {
     return (
-      <SelectItem key={idx}>
-        <h4>{techStackName}</h4>
-        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
+      <SelectItem key={techStack.id} id={String(techStack.id)}>
+        <ItemText>{techStack.name}</ItemText>
+        <EraseButton data-test="erase-button" onClick={handleEraseButtonClick}>
+          X
+        </EraseButton>
       </SelectItem>
     );
   });
@@ -43,11 +45,15 @@ const SelectItem = styled.div`
   border-radius: 10px;
 `;
 
+const ItemText = styled.p`
+  margin: 0;
+  color: ${(props) => props.theme.White};
+  font-weight: bold;
+`;
 const EraseButton = styled.button`
   margin-left: 10px;
-
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px 30px 30px 30px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 `;
 

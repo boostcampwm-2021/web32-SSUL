@@ -7,6 +7,8 @@ pipeline {
         version = '0.1'
     }
     agent any
+    tools {nodejs "nodejs-16"}
+
     stages {
         stage("deploy for dev") {
             when {
@@ -19,7 +21,7 @@ pipeline {
                         sh 'docker build -t $serverImageName:$version ./server/'
                         sh 'docker tag $serverImageName:$version $repository/$serverImageName:$version'
                         echo 'Build FE image'
-                        sh 'docker build -t $frontImageName:$version --build-arg REACT_APP_GITHUB_CI=dfd2f662e9fd50622ed5 --build-arg REACT_APP_GITHUB_CALLBACK_PATH=http://49.50.164.25/auth/callback ./client/'
+                        sh 'docker build -t $frontImageName:$version --build-arg REACT_APP_GITHUB_CI=dfd2f662e9fd50622ed5 --build-arg REACT_APP_GITHUB_CALLBACK_PATH=http://www.gaeinsa.kro.kr/auth/callback ./client/'
                         sh 'docker tag $frontImageName:$version $repository/$frontImageName:$version'
                     }
                 }
@@ -59,7 +61,17 @@ pipeline {
                 branch "PR-*"
             }
             steps {
-                echo "just fine."
+                configFileProvider([
+                    configFile(fileId: 'dotenvtest', variable:'dotenvFile')
+                ]){
+                    sh '''
+                        cd server
+                        cp $dotenvFile .env.test
+                        npm install
+                        npm run test
+                    '''
+                }
+                
             }
         }
     }

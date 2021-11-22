@@ -8,6 +8,7 @@
 
 - [ ] Warning Message 발생 유/무
 - [ ] Coding Convention 준수 유/무
+- [ ] test 통과 여부
 
 ## 작업 요약
 > 작업 내역 요약

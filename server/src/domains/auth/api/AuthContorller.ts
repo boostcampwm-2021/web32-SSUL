@@ -3,14 +3,16 @@ import {
   Get,
   QueryParam,
   Session,
-  SessionParam,
   OnUndefined,
+  Post,
+  UseBefore,
 } from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
-import { GithubUserDto } from '../dto/AuthDto';
+import { GroupService } from '@domains/group/service/GroupService';
 import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({ tags: ['인증'] })
 @Service()
@@ -19,6 +21,8 @@ export class AuthController {
   constructor(
     @Inject()
     private readonly authService: AuthService,
+    @Inject()
+    private readonly groupService: GroupService,
   ) {}
 
   @Get('/silent-refresh')
@@ -32,29 +36,26 @@ export class AuthController {
     },
   })
   @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
-  async getAuthentification(
-    @SessionParam('githubId') githubId: string,
-    @SessionParam('role') role: string,
-  ) {
-    if (!githubId) return;
+  async getAuthentification(@Session() session: any) {
+    if (!session.user) return;
+    const { githubId, role } = session.user;
     const userData = await this.authService.getUserProfile(githubId);
-    return { ...userData, role: role } as UserDto;
+    return { ...userData, role } as UserDto;
   }
 
-  @Get('/token')
-  @OpenAPI({ summary: 'Github OAuth 토큰을 발급받는 API' })
-  @ResponseSchema(GithubUserDto, { description: '토큰 정상 발급' })
-  async getGithubAccessToken(
-    @Session() session: any,
-    @SessionParam('githubId') githubId: string,
-    @QueryParam('code') code: string,
-  ) {
+  @Post('/login/social')
+  @OpenAPI({ summary: 'Github OAuth 로그인 API' })
+  @ResponseSchema(UserDto)
+  async socialLogin(@Session() session: any, @QueryParam('code') code: string) {
     const accessToken = await this.authService.getGithubAccessToken(code);
     const githubUserData = await this.authService.getGithubUserData(accessToken);
     const userData = await this.authService.findOrInsertUser(githubUserData);
-    if (!githubId) {
-      session.githubId = githubUserData.githubId;
-      session.role = 'MENTEE';
+    if (!session.user) {
+      session.user = {
+        githubId: githubUserData.githubId,
+        role: 'MENTEE',
+        id: userData.id,
+      };
     }
 
     return userData;
@@ -72,5 +73,35 @@ export class AuthController {
   })
   async postLogout(@Session() session: any) {
     session.destroy();
+  }
+
+  @Get('/')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 인증 여부 조회 API',
+  })
+  async isUserAuth() {}
+
+  @Get('/group/belong')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 그룹 소속 여부 조회 API',
+  })
+  async isGroupBelong(@Session() session: any, @QueryParam('gid') gid: number) {
+    const { id: uid } = session.user;
+    await this.groupService.checkGroupBelong(uid, gid);
+  }
+
+  @Get('/group/owner')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 그룹장 여부 조회 API',
+  })
+  async isGroupOwner(@Session() session: any, @QueryParam('gid') gid: number) {
+    const { id: uid } = session.user;
+    await this.groupService.checkGroupBelong(uid, gid);
   }
 }

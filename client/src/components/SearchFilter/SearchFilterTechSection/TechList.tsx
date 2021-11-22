@@ -6,7 +6,7 @@ import {
   pushSelectedTechStack,
   returnGroupRecruitFilterState,
   createdFilterdQuery,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 import { TechStack } from '@types';
 
 const MAX_SELECTED_INDEX = 5;
@@ -42,9 +42,9 @@ function TechList({ listView }: Props): JSX.Element {
       );
     else {
       return (
-        <TechListItem key={category.id} onClick={handleTechStackClick}>
+        <NonSelectedTechListItem key={category.id} onClick={handleTechStackClick}>
           {category.name}
-        </TechListItem>
+        </NonSelectedTechListItem>
       );
     }
   });
@@ -53,14 +53,13 @@ function TechList({ listView }: Props): JSX.Element {
 }
 
 const Container = styled.div`
-  display: grid;
-  margin: 10px;
+  display: flex;
+  margin: auto 10px;
 
-  grid-template-columns: repeat(7, minmax(100px, 2fr));
-  grid-template-rows: repeat(auo-fit, minmax(100px, 2fr));
+  grid-template-rows: repeat(auto-fill);
 
   background: ${(props) => props.theme.White};
-  box-shadow: 0px 0px 30px -5px rgba(41, 36, 36, 0.25);
+
   border-radius: 10px;
 `;
 
@@ -81,32 +80,27 @@ const shake = keyframes`
 
 const TechListItem = styled.button`
   display: flex;
-  margin: 10px;
-  padding: 10px;
+  margin: 5px 5px;
+  padding: 0px 10px;
 
-  color: ${(props) => props.theme.Gray3};
-  background: ${(props) => props.theme.Gray5};
-  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
+  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+
   border-radius: 10px;
   border: none;
   cursor: pointer;
+`;
 
+const SelectedTechListItem = styled(TechListItem)`
+  color: ${(props) => props.theme.White};
+  background: ${(props) => props.theme.Primary};
+`;
+
+const NonSelectedTechListItem = styled(TechListItem)`
+  color: ${(props) => props.theme.Gray3};
+  background: ${(props) => props.theme.Gray6};
   &.shake {
     animation: ${shake} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   }
-`;
-
-const SelectedTechListItem = styled.button`
-  display: flex;
-  margin: 10px;
-  padding: 10px;
-
-  color: ${(props) => props.theme.White};
-  background: ${(props) => props.theme.Primary};
-  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
 `;
 
 export default TechList;

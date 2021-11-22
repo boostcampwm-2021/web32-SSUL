@@ -35,15 +35,19 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;
   height: 100vh;
+  overflow: auto;
   background: rgba(47, 47, 47, 0.65);
+  z-index: 9999;
 `;
 
 const Modal = styled.div`
+  position: fixed;
+  top: calc(50vh - ${(props) => props?.style?.height ?? '600px'} / 2);
   width: ${(props) => props?.style?.width ?? '480px'};
   height: ${(props) => props?.style?.height ?? '600px'};
   background: ${(props) => props?.style?.background ?? 'white'};

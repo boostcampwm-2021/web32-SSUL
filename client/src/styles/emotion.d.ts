@@ -10,7 +10,14 @@ declare module '@emotion/react' {
     Gray6: string;
     White: string;
     Black: string;
+    Fever: string;
     LightBlack: string;
+    Error: string,
+    PrimaryHover: string,
     Primary: string;
+    PrimaryLight: string;
+    PrimaryDark: string;
+    Green: string;
+    Red: string;
   }
 }

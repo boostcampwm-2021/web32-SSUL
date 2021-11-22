@@ -24,9 +24,18 @@ export class FilterdGroupDto {
   @IsString()
   status: string | null;
   @IsArray()
-  techStackList: string[];
-  @IsString()
-  ownerFeverStack: string | null;
+  techStacks: string[];
   @IsNumber()
   ownerName: number | null;
+  @IsString()
+  ownerFeverStack: string | null;
+  @IsString()
+  ownerAvatarUrl: string | null;
+}
+
+export class FilterdPageGroupDto {
+  @IsArray()
+  groups: FilterdGroupDto[];
+  @IsNumber()
+  totalPages: number;
 }

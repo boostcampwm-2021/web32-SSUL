@@ -19,8 +19,8 @@
       "@domains/*": ["domains/*"],
       "@common/*": ["common/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@error/*": ["common/error/*"]
     }
   },
   "include": ["src"],

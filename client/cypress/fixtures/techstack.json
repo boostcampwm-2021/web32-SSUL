@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "React"
+  },
+  {
+    "id": 2,
+    "name": "Express"
+  },
+  {
+    "id": 3,
+    "name": "node.js"
+  },
+  {
+    "id": 4,
+    "name": "Java"
+  },
+  {
+    "id": 5,
+    "name": "javascript"
+  },
+  {
+    "id": 6,
+    "name": "typescript"
+  },
+  {
+    "id": 7,
+    "name": "R"
+  },
+  {
+    "id": 8,
+    "name": "C++"
+  },
+  {
+    "id": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 12,
+    "name": "css"
+  }
+]

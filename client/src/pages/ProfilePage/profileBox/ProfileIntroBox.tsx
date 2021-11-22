@@ -1,41 +1,67 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectProfileData, setProfileData } from '@store/user/profileSlice';
+import { userHttpClient } from '@api';
+import { selectUser } from '@store/user/globalSlice';
+import { UpdateIntroData } from '@types';
 
 function ProfileIntroBox(): JSX.Element {
+  const { intro } = useAppSelector(selectProfileData);
+  const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfileData);
+  const dispatch = useAppDispatch();
+  const [prevIntro, setPrevIntro] = useState<string>('');
   const [editState, setEditState] = useState<boolean>(false);
-  const [text, setText] = useState<string>('');
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = async () => {
+    if (editState === true && prevIntro !== intro) {
+      const request = {
+        id: user.id,
+        intro: intro,
+      } as UpdateIntroData;
+      setPrevIntro(intro);
+      userHttpClient.patchIntro(request);
+    }
     setEditState(!editState);
   };
 
   const handleEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.currentTarget.value;
-    setText(newText);
+    dispatch(setProfileData({ intro: newText }));
   };
-  function handleEditTextResize(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+
+  const handleEditTextResize = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const textArea: HTMLTextAreaElement = e.currentTarget;
     textArea.style.height = '1px';
     textArea.style.height = 10 + textArea.scrollHeight + 'px';
-  }
+  };
 
   const getTextElement = (): JSX.Element => {
     return editState ? (
       <ProfileEditText
         onKeyDown={handleEditTextResize}
         onChange={handleEditTextChange}
-        value={text}
+        value={intro}
       ></ProfileEditText>
     ) : (
-      <ProfileText>{text}</ProfileText>
+      <ProfileText>{intro}</ProfileText>
     );
+  };
+
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>;
+    } else {
+      return <></>;
+    }
   };
 
   return (
     <>
       <ProfileContainer title="자기소개">
-        <EditButton onClick={handleEditButtonClick}>{editState ? '저장' : '편집'}</EditButton>
+        {getEditButtonElement()}
         {getTextElement()}
       </ProfileContainer>
     </>
@@ -64,6 +90,7 @@ const ProfileEditText = styled.textarea`
   }
 `;
 const EditButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
@@ -74,5 +101,8 @@ const EditButton = styled.button`
   border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
+  &:hover {
+    background-color: ${(props) => props.theme.PrimaryHover};
+  }
 `;
 export default ProfileIntroBox;

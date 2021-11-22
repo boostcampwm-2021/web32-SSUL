@@ -1,14 +1,18 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import util from './slices/utilSlice';
-import user from './slices/userSlice';
-import groupRecruit from './slices/groupRecruitFilterSlice';
-import createGroupData from './slices/groupCreateDataSlice';
+import util from './util/Slice';
+import user from './user/globalSlice';
+import groupRecruit from './group/filterSlice';
+import createGroupData from './group/makerSlice';
+import groupDetail from './group/detailSlice';
+import profileDataSlice from './user/profileSlice';
 
 const reducer = combineReducers({
   util,
   user,
   createGroupData,
   groupRecruit,
+  groupDetail,
+  profileDataSlice,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;

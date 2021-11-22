@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector } from '@hooks';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import RoleSwitch from './RoleSwitch';

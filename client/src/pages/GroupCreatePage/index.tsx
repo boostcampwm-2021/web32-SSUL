@@ -7,17 +7,13 @@ import DateInput from './DateInput';
 import GageBar from './GageBar';
 import CustomButton from './CustomButton';
 import styled from '@emotion/styled';
-import {
-  clearGroupData,
-  groupCreateDataState,
-  setGroupData,
-} from '@store/slices/groupCreateDataSlice';
+import { clearGroupData, groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { Category, TechStack } from '@types';
 import { categoryHttpClient } from '@api';
 import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { selectUser } from '@store/slices/userSlice';
+import { selectUser } from '@store/user/globalSlice';
 
 const MAX_CONTENT_INDEX = 4;
 enum PAGE_NUMBER {
@@ -37,8 +33,8 @@ function GroupCreatePage(): JSX.Element {
   const { id: ownerId } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
 
-  const setUsingTechStacks = (newTechStacks: string[]) =>
-    dispatch(setGroupData({ usingTechStacks: newTechStacks }));
+  const setUsingTechStacks = (newTechStacks: TechStack[]) =>
+    dispatch(setGroupData({ techStacks: newTechStacks }));
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
       case PAGE_NUMBER.CATEGORY:
@@ -53,7 +49,7 @@ function GroupCreatePage(): JSX.Element {
         return (
           <TechStackInput
             baseTechStackList={techStacks}
-            usingTechStacks={groupData.usingTechStacks}
+            usingTechStacks={groupData.techStacks}
             setUsingTechStacks={setUsingTechStacks}
           />
         );
@@ -65,13 +61,13 @@ function GroupCreatePage(): JSX.Element {
   const checkInput = () => {
     switch (contentsNumber) {
       case PAGE_NUMBER.CATEGORY:
-        return groupData.category !== '';
+        return groupData.categoryId !== 0;
       case PAGE_NUMBER.GROUP_INFO:
         return groupData.name !== '' && groupData.intro !== '';
       case PAGE_NUMBER.DATE:
         return groupData.startAt !== '' && groupData.endAt !== '';
       case PAGE_NUMBER.TECH_STACK:
-        return groupData.usingTechStacks.length > 0;
+        return groupData.techStacks.length > 0;
       default:
         return true;
     }
@@ -178,6 +174,6 @@ const Notification = styled.div`
   font-size: 13px;
   margin-left: 40px;
   margin-bottom: 40px;
-  color: #e50707;
+  color: ${(props) => props.theme.Error}; ;
 `;
 export default GroupCreatePage;

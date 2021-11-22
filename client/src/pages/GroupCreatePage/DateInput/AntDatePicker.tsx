@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { RangeValue } from 'rc-picker/lib/interface';
 const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
-import { groupCreateDataState, setGroupData } from '@store/slices/groupCreateDataSlice';
+import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 function AntDatePicker(): JSX.Element {

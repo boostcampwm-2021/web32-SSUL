@@ -7,7 +7,7 @@ import {
   returnGroupRecruitFilterState,
   checkCategory,
   createdFilterdQuery,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 import { useHistory } from 'react-router';
 
 interface CategorySate {
@@ -70,10 +70,11 @@ function CategoryList(): JSX.Element {
   return <Container>{categoryItems}</Container>;
 }
 
-const Container = styled.div`
+const Container = styled.h3`
   display: flex;
-  width: 80%;
+  width: 65%;
   align-items: center;
+  justify-content: space-evenly;
 `;
 
 const CategoryItem = styled.button`
@@ -81,7 +82,7 @@ const CategoryItem = styled.button`
   margin: 5px;
   padding: 10px;
 
-  box-shadow: 10px 10px 10px -5px rgba(41, 36, 36, 0.25);
+  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
   border-radius: 10px;
   outline: none;
   border: none;
@@ -89,8 +90,8 @@ const CategoryItem = styled.button`
 `;
 
 const CategoryItemNonSelect = styled(CategoryItem)`
-  color: ${(props) => props.theme.White};
-  background: ${(props) => props.theme.Gray5};
+  color: ${(props) => props.theme.Gray3};
+  background: ${(props) => props.theme.Gray6};
 `;
 
 const CategoryItemSelect = styled(CategoryItem)`

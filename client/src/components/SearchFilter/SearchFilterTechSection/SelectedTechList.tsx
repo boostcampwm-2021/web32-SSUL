@@ -5,7 +5,7 @@ import {
   createdFilterdQuery,
   popSelectedTechStack,
   returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+} from '@store/group/filterSlice';
 
 function SelectedTechList(): JSX.Element {
   const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
@@ -21,7 +21,7 @@ function SelectedTechList(): JSX.Element {
   const totalSelectedTechList = selectedTechStack.map((techStack, idx) => {
     return (
       <SelectItem key={idx}>
-        <h4>{techStack}</h4>
+        <TechStackName>{techStack}</TechStackName>
         <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
@@ -32,24 +32,30 @@ function SelectedTechList(): JSX.Element {
 
 const Container = styled.div`
   display: flex;
+  margin: 15px;
 `;
 
 const SelectItem = styled.div`
   display: flex;
-  margin: 10px;
-  padding: 8px;
-
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
+  box-shadow: 2px 2px 4px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
+`;
+
+const TechStackName = styled.span`
+  align-self: center;
 `;
 
 const EraseButton = styled.button`
   margin-left: 10px;
-
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px 30px 30px 30px;
+  background: ${(props) => props.theme.Primary};
+  border: 10px;
+  border: none;
+  outline: none;
   cursor: pointer;
 `;
 

@@ -1,20 +1,35 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import ProfileContainer from './ProfileBoxContainer';
+import { selectProfileData } from '@store/user/profileSlice';
+import { useAppSelector } from '@hooks';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
-  handleEditButtonClick: () => void;
+  showModal: () => void;
 }
 
-function ProfileTechStackBox({ handleEditButtonClick }: Props): JSX.Element {
-  const techStackList = ['c++', 'java', 'javascript'];
+function ProfileTechStackBox({ showModal }: Props): JSX.Element {
+  const { techStacks } = useAppSelector(selectProfileData);
+  const user = useSelector(selectUser);
+  const profile = useSelector(selectProfileData);
+
+  const getEditButtonElement = (): JSX.Element => {
+    if (user.id === profile.userId) {
+      return <EditButton onClick={showModal}>편집</EditButton>;
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <>
       <ProfileContainer title="기술스택">
-        <EditButton onClick={handleEditButtonClick}>편집</EditButton>
+        {getEditButtonElement()}
         <TechStackContainer>
-          {techStackList.map((techStackName, idx) => (
-            <TechStackItem key={idx}>{techStackName}</TechStackItem>
+          {techStacks.map((techStack) => (
+            <TechStackItem key={techStack.id}>{techStack.name}</TechStackItem>
           ))}
         </TechStackContainer>
       </ProfileContainer>
@@ -38,6 +53,7 @@ const TechStackItem = styled.div`
 `;
 
 const EditButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
@@ -48,6 +64,10 @@ const EditButton = styled.button`
   border-radius: 5px;
   background-color: ${(props) => props.theme.Primary};
   color: ${(props) => props.theme.White};
+
+  &:hover {
+    background-color: ${(props) => props.theme.PrimaryHover};
+  }
 `;
 
 export default ProfileTechStackBox;

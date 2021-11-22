@@ -1,42 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { GroupCard } from '@components';
-import { GroupResponse } from '@types';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import {
-  initFilterState,
-  returnGroupRecruitFilterState,
-} from '@store/slices/groupRecruitFilterSlice';
+import { GroupCard, Pagination } from '@components';
+import { Group, GroupResponse } from '@types';
+import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
+import { initFilterState, returnGroupRecruitFilterState } from '@store/group/filterSlice';
 import { groupHttpClient } from '@api';
-import { toggleLoadingState } from '@store/slices/utilSlice';
 
 function GroupCardList(): JSX.Element {
-  const { filterdQuery } = useAppSelector(returnGroupRecruitFilterState);
-  const [filterdGroupList, setFilterdGroupList] = useState<GroupResponse[]>([]);
+  const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
+  const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
+  const toggleLoader = useLoader();
 
   useEffect(() => {
     dispatch(initFilterState());
   }, []);
 
   useEffect(() => {
-    toggleLoadingState();
+    toggleLoader();
     const getGroupsList = async () => {
-      const allGroupList = await groupHttpClient.getFilterdGroupList(filterdQuery);
-      setFilterdGroupList(allGroupList);
-      toggleLoadingState();
+      const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
+      setFilterdGroupList(allGroupList.groups);
+      setTotalPages(allGroupList.totalPages);
+      toggleLoader();
     };
     getGroupsList();
   }, [filterdQuery]);
 
-  const renderGroupCards = filterdGroupList.map((groupData: GroupResponse) => {
+  const renderGroupCards = filterdGroupList.map((groupData: Group) => {
     return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
-  return <Container>{renderGroupCards}</Container>;
+  return (
+    <>
+      <CardList>{renderGroupCards}</CardList>
+      <Pagination totalPages={totalPages} curPage={selectedPage} />
+    </>
+  );
 }
 
-const Container = styled.div`
+const CardList = styled.div`
   display: grid;
   margin: 10px auto;
   min-width: 1000px;

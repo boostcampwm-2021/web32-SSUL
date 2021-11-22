@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { useAppDispatch, useLoader } from '@hooks';
 import { authHttpClient } from '@api';
-import { setUser } from '@store/slices/userSlice';
+import { setUser } from '@store/user/globalSlice';
 
 function Auth(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ function Auth(): JSX.Element {
     const code = query.code as string;
 
     try {
-      const data = await authHttpClient.getAccessToken(code);
+      const data = await authHttpClient.login(code);
       const { id, githubId: oAuthId, name, avatarUrl: image, feverStack, shareStack } = data;
       dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack }));
       toggleLoader();
