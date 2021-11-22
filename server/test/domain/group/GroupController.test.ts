@@ -1,13 +1,14 @@
 import express from 'express';
 import request from 'supertest';
+
 import appWrapper from '../../../src/app';
 import { getLoginCookie } from '../../util/cookieSession';
 
 describe('그룹 컨트롤러', () => {
   let app: express.Application;
+
   beforeAll(async () => {
     app = await appWrapper.getInstance();
-    console.log('app done');
   });
 
   describe('GET /my', () => {
@@ -21,7 +22,6 @@ describe('그룹 컨트롤러', () => {
         .set('Cookie', getLoginCookie(mockSession));
 
       //then
-      console.log(response.body);
       expect(response.statusCode).toBe(200);
       expect(response.body.length).toBeGreaterThanOrEqual(2);
     });
