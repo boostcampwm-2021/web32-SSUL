@@ -27,7 +27,7 @@ export class Post {
   createdAt: Date | null;
 
   @Column({ name: 'type', type: 'enum', enum: PostType })
-  type: PostType;
+  type: PostType | string;
 
   @Column('int', { name: 'hit' })
   hit: number;
