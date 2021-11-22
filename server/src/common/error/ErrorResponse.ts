@@ -2,6 +2,7 @@ import { BusinessLogicError } from './BusinessLogicError';
 import { ValidationError } from 'class-validator';
 import { ErrorSpec } from './ErrorSpec';
 import { ErrorCode } from './ErrorCode';
+import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
 
 type BadRequestError = {
   httpCode: number;
@@ -29,5 +30,11 @@ export class ErrorResponse {
     const { httpCode } = error;
     const errorSpec = ErrorCode.BAD_REQUEST;
     return new ErrorResponse(httpCode, errorSpec, error.errors);
+  }
+
+  static fromEntityNotFoundError(error: EntityNotFoundError): ErrorResponse {
+    const errorSpec = ErrorCode.ENTITY_NOT_FOUND;
+    errorSpec.description = error.message;
+    return new ErrorResponse(400, errorSpec);
   }
 }
