@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GroupDetail } from '@types';
+import { GroupCardDetail } from '@types';
 import { RootState } from '../index';
 
-const INTIIAL_STATE = {} as GroupDetail;
+const INTIIAL_STATE = {} as GroupCardDetail;
 
 export const groupCardDetailSlice = createSlice({
   name: 'groupCardDetail',
@@ -20,4 +20,4 @@ export const groupCardDetailSlice = createSlice({
 
 export const { setGroupDetail, clearGroupDetail } = groupCardDetailSlice.actions;
 export default groupCardDetailSlice.reducer;
-export const groupCardDetailState = (state: RootState): GroupDetail => state.groupCardDetail;
+export const groupCardDetailState = (state: RootState): GroupCardDetail => state.groupCardDetail;

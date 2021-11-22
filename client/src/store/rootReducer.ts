@@ -5,6 +5,7 @@ import groupRecruit from './group/filterSlice';
 import createGroupData from './group/makerSlice';
 import groupDetail from './group/detailSlice';
 import profileDataSlice from './user/profileSlice';
+import groupCardDetail from './group/cardDetailSlice';
 
 const reducer = combineReducers({
   util,
