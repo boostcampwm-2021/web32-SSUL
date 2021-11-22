@@ -11,7 +11,7 @@ import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { Group } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
@@ -24,6 +24,7 @@ import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
+import { GroupNotInvolve } from '../error/GroupNotInvolve';
 
 const EACH_PAGE_CNT = 12;
 
@@ -178,5 +179,14 @@ export class GroupService {
     applyGroupInfo.userId = userId;
     applyGroupInfo.createdAt = new Date();
     this.applyGroupRepository.save(applyGroupInfo);
+  }
+
+  public async getGroupRole(groupId: number, userId: number) {
+    const enrollment = await this.groupEnrollmentRepository.findOne({
+      where: { groupId, userId },
+      select: ['type'],
+    });
+    if (!enrollment) throw new GroupNotInvolve();
+    return enrollment;
   }
 }

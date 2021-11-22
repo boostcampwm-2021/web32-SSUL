@@ -19,4 +19,5 @@ export const ErrorCode = Object.freeze({
   GROUP_ALREADY_APPLY: new ErrorSpec('G003', '이미 가입 신청한 상태입니다.'),
   GROUP_ALREADY_JOIN: new ErrorSpec('G004', '이미 속해 있는 그룹입니다.'),
   GROUP_ALREADY_DECLINED: new ErrorSpec('G005', '그룹 신청이 거절되었습니다.'),
+  GROUP_NOT_INVOLVE: new ErrorSpec('G006', '그룹에 속해있지 않습니다.'),
 });
