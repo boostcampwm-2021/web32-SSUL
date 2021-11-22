@@ -3,7 +3,7 @@ import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { PostRepository } from '../repository/PostRepository';
 import { Post } from '../models/Post';
-import { PostContentDto } from '../dto/PostDto';
+import { PostUpdateDto } from '../dto/PostDto';
 
 @Service()
 export class PostService {
@@ -20,5 +20,22 @@ export class PostService {
 
   public async createPost(post: Post): Promise<void> {
     await this.postRepository.insert(post);
+  }
+
+  public async updatePost(userId: number, post: PostUpdateDto): Promise<void> {
+    const { id: postId, groupId } = post;
+    const postData = await this.postRepository.findOne({ where: { id: postId, groupId } });
+    if (!postData) console.log('throw NO EXIST POST');
+
+    const isWriter = await this.isWriter(postId, userId);
+    if (!isWriter) console.log('throw NO WRITER');
+
+    const { title, content, type } = post;
+    await this.postRepository.update({ id: postId }, { title, content, type });
+  }
+
+  public async isWriter(postId: number, userId: number): Promise<boolean> {
+    const post = await this.postRepository.findOne({ where: { userId } });
+    return !post && post!.id === postId;
   }
 }

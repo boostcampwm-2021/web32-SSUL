@@ -5,6 +5,7 @@ import {
   OnUndefined,
   Param,
   Params,
+  Patch,
   Post,
   QueryParam,
   Session,
@@ -12,7 +13,6 @@ import {
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
-import { IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 
 import { GroupService } from '../service/GroupService';
 import { PostService } from '../service/PostService';
@@ -21,8 +21,8 @@ import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
+import { PostContentDto, PostDto, PostUpdateDto } from '../dto/PostDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
-import { PostContentDto, PostDto } from '../dto/PostDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({
@@ -114,5 +114,16 @@ export class GroupController {
     const { groupId } = postContent;
     await this.groupService.checkGroupBelong(userId, groupId);
     await this.postService.createPost(postContent.toEntity(userId));
+  }
+
+  @OpenAPI({ summary: '그룹 게시글을 수정하는 API' })
+  @Patch('/post')
+  @UseBefore(isLoggedIn)
+  @OnUndefined(200)
+  public async updatePost(@Session() session: any, @Body() postContent: PostUpdateDto) {
+    const { id: userId } = session.user;
+    const { groupId } = postContent;
+    await this.groupService.checkGroupBelong(userId, groupId);
+    await this.postService.updatePost(userId, postContent);
   }
 }
