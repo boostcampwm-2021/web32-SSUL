@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "groupId": 1,
+    "groupName": "Tapada das Mercês",
+    "categoryImage": "https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F05e1fee8-1d79-4b3a-97c3-02afdfa24032%2Ficon-project.png?table=block&id=b8f9ef6d-bc94-4888-9ea9-59cd8016a820&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2",
+    "ownerName": "김동규",
+    "createdAt": "2021-11-16T15:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "groupId": 2,
+    "groupName": "Tapada das Mercês",
+    "categoryImage": "https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F05e1fee8-1d79-4b3a-97c3-02afdfa24032%2Ficon-project.png?table=block&id=b8f9ef6d-bc94-4888-9ea9-59cd8016a820&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2",
+    "ownerName": "김동규",
+    "createdAt": "2021-11-16T15:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "groupId": 3,
+    "groupName": "Tapada das Mercês",
+    "categoryImage": "https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F05e1fee8-1d79-4b3a-97c3-02afdfa24032%2Ficon-project.png?table=block&id=b8f9ef6d-bc94-4888-9ea9-59cd8016a820&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2",
+    "ownerName": "김동규",
+    "createdAt": "2021-11-16T15:00:00.000Z"
+  }
+]
