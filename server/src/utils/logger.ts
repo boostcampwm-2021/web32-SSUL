@@ -11,7 +11,7 @@ export const logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       level: 'info',
-      filename: `logs/${todayString}.log`,
+      filename: `server/logs/${todayString}.log`,
       maxsize: 5 * 1024 * 1024, // 5MB
       format: combine(timestamp(), myFormat),
     }),
