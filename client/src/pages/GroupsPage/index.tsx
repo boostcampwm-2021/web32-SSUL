@@ -13,18 +13,18 @@ import { groupHttpClient } from '@api';
 import { useParams, useHistory } from 'react-router-dom';
 
 interface Param {
-  id: string;
+  gid: string;
 }
 
 function GroupsPage(): JSX.Element {
   const history = useHistory();
-  const { id } = useParams<Param>();
+  const { gid } = useParams<Param>();
   const dispatch = useAppDispatch();
   const modalType = useAppSelector(selectGroupModalState);
 
   const fetchGroupDetail = async () => {
     try {
-      const groupDetailData = await groupHttpClient.getGroupDetail(Number(id));
+      const groupDetailData = await groupHttpClient.getGroupDetail(Number(gid));
       dispatch(setGroupDetail(groupDetailData));
     } catch (e: any) {
       console.log(e.description);

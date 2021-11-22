@@ -17,37 +17,28 @@ export interface UserState {
   isLogin: boolean;
 }
 
+const initialState: UserState = {
+  id: 0,
+  oAuthId: '',
+  name: '',
+  image: '',
+  feverStack: 0,
+  shareStack: 0,
+  isLogin: false,
+  role: UserType.MENTEE,
+};
+
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    role: UserType.MENTEE,
-    isLogin: false,
-  } as UserState,
+  initialState,
   reducers: {
-    initUser(state) {
+    initUser: () => initialState,
+    setUser(state, { payload }) {
       return {
         ...state,
-        id: 0,
-        oAuthId: '',
-        name: '',
-        image: '',
-        feverStack: 0,
-        shareStack: 0,
-        isLogin: false,
-      };
-    },
-    setUser(state, action) {
-      const { id, oAuthId, name, image, feverStack, shareStack, role } = action.payload;
-      return {
-        ...state,
-        id,
-        oAuthId,
-        name,
-        image,
-        feverStack,
-        shareStack,
+        ...payload,
         isLogin: true,
-        role: role ?? UserType.MENTEE,
+        role: payload.role ?? UserType.MENTEE,
       };
     },
     changeUserRole(state) {
