@@ -17,6 +17,7 @@ import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
 import { GroupInvalidError } from '../error/GroupInvalidError';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
+import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 
 const EACH_PAGE_CNT = 12;
 
@@ -66,7 +67,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = { ...groupDetails, groupEnrollments } as GroupDetailDto;
+    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -137,5 +138,17 @@ export class GroupService {
       throw new DuplicateEnrollmentError();
     }
     await this.groupEnrollmentRepository.save({ groupId, userId, type });
+  }
+
+  public async checkGroupBelong(userId: number, groupId: number): Promise<void> {
+    const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
+    if (!enrollment) throw new NotAuthorizedError();
+  }
+
+  public async checkGroupOwner(userId: number, groupId: number): Promise<void> {
+    const group = await this.groupRepository.findOne({
+      where: { id: groupId, ownerId: userId },
+    });
+    if (!group) throw new NotAuthorizedError();
   }
 }

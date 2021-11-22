@@ -1,8 +1,18 @@
-import { Controller, Get, QueryParam, Session, OnUndefined, Post } from 'routing-controllers';
+import {
+  Controller,
+  Get,
+  QueryParam,
+  Session,
+  OnUndefined,
+  Post,
+  UseBefore,
+} from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
+import { GroupService } from '@domains/group/service/GroupService';
 import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({ tags: ['인증'] })
 @Service()
@@ -11,6 +21,8 @@ export class AuthController {
   constructor(
     @Inject()
     private readonly authService: AuthService,
+    @Inject()
+    private readonly groupService: GroupService,
   ) {}
 
   @Get('/silent-refresh')
@@ -61,5 +73,35 @@ export class AuthController {
   })
   async postLogout(@Session() session: any) {
     session.destroy();
+  }
+
+  @Get('/')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 인증 여부 조회 API',
+  })
+  async isUserAuth() {}
+
+  @Get('/group/belong')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 그룹 소속 여부 조회 API',
+  })
+  async isGroupBelong(@Session() session: any, @QueryParam('gid') gid: number) {
+    const { id: uid } = session.user;
+    await this.groupService.checkGroupBelong(uid, gid);
+  }
+
+  @Get('/group/owner')
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '사용자의 그룹장 여부 조회 API',
+  })
+  async isGroupOwner(@Session() session: any, @QueryParam('gid') gid: number) {
+    const { id: uid } = session.user;
+    await this.groupService.checkGroupBelong(uid, gid);
   }
 }
