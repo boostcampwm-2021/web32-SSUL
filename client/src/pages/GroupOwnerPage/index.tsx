@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import GroupInfoEditBox from './GroupInfoEditBox';
+import GroupInfoBox from './groupInfo';
 import ParticipationRequestBox from './ParticipationRequestBox';
 
 function GroupOwnerPage(): JSX.Element {
   return (
     <Container>
-      <GroupInfoEditBox />
+      <GroupInfoBox />
       <ParticipationRequestBox/>
     </Container>
   );
