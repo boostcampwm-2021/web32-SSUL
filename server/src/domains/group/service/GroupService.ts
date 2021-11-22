@@ -67,7 +67,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
+    const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -150,5 +150,10 @@ export class GroupService {
       where: { id: groupId, ownerId: userId },
     });
     if (!group) throw new NotAuthorizedError();
+  }
+
+  public async getMyGroups(userId: number): Promise<any> {
+    const groups = await this.groupRepository.findAllByOwnerId(userId);
+    return groups;
   }
 }
