@@ -22,12 +22,7 @@ function GroupCardStatus({ statusProps }: StatusProps): JSX.Element {
   const { intro, startAt, endAt, techStacks, ownerInfo } = statusProps;
   return (
     <Container>
-      <GroupOwnerStatus
-        ownerName={ownerInfo.name}
-        ownerFeverStack={ownerInfo.feverStack}
-        ownerAvatarUrl={ownerInfo.avatarUrl}
-      />
-      ownerInfo
+      <GroupOwnerStatus ownerInfo={ownerInfo} />
       <GroupStatusInfo intro={intro} startAt={startAt} endAt={endAt} />
       <GroupTechStackList techStackList={techStacks} />
     </Container>

@@ -1,22 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { OwnerInfo } from '@types';
 
 interface Props {
-  ownerName: string;
-  ownerFeverStack: number;
-  ownerAvatarUrl: string;
+  ownerInfo: OwnerInfo;
 }
 
-function GroupOwnerStatus({ ownerName, ownerFeverStack, ownerAvatarUrl }: Props): JSX.Element {
+function GroupOwnerStatus({ ownerInfo }: Props): JSX.Element {
   const DEFAULT_INDEX = 30;
   return (
     <Container>
       <GroupOwnerProfile>
-        <ProfileImage src={ownerAvatarUrl} />
-        <ProfileName>{ownerName}</ProfileName>
+        <ProfileImage src={ownerInfo.avatarUrl} />
+        <ProfileName>{ownerInfo.name}</ProfileName>
       </GroupOwnerProfile>
-      <GroupOwnerFeverStack style={{ width: `${ownerFeverStack + DEFAULT_INDEX}px` }}>
-        <FeverNum>{ownerFeverStack}</FeverNum>
+      <GroupOwnerFeverStack style={{ width: `${ownerInfo.feverStack + DEFAULT_INDEX}px` }}>
+        <FeverNum>{ownerInfo.feverStack}</FeverNum>
       </GroupOwnerFeverStack>
     </Container>
   );

@@ -4,6 +4,6 @@ export interface Category {
   imageUrl: string;
 }
 
-export interface CategoryName {
+export interface CategoryData {
   name: string;
 }
