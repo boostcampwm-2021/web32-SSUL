@@ -5,8 +5,8 @@ import { TechStack } from '@types';
 import { mentoringHttpClient, techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setProfileData } from '@store/user/profileSlice';
 import { selectUser } from '@store/user/globalSlice';
+import { setProfileData } from '@store/user/profileSlice';
 
 interface Props {
   onCancel: () => void;
@@ -31,7 +31,8 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
     setNotificationText('');
     try {
       await mentoringHttpClient.registerMentor({ userId: user.id, techStacks: selectedTechStacks });
-      dispatch(setProfileData({ mentoringStack: selectedTechStacks, isMentor: true }));
+      const { mentorId } = await mentoringHttpClient.getMentorId(user.id);
+      dispatch(setProfileData({ mentorId, isMentor: true, mentoringStack: selectedTechStacks }));
       onCancel();
     } catch (e) {
       setNotificationText('멘토 신청에 실패했습니다!');
