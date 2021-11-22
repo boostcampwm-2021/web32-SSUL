@@ -23,6 +23,6 @@ export class UserService {
     const targetProfile: User = await this.userRepository.findOneOrFailByUserId(userId);
 
     targetProfile.intro = intro;
-    this.userRepository.updateIntro(targetProfile);
+    await this.userRepository.updateIntro(targetProfile);
   }
 }

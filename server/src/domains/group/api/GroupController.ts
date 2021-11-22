@@ -35,17 +35,12 @@ export class GroupController {
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
-    //
-    const startDate = new Date();
     const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
       page,
       name,
       category,
       techstack,
     );
-    //
-    const endDate = new Date();
-    console.log(endDate.getTime() - startDate.getTime());
     return filterdGroups;
   }
 
@@ -53,7 +48,7 @@ export class GroupController {
   @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
-    return this.groupService.getGroupDetails(gid);
+    return await this.groupService.getGroupDetails(gid);
   }
 
   @Post('/')

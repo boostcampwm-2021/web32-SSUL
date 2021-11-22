@@ -1,21 +1,22 @@
 import { Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { Category } from '@domains/category/models/Category';
-import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
+import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
+import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
+
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
+import { GroupUserDto } from '@domains/user/dto/UserDto';
+
 import { Group } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupUserDto } from '@domains/user/dto/UserDto';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
+
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
 import { GroupInvalidError } from '../error/GroupInvalidError';
-import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
-import { GroupEnrollmentAs } from '../models/GroupEnrollment';
-import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
 
 const EACH_PAGE_CNT = 12;
 
@@ -24,8 +25,6 @@ export class GroupService {
   constructor(
     @InjectRepository()
     private readonly groupRepository: GroupRepository,
-    @InjectRepository()
-    private readonly categoryRepository: CategoryRepository,
     @InjectRepository()
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
     @InjectRepository()
@@ -108,7 +107,7 @@ export class GroupService {
       groupTechStack.name = techStack.name;
       return groupTechStack;
     });
-    ////const createdGroup = await this.groupRepository.create();
+
     group.techStacks = await this.groupTechStackRepository.saveAll(groupTechStacks);
     await this.groupRepository.save(group);
     await this.enroll(group.id, ownerId, GroupEnrollmentAs.OWNER);
@@ -129,7 +128,7 @@ export class GroupService {
       throw new GroupNotFoundError();
     }
     group.mentorId = mentorId;
-    this.groupRepository.save(group);
+    await this.groupRepository.save(group);
   }
 
   public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {

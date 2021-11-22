@@ -1,11 +1,15 @@
-import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
-import { UserRepository } from '@domains/user/repository/UserRepository';
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { Mentor } from '../models/Mentor';
-import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
+
+import { CategoryRepository } from '@domains/category/repository/CategoryRepository';
+import { UserRepository } from '@domains/user/repository/UserRepository';
 import { MentorRepository } from '../repository/MentorRepository';
+import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
+
+import { MentorInfoDto } from '../dto/MentorInfoDto';
+
+import { Mentor } from '../models/Mentor';
+
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
 @Service()
@@ -22,8 +26,7 @@ export class MentoringService {
   ) {}
 
   public async createMentor(userId: number) {
-    const mentor: Mentor = this.mentorRepository.create({ userId });
-    return await this.mentorRepository.save(mentor);
+    return await this.mentorRepository.save({ userId });
   }
 
   public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
