@@ -1,5 +1,11 @@
 import HttpClient from './HttpClient';
-import { GroupResponse, GroupCreateInterface, GroupActivity, GroupDetailData } from '@types';
+import {
+  GroupResponse,
+  GroupCreateInterface,
+  GroupActivity,
+  GroupDetailData,
+  GroupApplyData,
+} from '@types';
 
 class GroupHttpClient extends HttpClient {
   public constructor() {
@@ -17,6 +23,9 @@ class GroupHttpClient extends HttpClient {
 
   public getGroupDetail = (groupId: number): Promise<GroupDetailData> =>
     this.httpClient.get(`/${groupId}`);
+
+  public postApplyGroup = <T>(applyInfo: GroupApplyData): Promise<T> =>
+    this.httpClient.post('/apply', applyInfo);
 }
 
 export const groupHttpClient = new GroupHttpClient();
