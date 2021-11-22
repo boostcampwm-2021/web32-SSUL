@@ -19,6 +19,11 @@ import { GroupInvalidError } from '../error/GroupInvalidError';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
+import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
+import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
+import { ApplyGroupState } from '../models/ApplyGroup';
+import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
+import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
 
 const EACH_PAGE_CNT = 12;
 
@@ -31,6 +36,8 @@ export class GroupService {
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
     @InjectRepository()
     private readonly groupTechStackRepository: GroupTechStackRepository,
+    @InjectRepository()
+    private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
   public async getFilterdPageGroups(
@@ -154,5 +161,14 @@ export class GroupService {
   public async getOwnGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
     const groups = await this.groupRepository.findAllByOwnerId(userId);
     return groups as SimpleGroupCardResponse[];
+  }
+
+  public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
+    const applyInfo = await this.applyGroupRepository.findOne({
+      where: { groupId, userId },
+    });
+    if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
+    else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
+    else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
   }
 }

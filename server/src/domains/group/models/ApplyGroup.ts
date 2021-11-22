@@ -5,7 +5,7 @@ import { Group } from './Group';
 export enum ApplyGroupState {
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
-  DECLIEND = 'DECLINED',
+  DECLINED = 'DECLINED',
 }
 
 @Entity('apply_group')
@@ -20,7 +20,7 @@ export class ApplyGroup {
   groupId: number;
 
   @Column({ type: 'enum', enum: ApplyGroupState })
-  state: ApplyGroupState;
+  state: string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;

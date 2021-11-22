@@ -18,6 +18,7 @@ import { GroupDetailDto } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
+import { ApplyGroupDto } from '../dto/ApplyGroupDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
@@ -87,5 +88,14 @@ export class GroupController {
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
     return await this.groupService.getGroupDetails(gid);
+  }
+
+  @Post('/apply')
+  @OnUndefined(200)
+  @OpenAPI({
+    summary: '그룹 가입 신청 넣는 API',
+  })
+  async applyGroup(@Body() { groupId, userId }: ApplyGroupDto) {
+    await this.groupService.checkApplyGroup(groupId, userId);
   }
 }
