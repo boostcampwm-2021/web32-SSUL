@@ -21,7 +21,7 @@ import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
-import { ApplyGroupState } from '../models/ApplyGroup';
+import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
 
@@ -170,5 +170,13 @@ export class GroupService {
     if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
     else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
+  }
+
+  public async addApplyGroup(groupId: number, userId: number): Promise<void> {
+    const applyGroupInfo: ApplyGroup = new ApplyGroup();
+    applyGroupInfo.groupId = groupId;
+    applyGroupInfo.userId = userId;
+    applyGroupInfo.createdAt = new Date();
+    this.applyGroupRepository.save(applyGroupInfo);
   }
 }

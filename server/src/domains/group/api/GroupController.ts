@@ -97,5 +97,6 @@ export class GroupController {
   })
   async applyGroup(@Body() { groupId, userId }: ApplyGroupDto) {
     await this.groupService.checkApplyGroup(groupId, userId);
+    await this.groupService.addApplyGroup(groupId, userId);
   }
 }
