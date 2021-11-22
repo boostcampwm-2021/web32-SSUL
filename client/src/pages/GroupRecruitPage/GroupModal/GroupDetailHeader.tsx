@@ -21,10 +21,11 @@ function GroupDetailHeader({ name, curUserCnt, maxUserCnt }: Props): JSX.Element
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 10px;
+  align-items: center;
 `;
 
 const GroupName = styled.h2`
+  align-self: center;
   color: ${(props) => props.theme.Primary};
 `;
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { BoxModal, GroupCard, Pagination } from '@components';
-import { Group, GroupDetail, GroupResponse } from '@types';
+import { Group, GroupCardDetail, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { initFilterState, returnGroupRecruitFilterState } from '@store/group/filterSlice';
 import { groupHttpClient } from '@api';
-import { changeGroupModalState, selectGroupModalState } from '@store/slices/utilSlice';
+import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
 import GroupModal from './GroupModal';
-import { groupCardDetailState } from '@store/slices/groupCardDetailSlice';
+import { groupCardDetailState } from '@store/group/cardDetailSlice';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
@@ -15,7 +15,7 @@ function GroupCardList(): JSX.Element {
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
   const toggleLoader = useLoader();
-  const groupCardContetns: GroupDetail = useAppSelector(groupCardDetailState);
+  const groupCardContetns: GroupCardDetail = useAppSelector(groupCardDetailState);
   const modalType = useAppSelector(selectGroupModalState);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function GroupCardList(): JSX.Element {
       <Pagination totalPages={totalPages} curPage={selectedPage} />
       {modalType !== 'NONE' && (
         <BoxModal
-          style={{ height: '600px' }}
+          style={{ width: '650px', height: '550px' }}
           element={<GroupModal contents={{ ...groupCardContetns }} />}
           onCancel={handleModalBackgroundClick}
         />
