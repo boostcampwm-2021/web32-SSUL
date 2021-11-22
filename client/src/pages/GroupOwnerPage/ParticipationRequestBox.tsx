@@ -7,7 +7,9 @@ interface ParticipationRequest {
   name: string;
   githubId: string;
   createdAt: string;
+  feverStack: number;
 }
+
 function ParticipationRequestBox(): JSX.Element {
   const [requestList, setRequestList] = useState<ParticipationRequest[]>([
     {
@@ -15,31 +17,44 @@ function ParticipationRequestBox(): JSX.Element {
       name: '김용후',
       githubId: 'Who-is-hu',
       createdAt: '2021-11-22',
+      feverStack: 39.5,
     },
     {
       profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
       name: '유찬양',
       githubId: 'ChanYangYu',
       createdAt: '2021-11-22',
+      feverStack: 39.5,
     },
     {
       profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
       name: '유찬양',
       githubId: 'ChanYangYu',
       createdAt: '2021-11-22',
+      feverStack: 39.5,
     },
     {
       profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
       name: '유찬양',
       githubId: 'ChanYangYu',
       createdAt: '2021-11-22',
+      feverStack: 39.5,
     },
     {
       profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
       name: '유찬양',
       githubId: 'ChanYangYu',
       createdAt: '2021-11-22',
+      feverStack: 0,
     },
+    {
+      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
+      name: '유찬양',
+      githubId: 'ChanYangYu',
+      createdAt: '2021-11-22',
+      feverStack: 39.5,
+    },
+    
   ]);
 
   const handleAcceptButtonClick = () => async () => {
@@ -57,7 +72,9 @@ function ParticipationRequestBox(): JSX.Element {
         <ProfileImage src={data.profileImage} />
         <ProfileInfo>
           <ProfileText>{data.name}</ProfileText>
-          <ProfileText>{data.githubId}</ProfileText>
+          <ProfileFeverStack>
+            <FeverNum>{data.feverStack}</FeverNum>
+          </ProfileFeverStack>
         </ProfileInfo>
         <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
@@ -135,6 +152,28 @@ const ProfileText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+const ProfileFeverStack = styled.div`
+  height: 20px;
+  width: 70px;
+  align-self: center;
+  background-color: ${(props) => props.theme?.Fever};
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 5px;
+  &:hover > span {
+    display: flex;
+    color: ${(props) => props.theme?.White};
+  }
+`;
+
+const FeverNum = styled.span`
+  display: flex;
+  line-height: 20px;
+  font-weight: 500;
+  font-size: 13px;
+  color: ${(props) => props.theme?.White};
+  justify-content: center;
 `;
 
 const EmptyMessage = styled.div`
