@@ -18,6 +18,7 @@ import { GroupNotFoundError } from '../error/GroupNotFoundError';
 import { GroupInvalidError } from '../error/GroupInvalidError';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
+import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 
 const EACH_PAGE_CNT = 12;
 
@@ -133,7 +134,10 @@ export class GroupService {
   }
 
   public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {
-    const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
+    const enrollment = await this.groupEnrollmentRepository.findOneByGroupIdAndUserId(
+      groupId,
+      userId,
+    );
     if (enrollment !== undefined) {
       throw new DuplicateEnrollmentError();
     }
@@ -152,8 +156,8 @@ export class GroupService {
     if (!group) throw new NotAuthorizedError();
   }
 
-  public async getMyGroups(userId: number): Promise<any> {
+  public async getOwnGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
     const groups = await this.groupRepository.findAllByOwnerId(userId);
-    return groups;
+    return groups as SimpleGroupCardResponse[];
   }
 }

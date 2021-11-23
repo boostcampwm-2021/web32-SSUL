@@ -3,7 +3,7 @@ import { IsNumber, IsString, ValidateNested } from 'class-validator';
 
 class SimpleUserInfo {
   @IsString()
-  avartalUrl: string;
+  avatarUrl: string;
 }
 
 export class SimpleGroupCardResponse {
@@ -24,5 +24,5 @@ export class SimpleGroupCardResponse {
 
   @ValidateNested()
   @Type(() => SimpleUserInfo)
-  userInfo: SimpleUserInfo;
+  ownerInfo: SimpleUserInfo;
 }

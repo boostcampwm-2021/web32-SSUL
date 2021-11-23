@@ -18,7 +18,7 @@ describe('그룹 컨트롤러', () => {
 
       //when
       const response = await request(app)
-        .get('/api/group/my')
+        .get('/api/group/own')
         .set('Cookie', getLoginCookie(mockSession));
 
       //then
