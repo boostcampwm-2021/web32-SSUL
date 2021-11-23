@@ -19,28 +19,38 @@ function GroupCard({ groupContents }: CardProps): JSX.Element {
     intro,
     startAt,
     endAt,
-    ownerFeverStack,
+    category,
+    ownerInfo,
     techStacks,
-    ownerName,
-    ownerAvatarUrl,
   } = groupContents;
   const headerProps = { name, curUserCnt, maxUserCnt };
   const statusProps = {
     id,
-    ownerFeverStack,
     intro,
     startAt,
     endAt,
     techStacks,
-    ownerName,
-    ownerAvatarUrl,
+    ownerInfo,
+  };
+
+  const contents = {
+    id,
+    name,
+    maxUserCnt,
+    curUserCnt,
+    intro,
+    startAt,
+    endAt,
+    category,
+    ownerInfo,
+    techStacks,
   };
 
   return (
     <Card>
       <GroupCardHeader headerProps={headerProps} />
       <GroupCardStatus statusProps={statusProps} />
-      <GroupApplyButton dueDate={calculateRemainTimeFromNow(startAt)} />
+      <GroupApplyButton contents={contents} dueDate={calculateRemainTimeFromNow(startAt)} />
     </Card>
   );
 }

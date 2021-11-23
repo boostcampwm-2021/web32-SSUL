@@ -79,7 +79,6 @@ const Container = styled.h3`
 
 const CategoryItem = styled.button`
   display: flex;
-  margin: 5px;
   padding: 10px;
 
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
