@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import GroupInfoBox from './groupInfo';
+import GroupInfoBox from './groupInfoBox';
 import ParticipationRequestBox from './ParticipationRequestBox';
 
 function GroupOwnerPage(): JSX.Element {

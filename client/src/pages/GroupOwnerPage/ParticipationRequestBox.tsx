@@ -103,14 +103,14 @@ function ParticipationRequestBox(): JSX.Element {
 const Container = styled.div`
   position: relative;
   min-width: 470px;
-  height: 550px;
+  height: 600px;
   border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 5px;
 `;
 
 const ScrollContainer = styled.div`
   overflow-y: scroll;
-  height: 480px;
+  height: 530px;
   &::-webkit-scrollbar {
     display: none;
   }
