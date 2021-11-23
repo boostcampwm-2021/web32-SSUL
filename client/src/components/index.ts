@@ -9,3 +9,4 @@ export { default as SearchFilter } from './SearchFilter';
 export { default as SearchBar } from './SearchBar';
 export { default as GroupCard } from './GroupCard';
 export { default as Pagination } from './Pagination';
+export { default as MentorCard } from './MentorCard';
