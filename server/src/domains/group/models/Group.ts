@@ -1,12 +1,4 @@
-import {
-  Column,
-  Entity,
-  OneToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
