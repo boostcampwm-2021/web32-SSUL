@@ -6,9 +6,10 @@ import GroupInfo from './GroupInfo';
 import GroupBoard from './GroupBoard';
 import SettingButton from './SettingButton';
 import GroupPageModal from './Modal';
-import { useAppSelector, useAppDispatch } from '@hooks';
+import { useAppSelector, useAppDispatch, useLoader } from '@hooks';
 import { selectGroupModalState } from '@store/util/Slice';
-import { setGroupDetail } from '@store/group/detailSlice';
+import { selectUser } from '@store/user/globalSlice';
+import { selectGroupDetail, setGroupDetail } from '@store/group/detailSlice';
 import { setPosts } from '@store/group/postSlice';
 import { groupHttpClient, postHttpClient } from '@api';
 import { useParams, useHistory } from 'react-router-dom';
@@ -21,6 +22,9 @@ function GroupsPage(): JSX.Element {
   const history = useHistory();
   const { gid } = useParams<Param>();
   const dispatch = useAppDispatch();
+  const [toggleLoader, isLoading] = useLoader();
+  const user = useAppSelector(selectUser);
+  const group = useAppSelector(selectGroupDetail);
   const modalType = useAppSelector(selectGroupModalState);
 
   const fetchGroupDetail = async () => {
@@ -45,13 +49,17 @@ function GroupsPage(): JSX.Element {
   };
 
   useEffect(() => {
-    fetchGroupDetail();
-    fetchGroupPosts();
+    toggleLoader(true);
+    (async () => {
+      await Promise.all([fetchGroupDetail(), fetchGroupPosts()]);
+      toggleLoader(false);
+    })();
   }, []);
 
+  if (isLoading) return <></>;
   return (
     <Container>
-      <SettingButton />
+      {user.id === group.ownerId && <SettingButton />}
       <GroupInfo />
       <GroupBoard />
       <GroupPageModal type={modalType} />
