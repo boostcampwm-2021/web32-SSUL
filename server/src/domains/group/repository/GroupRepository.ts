@@ -84,15 +84,7 @@ export class GroupRepository extends Repository<Group> {
 
   public async findAllByOwnerId(ownerId: number) {
     return await this.createQueryBuilder('group')
-      .select([
-        'group.id',
-        'group.name',
-        'group.curUserCnt',
-        'group.maxUserCnt',
-        'group.status',
-        'ownerInfo.avatarUrl',
-      ])
-      .innerJoin('group.ownerInfo', 'ownerInfo')
+      .innerJoinAndSelect('group.ownerInfo', 'ownerInfo')
       .where('group.ownerId = :ownerId', { ownerId })
       .getMany();
   }
