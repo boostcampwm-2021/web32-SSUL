@@ -8,29 +8,41 @@
   {
     "id": 2,
     "userId": 3,
-    "groupId": 1,
+    "groupId": 100,
     "type": "MENTEE"
   },
   {
     "id": 3,
+    "userId": 3,
+    "groupId": 101,
+    "type": "MENTEE"
+  },
+  {
+    "id": 4,
+    "userId": 3,
+    "groupId": 102,
+    "type": "MENTEE"
+  },
+  {
+    "id": 5,
     "userId": 2,
     "groupId": 1,
     "type": "OWNER"
   },
   {
-    "id": 4,
+    "id": 6,
     "userId": 1,
     "groupId": 1,
     "type": "MENTOR"
   },
   {
-    "id": 5,
+    "id": 7,
     "userId": 4,
     "groupId": 2,
     "type": "OWNER"
   },
   {
-    "id": 6,
+    "id": 8,
     "userId": 1,
     "groupId": 2,
     "type": "MENTEE"
