@@ -11,9 +11,10 @@ declare module '@emotion/react' {
     White: string;
     Black: string;
     Fever: string;
+    Share: string;
     LightBlack: string;
-    Error: string,
-    PrimaryHover: string,
+    Error: string;
+    PrimaryHover: string;
     Primary: string;
     PrimaryLight: string;
     PrimaryDark: string;
