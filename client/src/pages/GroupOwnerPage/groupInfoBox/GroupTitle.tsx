@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 
 const MIN_TITLE_LENGTH = 1;
 const MAX_TITLE_LENGTH = 20;
 
 function GroupTitle(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
+  const { name } = useAppSelector(selectGroupAdminData);
+  const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>('알고리즘 스터디');
   const textInput = useRef<HTMLTextAreaElement>(null);
 
   const handleEditButtonClick = () => {
@@ -19,7 +22,7 @@ function GroupTitle(): JSX.Element {
         );
         return;
       }
-      setTitle(text);
+      dispatch(setGroupAdminData({ name: text }));
       //TODO: PATCH
     }
     setNotificationText('');
@@ -33,9 +36,9 @@ function GroupTitle(): JSX.Element {
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
-        <EditText ref={textInput} defaultValue={title} maxLength={MAX_TITLE_LENGTH} />
+        <EditText ref={textInput} defaultValue={name} maxLength={MAX_TITLE_LENGTH} />
       ) : (
-        <Text>{title}</Text>
+        <Text>{name}</Text>
       )}
     </Container>
   );

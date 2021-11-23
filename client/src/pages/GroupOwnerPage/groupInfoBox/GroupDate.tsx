@@ -43,7 +43,7 @@ function GroupDate(): JSX.Element {
           <DatePicker startAt={startAt} endAt={endAt} setDate={setDate} />
         </DatePickerContainer>
       ) : (
-        <Text>{`${startAt} ~ ${endAt}`}</Text>
+        <Text>{`${startAt} - ${endAt}`}</Text>
       )}
     </Container>
   );

@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 
 const MIN_INTRO_LENGTH = 1;
 const MAX_INTRO_LENGTH = 500;
 
 function GroupIntro(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
+  const { intro } = useAppSelector(selectGroupAdminData);
+  const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [intro, setIntro] = useState<string>('안녕하세요~');
   const textInput = useRef<HTMLTextAreaElement>(null);
 
   const handleEditButtonClick = () => {
@@ -20,7 +23,7 @@ function GroupIntro(): JSX.Element {
         );
         return;
       }
-      setIntro(text);
+      dispatch(setGroupAdminData({ intro: text }));
       //TODO: PATCH
     }
     setNotificationText('');
