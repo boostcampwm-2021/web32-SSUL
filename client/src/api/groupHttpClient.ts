@@ -45,9 +45,15 @@ class GroupHttpClient extends HttpClient {
 
   public patchGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
     this.httpClient.patch('/admin/intro', updateGroupIntroData);
-    
+
   public getApplyGroupList = (groupId: number): Promise<ParticipationRequest[]> =>
     this.httpClient.get(`/admin/apply/${groupId}`);
+  
+  public acceptApplyList = (applyId: number): Promise<null> => 
+    this.httpClient.patch(`/admin/accept/${applyId}`);
+  
+  public acceptDeclineList = (applyId: number): Promise<null> => 
+    this.httpClient.patch(`/admin/decline/${applyId}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();

@@ -1,19 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
-import { useAppSelector } from '@hooks';
-import { selectGroupAdminData} from '@store/group/adminSlice';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { ParticipationRequest } from '@types';
+import { groupHttpClient } from '@api';
 
 function ParticipationRequestBox(): JSX.Element {
-  const { requestList } = useAppSelector(selectGroupAdminData);
+  const { groupId, requestList } = useAppSelector(selectGroupAdminData);
+  const dispatch = useAppDispatch();
+
+  const fetchApplyList = async () => {
+    const requestList = await groupHttpClient.getApplyGroupList(groupId);
+    dispatch(setGroupAdminData({ requestList }));
+  };
 
   const handleAcceptButtonClick = (applyId: number) => async () => {
-    console.log('accept');
+    await groupHttpClient.acceptApplyList(applyId);
+    fetchApplyList();
   };
 
   const handleRejectButtonClick = (applyId: number) => async () => {
-    console.log('reject');
+    await groupHttpClient.acceptDeclineList(applyId);
+    fetchApplyList();
   };
 
   const makeRequestBox = (data: ParticipationRequest, idx: number): JSX.Element => {
