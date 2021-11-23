@@ -9,7 +9,8 @@ import GroupPageModal from './Modal';
 import { useAppSelector, useAppDispatch } from '@hooks';
 import { selectGroupModalState } from '@store/util/Slice';
 import { setGroupDetail } from '@store/group/detailSlice';
-import { groupHttpClient } from '@api';
+import { setPosts } from '@store/group/postSlice';
+import { groupHttpClient, postHttpClient } from '@api';
 import { useParams, useHistory } from 'react-router-dom';
 
 interface Param {
@@ -33,8 +34,19 @@ function GroupsPage(): JSX.Element {
     }
   };
 
+  const fetchGroupPosts = async () => {
+    try {
+      const groupPostData = await postHttpClient.getGroupPosts(Number(gid));
+      dispatch(setPosts(groupPostData));
+    } catch (e: any) {
+      // TODO: 404 Page Redirect
+      console.log(e.description);
+    }
+  };
+
   useEffect(() => {
     fetchGroupDetail();
+    fetchGroupPosts();
   }, []);
 
   return (
