@@ -9,37 +9,11 @@ export class GroupRepository extends Repository<Group> {
     return this.find();
   }
 
-  public async findGroupByNameAndCategory(name: string, categoryId?: number) {
-    return await this.createQueryBuilder('group')
-      .select([
-        'group.id',
-        'group.mentorId',
-        'group.ownerId',
-        'group.name',
-        'group.maxUserCnt',
-        'group.curUserCnt',
-        'group.intro',
-        'group.startAt',
-        'group.endAt',
-        'group.categoryId',
-        'group.status',
-        'group_tech_stack.techStackId',
-        'group_tech_stack.name',
-        'user.name',
-        'user.feverStack',
-        'user.avatarUrl',
-      ])
-      .innerJoinAndSelect('group.techStacks', 'group_tech_stack')
-      .innerJoinAndSelect('group.ownerInfo', 'user')
-      .where('group.name like :filterdName', { filterdName: `%${name}%` })
-      .andWhere('group.categoryId = :categoryId', { categoryId })
-      .getMany();
-  }
-
-  public async findGroupByName(name: string) {
-    return await this.createQueryBuilder('group')
-      .innerJoinAndSelect('group.techStacks', 'group_tech_stack')
-      .innerJoinAndSelect('group.ownerInfo', 'user')
+  public findAllByNameAndCategory(name: string, categoryId?: number) {
+    return this.createQueryBuilder('group')
+      .innerJoin('group.techStacks', 'group_tech_stack')
+      .innerJoin('group.category', 'category')
+      .innerJoin('group.ownerInfo', 'user')
       .select([
         'group.id',
         'group.mentorId',
@@ -54,7 +28,34 @@ export class GroupRepository extends Repository<Group> {
         'group.status',
       ])
       .addSelect(['group_tech_stack.techStackId', 'group_tech_stack.name'])
-      .addSelect(['user.name', 'user.feverStack', 'user.avatarUrl'])
+      .addSelect(['category.name'])
+      .addSelect(['user.name', 'user.feverStack', 'user.avatarUrl', 'user.githubId'])
+      .where('group.name like :filterdName', { filterdName: `%${name}%` })
+      .andWhere('group.categoryId = :categoryId', { categoryId })
+      .getMany();
+  }
+
+  public findAllByName(name: string) {
+    return this.createQueryBuilder('group')
+      .innerJoin('group.techStacks', 'group_tech_stack')
+      .innerJoin('group.category', 'category')
+      .innerJoin('group.ownerInfo', 'user')
+      .select([
+        'group.id',
+        'group.mentorId',
+        'group.ownerId',
+        'group.name',
+        'group.maxUserCnt',
+        'group.curUserCnt',
+        'group.intro',
+        'group.startAt',
+        'group.endAt',
+        'group.categoryId',
+        'group.status',
+      ])
+      .addSelect(['group_tech_stack.techStackId', 'group_tech_stack.name'])
+      .addSelect(['category.name'])
+      .addSelect(['user.name', 'user.feverStack', 'user.avatarUrl', 'user.githubId'])
       .where('group.name like :filterdName', { filterdName: `%${name}%` })
       .getMany();
   }

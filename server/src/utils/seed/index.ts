@@ -19,7 +19,9 @@ import {
   groupEnrollmentSeedData,
   mentorSeedData,
   postSeedData,
+  applyGroupSeedData,
 } from '@root/db_seed';
+import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 
 export async function seed() {
   const seedConfig = { ...ormConfig[config.mode], dropSchema: true };
@@ -53,12 +55,18 @@ async function seedDatabase(connection: Connection) {
     .into(GroupEnrollment)
     .values(groupEnrollmentSeedData)
     .execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(ApplyGroup)
+    .values(applyGroupSeedData)
+    .execute();
 
   // await connection
   //   .createQueryBuilder()
   //   .insert()
   //   .into(GroupEnrollment)
-  //   .values(groupEnrollmentData)
+  //   .values(gr)
   //   .execute();
   // await connection.createQueryBuilder().insert().into(Mentor).values(mentorData).execute();
 }

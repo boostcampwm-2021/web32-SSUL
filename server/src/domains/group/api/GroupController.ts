@@ -4,6 +4,7 @@ import {
   Get,
   OnUndefined,
   Param,
+  Params,
   Post,
   QueryParam,
   Session,
@@ -14,12 +15,14 @@ import { Inject, Service } from 'typedi';
 
 import { GroupService } from '../service/GroupService';
 
-import { GroupDetailDto } from '../dto/groupDto';
+import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
+import { ApplyGroupDto } from '../dto/ApplyGroupDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { GroupRoleResponse } from '../dto/GroupRoleResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -87,5 +90,27 @@ export class GroupController {
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
     return await this.groupService.getGroupDetails(gid);
+  }
+
+  @Post('/apply')
+  @OnUndefined(200)
+  @OpenAPI({
+    summary: '그룹 가입 신청 넣는 API',
+  })
+  async applyGroup(@Body() { groupId, userId }: ApplyGroupDto) {
+    await this.groupService.checkApplyGroup(groupId, userId);
+    await this.groupService.addApplyGroup(groupId, userId);
+  }
+
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '유저가 그룹에서 어떤 역할인지 가져오는 API',
+  })
+  @ResponseSchema(GroupRoleResponse)
+  @Get('/role/:gid')
+  public async getGroupEnroll(@Session() session: any, @Params() { gid: groupId }: GroupParam) {
+    const { id: userId } = session.user;
+    return await this.groupService.getGroupRole(groupId, userId);
   }
 }
