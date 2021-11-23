@@ -1,26 +1,44 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 
+const MIN_INTRO_LENGTH = 1;
+const MAX_INTRO_LENGTH = 500;
+
 function GroupIntro(): JSX.Element {
+  const [notificationText, setNotificationText] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [intro, setIntro] = useState<string>('안녕하세요~');
   const textInput = useRef<HTMLTextAreaElement>(null);
-  
+
   const handleEditButtonClick = () => {
     const text = textInput.current?.value;
-    if(isEdit && text){
+
+    if (isEdit && text !== undefined) {
+      if (text.length < MIN_INTRO_LENGTH || text.length > MAX_INTRO_LENGTH) {
+        setNotificationText(
+          `소개글은 ${MIN_INTRO_LENGTH} ~ ${MAX_INTRO_LENGTH}자 내외로 작성해주세요!`,
+        );
+        return;
+      }
       setIntro(text);
+      //TODO: PATCH
     }
+    setNotificationText('');
     setIsEdit(!isEdit);
-  }
+  };
 
   return (
     <Container>
       <Header>
         <BoxTitle>소개</BoxTitle>
+        <Notification>{notificationText}</Notification>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
-      {isEdit ? <EditText ref={textInput} defaultValue={intro}></EditText> : <Text>{intro}</Text>}
+      {isEdit ? (
+        <EditText ref={textInput} defaultValue={intro} maxLength={MAX_INTRO_LENGTH}></EditText>
+      ) : (
+        <Text>{intro}</Text>
+      )}
     </Container>
   );
 }
@@ -77,6 +95,11 @@ const EditText = styled.textarea`
   &:focus {
     outline: 2px ${(props) => props.theme.Primary} solid;
   }
+`;
+
+const Notification = styled.div`
+  font-size: 13px;
+  color: ${(props) => props.theme.Error}; ;
 `;
 
 export default GroupIntro;

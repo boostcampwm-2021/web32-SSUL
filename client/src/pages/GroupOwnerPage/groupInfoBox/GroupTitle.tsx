@@ -1,23 +1,35 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 
+const MIN_TITLE_LENGTH = 1;
 const MAX_TITLE_LENGTH = 20;
+
 function GroupTitle(): JSX.Element {
-  const [isEdit, setIsEdit] = useState<boolean>(false   );
-  const [title, setTitle] = useState<string>('');
+  const [notificationText, setNotificationText] = useState<string>('');
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>('알고리즘 스터디');
   const textInput = useRef<HTMLTextAreaElement>(null);
 
   const handleEditButtonClick = () => {
     const text = textInput.current?.value;
-    if (isEdit && text) {
+    if (isEdit && text !== undefined) {
+      if (text.length < MIN_TITLE_LENGTH || text.length > MAX_TITLE_LENGTH) {
+        setNotificationText(
+          `제목은 ${MIN_TITLE_LENGTH} ~ ${MAX_TITLE_LENGTH}자 내외로 작성해주세요!`,
+        );
+        return;
+      }
       setTitle(text);
+      //TODO: PATCH
     }
+    setNotificationText('');
     setIsEdit(!isEdit);
   };
   return (
     <Container>
       <Header>
         <BoxTitle>제목</BoxTitle>
+        <Notification>{notificationText}</Notification>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
@@ -81,6 +93,11 @@ const EditText = styled.textarea`
   &:focus {
     outline: 2px ${(props) => props.theme.Primary} solid;
   }
+`;
+
+const Notification = styled.div`
+  font-size: 13px;
+  color: ${(props) => props.theme.Error}; ;
 `;
 
 export default GroupTitle;

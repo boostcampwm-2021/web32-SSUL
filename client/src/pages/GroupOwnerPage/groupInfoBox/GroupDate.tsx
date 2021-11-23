@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { DatePicker } from '@components';
 
 function GroupDate(): JSX.Element {
+  const [notificationText, setNotificationText] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>('2021-11-17');
   const [endDate, setEndDate] = useState<string>('2021-12-18');
@@ -13,6 +14,15 @@ function GroupDate(): JSX.Element {
   };
 
   const handleEditButtonClick = () => {
+    if(isEdit){
+      if(startDate === '' || endDate === ''){
+        setNotificationText('시작일/종료일을 선택해주세요!');
+        return;
+      }
+      //TODO: PATCH
+    }
+    
+    setNotificationText('');
     setIsEdit(!isEdit);
   };
 
@@ -20,6 +30,7 @@ function GroupDate(): JSX.Element {
     <Container>
       <Header>
         <BoxTitle>시작/종료일</BoxTitle>
+        <Notification>{notificationText}</Notification>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
@@ -74,5 +85,10 @@ const Text = styled.p`
   white-space: pre-wrap;
   word-break: break-all;
   overflow: auto;
+`;
+
+const Notification = styled.div`
+  font-size: 13px;
+  color: ${(props) => props.theme.Error}; ;
 `;
 export default GroupDate;
