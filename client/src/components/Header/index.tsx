@@ -62,4 +62,4 @@ const ControllContent = styled.div`
   min-width: 240px;
 `;
 
-export default Header;
+export default React.memo(Header);
