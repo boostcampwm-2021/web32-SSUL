@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import AntDatePicker from '@pages/GroupCreatePage/DateInput/AntDatePicker';
+import { DatePicker } from '@components';
 
 function GroupDate(): JSX.Element {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState<string>('2021-11-17');
+  const [endDate, setEndDate] = useState<string>('2021-12-18');
+
+  const setDate = (startAt: string, endAt: string) => {
+    setStartDate(startAt);
+    setEndDate(endAt);
+  };
+
+  const handleEditButtonClick = () => {
+    setIsEdit(!isEdit);
+  };
+
   return (
     <Container>
       <Header>
         <BoxTitle>시작/종료일</BoxTitle>
-        <EditButton>편집</EditButton>
+        <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
-      <DatePickerContainer>
-          <AntDatePicker></AntDatePicker>
+      {isEdit ? (
+        <DatePickerContainer>
+          <DatePicker startAt={startDate} endAt={endDate} setDate={setDate} />
         </DatePickerContainer>
+      ) : (
+        <Text>{`${startDate} ~ ${endDate}`}</Text>
+      )}
     </Container>
   );
 }
@@ -50,4 +67,12 @@ const DatePickerContainer = styled.div`
   margin: auto;
 `;
 
+const Text = styled.p`
+  width: 520px;
+  margin: 10px 10px;
+  line-height: 30px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+`;
 export default GroupDate;
