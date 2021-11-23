@@ -63,8 +63,8 @@ export class GroupService {
     const filterdTechStack = techstack ? techstack.split(',') : [];
     const groups =
       category !== undefined
-        ? await this.groupRepository.findByNameAndCategory(name, category)
-        : await this.groupRepository.findByName(name);
+        ? await this.groupRepository.findAllByNameAndCategory(name, category)
+        : await this.groupRepository.findAllByName(name);
 
     const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
