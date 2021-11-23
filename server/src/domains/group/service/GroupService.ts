@@ -80,6 +80,23 @@ export class GroupService {
     return grupDetailData;
   }
 
+  public async getSimpleGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
+    const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFail({ id: gid });
+    return { name, intro, startAt, endAt };
+  }
+
+  public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
+    const applyGroupList = await this.applyGroupRepository.findApplyListByGroupId(gid);
+    return applyGroupList.map(({ createdAt, user }) => {
+      return {
+        createdAt,
+        name: user.name,
+        avatarUrl: user.avatarUrl,
+        feverStack: user.feverStack,
+      };
+    });
+  }
+
   public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {
     return Promise.all<any>(
       groups.map(async (group: Group) => {
