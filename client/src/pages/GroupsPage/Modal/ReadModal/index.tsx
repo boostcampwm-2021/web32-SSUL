@@ -1,39 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
+import { selectChoosenPost } from '@store/group/postSlice';
+import { formatDateToString } from '@utils/Date';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const post = useAppSelector(selectChoosenPost);
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
+  if (!post) return <></>;
   return (
     <Container>
       <Header>
-        <Title>리액트 공부할 때 도움되는 레퍼런스 모음집</Title>
+        <Title>{post.title}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
       <SubInfoBar>
-        <Name>김동규</Name>
-        <Date>2021-11-16</Date>
+        <Name>{post.writer}</Name>
+        <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content>
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-      </Content>
+      <Content>{post.content}</Content>
       <ButtonBox>
         <ModifyButton>수정</ModifyButton>
         <DeleteButton>삭제</DeleteButton>
