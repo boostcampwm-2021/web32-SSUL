@@ -18,7 +18,9 @@ import { GroupService } from '@domains/group/service/GroupService';
 import { PostService } from '../service/PostService';
 
 import { GroupParam, GroupPostParam, PostParam } from '@domains/group/dto/groupDto';
-import { PostContentDto, PostDto, PostUpdateDto } from '../dto/PostDto';
+import { PostDto } from '../dto/PostDto';
+import { PostContentDto } from '../dto/PostContentDto';
+import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({

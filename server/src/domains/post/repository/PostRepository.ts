@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
-import { PostUpdateDto } from '../dto/PostDto';
+import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { Post } from '../models/Post';
 
 @Service()

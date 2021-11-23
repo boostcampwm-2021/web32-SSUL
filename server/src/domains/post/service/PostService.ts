@@ -2,7 +2,7 @@ import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { PostRepository } from '../repository/PostRepository';
 import { Post } from '../models/Post';
-import { PostUpdateDto } from '../dto/PostDto';
+import { PostUpdateDto } from '../dto/PostUpdateDto';
 
 @Service()
 export class PostService {
