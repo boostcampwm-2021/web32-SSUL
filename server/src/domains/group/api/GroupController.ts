@@ -73,7 +73,8 @@ export class GroupController {
 
   @Get('/my')
   @UseBefore(isLoggedIn)
-  @OpenAPI({ summary: '내가 만든 그룹 목록' })
+  @ResponseSchema(SimpleGroupCardResponse. {isArray: true})
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 가져오는 API' })
   public async getMyGroups(@Session() session: any) {
     return await this.groupService.getMyGroups(session.user.id);
   }
