@@ -27,7 +27,7 @@ function GroupPageModal({ type }: Props): JSX.Element {
     <>
       {type !== 'NONE' && (
         <BoxModal
-          style={{ height: '480px' }}
+          style={{ height: '520px' }}
           element={modalElement}
           onCancel={handleClickModalBackground}
         />

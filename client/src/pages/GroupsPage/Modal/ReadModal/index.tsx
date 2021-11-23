@@ -22,7 +22,8 @@ function ReadModal(): JSX.Element {
         <Name>{post.writer}</Name>
         <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content>{post.content}</Content>
+      <Content>{post.content.replaceAll('\r\n', '<br/>')}</Content>
+      <Hit>조회수 {post.hit}</Hit>
       <ButtonBox>
         <ModifyButton>수정</ModifyButton>
         <DeleteButton>삭제</DeleteButton>
@@ -40,13 +41,16 @@ const Header = styled.div`
   align-items: center;
   padding-bottom: 16px;
   border-bottom: 1.75px solid ${(props) => props.theme.Gray4};
-  margin-bottom: 7px;
+  margin-bottom: 12px;
 `;
 
 const Title = styled.span`
+  width: 85%;
+  height: 30px;
   font-size: 1.25rem;
   font-weight: 600;
   color: ${(props) => props.theme.Gray2};
+  overflow: hidden;
 `;
 
 const CancelButton = styled.img`
@@ -63,7 +67,16 @@ const SubInfoBar = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  margin-bottom: 7px;
+  margin-bottom: 20px;
+`;
+
+const Hit = styled.span`
+  position: absolute;
+  bottom: 10%;
+  left: 7%;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${(props) => props.theme.Gray4};
 `;
 
 const Name = styled.span`
@@ -85,7 +98,8 @@ const Content = styled.div`
   border-radius: 18px;
   overflow: scroll;
   box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
-  margin-bottom: 7px;
+  margin-bottom: 24px;
+  white-space: pre;
 `;
 
 const ButtonBox = styled.div`
