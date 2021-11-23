@@ -15,7 +15,7 @@ export class PostRepository extends Repository<Post> {
   }
 
   public findByGroupId(groupId: number) {
-    return this.find({ where: { groupId } });
+    return this.find({ where: { groupId }, order: { createdAt: 'DESC' } });
   }
 
   public updateContentByPostId(post: PostUpdateDto) {
