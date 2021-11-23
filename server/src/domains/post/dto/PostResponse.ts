@@ -1,7 +1,7 @@
 import { IsDate, IsNumber, IsString, IsEnum, MaxLength, MinLength } from 'class-validator';
 import { Post, PostType } from '../models/Post';
 
-export class PostDto {
+export class PostResponse {
   @IsNumber()
   id: number;
   @IsNumber()

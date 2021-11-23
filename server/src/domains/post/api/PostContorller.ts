@@ -18,7 +18,7 @@ import { GroupService } from '@domains/group/service/GroupService';
 import { PostService } from '../service/PostService';
 
 import { GroupParam, GroupPostParam, PostParam } from '@domains/group/dto/groupDto';
-import { PostDto } from '../dto/PostDto';
+import { PostResponse } from '../dto/PostResponse';
 import { PostContentDto } from '../dto/PostContentDto';
 import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
@@ -37,7 +37,7 @@ export class PostController {
   ) {}
 
   @OpenAPI({ summary: '그룹 전체 게시글을 조회하는 API' })
-  @ResponseSchema(PostDto, { isArray: true })
+  @ResponseSchema(PostResponse, { isArray: true })
   @Get('/:gid')
   @UseBefore(isLoggedIn)
   public async getPostsByGroupId(@Session() session: any, @Params() { gid }: GroupParam) {
