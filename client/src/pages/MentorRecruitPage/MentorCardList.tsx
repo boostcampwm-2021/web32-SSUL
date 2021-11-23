@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { MentorCard } from '@components';
+import { MentorCard, Pagination } from '@components';
 
 function MentorCardList(): JSX.Element {
   return (
@@ -11,6 +11,7 @@ function MentorCardList(): JSX.Element {
         <MentorCard />
         <MentorCard />
       </CardList>
+      <Pagination totalPages={100} curPage={1} />
     </>
   );
 }
