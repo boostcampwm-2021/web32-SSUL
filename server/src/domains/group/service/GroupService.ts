@@ -9,7 +9,7 @@ import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 
-import { Group } from '../models/Group';
+import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
@@ -198,5 +198,19 @@ export class GroupService {
     );
     const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
     return groups;
+  }
+
+  public async getEnrolledGroupByQuery(
+    userId: number,
+    status: GroupState,
+    enrollmentAs: GroupEnrollmentAs,
+  ) {
+    const enrollments = await this.groupEnrollmentRepository.findAllByUserIdAndType(
+      userId,
+      enrollmentAs,
+    );
+    return enrollments
+      .map((enrollment) => SimpleGroupCardResponse.from(enrollment.group))
+      .filter((group) => group.status === status);
   }
 }
