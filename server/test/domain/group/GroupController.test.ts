@@ -1,4 +1,5 @@
 import { SimpleGroupCardResponse } from '@domains/group/dto/SimpleGroupCardResponse';
+import { resolveObjectURL } from 'buffer';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -130,6 +131,55 @@ describe('그룹 컨트롤러', () => {
 
       //then
       expect(res.statusCode).toBe(400);
+    });
+  });
+
+  describe('GET /group/my/mentee', () => {
+    const mockSession = getLoginCookie({ id: 3 });
+
+    test('멘티로 참여한 진행중 상태 조회 성공', async () => {
+      //given
+      //when
+      const response = await request(app)
+        .get('/api/group/my/mentee')
+        .set('Cookie', mockSession)
+        .query({
+          status: 'DOING',
+        });
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, status } = response.body[0];
+      expect(status).toBe('DOING');
+      expect(id).toBe(101);
+    });
+
+    test('멘티로 참여한 완료 상태 조회 성공', async () => {
+      //given
+      //when
+      const response = await request(app)
+        .get('/api/group/my/mentee')
+        .set('Cookie', mockSession)
+        .query({
+          status: 'DONE',
+        });
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, status } = response.body[0];
+      expect(status).toBe('DONE');
+      expect(id).toBe(102);
+    });
+
+    test('query에 status누락시 400 에러', async () => {
+      //given
+      //when
+      //no query
+      const response = await request(app).get('/api/group/my/mentee').set('Cookie', mockSession);
+
+      //then
+      console.log(response.body);
+      expect(response.statusCode).toBe(400);
     });
   });
 });
