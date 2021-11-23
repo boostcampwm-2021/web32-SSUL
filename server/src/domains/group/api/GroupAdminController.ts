@@ -39,6 +39,7 @@ export class GroupAdminController {
 
   @OpenAPI({ summary: '그룹의 제목을 변경하는 API' })
   @OnUndefined(200)
+  @UseBefore(isLoggedIn)
   @Patch('/name')
   public async updateTitle(@Body() { gid, name }: UpdateGroupNameDto) {
     await this.groupAdminService.updateGroupName(gid, name);
@@ -46,6 +47,7 @@ export class GroupAdminController {
 
   @OpenAPI({ summary: '그룹의 시작/종료일을 변경하는 API' })
   @OnUndefined(200)
+  @UseBefore(isLoggedIn)
   @Patch('/date')
   public async updateDate(@Body() { gid, startAt, endAt }: UpdateGroupDateDto) {
     await this.groupAdminService.updateGroupDate(gid, startAt, endAt);
@@ -53,6 +55,7 @@ export class GroupAdminController {
 
   @OpenAPI({ summary: '그룹의 소개글을 변경하는 API' })
   @OnUndefined(200)
+  @UseBefore(isLoggedIn)
   @Patch('/intro')
   public async updateIntro(@Body() { gid, intro }: UpdateGroupIntroDto) {
     await this.groupAdminService.updateGroupIntro(gid, intro);
@@ -60,6 +63,7 @@ export class GroupAdminController {
 
   @OpenAPI({ summary: '그룹의 참여 요청을 승인하는 API' })
   @OnUndefined(200)
+  @UseBefore(isLoggedIn)
   @Patch('/accept/:id')
   public async acceptApply(@Param('id') applyId: number) {
     await this.groupService.acceptRequest(applyId);
@@ -67,6 +71,7 @@ export class GroupAdminController {
 
   @OpenAPI({ summary: '그룹의 참여 요청을 거절하는 API' })
   @OnUndefined(200)
+  @UseBefore(isLoggedIn)
   @Patch('/decline/:id')
   public async declineApply(@Param('id') applyId: number) {
     await this.groupService.declineRequest(applyId);
