@@ -2,10 +2,10 @@
 /// <reference types="Cypress" />
 before(() => {
   cy.set();
-  cy.intercept('GET', '/api/user/profile/ChanYangYu', { fixture: 'profile-chanyang.json' });
+  cy.intercept('GET', '/api/user/profile/ChanYangYu', { fixture: 'profile/profile-chanyang.json' });
   cy.intercept('GET', '/api/user/intro/4', '');
   cy.intercept('GET', '/api/techstack/mentee/4', []);
-  cy.intercept('GET', '/api/group/activity/4', { fixture: 'group-activity.json' });
+  cy.intercept('GET', '/api/group/activity/4', { fixture: 'profile/group-activity.json' });
   cy.intercept('GET', '/api/mentoring/mentor/4', { forceNetworkError: true });
   cy.intercept('GET', '/api/techstack/mentor/4', { forceNetworkError: true });
   cy.visit('/profile/ChanYangYu');
@@ -57,17 +57,17 @@ describe('프로필 페이지 우측 유저 프로필 정보', () => {
   });
 
   it('멘토요청 리스트가 정상적으로 출력되며 수락', () => {
-    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'mentoring-request.json' });
+    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'profile/mentoring-request.json' });
     cy.intercept('POST', '/api/mentoring/request/accept', { statusCode: 200 });
     cy.contains('멘토요청 리스트').should('be.exist');
     cy.contains('멘토요청 리스트').click();
     cy.get('[data-test="request-container"]').should('have.length', 3);
-    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'accept-mentoring-request.json' });
+    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'profile/accept-mentoring-request.json' });
     cy.contains('수락').first().click();
     cy.get('[data-test="request-container"]').should('have.length', 2);
 
     cy.intercept('POST', '/api/mentoring/request/reject/2', { statusCode: 200 });
-    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'reject-mentoring-request.json' });
+    cy.intercept('GET', '/api/mentoring/request/1', { fixture: 'profile/reject-mentoring-request.json' });
     cy.contains('거절').first().click();
     cy.get('[data-test="request-container"]').should('have.length', 1);
   });
