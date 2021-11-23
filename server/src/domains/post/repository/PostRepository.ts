@@ -7,7 +7,7 @@ import { Post } from '../models/Post';
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {
   public findOneByPostIdOrFail(postId: number) {
-    return this.findOneOrFail({ where: { postId } });
+    return this.findOneOrFail({ where: { id: postId } });
   }
 
   public findOneByWriterDataOrFail(postId: number, userId: number) {

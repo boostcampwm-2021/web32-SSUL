@@ -79,7 +79,7 @@ export class PostController {
   }
 
   @OpenAPI({ summary: '그룹 게시글 조회수를 업데이트하는 API' })
-  @Patch('//hit/:pid')
+  @Patch('/hit/:pid')
   @OnUndefined(200)
   public async increasePostHit(@Params() { pid }: PostParam) {
     await this.postService.increaseHit(pid);

@@ -8,7 +8,7 @@ import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { User } from '@domains/user/models/User';
 import { Mentor } from '@domains/mentoring/models/Mentor';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
-import { Post } from '@domains/group/models/Post';
+import { Post } from '@domains/post/models/Post';
 
 import {
   catagorySeedData,
