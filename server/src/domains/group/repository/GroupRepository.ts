@@ -9,11 +9,11 @@ export class GroupRepository extends Repository<Group> {
     return this.find();
   }
 
-  public async findGroupByNameAndCategory(name: string, categoryId?: number) {
-    return await this.createQueryBuilder('group')
-      .innerJoinAndSelect('group.techStacks', 'group_tech_stack')
-      .innerJoinAndSelect('group.category', 'category')
-      .innerJoinAndSelect('group.ownerInfo', 'user')
+  public findGroupByNameAndCategory(name: string, categoryId?: number) {
+    return this.createQueryBuilder('group')
+      .innerJoin('group.techStacks', 'group_tech_stack')
+      .innerJoin('group.category', 'category')
+      .innerJoin('group.ownerInfo', 'user')
       .select([
         'group.id',
         'group.mentorId',
@@ -35,11 +35,11 @@ export class GroupRepository extends Repository<Group> {
       .getMany();
   }
 
-  public async findGroupByName(name: string) {
-    return await this.createQueryBuilder('group')
-      .innerJoinAndSelect('group.techStacks', 'group_tech_stack')
-      .innerJoinAndSelect('group.category', 'category')
-      .innerJoinAndSelect('group.ownerInfo', 'user')
+  public findGroupByName(name: string) {
+    return this.createQueryBuilder('group')
+      .innerJoin('group.techStacks', 'group_tech_stack')
+      .innerJoin('group.category', 'category')
+      .innerJoin('group.ownerInfo', 'user')
       .select([
         'group.id',
         'group.mentorId',
