@@ -9,7 +9,7 @@ export class GroupRepository extends Repository<Group> {
     return this.find();
   }
 
-  public findByNameAndCategory(name: string, categoryId?: number) {
+  public findAllByNameAndCategory(name: string, categoryId?: number) {
     return this.createQueryBuilder('group')
       .innerJoin('group.techStacks', 'group_tech_stack')
       .innerJoin('group.category', 'category')
@@ -35,7 +35,7 @@ export class GroupRepository extends Repository<Group> {
       .getMany();
   }
 
-  public findByName(name: string) {
+  public findAllByName(name: string) {
     return this.createQueryBuilder('group')
       .innerJoin('group.techStacks', 'group_tech_stack')
       .innerJoin('group.category', 'category')
