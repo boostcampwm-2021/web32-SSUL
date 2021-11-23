@@ -35,14 +35,14 @@ export class Group {
   @Column('int', { name: 'category_id', nullable: true })
   categoryId: number | null;
 
-  @Column('varchar', { name: 'name', nullable: true, length: 100 })
-  name: string | null;
+  @Column('varchar', { name: 'name', length: 100 })
+  name: string;
 
-  @Column('int', { name: 'max_user_cnt', nullable: true })
-  maxUserCnt: number | null;
+  @Column('int', { name: 'max_user_cnt' })
+  maxUserCnt: number;
 
-  @Column('int', { name: 'cur_user_cnt', nullable: true })
-  curUserCnt: number | null;
+  @Column('int', { name: 'cur_user_cnt' })
+  curUserCnt: number;
 
   @Column('varchar', { name: 'intro', nullable: true, length: 1023 })
   intro: string | null;
