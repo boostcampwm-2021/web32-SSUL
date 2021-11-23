@@ -27,8 +27,8 @@ const initialState = {
     ownerAvatarUrl: '',
     ownerGithubId: '',
   },
-  techStacks: [{ techStackId: 0, name: '' }],
-  groupEnrollments: [{ userId: 0, githubId: '', name: '', avatarUrl: '', type: '' }],
+  techStacks: [],
+  groupEnrollments: [],
 };
 
 export const detailSlice = createSlice({
