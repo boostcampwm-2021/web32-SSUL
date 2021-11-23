@@ -57,7 +57,7 @@ export class Group {
   status: string;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (user) => user.groups)
+  @ManyToOne(() => User, (user) => user.groups, { eager: true })
   ownerInfo: User;
 
   @ManyToOne((type) => Category)
