@@ -1,4 +1,14 @@
-import { Body, Controller, Get, OnUndefined, Param, Post, QueryParam } from 'routing-controllers';
+import {
+  Body,
+  Controller,
+  Get,
+  OnUndefined,
+  Param,
+  Post,
+  QueryParam,
+  Session,
+  UseBefore,
+} from 'routing-controllers';
 import { Inject, Service } from 'typedi';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupService } from '../service/GroupService';
@@ -6,6 +16,8 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -44,13 +56,6 @@ export class GroupController {
     return filterdGroups;
   }
 
-  @Get('/:gid')
-  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
-  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
-  async getGroupData(@Param('gid') gid: number) {
-    return await this.groupService.getGroupDetails(gid);
-  }
-
   @Post('/')
   @OnUndefined(200)
   @OpenAPI({
@@ -65,5 +70,20 @@ export class GroupController {
   @Get('/activity/:uid')
   public async getGroupActivity(@Param('uid') userId: number) {
     return await this.groupService.getEndGroupList(userId);
+  }
+
+  @Get('/own')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 가져오는 API' })
+  public async getMyGroups(@Session() session: any) {
+    return await this.groupService.getOwnGroups(session.user.id);
+  }
+
+  @Get('/:gid')
+  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
+  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
+  async getGroupData(@Param('gid') gid: number) {
+    return await this.groupService.getGroupDetails(gid);
   }
 }
