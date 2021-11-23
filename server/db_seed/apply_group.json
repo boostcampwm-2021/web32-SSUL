@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "userId": 4,
+    "groupId": 5,
+    "state": "PENDING",
+    "createdAt": "2022-01-11 01:06:55"
+  },
+  {
+    "id": 2,
+    "userId": 4,
+    "groupId": 7,
+    "state": "DECLINED",
+    "createdAt": "2022-01-11 01:06:55"
+  },
+    {
+    "id": 3,
+    "userId": 4,
+    "groupId": 6,
+    "state": "ACCEPTED",
+    "createdAt": "2022-01-11 01:06:55"
+  }
+]
