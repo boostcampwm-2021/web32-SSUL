@@ -41,7 +41,7 @@ function ReadModal(): JSX.Element {
         <Name>{post.writer}</Name>
         <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content>{post.content.replaceAll('\r\n', '<br/>')}</Content>
+      <Content readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
       <Hit>조회수 {post.hit}</Hit>
       {user.id === post.userId && (
         <ButtonBox>
@@ -112,15 +112,16 @@ const Date = styled.span`
   color: ${(props) => props.theme.Gray3};
 `;
 
-const Content = styled.div`
+const Content = styled.textarea`
+  width: 100%;
   height: 300px;
   padding: 12px;
   border: 1.75px solid ${(props) => props.theme.Gray2};
   border-radius: 18px;
-  overflow: scroll;
   box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
   margin-bottom: 24px;
-  white-space: pre;
+  resize: none;
+  outline-width: 0px;
 `;
 
 const ButtonBox = styled.div`
