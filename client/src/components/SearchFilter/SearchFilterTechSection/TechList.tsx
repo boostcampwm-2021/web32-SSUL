@@ -16,7 +16,7 @@ interface Props {
 }
 
 function TechList({ listView }: Props): JSX.Element {
-  const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
+  const { selectedTechStack } = useAppSelector(returnGroupRecruitFilterState);
   const selectedTechStackDispatch = useAppDispatch();
 
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {

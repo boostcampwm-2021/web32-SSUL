@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
-import SearchBar from '../SearchBar';
 import { useAppSelector } from '@hooks';
 import { returnGroupRecruitFilterState, changeGroupNameInput } from '@store/group/filterSlice';
+import { SearchBar } from '@components';
 
 function SearchFilterHeader(): JSX.Element {
-  const groupNameInput = useAppSelector(returnGroupRecruitFilterState).groupNameInput;
+  const { groupNameInput } = useAppSelector(returnGroupRecruitFilterState);
   return (
     <Container>
       <CategoryList />

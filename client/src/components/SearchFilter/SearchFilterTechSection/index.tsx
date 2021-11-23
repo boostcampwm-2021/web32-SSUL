@@ -8,7 +8,7 @@ import { TechStack } from '@types';
 import { returnGroupRecruitFilterState } from '@store/group/filterSlice';
 
 function SearchFilterTechSection(): JSX.Element {
-  const techStackInput = useAppSelector(returnGroupRecruitFilterState).techStackInput;
+  const { techStackInput } = useAppSelector(returnGroupRecruitFilterState);
   const [baseTechStackList, setBaseTechStackList] = useState<TechStack[]>([]);
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 
