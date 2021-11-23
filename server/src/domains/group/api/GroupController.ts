@@ -1,15 +1,11 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   OnUndefined,
   Param,
-  Params,
-  Patch,
   Post,
   QueryParam,
-  QueryParams,
   Session,
   UseBefore,
 } from 'routing-controllers';
@@ -17,13 +13,11 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 
 import { GroupService } from '../service/GroupService';
-import { PostService } from '../service/PostService';
 
-import { GroupDetailDto, GroupParam, GroupPostParam, PostParam } from '../dto/groupDto';
+import { GroupDetailDto } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
-import { PostContentDto, PostDto, PostUpdateDto } from '../dto/PostDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
@@ -36,8 +30,6 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
-    @Inject()
-    private readonly postService: PostService,
   ) {}
 
   @Get('/')
@@ -95,54 +87,5 @@ export class GroupController {
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
     return await this.groupService.getGroupDetails(gid);
-  }
-
-  @OpenAPI({ summary: '그룹 전체 게시글을 조회하는 API' })
-  @ResponseSchema(PostDto, { isArray: true })
-  @Get('/post/:gid')
-  @UseBefore(isLoggedIn)
-  public async getPostsByGroupId(@Session() session: any, @Params() { gid }: GroupParam) {
-    const { id: userid } = session.user;
-    await this.groupService.checkGroupBelong(userid, gid);
-    return await this.postService.getPostsByGroupId(gid);
-  }
-
-  @OpenAPI({ summary: '그룹 게시글을 생성하는 API' })
-  @Post('/post')
-  @UseBefore(isLoggedIn)
-  @OnUndefined(200)
-  public async createPost(@Session() session: any, @Body() postContent: PostContentDto) {
-    const { id: userId } = session.user;
-    const { groupId } = postContent;
-    await this.groupService.checkGroupBelong(userId, groupId);
-    await this.postService.createPost(postContent.toEntity(userId));
-  }
-
-  @OpenAPI({ summary: '그룹 게시글을 수정하는 API' })
-  @Patch('/post')
-  @UseBefore(isLoggedIn)
-  @OnUndefined(200)
-  public async updatePost(@Session() session: any, @Body() postContent: PostUpdateDto) {
-    const { id: userId } = session.user;
-    const { groupId } = postContent;
-    await this.groupService.checkGroupBelong(userId, groupId);
-    await this.postService.updatePost(userId, postContent);
-  }
-
-  @OpenAPI({ summary: '그룹 게시글을 삭제하는 API' })
-  @Delete('/post')
-  @UseBefore(isLoggedIn)
-  @OnUndefined(200)
-  public async deletePost(@Session() session: any, @QueryParams() { gid, pid }: GroupPostParam) {
-    const { id: userId } = session.user;
-    await this.groupService.checkGroupBelong(userId, gid);
-    await this.postService.deletePost(userId, pid);
-  }
-
-  @OpenAPI({ summary: '그룹 게시글 조회수를 업데이트하는 API' })
-  @Patch('/post/hit/:pid')
-  @OnUndefined(200)
-  public async increasePostHit(@Params() { pid }: PostParam) {
-    await this.postService.increaseHit(pid);
   }
 }

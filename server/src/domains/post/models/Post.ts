@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Group } from './Group';
+import { Group } from '../../group/models/Group';
 
 export enum PostType {
   NORMAL = 'NORMAL',
