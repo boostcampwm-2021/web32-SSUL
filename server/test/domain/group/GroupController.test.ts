@@ -62,7 +62,31 @@ describe('그룹 컨트롤러', () => {
   });
 
   describe('[GET /role/:gid] 그룹에서의 역할 가져오기', () => {
-    test('역할 가져오기 성공', async () => {
+    test('그룹장 역할 가져오기 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 2 });
+
+      //when
+      const res = await request(app).get('/api/group/role/1').set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('OWNER');
+    });
+
+    test('멘토 역할 가져오기 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 1 });
+
+      //when
+      const res = await request(app).get('/api/group/role/1').set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('MENTOR');
+    });
+
+    test('멘티 역할 가져오기 성공', async () => {
       //given
       const cookieSession = getLoginCookie({ id: 4 });
 
@@ -71,6 +95,7 @@ describe('그룹 컨트롤러', () => {
 
       //then
       expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('MENTEE');
     });
 
     test('현재 신청 중인 상태', async () => {
