@@ -4,6 +4,7 @@ import {
   Get,
   OnUndefined,
   Param,
+  Params,
   Post,
   QueryParam,
   Session,
@@ -14,7 +15,7 @@ import { Inject, Service } from 'typedi';
 
 import { GroupService } from '../service/GroupService';
 
-import { GroupDetailDto } from '../dto/groupDto';
+import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
@@ -108,7 +109,7 @@ export class GroupController {
   })
   @ResponseSchema(GroupRoleResponse)
   @Get('/role/:gid')
-  public async getGroupEnroll(@Session() session: any, @Param('gid') groupId: number) {
+  public async getGroupEnroll(@Session() session: any, @Params() { gid: groupId }: GroupParam) {
     const { id: userId } = session.user;
     return await this.groupService.getGroupRole(groupId, userId);
   }
