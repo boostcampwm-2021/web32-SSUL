@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteProps, useHistory, useParams } from 'react-router-dom';
 import { authHttpClient } from '@api';
 
@@ -26,6 +26,7 @@ export default function RouteGuard(
     const Component = Page as React.FC;
     const history = useHistory();
     const { gid } = useParams<ParamProps>();
+    const [isProgress, setIsProgress] = useState<boolean>(true);
 
     useEffect(() => {
       (async () => {
@@ -41,12 +42,14 @@ export default function RouteGuard(
               await authHttpClient.isGroupOwner(gid);
               break;
           }
+          setIsProgress(false);
         } catch (e: any) {
           history.go(-1);
         }
       })();
     }, []);
 
+    if (isProgress) return <></>;
     return <Component {...props} />;
   };
 }
