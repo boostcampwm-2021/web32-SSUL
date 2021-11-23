@@ -1,5 +1,5 @@
 import { IsDate, IsNumber, IsString, IsEnum, MaxLength, MinLength } from 'class-validator';
-import { Post, PostType } from '../models/Post';
+import { PostType } from '../models/Post';
 
 export class PostResponse {
   @IsNumber()
@@ -8,6 +8,8 @@ export class PostResponse {
   groupId: number;
   @IsNumber()
   userId: number;
+  @IsString()
+  writer: string;
   @IsString()
   title: string;
   @IsString()
