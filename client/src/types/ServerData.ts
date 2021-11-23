@@ -114,3 +114,10 @@ export interface GroupPostRequestDto {
   content: string;
   type: string;
 }
+
+export interface SimpleGroupInfoResponse {
+  name: string;
+  intro: string;
+  startAt: string;
+  endAt: string;
+}

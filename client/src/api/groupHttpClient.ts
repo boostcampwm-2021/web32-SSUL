@@ -5,6 +5,7 @@ import {
   GroupActivity,
   GroupDetailData,
   GroupApplyData,
+  SimpleGroupInfoResponse,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -28,6 +29,9 @@ class GroupHttpClient extends HttpClient {
     this.httpClient.post('/apply', applyInfo);
 
   public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
+  
+  public getGroupAdminInfo = (groupId: number): Promise<SimpleGroupInfoResponse> =>
+    this.httpClient.get(`/admin/${groupId}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();
