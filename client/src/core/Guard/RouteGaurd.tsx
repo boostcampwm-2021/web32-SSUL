@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteProps, useHistory, useParams } from 'react-router-dom';
 import { authHttpClient } from '@api';
 
@@ -27,23 +27,25 @@ export default function RouteGuard(
     const history = useHistory();
     const { gid } = useParams<ParamProps>();
 
-    (async () => {
-      try {
-        switch (scope) {
-          case RouteGuardScopes.AUTH:
-            await authHttpClient.isAuthUser();
-            break;
-          case RouteGuardScopes.GROUP_BELONG:
-            await authHttpClient.isGroupBelong(gid);
-            break;
-          case RouteGuardScopes.GROUP_OWNER:
-            await authHttpClient.isGroupOwner(gid);
-            break;
+    useEffect(() => {
+      (async () => {
+        try {
+          switch (scope) {
+            case RouteGuardScopes.AUTH:
+              await authHttpClient.isAuthUser();
+              break;
+            case RouteGuardScopes.GROUP_BELONG:
+              await authHttpClient.isGroupBelong(gid);
+              break;
+            case RouteGuardScopes.GROUP_OWNER:
+              await authHttpClient.isGroupOwner(gid);
+              break;
+          }
+        } catch (e: any) {
+          history.go(-1);
         }
-      } catch (e: any) {
-        history.go(-1);
-      }
-    })();
+      })();
+    }, []);
 
     return <Component {...props} />;
   };
