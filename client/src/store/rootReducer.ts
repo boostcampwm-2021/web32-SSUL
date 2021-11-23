@@ -8,6 +8,7 @@ import profileDataSlice from './user/profileSlice';
 import groupCardDetail from './group/cardDetailSlice';
 import post from './group/postSlice';
 import mentorRecruit from './mentor/filterSlice';
+import groupAdminDataSlice from './group/adminSlice';
 
 const reducer = combineReducers({
   util,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   groupCardDetail,
   post,
   mentorRecruit,
+  groupAdminDataSlice,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;
