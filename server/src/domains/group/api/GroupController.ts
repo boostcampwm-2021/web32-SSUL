@@ -7,6 +7,7 @@ import {
   Params,
   Post,
   QueryParam,
+  QueryParams,
   Session,
   UseBefore,
 } from 'routing-controllers';
@@ -22,6 +23,8 @@ import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { ApplyGroupDto } from '../dto/ApplyGroupDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 import { GroupRoleResponse } from '../dto/GroupRoleResponse';
 
 @OpenAPI({
@@ -91,6 +94,25 @@ export class GroupController {
   @OpenAPI({ summary: '내가 가입 신청이 대기중인 그룹 목록을 가져오는 API' })
   public async getMyApplyedGroups(@Session() session: any) {
     return await this.groupService.getMyApplyedGroups(session.user.id);
+  }
+
+  //TODO: need unit test
+  @Get('/my/mentee')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({
+    summary: '내가 참여한 그룹을 상태에따라 필터링하여 가져오는 API',
+    description: 'MENTEE로써 참여한 그룹만 조회',
+  })
+  public async getEnrolledGroupByStatus(
+    @Session() session: any,
+    @QueryParams() { status }: EnrolledGroupQuery,
+  ) {
+    return await this.groupService.getEnrolledGroupByQuery(
+      session.user.id,
+      status,
+      GroupEnrollmentAs.MENTEE,
+    );
   }
 
   @Get('/:gid')
