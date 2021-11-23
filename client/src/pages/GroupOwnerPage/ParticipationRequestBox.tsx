@@ -1,74 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
-
-interface ParticipationRequest {
-  profileImage: string;
-  name: string;
-  githubId: string;
-  createdAt: string;
-  feverStack: number;
-}
+import { useAppSelector } from '@hooks';
+import { selectGroupAdminData} from '@store/group/adminSlice';
+import { ParticipationRequest } from '@types';
 
 function ParticipationRequestBox(): JSX.Element {
-  const [requestList, setRequestList] = useState<ParticipationRequest[]>([
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/6914465?v=4',
-      name: '김용후',
-      githubId: 'Who-is-hu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 0,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-  ]);
+  const { requestList } = useAppSelector(selectGroupAdminData);
 
-  const handleAcceptButtonClick = () => async () => {
+  const handleAcceptButtonClick = (applyId: number) => async () => {
     console.log('accept');
-    setRequestList([]);
   };
 
-  const handleRejectButtonClick = () => async () => {
+  const handleRejectButtonClick = (applyId: number) => async () => {
     console.log('reject');
   };
 
   const makeRequestBox = (data: ParticipationRequest, idx: number): JSX.Element => {
     return (
       <BoxContainer key={idx}>
-        <ProfileImage src={data.profileImage} />
+        <ProfileImage src={data.avatarUrl} />
         <ProfileInfo>
           <ProfileText>{data.name}</ProfileText>
           <ProfileFeverStack>
@@ -77,8 +28,8 @@ function ParticipationRequestBox(): JSX.Element {
         </ProfileInfo>
         <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
-          <Reject onClick={handleRejectButtonClick()}>거절</Reject>
-          <Accept onClick={handleAcceptButtonClick()}>수락</Accept>
+          <Reject onClick={handleRejectButtonClick(data.id)}>거절</Reject>
+          <Accept onClick={handleAcceptButtonClick(data.id)}>수락</Accept>
         </ButtonWrapper>
       </BoxContainer>
     );
