@@ -19,5 +19,23 @@
     "groupId": 6,
     "state": "ACCEPTED",
     "createdAt": "2022-01-11 01:06:55"
+  },
+  {
+    "id": 4,
+    "userId": 3,
+    "groupId": 1,
+    "state": "PENDING"
+  },
+  {
+    "id": 5,
+    "userId": 3,
+    "groupId": 2,
+    "state": "PENDING"
+  },
+  {
+    "id": 6,
+    "userId": 3,
+    "groupId": 3,
+    "state": "PENDING"
   }
 ]

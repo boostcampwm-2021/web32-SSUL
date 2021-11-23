@@ -9,6 +9,7 @@ import { User } from '@domains/user/models/User';
 import { Mentor } from '@domains/mentoring/models/Mentor';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Post } from '@domains/post/models/Post';
+import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 
 import {
   catagorySeedData,
@@ -61,12 +62,4 @@ async function seedDatabase(connection: Connection) {
     .into(ApplyGroup)
     .values(applyGroupSeedData)
     .execute();
-
-  // await connection
-  //   .createQueryBuilder()
-  //   .insert()
-  //   .into(GroupEnrollment)
-  //   .values(gr)
-  //   .execute();
-  // await connection.createQueryBuilder().insert().into(Mentor).values(mentorData).execute();
 }
