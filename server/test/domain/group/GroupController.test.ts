@@ -3,17 +3,22 @@ import request from 'supertest';
 import appWrapper from '../../../src/app';
 import { getLoginCookie } from '../../util/cookieSession';
 import { generateString } from '../../util/string';
+import { Container } from 'typedi';
+import { GroupService } from '@domains/group/service/GroupService';
+import { CreateGroupDto } from '@domains/group/dto/CreateGroupDto';
 
 describe('그룹 컨트롤러', () => {
   let app: express.Application;
   const TEST_TITLE = '테스트 게시글 작성 제목';
   const TEST_CONTENT = '테스트 게시글 내용';
 
+  const groupService = Container.get(GroupService);
+
   beforeAll(async () => {
     app = await appWrapper.getInstance();
   });
 
-  describe('GET /my', () => {
+  describe('GET /own', () => {
     test('조회성공', async () => {
       //given
       const mockSession = { id: 3 };
@@ -26,6 +31,13 @@ describe('그룹 컨트롤러', () => {
       //then
       expect(response.statusCode).toBe(200);
       expect(response.body.length).toBeGreaterThanOrEqual(2);
+      const { id, name, intro, maxUserCnt, curUserCnt, ownerId } = response.body[2];
+      expect(id).toBe(172);
+      expect(name).toBe('owenr test group2');
+      expect(intro).toBe('i love java');
+      expect(maxUserCnt).toBe(12);
+      expect(curUserCnt).toBe(2);
+      expect(ownerId).toBe(3);
     });
   });
 
