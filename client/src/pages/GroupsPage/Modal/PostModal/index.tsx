@@ -5,16 +5,23 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectGroupDetail } from '@store/group/detailSlice';
+import { setPosts, selectChoosenPost } from '@store/group/postSlice';
 import { postHttpClient } from '@api';
 import CancelIcon from '@assets/icon_cancel.png';
 import { GroupPostRequestDto } from '@types';
-import { setPosts } from '@store/group/postSlice';
 
-function PostModal(): JSX.Element {
+interface Props {
+  mode: string;
+}
+
+function PostModal({ mode }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const group = useAppSelector(selectGroupDetail);
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
+  const post = useAppSelector(selectChoosenPost);
+  const [title, setTitle] = useState<string>((mode === 'UPDATE' ? post?.title : '') as string);
+  const [content, setContent] = useState<string>(
+    (mode === 'UPDATE' ? post?.content : '') as string,
+  );
   const [selectedType, setSelectedType] = useState<string>('NORMAL');
   const isCompleted = title.length > 0 && content.length > 0;
 
@@ -29,19 +36,26 @@ function PostModal(): JSX.Element {
 
   const handleContentInputChange = ({ target }: ChangeEvent<EventTarget & HTMLTextAreaElement>) => {
     setContent(target.value);
-    console.log(content);
   };
 
   const handlePostButtonClick = async () => {
     if (!isCompleted) return;
+
     try {
       const postData: GroupPostRequestDto = {
+        id: mode === 'POST' ? undefined : post?.id,
         groupId: group.id,
         title,
         content,
         type: selectedType,
       };
-      await postHttpClient.createPost(postData);
+
+      if (mode === 'POST') {
+        await postHttpClient.createPost(postData);
+      } else if (mode === 'UPDATE') {
+        await postHttpClient.updatePost(postData);
+      }
+
       const groupPosts = await postHttpClient.getGroupPosts(group.id);
       dispatch(setPosts(groupPosts));
     } catch (e: any) {
@@ -52,19 +66,28 @@ function PostModal(): JSX.Element {
 
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
+  if (!post && mode === 'UPDATE') return <></>;
   return (
     <Container>
       <Header>
-        <Title>글쓰기</Title>
+        <Title>{mode === 'UPDATE' ? '글수정' : '글쓰기'}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
       <Content>
         <PostTypeNav selectedType={selectedType} handlePostNavItemClick={handlePostNavItemClick} />
-        <TitleInput onChange={handleTitleInputChange} placeholder="제목을 입력하세요." />
-        <ContentInput onChange={handleContentInputChange} placeholder="내용을 입력하세요." />
+        <TitleInput
+          onChange={handleTitleInputChange}
+          value={title}
+          placeholder="제목을 입력하세요."
+        ></TitleInput>
+        <ContentInput
+          onChange={handleContentInputChange}
+          value={content}
+          placeholder="내용을 입력하세요."
+        ></ContentInput>
       </Content>
       <PostButton active={isCompleted} onClick={handlePostButtonClick}>
-        작성
+        {mode === 'UPDATE' ? '수정' : '작성'}
       </PostButton>
     </Container>
   );

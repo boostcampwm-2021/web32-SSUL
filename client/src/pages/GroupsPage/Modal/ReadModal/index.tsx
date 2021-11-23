@@ -2,13 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
+import { selectUser } from '@store/user/globalSlice';
 import { selectChoosenPost } from '@store/group/postSlice';
 import { formatDateToString } from '@utils/Date';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
   const post = useAppSelector(selectChoosenPost);
+  const handleModifyButtonClick = () => dispatch(changeGroupModalState('UPDATE'));
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
   if (!post) return <></>;
@@ -24,10 +27,12 @@ function ReadModal(): JSX.Element {
       </SubInfoBar>
       <Content>{post.content.replaceAll('\r\n', '<br/>')}</Content>
       <Hit>조회수 {post.hit}</Hit>
-      <ButtonBox>
-        <ModifyButton>수정</ModifyButton>
-        <DeleteButton>삭제</DeleteButton>
-      </ButtonBox>
+      {user.id === post.userId && (
+        <ButtonBox>
+          <ModifyButton onClick={handleModifyButtonClick}>수정</ModifyButton>
+          <DeleteButton>삭제</DeleteButton>
+        </ButtonBox>
+      )}
     </Container>
   );
 }
