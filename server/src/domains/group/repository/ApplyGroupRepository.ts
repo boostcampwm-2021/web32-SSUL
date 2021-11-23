@@ -16,14 +16,9 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   }
   public findApplyListByGroupId(gid: number) {
     return this.createQueryBuilder('apply_group')
-      .select([
-        'user.name',
-        'user.avatarUrl',
-        'user.feverStack',
-        'apply_group.createdAt',
-      ])
-      .innerJoin('apply_group.user', 'user')
+      .innerJoinAndSelect('apply_group.user', 'user')
       .where('apply_group.groupId = :gid', { gid })
+      .andWhere('state = "PENDING"')
       .orderBy('apply_group.createdAt','ASC')
       .getMany();
   }

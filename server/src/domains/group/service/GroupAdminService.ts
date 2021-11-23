@@ -1,7 +1,6 @@
 import { Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
@@ -22,8 +21,9 @@ export class GroupAdminService {
 
   public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
     const applyGroupList = await this.applyGroupRepository.findApplyListByGroupId(gid);
-    return applyGroupList.map(({ createdAt, user }) => {
+    return applyGroupList.map(({ id, createdAt, user }) => {
       return {
+        id: id,
         createdAt,
         name: user.name,
         avatarUrl: user.avatarUrl,
