@@ -15,7 +15,7 @@ import { UserDto } from '@domains/user/dto/UserDto';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import config from '@config/index';
-import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
+import { ForbiddenAccessError } from '@common/error/ForbidenAccessError';
 
 @OpenAPI({ tags: ['인증'] })
 @Service()
@@ -52,7 +52,7 @@ export class AuthController {
     if (config.mode !== 'prod') {
       session.user = loginDto;
     } else {
-      throw new NotAuthorizedError();
+      throw new ForbiddenAccessError();
     }
   }
 
