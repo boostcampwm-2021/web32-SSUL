@@ -17,6 +17,7 @@ import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { GroupDetailDto } from '../dto/groupDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -71,12 +72,12 @@ export class GroupController {
     return await this.groupService.getEndGroupList(userId);
   }
 
-  @Get('/my')
+  @Get('/own')
   @UseBefore(isLoggedIn)
-  @ResponseSchema(SimpleGroupCardResponse. {isArray: true})
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
   @OpenAPI({ summary: '내가 만든 그룹 목록을 가져오는 API' })
   public async getMyGroups(@Session() session: any) {
-    return await this.groupService.getMyGroups(session.user.id);
+    return await this.groupService.getOwnGroups(session.user.id);
   }
 
   @Get('/:gid')
