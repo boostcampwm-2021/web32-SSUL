@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { DatePicker } from '@components';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 
 function GroupDate(): JSX.Element {
+  const { startAt, endAt } = useAppSelector(selectGroupAdminData);
   const [notificationText, setNotificationText] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [startDate, setStartDate] = useState<string>('2021-11-17');
-  const [endDate, setEndDate] = useState<string>('2021-12-18');
+  const [seletedDate, setSelectedDate] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
 
   const setDate = (startAt: string, endAt: string) => {
-    setStartDate(startAt);
-    setEndDate(endAt);
+    setSelectedDate([startAt, endAt]);
   };
 
   const handleEditButtonClick = () => {
-    if(isEdit){
-      if(startDate === '' || endDate === ''){
+    const [startDate, endDate] = seletedDate;
+    if (isEdit) {
+      if (startDate === '' || endDate === '') {
         setNotificationText('시작일/종료일을 선택해주세요!');
         return;
       }
+      dispatch(setGroupAdminData({ startAt: startDate, endAt: endDate }));
+      setSelectedDate([]);
       //TODO: PATCH
     }
-    
+
     setNotificationText('');
     setIsEdit(!isEdit);
   };
@@ -35,10 +40,10 @@ function GroupDate(): JSX.Element {
       </Header>
       {isEdit ? (
         <DatePickerContainer>
-          <DatePicker startAt={startDate} endAt={endDate} setDate={setDate} />
+          <DatePicker startAt={startAt} endAt={endAt} setDate={setDate} />
         </DatePickerContainer>
       ) : (
-        <Text>{`${startDate} ~ ${endDate}`}</Text>
+        <Text>{`${startAt} ~ ${endAt}`}</Text>
       )}
     </Container>
   );

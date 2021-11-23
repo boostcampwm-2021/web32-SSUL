@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import GroupInfoBox from './groupInfoBox';
 import ParticipationRequestBox from './ParticipationRequestBox';
+import { useParams } from 'react-router';
+import { groupHttpClient } from '@api';
+import { useAppDispatch } from '@hooks';
+import { setGroupAdminData } from '@store/group/adminSlice';
+import { formatDateToString } from '@utils/Date';
+
+interface Param {
+  gid: string;
+}
 
 function GroupOwnerPage(): JSX.Element {
+  const { gid } = useParams<Param>();
+  const [fetchState, setFetchState] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchGroupInfo = async () => {
+      const groupInfo = await groupHttpClient.getGroupAdminInfo(Number(gid));
+      groupInfo.startAt = formatDateToString(groupInfo.startAt);
+      groupInfo.endAt = formatDateToString(groupInfo.endAt);
+      dispatch(setGroupAdminData({ ...groupInfo }));
+      setFetchState(true);
+    };
+
+    fetchGroupInfo();
+  }, []);
   return (
     <Container>
-      <GroupInfoBox />
-      <ParticipationRequestBox/>
+      {fetchState ? (
+        <>
+          <GroupInfoBox />
+          <ParticipationRequestBox />
+        </>
+      ) : null}
     </Container>
   );
 }
