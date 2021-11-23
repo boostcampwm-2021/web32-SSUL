@@ -1,10 +1,11 @@
-import { Controller, Get, Param, Patch, UseBefore } from 'routing-controllers';
+import { Body, Controller, Get, OnUndefined, Param, Patch, UseBefore } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
-import { GroupService } from '../service/GroupService';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { GroupAdminService } from '../service/GroupAdminService';
+import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/UpdateGroupDto';
 
 @OpenAPI({
   tags: ['그룹 설정'],
@@ -14,7 +15,7 @@ import { isLoggedIn } from '@common/middleware/isLoggedIn';
 export class GroupAdminController {
   constructor(
     @Inject()
-    private readonly groupService: GroupService,
+    private readonly groupAdminService: GroupAdminService,
   ) {}
 
   @OpenAPI({ summary: '그룹정보를 가져오는 API' })
@@ -22,7 +23,7 @@ export class GroupAdminController {
   @UseBefore(isLoggedIn)
   @Get('/:gid')
   public async getGroupInfo(@Param('gid') groupId: number) {
-    return await this.groupService.getSimpleGroupInfoByGroupId(groupId);
+    return await this.groupAdminService.getGroupInfoByGroupId(groupId);
   }
 
   @OpenAPI({ summary: '그룹참가 요청 리스트를 가져오는 API' })
@@ -30,6 +31,27 @@ export class GroupAdminController {
   @UseBefore(isLoggedIn)
   @Get('/apply/:gid')
   public async getApplyList(@Param('gid') groupId: number) {
-    return await this.groupService.getApplyListByGroupId(groupId);
+    return await this.groupAdminService.getApplyListByGroupId(groupId);
+  }
+
+  @OpenAPI({ summary: '그룹의 제목을 변경하는 API' })
+  @OnUndefined(200)
+  @Patch('/name')
+  public async updateTitle(@Body() { gid, name }: UpdateGroupNameDto) {
+    await this.groupAdminService.updateGroupName(gid, name);
+  }
+
+  @OpenAPI({ summary: '그룹의 시작/종료일을 변경하는 API' })
+  @OnUndefined(200)
+  @Patch('/date')
+  public async updateDate(@Body() { gid, startAt, endAt }: UpdateGroupDateDto) {
+    await this.groupAdminService.updateGroupDate(gid, startAt, endAt);
+  }
+
+  @OpenAPI({ summary: '그룹의 소개글을 변경하는 API' })
+  @OnUndefined(200)
+  @Patch('/intro')
+  public async updateIntro(@Body() { gid, intro }: UpdateGroupIntroDto) {
+    await this.groupAdminService.updateGroupIntro(gid, intro);
   }
 }

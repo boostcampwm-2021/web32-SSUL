@@ -2,7 +2,6 @@ import { Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
-import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
@@ -18,7 +17,7 @@ export class GroupAdminService {
     private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
-  public async getSimpleGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
+  public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
     const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFail({ id: gid });
     return { name, intro, startAt, endAt };
   }
@@ -33,5 +32,17 @@ export class GroupAdminService {
         feverStack: user.feverStack,
       };
     });
+  }
+
+  public updateGroupName(gid: number, name: string) {
+    return this.groupRepository.update({ id: gid }, { name });
+  }
+
+  public updateGroupDate(gid: number, startAt: string, endAt: string) {
+    return this.groupRepository.update({ id: gid }, { startAt, endAt });
+  }
+
+  public updateGroupIntro(gid: number, intro: string) {
+    return this.groupRepository.update({ id: gid }, { intro });
   }
 }
