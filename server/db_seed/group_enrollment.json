@@ -2,25 +2,37 @@
   {
     "id": 1,
     "userId": 4,
-    "groupId": 101,
-    "type": "OWNER"
+    "groupId": 1,
+    "type": "MENTEE"
   },
   {
     "id": 2,
     "userId": 3,
-    "groupId": 101,
-    "type": "MENTOR"
+    "groupId": 1,
+    "type": "MENTEE"
   },
   {
     "id": 3,
     "userId": 2,
-    "groupId": 101,
-    "type": "MENTEE"
+    "groupId": 1,
+    "type": "OWNER"
   },
   {
     "id": 4,
     "userId": 1,
-    "groupId": 101,
+    "groupId": 1,
+    "type": "MENTOR"
+  },
+  {
+    "id": 5,
+    "userId": 4,
+    "groupId": 2,
+    "type": "OWNER"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "groupId": 2,
     "type": "MENTEE"
   }
 ]

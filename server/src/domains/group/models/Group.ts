@@ -13,7 +13,7 @@ import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { Category } from '@domains/category/models/Category';
 import { User } from '@domains/user/models/User';
-import { Post } from './Post';
+import { Post } from '../../post/models/Post';
 
 export enum GroupState {
   READY = 'READY',

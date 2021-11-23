@@ -1,4 +1,12 @@
-import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
+import {
+  IsArray,
+  IsDate,
+  IsNumber,
+  IsString,
+  IsEnum,
+  IsNotEmpty,
+  IsNotEmptyObject,
+} from 'class-validator';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 
@@ -46,4 +54,21 @@ export class GroupDetailDto {
   techStacks: GroupUsingTechStackDto[];
   @IsArray()
   groupEnrollments: GroupUserDto[];
+}
+
+export class GroupParam {
+  @IsNumber()
+  gid: number;
+}
+
+export class GroupPostParam {
+  @IsNumber()
+  gid: number;
+  @IsNumber()
+  pid: number;
+}
+
+export class PostParam {
+  @IsNumber()
+  pid: number;
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "groupId": 1,
+    "userId": 2,
+    "title": "첫 번째 게시글",
+    "content": "내용은 뭐 별거 없습니다만",
+    "createdAt": "2021-11-17 12:06:55",
+    "type": "NOTICE",
+    "hit": 0
+  },
+  {
+    "id": 2,
+    "groupId": 1,
+    "userId": 1,
+    "title": "판교로 가는 유찬 멘토님",
+    "content": "가...가즈아",
+    "createdAt": "2021-11-18 12:06:55",
+    "type": "NORMAL",
+    "hit": 0
+  }
+]

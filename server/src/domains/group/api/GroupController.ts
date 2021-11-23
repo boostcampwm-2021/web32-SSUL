@@ -9,15 +9,17 @@ import {
   Session,
   UseBefore,
 } from 'routing-controllers';
-import { Inject, Service } from 'typedi';
-import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupService } from '../service/GroupService';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
-import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupActivityDto } from '../dto/GroupActivityDto';
+import { Inject, Service } from 'typedi';
+
+import { GroupService } from '../service/GroupService';
+
 import { GroupDetailDto } from '../dto/groupDto';
-import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { CreateGroupDto } from '../dto/CreateGroupDto';
+import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
 
 @OpenAPI({
   tags: ['그룹'],

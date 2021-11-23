@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Group } from './Group';
+import { Group } from '../../group/models/Group';
 
 export enum PostType {
   NORMAL = 'NORMAL',
@@ -27,7 +27,7 @@ export class Post {
   createdAt: Date | null;
 
   @Column({ name: 'type', type: 'enum', enum: PostType })
-  type: PostType;
+  type: PostType | string;
 
   @Column('int', { name: 'hit' })
   hit: number;
