@@ -57,18 +57,18 @@ export class GroupDetailDto {
 }
 
 export class GroupParam {
-  @IsNumber({ allowNaN: false })
+  @IsNumber()
   gid: number;
 }
 
 export class GroupPostParam {
-  @IsNumber({ allowNaN: false })
+  @IsNumber()
   gid: number;
-  @IsNumber({ allowNaN: false })
+  @IsNumber()
   pid: number;
 }
 
 export class PostParam {
-  @IsNumber({ allowNaN: false })
+  @IsNumber()
   pid: number;
 }
