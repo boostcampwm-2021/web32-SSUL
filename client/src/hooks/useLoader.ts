@@ -1,9 +1,13 @@
-import { useAppDispatch } from '@hooks';
-import { toggleLoadingState } from '@store/util/Slice';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { setLoadingState, selectLoadingState } from '@store/util/Slice';
 
-export function useLoader(): () => void {
+type LoaderHookReturnType = [(mode: boolean) => void, boolean];
+
+export function useLoader(): LoaderHookReturnType {
   const dispatch = useAppDispatch();
-  return function toggleState(): void {
-    dispatch(toggleLoadingState());
+  const isLoading = useAppSelector(selectLoadingState);
+  const toggle = (mode: boolean): void => {
+    dispatch(setLoadingState(mode));
   };
+  return [toggle, isLoading];
 }
