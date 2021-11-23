@@ -29,7 +29,9 @@ function ProfileTechStackBox({ showModal }: Props): JSX.Element {
         {getEditButtonElement()}
         <TechStackContainer>
           {techStacks.map((techStack) => (
-            <TechStackItem key={techStack.id}>{techStack.name}</TechStackItem>
+            <TechStackItem data-test="mentee-techstack" key={techStack.id}>
+              {techStack.name}
+            </TechStackItem>
           ))}
         </TechStackContainer>
       </ProfileContainer>

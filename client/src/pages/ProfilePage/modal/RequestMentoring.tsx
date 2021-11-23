@@ -4,7 +4,7 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
 import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
-import {  AcceptRequestInfo, MentoringRequestData } from '@types';
+import { AcceptRequestInfo, MentoringRequestData } from '@types';
 import { formatDateToString } from '@utils/Date';
 
 function RequestMentoring(): JSX.Element {
@@ -18,7 +18,7 @@ function RequestMentoring(): JSX.Element {
     setRequestList(fetchedData);
   };
 
-  const handleAcceptButtonClick = ((data: MentoringRequestData) => async () => {
+  const handleAcceptButtonClick = (data: MentoringRequestData) => async () => {
     const acceptRequest: AcceptRequestInfo = {
       id: data.id,
       groupId: data.groupId,
@@ -30,7 +30,7 @@ function RequestMentoring(): JSX.Element {
     } catch (e) {
       console.log(e);
     }
-  });
+  };
 
   const handleRejectButtonClick = (data: MentoringRequestData) => async () => {
     try {
@@ -43,7 +43,7 @@ function RequestMentoring(): JSX.Element {
 
   const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
     return (
-      <BoxContainer key={idx}>
+      <BoxContainer data-test="request-container" key={idx}>
         <ImageContainer>
           <CategoryImage src={data.categoryImage} />
         </ImageContainer>
