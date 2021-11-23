@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
+import { groupHttpClient } from '@api';
 
 const MIN_TITLE_LENGTH = 1;
 const MAX_TITLE_LENGTH = 20;
 
 function GroupTitle(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
-  const { name } = useAppSelector(selectGroupAdminData);
+  const { groupId, name } = useAppSelector(selectGroupAdminData);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const textInput = useRef<HTMLTextAreaElement>(null);
@@ -23,7 +24,7 @@ function GroupTitle(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ name: text }));
-      //TODO: PATCH
+      groupHttpClient.patchGroupName({ gid: groupId, name: text });
     }
     setNotificationText('');
     setIsEdit(!isEdit);

@@ -10,6 +10,7 @@ interface ParticipationRequest {
 }
 
 interface GroupAdminState {
+  groupId: number;
   name: string;
   intro: string;
   startAt: string;
@@ -18,6 +19,7 @@ interface GroupAdminState {
 }
 
 const INTIIAL_STATE: GroupAdminState = {
+  groupId: 0,
   name: '',
   intro: '',
   startAt: '',
@@ -38,7 +40,7 @@ export const groupAdminDataSlice = createSlice({
     },
   },
 });
-
+``;
 export const { setGroupAdminData, clearGroupAdminData } = groupAdminDataSlice.actions;
 export default groupAdminDataSlice.reducer;
 export const selectGroupAdminData = (state: RootState): GroupAdminState =>

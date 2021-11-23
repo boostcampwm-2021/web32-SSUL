@@ -5,7 +5,7 @@ import ParticipationRequestBox from './ParticipationRequestBox';
 import { useParams } from 'react-router';
 import { groupHttpClient } from '@api';
 import { useAppDispatch } from '@hooks';
-import { setGroupAdminData } from '@store/group/adminSlice';
+import { clearGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { formatDateToString } from '@utils/Date';
 
 interface Param {
@@ -19,14 +19,19 @@ function GroupOwnerPage(): JSX.Element {
 
   useEffect(() => {
     const fetchGroupInfo = async () => {
+      const groupId = Number(gid);
       const groupInfo = await groupHttpClient.getGroupAdminInfo(Number(gid));
       groupInfo.startAt = formatDateToString(groupInfo.startAt);
       groupInfo.endAt = formatDateToString(groupInfo.endAt);
-      dispatch(setGroupAdminData({ ...groupInfo }));
+      dispatch(setGroupAdminData({ groupId, ...groupInfo }));
       setFetchState(true);
     };
 
     fetchGroupInfo();
+
+    return () => {
+      dispatch(clearGroupAdminData());
+    };
   }, []);
   return (
     <Container>

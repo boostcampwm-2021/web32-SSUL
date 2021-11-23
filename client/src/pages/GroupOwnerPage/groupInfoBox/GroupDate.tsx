@@ -3,28 +3,26 @@ import styled from '@emotion/styled';
 import { DatePicker } from '@components';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
+import { groupHttpClient } from '@api';
 
 function GroupDate(): JSX.Element {
-  const { startAt, endAt } = useAppSelector(selectGroupAdminData);
+  const { groupId, startAt, endAt } = useAppSelector(selectGroupAdminData);
   const [notificationText, setNotificationText] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [seletedDate, setSelectedDate] = useState<string[]>([]);
   const dispatch = useAppDispatch();
 
   const setDate = (startAt: string, endAt: string) => {
-    setSelectedDate([startAt, endAt]);
+    dispatch(setGroupAdminData({ startAt, endAt }));
   };
 
   const handleEditButtonClick = () => {
-    const [startDate, endDate] = seletedDate;
     if (isEdit) {
-      if (startDate === '' || endDate === '') {
+      if (startAt === '' || endAt === '') {
         setNotificationText('시작일/종료일을 선택해주세요!');
         return;
       }
-      dispatch(setGroupAdminData({ startAt: startDate, endAt: endDate }));
-      setSelectedDate([]);
-      //TODO: PATCH
+      dispatch(setGroupAdminData({ startAt, endAt }));
+      groupHttpClient.patchGroupDate({ gid: groupId, startAt, endAt });
     }
 
     setNotificationText('');
