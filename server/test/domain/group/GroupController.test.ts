@@ -1,18 +1,13 @@
+import { SimpleGroupCardResponse } from '@domains/group/dto/SimpleGroupCardResponse';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
 import { getLoginCookie } from '../../util/cookieSession';
-import { generateString } from '../../util/string';
-import { Container } from 'typedi';
-import { GroupService } from '@domains/group/service/GroupService';
-import { CreateGroupDto } from '@domains/group/dto/CreateGroupDto';
 
 describe('그룹 컨트롤러', () => {
   let app: express.Application;
   const TEST_TITLE = '테스트 게시글 작성 제목';
   const TEST_CONTENT = '테스트 게시글 내용';
-
-  const groupService = Container.get(GroupService);
 
   beforeAll(async () => {
     app = await appWrapper.getInstance();
@@ -21,23 +16,39 @@ describe('그룹 컨트롤러', () => {
   describe('GET /own', () => {
     test('조회성공', async () => {
       //given
-      const mockSession = { id: 3 };
+      const mockSession = getLoginCookie({ id: 3 });
 
       //when
-      const response = await request(app)
-        .get('/api/group/own')
-        .set('Cookie', getLoginCookie(mockSession));
+      const response = await request(app).get('/api/group/own').set('Cookie', mockSession);
 
       //then
       expect(response.statusCode).toBe(200);
       expect(response.body.length).toBeGreaterThanOrEqual(2);
-      const { id, name, intro, maxUserCnt, curUserCnt, ownerId } = response.body[2];
+      const { id, name, maxUserCnt, curUserCnt } = response.body[1];
       expect(id).toBe(172);
       expect(name).toBe('owenr test group2');
-      expect(intro).toBe('i love java');
       expect(maxUserCnt).toBe(12);
       expect(curUserCnt).toBe(2);
-      expect(ownerId).toBe(3);
+    });
+  });
+
+  describe('GET /pending-apply', () => {
+    test('조회 성공', async () => {
+      //given
+      const mockSession = getLoginCookie({ id: 3 });
+
+      //when
+      const response = await request(app)
+        .get('/api/group/pending-apply')
+        .set('Cookie', mockSession);
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, name, maxUserCnt, curUserCnt } = response.body[0];
+      expect(id).toBe(1); //pending state group
+      expect(name).toBe('프로그래밍 고수가 되는 길');
+      expect(maxUserCnt).toBe(8);
+      expect(curUserCnt).toBe(1);
     });
   });
 
