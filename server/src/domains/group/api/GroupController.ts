@@ -21,7 +21,7 @@ import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { ApplyGroupDto } from '../dto/ApplyGroupDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
-import { GroupRoleDto } from '../dto/GroupRoleDto';
+import { GroupRoleResponse } from '../dto/GroupRoleResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -106,7 +106,7 @@ export class GroupController {
   @OpenAPI({
     summary: '유저가 그룹에서 어떤 역할인지 가져오는 API',
   })
-  @ResponseSchema(GroupRoleDto)
+  @ResponseSchema(GroupRoleResponse)
   @Get('/role/:gid')
   public async getGroupEnroll(@Session() session: any, @Param('gid') groupId: number) {
     const { id: userId } = session.user;
