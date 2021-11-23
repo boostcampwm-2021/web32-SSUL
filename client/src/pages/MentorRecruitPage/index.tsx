@@ -4,6 +4,7 @@ import { SearchBar } from '@components';
 import { changeMentorNameInput, returnMentorRecruitFilterState } from '@store/mentor/filterSlice';
 import { useAppSelector } from '@hooks';
 import MentorSearchFilter from './MentorSearchFilter';
+import MentorCardList from './MentorCardList';
 
 function MentorRecruitPage(): JSX.Element {
   const { mentorNameInput } = useAppSelector(returnMentorRecruitFilterState);
@@ -18,14 +19,17 @@ function MentorRecruitPage(): JSX.Element {
         />
       </Header>
       <MentorSearchFilter />
+      <MentorCardList />
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+  min-width: 1000px;
+  margin: 20px;
 `;
 const Header = styled.div`
   width: 1000px;
