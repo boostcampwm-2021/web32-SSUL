@@ -28,4 +28,36 @@ describe('그룹 컨트롤러', () => {
       expect(response.body.length).toBeGreaterThanOrEqual(2);
     });
   });
+
+  describe('[POST /apply] 그룹 가입 신청', () => {
+    test('그룹 가입 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 3 });
+      const applyInfo = { groupId: 2, userId: 3 };
+
+      //when
+      const res = await request(app)
+        .post('/api/group/apply')
+        .set('Cookie', [cookieSession])
+        .send(applyInfo);
+
+      //then
+      expect(res.statusCode).toBe(200);
+    });
+
+    test('이미 신청한 그룹이었을 때 에러 발생', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 3 });
+      const applyInfo = { groupId: 2, userId: 3 };
+
+      //when
+      const res = await request(app)
+        .post('/api/group/apply')
+        .set('Cookie', [cookieSession])
+        .send(applyInfo);
+
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+  });
 });
