@@ -137,3 +137,11 @@ export interface UpdateGroupIntroData {
   gid: number;
   intro: string;
 }
+
+export interface ParticipationRequest {
+  id: number;
+  name: string;
+  avatarUrl: string;
+  feverStack: number;
+  createdAt: Date;
+}

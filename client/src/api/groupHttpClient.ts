@@ -9,6 +9,7 @@ import {
   UpdateGroupIntroData,
   UpdateGroupDateData,
   UpdateGroupNameData,
+  ParticipationRequest,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -44,6 +45,9 @@ class GroupHttpClient extends HttpClient {
 
   public patchGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
     this.httpClient.patch('/admin/intro', updateGroupIntroData);
+    
+  public getApplyGroupList = (groupId: number): Promise<ParticipationRequest[]> =>
+    this.httpClient.get(`/admin/apply/${groupId}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();

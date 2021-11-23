@@ -1,13 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ParticipationRequest } from '@types';
 import { RootState } from '../index';
-
-interface ParticipationRequest {
-  profileImage: string;
-  name: string;
-  githubId: string;
-  createdAt: string;
-  feverStack: number;
-}
 
 interface GroupAdminState {
   groupId: number;
