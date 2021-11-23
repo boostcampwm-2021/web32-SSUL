@@ -1,8 +1,4 @@
-export enum GroupEnrollmentAs {
-  OWNER = 'OWNER',
-  MENTOR = 'MENTOR',
-  MENTEE = 'MENTEE',
-}
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 export class GroupRoleDto {
   role: GroupEnrollmentAs;
