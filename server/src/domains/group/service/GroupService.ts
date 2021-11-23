@@ -37,8 +37,6 @@ export class GroupService {
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
     @InjectRepository()
     private readonly groupTechStackRepository: GroupTechStackRepository,
-    @InjectRepository()
-    private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
   public async getFilterdPageGroups(
@@ -78,23 +76,6 @@ export class GroupService {
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
     const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
     return grupDetailData;
-  }
-
-  public async getSimpleGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
-    const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFail({ id: gid });
-    return { name, intro, startAt, endAt };
-  }
-
-  public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
-    const applyGroupList = await this.applyGroupRepository.findApplyListByGroupId(gid);
-    return applyGroupList.map(({ createdAt, user }) => {
-      return {
-        createdAt,
-        name: user.name,
-        avatarUrl: user.avatarUrl,
-        feverStack: user.feverStack,
-      };
-    });
   }
 
   public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {
