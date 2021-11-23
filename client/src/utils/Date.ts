@@ -11,7 +11,7 @@ export const formatDateToString = (date: UtilDate): string => {
 };
 
 export const calculateRemainTimeFromNow = (date: Date | null): number => {
-  const groupStartTime = moment(formatDateToString(date));
+  const groupStartTime = moment(new Date(formatDateToString(date)));
   const today = moment();
   return groupStartTime.diff(today, 'days');
 };
