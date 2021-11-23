@@ -6,6 +6,9 @@ import {
   GroupDetailData,
   GroupApplyData,
   SimpleGroupInfoResponse,
+  UpdateGroupIntroData,
+  UpdateGroupDateData,
+  UpdateGroupNameData,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -32,6 +35,15 @@ class GroupHttpClient extends HttpClient {
   
   public getGroupAdminInfo = (groupId: number): Promise<SimpleGroupInfoResponse> =>
     this.httpClient.get(`/admin/${groupId}`);
+
+  public patchGroupName = (UpdateGroupNameData: UpdateGroupNameData): Promise<null> =>
+    this.httpClient.patch('/admin/name', UpdateGroupNameData);
+
+  public patchGroupDate = (updateGroupDateData: UpdateGroupDateData): Promise<null> =>
+    this.httpClient.patch('/admin/date', updateGroupDateData);
+
+  public patchGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
+    this.httpClient.patch('/admin/intro', updateGroupIntroData);
 }
 
 export const groupHttpClient = new GroupHttpClient();
