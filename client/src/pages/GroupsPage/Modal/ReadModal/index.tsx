@@ -1,17 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { postHttpClient } from '@api';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectUser } from '@store/user/globalSlice';
-import { selectChoosenPost } from '@store/group/postSlice';
+import { selectGroupDetail } from '@store/group/detailSlice';
+import { setPosts, selectChoosenPost } from '@store/group/postSlice';
 import { formatDateToString } from '@utils/Date';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const group = useAppSelector(selectGroupDetail);
   const post = useAppSelector(selectChoosenPost);
   const handleModifyButtonClick = () => dispatch(changeGroupModalState('UPDATE'));
+  const handleDeleteButtonClick = async () => {
+    // TODO: double check user action
+    if (!post) return;
+    try {
+      await postHttpClient.deletePost(post?.id, group.id);
+      const posts = await postHttpClient.getGroupPosts(group.id);
+      dispatch(setPosts(posts));
+    } catch (e: any) {
+      console.log(e.description);
+    }
+    dispatch(changeGroupModalState('NONE'));
+  };
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
   if (!post) return <></>;
@@ -30,7 +46,7 @@ function ReadModal(): JSX.Element {
       {user.id === post.userId && (
         <ButtonBox>
           <ModifyButton onClick={handleModifyButtonClick}>수정</ModifyButton>
-          <DeleteButton>삭제</DeleteButton>
+          <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
         </ButtonBox>
       )}
     </Container>
