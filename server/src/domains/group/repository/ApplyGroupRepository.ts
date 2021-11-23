@@ -4,4 +4,8 @@ import { ApplyGroup } from '../models/ApplyGroup';
 
 @Service()
 @EntityRepository(ApplyGroup)
-export class ApplyGroupRepository extends Repository<ApplyGroup> {}
+export class ApplyGroupRepository extends Repository<ApplyGroup> {
+  findApplyInfoByGroupIdAndUserId(groupId: number, userId: number) {
+    return this.findOne({ where: { groupId, userId } });
+  }
+}

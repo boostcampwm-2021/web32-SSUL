@@ -165,9 +165,10 @@ export class GroupService {
   }
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
-    const applyInfo = await this.applyGroupRepository.findOne({
-      where: { groupId, userId },
-    });
+    const applyInfo = await this.applyGroupRepository.findApplyInfoByGroupIdAndUserId(
+      groupId,
+      userId,
+    );
     if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
     else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
@@ -182,13 +183,12 @@ export class GroupService {
   }
 
   public async getGroupRole(groupId: number, userId: number) {
-    const enrollment = await this.groupEnrollmentRepository.findOne({
-      where: { groupId, userId },
-      select: ['type'],
-    });
-    if (!enrollment) {
-      await this.checkApplyGroup(groupId, userId);
-    }
-    return enrollment;
+    const enrollmentType = this.groupEnrollmentRepository.findEnrollmentTypeByGroupIdAndUserId(
+      groupId,
+      userId,
+    );
+    if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
+
+    return enrollmentType;
   }
 }
