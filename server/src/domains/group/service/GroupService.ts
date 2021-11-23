@@ -3,6 +3,7 @@ import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
+import { UserRepository } from '@domains/user/repository/UserRepository';
 
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
@@ -25,6 +26,7 @@ import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
 import { GroupNotInvolve } from '../error/GroupNotInvolve';
+import { ApplyGroupState } from '../models/ApplyGroup';
 
 const EACH_PAGE_CNT = 12;
 
@@ -161,7 +163,7 @@ export class GroupService {
 
   public async getOwnGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
     const groups = await this.groupRepository.findAllByOwnerId(userId);
-    return groups as SimpleGroupCardResponse[];
+    return groups.map((group) => SimpleGroupCardResponse.from(group));
   }
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
@@ -187,5 +189,14 @@ export class GroupService {
     if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
+  }
+
+  public async getMyApplyedGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
+    const applies = await this.applyGroupRepository.findAllByUserIdAndState(
+      userId,
+      ApplyGroupState.PENDING,
+    );
+    const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
+    return groups;
   }
 }

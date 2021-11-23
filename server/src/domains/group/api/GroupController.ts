@@ -85,6 +85,14 @@ export class GroupController {
     return await this.groupService.getOwnGroups(session.user.id);
   }
 
+  @Get('/pending-apply')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 가입 신청한 그룹 목록을 가져오는 API' })
+  public async getMyApplyedGroups(@Session() session: any) {
+    return await this.groupService.getMyApplyedGroups(session.user.id);
+  }
+
   @Get('/:gid')
   @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
   @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })

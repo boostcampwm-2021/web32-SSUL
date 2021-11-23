@@ -30,12 +30,12 @@
     "id": 5,
     "userId": 3,
     "groupId": 2,
-    "state": "PENDING"
+    "state": "ACCEPTED"
   },
   {
     "id": 6,
     "userId": 3,
     "groupId": 3,
-    "state": "PENDING"
+    "state": "DECLINED"
   }
 ]

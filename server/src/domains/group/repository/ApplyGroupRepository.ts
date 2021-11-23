@@ -1,13 +1,13 @@
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
-import { ApplyGroup } from '../models/ApplyGroup';
+import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 
 @Service()
 @EntityRepository(ApplyGroup)
 export class ApplyGroupRepository extends Repository<ApplyGroup> {
-  findAllByUserId(userId: number) {
+  findAllByUserIdAndState(userId: number, state: ApplyGroupState) {
     return this.find({
-      where: { userId },
+      where: { userId, state },
     });
   }
 

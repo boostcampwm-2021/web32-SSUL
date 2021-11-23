@@ -82,10 +82,9 @@ export class GroupRepository extends Repository<Group> {
       .getOne();
   }
 
-  public async findAllByOwnerId(ownerId: number) {
-    return await this.createQueryBuilder('group')
-      .innerJoinAndSelect('group.ownerInfo', 'ownerInfo')
-      .where('group.ownerId = :ownerId', { ownerId })
-      .getMany();
+  public findAllByOwnerId(ownerId: number) {
+    return this.find({
+      where: { ownerId },
+    });
   }
 }
