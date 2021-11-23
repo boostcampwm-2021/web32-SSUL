@@ -12,8 +12,6 @@ export class GroupAdminService {
     @InjectRepository()
     private readonly groupRepository: GroupRepository,
     @InjectRepository()
-    private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
-    @InjectRepository()
     private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 

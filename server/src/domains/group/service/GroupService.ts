@@ -37,6 +37,8 @@ export class GroupService {
     private readonly groupEnrollmentRepository: GroupEnrollmentRepository,
     @InjectRepository()
     private readonly groupTechStackRepository: GroupTechStackRepository,
+    @InjectRepository()
+    private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
   public async getFilterdPageGroups(

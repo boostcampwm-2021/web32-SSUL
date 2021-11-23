@@ -27,4 +27,8 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
       .orderBy('apply_group.createdAt','ASC')
       .getMany();
   }
+
+  public updateApplyState(id: number, state: ApplyGroupState){
+    return this.update({id}, {state});
+  }
 }

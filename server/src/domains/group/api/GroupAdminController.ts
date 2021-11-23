@@ -6,6 +6,7 @@ import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { GroupAdminService } from '../service/GroupAdminService';
 import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/UpdateGroupDto';
+import { GroupService } from '../service/GroupService';
 
 @OpenAPI({
   tags: ['그룹 설정'],
@@ -16,6 +17,8 @@ export class GroupAdminController {
   constructor(
     @Inject()
     private readonly groupAdminService: GroupAdminService,
+    @Inject()
+    private readonly groupService: GroupService,
   ) {}
 
   @OpenAPI({ summary: '그룹정보를 가져오는 API' })
@@ -53,5 +56,19 @@ export class GroupAdminController {
   @Patch('/intro')
   public async updateIntro(@Body() { gid, intro }: UpdateGroupIntroDto) {
     await this.groupAdminService.updateGroupIntro(gid, intro);
+  }
+
+  @OpenAPI({ summary: '그룹의 참여 요청을 승인하는 API' })
+  @OnUndefined(200)
+  @Patch('/accept/:id')
+  public async acceptApply(@Param('id') applyId: number) {
+    await this.groupService.acceptRequest(applyId);
+  }
+
+  @OpenAPI({ summary: '그룹의 참여 요청을 거절하는 API' })
+  @OnUndefined(200)
+  @Patch('/decline/:id')
+  public async declineApply(@Param('id') applyId: number) {
+    await this.groupService.declineRequest(applyId);
   }
 }
