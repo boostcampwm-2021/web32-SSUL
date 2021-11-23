@@ -10,7 +10,7 @@ export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {
       where: { groupId, userId },
     });
   }
-  findEnrollmentTypeByGroupIdAndUserId(groupId: number, userId: number) {
+  findTypeByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({
       where: { groupId, userId },
       select: ['type'],

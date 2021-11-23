@@ -63,8 +63,8 @@ export class GroupService {
     const filterdTechStack = techstack ? techstack.split(',') : [];
     const groups =
       category !== undefined
-        ? await this.groupRepository.findGroupByNameAndCategory(name, category)
-        : await this.groupRepository.findGroupByName(name);
+        ? await this.groupRepository.findByNameAndCategory(name, category)
+        : await this.groupRepository.findByName(name);
 
     const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
     return addedGroupsInfo;
@@ -165,10 +165,7 @@ export class GroupService {
   }
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
-    const applyInfo = await this.applyGroupRepository.findApplyInfoByGroupIdAndUserId(
-      groupId,
-      userId,
-    );
+    const applyInfo = await this.applyGroupRepository.findOneByGroupIdAndUserId(groupId, userId);
     if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
     else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
@@ -179,12 +176,14 @@ export class GroupService {
     applyGroupInfo.groupId = groupId;
     applyGroupInfo.userId = userId;
     applyGroupInfo.createdAt = new Date();
-    this.applyGroupRepository.save(applyGroupInfo);
+    await this.applyGroupRepository.save(applyGroupInfo);
   }
 
   public async getGroupRole(groupId: number, userId: number) {
-    const enrollmentType =
-      await this.groupEnrollmentRepository.findEnrollmentTypeByGroupIdAndUserId(groupId, userId);
+    const enrollmentType = await this.groupEnrollmentRepository.findTypeByGroupIdAndUserId(
+      groupId,
+      userId,
+    );
     if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
