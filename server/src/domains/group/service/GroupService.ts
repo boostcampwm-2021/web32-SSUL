@@ -76,7 +76,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
+    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -183,10 +183,8 @@ export class GroupService {
   }
 
   public async getGroupRole(groupId: number, userId: number) {
-    const enrollmentType = this.groupEnrollmentRepository.findEnrollmentTypeByGroupIdAndUserId(
-      groupId,
-      userId,
-    );
+    const enrollmentType =
+      await this.groupEnrollmentRepository.findEnrollmentTypeByGroupIdAndUserId(groupId, userId);
     if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
