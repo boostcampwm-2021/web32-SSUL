@@ -34,4 +34,4 @@ function Router(): JSX.Element {
   );
 }
 
-export default Router;
+export default React.memo(Router);

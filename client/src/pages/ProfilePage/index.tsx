@@ -4,8 +4,7 @@ import ProfileSideContents from './ProfileSideContents';
 import { ProfileActivityListBox, ProfileIntroBox, ProfileTechStackBox } from './profileBox';
 import ProfileMentorStackBox from './profileBox/ProfileMentorStackBox';
 import ProfilePageModal from './modal';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import { setLoadingState } from '@store/util/Slice';
+import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { clearProfileData, selectProfileData, setProfileData } from '@store/user/profileSlice';
 import {
   fetchGroupActivityTechStack,
@@ -29,6 +28,7 @@ function ProfilePage(): JSX.Element {
   const profile = useAppSelector(selectProfileData);
   const showModal = (type: string) => () => setModalType(type);
   const dispatch = useAppDispatch();
+  const [toggleLoader] = useLoader();
   const handler = (newState: ProfileState) => dispatch(setProfileData(newState));
 
   useEffect(() => {
@@ -41,14 +41,14 @@ function ProfilePage(): JSX.Element {
         fetchGroupActivityTechStack(userId, handler),
       ]);
       setFetchState(true);
-      dispatch(setLoadingState(false));
+      toggleLoader(false);
     };
 
     if (profile.gitHubId === id) fetchAllData(profile.userId);
   }, [profile.gitHubId]);
 
   useEffect(() => {
-    dispatch(setLoadingState(true));
+    toggleLoader(true);
     setFetchState(false);
     fetchBaseUserData(handler, id);
 

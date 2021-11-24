@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Post from './Post';
+import { useAppSelector } from '@hooks';
+import { selectAllPosts } from '@store/group/postSlice';
 
 function PostList(): JSX.Element {
-  const NUM = 12;
-  const postList = [...Array(NUM)].map((_, idx) => <Post key={idx} />);
+  const posts = useAppSelector(selectAllPosts);
+  const postList = posts.map((post) => <Post post={post} key={post.id} />);
 
   return (
     <Container>

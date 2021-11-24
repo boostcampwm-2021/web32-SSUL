@@ -14,7 +14,7 @@ function GroupCardList(): JSX.Element {
   const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
-  const toggleLoader = useLoader();
+  const [toggleLoader] = useLoader();
   const groupCardContetns: GroupCardDetail = useAppSelector(groupCardDetailState);
   const modalType = useAppSelector(selectGroupModalState);
 
@@ -23,12 +23,12 @@ function GroupCardList(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    toggleLoader();
+    toggleLoader(true);
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
-      toggleLoader();
+      toggleLoader(false);
     };
     getGroupsList();
   }, [filterdQuery]);
