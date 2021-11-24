@@ -1,14 +1,55 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import {
+  pushSelectedTechStack,
+  returnMentorRecruitFilterState,
+  createdFilterdQuery,
+} from '@store/mentor/filterSlice';
+import { TechStack } from '@types';
 
-function TechList(): JSX.Element {
-  return (
-    <Container>
-      <SelectedTechListItem>item</SelectedTechListItem>
-      <NonSelectedTechListItem>item2</NonSelectedTechListItem>
-    </Container>
-  );
+const MAX_SELECTED_INDEX = 5;
+
+interface Props {
+  listView: TechStack[];
+}
+
+function TechList({ listView }: Props): JSX.Element {
+  const { selectedTechStack } = useAppSelector(returnMentorRecruitFilterState);
+  const selectedTechStackDispatch = useAppDispatch();
+
+  const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const clickedTechStack = e.target as HTMLButtonElement;
+    const techStackName = clickedTechStack.innerText;
+    clickedTechStack.classList.remove('shake');
+    clickedTechStack.offsetWidth;
+
+    if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
+      clickedTechStack.classList.add('shake');
+    } else {
+      selectedTechStackDispatch(pushSelectedTechStack(techStackName));
+      selectedTechStackDispatch(createdFilterdQuery());
+    }
+  };
+
+  const techList = listView.map((techStack) => {
+    if (selectedTechStack.includes(techStack.name))
+      return (
+        <SelectedTechListItem key={techStack.id} onClick={handleTechStackClick}>
+          {techStack.name}
+        </SelectedTechListItem>
+      );
+    else {
+      return (
+        <NonSelectedTechListItem key={techStack.id} onClick={handleTechStackClick}>
+          {techStack.name}
+        </NonSelectedTechListItem>
+      );
+    }
+  });
+
+  return <Container>{techList}</Container>;
 }
 
 const Container = styled.div`

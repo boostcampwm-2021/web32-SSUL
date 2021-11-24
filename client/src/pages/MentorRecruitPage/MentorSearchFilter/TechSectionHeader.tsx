@@ -6,7 +6,7 @@ import { useAppSelector } from '@hooks';
 import { returnMentorRecruitFilterState, changeTechStackInput } from '@store/mentor/filterSlice';
 
 function TechSectionHeader(): JSX.Element {
-  const techStackInput = useAppSelector(returnMentorRecruitFilterState).techStackInput;
+  const { techStackInput } = useAppSelector(returnMentorRecruitFilterState);
 
   return (
     <Container>

@@ -1,15 +1,33 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import {
+  createdFilterdQuery,
+  popSelectedTechStack,
+  returnMentorRecruitFilterState,
+} from '@store/mentor/filterSlice';
 
 function SelectedTechList(): JSX.Element {
-  return (
-    <Container>
-      <SelectItem>
-        <TechStackName>TechStack</TechStackName>
-        <EraseButton>X</EraseButton>
+  const { selectedTechStack } = useAppSelector(returnMentorRecruitFilterState);
+  const selectedTechStackDispatch = useAppDispatch();
+
+  const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const targetTechStack = e.currentTarget as HTMLButtonElement;
+    const nowTechStack = targetTechStack.previousElementSibling?.innerHTML;
+    selectedTechStackDispatch(popSelectedTechStack(nowTechStack));
+    selectedTechStackDispatch(createdFilterdQuery());
+  };
+
+  const totalSelectedTechList = selectedTechStack.map((techStack, idx) => {
+    return (
+      <SelectItem key={idx}>
+        <TechStackName>{techStack}</TechStackName>
+        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
-    </Container>
-  );
+    );
+  });
+
+  return <Container>{totalSelectedTechList}</Container>;
 }
 
 const Container = styled.div`
