@@ -114,14 +114,6 @@ export class GroupController {
       GroupEnrollmentAs.MENTEE,
     );
   }
-
-  @Get('/:gid')
-  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
-  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
-  async getGroupData(@Param('gid') gid: number) {
-    return await this.groupService.getGroupDetails(gid);
-  }
-
   @Post('/apply')
   @OnUndefined(200)
   @OpenAPI({
@@ -142,5 +134,12 @@ export class GroupController {
   public async getGroupEnroll(@Session() session: any, @Params() { gid: groupId }: GroupParam) {
     const { id: userId } = session.user;
     return await this.groupService.getGroupRole(groupId, userId);
+  }
+
+  @Get('/:gid')
+  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
+  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
+  async getGroupData(@Param('gid') gid: number) {
+    return await this.groupService.getGroupDetails(gid);
   }
 }

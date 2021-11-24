@@ -22,7 +22,6 @@ import {
   postSeedData,
   applyGroupSeedData,
 } from '@root/db_seed';
-import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 
 export async function seed() {
   const seedConfig = { ...ormConfig[config.mode], dropSchema: true };

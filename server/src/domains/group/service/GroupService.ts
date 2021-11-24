@@ -12,7 +12,7 @@ import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
@@ -25,8 +25,6 @@ import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
-import { GroupNotInvolve } from '../error/GroupNotInvolve';
-import { ApplyGroupState } from '../models/ApplyGroup';
 
 const EACH_PAGE_CNT = 12;
 
@@ -78,7 +76,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
+    const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -150,6 +148,7 @@ export class GroupService {
   }
 
   public async checkGroupBelong(userId: number, groupId: number): Promise<void> {
+    //TODO: findOrFail 을 사용하고 내부구현 감추기
     const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
     if (!enrollment) throw new NotAuthorizedError();
   }
