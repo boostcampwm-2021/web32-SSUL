@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { ParticipationRequest } from '@types';
 import { groupHttpClient } from '@api';
+import { Link } from 'react-router-dom';
 
 function ParticipationRequestBox(): JSX.Element {
   const { groupId, requestList } = useAppSelector(selectGroupAdminData);
@@ -28,7 +29,9 @@ function ParticipationRequestBox(): JSX.Element {
   const makeRequestBox = (data: ParticipationRequest, idx: number): JSX.Element => {
     return (
       <BoxContainer key={idx}>
-        <ProfileImage src={data.avatarUrl} />
+        <ProfileLink to={`/profile/${data.githubId}`}>
+          <ProfileImage src={data.avatarUrl} alt="깃허브 이미지"></ProfileImage>
+        </ProfileLink>
         <ProfileInfo>
           <ProfileText>{data.name}</ProfileText>
           <ProfileFeverStack>
@@ -192,6 +195,16 @@ const RequestDate = styled.p`
   font-size: 13px;
   margin-top: 5px;
   margin-right: 20px;
+`;
+
+const ProfileLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center;
 `;
 
 export default ParticipationRequestBox;

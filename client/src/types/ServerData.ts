@@ -141,6 +141,7 @@ export interface UpdateGroupIntroData {
 export interface ParticipationRequest {
   id: number;
   name: string;
+  githubId: string;
   avatarUrl: string;
   feverStack: number;
   createdAt: Date;
