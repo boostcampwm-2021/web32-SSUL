@@ -6,6 +6,8 @@ export class GroupApplyResponse {
   @IsString()
   name: string | null;
   @IsString()
+  githubId: string;
+  @IsString()
   avatarUrl: string | null;
   @IsNumber()
   feverStack: number | null;

@@ -26,6 +26,7 @@ export class GroupAdminService {
         id: id,
         createdAt,
         name: user.name,
+        githubId: user.githubId,
         avatarUrl: user.avatarUrl,
         feverStack: user.feverStack,
       };
