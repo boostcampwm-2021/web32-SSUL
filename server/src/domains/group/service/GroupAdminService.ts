@@ -4,6 +4,7 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
+import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 
 @Service()
 export class GroupAdminService {
@@ -14,8 +15,15 @@ export class GroupAdminService {
     private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
+  public async checkIsGroupOwner(gid: number, userId: number): Promise<void> {
+    const { ownerId } = await this.groupRepository.findOneOrFailByGroupId(gid);
+
+    if(ownerId !== userId){
+      throw new NotAuthorizedError();
+    }
+  }
   public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
-    const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFail({ id: gid });
+    const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFailByGroupId(gid);
     return { name, intro, startAt, endAt };
   }
 

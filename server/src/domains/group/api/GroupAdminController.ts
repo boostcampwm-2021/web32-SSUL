@@ -1,4 +1,13 @@
-import { Body, Controller, Get, OnUndefined, Param, Patch, UseBefore } from 'routing-controllers';
+import {
+  Body,
+  Controller,
+  Get,
+  OnUndefined,
+  Param,
+  Patch,
+  Session,
+  UseBefore,
+} from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
@@ -25,7 +34,8 @@ export class GroupAdminController {
   @ResponseSchema(SimpleGroupInfoResponse)
   @UseBefore(isLoggedIn)
   @Get('/:gid')
-  public async getGroupInfo(@Param('gid') groupId: number) {
+  public async getGroupInfo(@Session() session: any, @Param('gid') groupId: number) {
+    await this.groupAdminService.checkIsGroupOwner(groupId, session.user.id);
     return await this.groupAdminService.getGroupInfoByGroupId(groupId);
   }
 
@@ -33,7 +43,8 @@ export class GroupAdminController {
   @ResponseSchema(GroupApplyResponse, { isArray: true })
   @UseBefore(isLoggedIn)
   @Get('/apply/:gid')
-  public async getApplyList(@Param('gid') groupId: number) {
+  public async getApplyList(@Session() session: any, @Param('gid') groupId: number) {
+    await this.groupAdminService.checkIsGroupOwner(groupId, session.user.id);
     return await this.groupAdminService.getApplyListByGroupId(groupId);
   }
 
@@ -41,7 +52,8 @@ export class GroupAdminController {
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @Patch('/name')
-  public async updateTitle(@Body() { gid, name }: UpdateGroupNameDto) {
+  public async updateTitle(@Session() session: any, @Body() { gid, name }: UpdateGroupNameDto) {
+    await this.groupAdminService.checkIsGroupOwner(gid, session.user.id);
     await this.groupAdminService.updateGroupName(gid, name);
   }
 
@@ -49,7 +61,11 @@ export class GroupAdminController {
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @Patch('/date')
-  public async updateDate(@Body() { gid, startAt, endAt }: UpdateGroupDateDto) {
+  public async updateDate(
+    @Session() session: any,
+    @Body() { gid, startAt, endAt }: UpdateGroupDateDto,
+  ) {
+    await this.groupAdminService.checkIsGroupOwner(gid, session.user.id);
     await this.groupAdminService.updateGroupDate(gid, startAt, endAt);
   }
 
@@ -57,7 +73,8 @@ export class GroupAdminController {
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @Patch('/intro')
-  public async updateIntro(@Body() { gid, intro }: UpdateGroupIntroDto) {
+  public async updateIntro(@Session() session: any, @Body() { gid, intro }: UpdateGroupIntroDto) {
+    await this.groupAdminService.checkIsGroupOwner(gid, session.user.id);
     await this.groupAdminService.updateGroupIntro(gid, intro);
   }
 
