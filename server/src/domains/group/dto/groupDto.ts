@@ -1,12 +1,4 @@
-import {
-  IsArray,
-  IsDate,
-  IsNumber,
-  IsString,
-  IsEnum,
-  IsNotEmpty,
-  IsNotEmptyObject,
-} from 'class-validator';
+import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 
@@ -14,19 +6,6 @@ export enum GroupState {
   READY = 'READY',
   DOING = 'DOING',
   END = 'END',
-}
-
-export interface Group {
-  id: number;
-  mentorId: number;
-  ownerId: number;
-  name: string | null;
-  maxUserCnt: number | null;
-  curUserCnt: number | null;
-  intro: string | null;
-  startAt: Date | null;
-  endAt: Date | null;
-  status: GroupState;
 }
 
 export class GroupDetailDto {

@@ -1,5 +1,4 @@
-import { Category } from '@domains/category/models/Category';
-import { IsArray, IsDate, IsDateString, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsDateString, IsNumber, IsString } from 'class-validator';
 import { Group } from '../models/Group';
 import { TechStack } from '@domains/techstack/models/TechStack';
 
