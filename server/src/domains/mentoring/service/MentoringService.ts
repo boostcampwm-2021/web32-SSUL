@@ -59,4 +59,9 @@ export class MentoringService {
   public async deleteRequest(requestId: number) {
     return await this.mentoringRequestRepository.delete({ id: requestId });
   }
+
+  public async getFilterdPageMentorList(page: number, name: string = '', techstack: string = '') {
+    const nameFilterdAllMentor = await this.mentorRepository.findAllByName(name);
+    return nameFilterdAllMentor;
+  }
 }

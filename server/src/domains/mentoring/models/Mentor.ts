@@ -11,6 +11,7 @@ export class Mentor {
   @Column('int', { name: 'user_id' })
   userId: number;
 
+  @JoinColumn({ name: 'user_id' })
   @OneToOne(() => User)
   user: User;
 

@@ -4,4 +4,15 @@ import { Mentor } from '../models/Mentor';
 
 @Service()
 @EntityRepository(Mentor)
-export class MentorRepository extends Repository<Mentor> {}
+export class MentorRepository extends Repository<Mentor> {
+  public findAllByName(name: string) {
+    return this.createQueryBuilder('mentor')
+      .innerJoin('mentor.techStacks', 'mentor_tech_stack')
+      .innerJoin('mentor.user', 'user')
+      .select(['mentor.id'])
+      .addSelect(['mentor_tech_stack.id', 'mentor_tech_stack.name'])
+      .addSelect(['user.name', 'user.shareStack', 'user.avatarUrl', 'user.githubId', 'user.intro'])
+      .where('user.name like :filterdName', { filterdName: `%${name}%` })
+      .getMany();
+  }
+}
