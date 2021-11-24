@@ -19,11 +19,19 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
       .innerJoinAndSelect('apply_group.user', 'user')
       .where('apply_group.groupId = :gid', { gid })
       .andWhere('state = "PENDING"')
-      .orderBy('apply_group.createdAt','ASC')
+      .orderBy('apply_group.createdAt', 'ASC')
       .getMany();
   }
 
-  public updateApplyState(id: number, state: ApplyGroupState){
-    return this.update({id}, {state});
+  public updateApplyState(id: number, state: ApplyGroupState) {
+    return this.update({ id }, { state });
+  }
+
+  public findApplyData(id: number, ownerId: number) {
+    return this.createQueryBuilder('apply_group')
+      .innerJoinAndSelect('apply_group.group', 'group')
+      .where('apply_group.id = :id', { id })
+      .andWhere('group.ownerId = :ownerId', { ownerId })
+      .getOne();
   }
 }

@@ -82,15 +82,15 @@ export class GroupAdminController {
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @Patch('/accept/:id')
-  public async acceptApply(@Param('id') applyId: number) {
-    await this.groupService.acceptRequest(applyId);
+  public async acceptApply(@Session() session: any, @Param('id') applyId: number) {
+    await this.groupService.acceptRequest(applyId, session.user.id);
   }
 
   @OpenAPI({ summary: '그룹의 참여 요청을 거절하는 API' })
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @Patch('/decline/:id')
-  public async declineApply(@Param('id') applyId: number) {
-    await this.groupService.declineRequest(applyId);
+  public async declineApply(@Session() session: any, @Param('id') applyId: number) {
+    await this.groupService.declineRequest(applyId, session.user.id);
   }
 }
