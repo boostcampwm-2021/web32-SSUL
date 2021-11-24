@@ -24,6 +24,8 @@ function SearchBar({ searchBarInput, changeInputEvent, inputValue }: searchBarPr
     switch (type) {
       case 'GROUP_NAME':
         return '그룹 이름 검색';
+      case 'MENTOR_NAME':
+        return '멘토 이름 검색';
       case 'TECH_STACK':
         return '기술 이름 검색';
     }
@@ -62,7 +64,7 @@ const Container = styled.div`
   display: flex;
   margin: 10px;
   padding: 10px;
-
+  width: 200px;
   background: ${(props) => props.theme.White};
   box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 30px 30px 30px 30px;
@@ -79,7 +81,7 @@ const InputValue = styled.input`
 `;
 
 const SearchButton = styled.button`
-  display: ${(props: StyledProps) => (props.inputValue === 'GROUP_NAME' ? 'diplay' : 'none')};
+  display: ${(props: StyledProps) => (props.inputValue === 'TECH_STACK' ? 'none' : 'flex')};
   background: ${(props) => props.theme.White};
   border: none;
   cursor: pointer;

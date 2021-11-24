@@ -8,6 +8,7 @@ const theme = {
   White: '#FFFFFF',
   Black: '#000000',
   Fever: '#ee7262',
+  Share: '#9cde84',
   LightBlack: '#323232',
   Error: '#E50707',
   PrimaryHover: '#00A18D',

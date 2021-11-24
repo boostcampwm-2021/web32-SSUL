@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { SearchBar } from '@components';
 import SelectedTechList from './SelectedTechList';
 import { useAppSelector } from '@hooks';
-import { returnGroupRecruitFilterState, changeTechStackInput } from '@store/group/filterSlice';
-import { SearchBar } from '@components';
+import { returnMentorRecruitFilterState, changeTechStackInput } from '@store/mentor/filterSlice';
 
 function TechSectionHeader(): JSX.Element {
-  const { techStackInput } = useAppSelector(returnGroupRecruitFilterState);
+  const techStackInput = useAppSelector(returnMentorRecruitFilterState).techStackInput;
 
   return (
     <Container>
