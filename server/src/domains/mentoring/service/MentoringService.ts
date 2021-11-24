@@ -62,6 +62,21 @@ export class MentoringService {
 
   public async getFilterdPageMentorList(page: number, name: string = '', techstack: string = '') {
     const nameFilterdAllMentor = await this.mentorRepository.findAllByName(name);
-    return nameFilterdAllMentor;
+    const techStackFilterdAllMentor = this.filterdBytechStacks(nameFilterdAllMentor, techstack);
+    return techStackFilterdAllMentor;
+  }
+
+  public filterdBytechStacks(mentors: Mentor[], filterdTechstack: string) {
+    if (!filterdTechstack) return mentors;
+    const filterdTechstacks = filterdTechstack.split(',');
+    return mentors
+      .map((mentor) => {
+        const mentorTechStacks = mentor.techStacks;
+        const isIncludeTechStackList = mentorTechStacks.some((techstack) =>
+          filterdTechstacks.includes(techstack.name),
+        );
+        if (isIncludeTechStackList) return mentor;
+      })
+      .filter((mentor) => mentor !== undefined);
   }
 }
