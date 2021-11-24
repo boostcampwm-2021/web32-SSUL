@@ -16,7 +16,7 @@ function GroupOwnerPage(): JSX.Element {
   const { gid } = useParams<Param>();
   const [fetchState, setFetchState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  
+
   const fetchGroupInfo = async (groupId: number) => {
     const groupInfo = await groupHttpClient.getGroupAdminInfo(groupId);
     groupInfo.startAt = formatDateToString(groupInfo.startAt);
@@ -32,8 +32,12 @@ function GroupOwnerPage(): JSX.Element {
   useEffect(() => {
     (async () => {
       const groupId = Number(gid);
-      await Promise.all([fetchGroupInfo(groupId), fetchApplyList(groupId)]);
-      setFetchState(true);
+      try {
+        await Promise.all([fetchGroupInfo(groupId), fetchApplyList(groupId)]);
+        setFetchState(true);
+      } catch (e) {
+        location.href = '/';
+      }
     })();
     return () => {
       dispatch(clearGroupAdminData());
