@@ -13,11 +13,10 @@ function MentorSearchFilter(): JSX.Element {
   const [techListView, setTechListView] = useState<TechStack[]>([]);
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await techStackHttpClient.getTechStackList();
-      setBaseTechStackList(data);
-    };
-    getData();
+    (async () => {
+      const techStacks = await techStackHttpClient.getTechStackList();
+      setBaseTechStackList(techStacks);
+    })();
   }, []);
 
   useEffect(() => {
