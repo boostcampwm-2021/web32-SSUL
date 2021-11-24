@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { MentorCard, Pagination } from '@components';
+import { createdFilterdQuery } from '@store/mentor/filterSlice';
 
 function MentorCardList(): JSX.Element {
   return (
@@ -11,7 +12,7 @@ function MentorCardList(): JSX.Element {
         <MentorCard />
         <MentorCard />
       </CardList>
-      <Pagination totalPages={100} curPage={1} />
+      <Pagination totalPages={100} curPage={1} createdQuery={createdFilterdQuery} />
     </>
   );
 }
