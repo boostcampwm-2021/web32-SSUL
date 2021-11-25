@@ -23,6 +23,7 @@ export class FilterdPageMentorListResponse {
 }
 
 export class FilterdPageMentorListParams {
+  @IsOptional()
   @IsNumber()
   page: number;
   @IsOptional()
