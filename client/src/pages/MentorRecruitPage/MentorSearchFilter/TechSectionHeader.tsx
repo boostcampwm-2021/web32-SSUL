@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import { SearchBar } from '@components';
 import SelectedTechList from './SelectedTechList';
 import { useAppSelector } from '@hooks';
-import { returnMentorRecruitFilterState, changeTechStackInput } from '@store/mentor/filterSlice';
+import {
+  returnMentorRecruitFilterState,
+  changeTechStackInput,
+  createdFilterdQuery,
+} from '@store/mentor/filterSlice';
 
 function TechSectionHeader(): JSX.Element {
   const { techStackInput } = useAppSelector(returnMentorRecruitFilterState);
@@ -13,6 +17,7 @@ function TechSectionHeader(): JSX.Element {
       <SearchBar
         searchBarInput={techStackInput}
         changeInputEvent={changeTechStackInput}
+        createdFilterdQuery={createdFilterdQuery}
         inputValue={'TECH_STACK'}
       />
       <SelectedTechList />

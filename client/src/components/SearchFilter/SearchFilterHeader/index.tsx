@@ -2,7 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import CategoryList from './CategoryList';
 import { useAppSelector } from '@hooks';
-import { returnGroupRecruitFilterState, changeGroupNameInput } from '@store/group/filterSlice';
+import {
+  returnGroupRecruitFilterState,
+  changeGroupNameInput,
+  createdFilterdQuery,
+} from '@store/group/filterSlice';
 import { SearchBar } from '@components';
 
 function SearchFilterHeader(): JSX.Element {
@@ -13,6 +17,7 @@ function SearchFilterHeader(): JSX.Element {
       <SearchBar
         searchBarInput={groupNameInput}
         changeInputEvent={changeGroupNameInput}
+        createdFilterdQuery={createdFilterdQuery}
         inputValue={'GROUP_NAME'}
       />
     </Container>
