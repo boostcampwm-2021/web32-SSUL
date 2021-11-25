@@ -34,5 +34,14 @@
     "createdAt": "2020-11-13 12:39:51",
     "feverStack": 37.5,
     "shareStack": 0
+  },
+  {
+    "id": 5,
+    "githubId": "JunilHwang",
+    "name": "황준일",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/18749057?v=4",
+    "createdAt": "2020-11-13 12:39:51",
+    "feverStack": 37.5,
+    "shareStack": 40.0
   }
 ]

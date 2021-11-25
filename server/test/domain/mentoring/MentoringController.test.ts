@@ -10,13 +10,13 @@ describe('/mentoring', () => {
   });
 
   describe('[GET /mentor/:uid] 유저 id로 멘토링 id 가져옴', () => {
-    //uid 1 is mentor , uid 2 is not mentor
+    //uid 4 is mentor
     test('멘토 등록된 유저는 성공', async () => {
       //when
-      const response = await request(app).get('/api/mentoring/mentor/1');
+      const response = await request(app).get('/api/mentoring/mentor/4');
       //then
       expect(response.statusCode).toBe(200);
-      expect(response.body.mentorId).toBe(10);
+      expect(response.body.mentorId).toBe(1);
     });
 
     test('멘토 등록X 유저는 실패', async () => {
@@ -30,11 +30,9 @@ describe('/mentoring', () => {
   describe('[POST /mentor] 멘토 등록 신청', () => {
     test('멘토 등록 성공', async () => {
       //given
-      const cookieSession = getLoginCookie({
-        id: 3,
-      });
+      const cookieSession = getLoginCookie({ id: 5 });
       const mentorRegstDto = {
-        userId: 3,
+        userId: 5,
         techStacks: [
           { id: 1, name: 'react' },
           { id: 2, name: 'express' },
@@ -53,9 +51,7 @@ describe('/mentoring', () => {
 
     test('본인이 아닐시 등록 실패', async () => {
       //given
-      const cookieSession = getLoginCookie({
-        id: 2,
-      });
+      const cookieSession = getLoginCookie({ id: 2 });
       const mentorRegstDto = {
         userId: 3,
         techStacks: [

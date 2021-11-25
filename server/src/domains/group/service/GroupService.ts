@@ -3,15 +3,16 @@ import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
+import { UserRepository } from '@domains/user/repository/UserRepository';
 
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
 import { GroupUserDto } from '@domains/user/dto/UserDto';
 
-import { Group } from '../models/Group';
+import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
@@ -24,7 +25,6 @@ import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
-import { GroupNotInvolve } from '../error/GroupNotInvolve';
 
 const EACH_PAGE_CNT = 12;
 
@@ -76,7 +76,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
+    const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -148,6 +148,7 @@ export class GroupService {
   }
 
   public async checkGroupBelong(userId: number, groupId: number): Promise<void> {
+    //TODO: findOrFail 을 사용하고 내부구현 감추기
     const enrollment = await this.groupEnrollmentRepository.findOne({ where: { groupId, userId } });
     if (!enrollment) throw new NotAuthorizedError();
   }
@@ -161,7 +162,7 @@ export class GroupService {
 
   public async getOwnGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
     const groups = await this.groupRepository.findAllByOwnerId(userId);
-    return groups as SimpleGroupCardResponse[];
+    return groups.map((group) => SimpleGroupCardResponse.from(group));
   }
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
@@ -187,5 +188,28 @@ export class GroupService {
     if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
+  }
+
+  public async getMyApplyedGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
+    const applies = await this.applyGroupRepository.findAllByUserIdAndState(
+      userId,
+      ApplyGroupState.PENDING,
+    );
+    const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
+    return groups;
+  }
+
+  public async getEnrolledGroupByQuery(
+    userId: number,
+    status: GroupState,
+    enrollmentAs: GroupEnrollmentAs,
+  ) {
+    const enrollments = await this.groupEnrollmentRepository.findAllByUserIdAndType(
+      userId,
+      enrollmentAs,
+    );
+    return enrollments
+      .map((enrollment) => SimpleGroupCardResponse.from(enrollment.group))
+      .filter((group) => group.status === status);
   }
 }

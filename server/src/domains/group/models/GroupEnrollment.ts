@@ -25,6 +25,7 @@ export class GroupEnrollment {
   @ManyToOne(() => User, (user) => user.groupEnrollments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
+    eager: true,
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
@@ -32,6 +33,7 @@ export class GroupEnrollment {
   @ManyToOne(() => Group, (group) => group.groupEnrollments, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
+    eager: true,
   })
   @JoinColumn({ name: 'group_id' })
   group: Group;

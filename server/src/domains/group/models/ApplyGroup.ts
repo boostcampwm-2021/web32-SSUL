@@ -19,22 +19,18 @@ export class ApplyGroup {
   @Column('int', { name: 'group_id' })
   groupId: number;
 
-  @Column({ type: 'enum', enum: ApplyGroupState })
+  @Column({ type: 'enum', enum: ApplyGroupState, default: ApplyGroupState.PENDING })
   state: string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
 
-  @ManyToOne(() => User, (user) => user.applyGroups, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-  })
+  @ManyToOne(() => User, (user) => user.applyGroups, { eager: true })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Group, (group) => group.applyGroups, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
+    eager: true,
   })
   @JoinColumn({ name: 'group_id' })
   group: Group;
