@@ -19,8 +19,8 @@ export class ApplyGroup {
   @Column('int', { name: 'group_id' })
   groupId: number;
 
-  @Column({ type: 'enum', enum: ApplyGroupState, default: ApplyGroupState.PENDING })
-  state: string;
+  @Column('varchar', { name: 'state' })
+  state: ApplyGroupState | string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;

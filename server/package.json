@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "cp .env.dev .env && nodemon",
     "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
-    "test": "npm run seed:test && jest --setupFiles dotenv/config --forceExit",
-    "seed:test": "cp .env.test .env && ts-node -r tsconfig-paths/register ./bin/seed.ts",
+    "test": "cp .env.test .env && jest --setupFiles dotenv/config --forceExit",
     "seed:dev": "cp .env.dev .env && ts-node -r tsconfig-paths/register ./bin/seed.ts"
   },
   "dependencies": {
@@ -26,6 +25,7 @@
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
     "routing-controllers-openapi": "^3.1.0",
+    "sqlite3": "^5.0.2",
     "swagger-ui-express": "^4.1.6",
     "typedi": "^0.10.0",
     "typeorm": "^0.2.38",

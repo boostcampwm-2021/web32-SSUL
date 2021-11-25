@@ -23,12 +23,10 @@ export class Alarm {
   @JoinColumn({ name: 'reciever_id' })
   recieverId: number;
 
-  @Column({
+  @Column('varchar', {
     name: 'type',
-    type: 'enum',
-    enum: AlarmType,
   })
-  type: AlarmType;
+  type: AlarmType | string;
 
   @Column('varchar', { name: 'content', nullable: true, length: 255 })
   content: string | null;
