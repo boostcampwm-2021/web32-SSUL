@@ -1,10 +1,13 @@
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
+import { GroupService } from './GroupService';
+import { GroupEnrollmentAs } from '../models/GroupEnrollment';
+import { ApplyGroupState } from '../models/ApplyGroup';
 
 @Service()
 export class GroupOwnerService {
@@ -13,6 +16,8 @@ export class GroupOwnerService {
     private readonly groupRepository: GroupRepository,
     @InjectRepository()
     private readonly applyGroupRepository: ApplyGroupRepository,
+    @Inject()
+    private readonly groupService: GroupService,
   ) {}
 
   public async checkIsGroupOwner(gid: number, userId: number): Promise<void> {
@@ -51,5 +56,26 @@ export class GroupOwnerService {
 
   public updateGroupIntro(gid: number, intro: string) {
     return this.groupRepository.update({ id: gid }, { intro });
+  }
+  public async acceptRequest(applyId: number, ownerId: number) {
+    const applyGroup = await this.applyGroupRepository.findApplyData(applyId, ownerId);
+
+    if (applyGroup === undefined) {
+      throw new NotAuthorizedError();
+    }
+    applyGroup.state = ApplyGroupState.ACCEPTED;
+    //TODO transaction
+    await this.groupService.enroll(applyGroup.groupId, applyGroup.userId, GroupEnrollmentAs.MENTEE);
+    await this.applyGroupRepository.save(applyGroup);
+  }
+
+  public async declineRequest(applyId: number, ownerId: number) {
+    const applyGroup = await this.applyGroupRepository.findApplyData(applyId, ownerId);
+
+    if (applyGroup === undefined) {
+      throw new NotAuthorizedError();
+    }
+    applyGroup.state = ApplyGroupState.DECLINED;
+    await this.applyGroupRepository.save(applyGroup);
   }
 }

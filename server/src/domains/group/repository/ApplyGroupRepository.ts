@@ -23,10 +23,6 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
       .getMany();
   }
 
-  public updateApplyState(id: number, state: ApplyGroupState) {
-    return this.update({ id }, { state });
-  }
-
   public findApplyData(id: number, ownerId: number) {
     return this.createQueryBuilder('apply_group')
       .innerJoinAndSelect('apply_group.group', 'group')
