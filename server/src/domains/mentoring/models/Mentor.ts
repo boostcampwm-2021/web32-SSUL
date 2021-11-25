@@ -1,4 +1,4 @@
-import { Entity, OneToOne, OneToMany, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, OneToOne, OneToMany, PrimaryGeneratedColumn, Column, JoinColumn } from 'typeorm';
 import { MentoringRequest } from './MentoringRequest';
 import { User } from '@domains/user/models/User';
 import { MentorTechStack } from '@domains/techstack/models/MentorTechStack';
