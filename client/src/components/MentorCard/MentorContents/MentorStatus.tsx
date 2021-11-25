@@ -19,7 +19,7 @@ function MentorStatus({ user, techStacks }: Props): JSX.Element {
     if (idx < MAX_SHOW_TECHSTACK)
       return <TechListItem key={techStack.id}>{techStack.name} </TechListItem>;
     if (idx === MAX_SHOW_TECHSTACK)
-      return <MoreTechStack key={idx}>...{moreTechStackList}</MoreTechStack>;
+      return <MoreTechStack key={techStack.id}>...{moreTechStackList}</MoreTechStack>;
   });
 
   return (
