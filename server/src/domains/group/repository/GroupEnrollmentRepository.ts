@@ -16,11 +16,10 @@ export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {
       where: { userId, type },
     });
   }
-  
+
   findTypeByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({
       where: { groupId, userId },
-      select: ['type'],
     });
   }
 }
