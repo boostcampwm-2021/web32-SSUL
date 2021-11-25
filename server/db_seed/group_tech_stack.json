@@ -2,151 +2,151 @@
   {
     "id": 1,
     "groupId": 1,
-    "techstackId": 3,
+    "techStackId": 3,
     "name": "node.js"
   },
   {
     "id": 2,
     "groupId": 1,
-    "techstackId": 4,
+    "techStackId": 4,
     "name": "Java"
   },
   {
     "id": 3,
     "groupId": 1,
-    "techstackId": 5,
+    "techStackId": 5,
     "name": "javascript"
   },
   {
     "id": 4,
     "groupId": 1,
-    "techstackId": 6,
+    "techStackId": 6,
     "name": "typescript"
   },
   {
     "id": 5,
     "groupId": 1,
-    "techstackId": 7,
+    "techStackId": 7,
     "name": "R"
   },
   {
     "id": 6,
     "groupId": 2,
-    "techstackId": 4,
+    "techStackId": 4,
     "name": "Java"
   },
   {
     "id": 7,
     "groupId": 2,
-    "techstackId": 5,
+    "techStackId": 5,
     "name": "javascript"
   },
   {
     "id": 8,
     "groupId": 2,
-    "techstackId": 6,
+    "techStackId": 6,
     "name": "typescript"
   },
   {
     "id": 9,
     "groupId": 2,
-    "techstackId": 7,
+    "techStackId": 7,
     "name": "R"
   },
   {
     "id": 10,
     "groupId": 2,
-    "techstackId": 8,
+    "techStackId": 8,
     "name": "C++"
   },
   {
     "id": 11,
     "groupId": 3,
-    "techstackId": 5,
+    "techStackId": 5,
     "name": "javascript"
   },
   {
     "id": 12,
     "groupId": 3,
-    "techstackId": 6,
+    "techStackId": 6,
     "name": "typescript"
   },
   {
     "id": 13,
     "groupId": 3,
-    "techstackId": 7,
+    "techStackId": 7,
     "name": "R"
   },
   {
     "id": 14,
     "groupId": 3,
-    "techstackId": 8,
+    "techStackId": 8,
     "name": "C++"
   },
   {
     "id": 15,
     "groupId": 3,
-    "techstackId": 9,
+    "techStackId": 9,
     "name": "SQL"
   },
   {
     "id": 16,
     "groupId": 4,
-    "techstackId": 6,
+    "techStackId": 6,
     "name": "typescript"
   },
   {
     "id": 17,
     "groupId": 4,
-    "techstackId": 7,
+    "techStackId": 7,
     "name": "R"
   },
   {
     "id": 18,
     "groupId": 4,
-    "techstackId": 8,
+    "techStackId": 8,
     "name": "C++"
   },
   {
     "id": 19,
     "groupId": 4,
-    "techstackId": 9,
+    "techStackId": 9,
     "name": "SQL"
   },
   {
     "id": 20,
     "groupId": 4,
-    "techstackId": 10,
+    "techStackId": 10,
     "name": "Vue.js"
   },
   {
     "id": 21,
     "groupId": 5,
-    "techstackId": 7,
+    "techStackId": 7,
     "name": "R"
   },
   {
     "id": 22,
     "groupId": 5,
-    "techstackId": 8,
+    "techStackId": 8,
     "name": "C++"
   },
   {
     "id": 23,
     "groupId": 5,
-    "techstackId": 9,
+    "techStackId": 9,
     "name": "SQL"
   },
   {
     "id": 24,
     "groupId": 5,
-    "techstackId": 10,
+    "techStackId": 10,
     "name": "Vue.js"
   },
   {
     "id": 25,
     "groupId": 5,
-    "techstackId": 11,
+    "techStackId": 11,
     "name": "HTML"
   }
 ]
