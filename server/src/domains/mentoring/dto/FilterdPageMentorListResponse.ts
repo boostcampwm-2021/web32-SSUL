@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class FilterdMentor {
   @IsNumber()
@@ -20,4 +20,16 @@ export class FilterdPageMentorListResponse {
   mentors: FilterdMentor[];
   @IsNumber()
   totalPages: number;
+}
+
+export class FilterdPageMentorListParams {
+  @IsOptional()
+  @IsNumber()
+  page: number;
+  @IsOptional()
+  @IsString()
+  name: string;
+  @IsOptional()
+  @IsString()
+  techstack: string;
 }

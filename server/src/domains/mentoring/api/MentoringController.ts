@@ -7,7 +7,7 @@ import {
   Get,
   Param,
   UseBefore,
-  QueryParam,
+  QueryParams,
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
@@ -22,7 +22,10 @@ import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
 import { GroupService } from '@domains/group/service/GroupService';
 import { TechStackService } from '@domains/techstack/service/TechStackService';
 import { UserService } from '@domains/user/service/UserService';
-import { FilterdPageMentorListResponse } from '../dto/FilterdPageMentorListResponse';
+import {
+  FilterdPageMentorListParams,
+  FilterdPageMentorListResponse,
+} from '../dto/FilterdPageMentorListResponse';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -53,9 +56,7 @@ export class MentoringController {
   })
   @ResponseSchema(FilterdPageMentorListResponse)
   public async getFilterdMentorList(
-    @QueryParam('page') page: number,
-    @QueryParam('name') name: string,
-    @QueryParam('techstack') techstack: string,
+    @QueryParams() { page, name, techstack }: FilterdPageMentorListParams,
   ) {
     return await this.mentoringService.getFilterdPageMentorList(page, name, techstack);
   }
