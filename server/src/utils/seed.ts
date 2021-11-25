@@ -21,7 +21,9 @@ import {
   mentorSeedData,
   postSeedData,
   applyGroupSeedData,
+  mentorTechStackSeedData,
 } from '@root/db_seed';
+import { MentorTechStack } from '@domains/techstack/models/MentorTechStack';
 
 export async function seed() {
   const seedConfig = { ...ormConfig[config.mode], dropSchema: true };
@@ -65,5 +67,11 @@ async function seedDatabase(connection: Connection) {
     .insert()
     .into(ApplyGroup)
     .values(applyGroupSeedData)
+    .execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(MentorTechStack)
+    .values(mentorTechStackSeedData)
     .execute();
 }
