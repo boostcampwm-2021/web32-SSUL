@@ -106,4 +106,54 @@ describe('/mentoring', () => {
       expect(res.statusCode).toBe(400);
     });
   });
+
+  describe('[GET /mentor/list] 필터링된 멘토 리스트 가져오기', () => {
+    //uid 1 is mentor , uid 2 is not mentor
+    test('페이지 번호로 조회하기', async () => {
+      //when
+
+      const res = await request(app).get('/api/mentoring/mentor/list').query({
+        page: 1,
+      });
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.totalPages).toBe(1);
+    });
+
+    test('선택한 기술스택을 가진 멘토만 조회되는지 테스트', async () => {
+      //when
+      const techStackName = 'Express';
+      const response = await request(app).get('/api/mentoring/mentor/list').query({
+        techstack: techStackName,
+      });
+      //then
+      expect(response.statusCode).toBe(200);
+
+      const { mentors } = response.body;
+      mentors.forEach((mentor: any) => {
+        const mentorTechStacks = mentor.techStacks;
+        const isIncludeTechStackList = mentorTechStacks.some((techstack: any) =>
+          techStackName.includes(techstack.name),
+        );
+        expect(isIncludeTechStackList).toBe(true);
+      });
+    });
+
+    test('선택한 이름을 가진 멘토만 조회되는지 테스트', async () => {
+      //when
+      const name = '유';
+      const response = await request(app).get('/api/mentoring/mentor/list').query({
+        name,
+      });
+      //then
+      expect(response.statusCode).toBe(200);
+
+      const { mentors } = response.body;
+      mentors.forEach((mentor: any) => {
+        const mentorName = mentor.user.name;
+        const isIncludeMentorName = mentorName.includes(name);
+        expect(isIncludeMentorName).toBe(true);
+      });
+    });
+  });
 });
