@@ -5,3 +5,4 @@ export * from './groupHttpClient';
 export * from './techStackHttpClient';
 export * from './mentoringHttpClient';
 export * from './postHttpClient';
+export * from './groupOwnerHttpClient';

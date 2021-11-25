@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
-import { groupHttpClient } from '@api';
+import { groupOwnerHttpClient } from '@api';
 
 const MIN_TITLE_LENGTH = 1;
 const MAX_TITLE_LENGTH = 20;
@@ -24,7 +24,7 @@ function GroupTitle(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ name: text }));
-      groupHttpClient.patchGroupName({ gid: groupId, name: text });
+      groupOwnerHttpClient.patchGroupName({ gid: groupId, name: text });
     }
     setNotificationText('');
     setIsEdit(!isEdit);

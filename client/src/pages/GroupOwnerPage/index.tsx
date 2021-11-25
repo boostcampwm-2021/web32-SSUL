@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import GroupInfoBox from './groupInfoBox';
 import ParticipationRequestBox from './ParticipationRequestBox';
 import { useParams } from 'react-router';
-import { groupHttpClient } from '@api';
+import { groupOwnerHttpClient } from '@api';
 import { useAppDispatch } from '@hooks';
 import { clearGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { formatDateToString } from '@utils/Date';
@@ -18,14 +18,14 @@ function GroupOwnerPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const fetchGroupInfo = async (groupId: number) => {
-    const groupInfo = await groupHttpClient.getGroupAdminInfo(groupId);
+    const groupInfo = await groupOwnerHttpClient.getGroupAdminInfo(groupId);
     groupInfo.startAt = formatDateToString(groupInfo.startAt);
     groupInfo.endAt = formatDateToString(groupInfo.endAt);
     dispatch(setGroupAdminData({ groupId, ...groupInfo }));
   };
 
   const fetchApplyList = async (groupId: number) => {
-    const requestList = await groupHttpClient.getApplyGroupList(groupId);
+    const requestList = await groupOwnerHttpClient.getApplyGroupList(groupId);
     dispatch(setGroupAdminData({ requestList }));
   };
 

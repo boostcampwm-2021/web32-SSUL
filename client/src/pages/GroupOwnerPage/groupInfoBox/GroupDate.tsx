@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { DatePicker } from '@components';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
-import { groupHttpClient } from '@api';
+import { groupOwnerHttpClient } from '@api';
 
 function GroupDate(): JSX.Element {
   const { groupId, startAt, endAt } = useAppSelector(selectGroupAdminData);
@@ -22,7 +22,7 @@ function GroupDate(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ startAt, endAt }));
-      groupHttpClient.patchGroupDate({ gid: groupId, startAt, endAt });
+      groupOwnerHttpClient.patchGroupDate({ gid: groupId, startAt, endAt });
     }
 
     setNotificationText('');

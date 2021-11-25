@@ -4,7 +4,7 @@ import { formatDateToString } from '@utils/Date';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { ParticipationRequest } from '@types';
-import { groupHttpClient } from '@api';
+import { groupOwnerHttpClient } from '@api';
 import { Link } from 'react-router-dom';
 
 function ParticipationRequestBox(): JSX.Element {
@@ -12,17 +12,17 @@ function ParticipationRequestBox(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const fetchApplyList = async () => {
-    const requestList = await groupHttpClient.getApplyGroupList(groupId);
+    const requestList = await groupOwnerHttpClient.getApplyGroupList(groupId);
     dispatch(setGroupAdminData({ requestList }));
   };
 
   const handleAcceptButtonClick = (applyId: number) => async () => {
-    await groupHttpClient.acceptApplyList(applyId);
+    await groupOwnerHttpClient.acceptApplyList(applyId);
     fetchApplyList();
   };
 
   const handleRejectButtonClick = (applyId: number) => async () => {
-    await groupHttpClient.acceptDeclineList(applyId);
+    await groupOwnerHttpClient.acceptDeclineList(applyId);
     fetchApplyList();
   };
 

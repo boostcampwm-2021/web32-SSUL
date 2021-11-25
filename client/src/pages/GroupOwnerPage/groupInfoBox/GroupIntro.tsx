@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
-import { groupHttpClient } from '@api';
+import { groupOwnerHttpClient } from '@api';
 
 const MIN_INTRO_LENGTH = 1;
 const MAX_INTRO_LENGTH = 500;
@@ -25,7 +25,7 @@ function GroupIntro(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ intro: text }));
-      groupHttpClient.patchGroupIntro({ gid: groupId, intro: text });
+      groupOwnerHttpClient.patchGroupIntro({ gid: groupId, intro: text });
     }
     setNotificationText('');
     setIsEdit(!isEdit);

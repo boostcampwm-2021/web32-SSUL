@@ -5,11 +5,6 @@ import {
   GroupActivity,
   GroupDetailData,
   GroupApplyData,
-  SimpleGroupInfoResponse,
-  UpdateGroupIntroData,
-  UpdateGroupDateData,
-  UpdateGroupNameData,
-  ParticipationRequest,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -33,27 +28,6 @@ class GroupHttpClient extends HttpClient {
     this.httpClient.post('/apply', applyInfo);
 
   public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
-  
-  public getGroupAdminInfo = (groupId: number): Promise<SimpleGroupInfoResponse> =>
-    this.httpClient.get(`/admin/${groupId}`);
-
-  public patchGroupName = (UpdateGroupNameData: UpdateGroupNameData): Promise<null> =>
-    this.httpClient.patch('/admin/name', UpdateGroupNameData);
-
-  public patchGroupDate = (updateGroupDateData: UpdateGroupDateData): Promise<null> =>
-    this.httpClient.patch('/admin/date', updateGroupDateData);
-
-  public patchGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
-    this.httpClient.patch('/admin/intro', updateGroupIntroData);
-
-  public getApplyGroupList = (groupId: number): Promise<ParticipationRequest[]> =>
-    this.httpClient.get(`/admin/apply/${groupId}`);
-  
-  public acceptApplyList = (applyId: number): Promise<null> => 
-    this.httpClient.patch(`/admin/accept/${applyId}`);
-  
-  public acceptDeclineList = (applyId: number): Promise<null> => 
-    this.httpClient.patch(`/admin/decline/${applyId}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();
