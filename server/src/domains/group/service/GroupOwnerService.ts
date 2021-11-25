@@ -20,13 +20,6 @@ export class GroupOwnerService {
     private readonly groupService: GroupService,
   ) {}
 
-  public async checkIsGroupOwner(gid: number, userId: number): Promise<void> {
-    const { ownerId } = await this.groupRepository.findOneOrFailByGroupId(gid);
-
-    if(ownerId !== userId){
-      throw new NotAuthorizedError();
-    }
-  }
   public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
     const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFailByGroupId(gid);
     return { name, intro, startAt, endAt };

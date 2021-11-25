@@ -6,3 +6,8 @@ export class ApplyGroupDto {
   @IsNumber()
   userId: number;
 }
+
+export class ApplyParam {
+  @IsNumber()
+  aid: number;
+}
