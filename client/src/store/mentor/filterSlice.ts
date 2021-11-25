@@ -53,9 +53,11 @@ export const mentorRecruitFilterSlice = createSlice({
     createdFilterdQuery(state) {
       const { mentorNameInput, selectedTechStack, selectedPage } = state;
       const pageQuery = `?page=${selectedPage}`;
-      const nameQuery = mentorNameInput ? `&name=${mentorNameInput}` : '';
+      const nameQuery = mentorNameInput ? `&name=${encodeURIComponent(mentorNameInput)}` : '';
       const techStackQuery =
-        selectedTechStack.length !== 0 ? `&techstack=${selectedTechStack.join(',')}` : '';
+        selectedTechStack.length !== 0
+          ? `&techstack=${encodeURIComponent(selectedTechStack.join(','))}`
+          : '';
       return {
         ...state,
         filterdQuery: `${pageQuery}${nameQuery}${techStackQuery}`,
