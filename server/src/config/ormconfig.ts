@@ -28,14 +28,11 @@ export const ormConfig: OrmConfig = {
     logging: false,
   },
   test: {
-    type: 'mysql',
-    host: '101.101.217.227',
-    port: 3306,
-    database: 'ssul_test',
-    username: config.database.username,
-    password: config.database.password,
+    type: 'sqlite',
+    database: ':memory:',
     entities: [join(__dirname, '../domains/**/models/*.ts')],
     logging: false,
+    dropSchema: true,
     synchronize: true,
   },
 };

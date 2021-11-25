@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "cp .env.dev .env && nodemon",
     "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
-    "test": "npm run seed:test && jest --setupFiles dotenv/config --forceExit",
-    "seed:test": "cp .env.test .env && ts-node -r tsconfig-paths/register ./bin/seed.ts",
+    "test": "cp .env.test .env && jest --setupFiles dotenv/config --forceExit",
     "seed:dev": "cp .env.dev .env && ts-node -r tsconfig-paths/register ./bin/seed.ts"
   },
   "dependencies": {
