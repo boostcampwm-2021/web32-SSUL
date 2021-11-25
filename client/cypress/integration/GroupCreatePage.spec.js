@@ -167,7 +167,7 @@ describe('그룹 기술스택 입력', () => {
   });
 
   it('기술선택 후 완료버튼을 누르면 그룹생성 페이지를 벗어난다.', () => {
-    cy.intercept('POST', 'api/group', { statusCode : 200});
+    cy.intercept('POST', 'api/group', { statusCode: 200 });
     cy.react('CustomButton').contains('완료').click();
     cy.url().should('not.include', '/group/create');
   });
