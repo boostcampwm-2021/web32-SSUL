@@ -69,6 +69,10 @@ pipeline {
                         cp $dotenvFile .env.test
                         npm install
                         npm run test
+
+                        cd ../client
+                        npm install
+                        npm run test
                     '''
                 }
                 
