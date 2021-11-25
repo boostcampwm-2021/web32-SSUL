@@ -12,6 +12,9 @@ import { Mentor } from '../models/Mentor';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
+const EACH_PAGE_CNT = 12;
+const DEFAULT_PAGE_NUM = 1;
+
 @Service()
 export class MentoringService {
   constructor(
@@ -58,5 +61,32 @@ export class MentoringService {
 
   public async deleteRequest(requestId: number) {
     return await this.mentoringRequestRepository.delete({ id: requestId });
+  }
+
+  public async getFilterdPageMentorList(
+    page: number = DEFAULT_PAGE_NUM,
+    name: string = '',
+    techstack: string = '',
+  ) {
+    const nameFilterdAllMentor = await this.mentorRepository.findAllByName(name);
+    const techStackFilterdAllMentor = this.filterdBytechStacks(nameFilterdAllMentor, techstack);
+    const offset = (page - 1) * EACH_PAGE_CNT;
+    const filterdPageMentors = techStackFilterdAllMentor.slice(offset, offset + EACH_PAGE_CNT);
+    const totalPages: number = Math.ceil(filterdPageMentors.length / EACH_PAGE_CNT);
+    return { mentors: filterdPageMentors, totalPages };
+  }
+
+  public filterdBytechStacks(mentors: Mentor[], filterdTechstack: string) {
+    if (!filterdTechstack) return mentors;
+    const filterdTechstacks = filterdTechstack.split(',');
+    return mentors
+      .map((mentor) => {
+        const mentorTechStacks = mentor.techStacks;
+        const isIncludeTechStackList = mentorTechStacks.some((techstack) =>
+          filterdTechstacks.includes(techstack.name),
+        );
+        if (isIncludeTechStackList) return mentor;
+      })
+      .filter((mentor) => mentor);
   }
 }
