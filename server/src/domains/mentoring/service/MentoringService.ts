@@ -13,6 +13,7 @@ import { Mentor } from '../models/Mentor';
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
 const EACH_PAGE_CNT = 12;
+const DEFAULT_PAGE_NUM = 1;
 
 @Service()
 export class MentoringService {
@@ -63,7 +64,7 @@ export class MentoringService {
   }
 
   public async getFilterdPageMentorList(
-    page: number = 1,
+    page: number = DEFAULT_PAGE_NUM,
     name: string = '',
     techstack: string = '',
   ) {
@@ -86,6 +87,6 @@ export class MentoringService {
         );
         if (isIncludeTechStackList) return mentor;
       })
-      .filter((mentor) => mentor !== undefined);
+      .filter((mentor) => mentor);
   }
 }
