@@ -7,11 +7,9 @@ import {
   initFilterState,
 } from '@store/mentor/filterSlice';
 import { Mentor, MentorListResponse } from '@types';
-import { dummyData } from './dummyData';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { mentoringHttpClient } from '@api';
 
-console.log(dummyData);
 function MentorCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnMentorRecruitFilterState);
   const [filterdMentorList, setFilterdMentorList] = useState<Mentor[]>([]);
@@ -30,19 +28,23 @@ function MentorCardList(): JSX.Element {
         filterdQuery,
       );
       setFilterdMentorList(allMentorList.mentors);
-      setTotalPages(allMentorList.pages);
+      setTotalPages(allMentorList.totalPages);
       toggleLoader(false);
     })();
   }, [filterdQuery]);
 
-  const renderMentorCards = dummyData.map((mentorData: Mentor) => {
+  const renderMentorCards = filterdMentorList.map((mentorData: Mentor) => {
     return <MentorCard key={mentorData.id} contents={mentorData} />;
   });
 
   return (
     <>
       <CardList>{renderMentorCards}</CardList>
-      <Pagination totalPages={100} curPage={1} createdQuery={createdFilterdQuery} />
+      <Pagination
+        totalPages={totalPages}
+        curPage={selectedPage}
+        createdQuery={createdFilterdQuery}
+      />
     </>
   );
 }
