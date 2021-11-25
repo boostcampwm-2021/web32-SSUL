@@ -31,6 +31,11 @@ export async function seed() {
   console.log('seeding done.');
 }
 
+export async function seedWithConnection(connection: Connection) {
+  await seedDatabase(connection);
+  console.log('seeding done.');
+}
+
 async function seedDatabase(connection: Connection) {
   await connection.createQueryBuilder().insert().into(User).values(userSeedData).execute();
   await connection.createQueryBuilder().insert().into(Category).values(catagorySeedData).execute();
