@@ -97,23 +97,19 @@ export class GroupController {
   }
 
   //TODO: need unit test
-  @Get('/my/mentee')
+  @Get('/my')
   @UseBefore(isLoggedIn)
   @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
   @OpenAPI({
     summary: '내가 참여한 그룹을 상태에따라 필터링하여 가져오는 API',
-    description: 'MENTEE로써 참여한 그룹만 조회',
   })
   public async getEnrolledGroupByStatus(
     @Session() session: any,
-    @QueryParams() { status }: EnrolledGroupQuery,
+    @QueryParams() { status, type }: EnrolledGroupQuery,
   ) {
-    return await this.groupService.getEnrolledGroupByQuery(
-      session.user.id,
-      status,
-      GroupEnrollmentAs.MENTEE,
-    );
+    return await this.groupService.getEnrolledGroupByQuery(session.user.id, status, type);
   }
+
   @Post('/apply')
   @OnUndefined(200)
   @OpenAPI({
