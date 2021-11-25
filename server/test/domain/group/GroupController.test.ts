@@ -1,4 +1,6 @@
 import { SimpleGroupCardResponse } from '@domains/group/dto/SimpleGroupCardResponse';
+import { GroupState } from '@domains/group/models/Group';
+import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -52,24 +54,22 @@ describe('그룹 컨트롤러', () => {
     });
   });
 
-  describe('GET /group/my/mentee', () => {
+  describe('GET /group/my', () => {
     test('멘티로 참여한 진행중 상태 조회 성공', async () => {
       //given
       const mockSession = getLoginCookie({ id: 2 });
 
       //when
-      const response = await request(app)
-        .get('/api/group/my/mentee')
-        .set('Cookie', mockSession)
-        .query({
-          status: 'DOING',
-        });
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession).query({
+        status: GroupState.DOING,
+        type: GroupEnrollmentAs.MENTEE,
+      });
 
       //then
       expect(response.statusCode).toBe(200);
       const groups: SimpleGroupCardResponse[] = response.body;
       groups.forEach((group) => {
-        expect(group.status).toBe('DOING');
+        expect(group.status).toBe(GroupState.DOING);
       });
     });
 
@@ -78,18 +78,16 @@ describe('그룹 컨트롤러', () => {
       const mockSession = getLoginCookie({ id: 2 });
 
       //when
-      const response = await request(app)
-        .get('/api/group/my/mentee')
-        .set('Cookie', mockSession)
-        .query({
-          status: 'DONE',
-        });
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession).query({
+        status: GroupState.END,
+        type: GroupEnrollmentAs.MENTEE,
+      });
 
       //then
       expect(response.statusCode).toBe(200);
       const groups: SimpleGroupCardResponse[] = response.body;
       groups.forEach((group) => {
-        expect(group.status).toBe('DONE');
+        expect(group.status).toBe(GroupState.END);
       });
     });
 
@@ -99,11 +97,43 @@ describe('그룹 컨트롤러', () => {
 
       //when
       //no query
-      const response = await request(app).get('/api/group/my/mentee').set('Cookie', mockSession);
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession);
 
       //then
-      console.log(response.body);
       expect(response.statusCode).toBe(400);
+    });
+
+    test('멘토로 참여한 진행 중 상태 조회 성공', async () => {
+      //given
+      const mockSession = getLoginCookie({ id: 4 });
+
+      //when
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession).query({
+        status: GroupState.DOING,
+        type: GroupEnrollmentAs.MENTOR,
+      });
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, status } = response.body[0];
+      expect(id).toBe(2);
+      expect(status).toBe(GroupState.DOING);
+    });
+    test('멘토로 참여한 진행 완료 상태 그룹 조회 성공', async () => {
+      //given
+      const mockSession = getLoginCookie({ id: 4 });
+
+      //when
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession).query({
+        status: GroupState.END,
+        type: GroupEnrollmentAs.MENTOR,
+      });
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, status } = response.body[0];
+      expect(id).toBe(3);
+      expect(status).toBe(GroupState.END);
     });
   });
 });
