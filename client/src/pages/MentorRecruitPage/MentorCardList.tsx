@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { MentorCard, Pagination } from '@components';
 import { createdFilterdQuery } from '@store/mentor/filterSlice';
+import { Mentor } from '@types';
+import { dummyData } from './dummyData';
 
+console.log(dummyData);
 function MentorCardList(): JSX.Element {
+  const [filterdMentorList, setFilterdMentorList] = useState<Mentor[]>([]);
+  const renderMentorCards = dummyData.map((mentorData: Mentor) => {
+    return <MentorCard key={mentorData.id} contents={mentorData} />;
+  });
+
   return (
     <>
-      <CardList>
-        <MentorCard />
-        <MentorCard />
-        <MentorCard />
-        <MentorCard />
-      </CardList>
+      <CardList>{renderMentorCards}</CardList>
+
       <Pagination totalPages={100} curPage={1} createdQuery={createdFilterdQuery} />
     </>
   );
