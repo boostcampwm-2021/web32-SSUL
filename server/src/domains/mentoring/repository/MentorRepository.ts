@@ -11,7 +11,15 @@ export class MentorRepository extends Repository<Mentor> {
       .innerJoin('mentor.user', 'user')
       .select(['mentor.id'])
       .addSelect(['mentor_tech_stack.id', 'mentor_tech_stack.name'])
-      .addSelect(['user.name', 'user.shareStack', 'user.avatarUrl', 'user.githubId', 'user.intro'])
+      .addSelect([
+        'user.id',
+        'user.name',
+        'user.shareStack',
+        'user.avatarUrl',
+        'user.githubId',
+        'user.intro',
+        'user.createdAt',
+      ])
       .where('user.name like :filterdName', { filterdName: `%${name}%` })
       .getMany();
   }

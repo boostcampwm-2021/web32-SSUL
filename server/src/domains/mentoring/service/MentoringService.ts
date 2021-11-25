@@ -12,6 +12,8 @@ import { Mentor } from '../models/Mentor';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 
+const EACH_PAGE_CNT = 12;
+
 @Service()
 export class MentoringService {
   constructor(
@@ -60,10 +62,17 @@ export class MentoringService {
     return await this.mentoringRequestRepository.delete({ id: requestId });
   }
 
-  public async getFilterdPageMentorList(page: number, name: string = '', techstack: string = '') {
+  public async getFilterdPageMentorList(
+    page: number = 1,
+    name: string = '',
+    techstack: string = '',
+  ) {
     const nameFilterdAllMentor = await this.mentorRepository.findAllByName(name);
     const techStackFilterdAllMentor = this.filterdBytechStacks(nameFilterdAllMentor, techstack);
-    return techStackFilterdAllMentor;
+    const offset = (page - 1) * EACH_PAGE_CNT;
+    const filterdPageMentors = techStackFilterdAllMentor.slice(offset, offset + EACH_PAGE_CNT);
+    const totalPages: number = Math.ceil(filterdPageMentors.length / EACH_PAGE_CNT);
+    return { mentors: filterdPageMentors, totalPages };
   }
 
   public filterdBytechStacks(mentors: Mentor[], filterdTechstack: string) {
