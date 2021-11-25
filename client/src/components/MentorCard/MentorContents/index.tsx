@@ -2,12 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import MentorStatus from './MentorStatus';
 import MentorProfile from './MentorProfile';
+import { Mentor } from '@types';
 
-function MentorContents(): JSX.Element {
+interface CardProps {
+  contents: Mentor;
+}
+
+function MentorContents({ contents }: CardProps): JSX.Element {
   return (
     <Container>
-      <MentorProfile />
-      <MentorStatus />
+      <MentorProfile user={contents.user} />
+      <MentorStatus user={contents.user} techStacks={contents.techStacks} />
     </Container>
   );
 }

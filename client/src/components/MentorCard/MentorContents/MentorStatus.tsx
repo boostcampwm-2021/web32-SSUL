@@ -1,28 +1,31 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { MentorUserInfo, TechStack } from '@types';
+import { formatDateToString } from '@utils/Date';
 
 const MAX_SHOW_TECHSTACK = 3;
 
-const techStackList = ['node.js', 'react', 'typescript', 'python', 'SADFDFS'];
+interface Props {
+  user: MentorUserInfo;
+  techStacks: TechStack[];
+}
 
-function MentorStatus(): JSX.Element {
-  const moreTechStackList = techStackList.map((techStack, idx) => {
-    if (idx >= MAX_SHOW_TECHSTACK) return <MoreInfo key={idx}>{techStack}</MoreInfo>;
+function MentorStatus({ user, techStacks }: Props): JSX.Element {
+  const moreTechStackList = techStacks.map((techStack, idx) => {
+    if (idx >= MAX_SHOW_TECHSTACK) return <MoreInfo key={techStack.id}>{techStack.name}</MoreInfo>;
   });
 
-  const renderTechStackList = techStackList.map((techStack, idx) => {
-    if (idx < MAX_SHOW_TECHSTACK) return <TechListItem key={idx}>{techStack} </TechListItem>;
+  const renderTechStackList = techStacks.map((techStack, idx) => {
+    if (idx < MAX_SHOW_TECHSTACK)
+      return <TechListItem key={techStack.id}>{techStack.name} </TechListItem>;
     if (idx === MAX_SHOW_TECHSTACK)
       return <MoreTechStack key={idx}>...{moreTechStackList}</MoreTechStack>;
   });
 
   return (
     <Container>
-      <MentorCreatedAt>Since. 2021-07-14</MentorCreatedAt>
-      <MentorIntro>
-        나는 자바스크립트 개발자입니다. 타입스크립트로도 개발하고요. 자바로도 개발하고요. C#으로도
-        개발하고요. C++로도 하고요. 파이썬으로도 한답니다. 다 합니다.
-      </MentorIntro>
+      <MentorCreatedAt>Since. {formatDateToString(user.createdAt)}</MentorCreatedAt>
+      <MentorIntro>{user.intro}</MentorIntro>
       <TechList>{renderTechStackList}</TechList>
     </Container>
   );

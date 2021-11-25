@@ -1,15 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { MentorUserInfo } from '@types';
 
-function MentorProfile(): JSX.Element {
+interface Props {
+  user: MentorUserInfo;
+}
+
+function MentorProfile({ user }: Props): JSX.Element {
+  const DEFAULT_INDEX = 30;
   return (
     <Container>
       <Profile>
-        <ProfileImage src={`https://avatars.githubusercontent.com/u/48426909?v=4`} />
-        <ProfileName>이유찬</ProfileName>
+        <ProfileImage src={user.avatarUrl} />
+        <ProfileName>{user.name}</ProfileName>
       </Profile>
-      <ShareStack style={{ width: '80px' }}>
-        <ShareNum>37.5</ShareNum>
+      <ShareStack style={{ width: `${DEFAULT_INDEX + user.shareStack}px` }}>
+        <ShareNum>{user.shareStack}</ShareNum>
       </ShareStack>
     </Container>
   );
