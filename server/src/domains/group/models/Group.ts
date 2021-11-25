@@ -45,8 +45,8 @@ export class Group {
   @Column('datetime', { name: 'end_at', nullable: true })
   endAt: Date | null;
 
-  @Column('varchar', { name: 'status', nullable: true, length: 10, default: 'READY' })
-  status: string;
+  @Column('varchar', { name: 'status', length: 10, default: 'READY' })
+  status: GroupState | string;
 
   @JoinColumn({ name: 'owner_id' })
   @ManyToOne(() => User, (user) => user.groups, { eager: true })

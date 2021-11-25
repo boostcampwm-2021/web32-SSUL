@@ -19,8 +19,8 @@ export class GroupEnrollment {
   @Column('int', { name: 'group_id' })
   groupId: number;
 
-  @Column({ name: 'type', type: 'enum', enum: GroupEnrollmentAs })
-  type: string;
+  @Column('varchar', { name: 'type' })
+  type: GroupEnrollmentAs | string;
 
   @ManyToOne(() => User, (user) => user.groupEnrollments, {
     onDelete: 'NO ACTION',

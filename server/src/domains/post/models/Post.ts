@@ -26,7 +26,7 @@ export class Post {
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
 
-  @Column({ name: 'type', type: 'enum', enum: PostType })
+  @Column('varchar', { name: 'type' })
   type: PostType | string;
 
   @Column('int', { name: 'hit' })
