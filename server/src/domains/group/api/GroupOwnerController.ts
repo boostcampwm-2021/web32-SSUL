@@ -13,7 +13,7 @@ import { Inject, Service } from 'typedi';
 import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
-import { GroupAdminService } from '../service/GroupAdminService';
+import { GroupOwnerService } from '../service/GroupOwnerService';
 import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/UpdateGroupDto';
 import { GroupService } from '../service/GroupService';
 
@@ -21,11 +21,11 @@ import { GroupService } from '../service/GroupService';
   tags: ['그룹 설정'],
 })
 @Service()
-@Controller('/group/admin')
-export class GroupAdminController {
+@Controller('/group-owner')
+export class GroupOwnerController {
   constructor(
     @Inject()
-    private readonly groupAdminService: GroupAdminService,
+    private readonly groupAdminService: GroupOwnerService,
     @Inject()
     private readonly groupService: GroupService,
   ) {}

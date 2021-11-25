@@ -7,7 +7,7 @@ import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 
 @Service()
-export class GroupAdminService {
+export class GroupOwnerService {
   constructor(
     @InjectRepository()
     private readonly groupRepository: GroupRepository,
