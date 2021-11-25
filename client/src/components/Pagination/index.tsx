@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { makeRangeNumberArray } from '@utils/Range';
 import { useAppDispatch } from '@hooks';
-import { checkPageNumber, createdFilterdQuery } from '@store/group/filterSlice';
+import { checkPageNumber } from '@store/group/filterSlice';
+import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 
 interface PaginationProps {
   totalPages: number;
   curPage: number;
+  createdQuery: ActionCreatorWithoutPayload<string>;
 }
 
 const FIRST_PAGE_NUM = 1;
 const PAGE_OFFSET_CNT = 5;
 
-function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
+function Pagination({ totalPages, curPage, createdQuery }: PaginationProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [isFirstPageNumber, setIsFirstPageNumber] = useState<boolean>(true);
   const [isLastPageNumber, setIsLastPageNumberstate] = useState<boolean>(true);
@@ -26,17 +28,17 @@ function Pagination({ totalPages, curPage }: PaginationProps): JSX.Element {
   const handlePageNumberButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const number = Number(e.currentTarget.innerText);
     dispatch(checkPageNumber(number));
-    dispatch(createdFilterdQuery());
+    dispatch(createdQuery());
   };
 
   const handlePrevButtonClick = () => {
     dispatch(checkPageNumber(firstPageNumber - 1));
-    dispatch(createdFilterdQuery());
+    dispatch(createdQuery());
   };
 
   const handleNextButtonClick = () => {
     dispatch(checkPageNumber(lastPageNumber + 1));
-    dispatch(createdFilterdQuery());
+    dispatch(createdQuery());
   };
 
   const handleMovePageButtonClick = (type: string) => {

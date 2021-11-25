@@ -2,7 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import SelectedTechList from './SelectedTechList';
 import { useAppSelector } from '@hooks';
-import { returnGroupRecruitFilterState, changeTechStackInput } from '@store/group/filterSlice';
+import {
+  returnGroupRecruitFilterState,
+  changeTechStackInput,
+  createdFilterdQuery,
+} from '@store/group/filterSlice';
 import { SearchBar } from '@components';
 
 function TechSectionHeader(): JSX.Element {
@@ -13,6 +17,7 @@ function TechSectionHeader(): JSX.Element {
       <SearchBar
         searchBarInput={techStackInput}
         changeInputEvent={changeTechStackInput}
+        createdFilterdQuery={createdFilterdQuery}
         inputValue={'TECH_STACK'}
       />
       <SelectedTechList />

@@ -5,7 +5,6 @@ export interface mentorRecruitType {
   techStackInput: string;
   mentorNameInput: string;
   selectedTechStack: string[];
-  selectedCategoryId: number;
   filterdQuery: string;
   selectedPage: number;
 }
@@ -14,7 +13,6 @@ const initialState = {
   techStackInput: '',
   mentorNameInput: '',
   selectedTechStack: [],
-  selectedCategoryId: 0,
   filterdQuery: '',
   selectedPage: 1,
 } as mentorRecruitType;
@@ -49,22 +47,20 @@ export const mentorRecruitFilterSlice = createSlice({
       );
       return { ...state, selectedTechStack: newSelectedTechStackList, selectedPage: 1 };
     },
-    checkCategory(state, { payload }) {
-      return { ...state, selectedCategoryId: payload, selectedPage: 1 };
-    },
     checkPageNumber(state, { payload }) {
       return { ...state, selectedPage: payload };
     },
     createdFilterdQuery(state) {
-      const { mentorNameInput, selectedCategoryId, selectedTechStack, selectedPage } = state;
+      const { mentorNameInput, selectedTechStack, selectedPage } = state;
       const pageQuery = `?page=${selectedPage}`;
-      const nameQuery = mentorNameInput ? `&name=${mentorNameInput}` : '';
-      const categoryQuery = selectedCategoryId ? `&category=${selectedCategoryId}` : '';
+      const nameQuery = mentorNameInput ? `&name=${encodeURIComponent(mentorNameInput)}` : '';
       const techStackQuery =
-        selectedTechStack.length !== 0 ? `&techstack=${selectedTechStack.join(',')}` : '';
+        selectedTechStack.length !== 0
+          ? `&techstack=${encodeURIComponent(selectedTechStack.join(','))}`
+          : '';
       return {
         ...state,
-        filterdQuery: `${pageQuery}${nameQuery}${categoryQuery}${techStackQuery}`,
+        filterdQuery: `${pageQuery}${nameQuery}${techStackQuery}`,
       };
     },
   },
@@ -74,7 +70,6 @@ export const {
   changeTechStackInput,
   pushSelectedTechStack,
   popSelectedTechStack,
-  checkCategory,
   changeMentorNameInput,
   createdFilterdQuery,
   initFilterState,

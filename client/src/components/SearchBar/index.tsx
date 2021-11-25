@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import SearchIcon from '@assets/icon_search.png';
-import { createdFilterdQuery } from '@store/group/filterSlice';
 
 const MAX_INPUT_CNT = 10;
 
 interface searchBarProps {
   searchBarInput: string;
   changeInputEvent: ActionCreatorWithPayload<string>;
+  createdFilterdQuery: ActionCreatorWithoutPayload<string>;
   inputValue: string;
 }
 
@@ -17,7 +17,12 @@ interface StyledProps {
   inputValue: string;
 }
 
-function SearchBar({ searchBarInput, changeInputEvent, inputValue }: searchBarProps): JSX.Element {
+function SearchBar({
+  searchBarInput,
+  changeInputEvent,
+  inputValue,
+  createdFilterdQuery,
+}: searchBarProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const returnPlaceholderText = (type: string) => {

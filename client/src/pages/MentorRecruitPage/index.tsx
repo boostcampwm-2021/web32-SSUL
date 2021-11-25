@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { SearchBar } from '@components';
-import { changeMentorNameInput, returnMentorRecruitFilterState } from '@store/mentor/filterSlice';
+import {
+  changeMentorNameInput,
+  returnMentorRecruitFilterState,
+  createdFilterdQuery,
+} from '@store/mentor/filterSlice';
 import { useAppSelector } from '@hooks';
 import MentorSearchFilter from './MentorSearchFilter';
 import MentorCardList from './MentorCardList';
@@ -15,6 +19,7 @@ function MentorRecruitPage(): JSX.Element {
         <SearchBar
           searchBarInput={mentorNameInput}
           changeInputEvent={changeMentorNameInput}
+          createdFilterdQuery={createdFilterdQuery}
           inputValue={'MENTOR_NAME'}
         />
       </Header>

@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import { BoxModal, GroupCard, Pagination } from '@components';
 import { Group, GroupCardDetail, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
-import { initFilterState, returnGroupRecruitFilterState } from '@store/group/filterSlice';
+import {
+  createdFilterdQuery,
+  initFilterState,
+  returnGroupRecruitFilterState,
+} from '@store/group/filterSlice';
 import { groupHttpClient } from '@api';
 import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
 import GroupModal from './GroupModal';
@@ -42,7 +46,11 @@ function GroupCardList(): JSX.Element {
   return (
     <>
       <CardList>{renderGroupCards}</CardList>
-      <Pagination totalPages={totalPages} curPage={selectedPage} />
+      <Pagination
+        totalPages={totalPages}
+        curPage={selectedPage}
+        createdQuery={createdFilterdQuery}
+      />
       {modalType !== 'NONE' && (
         <BoxModal
           style={{ width: '650px', height: '550px' }}

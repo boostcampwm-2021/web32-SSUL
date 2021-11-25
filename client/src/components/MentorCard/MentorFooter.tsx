@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-function MentorFooter(): JSX.Element {
+interface Props {
+  mentorUserId: number;
+}
+
+function MentorFooter({ mentorUserId }: Props): JSX.Element {
   return (
     <Container>
       <ApplyButton>멘토링 신청</ApplyButton>
