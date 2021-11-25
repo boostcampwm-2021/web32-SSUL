@@ -1,10 +1,19 @@
-import { AcceptRequestInfo, MentorInfo, MentoringRequestData, RegisterMentorData } from '@types';
+import {
+  AcceptRequestInfo,
+  MentorInfo,
+  MentoringRequestData,
+  MentorListResponse,
+  RegisterMentorData,
+} from '@types';
 import HttpClient from './HttpClient';
 
 class MentoringHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/mentoring' });
   }
+
+  public getFilterdMentorList = (query: string): Promise<MentorListResponse> =>
+    this.httpClient.get(`/mentor/list${query}`);
 
   public getMentorId = (userId: number): Promise<MentorInfo> => {
     return this.httpClient.get(`/mentor/${userId}`);
