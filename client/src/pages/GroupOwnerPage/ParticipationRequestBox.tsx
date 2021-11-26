@@ -1,74 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
-
-interface ParticipationRequest {
-  profileImage: string;
-  name: string;
-  githubId: string;
-  createdAt: string;
-  feverStack: number;
-}
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
+import { ParticipationRequest } from '@types';
+import { groupOwnerHttpClient } from '@api';
+import { Link } from 'react-router-dom';
 
 function ParticipationRequestBox(): JSX.Element {
-  const [requestList, setRequestList] = useState<ParticipationRequest[]>([
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/6914465?v=4',
-      name: '김용후',
-      githubId: 'Who-is-hu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 0,
-    },
-    {
-      profileImage: 'https://avatars.githubusercontent.com/u/55623688?v=4',
-      name: '유찬양',
-      githubId: 'ChanYangYu',
-      createdAt: '2021-11-22',
-      feverStack: 39.5,
-    },
-  ]);
+  const { groupId, requestList } = useAppSelector(selectGroupAdminData);
+  const dispatch = useAppDispatch();
 
-  const handleAcceptButtonClick = () => async () => {
-    console.log('accept');
-    setRequestList([]);
+  const fetchApplyList = async () => {
+    const requestList = await groupOwnerHttpClient.getApplyGroupList(groupId);
+    dispatch(setGroupAdminData({ requestList }));
   };
 
-  const handleRejectButtonClick = () => async () => {
-    console.log('reject');
+  const handleAcceptButtonClick = (applyId: number) => async () => {
+    await groupOwnerHttpClient.acceptApplyList(applyId);
+    fetchApplyList();
+  };
+
+  const handleRejectButtonClick = (applyId: number) => async () => {
+    await groupOwnerHttpClient.acceptDeclineList(applyId);
+    fetchApplyList();
   };
 
   const makeRequestBox = (data: ParticipationRequest, idx: number): JSX.Element => {
     return (
       <BoxContainer key={idx}>
-        <ProfileImage src={data.profileImage} />
+        <ProfileLink to={`/profile/${data.githubId}`}>
+          <ProfileImage src={data.avatarUrl} alt="깃허브 이미지"></ProfileImage>
+        </ProfileLink>
         <ProfileInfo>
           <ProfileText>{data.name}</ProfileText>
           <ProfileFeverStack>
@@ -77,8 +40,8 @@ function ParticipationRequestBox(): JSX.Element {
         </ProfileInfo>
         <RequestDate>{formatDateToString(data.createdAt)}</RequestDate>
         <ButtonWrapper>
-          <Reject onClick={handleRejectButtonClick()}>거절</Reject>
-          <Accept onClick={handleAcceptButtonClick()}>수락</Accept>
+          <Reject onClick={handleRejectButtonClick(data.id)}>거절</Reject>
+          <Accept onClick={handleAcceptButtonClick(data.id)}>수락</Accept>
         </ButtonWrapper>
       </BoxContainer>
     );
@@ -103,14 +66,14 @@ function ParticipationRequestBox(): JSX.Element {
 const Container = styled.div`
   position: relative;
   min-width: 470px;
-  height: 550px;
+  height: 600px;
   border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 5px;
 `;
 
 const ScrollContainer = styled.div`
   overflow-y: scroll;
-  height: 480px;
+  height: 530px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -232,6 +195,16 @@ const RequestDate = styled.p`
   font-size: 13px;
   margin-top: 5px;
   margin-right: 20px;
+`;
+
+const ProfileLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center;
 `;
 
 export default ParticipationRequestBox;

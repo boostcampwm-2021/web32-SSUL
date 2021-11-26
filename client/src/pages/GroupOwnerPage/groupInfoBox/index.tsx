@@ -25,7 +25,7 @@ function GroupInfoBox(): JSX.Element {
 
 const Container = styled.div`
   min-width: 600px;
-  height: 550px;
+  height: 600px;
   overflow-y: scroll;
   border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 5px;

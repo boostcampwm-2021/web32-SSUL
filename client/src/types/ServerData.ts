@@ -114,3 +114,35 @@ export interface GroupPostRequestDto {
   content: string;
   type: string;
 }
+
+export interface SimpleGroupInfoResponse {
+  name: string;
+  intro: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface UpdateGroupNameData {
+  gid: number;
+  name: string;
+}
+
+export interface UpdateGroupDateData {
+  gid: number;
+  startAt: string;
+  endAt: string;
+}
+
+export interface UpdateGroupIntroData {
+  gid: number;
+  intro: string;
+}
+
+export interface ParticipationRequest {
+  id: number;
+  name: string;
+  githubId: string;
+  avatarUrl: string;
+  feverStack: number;
+  createdAt: Date;
+}

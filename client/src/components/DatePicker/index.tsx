@@ -5,12 +5,13 @@ import styled from '@emotion/styled';
 import { RangeValue } from 'rc-picker/lib/interface';
 const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
-import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
-import { useAppDispatch, useAppSelector } from '@hooks';
 
-function AntDatePicker(): JSX.Element {
-  const { startAt, endAt } = useAppSelector(groupCreateDataState);
-  const dispatch = useAppDispatch();
+interface Props {
+  startAt: string,
+  endAt: string,
+  setDate : (startAt: string, endAt: string) => void;
+}
+function AntDatePicker({startAt, endAt, setDate}:Props): JSX.Element {
 
   const checkDate = (current: moment.Moment) => {
     const now = new Date();
@@ -25,7 +26,7 @@ function AntDatePicker(): JSX.Element {
     formatString: [string, string],
   ) => {
     const [newStartDate, newEndDate] = formatString;
-    dispatch(setGroupData({ startAt: newStartDate, endAt: newEndDate }));
+    setDate(newStartDate, newEndDate);
   };
   return (
     <CustomPicker
