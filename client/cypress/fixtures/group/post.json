@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "첫 번째 게시글",
+    "content": "내용은 뭐 별거 없습니다만",
+    "createdAt": "2021-11-17T03:06:55.000Z",
+    "type": "NOTICE",
+    "hit": 0,
+    "writer": "김동규",
+    "groupId": 1,
+    "userId": 2
+  },
+  {
+    "id": 2,
+    "title": "판교로 가는 유찬 멘토님",
+    "content": "가...가즈아",
+    "createdAt": "2021-11-18T03:06:55.000Z",
+    "type": "NORMAL",
+    "hit": 0,
+    "writer": "이유찬",
+    "groupId": 1,
+    "userId": 1
+  }
+]
