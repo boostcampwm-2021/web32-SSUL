@@ -67,3 +67,14 @@ export interface GroupEnrollment {
   avatarUrl: string;
   type: string;
 }
+
+export interface SimpleGroupCard {
+  id: 0;
+  name: string;
+  maxUserCnt: 0;
+  curUserCnt: 0;
+  status: string;
+  ownerInfo: {
+    avatarUrl: string;
+  };
+}
