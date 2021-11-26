@@ -94,7 +94,6 @@ export class GroupOwnerController {
   @UseBefore(isLoggedIn)
   @Patch('/decline/:aid')
   public async declineApply(@Session() session: any, @Params() { aid }: ApplyParam) {
-    console.log(aid);
     await this.groupOwnerService.declineRequest(aid, session.user.id);
   }
 }
