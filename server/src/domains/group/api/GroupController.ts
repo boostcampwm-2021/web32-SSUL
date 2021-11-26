@@ -24,8 +24,8 @@ import { ApplyGroupDto } from '../dto/ApplyGroupDto';
 import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
-import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 import { GroupRoleResponse } from '../dto/GroupRoleResponse';
+import { ApplyedGroupQuery } from '../dto/ApplyedGroupQuery';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -88,12 +88,15 @@ export class GroupController {
     return await this.groupService.getOwnGroups(session.user.id);
   }
 
-  @Get('/pending-apply')
+  @Get('/applyed')
   @UseBefore(isLoggedIn)
   @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
-  @OpenAPI({ summary: '내가 가입 신청이 대기중인 그룹 목록을 가져오는 API' })
-  public async getMyApplyedGroups(@Session() session: any) {
-    return await this.groupService.getMyApplyedGroups(session.user.id);
+  @OpenAPI({ summary: '내가 가입 신청한 그룹 목록을 신청 상태에 따라 가져오는 API' })
+  public async getMyApplyedGroups(
+    @Session() session: any,
+    @QueryParams() { state }: ApplyedGroupQuery,
+  ) {
+    return await this.groupService.getMyApplyedGroups(session.user.id, state);
   }
 
   //TODO: need unit test

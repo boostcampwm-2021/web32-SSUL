@@ -190,11 +190,11 @@ export class GroupService {
     return enrollmentType;
   }
 
-  public async getMyApplyedGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
-    const applies = await this.applyGroupRepository.findAllByUserIdAndState(
-      userId,
-      ApplyGroupState.PENDING,
-    );
+  public async getMyApplyedGroups(
+    userId: number,
+    state: ApplyGroupState,
+  ): Promise<SimpleGroupCardResponse[]> {
+    const applies = await this.applyGroupRepository.findAllByUserIdAndState(userId, state);
     const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
     return groups;
   }
