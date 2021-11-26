@@ -4,6 +4,7 @@ import {
   Get,
   OnUndefined,
   Param,
+  Params,
   Patch,
   Session,
   UseBefore,
@@ -36,8 +37,8 @@ export class GroupOwnerController {
   @ResponseSchema(SimpleGroupInfoResponse)
   @UseBefore(isLoggedIn)
   @Get('/:gid')
-  public async getGroupInfo(@Session() session: any, @Param('gid') { gid }: GroupParam) {
-    await this.groupService.checkGroupOwner(gid, session.user.id);
+  public async getGroupInfo(@Session() session: any, @Params() { gid }: GroupParam) {
+    await this.groupService.checkGroupOwner(session.user.id, gid);
     return await this.groupOwnerService.getGroupInfoByGroupId(gid);
   }
 
@@ -45,8 +46,8 @@ export class GroupOwnerController {
   @ResponseSchema(GroupApplyResponse, { isArray: true })
   @UseBefore(isLoggedIn)
   @Get('/apply/:gid')
-  public async getApplyList(@Session() session: any, @Param('gid') { gid }: GroupParam) {
-    await this.groupService.checkGroupOwner(gid, session.user.id);
+  public async getApplyList(@Session() session: any, @Params() { gid }: GroupParam) {
+    await this.groupService.checkGroupOwner(session.user.id, gid);
     return await this.groupOwnerService.getApplyListByGroupId(gid);
   }
 
@@ -55,7 +56,7 @@ export class GroupOwnerController {
   @UseBefore(isLoggedIn)
   @Patch('/name')
   public async updateTitle(@Session() session: any, @Body() { gid, name }: UpdateGroupNameDto) {
-    await this.groupService.checkGroupOwner(gid, session.user.id);
+    await this.groupService.checkGroupOwner(session.user.id, gid);
     await this.groupOwnerService.updateGroupName(gid, name);
   }
 
@@ -67,7 +68,7 @@ export class GroupOwnerController {
     @Session() session: any,
     @Body() { gid, startAt, endAt }: UpdateGroupDateDto,
   ) {
-    await this.groupService.checkGroupOwner(gid, session.user.id);
+    await this.groupService.checkGroupOwner(session.user.id, gid);
     await this.groupOwnerService.updateGroupDate(gid, startAt, endAt);
   }
 
@@ -76,23 +77,24 @@ export class GroupOwnerController {
   @UseBefore(isLoggedIn)
   @Patch('/intro')
   public async updateIntro(@Session() session: any, @Body() { gid, intro }: UpdateGroupIntroDto) {
-    await this.groupService.checkGroupOwner(gid, session.user.id);
+    await this.groupService.checkGroupOwner(session.user.id, gid);
     await this.groupOwnerService.updateGroupIntro(gid, intro);
   }
 
   @OpenAPI({ summary: '그룹의 참여 요청을 승인하는 API' })
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
-  @Patch('/accept/:id')
-  public async acceptApply(@Session() session: any, @Param('id') { aid }: ApplyParam) {
+  @Patch('/accept/:aid')
+  public async acceptApply(@Session() session: any, @Params() { aid }: ApplyParam) {
     await this.groupOwnerService.acceptRequest(aid, session.user.id);
   }
 
   @OpenAPI({ summary: '그룹의 참여 요청을 거절하는 API' })
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
-  @Patch('/decline/:id')
-  public async declineApply(@Session() session: any, @Param('id') { aid }: ApplyParam) {
+  @Patch('/decline/:aid')
+  public async declineApply(@Session() session: any, @Params() { aid }: ApplyParam) {
+    console.log(aid);
     await this.groupOwnerService.declineRequest(aid, session.user.id);
   }
 }

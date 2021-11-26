@@ -14,20 +14,24 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   findOneByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({ where: { groupId, userId } });
   }
-  public findApplyListByGroupId(gid: number) {
-    return this.createQueryBuilder('apply_group')
-      .innerJoinAndSelect('apply_group.user', 'user')
-      .where('apply_group.groupId = :gid', { gid })
-      .andWhere('state = "PENDING"')
-      .orderBy('apply_group.createdAt', 'ASC')
-      .getMany();
+  public findByGroupIdAndState(gid: number, state: string) {
+    return this.find({
+      relations: ['user'],
+      where: {
+        groupId: gid,
+        state,
+      },
+      order: { createdAt: 'ASC' },
+    });
   }
 
-  public findApplyData(id: number, ownerId: number) {
-    return this.createQueryBuilder('apply_group')
-      .innerJoinAndSelect('apply_group.group', 'group')
-      .where('apply_group.id = :id', { id })
-      .andWhere('group.ownerId = :ownerId', { ownerId })
-      .getOne();
+  public findOneByIdAndOwnerId(id: number, ownerId: number) {
+    return this.findOne({
+      relations: ['group'],
+      where: {
+        id,
+        group: { ownerId },
+      },
+    });
   }
 }

@@ -26,7 +26,7 @@ export class GroupOwnerService {
   }
 
   public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
-    const applyGroupList = await this.applyGroupRepository.findApplyListByGroupId(gid);
+    const applyGroupList = await this.applyGroupRepository.findByGroupIdAndState(gid, 'PENDING');
     return applyGroupList.map(({ id, createdAt, user }) => {
       return {
         id: id,
@@ -51,9 +51,9 @@ export class GroupOwnerService {
     return this.groupRepository.update({ id: gid }, { intro });
   }
   public async acceptRequest(applyId: number, ownerId: number) {
-    const applyGroup = await this.applyGroupRepository.findApplyData(applyId, ownerId);
+    const applyGroup = await this.applyGroupRepository.findOneByIdAndOwnerId(applyId, ownerId);
 
-    if (applyGroup === undefined) {
+    if (!applyGroup) {
       throw new NotAuthorizedError();
     }
     applyGroup.state = ApplyGroupState.ACCEPTED;
@@ -63,9 +63,9 @@ export class GroupOwnerService {
   }
 
   public async declineRequest(applyId: number, ownerId: number) {
-    const applyGroup = await this.applyGroupRepository.findApplyData(applyId, ownerId);
+    const applyGroup = await this.applyGroupRepository.findOneByIdAndOwnerId(applyId, ownerId);
 
-    if (applyGroup === undefined) {
+    if (!applyGroup) {
       throw new NotAuthorizedError();
     }
     applyGroup.state = ApplyGroupState.DECLINED;
