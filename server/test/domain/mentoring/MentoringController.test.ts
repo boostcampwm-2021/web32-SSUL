@@ -30,9 +30,9 @@ describe('/mentoring', () => {
   describe('[POST /mentor] 멘토 등록 신청', () => {
     test('멘토 등록 성공', async () => {
       //given
-      const cookieSession = getLoginCookie({ id: 5 });
+      const cookieSession = getLoginCookie({ id: 1 });
       const mentorRegstDto = {
-        userId: 5,
+        userId: 1,
         techStacks: [
           { id: 1, name: 'react' },
           { id: 2, name: 'express' },
