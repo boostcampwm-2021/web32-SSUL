@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
 import { ToastMessageEnum } from '@constants/enums';
 
-type ToastHookReturnType = [(message: string, type?: ToastMessageEnum) => void];
+type ToastHookReturnType = [(message: string, type?: ToastMessageEnum | string) => void];
 
 export function useToast(): ToastHookReturnType {
-  const notify = (message: string, type?: ToastMessageEnum) => {
+  const notify = (message: string, type?: ToastMessageEnum | string) => {
     switch (type) {
       case ToastMessageEnum.INFO:
         toast.info(message);

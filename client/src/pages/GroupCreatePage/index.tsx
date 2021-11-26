@@ -14,7 +14,6 @@ import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
-import { ToastMessageEnum } from '@constants/enums';
 import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO } from '@constants/consts';
 
 const MAX_CONTENT_INDEX = 4;
@@ -82,7 +81,7 @@ function GroupCreatePage(): JSX.Element {
 
   const clickNextContents = () => {
     if (!checkInput()) {
-      toastify(MSG_NEED_INFO, ToastMessageEnum.INFO);
+      toastify(MSG_NEED_INFO, 'INFO');
       return;
     }
 
@@ -98,7 +97,7 @@ function GroupCreatePage(): JSX.Element {
       await groupHttpClient.postGroupCreate(postGroupData);
       window.location.href = '/';
     } catch (e) {
-      toastify(MSG_GROUP_CREATE_ERROR, ToastMessageEnum.ERROR);
+      toastify(MSG_GROUP_CREATE_ERROR, 'ERROR');
     }
   };
   const cleanUp = () => {
