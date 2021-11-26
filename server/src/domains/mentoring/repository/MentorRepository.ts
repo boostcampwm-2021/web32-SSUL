@@ -23,4 +23,10 @@ export class MentorRepository extends Repository<Mentor> {
       .where('user.name like :filterdName', { filterdName: `%${name}%` })
       .getMany();
   }
+
+  public findOneByUserId(userId: number) {
+    return this.findOne({
+      where: { userId },
+    });
+  }
 }

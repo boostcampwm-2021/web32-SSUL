@@ -11,6 +11,7 @@ import { MentorInfoDto } from '../dto/MentorInfoDto';
 import { Mentor } from '../models/Mentor';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
+import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -29,6 +30,10 @@ export class MentoringService {
   ) {}
 
   public async createMentor(userId: number) {
+    const mentor = await this.mentorRepository.findOneByUserId(userId);
+    if (mentor !== undefined) {
+      throw new UserAlreadyMentorError(userId);
+    }
     return await this.mentorRepository.save({ userId });
   }
 

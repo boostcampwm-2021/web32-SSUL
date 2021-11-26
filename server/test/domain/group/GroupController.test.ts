@@ -8,9 +8,6 @@ import { getLoginCookie } from '../../util/cookieSession';
 
 describe('그룹 컨트롤러', () => {
   let app: express.Application;
-  const TEST_TITLE = '테스트 게시글 작성 제목';
-  const TEST_CONTENT = '테스트 게시글 내용';
-
   beforeAll(async () => {
     app = await appWrapper.getInstance();
   });
@@ -134,6 +131,98 @@ describe('그룹 컨트롤러', () => {
       const { id, status } = response.body[0];
       expect(id).toBe(3);
       expect(status).toBe(GroupState.END);
+    });
+  });
+
+  describe('[POST /apply] 그룹 가입 신청', () => {
+    test('그룹 가입 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 3 });
+      const applyInfo = { groupId: 3, userId: 3 };
+
+      //when
+      const res = await request(app)
+        .post('/api/group/apply')
+        .set('Cookie', [cookieSession])
+        .send(applyInfo);
+
+      //then
+      expect(res.statusCode).toBe(200);
+    });
+
+    test('이미 신청한 그룹이었을 때 에러 발생', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 3 });
+      const applyInfo = { groupId: 3, userId: 3 };
+
+      //when
+      const res = await request(app)
+        .post('/api/group/apply')
+        .set('Cookie', [cookieSession])
+        .send(applyInfo);
+
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+  });
+
+  describe('[GET /role/:gid] 그룹에서의 역할 가져오기', () => {
+    test('그룹장 역할 가져오기 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 2 });
+      const groupId = 4;
+
+      //when
+      const res = await request(app)
+        .get(`/api/group/role/${groupId}`)
+        .set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('OWNER');
+    });
+
+    test('멘토 역할 가져오기 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 4 });
+      const groupId = 1;
+
+      //when
+      const res = await request(app)
+        .get(`/api/group/role/${groupId}`)
+        .set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('MENTOR');
+    });
+
+    test('멘티 역할 가져오기 성공', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 2 });
+      const groupId = 1;
+
+      //when
+      const res = await request(app)
+        .get(`/api/group/role/${groupId}`)
+        .set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('MENTEE');
+    });
+
+    test('현재 신청 중인 상태', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 3 });
+      const groupId = 1;
+      //when
+      const res = await request(app)
+        .get(`/api/group/role/${groupId}`)
+        .set('Cookie', [cookieSession]);
+
+      //then
+      expect(res.statusCode).toBe(400);
     });
   });
 });

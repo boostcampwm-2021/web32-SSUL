@@ -30,9 +30,9 @@ describe('/mentoring', () => {
   describe('[POST /mentor] 멘토 등록 신청', () => {
     test('멘토 등록 성공', async () => {
       //given
-      const cookieSession = getLoginCookie({ id: 5 });
+      const cookieSession = getLoginCookie({ id: 1 });
       const mentorRegstDto = {
-        userId: 5,
+        userId: 1,
         techStacks: [
           { id: 1, name: 'react' },
           { id: 2, name: 'express' },
@@ -117,12 +117,14 @@ describe('/mentoring', () => {
       });
       //then
       expect(res.statusCode).toBe(200);
+      const { mentors } = res.body;
+      expect(mentors.length).toBeGreaterThanOrEqual(1);
       expect(res.body.totalPages).toBe(1);
     });
 
     test('선택한 기술스택을 가진 멘토만 조회되는지 테스트', async () => {
       //when
-      const techStackName = 'Express';
+      const techStackName = 'javascript';
       const response = await request(app).get('/api/mentoring/mentor/list').query({
         techstack: techStackName,
       });
@@ -130,6 +132,8 @@ describe('/mentoring', () => {
       expect(response.statusCode).toBe(200);
 
       const { mentors } = response.body;
+      expect(mentors.length).toBeGreaterThanOrEqual(1);
+
       mentors.forEach((mentor: any) => {
         const mentorTechStacks = mentor.techStacks;
         const isIncludeTechStackList = mentorTechStacks.some((techstack: any) =>
@@ -147,8 +151,9 @@ describe('/mentoring', () => {
       });
       //then
       expect(response.statusCode).toBe(200);
-
       const { mentors } = response.body;
+
+      expect(mentors.length).toBeGreaterThanOrEqual(1);
       mentors.forEach((mentor: any) => {
         const mentorName = mentor.user.name;
         const isIncludeMentorName = mentorName.includes(name);

@@ -43,5 +43,41 @@
     "createdAt": "2020-11-13 12:39:51",
     "feverStack": 37.5,
     "shareStack": 40.0
+  },
+  {
+    "id": 6,
+    "githubId": "crongro",
+    "name": "윤지수",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/1456761?v=4",
+    "createdAt": "2005-11-13 12:39:51",
+    "feverStack": 37.5,
+    "shareStack": 100.0
+  },
+  {
+    "id": 7,
+    "githubId": "honux77",
+    "name": "정호영",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/2168702?v=4",
+    "createdAt": "2005-11-13 12:39:51",
+    "feverStack": 37.5,
+    "shareStack": 100.0
+  },
+  {
+    "id": 8,
+    "githubId": "godrm",
+    "name": "김정",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/278988?v=4",
+    "createdAt": "2005-11-13 12:39:51",
+    "feverStack": 37.5,
+    "shareStack": 100.0
+  },
+  {
+    "id": 9,
+    "githubId": "FullOfOrange",
+    "name": "육진혁",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/10372359?v=4",
+    "createdAt": "2019-11-13 12:39:51",
+    "feverStack": 40.5,
+    "shareStack": 80.0
   }
 ]
