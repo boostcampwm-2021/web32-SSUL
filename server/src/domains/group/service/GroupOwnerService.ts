@@ -21,22 +21,16 @@ export class GroupOwnerService {
   ) {}
 
   public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
-    const { name, intro, startAt, endAt } = await this.groupRepository.findOneOrFailByGroupId(gid);
-    return { name, intro, startAt, endAt };
+    const group = await this.groupRepository.findOneOrFailByGroupId(gid);
+    return SimpleGroupInfoResponse.from(group);
   }
 
   public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
-    const applyGroupList = await this.applyGroupRepository.findByGroupIdAndState(gid, 'PENDING');
-    return applyGroupList.map(({ id, createdAt, user }) => {
-      return {
-        id: id,
-        createdAt,
-        name: user.name,
-        githubId: user.githubId,
-        avatarUrl: user.avatarUrl,
-        feverStack: user.feverStack,
-      };
-    });
+    const applyGroupList = await this.applyGroupRepository.findAllByGroupIdAndState(
+      gid,
+      ApplyGroupState.PENDING,
+    );
+    return applyGroupList.map((applyGroup) => GroupApplyResponse.from(applyGroup));
   }
 
   public updateGroupName(gid: number, name: string) {
@@ -56,8 +50,8 @@ export class GroupOwnerService {
     if (!applyGroup) {
       throw new NotAuthorizedError();
     }
-    applyGroup.state = ApplyGroupState.ACCEPTED;
     //TODO transaction
+    applyGroup.state = ApplyGroupState.ACCEPTED;
     await this.groupService.enroll(applyGroup.groupId, applyGroup.userId, GroupEnrollmentAs.MENTEE);
     await this.applyGroupRepository.save(applyGroup);
   }

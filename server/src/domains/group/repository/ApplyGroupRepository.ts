@@ -14,7 +14,7 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   findOneByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({ where: { groupId, userId } });
   }
-  public findByGroupIdAndState(gid: number, state: string) {
+  public findAllByGroupIdAndState(gid: number, state: ApplyGroupState) {
     return this.find({
       relations: ['user'],
       where: {
