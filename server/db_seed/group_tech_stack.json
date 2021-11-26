@@ -148,5 +148,11 @@
     "groupId": 5,
     "techStackId": 11,
     "name": "HTML"
+  },
+  {
+    "id": 26,
+    "groupId": 11,
+    "techStackId": 8,
+    "name": "C++"
   }
 ]

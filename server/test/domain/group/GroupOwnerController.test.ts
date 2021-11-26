@@ -13,22 +13,22 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[GET /api/group-owner/:gid] 그룹 id로 그룹 정보를 가져옴', () => {
     test('로그인한 유저가 그룹장인 경우 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
 
       // when
-      const response = await request(app).get('/api/group-owner/1').set('Cookie', [cookieSession]);
+      const response = await request(app).get('/api/group-owner/11').set('Cookie', [cookieSession]);
 
       // then
       expect(response.statusCode).toBe(200);
-      expect(response.body.name).toBe('testgroup1');
+      expect(response.body.name).toBe('testgroup11');
     });
 
     test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
 
       // when
-      const response = await request(app).get('/api/group-owner/1').set('Cookie', [cookieSession]);
+      const response = await request(app).get('/api/group-owner/11').set('Cookie', [cookieSession]);
 
       // then
       expect(response.statusCode).toBe(401);
@@ -38,25 +38,25 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[GET /api/group-owner/apply/:gid] 그룹 id로 그룹 참가요청 리스트를 가져옴', () => {
     test('로그인한 유저가 그룹장인 경우 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
-
-      //when
-      const response = await request(app)
-        .get('/api/group-owner/apply/1')
-        .set('Cookie', [cookieSession]);
-
-      //then
-      expect(response.statusCode).toBe(200);
-      expect(response.body.length).toEqual(1);
-    });
-
-    test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
-      // given
       const cookieSession = getLoginCookie({ id: 4 });
 
       //when
       const response = await request(app)
-        .get('/api/group-owner/apply/1')
+        .get('/api/group-owner/apply/11')
+        .set('Cookie', [cookieSession]);
+
+      //then
+      expect(response.statusCode).toBe(200);
+      expect(response.body.length).toEqual(2);
+    });
+
+    test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
+      // given
+      const cookieSession = getLoginCookie({ id: 1 });
+
+      //when
+      const response = await request(app)
+        .get('/api/group-owner/apply/11')
         .set('Cookie', [cookieSession]);
 
       //then
@@ -67,9 +67,9 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[PATCH /api/group-owner/name] 그룹 제목을 수정함', () => {
     test('로그인한 유저가 그룹장인 경우 업데이트 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
       const UpdateGroupNameDto = {
-        gid: 1,
+        gid: 11,
         name: 'group name test',
       };
 
@@ -85,9 +85,9 @@ describe('그룹 관리 컨트롤러', () => {
 
     test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
       const UpdateGroupNameDto = {
-        gid: 1,
+        gid: 11,
         name: 'group name test',
       };
       //when
@@ -104,9 +104,9 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[PATCH /api/group-owner/date] 그룹 시작/종료일을 수정함', () => {
     test('로그인한 유저가 그룹장인 경우 업데이트 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
       const UpdateGroupDateDto = {
-        gid: 1,
+        gid: 11,
         startAt: '2021-12-03',
         endAt: '2021-12-06',
       };
@@ -123,9 +123,9 @@ describe('그룹 관리 컨트롤러', () => {
 
     test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
       const UpdateGroupDateDto = {
-        gid: 1,
+        gid: 11,
         startAt: '2021-12-03',
         endAt: '2021-12-06',
       };
@@ -143,9 +143,9 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[PATCH /api/group-owner/intro] 그룹 소개글을 수정함', () => {
     test('로그인한 유저가 그룹장인 경우 업데이트 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
       const UpdateGroupIntroDto = {
-        gid: 1,
+        gid: 11,
         intro: 'group intro test',
       };
 
@@ -161,9 +161,9 @@ describe('그룹 관리 컨트롤러', () => {
 
     test('로그인한 유저가 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
       const UpdateGroupIntroDto = {
-        gid: 1,
+        gid: 11,
         intro: 'group intro test',
       };
       //when
@@ -180,11 +180,11 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[PATCH /api/group-owner/decline/:aid] 그룹 참가 신청을 거절함', () => {
     test('로그인한 유저가 해당 참가요청 그룹의 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
 
       //when
       const response = await request(app)
-        .patch('/api/group-owner/decline/1')
+        .patch('/api/group-owner/decline/3')
         .set('Cookie', [cookieSession]);
 
       //then
@@ -193,11 +193,11 @@ describe('그룹 관리 컨트롤러', () => {
 
     test('로그인한 유저가 해당 참가요청 그룹의 그룹장인 경우 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
 
       //when
       const response = await request(app)
-        .patch('/api/group-owner/decline/1')
+        .patch('/api/group-owner/decline/3')
         .set('Cookie', [cookieSession]);
 
       //then
@@ -208,11 +208,11 @@ describe('그룹 관리 컨트롤러', () => {
   describe('[PATCH /api/group-owner/accept/:aid] 그룹 참가 신청을 수락함', () => {
     test('로그인한 유저가 해당 참가요청 그룹의 그룹장이 아닌경우 실패', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 4 });
+      const cookieSession = getLoginCookie({ id: 1 });
 
       //when
       const response = await request(app)
-        .patch('/api/group-owner/accept/1')
+        .patch('/api/group-owner/accept/4')
         .set('Cookie', [cookieSession]);
 
       //then
@@ -221,11 +221,11 @@ describe('그룹 관리 컨트롤러', () => {
 
     test('로그인한 유저가 해당 참가요청 그룹의 그룹장인 경우 성공', async () => {
       // given
-      const cookieSession = getLoginCookie({ id: 1 });
+      const cookieSession = getLoginCookie({ id: 4 });
 
       //when
       const response = await request(app)
-        .patch('/api/group-owner/accept/1')
+        .patch('/api/group-owner/accept/4')
         .set('Cookie', [cookieSession]);
 
       //then

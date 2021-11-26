@@ -79,5 +79,23 @@
     "createdAt": "2019-11-13 12:39:51",
     "feverStack": 40.5,
     "shareStack": 80.0
+  },
+  {
+    "id": 11,
+    "githubId": "zerohoon96",
+    "name": "이영훈",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/57934100?v=4",
+    "createdAt": "2021-11-13 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
+  },
+  {
+    "id": 12,
+    "githubId": "kimuihyeon222",
+    "name": "김의현",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/57362030?v=4",
+    "createdAt": "2021-11-10 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
   }
 ]
