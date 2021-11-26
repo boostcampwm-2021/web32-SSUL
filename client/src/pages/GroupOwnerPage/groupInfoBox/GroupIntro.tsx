@@ -25,7 +25,7 @@ function GroupIntro(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ intro: text }));
-      groupOwnerHttpClient.patchGroupIntro({ gid: groupId, intro: text });
+      groupOwnerHttpClient.updateGroupIntro({ gid: groupId, intro: text });
     }
     setNotificationText('');
     setIsEdit(!isEdit);

@@ -15,13 +15,13 @@ class GroupOwnerHttpClient extends HttpClient {
   public getGroupAdminInfo = (groupId: number): Promise<SimpleGroupInfoResponse> =>
     this.httpClient.get(`/${groupId}`);
 
-  public patchGroupName = (UpdateGroupNameData: UpdateGroupNameData): Promise<null> =>
+  public updateGroupName = (UpdateGroupNameData: UpdateGroupNameData): Promise<null> =>
     this.httpClient.patch('/name', UpdateGroupNameData);
 
-  public patchGroupDate = (updateGroupDateData: UpdateGroupDateData): Promise<null> =>
+  public updateGroupDate = (updateGroupDateData: UpdateGroupDateData): Promise<null> =>
     this.httpClient.patch('/date', updateGroupDateData);
 
-  public patchGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
+  public updateGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
     this.httpClient.patch('/intro', updateGroupIntroData);
 
   public getApplyGroupList = (groupId: number): Promise<ParticipationRequest[]> =>

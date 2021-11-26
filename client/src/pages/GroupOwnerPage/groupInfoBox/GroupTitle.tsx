@@ -24,7 +24,7 @@ function GroupTitle(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ name: text }));
-      groupOwnerHttpClient.patchGroupName({ gid: groupId, name: text });
+      groupOwnerHttpClient.updateGroupName({ gid: groupId, name: text });
     }
     setNotificationText('');
     setIsEdit(!isEdit);

@@ -22,7 +22,7 @@ function GroupDate(): JSX.Element {
         return;
       }
       dispatch(setGroupAdminData({ startAt, endAt }));
-      groupOwnerHttpClient.patchGroupDate({ gid: groupId, startAt, endAt });
+      groupOwnerHttpClient.updateGroupDate({ gid: groupId, startAt, endAt });
     }
 
     setNotificationText('');
