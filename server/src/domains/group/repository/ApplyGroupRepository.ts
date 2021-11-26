@@ -22,6 +22,6 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   }
 
   public findOneOrFailById(id: number) {
-    return this.findOneOrFail({ where: { id } });
+    return this.findOneOrFail(id);
   }
 }
