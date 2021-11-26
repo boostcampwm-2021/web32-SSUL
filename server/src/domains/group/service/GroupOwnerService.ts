@@ -21,7 +21,7 @@ export class GroupOwnerService {
   ) {}
 
   public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
-    const group = await this.groupRepository.findOneOrFailByGroupId(gid);
+    const group = await this.groupRepository.findOneOrFailById(gid);
     return SimpleGroupInfoResponse.from(group);
   }
 

@@ -15,10 +15,10 @@ import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { GroupOwnerService } from '../service/GroupOwnerService';
-import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/UpdateGroupDto';
+import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/updateGroup';
 import { GroupService } from '../service/GroupService';
 import { GroupParam } from '../dto/groupDto';
-import { ApplyParam } from '../dto/ApplyGroupDto';
+import { ApplyParam } from '../dto/ApplyParam';
 
 @OpenAPI({
   tags: ['그룹 설정'],

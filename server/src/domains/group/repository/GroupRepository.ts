@@ -88,7 +88,7 @@ export class GroupRepository extends Repository<Group> {
     });
   }
 
-  public findOneOrFailByGroupId(groupId: number){
-    return this.findOneOrFail({id: groupId});
+  public findOneOrFailById(id: number) {
+    return this.findOneOrFail({ id });
   }
 }
