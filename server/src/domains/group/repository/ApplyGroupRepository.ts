@@ -14,24 +14,14 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   findOneByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({ where: { groupId, userId } });
   }
-  public findAllByGroupIdAndState(gid: number, state: ApplyGroupState) {
+  public findAllByGroupIdAndState(groupId: number, state: ApplyGroupState) {
     return this.find({
-      relations: ['user'],
-      where: {
-        groupId: gid,
-        state,
-      },
+      where: { groupId, state },
       order: { createdAt: 'ASC' },
     });
   }
 
-  public findOneByIdAndOwnerId(id: number, ownerId: number) {
-    return this.findOne({
-      relations: ['group'],
-      where: {
-        id,
-        group: { ownerId },
-      },
-    });
+  public findOneOrFailById(id: number) {
+    return this.findOneOrFail({ where: { id } });
   }
 }

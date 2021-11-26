@@ -45,9 +45,9 @@ export class GroupOwnerService {
     return this.groupRepository.update({ id: gid }, { intro });
   }
   public async acceptRequest(applyId: number, ownerId: number) {
-    const applyGroup = await this.applyGroupRepository.findOneByIdAndOwnerId(applyId, ownerId);
+    const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
-    if (!applyGroup) {
+    if (applyGroup.group.ownerId !== ownerId) {
       throw new NotAuthorizedError();
     }
     //TODO transaction
@@ -57,9 +57,9 @@ export class GroupOwnerService {
   }
 
   public async declineRequest(applyId: number, ownerId: number) {
-    const applyGroup = await this.applyGroupRepository.findOneByIdAndOwnerId(applyId, ownerId);
+    const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
-    if (!applyGroup) {
+    if (applyGroup.group.ownerId !== ownerId) {
       throw new NotAuthorizedError();
     }
     applyGroup.state = ApplyGroupState.DECLINED;
