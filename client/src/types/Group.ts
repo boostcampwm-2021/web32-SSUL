@@ -6,6 +6,18 @@ export enum GroupState {
   END = 'END',
 }
 
+export enum ApplyState {
+  PENDING = 'PENDING',
+  DECLINED = 'DECLINED',
+  ACCEPTED = 'ACCEPTED',
+}
+
+export enum GroupEnrollmentState {
+  MENTOR = 'MENTOR',
+  MENTEE = 'MENTEE',
+  OWNER = 'OWNER',
+}
+
 export interface Group {
   id: number;
   mentorId: number;
@@ -68,11 +80,11 @@ export interface GroupEnrollment {
   type: string;
 }
 
-export interface SimpleGroupCard {
-  id: 0;
+export interface SimpleGroupCardData {
+  id: number;
   name: string;
-  maxUserCnt: 0;
-  curUserCnt: 0;
+  maxUserCnt: number;
+  curUserCnt: number;
   status: string;
   ownerInfo: {
     avatarUrl: string;

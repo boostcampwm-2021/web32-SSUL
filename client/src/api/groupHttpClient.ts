@@ -5,6 +5,10 @@ import {
   GroupActivity,
   GroupDetailData,
   GroupApplyData,
+  SimpleGroupCardData,
+  ApplyState,
+  GroupState,
+  GroupEnrollmentState,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -28,6 +32,17 @@ class GroupHttpClient extends HttpClient {
     this.httpClient.post('/apply', applyInfo);
 
   public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
+
+  public getOwnGroups = (): Promise<SimpleGroupCardData[]> => this.httpClient.get(`/own`);
+
+  public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/applyed?state=${applyState}`);
+
+  public getMyGroups = (
+    groupStatus: GroupState,
+    enrollType: GroupEnrollmentState,
+  ): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/my?status=${groupStatus}&type=${enrollType}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();
