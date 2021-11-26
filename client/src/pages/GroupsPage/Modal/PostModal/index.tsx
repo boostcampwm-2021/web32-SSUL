@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, ChangeEvent } from 'react';
-import PostTypeNav from './PostTypeNav';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { postHttpClient } from '@api';
+import { GroupPostRequestDto } from '@types';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectGroupDetail } from '@store/group/detailSlice';
 import { setPosts, selectChoosenPost } from '@store/group/postSlice';
-import { postHttpClient } from '@api';
+import PostTypeNav from './PostTypeNav';
+import {
+  MSG_NEED_INFO,
+  MSG_POST_CREATE_SUCCESS,
+  MSG_POST_CREATE_ERROR,
+  MSG_POST_UPDATE_SUCCESS,
+  MSG_POST_UPDATE_ERROR,
+} from '@constants/consts';
 import CancelIcon from '@assets/icon_cancel.png';
-import { GroupPostRequestDto } from '@types';
 
 interface Props {
   mode: string;
@@ -16,6 +23,7 @@ interface Props {
 
 function PostModal({ mode }: Props): JSX.Element {
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
   const group = useAppSelector(selectGroupDetail);
   const post = useAppSelector(selectChoosenPost);
   const [title, setTitle] = useState<string>((mode === 'UPDATE' ? post?.title : '') as string);
@@ -39,7 +47,10 @@ function PostModal({ mode }: Props): JSX.Element {
   };
 
   const handlePostButtonClick = async () => {
-    if (!isCompleted) return;
+    if (!isCompleted) {
+      toastify(MSG_NEED_INFO, 'INFO');
+      return;
+    }
 
     try {
       const postData: GroupPostRequestDto = {
@@ -52,16 +63,19 @@ function PostModal({ mode }: Props): JSX.Element {
 
       if (mode === 'POST') {
         await postHttpClient.createPost(postData);
+        toastify(MSG_POST_CREATE_SUCCESS, 'SUCCESS');
       } else if (mode === 'UPDATE') {
         await postHttpClient.updatePost(postData);
+        toastify(MSG_POST_UPDATE_SUCCESS, 'SUCCESS');
       }
 
+      dispatch(changeGroupModalState('NONE'));
       const groupPosts = await postHttpClient.getGroupPosts(group.id);
       dispatch(setPosts(groupPosts));
     } catch (e: any) {
-      console.log(e.description);
+      if (mode === 'POST') toastify(MSG_POST_CREATE_ERROR, 'ERROR');
+      else if (mode === 'UPDATE') toastify(MSG_POST_UPDATE_ERROR, 'ERROR');
     }
-    dispatch(changeGroupModalState('NONE'));
   };
 
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));

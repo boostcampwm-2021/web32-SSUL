@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
 import { postHttpClient } from '@api';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectUser } from '@store/user/globalSlice';
 import { selectGroupDetail } from '@store/group/detailSlice';
 import { setPosts, selectChoosenPost } from '@store/group/postSlice';
 import { formatDateToString } from '@utils/Date';
+import { MSG_POST_DELETE_SUCCESS, MSG_POST_DELETE_ERROR } from '@constants/consts';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
   const user = useAppSelector(selectUser);
   const group = useAppSelector(selectGroupDetail);
   const post = useAppSelector(selectChoosenPost);
@@ -21,12 +23,13 @@ function ReadModal(): JSX.Element {
     if (!post) return;
     try {
       await postHttpClient.deletePost(post?.id, group.id);
+      toastify(MSG_POST_DELETE_SUCCESS, 'SUCCESS');
+      dispatch(changeGroupModalState('NONE'));
       const posts = await postHttpClient.getGroupPosts(group.id);
       dispatch(setPosts(posts));
     } catch (e: any) {
-      console.log(e.description);
+      toastify(MSG_POST_DELETE_ERROR, 'ERROR');
     }
-    dispatch(changeGroupModalState('NONE'));
   };
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 

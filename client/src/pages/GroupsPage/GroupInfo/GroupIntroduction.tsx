@@ -24,6 +24,7 @@ const Content = styled.p`
   font-size: 0.9rem;
   font-weight: 700;
   color: ${(props) => props.theme.Gray1};
+  white-space: pre;
 `;
 
 export default GroupIntrodction;
