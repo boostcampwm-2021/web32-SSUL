@@ -1,6 +1,8 @@
 // 메시지
 export const MSG_NOT_FOUND = '없는 페이지입니다';
 export const MSG_BAD_ACCESS = '좋지 못한 접근입니다.';
+export const MSG_NEED_INFO = '필수 입력사항을 입력해주세요!';
+export const MSG_GROUP_CREATE_ERROR = '그룹생성에 실패했습니다.';
 
 // 디스크립션
 export const DESC_NOT_FOUND = '404 NOT FOUND';
