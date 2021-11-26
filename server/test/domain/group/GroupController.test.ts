@@ -1,4 +1,5 @@
 import { SimpleGroupCardResponse } from '@domains/group/dto/SimpleGroupCardResponse';
+import { ApplyGroupState } from '@domains/group/models/ApplyGroup';
 import { GroupState } from '@domains/group/models/Group';
 import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
 import express from 'express';
@@ -31,23 +32,39 @@ describe('그룹 컨트롤러', () => {
     });
   });
 
-  describe('GET /pending-apply', () => {
-    test('조회 성공', async () => {
+  describe('GET /applyed', () => {
+    test('대기중 상태 조회 성공', async () => {
       //given
       const mockSession = getLoginCookie({ id: 3 });
-
+      const applyedState = ApplyGroupState.PENDING;
       //when
       const response = await request(app)
-        .get('/api/group/pending-apply')
+        .get('/api/group/applyed')
+        .query({ state: applyedState })
         .set('Cookie', mockSession);
 
       //then
       expect(response.statusCode).toBe(200);
-      const { id, name, maxUserCnt, curUserCnt } = response.body[0];
+      const { id, name } = response.body[0];
       expect(id).toBe(1); //pending state group
       expect(name).toBe('testgroup1');
-      expect(maxUserCnt).toBe(8);
-      expect(curUserCnt).toBe(1);
+    });
+
+    test('거절 상태 조회 성공', async () => {
+      //given
+      const mockSession = getLoginCookie({ id: 3 });
+      const applyedState = ApplyGroupState.DECLINED;
+      //when
+      const response = await request(app)
+        .get('/api/group/applyed')
+        .query({ state: applyedState })
+        .set('Cookie', mockSession);
+
+      //then
+      expect(response.statusCode).toBe(200);
+      const { id, name } = response.body[0];
+      expect(id).toBe(2); //declined state group
+      expect(name).toBe('testgroup2');
     });
   });
 
