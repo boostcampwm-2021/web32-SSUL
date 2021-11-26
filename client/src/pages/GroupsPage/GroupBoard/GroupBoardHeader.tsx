@@ -13,7 +13,8 @@ function GroupBoardHeader(): JSX.Element {
   return (
     <Container>
       <GroupDate>{GROUP_BOARD_TITLE}</GroupDate>
-      <Image src={PlusIcon} onClick={handlePostButtonClick} alt="그룹 게시판 글쓰기 버튼" />
+      <Image data-test="board-post-btn" src={PlusIcon} onClick={handlePostButtonClick} alt="그룹 게시판 글쓰기 버튼" />
+        
     </Container>
   );
 }

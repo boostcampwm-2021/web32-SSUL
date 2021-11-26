@@ -13,12 +13,14 @@ function GroupInfoHeader(): JSX.Element {
 
   return (
     <Container>
-      <GroupDate>
+      <GroupDate data-test="my-group-duration">
         {formatDateToString(groupDetail.startAt)} ~ {formatDateToString(groupDetail.endAt)}
       </GroupDate>
-      <GroupStatus>{classifyDate(groupDetail.startAt, groupDetail.endAt)}</GroupStatus>
-      <GroupTitle>{groupDetail.name}</GroupTitle>
-      <GroupTagBar>{groupTechStackList}</GroupTagBar>
+      <GroupStatus data-test="my-group-status">
+        {classifyDate(groupDetail.startAt, groupDetail.endAt)}
+      </GroupStatus>
+      <GroupTitle data-test="my-group-title">{groupDetail.name}</GroupTitle>
+      <GroupTagBar data-test="my-group-tag-list">{groupTechStackList}</GroupTagBar>
     </Container>
   );
 }

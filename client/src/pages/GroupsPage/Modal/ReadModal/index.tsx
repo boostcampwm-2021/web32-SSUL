@@ -38,21 +38,25 @@ function ReadModal(): JSX.Element {
   return (
     <Container>
       <Header>
-        <Title>{post.title}</Title>
+        <Title data-test="read-modal-title">{post.title}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
-      <SubInfoBar>
+      <SubInfoBar data-test="read-modal-info">
         <Name>{post.writer}</Name>
         <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
+      <Content data-test="read-modal-content" readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
       <Hit>
         {HIT} {post.hit}
       </Hit>
       {user.id === post.userId && (
-        <ButtonBox>
-          <ModifyButton onClick={handleModifyButtonClick}>수정</ModifyButton>
-          <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
+        <ButtonBox data-test="read-modal-btn-box">
+          <ModifyButton data-test="read-modal-modify-btn" onClick={handleModifyButtonClick}>
+            수정
+          </ModifyButton>
+          <DeleteButton data-test="read-modal-delete-btn" onClick={handleDeleteButtonClick}>
+            삭제
+          </DeleteButton>
         </ButtonBox>
       )}
     </Container>

@@ -97,17 +97,19 @@ function PostModal({ mode }: Props): JSX.Element {
       <Content>
         <PostTypeNav selectedType={selectedType} handlePostNavItemClick={handlePostNavItemClick} />
         <TitleInput
+          data-test="post-modal-title-input"
           onChange={handleTitleInputChange}
           value={title}
           placeholder={TITLE_INTRO}
         ></TitleInput>
         <ContentInput
+          data-test="post-modal-content-input"
           onChange={handleContentInputChange}
           value={content}
           placeholder={CONTENT_INTRO}
         ></ContentInput>
       </Content>
-      <PostButton active={isCompleted} onClick={handlePostButtonClick}>
+      <PostButton data-test="modal-post-btn" active={isCompleted} onClick={handlePostButtonClick}>
         {mode === ModalTypeEnum.UPDATE ? '수정' : '작성'}
       </PostButton>
     </Container>
