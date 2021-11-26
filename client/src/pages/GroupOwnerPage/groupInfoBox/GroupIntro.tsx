@@ -12,10 +12,10 @@ function GroupIntro(): JSX.Element {
   const { groupId, intro } = useAppSelector(selectGroupAdminData);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const textInput = useRef<HTMLTextAreaElement>(null);
+  const textInput = useRef<string>(intro);
 
   const handleEditButtonClick = () => {
-    const text = textInput.current?.value;
+    const text = textInput.current;
 
     if (isEdit && text !== undefined) {
       if (text.length < MIN_INTRO_LENGTH || text.length > MAX_INTRO_LENGTH) {
@@ -31,6 +31,10 @@ function GroupIntro(): JSX.Element {
     setIsEdit(!isEdit);
   };
 
+  const handleEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    textInput.current = e.currentTarget.value;
+  };
+
   return (
     <Container>
       <Header>
@@ -39,7 +43,11 @@ function GroupIntro(): JSX.Element {
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
-        <EditText ref={textInput} defaultValue={intro} maxLength={MAX_INTRO_LENGTH}></EditText>
+        <EditText
+          onChange={handleEditTextChange}
+          defaultValue={intro}
+          maxLength={MAX_INTRO_LENGTH}
+        ></EditText>
       ) : (
         <Text>{intro}</Text>
       )}

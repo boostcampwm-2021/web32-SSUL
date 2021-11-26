@@ -12,10 +12,10 @@ function GroupTitle(): JSX.Element {
   const { groupId, name } = useAppSelector(selectGroupAdminData);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const textInput = useRef<HTMLTextAreaElement>(null);
+  const textInput = useRef<string>(name);
 
   const handleEditButtonClick = () => {
-    const text = textInput.current?.value;
+    const text = textInput.current;
     if (isEdit && text !== undefined) {
       if (text.length < MIN_TITLE_LENGTH || text.length > MAX_TITLE_LENGTH) {
         setNotificationText(
@@ -29,6 +29,10 @@ function GroupTitle(): JSX.Element {
     setNotificationText('');
     setIsEdit(!isEdit);
   };
+
+  const handleEditTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    textInput.current = e.currentTarget.value;
+  };
   return (
     <Container>
       <Header>
@@ -37,7 +41,11 @@ function GroupTitle(): JSX.Element {
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
-        <EditText ref={textInput} defaultValue={name} maxLength={MAX_TITLE_LENGTH} />
+        <EditText
+          onChange={handleEditTextChange}
+          defaultValue={name}
+          maxLength={MAX_TITLE_LENGTH}
+        />
       ) : (
         <Text>{name}</Text>
       )}
