@@ -64,5 +64,11 @@
     "userId": 4,
     "groupId": 3,
     "type": "MENTOR"
+  },
+  {
+    "id": 12,
+    "userId": 4,
+    "groupId": 11,
+    "type": "OWNER"
   }
 ]

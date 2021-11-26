@@ -14,4 +14,14 @@ export class ApplyGroupRepository extends Repository<ApplyGroup> {
   findOneByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({ where: { groupId, userId } });
   }
+  public findAllByGroupIdAndState(groupId: number, state: ApplyGroupState) {
+    return this.find({
+      where: { groupId, state },
+      order: { createdAt: 'ASC' },
+    });
+  }
+
+  public findOneOrFailById(id: number) {
+    return this.findOneOrFail(id);
+  }
 }

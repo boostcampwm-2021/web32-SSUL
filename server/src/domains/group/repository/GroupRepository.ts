@@ -87,4 +87,8 @@ export class GroupRepository extends Repository<Group> {
       where: { ownerId },
     });
   }
+
+  public findOneOrFailById(id: number) {
+    return this.findOneOrFail(id);
+  }
 }
