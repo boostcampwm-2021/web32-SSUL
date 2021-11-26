@@ -12,7 +12,7 @@ import ChatListPage from '@pages/ChatListPage';
 import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
 import GroupCreatePage from '../../pages/GroupCreatePage';
-import NotFoundPage from '@pages/NotFoundPage';
+import ExceptionPage from '@pages/ExceptionPage';
 import { AuthGuardRoute, GroupBelongGuardRoute, GroupOwnerGuardRoute } from './routes';
 
 function Router(): JSX.Element {
@@ -30,7 +30,7 @@ function Router(): JSX.Element {
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile/:id" component={ProfilePage} />
       <Route path="/auth/callback" component={AuthCallback} />
-      <Route path="*" component={NotFoundPage} />
+      <Route path="*" component={ExceptionPage} />
     </Switch>
   );
 }

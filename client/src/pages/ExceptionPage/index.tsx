@@ -1,14 +1,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import WarningLogo from '@assets/icon_warning.svg';
+import { DESC_NOT_FOUND, MSG_NOT_FOUND } from '@constants/consts';
 
-function NotFoundPage(): JSX.Element {
+interface Props {
+  description?: string;
+  message?: string;
+}
+
+function ExceptionPage({
+  description = DESC_NOT_FOUND,
+  message = MSG_NOT_FOUND,
+}: Props): JSX.Element {
   return (
     <Container>
       <WarningImage src={WarningLogo}></WarningImage>
       <WarningTextBox>
-        <WarningCode>404 NOT FOUND</WarningCode>
-        <WarningText>없는 페이지입니다</WarningText>
+        <WarningCode>{description}</WarningCode>
+        <WarningText>{message}</WarningText>
       </WarningTextBox>
     </Container>
   );
@@ -56,4 +65,4 @@ const WarningText = styled.span`
   color: ${(props) => props.theme.Primary};
 `;
 
-export default NotFoundPage;
+export default ExceptionPage;
