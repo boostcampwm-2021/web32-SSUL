@@ -42,7 +42,6 @@ const Container = styled.div<{ isClickable: boolean }>`
   border-radius: 8px;
   border: 1px ${(props) => props.theme.Gray4} solid;
   margin-bottom: 16px;
-  margin-right: 4px;
   cursor: ${(props) => (props.isClickable ? 'pointer' : '')};
   background-color: #fff;
 

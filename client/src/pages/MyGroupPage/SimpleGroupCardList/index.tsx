@@ -28,7 +28,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 18%;
   height: 100%;
-  padding: 16px 8px 16px 16px;
+  padding: 16px;
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.Gray4};
   margin-right: 32px;
