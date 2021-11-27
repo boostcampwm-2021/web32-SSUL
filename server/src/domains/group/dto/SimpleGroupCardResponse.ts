@@ -1,6 +1,7 @@
+import { Category } from '@domains/category/models/Category';
 import { User } from '@domains/user/models/User';
 import { Type } from 'class-transformer';
-import { IsNumber, IsString, ValidateNested } from 'class-validator';
+import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { Group } from '../models/Group';
 
 class SimpleUserInfo {
@@ -10,6 +11,21 @@ class SimpleUserInfo {
   static from(user: User) {
     const dto = new SimpleUserInfo();
     dto.avatarUrl = user.avatarUrl;
+    return dto;
+  }
+}
+
+class SimpleCategoryInfo {
+  @IsString()
+  name: string | null;
+
+  @IsString()
+  imageUrl: string | null;
+
+  static from(category: Category) {
+    const dto = new SimpleCategoryInfo();
+    dto.name = category.name;
+    dto.imageUrl = category.imageUrl;
     return dto;
   }
 }
@@ -30,9 +46,22 @@ export class SimpleGroupCardResponse {
   @IsString()
   status: string;
 
+  @IsString()
+  intro: string | null;
+
+  @IsDate()
+  startAt: Date | null;
+
+  @IsDate()
+  endAt: Date | null;
+
   @ValidateNested()
   @Type(() => SimpleUserInfo)
   ownerInfo: SimpleUserInfo;
+
+  @ValidateNested()
+  @Type(() => SimpleCategoryInfo)
+  category: SimpleCategoryInfo;
 
   static from(group: Group) {
     const dto = new SimpleGroupCardResponse();
@@ -41,7 +70,10 @@ export class SimpleGroupCardResponse {
     dto.maxUserCnt = group.maxUserCnt;
     dto.curUserCnt = group.curUserCnt;
     dto.status = group.status;
+    dto.intro = group.intro;
+    dto.startAt = group.startAt;
     dto.ownerInfo = SimpleUserInfo.from(group.ownerInfo);
+    dto.category = SimpleCategoryInfo.from(group.category);
     return dto;
   }
 }
