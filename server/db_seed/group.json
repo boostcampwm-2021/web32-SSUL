@@ -64,6 +64,30 @@
     "categoryId": 1,
     "status": "READY"
   },
+   {
+    "id": 6,
+    "ownerId": 31,
+    "name": "testgroup6",
+    "maxUserCnt": 5,
+    "curUserCnt": 1,
+    "intro": "synthesize virtual bandwidth",
+    "startAt": "2022-04-01 01:06:55",
+    "endAt": "2022-05-01 06:44:08",
+    "categoryId": 2,
+    "status": "READY"
+  },
+  {
+    "id": 7,
+    "ownerId": 31,
+    "name": "testgroup7",
+    "maxUserCnt": 5,
+    "curUserCnt": 1,
+    "intro": "synthesize virtual bandwidth",
+    "startAt": "2022-03-01 01:06:55",
+    "endAt": "2022-06-01 06:44:08",
+    "categoryId": 2,
+    "status": "READY"
+  },
   {
     "id": 11,
     "ownerId": 4,
@@ -76,4 +100,5 @@
     "categoryId": 3,
     "status": "READY"
   }
+ 
 ]

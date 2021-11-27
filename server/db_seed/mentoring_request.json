@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "createdAt" : "2021-11-27 18:00:00",
+    "mentorId": 33,
+    "groupId": 6
+  },
+  {
+    "id": 2,
+    "createdAt" : "2021-11-27 18:00:00",
+    "mentorId": 34,
+    "groupId": 7
+  }
+]

@@ -97,5 +97,41 @@
     "createdAt": "2021-11-10 12:39:51",
     "feverStack": 36.5,
     "shareStack": 0
+  },
+  {
+    "id": 31,
+    "githubId": "ycleeme",
+    "name": "유저31",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/92939366?v=4",
+    "createdAt": "2021-11-12 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
+  },
+  {
+    "id": 32,
+    "githubId": "ycleeme",
+    "name": "유저32",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/92939366?v=4",
+    "createdAt": "2021-11-14 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
+  },
+  {
+    "id": 33,
+    "githubId": "ycleeme",
+    "name": "유저33",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/92939366?v=4",
+    "createdAt": "2021-11-10 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
+  },
+  {
+    "id": 34,
+    "githubId": "ycleeme",
+    "name": "유저34",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/92939366?v=4",
+    "createdAt": "2021-11-10 12:39:51",
+    "feverStack": 36.5,
+    "shareStack": 0
   }
 ]

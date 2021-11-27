@@ -101,6 +101,7 @@ export class MentoringController {
   }
 
   @Post('/request')
+  @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
   @OnUndefined(200)
   public async postMentoringRequest(@Body() { mentorId, groupId }: PostRequestDto) {
@@ -108,6 +109,7 @@ export class MentoringController {
   }
 
   @Delete('/request')
+  @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '멘토링 요청을 취소하는 API' })
   @OnUndefined(200)
   public async deleteRequest(

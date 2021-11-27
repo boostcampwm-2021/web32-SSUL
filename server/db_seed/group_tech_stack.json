@@ -154,5 +154,41 @@
     "groupId": 11,
     "techStackId": 8,
     "name": "C++"
+  },
+  {
+    "id": 27,
+    "groupId": 6,
+    "techStackId": 7,
+    "name": "R"
+  },
+  {
+    "id": 28,
+    "groupId": 6,
+    "techStackId": 8,
+    "name": "C++"
+  },
+  {
+    "id": 29,
+    "groupId": 6,
+    "techStackId": 9,
+    "name": "SQL"
+  },
+  {
+    "id": 30,
+    "groupId": 7,
+    "techStackId": 10,
+    "name": "Vue.js"
+  },
+  {
+    "id": 31,
+    "groupId": 7,
+    "techStackId": 11,
+    "name": "HTML"
+  },
+  {
+    "id": 32,
+    "groupId": 7,
+    "techStackId": 8,
+    "name": "C++"
   }
 ]
