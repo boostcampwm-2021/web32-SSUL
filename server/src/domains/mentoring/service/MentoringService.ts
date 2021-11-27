@@ -16,7 +16,7 @@ import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
 import { MentorAlreadyRequestError } from '../error/MentorAlreadyRequestError';
 import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { MentorNotFoundError } from '../error/MentorNotFoundError';
-import { GroupNotFoundError } from '@domains/group/error/GroupNotFoundError';
+import { MentoringRequestNotFoundError } from '../error/MentoringRequestNotFoundError';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -109,11 +109,15 @@ export class MentoringService {
       .filter((mentor) => mentor);
   }
 
-  public async saveMentoringRequest(mentorId: number, groupId: number) {
+  public async checkMentorIdAndGroupIdValid(mentorId: number, groupId: number) {
     const mentorOne = await this.mentorRepository.findOneByMentorId(mentorId);
     if (!mentorOne) throw new MentorNotFoundError();
 
     await this.groupRepository.findOneOrFailById(groupId);
+  }
+
+  public async saveMentoringRequest(mentorId: number, groupId: number) {
+    await this.checkMentorIdAndGroupIdValid(mentorId, groupId);
 
     const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
       mentorId,
@@ -128,5 +132,17 @@ export class MentoringService {
     const createdAt = new Date();
 
     return await this.mentoringRequestRepository.save({ createdAt, mentor, group });
+  }
+
+  public async cancelMentoringRequest(mentorId: number, groupId: number) {
+    await this.checkMentorIdAndGroupIdValid(mentorId, groupId);
+
+    const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
+      mentorId,
+      groupId,
+    );
+    if (!mentoringRequest) throw new MentoringRequestNotFoundError();
+
+    return await this.mentoringRequestRepository.deleteByMentorIdAndGroupId(mentorId, groupId);
   }
 }

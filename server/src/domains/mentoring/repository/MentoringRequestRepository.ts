@@ -20,4 +20,8 @@ export class MentoringRequestRepository extends Repository<MentoringRequest> {
   public findOneByMentorIdAndGroupId(mentorId: number, groupId: number) {
     return this.findOne({ where: { mentorId, groupId } });
   }
+
+  public deleteByMentorIdAndGroupId(mentorId: number, groupId: number) {
+    this.delete({ mentorId, groupId });
+  }
 }

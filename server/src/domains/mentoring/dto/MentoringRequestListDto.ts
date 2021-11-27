@@ -20,3 +20,10 @@ export class MentoringRequestParam {
   @IsNumber()
   mid: number;
 }
+
+export class MentoringCancelParam {
+  @IsNumber()
+  mentor: number;
+  @IsNumber()
+  group: number;
+}

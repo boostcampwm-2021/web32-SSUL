@@ -9,11 +9,16 @@ import {
   UseBefore,
   QueryParams,
   Params,
+  Delete,
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { MentoringRequestListDto, MentoringRequestParam } from '../dto/MentoringRequestListDto';
+import {
+  MentoringCancelParam,
+  MentoringRequestListDto,
+  MentoringRequestParam,
+} from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentoringService } from '../service/MentoringService';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
@@ -100,6 +105,15 @@ export class MentoringController {
   @OnUndefined(200)
   public async postMentoringRequest(@Body() { mentorId, groupId }: PostRequestDto) {
     return await this.mentoringService.saveMentoringRequest(mentorId, groupId);
+  }
+
+  @Delete('/request')
+  @OpenAPI({ summary: '멘토링 요청을 취소하는 API' })
+  @OnUndefined(200)
+  public async deleteRequest(
+    @QueryParams() { mentor: mentorId, group: groupId }: MentoringCancelParam,
+  ) {
+    await this.mentoringService.cancelMentoringRequest(mentorId, groupId);
   }
 
   @Get('/request/:mid')
