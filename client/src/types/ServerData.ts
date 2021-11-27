@@ -146,3 +146,15 @@ export interface ParticipationRequest {
   feverStack: number;
   createdAt: Date;
 }
+
+export interface NotificationData {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  groupId: number;
+  type: string;
+  createdAt: string;
+  readChk: number;
+  senderName: string;
+  groupName: string;
+}
