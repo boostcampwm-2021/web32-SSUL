@@ -161,4 +161,15 @@ describe('/mentoring', () => {
       });
     });
   });
+
+  describe('[GET /request] 모든 멘토링 요청 리스트를 정상적으로 가져오는지 테스트', () => {
+    //uid 1 is mentor , uid 2 is not mentor
+    test('전체 조회 테스트', async () => {
+      //when
+
+      const res = await request(app).get('/api/mentoring/request');
+      expect(res.statusCode).toBe(200);
+      expect(res.body.length).toBeGreaterThanOrEqual(1);
+    });
+  });
 });
