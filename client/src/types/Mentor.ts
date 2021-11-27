@@ -20,3 +20,8 @@ export interface MentoringRequest {
   group: OnlyGroupId;
   mentor: OnlyMentorId;
 }
+
+export interface MentoringRequestPostData {
+  mentorId: number;
+  groupId: number;
+}

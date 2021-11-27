@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
 import { groupHttpClient, mentoringHttpClient } from '@api';
-import { MentoringRequest, OwnGroupsInfo } from '@types';
-import { useAppSelector } from '@hooks';
+import { MentoringRequest, MentoringRequestPostData, OwnGroupsInfo } from '@types';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
+import { changeGroupModalState } from '@store/util/Slice';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
   const [allMentoringRequests, setAllMentoringRequests] = useState<MentoringRequest[]>([]);
   const { mentorId } = useAppSelector(mentorCardDetailState);
+  const dispatch = useAppDispatch();
 
   const getOwnGroups = async () => {
     const allOwnGroups = await groupHttpClient.getOwnGroups();
@@ -21,6 +23,16 @@ function GroupList(): JSX.Element {
   useEffect(() => {
     getOwnGroups();
   }, []);
+
+  const hanldeApplyButtonClick = async (groupId: number) => {
+    const postData: MentoringRequestPostData = { groupId, mentorId };
+    await mentoringHttpClient.postMentoringRequests(postData);
+    dispatch(changeGroupModalState('NONE'));
+  };
+
+  const hanldeCancelButtonClick = async () => {
+    console.log('cancel');
+  };
 
   const makeRequestBox = ownGroups.map((group, idx) => {
     const alreadyRequestMentoring = allMentoringRequests.find(
@@ -44,9 +56,9 @@ function GroupList(): JSX.Element {
         <ButtonWrapper>
           <GroupInfoButton>그룹 보기</GroupInfoButton>
           {alreadyRequestMentoring ? (
-            <CancelButton>신청 취소</CancelButton>
+            <CancelButton onClick={hanldeCancelButtonClick}>신청 취소</CancelButton>
           ) : (
-            <ApplyButton>신청 하기</ApplyButton>
+            <ApplyButton onClick={() => hanldeApplyButtonClick(group.id)}>신청 하기</ApplyButton>
           )}
         </ButtonWrapper>
       </BoxContainer>

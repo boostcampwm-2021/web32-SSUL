@@ -3,6 +3,7 @@ import {
   MentorInfo,
   MentoringRequest,
   MentoringRequestData,
+  MentoringRequestPostData,
   MentorListResponse,
   RegisterMentorData,
 } from '@types';
@@ -26,6 +27,12 @@ class MentoringHttpClient extends HttpClient {
 
   public getAllMentoringRequests = (): Promise<MentoringRequest[]> => {
     return this.httpClient.get(`/request`);
+  };
+
+  public postMentoringRequests = (
+    MentoringRequestData: MentoringRequestPostData,
+  ): Promise<null> => {
+    return this.httpClient.post(`/request`, MentoringRequestData);
   };
 
   public getMentoringRequest = (mentorId: number): Promise<MentoringRequestData[]> => {
