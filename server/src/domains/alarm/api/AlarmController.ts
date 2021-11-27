@@ -25,7 +25,7 @@ export class AlarmController {
     private readonly alarmService: AlarmService,
   ) {}
 
-  @Get('/:uid')
+  @Get('/')
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @ResponseSchema(AlarmListResponse, { isArray: true, description: '알림 목록 조회 성공' })

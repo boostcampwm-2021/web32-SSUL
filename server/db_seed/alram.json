@@ -2,7 +2,7 @@
   {
     "id": 1,
     "senderId": 4,
-    "recieverId": 2,
+    "receiverId": 2,
     "groupId": 4,
     "type": "JOIN_GROUP_REQUEST",
     "createdAt": "2021-11-20 12:06:55",
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "senderId": 2,
-    "recieverId": 4,
+    "receiverId": 4,
     "groupId": 4,
     "type": "MENTORING_REQUEST",
     "createdAt": "2021-11-25 12:06:55",
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "senderId": 2,
-    "recieverId": 4,
+    "receiverId": 4,
     "groupId": 11,
     "type": "JOIN_GROUP_REQUEST",
     "createdAt": "2021-11-26 12:06:55",
