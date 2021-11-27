@@ -21,7 +21,7 @@ export const ErrorCode = Object.freeze({
   GROUP_ALREADY_JOIN: new ErrorSpec('G004', '이미 속해 있는 그룹입니다.'),
   GROUP_ALREADY_DECLINED: new ErrorSpec('G005', '그룹 신청이 거절되었습니다.'),
   GROUP_NOT_INVOLVE: new ErrorSpec('G006', '그룹에 속해있지 않습니다.'),
-  // group
+  // mentoring
   MENTORING_ALREADY_REQUEST: new ErrorSpec('M00', '이미 멘토링 신청을 한 상태입니다.'),
   MENTOR_NOT_FOUND: new ErrorSpec('M01', '잘못된 멘토ID 입니다.'),
   MENTORING_NOT_FOUND: new ErrorSpec('M02', '멘토링 요청 정보를 찾을 수 없습니다.'),
