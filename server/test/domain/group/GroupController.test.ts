@@ -105,18 +105,6 @@ describe('그룹 컨트롤러', () => {
       });
     });
 
-    test('query에 status누락시 400 에러', async () => {
-      //given
-      const mockSession = getLoginCookie({ id: 2 });
-
-      //when
-      //no query
-      const response = await request(app).get('/api/group/my').set('Cookie', mockSession);
-
-      //then
-      expect(response.statusCode).toBe(400);
-    });
-
     test('멘토로 참여한 진행 중 상태 조회 성공', async () => {
       //given
       const mockSession = getLoginCookie({ id: 4 });
@@ -148,6 +136,19 @@ describe('그룹 컨트롤러', () => {
       const { id, status } = response.body[0];
       expect(id).toBe(3);
       expect(status).toBe(GroupState.END);
+    });
+
+    test('query없을시 전부 조회', async () => {
+      //given
+      const mockSession = getLoginCookie({ id: 2 });
+
+      //when
+      //no query
+      const response = await request(app).get('/api/group/my').set('Cookie', mockSession);
+
+      //then
+      expect(response.statusCode).toBe(200);
+      expect(response.body.length).toBeGreaterThanOrEqual(3);
     });
   });
 
