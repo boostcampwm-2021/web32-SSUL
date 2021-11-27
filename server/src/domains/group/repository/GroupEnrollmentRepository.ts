@@ -17,6 +17,12 @@ export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {
     });
   }
 
+  findAllByUserId(userId: number) {
+    return this.find({
+      where: { userId },
+    });
+  }
+
   findTypeByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({
       where: { groupId, userId },
