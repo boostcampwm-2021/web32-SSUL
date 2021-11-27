@@ -8,11 +8,13 @@ import {
   Param,
   UseBefore,
   QueryParams,
+  Params,
+  Delete,
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
+import { MentoringRequestListDto, MentoringRequestParam } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentoringService } from '../service/MentoringService';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
@@ -26,6 +28,9 @@ import {
   FilterdPageMentorListParams,
   FilterdPageMentorListResponse,
 } from '../dto/FilterdPageMentorListResponse';
+import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
+import { MentoringCancelParam } from '../dto/MentoringCancelParam';
+import { MentoringRequestDto } from '../dto/MentoringRequestDto';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -85,10 +90,35 @@ export class MentoringController {
     await this.techStackService.createMentorTechStack(mentorId, techStacks);
   }
 
+  @Get('/request')
+  @OpenAPI({ summary: '모든 멘토링 요청 리스트를 가져오는 API' })
+  @ResponseSchema(MentoringRequestResponse, { isArray: true })
+  public async getAllMentoringRequest() {
+    return await this.mentoringService.getAllRequestList();
+  }
+
+  @Post('/request')
+  @UseBefore(isLoggedIn)
+  @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
+  @OnUndefined(200)
+  public async postMentoringRequest(@Body() { mentorId, groupId }: MentoringRequestDto) {
+    return await this.mentoringService.saveMentoringRequest(mentorId, groupId);
+  }
+
+  @Delete('/request')
+  @UseBefore(isLoggedIn)
+  @OpenAPI({ summary: '멘토링 요청을 취소하는 API' })
+  @OnUndefined(204)
+  public async deleteRequest(
+    @QueryParams() { mentor: mentorId, group: groupId }: MentoringCancelParam,
+  ) {
+    await this.mentoringService.cancelMentoringRequest(mentorId, groupId);
+  }
+
   @Get('/request/:mid')
-  @OpenAPI({ summary: '멘토링 요청 리스트를 가져오는 API' })
+  @OpenAPI({ summary: '특정 멘토의 멘토링 요청 리스트를 가져오는 API' })
   @ResponseSchema(MentoringRequestListDto)
-  public async getRequest(@Param('mid') mentorId: number) {
+  public async getRequest(@Params() { mid: mentorId }: MentoringRequestParam) {
     return await this.mentoringService.getRequestListByMentorId(mentorId);
   }
 

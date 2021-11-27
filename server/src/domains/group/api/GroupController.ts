@@ -26,6 +26,7 @@ import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
 import { GroupRoleResponse } from '../dto/GroupRoleResponse';
 import { ApplyedGroupQuery } from '../dto/ApplyedGroupQuery';
+import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -82,10 +83,18 @@ export class GroupController {
 
   @Get('/own')
   @UseBefore(isLoggedIn)
-  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @ResponseSchema(OwnerGroupCardResponse, { isArray: true })
   @OpenAPI({ summary: '내가 만든 그룹 목록을 가져오는 API' })
   public async getMyGroups(@Session() session: any) {
     return await this.groupService.getOwnGroups(session.user.id);
+  }
+
+  @Get('/own/simple')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 간단한 내용만 가져오는 API' })
+  public async getMySimpleGroups(@Session() session: any) {
+    return await this.groupService.getOwnSimpleGroups(session.user.id);
   }
 
   @Get('/applyed')

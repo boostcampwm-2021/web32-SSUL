@@ -22,8 +22,10 @@ import {
   postSeedData,
   applyGroupSeedData,
   mentorTechStackSeedData,
+  mentoringRequestSeedData,
 } from '@root/db_seed';
 import { MentorTechStack } from '@domains/techstack/models/MentorTechStack';
+import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 
 export async function seed() {
   const seedConfig = { ...ormConfig[config.mode], dropSchema: true };
@@ -73,5 +75,11 @@ async function seedDatabase(connection: Connection) {
     .insert()
     .into(MentorTechStack)
     .values(mentorTechStackSeedData)
+    .execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(MentoringRequest)
+    .values(mentoringRequestSeedData)
     .execute();
 }

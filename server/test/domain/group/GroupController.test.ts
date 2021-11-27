@@ -13,13 +13,13 @@ describe('그룹 컨트롤러', () => {
     app = await appWrapper.getInstance();
   });
 
-  describe('GET /own', () => {
+  describe('GET /own/simple', () => {
     test('조회성공', async () => {
       //given
       const mockSession = getLoginCookie({ id: 1 });
 
       //when
-      const response = await request(app).get('/api/group/own').set('Cookie', mockSession);
+      const response = await request(app).get('/api/group/own/simple').set('Cookie', mockSession);
 
       //then
       expect(response.statusCode).toBe(200);
