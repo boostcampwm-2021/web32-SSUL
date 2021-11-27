@@ -15,10 +15,13 @@ import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { GroupOwnerService } from '../service/GroupOwnerService';
+import { AlarmService } from '@domains/alarm/service/AlarmService';
 import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/updateGroup';
 import { GroupService } from '../service/GroupService';
 import { GroupParam } from '../dto/groupDto';
 import { ApplyParam } from '../dto/ApplyParam';
+import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
+import { AlarmType } from '@domains/alarm/models/Alarm';
 
 @OpenAPI({
   tags: ['그룹 설정'],
@@ -31,6 +34,8 @@ export class GroupOwnerController {
     private readonly groupOwnerService: GroupOwnerService,
     @Inject()
     private readonly groupService: GroupService,
+    @Inject()
+    private readonly alarmService: AlarmService,
   ) {}
 
   @OpenAPI({ summary: '그룹정보를 가져오는 API' })
@@ -86,7 +91,10 @@ export class GroupOwnerController {
   @UseBefore(isLoggedIn)
   @Patch('/accept/:aid')
   public async acceptApply(@Session() session: any, @Params() { aid }: ApplyParam) {
-    await this.groupOwnerService.acceptRequest(aid, session.user.id);
+    const applyGroup = await this.groupOwnerService.acceptRequest(aid, session.user.id);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromApply(applyGroup, AlarmType.JOIN_GROUP_ACCEPTED),
+    );
   }
 
   @OpenAPI({ summary: '그룹의 참여 요청을 거절하는 API' })

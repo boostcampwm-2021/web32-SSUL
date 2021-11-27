@@ -1,5 +1,7 @@
+import { ApplyGroup } from '@domains/group/models/ApplyGroup';
+import { Group } from '@domains/group/models/Group';
 import { IsNumber, IsString } from 'class-validator';
-import { Alarm } from '../models/Alarm';
+import { Alarm, AlarmType } from '../models/Alarm';
 
 export class AlarmDto {
   @IsNumber()
@@ -20,5 +22,23 @@ export class AlarmDto {
     entity.createdAt = new Date();
     entity.readChk = false;
     return entity;
+  }
+
+  static fromApply(applyGroup: ApplyGroup, type: AlarmType) {
+    const dto = new AlarmDto();
+    dto.senderId = applyGroup.userId;
+    dto.receiverId = applyGroup.group.ownerId;
+    dto.groupId = applyGroup.groupId;
+    dto.type = type;
+    return dto;
+  }
+
+  static fromGroup(group: Group, type: AlarmType) {
+    const dto = new AlarmDto();
+    dto.senderId = group.mentorId!;
+    dto.receiverId = group.ownerId;
+    dto.groupId = group.id;
+    dto.type = type;
+    return dto;
   }
 }
