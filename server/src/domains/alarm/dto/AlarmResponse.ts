@@ -3,19 +3,19 @@ import { Alarm } from '../models/Alarm';
 
 export class AlarmListResponse {
   @IsNumber()
-  id: number | null;
+  id: number;
   @IsNumber()
-  senderId: number | null;
+  senderId: number;
   @IsString()
-  senderName: string | null;
+  senderName: string;
   @IsNumber()
-  receiverId: number | null;
+  receiverId: number;
   @IsNumber()
-  groupId: number | null;
+  groupId: number;
   @IsString()
   groupName: string | null;
   @IsString()
-  type: string | null;
+  type: string;
   @IsDate()
   createdAt: Date | null;
   @IsBoolean()
