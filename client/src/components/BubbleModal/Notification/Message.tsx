@@ -27,12 +27,12 @@ function Message({ data }: Props): JSX.Element {
   };
 
   const getFixedLengthName = (name: string) =>
-    name.length > MAX_NAME_LENGTH ? `${name.slice(0, MAX_NAME_LENGTH)}...` : name;
+    name.length > MAX_NAME_LENGTH ? `"${name.slice(0, MAX_NAME_LENGTH)}..."` : `"${name}"`;
 
   const resultText = (name: string, what: string, result: string) =>
     `${getFixedLengthName(name)} \n${what} ${result} 되었습니다.`;
 
-  const applyText = (name: string, what: string) => `${name} 님이\n${what} 보냈습니다.`;
+  const applyText = (name: string, what: string) => `"${name}" 님이\n${what} 보냈습니다.`;
 
   return <Container>{getText()}</Container>;
 }

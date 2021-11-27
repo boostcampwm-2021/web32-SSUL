@@ -25,7 +25,11 @@ function ListItem({ idx, data }: Props): JSX.Element {
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
-  const handleItemClick = () => {
+  const handleItemClick = (e: React.MouseEvent) => {
+    const newList = notificationList.map((notification) => {
+      return { ...notification };
+    });
+
     switch (data.type) {
       case 'JOIN_GROUP_ACCEPTED':
         history.push('/group/status');
@@ -40,6 +44,9 @@ function ListItem({ idx, data }: Props): JSX.Element {
         history.push(`/profile/${user.oAuthId}`);
         break;
     }
+
+    newList[idx].readChk = 1;
+    dispatch(setNotificationList({ notificationList: newList }));
   };
 
   const handleDeleteButtonClick = (e: React.MouseEvent) => {
@@ -76,7 +83,9 @@ const Item = styled.div`
 
 const CreatedDate = styled.span`
   width: 60px;
-  font-weight: 500;
+  margin-right: 10px;
+  text-align: center;
+  font-weight: 400;
 `;
 
 const DeleteButton = styled.img`

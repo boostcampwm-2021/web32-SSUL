@@ -64,8 +64,8 @@ const NotificationModalContainer = styled.div`
   flex-direction: column;
   position: absolute;
   top: 52px;
-  right: -700%;
-  width: 280px;
+  right: -800%;
+  width: 300px;
   min-height: 60px;
   background: ${(props) => props.theme.White};
   border-radius: 4px;
