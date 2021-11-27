@@ -17,6 +17,7 @@ const DefaultLayout = (): JSX.Element => {
         style={{ top: '90px' }}
         position="top-right"
         autoClose={3000}
+        limit={1}
         hideProgressBar
         pauseOnFocusLoss
         draggable
