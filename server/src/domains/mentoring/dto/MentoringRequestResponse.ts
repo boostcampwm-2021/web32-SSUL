@@ -1,6 +1,6 @@
 import { Group } from '@domains/group/models/Group';
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { IsNumber, IsString, ValidateNested } from 'class-validator';
 import { Mentor } from '../models/Mentor';
 import { MentoringRequest } from '../models/MentoringRequest';
 
