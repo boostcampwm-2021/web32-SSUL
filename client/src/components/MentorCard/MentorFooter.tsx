@@ -3,21 +3,23 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectUser } from '@store/user/globalSlice';
+import { setMentorCardDetail } from '@store/mentor/cardDetailSlice';
 
 interface Props {
-  mentorUserId: number;
+  mentorId: number;
 }
 
-function MentorFooter({ mentorUserId }: Props): JSX.Element {
+function MentorFooter({ mentorId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(selectUser);
 
   const handleShowDetailButtonClick = () => {
+    dispatch(setMentorCardDetail(mentorId));
     dispatch(changeGroupModalState('MENTOR_DETAIL'));
   };
   return (
     <Container>
-      {id !== 0 && id !== mentorUserId && (
+      {id !== 0 && id !== mentorId && (
         <ApplyButton onClick={handleShowDetailButtonClick}>멘토링 신청</ApplyButton>
       )}
     </Container>

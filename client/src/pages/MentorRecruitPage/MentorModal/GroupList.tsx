@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
-import { groupHttpClient } from '@api';
-import { OwnGroupsInfo } from '@types';
+import { groupHttpClient, mentoringHttpClient } from '@api';
+import { MentoringRequest, OwnGroupsInfo } from '@types';
+import { useAppSelector } from '@hooks';
+import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
+  const [allMentoringRequests, setAllMentoringRequests] = useState<MentoringRequest[]>([]);
+  const { mentorId } = useAppSelector(mentorCardDetailState);
+
   const getOwnGroups = async () => {
     const allOwnGroups = await groupHttpClient.getOwnGroups();
+    const allMentoringRequests = await mentoringHttpClient.getAllMentoringRequests();
     setOwnGroups(allOwnGroups);
+    setAllMentoringRequests(allMentoringRequests);
   };
 
   useEffect(() => {
@@ -16,6 +23,11 @@ function GroupList(): JSX.Element {
   }, []);
 
   const makeRequestBox = ownGroups.map((group, idx) => {
+    const alreadyRequestMentoring = allMentoringRequests.find(
+      (mentoringRequest) =>
+        mentoringRequest.group.id === group.id && mentoringRequest.mentor.id === mentorId,
+    );
+
     return (
       <BoxContainer key={idx}>
         <CategoryContainer>
@@ -31,10 +43,10 @@ function GroupList(): JSX.Element {
         </GroupDueDate>
         <ButtonWrapper>
           <GroupInfoButton>그룹 보기</GroupInfoButton>
-          {idx % 2 === 0 ? (
-            <ApplyButton>신청 하기</ApplyButton>
-          ) : (
+          {alreadyRequestMentoring ? (
             <CancelButton>신청 취소</CancelButton>
+          ) : (
+            <ApplyButton>신청 하기</ApplyButton>
           )}
         </ButtonWrapper>
       </BoxContainer>
