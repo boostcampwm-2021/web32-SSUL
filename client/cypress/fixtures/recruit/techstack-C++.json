@@ -1,0 +1,172 @@
+{
+  "groups": [
+    {
+      "id": 2,
+      "mentorId": 1,
+      "ownerId": 1,
+      "categoryId": 1,
+      "name": "testgroup2",
+      "maxUserCnt": 5,
+      "curUserCnt": 2,
+      "intro": "얼른 얼른 갑시다!",
+      "startAt": "2022-01-10T16:06:55.000Z",
+      "endAt": "2022-02-19T21:44:08.000Z",
+      "status": "DOING",
+      "techStacks": [
+        "Java",
+        "javascript",
+        "typescript",
+        "R",
+        "C++"
+      ],
+      "category": {
+        "name": "대외활동"
+      },
+      "ownerInfo": {
+        "githubId": "yuchanleeme",
+        "name": "이유찬",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 3,
+      "mentorId": 1,
+      "ownerId": 1,
+      "categoryId": 1,
+      "name": "testgroup3",
+      "maxUserCnt": 8,
+      "curUserCnt": 3,
+      "intro": "synthesize virtual bandwidth",
+      "startAt": "2022-08-16T16:06:55.000Z",
+      "endAt": "2022-09-02T21:44:08.000Z",
+      "status": "END",
+      "techStacks": [
+        "javascript",
+        "typescript",
+        "R",
+        "C++",
+        "SQL"
+      ],
+      "category": {
+        "name": "대외활동"
+      },
+      "ownerInfo": {
+        "githubId": "yuchanleeme",
+        "name": "이유찬",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 4,
+      "mentorId": null,
+      "ownerId": 2,
+      "categoryId": 1,
+      "name": "testgroup4",
+      "maxUserCnt": 8,
+      "curUserCnt": 3,
+      "intro": "synthesize virtual bandwidth",
+      "startAt": "2022-08-16T16:06:55.000Z",
+      "endAt": "2022-09-02T21:44:08.000Z",
+      "status": "READY",
+      "techStacks": [
+        "typescript",
+        "R",
+        "C++",
+        "SQL",
+        "Vue.js"
+      ],
+      "category": {
+        "name": "대외활동"
+      },
+      "ownerInfo": {
+        "githubId": "Donggggg",
+        "name": "김동규",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 5,
+      "mentorId": 1,
+      "ownerId": 2,
+      "categoryId": 1,
+      "name": "testgroup5",
+      "maxUserCnt": 8,
+      "curUserCnt": 3,
+      "intro": "synthesize virtual bandwidth",
+      "startAt": "2022-08-16T16:06:55.000Z",
+      "endAt": "2022-09-02T21:44:08.000Z",
+      "status": "READY",
+      "techStacks": [
+        "R",
+        "C++",
+        "SQL",
+        "Vue.js",
+        "HTML"
+      ],
+      "category": {
+        "name": "대외활동"
+      },
+      "ownerInfo": {
+        "githubId": "Donggggg",
+        "name": "김동규",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 11,
+      "mentorId": null,
+      "ownerId": 4,
+      "categoryId": 3,
+      "name": "testgroup11",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "synthesize virtual bandwidth",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "status": "READY",
+      "techStacks": [
+        "C++"
+      ],
+      "category": {
+        "name": "스터디"
+      },
+      "ownerInfo": {
+        "githubId": "ChanYangYu",
+        "name": "유찬양",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/55623688?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 12,
+      "mentorId": null,
+      "ownerId": 4,
+      "categoryId": 3,
+      "name": "알고리즘 스터디",
+      "maxUserCnt": 13,
+      "curUserCnt": 1,
+      "intro": "C++/ JAVA",
+      "startAt": "2022-01-06T00:00:00.000Z",
+      "endAt": "2022-01-27T00:00:00.000Z",
+      "status": "READY",
+      "techStacks": [
+        "C++",
+        "Java"
+      ],
+      "category": {
+        "name": "스터디"
+      },
+      "ownerInfo": {
+        "githubId": "ChanYangYu",
+        "name": "유찬양",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/55623688?v=4",
+        "feverStack": 37.5
+      }
+    }
+  ],
+  "totalPages": 1
+}
