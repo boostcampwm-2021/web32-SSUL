@@ -6,6 +6,9 @@ import Message from './Message';
 import { calculateNotificationTime } from '@utils/Date';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectNotficationList, setNotificationList } from '@store/notification/slice';
+import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
   idx: number;
@@ -13,8 +16,26 @@ interface Props {
 }
 function ListItem({ idx, data }: Props): JSX.Element {
   const { notificationList } = useAppSelector(selectNotficationList);
+  const history = useHistory();
+  const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
+  const handleItemClick = () => {
+    switch (data.type) {
+      case 'JOIN_GROUP_ACCEPTED':
+        history.push('/group/status');
+        break;
+      case 'MENTORING_ACCEPTED':
+        history.push('/group/status');
+        break;
+      case 'JOIN_GROUP_REQUEST':
+        history.push(`/group/owner/${data.groupId}`);
+        break;
+      case 'MENTORING_REQUEST':
+        history.push(`/profile/${user.oAuthId}`);
+        break;
+    }
+  };
   const handleDeleteButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     const newList = [...notificationList];
@@ -24,7 +45,7 @@ function ListItem({ idx, data }: Props): JSX.Element {
     dispatch(setNotificationList({ notificationList: newList }));
   };
   return (
-    <Item>
+    <Item onClick={handleItemClick}>
       <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
       <Message data={data} />
       <DeleteButton src={cancelIcon} onClick={handleDeleteButtonClick}></DeleteButton>
