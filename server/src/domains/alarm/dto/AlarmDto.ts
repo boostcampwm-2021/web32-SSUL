@@ -26,8 +26,13 @@ export class AlarmDto {
 
   static fromApply(applyGroup: ApplyGroup, type: AlarmType) {
     const dto = new AlarmDto();
-    dto.senderId = applyGroup.userId;
-    dto.receiverId = applyGroup.group.ownerId;
+    if (type === AlarmType.JOIN_GROUP_REQUEST) {
+      dto.senderId = applyGroup.userId;
+      dto.receiverId = applyGroup.group.ownerId;
+    } else {
+      dto.senderId = applyGroup.group.ownerId;
+      dto.receiverId = applyGroup.userId;
+    }
     dto.groupId = applyGroup.groupId;
     dto.type = type;
     return dto;
@@ -35,8 +40,13 @@ export class AlarmDto {
 
   static fromGroup(group: Group, type: AlarmType) {
     const dto = new AlarmDto();
-    dto.senderId = group.mentorId!;
-    dto.receiverId = group.ownerId;
+    if (type === AlarmType.MENTORING_REQUEST) {
+      dto.senderId = group.ownerId;
+      dto.receiverId = group.mentorId!;
+    } else {
+      dto.senderId = group.mentorId!;
+      dto.receiverId = group.ownerId;
+    }
     dto.groupId = group.id;
     dto.type = type;
     return dto;
