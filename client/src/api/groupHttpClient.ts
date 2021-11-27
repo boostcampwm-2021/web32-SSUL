@@ -7,6 +7,7 @@ import {
   GroupApplyData,
   SimpleGroupCardData,
   ApplyState,
+  OwnGroupsInfo,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -39,6 +40,8 @@ class GroupHttpClient extends HttpClient {
 
   public getMyGroups = (query: string): Promise<SimpleGroupCardData[]> =>
     this.httpClient.get(`/my${query}`);
+
+  public getOwnGroups = (): Promise<OwnGroupsInfo[]> => this.httpClient.get(`/own`);
 }
 
 export const groupHttpClient = new GroupHttpClient();

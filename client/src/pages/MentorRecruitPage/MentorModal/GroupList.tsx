@@ -1,39 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
+import { groupHttpClient } from '@api';
+import { OwnGroupsInfo } from '@types';
 
-const groupList = [
-  {
-    groupId: 1,
-    categoryImage:
-      'https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F075b46f8-ebd6-43ef-80b0-1cc1f2c6ebe0%2Ficon-study.png?table=block&id=45def0e6-f405-4184-93d8-ee69afa3ea23&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2',
-    groupName: '스프링 공부하는 스터디를 공부하는 스프링을 공부하는 스터디를 공부하는 스프링',
-    categoryName: '대외활동',
-    intro: '그룹 소개 입니다.',
-    startAt: '2020',
-    endAt: '2020',
-  },
-  {
-    groupId: 2,
-    categoryImage:
-      'https://neighborly-ash-fed.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F075b46f8-ebd6-43ef-80b0-1cc1f2c6ebe0%2Ficon-study.png?table=block&id=45def0e6-f405-4184-93d8-ee69afa3ea23&spaceId=1e190b35-e398-4c80-9518-9c3889034187&width=1020&userId=&cache=v2',
-    groupName: '스프링 공부하는 스터디를 공부하는 스프링을 공부하는 스터디를 공부하는 스프링',
-    categoryName: '대외활동',
-    intro: '그룹 소개 입니다.',
-    startAt: '2020',
-    endAt: '2020',
-  },
-];
 function GroupList(): JSX.Element {
-  const makeRequestBox = groupList.map((group, idx) => {
+  const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
+  const getOwnGroups = async () => {
+    const allOwnGroups = await groupHttpClient.getOwnGroups();
+    setOwnGroups(allOwnGroups);
+  };
+
+  useEffect(() => {
+    getOwnGroups();
+  }, []);
+
+  const makeRequestBox = ownGroups.map((group, idx) => {
     return (
       <BoxContainer key={idx}>
         <CategoryContainer>
-          <CategoryImage src={group.categoryImage} />
-          <CategoryText>{group.categoryName}</CategoryText>
+          <CategoryImage src={group.category.imageUrl} />
+          <CategoryText>{group.category.name}</CategoryText>
         </CategoryContainer>
         <GroupInfo>
-          <GroupName>{group.groupName}</GroupName>
+          <GroupName>{group.name}</GroupName>
           <GroupIntro>{group.intro}</GroupIntro>
         </GroupInfo>
         <GroupDueDate>
