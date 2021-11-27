@@ -24,4 +24,5 @@ export const ErrorCode = Object.freeze({
   // group
   MENTORING_ALREADY_REQUEST: new ErrorSpec('M00', '이미 멘토링 신청을 한 상태입니다.'),
   MENTOR_NOT_FOUND: new ErrorSpec('M01', '잘못된 멘토ID 입니다.'),
+  MENTORING_NOT_FOUND: new ErrorSpec('M02', '멘토링 요청 정보를 찾을 수 없습니다.'),
 });
