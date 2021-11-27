@@ -2,14 +2,53 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import NotificationIcon from '../../../assets/icon_notification.svg';
 import { BubbleModal } from '@components';
+import { useAppDispatch } from '@hooks';
+import { setNotificationList } from '@store/notification/slice';
 
 function Notification(): JSX.Element {
-  const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const dummy = [
+    {
+      id: 1,
+      senderId: 4,
+      recieverId: 2,
+      groupId: 4,
+      type: 'JOIN_GROUP_REQUEST',
+      createdAt: '2021-11-25T03:06:55.000Z',
+      readChk: 0,
+      senderName: '유찬양',
+      groupName: '알고리즘 스터디',
+    },
+    {
+      id: 2,
+      senderId: 4,
+      recieverId: 2,
+      groupId: 4,
+      type: 'MENTORING_ACCEPTED',
+      createdAt: '2021-11-26T03:06:55.000Z',
+      readChk: 0,
+      senderName: '유찬양',
+      groupName: '타입스크립트 스터디',
+    },
+    {
+      id: 3,
+      senderId: 4,
+      recieverId: 2,
+      groupId: 4,
+      type: 'MENTORING_REQUEST',
+      createdAt: '2021-11-27T03:06:55.000Z',
+      readChk: 0,
+      senderName: '유찬양',
+      groupName: '',
+    },
+  ];
 
+  const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
   const handleWindowClick = () => setIsModalClicked(false);
   const handleNotificationButtonClick = () => setIsModalClicked(true);
 
   useEffect(() => {
+    dispatch(setNotificationList({ notificationList: dummy }));
     isModalClicked
       ? window.addEventListener('click', handleWindowClick)
       : window.removeEventListener('click', handleWindowClick);
@@ -20,7 +59,9 @@ function Notification(): JSX.Element {
   return (
     <Container>
       <NotificationButton src={NotificationIcon} onClick={handleNotificationButtonClick} />
-      {isModalClicked && <BubbleModal type="notification-modal" items={[]} headerVisibility={true} />}
+      {isModalClicked && (
+        <BubbleModal type="notification-modal" items={[]} headerVisibility={true} />
+      )}
     </Container>
   );
 }
