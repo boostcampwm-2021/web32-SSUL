@@ -30,9 +30,7 @@ export class MentorRepository extends Repository<Mentor> {
     });
   }
 
-  public findOneByMentorId(mentorId: number) {
-    return this.findOne({
-      where: { id: mentorId },
-    });
+  public findOneById(mentorId: number) {
+    return this.findOne(mentorId);
   }
 }

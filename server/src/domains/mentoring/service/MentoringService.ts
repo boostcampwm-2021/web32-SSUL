@@ -72,7 +72,7 @@ export class MentoringService {
   }
 
   public async getAllRequestList(): Promise<MentoringRequestResponse[]> {
-    const mentoringRequests = await this.mentoringRequestRepository.findAllRequetList();
+    const mentoringRequests = await this.mentoringRequestRepository.findAll();
     return mentoringRequests.map((mentoringRequest) =>
       MentoringRequestResponse.from(mentoringRequest),
     );
@@ -109,15 +109,15 @@ export class MentoringService {
       .filter((mentor) => mentor);
   }
 
-  public async checkMentorIdAndGroupIdValid(mentorId: number, groupId: number) {
-    const mentorOne = await this.mentorRepository.findOneByMentorId(mentorId);
-    if (!mentorOne) throw new MentorNotFoundError();
+  public async validateMentorAndGroup(mentorId: number, groupId: number) {
+    const mentor = await this.mentorRepository.findOneById(mentorId);
+    if (!mentor) throw new MentorNotFoundError();
 
     await this.groupRepository.findOneOrFailById(groupId);
   }
 
   public async saveMentoringRequest(mentorId: number, groupId: number) {
-    await this.checkMentorIdAndGroupIdValid(mentorId, groupId);
+    await this.validateMentorAndGroup(mentorId, groupId);
 
     const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
       mentorId,
@@ -135,7 +135,7 @@ export class MentoringService {
   }
 
   public async cancelMentoringRequest(mentorId: number, groupId: number) {
-    await this.checkMentorIdAndGroupIdValid(mentorId, groupId);
+    await this.validateMentorAndGroup(mentorId, groupId);
 
     const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
       mentorId,

@@ -13,7 +13,7 @@ export class MentoringRequestRepository extends Repository<MentoringRequest> {
       .getMany();
   }
 
-  public findAllRequetList() {
+  public findAll() {
     return this.find();
   }
 
@@ -22,6 +22,6 @@ export class MentoringRequestRepository extends Repository<MentoringRequest> {
   }
 
   public deleteByMentorIdAndGroupId(mentorId: number, groupId: number) {
-    this.delete({ mentorId, groupId });
+    this.delete({ where: { mentorId, groupId } });
   }
 }

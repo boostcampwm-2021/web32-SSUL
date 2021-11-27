@@ -260,7 +260,7 @@ describe('/mentoring', () => {
         .query({ mentor: 33, group: 6 })
         .set('Cookie', [cookieSession]);
       //then
-      expect(res.statusCode).toBe(200);
+      expect(res.statusCode).toBe(204);
     });
 
     test('로그인 되어 있지 않은 유저가 요청을 보냈을 때 테스트', async () => {

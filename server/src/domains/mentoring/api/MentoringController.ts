@@ -108,7 +108,7 @@ export class MentoringController {
   @Delete('/request')
   @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '멘토링 요청을 취소하는 API' })
-  @OnUndefined(200)
+  @OnUndefined(204)
   public async deleteRequest(
     @QueryParams() { mentor: mentorId, group: groupId }: MentoringCancelParam,
   ) {
