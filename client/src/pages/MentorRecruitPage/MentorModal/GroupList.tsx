@@ -16,7 +16,7 @@ function GroupList(): JSX.Element {
   const history = useHistory();
 
   const getOwnGroups = async () => {
-    const allOwnGroups = await groupHttpClient.getOwnGroups();
+    const allOwnGroups = (await groupHttpClient.getOwnGroups()).filter((group) => !group.mentorId);
     const allMentoringRequests = await mentoringHttpClient.getAllMentoringRequests();
     setOwnGroups(allOwnGroups);
     setAllMentoringRequests(allMentoringRequests);
