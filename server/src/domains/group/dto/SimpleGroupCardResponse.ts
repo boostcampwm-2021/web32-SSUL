@@ -34,6 +34,9 @@ export class SimpleGroupCardResponse {
   @IsNumber()
   id: number;
 
+  @IsNumber()
+  mentorId: number | null;
+
   @IsString()
   name: string;
 
@@ -66,6 +69,7 @@ export class SimpleGroupCardResponse {
   static from(group: Group) {
     const dto = new SimpleGroupCardResponse();
     dto.id = group.id;
+    dto.mentorId = group.mentorId;
     dto.name = group.name;
     dto.maxUserCnt = group.maxUserCnt;
     dto.curUserCnt = group.curUserCnt;
