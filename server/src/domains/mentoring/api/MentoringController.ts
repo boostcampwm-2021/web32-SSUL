@@ -14,11 +14,7 @@ import {
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
-import {
-  MentoringCancelParam,
-  MentoringRequestListDto,
-  MentoringRequestParam,
-} from '../dto/MentoringRequestListDto';
+import { MentoringRequestListDto, MentoringRequestParam } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentoringService } from '../service/MentoringService';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
@@ -33,7 +29,8 @@ import {
   FilterdPageMentorListResponse,
 } from '../dto/FilterdPageMentorListResponse';
 import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
-import { PostRequestDto } from '../dto/PostRequestDto';
+import { MentoringCancelParam } from '../dto/MentoringCancelParam';
+import { MentoringRequestDto } from '../dto/MentoringRequestDto';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -104,7 +101,7 @@ export class MentoringController {
   @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
   @OnUndefined(200)
-  public async postMentoringRequest(@Body() { mentorId, groupId }: PostRequestDto) {
+  public async postMentoringRequest(@Body() { mentorId, groupId }: MentoringRequestDto) {
     return await this.mentoringService.saveMentoringRequest(mentorId, groupId);
   }
 

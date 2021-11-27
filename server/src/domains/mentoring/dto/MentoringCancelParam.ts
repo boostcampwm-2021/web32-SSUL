@@ -1,8 +1,8 @@
 import { IsNumber } from 'class-validator';
 
-export class PostRequestDto {
+export class MentoringCancelParam {
   @IsNumber()
-  mentorId: number;
+  mentor: number;
   @IsNumber()
-  groupId: number;
+  group: number;
 }
