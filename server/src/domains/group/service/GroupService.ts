@@ -202,14 +202,20 @@ export class GroupService {
   public async getEnrolledGroupByQuery(
     userId: number,
     status: GroupState,
-    enrollmentAs: GroupEnrollmentAs,
+    type: GroupEnrollmentAs,
   ) {
-    const enrollments = await this.groupEnrollmentRepository.findAllByUserIdAndType(
-      userId,
-      enrollmentAs,
-    );
-    return enrollments
-      .map((enrollment) => SimpleGroupCardResponse.from(enrollment.group))
-      .filter((group) => group.status === status);
+    let enrollments;
+    if (type !== undefined) {
+      enrollments = await this.groupEnrollmentRepository.findAllByUserIdAndType(userId, type);
+    } else {
+      enrollments = await this.groupEnrollmentRepository.findAllByUserId(userId);
+    }
+
+    let groups = enrollments.map((enrollment) => enrollment.group);
+    if (status !== undefined) {
+      groups = groups.filter((group) => group.status === status);
+    }
+
+    return groups.map((group) => SimpleGroupCardResponse.from(group));
   }
 }
