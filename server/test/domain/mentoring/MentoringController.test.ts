@@ -169,6 +169,11 @@ describe('/mentoring', () => {
       const res = await request(app).get('/api/mentoring/request');
       expect(res.statusCode).toBe(200);
       expect(res.body.length).toBeGreaterThanOrEqual(1);
+
+      const { id, group, mentor } = res.body[0];
+      expect(id).toBe(1);
+      expect(group.id).toBe(6);
+      expect(mentor.id).toBe(33);
     });
   });
 
