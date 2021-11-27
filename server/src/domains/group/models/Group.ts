@@ -52,7 +52,7 @@ export class Group {
   @ManyToOne(() => User, (user) => user.groups, { eager: true })
   ownerInfo: User;
 
-  @ManyToOne((type) => Category)
+  @ManyToOne(() => Category, (category) => category.id, { eager: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
