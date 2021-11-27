@@ -16,4 +16,8 @@ export class MentoringRequestRepository extends Repository<MentoringRequest> {
   public findAllRequetList() {
     return this.find();
   }
+
+  public findOneByMentorIdAndGroupId(mentorId: number, groupId: number) {
+    return this.findOne({ where: { mentorId, groupId } });
+  }
 }

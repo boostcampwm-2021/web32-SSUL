@@ -10,6 +10,12 @@ export class MentoringRequest {
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
 
+  @Column('int', { name: 'mentor_id' })
+  mentorId: number;
+
+  @Column('int', { name: 'group_id' })
+  groupId: number;
+
   @ManyToOne(() => Mentor, (mentor) => mentor.mentoringRequests, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',

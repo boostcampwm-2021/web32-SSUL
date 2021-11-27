@@ -13,6 +13,7 @@ import { Mentor } from '../models/Mentor';
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
 import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
+import { MentorAlreadyRequest } from '../error/MentorAlreadyRequest';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -104,6 +105,12 @@ export class MentoringService {
   }
 
   public async saveMentoringRequest(mentorId: number, groupId: number) {
+    const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
+      mentorId,
+      groupId,
+    );
+    if (mentoringRequest) throw new MentorAlreadyRequest();
+
     const mentor = new Mentor();
     mentor.id = mentorId;
     const group = new Mentor();
