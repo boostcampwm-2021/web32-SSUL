@@ -34,14 +34,14 @@ function GroupList(): JSX.Element {
     console.log('cancel');
   };
 
-  const makeRequestBox = ownGroups.map((group, idx) => {
+  const makeRequestBox = ownGroups.map((group) => {
     const alreadyRequestMentoring = allMentoringRequests.find(
       (mentoringRequest) =>
         mentoringRequest.group.id === group.id && mentoringRequest.mentor.id === mentorId,
     );
 
     return (
-      <BoxContainer key={idx}>
+      <BoxContainer key={group.id}>
         <CategoryContainer>
           <CategoryImage src={group.category.imageUrl} />
           <CategoryText>{group.category.name}</CategoryText>
