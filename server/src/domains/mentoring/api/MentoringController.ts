@@ -31,6 +31,9 @@ import {
 import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
 import { MentoringCancelParam } from '../dto/MentoringCancelParam';
 import { MentoringRequestDto } from '../dto/MentoringRequestDto';
+import { AlarmService } from '@domains/alarm/service/AlarmService';
+import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
+import { AlarmType } from '@domains/alarm/models/Alarm';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -44,7 +47,7 @@ export class MentoringController {
     @Inject()
     private readonly techStackService: TechStackService,
     @Inject()
-    private readonly userService: UserService,
+    private readonly alarmService: AlarmService,
     @Inject()
     private readonly groupService: GroupService,
   ) {}
@@ -135,7 +138,8 @@ export class MentoringController {
   public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
     const { mentorId } = await this.mentoringService.getMentorIdByUserId(userId);
     await this.groupService.addGroupMentor(mentorId, groupId);
-    await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
+    const group = await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
     await this.mentoringService.deleteRequest(id);
+    await this.alarmService.postAlarm(AlarmDto.fromGroup(group, AlarmType.MENTORING_ACCEPTED));
   }
 }
