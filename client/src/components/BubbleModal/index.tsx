@@ -6,6 +6,7 @@ import { BubbleModalProfileItem } from '@types';
 import ListItem from './Notification/ListItem';
 import { useAppSelector } from '@hooks';
 import { selectNotficationList } from '@store/notification/slice';
+import EmptyItem from './Notification/EmptyItem';
 
 interface Props {
   type: string;
@@ -28,10 +29,17 @@ function BubbleModal({ type, items, headerVisibility }: Props): JSX.Element {
     );
   }
 
+  if (notificationList.length === 0)
+    return (
+      <NotificationModalContainer>
+        <EmptyItem />
+      </NotificationModalContainer>
+    );
+  
   return (
     <NotificationModalContainer>
-      {notificationList.map((notificationData) => (
-        <ListItem key={notificationData.id} data={notificationData} />
+      {notificationList.map((notificationData, idx) => (
+        <ListItem key={notificationData.id} data={notificationData} idx={idx} />
       ))}
     </NotificationModalContainer>
   );
@@ -58,7 +66,7 @@ const NotificationModalContainer = styled.div`
   top: 52px;
   right: -700%;
   width: 280px;
-  min-height: 100px;
+  min-height: 60px;
   background: ${(props) => props.theme.White};
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.Gray6};

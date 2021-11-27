@@ -4,16 +4,30 @@ import cancelIcon from '@assets/icon_cancel.png';
 import { NotificationData } from '@types';
 import Message from './Message';
 import { calculateNotificationTime } from '@utils/Date';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectNotficationList, setNotificationList } from '@store/notification/slice';
 
 interface Props {
+  idx: number;
   data: NotificationData;
 }
-function ListItem({ data }: Props): JSX.Element {
+function ListItem({ idx, data }: Props): JSX.Element {
+  const { notificationList } = useAppSelector(selectNotficationList);
+  const dispatch = useAppDispatch();
+
+  const handleDeleteButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newList = [...notificationList];
+
+    //TODO: DELETE API REQUEST
+    newList.splice(idx, 1);
+    dispatch(setNotificationList({ notificationList: newList }));
+  };
   return (
     <Item>
       <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
       <Message data={data} />
-      <DeleteButton src={cancelIcon}></DeleteButton>
+      <DeleteButton src={cancelIcon} onClick={handleDeleteButtonClick}></DeleteButton>
     </Item>
   );
 }
@@ -25,13 +39,10 @@ const Item = styled.div`
   height: 60px;
   padding: 12px 15px 12px 15px;
   font-size: 0.8em;
-  color: ${(props) => props.theme.Gray3};
+  color: ${(props) => props.theme.Gray2};
   box-sizing: border-box;
   border: 1px solid ${(props) => props.theme.Gray6};
   cursor: pointer;
-  &:hover {
-    background-color: ${(props) => props.theme.Gray6};
-  }
 `;
 
 const CreatedDate = styled.span`
