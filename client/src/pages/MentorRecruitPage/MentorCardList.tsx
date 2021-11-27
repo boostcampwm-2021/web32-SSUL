@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { MentorCard, Pagination } from '@components';
+import { BoxModal, MentorCard, Pagination } from '@components';
 import {
   createdFilterdQuery,
   returnMentorRecruitFilterState,
@@ -9,6 +9,8 @@ import {
 import { Mentor, MentorListResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { mentoringHttpClient } from '@api';
+import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
+import MentorModal from './MetorModal';
 
 function MentorCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnMentorRecruitFilterState);
@@ -16,6 +18,7 @@ function MentorCardList(): JSX.Element {
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
   const [toggleLoader] = useLoader();
+  const modalType = useAppSelector(selectGroupModalState);
 
   useEffect(() => {
     dispatch(initFilterState());
@@ -37,6 +40,8 @@ function MentorCardList(): JSX.Element {
     return <MentorCard key={mentorData.id} contents={mentorData} />;
   });
 
+  const handleModalBackgroundClick = () => dispatch(changeGroupModalState('NONE'));
+
   return (
     <>
       <CardList>{renderMentorCards}</CardList>
@@ -45,6 +50,13 @@ function MentorCardList(): JSX.Element {
         curPage={selectedPage}
         createdQuery={createdFilterdQuery}
       />
+      {modalType !== 'NONE' && (
+        <BoxModal
+          style={{ width: '550px', height: '550px' }}
+          element={<MentorModal />}
+          onCancel={handleModalBackgroundClick}
+        />
+      )}
     </>
   );
 }

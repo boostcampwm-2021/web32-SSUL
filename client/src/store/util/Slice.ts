@@ -6,6 +6,7 @@ export enum ModalType {
   READ = 'READ',
   POST = 'POST',
   GROUP_DETAIL = 'GROUP_DETAIL',
+  MENTOR_DETAIL = 'MENTOR_DETAIL',
 }
 
 export interface UtilState {
