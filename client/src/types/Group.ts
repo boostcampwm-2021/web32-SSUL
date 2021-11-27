@@ -100,3 +100,7 @@ export interface OwnGroupsInfo {
   endAt: Date | null;
   category: Category;
 }
+
+export interface OnlyGroupId {
+  id: number;
+}
