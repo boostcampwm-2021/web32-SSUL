@@ -30,7 +30,7 @@ export class AlarmController {
   @UseBefore(isLoggedIn)
   @ResponseSchema(AlarmListResponse, { isArray: true, description: '알림 목록 조회 성공' })
   @OpenAPI({ summary: '사용자의 알림 목록을 조회하는 API' })
-  async getAllAlarm(@Session() session: any) {
+  async getAlarms(@Session() session: any) {
     return await this.alarmService.getAlarms(session.user.id);
   }
 

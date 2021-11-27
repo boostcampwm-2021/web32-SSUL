@@ -5,7 +5,7 @@ import { Alarm } from '../models/Alarm';
 @Service()
 @EntityRepository(Alarm)
 export class AlarmRepository extends Repository<Alarm> {
-  public findAllByRecieverId(recieverId: number) {
-    return this.find({ relations: ['sender', 'group'], where: { recieverId } });
+  public findAllByReceiverId(receiverId: number) {
+    return this.find({ relations: ['sender', 'group'], where: { receiverId } });
   }
 }

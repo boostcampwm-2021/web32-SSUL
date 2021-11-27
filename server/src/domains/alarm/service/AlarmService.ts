@@ -12,7 +12,9 @@ export class AlarmService {
   ) {}
 
   public async getAlarms(userId: number): Promise<AlarmListResponse[]> {
-    const alarms = await this.alarmRepository.findAllByRecieverId(userId);
+    const alarms = await this.alarmRepository.findAllByReceiverId(userId);
     return alarms.map((alarm: Alarm) => AlarmListResponse.from(alarm));
   }
+
+  //   public async checkReceiver
 }

@@ -9,7 +9,7 @@ export class AlarmListResponse {
   @IsString()
   senderName: string | null;
   @IsNumber()
-  recieverId: number | null;
+  receiverId: number | null;
   @IsNumber()
   groupId: number | null;
   @IsString()
@@ -25,7 +25,7 @@ export class AlarmListResponse {
     const dto = new AlarmListResponse();
     dto.id = alarm.id;
     dto.senderId = alarm.senderId;
-    dto.recieverId = alarm.recieverId;
+    dto.receiverId = alarm.receiverId;
     dto.groupId = alarm.groupId;
     dto.type = alarm.type;
     dto.createdAt = alarm.createdAt;

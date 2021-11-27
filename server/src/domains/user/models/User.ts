@@ -40,7 +40,7 @@ export class User {
   @OneToMany(() => GroupEnrollment, (groupEnrollment) => groupEnrollment.user)
   groupEnrollments: GroupEnrollment[];
 
-  @OneToMany(() => Alarm, (alarm) => alarm.recieverId)
+  @OneToMany(() => Alarm, (alarm) => alarm.receiverId)
   receivedAlarms: Alarm[];
 
   @OneToMany(() => MenteeTechStack, (menteeTechStack) => menteeTechStack.user)

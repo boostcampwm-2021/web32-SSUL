@@ -19,8 +19,8 @@ export class Alarm {
   @Column({ name: 'sender_id' })
   senderId: number;
 
-  @Column({ name: 'reciever_id' })
-  recieverId: number;
+  @Column({ name: 'receiver_id' })
+  receiverId: number;
 
   @Column({ name: 'group_id' })
   groupId: number;
@@ -39,8 +39,8 @@ export class Alarm {
   sender: User;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'reciever_id' })
-  reciever: User;
+  @JoinColumn({ name: 'receiver_id' })
+  receiver: User;
 
   @ManyToOne(() => Group)
   @JoinColumn({ name: 'group_id' })
