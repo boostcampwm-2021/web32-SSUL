@@ -31,7 +31,7 @@ function MyGroupPage(): JSX.Element {
   };
 
   const fetchMyOwnGroups = async () => {
-    const simpleGroupCardInfos = await groupHttpClient.getOwnGroups();
+    const simpleGroupCardInfos = await groupHttpClient.getOwnSimpleGroups();
     setOwnGroups(simpleGroupCardInfos);
   };
 

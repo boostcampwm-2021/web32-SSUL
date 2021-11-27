@@ -31,7 +31,8 @@ class GroupHttpClient extends HttpClient {
 
   public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
 
-  public getOwnGroups = (): Promise<SimpleGroupCardData[]> => this.httpClient.get(`/own`);
+  public getOwnSimpleGroups = (): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/own/simple`);
 
   public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardData[]> =>
     this.httpClient.get(`/applyed?state=${applyState}`);
