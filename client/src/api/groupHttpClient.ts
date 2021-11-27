@@ -7,8 +7,6 @@ import {
   GroupApplyData,
   SimpleGroupCardData,
   ApplyState,
-  GroupState,
-  GroupEnrollmentState,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
