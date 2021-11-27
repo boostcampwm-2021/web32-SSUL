@@ -14,6 +14,11 @@ interface Props {
   idx: number;
   data: NotificationData;
 }
+
+interface StyledProps {
+  isView: boolean;
+}
+
 function ListItem({ idx, data }: Props): JSX.Element {
   const { notificationList } = useAppSelector(selectNotficationList);
   const history = useHistory();
@@ -36,6 +41,7 @@ function ListItem({ idx, data }: Props): JSX.Element {
         break;
     }
   };
+
   const handleDeleteButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     const newList = [...notificationList];
@@ -45,7 +51,7 @@ function ListItem({ idx, data }: Props): JSX.Element {
     dispatch(setNotificationList({ notificationList: newList }));
   };
   return (
-    <Item onClick={handleItemClick}>
+    <Item onClick={handleItemClick} isView={data.readChk !== 0}>
       <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
       <Message data={data} />
       <DeleteButton src={cancelIcon} onClick={handleDeleteButtonClick}></DeleteButton>
@@ -60,7 +66,9 @@ const Item = styled.div`
   height: 60px;
   padding: 12px 15px 12px 15px;
   font-size: 0.8em;
-  color: ${(props) => props.theme.Gray2};
+  color: ${(props) =>
+    ({ isView }: StyledProps) =>
+      isView ? props.theme.Gray4 : props.theme.Gray2};
   box-sizing: border-box;
   border: 1px solid ${(props) => props.theme.Gray6};
   cursor: pointer;
@@ -76,6 +84,11 @@ const DeleteButton = styled.img`
   padding: 6px;
   width: 20px;
   height: 20px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: ${(props) => props.theme.Gray6};
+  }
 `;
 
 export default ListItem;

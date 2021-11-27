@@ -14,7 +14,7 @@ function Notification(): JSX.Element {
       recieverId: 2,
       groupId: 3,
       type: 'JOIN_GROUP_REQUEST',
-      createdAt: '2021-11-25T03:06:55.000Z',
+      createdAt: '2021-11-27T03:06:55.000Z',
       readChk: 0,
       senderName: '유찬양',
       groupName: '알고리즘 스터디',
@@ -36,8 +36,8 @@ function Notification(): JSX.Element {
       recieverId: 2,
       groupId: 3,
       type: 'MENTORING_REQUEST',
-      createdAt: '2021-11-27T03:06:55.000Z',
-      readChk: 0,
+      createdAt: '2021-11-25T03:06:55.000Z',
+      readChk: 1,
       senderName: '유찬양',
       groupName: '',
     },
@@ -48,6 +48,7 @@ function Notification(): JSX.Element {
   const handleNotificationButtonClick = () => setIsModalClicked(true);
 
   useEffect(() => {
+    //TODO GET NotificationList
     dispatch(setNotificationList({ notificationList: dummy }));
     isModalClicked
       ? window.addEventListener('click', handleWindowClick)
