@@ -87,6 +87,13 @@ export class MentoringController {
     await this.techStackService.createMentorTechStack(mentorId, techStacks);
   }
 
+  @Get('/request')
+  @OpenAPI({ summary: '모든 멘토링 요청 리스트를 가져오는 API' })
+  @ResponseSchema(MentoringRequestResponse, { isArray: true })
+  public async getAllMentoringRequest() {
+    return await this.mentoringService.getAllRequestList();
+  }
+
   @Get('/request/:mid')
   @OpenAPI({ summary: '특정 멘토의 멘토링 요청 리스트를 가져오는 API' })
   @ResponseSchema(MentoringRequestListDto)

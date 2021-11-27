@@ -12,6 +12,7 @@ import { Mentor } from '../models/Mentor';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
+import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -61,6 +62,13 @@ export class MentoringService {
 
         return { id, groupId, groupName, categoryImage, ownerName, createdAt };
       }),
+    );
+  }
+
+  public async getAllRequestList(): Promise<MentoringRequestResponse[]> {
+    const mentoringRequests = await this.mentoringRequestRepository.findAllRequetList();
+    return mentoringRequests.map((mentoringRequest) =>
+      MentoringRequestResponse.from(mentoringRequest),
     );
   }
 
