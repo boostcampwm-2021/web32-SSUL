@@ -34,10 +34,7 @@ function Profile(): JSX.Element {
     setIsModalClicked(false);
     history.push('/');
   };
-  const handleProfileButtonClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    setIsModalClicked(!isModalClicked);
-  };
+  const handleProfileButtonClick = () => setIsModalClicked(!isModalClicked);
   const handleWindowClick = () => setIsModalClicked(false);
 
   const noSignBubbleModalProfileItems: BubbleModalProfileItem[] = [
