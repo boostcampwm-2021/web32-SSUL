@@ -2,6 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 import { SimpleGroupCardData } from '@types';
+import { useToast } from '@hooks';
+import { ToastMessageEnum } from '@constants/enums';
 
 interface SimpleGroupCardProps {
   group: SimpleGroupCardData;
@@ -13,10 +15,13 @@ function SimpleGroupCard(props: SimpleGroupCardProps): JSX.Element {
 
   const { group, isClickable } = props;
   const { id, curUserCnt, maxUserCnt, name, ownerInfo, status } = group;
+  const [notify] = useToast();
 
   const groupCardClickHandler = () => {
     if (isClickable) {
       history.push(`/group/${id}`);
+    } else {
+      notify('아직 가입되지 않은 그룹이에요ㅠㅠ', ToastMessageEnum.ERROR);
     }
   };
 
