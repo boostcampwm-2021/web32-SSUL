@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import cancelIcon from '@assets/icon_cancel.png';
+import { NotificationData } from '@types';
+import Message from './Message';
+import { calculateNotificationTime } from '@utils/Date';
 
-function ListItem(): JSX.Element {
+interface Props {
+  data: NotificationData;
+}
+function ListItem({ data }: Props): JSX.Element {
   return (
     <Item>
-      <CreatedDate>조금 전</CreatedDate>
-      <Message>
-        <span>{'알고리즘 스터디'}</span>
-        <span>{' 그룹\n신청이 '}</span>
-        <Accept>{'승인'}</Accept>
-        <span>{' 되었습니다.'}</span>
-      </Message>
+      <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
+      <Message data={data} />
       <DeleteButton src={cancelIcon}></DeleteButton>
     </Item>
   );
@@ -19,11 +20,10 @@ function ListItem(): JSX.Element {
 
 const Item = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 60px;
-  padding: 12px 20px 12px 20px;
+  padding: 12px 15px 12px 15px;
   font-size: 0.8em;
   color: ${(props) => props.theme.Gray3};
   box-sizing: border-box;
@@ -34,27 +34,16 @@ const Item = styled.div`
   }
 `;
 
-const Message = styled.span`
-  font-weight: 600;
-  white-space: pre;
-`;
-
 const CreatedDate = styled.span`
+  width: 60px;
   font-weight: 500;
 `;
 
 const DeleteButton = styled.img`
+  margin-left: 20px;
   padding: 6px;
   width: 20px;
   height: 20px;
 `;
-
-const Accept = styled.span`
-  color: ${(props) => props.theme.Primary};
-`;
-
-const Decline = styled.span`
-  color: ${(props) => props.theme.Error};
-`
 
 export default ListItem;
