@@ -38,11 +38,8 @@ class GroupHttpClient extends HttpClient {
   public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardData[]> =>
     this.httpClient.get(`/applyed?state=${applyState}`);
 
-  public getMyGroups = (
-    groupStatus: GroupState,
-    enrollType: GroupEnrollmentState,
-  ): Promise<SimpleGroupCardData[]> =>
-    this.httpClient.get(`/my?status=${groupStatus}&type=${enrollType}`);
+  public getMyGroups = (query: string): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/my?status${query}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();
