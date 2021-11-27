@@ -30,8 +30,10 @@ function GroupList(): JSX.Element {
     dispatch(changeGroupModalState('NONE'));
   };
 
-  const hanldeCancelButtonClick = async () => {
-    console.log('cancel');
+  const hanldeCancelButtonClick = async (groupId: number) => {
+    const deleteQuery = `?mentor=${mentorId}&group=${groupId}`;
+    await mentoringHttpClient.deleteMentoringRequests(deleteQuery);
+    dispatch(changeGroupModalState('NONE'));
   };
 
   const makeRequestBox = ownGroups.map((group) => {
@@ -56,7 +58,7 @@ function GroupList(): JSX.Element {
         <ButtonWrapper>
           <GroupInfoButton>그룹 보기</GroupInfoButton>
           {alreadyRequestMentoring ? (
-            <CancelButton onClick={hanldeCancelButtonClick}>신청 취소</CancelButton>
+            <CancelButton onClick={() => hanldeCancelButtonClick(group.id)}>신청 취소</CancelButton>
           ) : (
             <ApplyButton onClick={() => hanldeApplyButtonClick(group.id)}>신청 하기</ApplyButton>
           )}

@@ -29,6 +29,10 @@ class MentoringHttpClient extends HttpClient {
     return this.httpClient.get(`/request`);
   };
 
+  public deleteMentoringRequests = (deleteQuery: string): Promise<null> => {
+    return this.httpClient.delete(`/request${deleteQuery}`);
+  };
+
   public postMentoringRequests = (
     MentoringRequestData: MentoringRequestPostData,
   ): Promise<null> => {
