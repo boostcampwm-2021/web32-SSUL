@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { Auth as AuthCallback } from '@components';
 import MainPage from '@pages/MainPage';
 import GroupRecruitPage from '@pages/GroupRecruitPage';
 import MentorRecruitPage from '@pages/MentorRecruitPage';
@@ -10,8 +11,8 @@ import EvaluateGroupPage from '@pages/EvaluateGroupPage';
 import ChatListPage from '@pages/ChatListPage';
 import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
-import { Auth as AuthCallback } from '@components';
 import GroupCreatePage from '../../pages/GroupCreatePage';
+import ExceptionPage from '@pages/ExceptionPage';
 import { AuthGuardRoute, GroupBelongGuardRoute, GroupOwnerGuardRoute } from './routes';
 
 function Router(): JSX.Element {
@@ -29,7 +30,7 @@ function Router(): JSX.Element {
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile/:id" component={ProfilePage} />
       <Route path="/auth/callback" component={AuthCallback} />
-      <Redirect to="/" />
+      <Route path="*" component={ExceptionPage} />
     </Switch>
   );
 }

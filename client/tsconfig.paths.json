@@ -11,7 +11,8 @@
       "@store/*": ["src/store/*"],
       "@styles": ["src/styles/global.tsx"],
       "@types": ["src/types/index.ts"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"]
     }
   }
 }

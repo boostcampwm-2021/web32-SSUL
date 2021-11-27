@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
-import { RouteProps, useHistory, useParams } from 'react-router-dom';
+import { RouteProps, useParams } from 'react-router-dom';
+import ExceptionPage from '@pages/ExceptionPage';
+import { DESC_BAD_ACCESS, MSG_BAD_ACCESS } from '@constants/consts';
 
 interface ParamProps {
   gid: string;
@@ -18,17 +20,18 @@ export function RouteGuard(
 ): (props: RouteProps) => JSX.Element {
   return function guardRoute(props: RouteProps): JSX.Element {
     const Component = Page as React.FC;
-    const history = useHistory();
     const { gid } = useParams<ParamProps>();
     const [isProgress, setIsProgress] = useState<boolean>(true);
+    const [isAuth, setIsAuth] = useState<boolean>(false);
 
     useEffect(() => {
       (async () => {
         try {
           if (!gid) await authenficate();
           else await authenficate(gid);
+          setIsAuth(true);
         } catch (e: any) {
-          history.go(-1);
+          setIsAuth(false);
         }
 
         setIsProgress(false);
@@ -36,6 +39,7 @@ export function RouteGuard(
     }, []);
 
     if (isProgress) return <></>;
+    if (!isAuth) return <ExceptionPage description={DESC_BAD_ACCESS} message={MSG_BAD_ACCESS} />;
     return <Component {...props} />;
   };
 }
