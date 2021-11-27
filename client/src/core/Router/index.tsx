@@ -21,7 +21,7 @@ function Router(): JSX.Element {
       <Route path="/" component={MainPage} exact />
       <Route path="/recruit/group" component={GroupRecruitPage} exact />
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
-      <Route path="/group/my" component={MyGroupPage} />
+      <AuthGuardRoute path="/group/my" component={MyGroupPage} />
       <GroupOwnerGuardRoute path="/group/owner/:gid" component={GroupOwnerPage} />
       <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
       <GroupBelongGuardRoute path="/group/evaluate" component={EvaluateGroupPage} />
