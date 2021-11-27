@@ -102,6 +102,9 @@ export class GroupOwnerController {
   @UseBefore(isLoggedIn)
   @Patch('/decline/:aid')
   public async declineApply(@Session() session: any, @Params() { aid }: ApplyParam) {
-    await this.groupOwnerService.declineRequest(aid, session.user.id);
+    const applyGroup = await this.groupOwnerService.declineRequest(aid, session.user.id);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromApply(applyGroup, AlarmType.JOIN_GROUP_DECLINED),
+    );
   }
 }

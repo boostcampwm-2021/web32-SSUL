@@ -57,7 +57,7 @@ export class GroupOwnerService {
     return applyGroup;
   }
 
-  public async declineRequest(applyId: number, ownerId: number) {
+  public async declineRequest(applyId: number, ownerId: number): Promise<ApplyGroup> {
     const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
     if (applyGroup.group.ownerId !== ownerId) {
@@ -65,5 +65,6 @@ export class GroupOwnerService {
     }
     applyGroup.state = ApplyGroupState.DECLINED;
     await this.applyGroupRepository.save(applyGroup);
+    return applyGroup;
   }
 }
