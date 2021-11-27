@@ -13,7 +13,10 @@ import { Mentor } from '../models/Mentor';
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
 import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
-import { MentorAlreadyRequest } from '../error/MentorAlreadyRequest';
+import { MentorAlreadyRequestError } from '../error/MentorAlreadyRequestError';
+import { GroupRepository } from '@domains/group/repository/GroupRepository';
+import { MentorNotFoundError } from '../error/MentorNotFoundError';
+import { GroupNotFoundError } from '@domains/group/error/GroupNotFoundError';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -29,6 +32,8 @@ export class MentoringService {
     private readonly categoryRepository: CategoryRepository,
     @InjectRepository()
     private readonly userRepository: UserRepository,
+    @InjectRepository()
+    private readonly groupRepository: GroupRepository,
   ) {}
 
   public async createMentor(userId: number) {
@@ -105,11 +110,16 @@ export class MentoringService {
   }
 
   public async saveMentoringRequest(mentorId: number, groupId: number) {
+    const mentorOne = await this.mentorRepository.findOneByMentorId(mentorId);
+    if (!mentorOne) throw new MentorNotFoundError();
+
+    await this.groupRepository.findOneOrFailById(groupId);
+
     const mentoringRequest = await this.mentoringRequestRepository.findOneByMentorIdAndGroupId(
       mentorId,
       groupId,
     );
-    if (mentoringRequest) throw new MentorAlreadyRequest();
+    if (mentoringRequest) throw new MentorAlreadyRequestError();
 
     const mentor = new Mentor();
     mentor.id = mentorId;
