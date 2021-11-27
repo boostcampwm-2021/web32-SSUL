@@ -247,4 +247,65 @@ describe('/mentoring', () => {
       expect(res.statusCode).toBe(400);
     });
   });
+
+  describe('[DELETE /request] 멘토링 취소 요청 테스트', () => {
+    //userId 31 is owner , mentorId 33,34,35 is mentor
+    test('정상 취소 요청 테스트', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+
+      //when
+      const res = await request(app)
+        .delete('/api/mentoring/request')
+        .query({ mentor: 33, group: 6 })
+        .set('Cookie', [cookieSession]);
+      //then
+      expect(res.statusCode).toBe(200);
+    });
+
+    test('로그인 되어 있지 않은 유저가 요청을 보냈을 때 테스트', async () => {
+      //given
+      const mentorRequestDto = {};
+      //when
+      const res = await request(app).post('/api/mentoring/request').send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(401);
+    });
+
+    test('유효하지 않은 멘토 id일때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      //when
+      const res = await request(app)
+        .delete('/api/mentoring/request')
+        .query({ mentor: 37, group: 6 })
+        .set('Cookie', [cookieSession]);
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+
+    test('유효하지 않은 그룹 id일때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      //when
+      const res = await request(app)
+        .delete('/api/mentoring/request')
+        .query({ mentor: 33, group: 9 })
+        .set('Cookie', [cookieSession]);
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+
+    test('멘토링 신청 내역이 존재하지 않을 때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      //when
+      const res = await request(app)
+        .delete('/api/mentoring/request')
+        .query({ mentor: 33, group: 6 })
+        .set('Cookie', [cookieSession]);
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+  });
 });
