@@ -166,10 +166,85 @@ describe('/mentoring', () => {
     //uid 1 is mentor , uid 2 is not mentor
     test('전체 조회 테스트', async () => {
       //when
-
       const res = await request(app).get('/api/mentoring/request');
       expect(res.statusCode).toBe(200);
       expect(res.body.length).toBeGreaterThanOrEqual(1);
+    });
+  });
+
+  describe('[POST /request] 멘토링 요청 테스트', () => {
+    //userId 31 is owner , mentorId 33,34,35 is mentor
+    test('정상 요청 테스트', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      const mentorRequestDto = {
+        mentorId: 35,
+        groupId: 6,
+      };
+      //when
+      const res = await request(app)
+        .post('/api/mentoring/request')
+        .set('Cookie', [cookieSession])
+        .send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(200);
+    });
+
+    test('로그인 되어 있지 않은 유저가 요청을 보냈을 때 테스트', async () => {
+      //given
+      const mentorRequestDto = {};
+      //when
+      const res = await request(app).post('/api/mentoring/request').send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(401);
+    });
+
+    test('유효하지 않은 멘토 id일때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      const mentorRequestDto = {
+        mentorId: 37,
+        groupId: 6,
+      };
+      //when
+      const res = await request(app)
+        .post('/api/mentoring/request')
+        .set('Cookie', [cookieSession])
+        .send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+
+    test('유효하지 않은 그룹 id일때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      const mentorRequestDto = {
+        mentorId: 37,
+        groupId: 9,
+      };
+      //when
+      const res = await request(app)
+        .post('/api/mentoring/request')
+        .set('Cookie', [cookieSession])
+        .send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(400);
+    });
+
+    test('이미 멘토링 신청 내역이 존재할 때', async () => {
+      //given
+      const cookieSession = getLoginCookie({ id: 31 });
+      const mentorRequestDto = {
+        mentorId: 33,
+        groupId: 6,
+      };
+      //when
+      const res = await request(app)
+        .post('/api/mentoring/request')
+        .set('Cookie', [cookieSession])
+        .send(mentorRequestDto);
+      //then
+      expect(res.statusCode).toBe(400);
     });
   });
 });
