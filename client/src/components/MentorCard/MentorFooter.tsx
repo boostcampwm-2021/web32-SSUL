@@ -1,14 +1,25 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { changeGroupModalState } from '@store/util/Slice';
+import { selectUser } from '@store/user/globalSlice';
 
 interface Props {
   mentorUserId: number;
 }
 
 function MentorFooter({ mentorUserId }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { id } = useAppSelector(selectUser);
+
+  const handleShowDetailButtonClick = () => {
+    dispatch(changeGroupModalState('MENTOR_DETAIL'));
+  };
   return (
     <Container>
-      <ApplyButton>멘토링 신청</ApplyButton>
+      {id !== 0 && id !== mentorUserId && (
+        <ApplyButton onClick={handleShowDetailButtonClick}>멘토링 신청</ApplyButton>
+      )}
     </Container>
   );
 }
