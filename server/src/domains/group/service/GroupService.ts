@@ -25,6 +25,7 @@ import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
+import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
 
 const EACH_PAGE_CNT = 12;
 
@@ -76,7 +77,7 @@ export class GroupService {
       destructObject(enrollment),
     ) as GroupUserDto[];
     if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = ({ ...groupDetails, groupEnrollments } as unknown) as GroupDetailDto;
+    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
     return grupDetailData;
   }
 
@@ -160,9 +161,14 @@ export class GroupService {
     if (!group) throw new NotAuthorizedError();
   }
 
-  public async getOwnGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
+  public async getOwnSimpleGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
     const groups = await this.groupRepository.findAllByOwnerId(userId);
     return groups.map((group) => SimpleGroupCardResponse.from(group));
+  }
+
+  public async getOwnGroups(userId: number): Promise<OwnerGroupCardResponse[]> {
+    const groups = await this.groupRepository.findAllByOwnerId(userId);
+    return groups.map((group) => OwnerGroupCardResponse.from(group));
   }
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {

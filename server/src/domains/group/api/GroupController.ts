@@ -89,6 +89,14 @@ export class GroupController {
     return await this.groupService.getOwnGroups(session.user.id);
   }
 
+  @Get('/own/simple')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 간단한 내용만 가져오는 API' })
+  public async getMySimpleGroups(@Session() session: any) {
+    return await this.groupService.getOwnSimpleGroups(session.user.id);
+  }
+
   @Get('/applyed')
   @UseBefore(isLoggedIn)
   @ResponseSchema(SimpleGroupCardResponse, { isArray: true })

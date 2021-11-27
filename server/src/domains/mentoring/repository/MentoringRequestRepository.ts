@@ -22,6 +22,6 @@ export class MentoringRequestRepository extends Repository<MentoringRequest> {
   }
 
   public deleteByMentorIdAndGroupId(mentorId: number, groupId: number) {
-    this.delete({ where: { mentorId, groupId } });
+    this.delete({ mentorId, groupId });
   }
 }
