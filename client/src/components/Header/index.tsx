@@ -32,6 +32,8 @@ function Header(): JSX.Element {
 }
 
 const Container = styled.div`
+  position: sticky;
+  top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -40,8 +42,10 @@ const Container = styled.div`
   min-width: 1040px;
   height: 80px;
   padding: 12px 32px 0px 32px;
+  background-color: ${(props) => props.theme.White};
   box-sizing: border-box;
   box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  z-index: 9999;
 `;
 
 const Content = styled.div`

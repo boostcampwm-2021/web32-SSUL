@@ -12,8 +12,9 @@ import { Category, TechStack } from '@types';
 import { categoryHttpClient } from '@api';
 import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
+import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO } from '@constants/consts';
 
 const MAX_CONTENT_INDEX = 4;
 enum PAGE_NUMBER {
@@ -26,12 +27,12 @@ enum PAGE_NUMBER {
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
-  const [notificationText, setNotificationText] = useState<string>('');
   const [categorys, setCategorys] = useState<Category[]>([]);
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
   const groupData = useAppSelector(groupCreateDataState);
   const { id: ownerId } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
 
   const setUsingTechStacks = (newTechStacks: TechStack[]) =>
     dispatch(setGroupData({ techStacks: newTechStacks }));
@@ -74,34 +75,29 @@ function GroupCreatePage(): JSX.Element {
   };
 
   const clickPrevContents = () => {
-    setNotificationText('');
     if (contentsNumber > PAGE_NUMBER.CATEGORY) setContentsNumber(contentsNumber - 1);
     else window.history.back();
   };
 
   const clickNextContents = () => {
     if (!checkInput()) {
-      setNotificationText('필수 입력사항을 입력해주세요!');
+      toastify(MSG_NEED_INFO, 'INFO');
       return;
     }
 
-    setNotificationText('');
     if (contentsNumber < MAX_CONTENT_INDEX) setContentsNumber(contentsNumber + 1);
     else if (contentsNumber === MAX_CONTENT_INDEX) requestGroupCreate();
   };
 
   const requestGroupCreate = async () => {
     try {
-      if (ownerId === undefined) {
-        setNotificationText('로그인 정보가 없습니다...');
-        return;
-      }
+      if (!ownerId) return;
       const postGroupData = { ...groupData };
       postGroupData.ownerId = ownerId;
       await groupHttpClient.postGroupCreate(postGroupData);
       window.location.href = '/';
     } catch (e) {
-      setNotificationText('그룹생성에 실패했습니다...');
+      toastify(MSG_GROUP_CREATE_ERROR, 'ERROR');
     }
   };
   const cleanUp = () => {
@@ -129,7 +125,6 @@ function GroupCreatePage(): JSX.Element {
     <CreateForm>
       <GageBar contentsNumber={contentsNumber} />
       <ContentsContainer>{getContents()}</ContentsContainer>
-      <Notification>{notificationText}</Notification>
       <ButtonWrapper>
         <CustomButton label={'이전'} clickBtn={clickPrevContents} />
         <CustomButton
@@ -167,13 +162,4 @@ const ButtonWrapper = styled.div`
   margin: 0 40px 40px 0;
 `;
 
-const Notification = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  margin-left: 40px;
-  margin-bottom: 40px;
-  color: ${(props) => props.theme.Error}; ;
-`;
 export default GroupCreatePage;

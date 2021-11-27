@@ -1,3 +1,6 @@
-export enum TempEnum {
-  temp = 'TEMP',
+export enum ToastMessageEnum {
+  INFO = 'INFO',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
 }
