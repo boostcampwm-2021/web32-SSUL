@@ -23,4 +23,5 @@ export const ErrorCode = Object.freeze({
   GROUP_NOT_INVOLVE: new ErrorSpec('G006', '그룹에 속해있지 않습니다.'),
   // group
   MENTORING_ALREADY_REQUEST: new ErrorSpec('M00', '이미 멘토링 신청을 한 상태입니다.'),
+  MENTOR_NOT_FOUND: new ErrorSpec('M01', '잘못된 멘토ID 입니다.'),
 });
