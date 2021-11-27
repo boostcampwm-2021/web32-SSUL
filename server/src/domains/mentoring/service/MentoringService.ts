@@ -102,4 +102,14 @@ export class MentoringService {
       })
       .filter((mentor) => mentor);
   }
+
+  public async saveMentoringRequest(mentorId: number, groupId: number) {
+    const mentor = new Mentor();
+    mentor.id = mentorId;
+    const group = new Mentor();
+    group.id = groupId;
+    const createdAt = new Date();
+
+    return await this.mentoringRequestRepository.save({ createdAt, mentor, group });
+  }
 }

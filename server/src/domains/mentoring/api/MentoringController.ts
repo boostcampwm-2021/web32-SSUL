@@ -28,6 +28,7 @@ import {
   FilterdPageMentorListResponse,
 } from '../dto/FilterdPageMentorListResponse';
 import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
+import { PostRequestDto } from '../dto/PostRequestDto';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -92,6 +93,13 @@ export class MentoringController {
   @ResponseSchema(MentoringRequestResponse, { isArray: true })
   public async getAllMentoringRequest() {
     return await this.mentoringService.getAllRequestList();
+  }
+
+  @Post('/request')
+  @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
+  @OnUndefined(200)
+  public async postMentoringRequest(@Body() { mentorId, groupId }: PostRequestDto) {
+    return await this.mentoringService.saveMentoringRequest(mentorId, groupId);
   }
 
   @Get('/request/:mid')
