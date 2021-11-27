@@ -137,7 +137,7 @@ export class GroupService {
     await this.groupRepository.save(group);
   }
 
-  public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs) {
+  public async enroll(groupId: number, userId: number, type: GroupEnrollmentAs): Promise<Group> {
     const enrollment = await this.groupEnrollmentRepository.findOneByGroupIdAndUserId(
       groupId,
       userId,
@@ -145,7 +145,8 @@ export class GroupService {
     if (enrollment !== undefined) {
       throw new DuplicateEnrollmentError();
     }
-    await this.groupEnrollmentRepository.save({ groupId, userId, type });
+    const groupEnorllment = await this.groupEnrollmentRepository.save({ groupId, userId, type });
+    return await this.groupRepository.findOneOrFail({ id: groupEnorllment.groupId });
   }
 
   public async checkGroupBelong(userId: number, groupId: number): Promise<void> {
@@ -178,12 +179,13 @@ export class GroupService {
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
   }
 
-  public async addApplyGroup(groupId: number, userId: number): Promise<void> {
+  public async addApplyGroup(groupId: number, userId: number): Promise<ApplyGroup> {
     const applyGroupInfo: ApplyGroup = new ApplyGroup();
     applyGroupInfo.groupId = groupId;
     applyGroupInfo.userId = userId;
     applyGroupInfo.createdAt = new Date();
-    await this.applyGroupRepository.save(applyGroupInfo);
+    const applyGroup = await this.applyGroupRepository.save(applyGroupInfo);
+    return await this.applyGroupRepository.findOneOrFail({ id: applyGroup.id });
   }
 
   public async getGroupRole(groupId: number, userId: number) {
