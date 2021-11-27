@@ -6,12 +6,14 @@ import { MentoringRequest, MentoringRequestPostData, OwnGroupsInfo } from '@type
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 import { changeGroupModalState } from '@store/util/Slice';
+import { useHistory } from 'react-router';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
   const [allMentoringRequests, setAllMentoringRequests] = useState<MentoringRequest[]>([]);
   const { mentorId } = useAppSelector(mentorCardDetailState);
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const getOwnGroups = async () => {
     const allOwnGroups = await groupHttpClient.getOwnGroups();
@@ -23,6 +25,11 @@ function GroupList(): JSX.Element {
   useEffect(() => {
     getOwnGroups();
   }, []);
+
+  const handleShowGroupButtonClick = (groupId: number) => {
+    history.push({ pathname: `/group/${groupId}` });
+    dispatch(changeGroupModalState('NONE'));
+  };
 
   const hanldeApplyButtonClick = async (groupId: number) => {
     const postData: MentoringRequestPostData = { groupId, mentorId };
@@ -56,7 +63,9 @@ function GroupList(): JSX.Element {
           {formatDateToString(group.startAt)} ~ {formatDateToString(group.endAt)}
         </GroupDueDate>
         <ButtonWrapper>
-          <GroupInfoButton>그룹 보기</GroupInfoButton>
+          <GroupInfoButton onClick={() => handleShowGroupButtonClick(group.id)}>
+            그룹 보기
+          </GroupInfoButton>
           {alreadyRequestMentoring ? (
             <CancelButton onClick={() => hanldeCancelButtonClick(group.id)}>신청 취소</CancelButton>
           ) : (
