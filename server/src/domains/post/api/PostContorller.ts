@@ -41,8 +41,7 @@ export class PostController {
   @Get('/:gid')
   @UseBefore(isLoggedIn)
   public async getPostsByGroupId(@Session() session: any, @Params() { gid }: GroupParam) {
-    const { id: userid } = session.user;
-    await this.groupService.checkGroupBelong(userid, gid);
+    await this.groupService.checkGroupBelong(session.user.id, gid);
     return await this.postService.getPostsByGroupId(gid);
   }
 

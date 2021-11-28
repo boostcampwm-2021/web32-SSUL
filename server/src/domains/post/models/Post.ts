@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from '@domains/user/models/User';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { Group } from '../../group/models/Group';
 
 export enum PostType {
@@ -34,4 +35,8 @@ export class Post {
 
   @ManyToOne(() => Group, (group) => group.posts)
   group: Group;
+
+  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, (user) => user.posts)
+  user: User;
 }

@@ -1,9 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Alarm } from '@domains/alarm/models/Alarm';
 import { MenteeTechStack } from '@domains/techstack/models/MenteeTechStack';
 import { Group } from '@domains/group/models/Group';
+import { Post } from '@domains/post/models/Post';
 
 @Entity('user')
 export class User {
@@ -45,4 +46,7 @@ export class User {
 
   @OneToMany(() => MenteeTechStack, (menteeTechStack) => menteeTechStack.user)
   techStacks: MenteeTechStack[];
+
+  @OneToMany(() => Post, (post) => post.group)
+  posts: Post[];
 }
