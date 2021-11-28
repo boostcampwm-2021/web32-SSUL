@@ -26,21 +26,19 @@ function GroupList(): JSX.Element {
     getOwnGroups();
   }, []);
 
-  const handleShowGroupButtonClick = (groupId: number) => {
-    history.push({ pathname: `/group/${groupId}` });
-    dispatch(changeGroupModalState('NONE'));
-  };
-
-  const hanldeApplyButtonClick = async (groupId: number) => {
-    const postData: MentoringRequestPostData = { groupId, mentorId };
-    await mentoringHttpClient.postMentoringRequests(postData);
-    dispatch(changeGroupModalState('NONE'));
-  };
-
-  const hanldeCancelButtonClick = async (groupId: number) => {
-    const deleteQuery = `?mentor=${mentorId}&group=${groupId}`;
-    await mentoringHttpClient.deleteMentoringRequests(deleteQuery);
-    dispatch(changeGroupModalState('NONE'));
+  const handleButtonClick = (type: string, groupId: number) => {
+    return async () => {
+      if (type === 'GROUP_INFO') {
+        history.push({ pathname: `/group/${groupId}` });
+      } else if (type === 'APPLY_BUTTON') {
+        const postData: MentoringRequestPostData = { groupId, mentorId };
+        await mentoringHttpClient.postMentoringRequests(postData);
+      } else if (type === 'CANCEL_BUTTON') {
+        const deleteQuery = `?mentor=${mentorId}&group=${groupId}`;
+        await mentoringHttpClient.deleteMentoringRequests(deleteQuery);
+      }
+      dispatch(changeGroupModalState('NONE'));
+    };
   };
 
   const makeRequestBox = ownGroups.map((group) => {
@@ -63,13 +61,17 @@ function GroupList(): JSX.Element {
           {formatDateToString(group.startAt)} ~ {formatDateToString(group.endAt)}
         </GroupDueDate>
         <ButtonWrapper>
-          <GroupInfoButton onClick={() => handleShowGroupButtonClick(group.id)}>
+          <GroupInfoButton onClick={handleButtonClick('GROUP_INFO', group.id)}>
             그룹 보기
           </GroupInfoButton>
           {alreadyRequestMentoring ? (
-            <CancelButton onClick={() => hanldeCancelButtonClick(group.id)}>신청 취소</CancelButton>
+            <CancelButton onClick={handleButtonClick('CANCEL_BUTTON', group.id)}>
+              신청 취소
+            </CancelButton>
           ) : (
-            <ApplyButton onClick={() => hanldeApplyButtonClick(group.id)}>신청 하기</ApplyButton>
+            <ApplyButton onClick={handleButtonClick('APPLY_BUTTON', group.id)}>
+              신청 하기
+            </ApplyButton>
           )}
         </ButtonWrapper>
       </BoxContainer>
