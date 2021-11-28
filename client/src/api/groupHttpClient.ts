@@ -5,6 +5,8 @@ import {
   GroupActivity,
   GroupDetailData,
   GroupApplyData,
+  SimpleGroupCardData,
+  ApplyState,
 } from '@types';
 
 class GroupHttpClient extends HttpClient {
@@ -28,6 +30,15 @@ class GroupHttpClient extends HttpClient {
     this.httpClient.post('/apply', applyInfo);
 
   public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
+
+  public getOwnSimpleGroups = (): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/own/simple`);
+
+  public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/applyed?state=${applyState}`);
+
+  public getMyGroups = (query: string): Promise<SimpleGroupCardData[]> =>
+    this.httpClient.get(`/my${query}`);
 }
 
 export const groupHttpClient = new GroupHttpClient();

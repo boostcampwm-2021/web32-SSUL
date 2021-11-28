@@ -5,7 +5,7 @@ import MainPage from '@pages/MainPage';
 import GroupRecruitPage from '@pages/GroupRecruitPage';
 import MentorRecruitPage from '@pages/MentorRecruitPage';
 import GroupsPage from '@pages/GroupsPage';
-import GroupStatusPage from '@pages/GroupStatusPage';
+import MyGroupPage from '@pages/MyGroupPage';
 import GroupOwnerPage from '@pages/GroupOwnerPage';
 import EvaluateGroupPage from '@pages/EvaluateGroupPage';
 import ChatListPage from '@pages/ChatListPage';
@@ -21,7 +21,7 @@ function Router(): JSX.Element {
       <Route path="/" component={MainPage} exact />
       <Route path="/recruit/group" component={GroupRecruitPage} exact />
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
-      <Route path="/group/status" component={GroupStatusPage} />
+      <AuthGuardRoute path="/group/my" component={MyGroupPage} />
       <GroupOwnerGuardRoute path="/group/owner/:gid" component={GroupOwnerPage} />
       <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
       <GroupBelongGuardRoute path="/group/evaluate" component={EvaluateGroupPage} />

@@ -12,6 +12,8 @@ export const MSG_POST_CREATE_ERROR = '게시글 작성이 실패했습니다.';
 export const MSG_POST_UPDATE_ERROR = '게시글 수정이 실패했습니다.';
 export const MSG_POST_DELETE_ERROR = '게시글 삭제가 실패했습니다.';
 
+export const MSG_NOT_JOIN_ERROR = '아직 가입되지 않은 그룹이에요ㅠㅠ';
+
 // 디스크립션
 export const DESC_NOT_FOUND = '404 NOT FOUND';
 export const DESC_BAD_ACCESS = '4XX BAD ACCESS';
