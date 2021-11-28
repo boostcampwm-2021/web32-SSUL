@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   OnUndefined,
-  Param,
   Params,
   Patch,
   Session,
@@ -11,17 +10,21 @@ import {
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
-import { GroupApplyResponse } from '../dto/GroupApplyResponse';
-import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import { GroupOwnerService } from '../service/GroupOwnerService';
 import { AlarmService } from '@domains/alarm/service/AlarmService';
-import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/updateGroup';
 import { GroupService } from '../service/GroupService';
-import { GroupParam } from '../dto/GroupParam';
-import { ApplyParam } from '../dto/ApplyParam';
 import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
 import { AlarmType } from '@domains/alarm/models/Alarm';
+import { SimpleGroupInfoResponse } from '../dto/response/SimpleGroupInfoResponse';
+import { GroupParam } from '../dto/param/GroupParam';
+import { GroupApplyResponse } from '../dto/response/GroupApplyResponse';
+import { ApplyParam } from '../dto/param/ApplyParam';
+import {
+  UpdateGroupIntroDto,
+  UpdateGroupDateDto,
+  UpdateGroupNameDto,
+} from '../dto/request/updateGroup';
 
 @OpenAPI({
   tags: ['그룹 설정'],
