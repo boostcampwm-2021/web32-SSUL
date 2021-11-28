@@ -2,19 +2,19 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { calculateStudyTime, formatDateToString } from '@utils/Date';
-import { OwnerInfo } from '@types';
+import { OwnerInfo, TechStack } from '@types';
 
 interface Props {
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
-  techStacks: string[];
+  techStacks: TechStack[];
   ownerInfo: OwnerInfo;
 }
 
 function GroupDetailStatus({ techStacks, ownerInfo, intro, startAt, endAt }: Props): JSX.Element {
   const renderTechStackList = techStacks.map((techStack, idx) => {
-    return <TechListItem key={idx}>{techStack} </TechListItem>;
+    return <TechListItem key={idx}>{techStack.name} </TechListItem>;
   });
   return (
     <Container>

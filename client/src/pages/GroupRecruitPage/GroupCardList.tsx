@@ -30,6 +30,7 @@ function GroupCardList(): JSX.Element {
     toggleLoader(true);
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
+      console.log(allGroupList);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
       toggleLoader(false);

@@ -1,4 +1,4 @@
-import { Category, CategoryData, OwnerInfo } from '@types';
+import { Category, CategoryData, OwnerInfo, TechStack } from '@types';
 
 export enum GroupState {
   READY = 'READY',
@@ -32,7 +32,7 @@ export interface Group {
   status: GroupState;
   category: CategoryData;
   ownerInfo: OwnerInfo;
-  techStacks: string[];
+  techStacks: TechStack[];
 }
 
 export interface GroupCardDetail {
@@ -43,7 +43,7 @@ export interface GroupCardDetail {
   intro: string | null;
   startAt: Date | null;
   endAt: Date | null;
-  techStacks: string[];
+  techStacks: TechStack[];
   category: CategoryData;
   ownerInfo: OwnerInfo;
 }

@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TechStack } from '@types';
 
 interface Props {
-  techStackList: string[];
+  techStackList: TechStack[];
 }
 
 const MAX_SHOW_TECHSTACK = 3;
 
 function GroupTechStackList({ techStackList }: Props): JSX.Element {
   const moreTechStackList = techStackList.map((techStack, idx) => {
-    if (idx >= MAX_SHOW_TECHSTACK) return <MoreInfo key={idx}>{techStack}</MoreInfo>;
+    if (idx >= MAX_SHOW_TECHSTACK) return <MoreInfo key={idx}>{techStack.name}</MoreInfo>;
   });
 
   const renderTechStackList = techStackList.map((techStack, idx) => {
-    if (idx < MAX_SHOW_TECHSTACK) return <TechListItem key={idx}>{techStack} </TechListItem>;
+    if (idx < MAX_SHOW_TECHSTACK) return <TechListItem key={idx}>{techStack.name} </TechListItem>;
     if (idx === MAX_SHOW_TECHSTACK)
       return <MoreTechStack key={idx}>...{moreTechStackList}</MoreTechStack>;
   });
