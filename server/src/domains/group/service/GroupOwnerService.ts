@@ -20,12 +20,12 @@ export class GroupOwnerService {
     private readonly groupService: GroupService,
   ) {}
 
-  public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
+  public async getGroupInfo(gid: number): Promise<SimpleGroupInfoResponse> {
     const group = await this.groupRepository.findOneOrFailById(gid);
     return SimpleGroupInfoResponse.from(group);
   }
 
-  public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
+  public async getApplyList(gid: number): Promise<GroupApplyResponse[]> {
     const applyGroupList = await this.applyGroupRepository.findAllByGroupIdAndState(
       gid,
       ApplyGroupState.PENDING,

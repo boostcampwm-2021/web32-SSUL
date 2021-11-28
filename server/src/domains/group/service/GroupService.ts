@@ -5,15 +5,13 @@ import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentReposito
 import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
 
 import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupDetailDto } from '../dto/groupDto';
-import { GroupUserDto } from '@domains/user/dto/GroupUserDto';
+import { GroupDetailDto } from '../dto/GroupDetailDto';
 
 import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
-import { destructObject } from '@utils/Object';
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
 import { GroupInvalidError } from '../error/GroupInvalidError';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
@@ -42,64 +40,90 @@ export class GroupService {
     private readonly applyGroupRepository: ApplyGroupRepository,
   ) {}
 
+  public async getOwnSimpleGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
+    const groups = await this.groupRepository.findAllByOwnerId(userId);
+    return groups.map((group) => SimpleGroupCardResponse.from(group));
+  }
+
+  public async getOwnGroups(userId: number): Promise<OwnerGroupCardResponse[]> {
+    const groups = await this.groupRepository.findAllByOwnerId(userId);
+    return groups.map((group) => OwnerGroupCardResponse.from(group));
+  }
+
+  public async getEndGroupList(userId: number) {
+    const endGroupList = await this.groupEnrollmentRepository.findAllByUserIdAndGroupStatus(
+      userId,
+      GroupState.END,
+    );
+    return endGroupList.map((groupEnrollment) => GroupActivityDto.from(groupEnrollment));
+  }
+
+  public async getGroupDetail(gid: number): Promise<GroupDetailDto> {
+    const groupDetail = await this.groupRepository.findOneById(gid);
+    if (!groupDetail || !groupDetail.groupEnrollments.length) throw new GroupInvalidError();
+    return GroupDetailDto.from(groupDetail);
+  }
+
   public async getFilterdPageGroups(
     page: number = 1,
     name: string = '',
     category: number,
     techstack: string,
   ): Promise<FilterdPageGroupDto> {
-    const totalFilterdGroups = await this.getFilterdGroups(name, category, techstack);
+    const inputTechStackNames = techstack ? techstack.split(',') : [];
     const offset = (page - 1) * EACH_PAGE_CNT;
-    const filterdPageGroups = totalFilterdGroups.slice(offset, offset + EACH_PAGE_CNT);
-    const totalPages: number = Math.ceil(totalFilterdGroups.length / EACH_PAGE_CNT);
 
-    return { groups: filterdPageGroups, totalPages };
-  }
-
-  public async getFilterdGroups(
-    name: string,
-    category: number,
-    techstack: string,
-  ): Promise<FilterdGroupDto[]> {
-    const filterdTechStack = techstack ? techstack.split(',') : [];
     const groups =
-      category !== undefined
-        ? await this.groupRepository.findAllByNameAndCategory(name, category)
-        : await this.groupRepository.findAllByName(name);
+      category === undefined
+        ? await this.groupRepository.findAllByName(name)
+        : await this.groupRepository.findAllByNameAndCategoryId(name, category);
 
-    const addedGroupsInfo: FilterdGroupDto[] = await this.addGrpupInfo(groups, filterdTechStack);
-    return addedGroupsInfo;
+    const filteredGroups: Group[] = inputTechStackNames.length
+      ? groups.filter((group) => group.techStacks.some((t) => inputTechStackNames.includes(t.name)))
+      : groups;
+
+    const selectedPageGroups = filteredGroups
+      .slice(offset, offset + EACH_PAGE_CNT)
+      .map((group) => FilterdGroupDto.from(group));
+
+    const totalPages: number = Math.ceil(selectedPageGroups.length / EACH_PAGE_CNT);
+
+    return FilterdPageGroupDto.from(selectedPageGroups, totalPages);
   }
 
-  public async getGroupDetails(gid: number): Promise<GroupDetailDto> {
-    const groupDetails = await this.groupRepository.findGroupDetailByGroupId(gid);
-    const groupEnrollments = groupDetails?.groupEnrollments.map((enrollment) =>
-      destructObject(enrollment),
-    ) as GroupUserDto[];
-    if (!groupDetails || !groupEnrollments.length) throw new GroupInvalidError();
-    const grupDetailData = { ...groupDetails, groupEnrollments } as unknown as GroupDetailDto;
-    return grupDetailData;
+  public async getGroupRole(groupId: number, userId: number) {
+    // TODO : 타입만 가져오는 DTO 생성
+    const enrollmentType = await this.groupEnrollmentRepository.findOneByGroupIdAndUserId(
+      groupId,
+      userId,
+    );
+    if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
+
+    return enrollmentType;
   }
 
-  public async addGrpupInfo(groups: Group[], filterdTechStack: string[]) {
-    return Promise.all<any>(
-      groups.map(async (group: Group) => {
-        const groupsTechStacks = group.techStacks;
-        const isIncludeStackList = group.techStacks.some((techStack) =>
-          filterdTechStack.includes(techStack.name),
-        );
+  public async getMyApplyedGroups(
+    userId: number,
+    state: ApplyGroupState,
+  ): Promise<SimpleGroupCardResponse[]> {
+    const applies = await this.applyGroupRepository.findAllByUserIdAndState(userId, state);
+    const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
+    return groups;
+  }
 
-        if (filterdTechStack.length === 0 || isIncludeStackList) {
-          const newTechStackNames = groupsTechStacks.map((techstacks) => {
-            return techstacks.name;
-          });
-          return {
-            ...group,
-            techStacks: newTechStackNames,
-          };
-        }
-      }),
-    ).then((data) => data.filter((group) => group !== undefined));
+  public async getEnrolledGroupByQuery(
+    userId: number,
+    status: GroupState,
+    type: GroupEnrollmentAs,
+  ) {
+    const enrollments = type
+      ? await this.groupEnrollmentRepository.findAllByUserIdAndType(userId, type)
+      : await this.groupEnrollmentRepository.findAllByUserId(userId);
+
+    const groups = enrollments.map((enrollment) => enrollment.group);
+    return status
+      ? groups.filter((group) => group.status === status)
+      : groups.map((group) => SimpleGroupCardResponse.from(group));
   }
 
   public async createGroup(createGroupDto: CreateGroupDto): Promise<void> {
@@ -119,12 +143,13 @@ export class GroupService {
     await this.enroll(group.id, ownerId, GroupEnrollmentAs.OWNER);
   }
 
-  public async getEndGroupList(userId: number) {
-    const endGroupList = await this.groupEnrollmentRepository.findGroupByUserIdAndStatus(
-      userId,
-      GroupState.END,
-    );
-    return endGroupList.map((groupEnrollment) => GroupActivityDto.from(groupEnrollment));
+  public async addApplyGroup(groupId: number, userId: number): Promise<ApplyGroup> {
+    const applyGroupInfo: ApplyGroup = new ApplyGroup();
+    applyGroupInfo.groupId = groupId;
+    applyGroupInfo.userId = userId;
+    applyGroupInfo.createdAt = new Date();
+    const applyGroup = await this.applyGroupRepository.save(applyGroupInfo);
+    return await this.applyGroupRepository.findOneOrFail({ id: applyGroup.id });
   }
 
   public async addGroupMentor(mentorId: number, groupId: number) {
@@ -162,68 +187,10 @@ export class GroupService {
     if (!group) throw new NotAuthorizedError();
   }
 
-  public async getOwnSimpleGroups(userId: number): Promise<SimpleGroupCardResponse[]> {
-    const groups = await this.groupRepository.findAllByOwnerId(userId);
-    return groups.map((group) => SimpleGroupCardResponse.from(group));
-  }
-
-  public async getOwnGroups(userId: number): Promise<OwnerGroupCardResponse[]> {
-    const groups = await this.groupRepository.findAllByOwnerId(userId);
-    return groups.map((group) => OwnerGroupCardResponse.from(group));
-  }
-
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
     const applyInfo = await this.applyGroupRepository.findOneByGroupIdAndUserId(groupId, userId);
     if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
     else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
-  }
-
-  public async addApplyGroup(groupId: number, userId: number): Promise<ApplyGroup> {
-    const applyGroupInfo: ApplyGroup = new ApplyGroup();
-    applyGroupInfo.groupId = groupId;
-    applyGroupInfo.userId = userId;
-    applyGroupInfo.createdAt = new Date();
-    const applyGroup = await this.applyGroupRepository.save(applyGroupInfo);
-    return await this.applyGroupRepository.findOneOrFail({ id: applyGroup.id });
-  }
-
-  public async getGroupRole(groupId: number, userId: number) {
-    const enrollmentType = await this.groupEnrollmentRepository.findTypeByGroupIdAndUserId(
-      groupId,
-      userId,
-    );
-    if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
-
-    return enrollmentType;
-  }
-
-  public async getMyApplyedGroups(
-    userId: number,
-    state: ApplyGroupState,
-  ): Promise<SimpleGroupCardResponse[]> {
-    const applies = await this.applyGroupRepository.findAllByUserIdAndState(userId, state);
-    const groups = applies.map((applyment) => SimpleGroupCardResponse.from(applyment.group));
-    return groups;
-  }
-
-  public async getEnrolledGroupByQuery(
-    userId: number,
-    status: GroupState,
-    type: GroupEnrollmentAs,
-  ) {
-    let enrollments;
-    if (type !== undefined) {
-      enrollments = await this.groupEnrollmentRepository.findAllByUserIdAndType(userId, type);
-    } else {
-      enrollments = await this.groupEnrollmentRepository.findAllByUserId(userId);
-    }
-
-    let groups = enrollments.map((enrollment) => enrollment.group);
-    if (status !== undefined) {
-      groups = groups.filter((group) => group.status === status);
-    }
-
-    return groups.map((group) => SimpleGroupCardResponse.from(group));
   }
 }
