@@ -13,7 +13,7 @@ export class AlarmRepository extends Repository<Alarm> {
     return this.update({ id: alarmId }, { readChk: true });
   }
 
-  public checkReceiver(alarmId: number, receiverId: number) {
-    return this.findOneOrFail({ where: { id: alarmId, receiverId } });
+  public async existByIdAndReceiverId(alarmId: number, receiverId: number): Promise<boolean> {
+    return (await this.findOne({ where: { id: alarmId, receiverId } })) !== undefined;
   }
 }

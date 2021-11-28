@@ -4,6 +4,7 @@ import { AlarmRepository } from '@domains/alarm/repository/AlarmRepository';
 import { AlarmListResponse } from '../dto/AlarmResponse';
 import { Alarm } from '../models/Alarm';
 import { AlarmDto } from '../dto/AlarmDto';
+import { AlarmNotFoundError } from '../error/AlarmNotFoundError';
 
 @Service()
 export class AlarmService {
@@ -18,7 +19,8 @@ export class AlarmService {
   }
 
   public async readAlarm(alarmId: number, userId: number): Promise<void> {
-    await this.alarmRepository.checkReceiver(alarmId, userId);
+    if (await this.alarmRepository.existByIdAndReceiverId(alarmId, userId))
+      throw new AlarmNotFoundError();
     await this.alarmRepository.updateReadCheck(alarmId);
   }
 
@@ -28,7 +30,8 @@ export class AlarmService {
   }
 
   public async deleteAlarm(alarmId: number, userId: number): Promise<void> {
-    await this.alarmRepository.checkReceiver(alarmId, userId);
+    if (await this.alarmRepository.existByIdAndReceiverId(alarmId, userId))
+      throw new AlarmNotFoundError();
     await this.alarmRepository.delete({ id: alarmId });
   }
 }
