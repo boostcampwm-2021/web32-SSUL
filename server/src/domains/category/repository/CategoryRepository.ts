@@ -9,9 +9,15 @@ export class CategoryRepository extends Repository<Category> {
     return this.find();
   }
 
-  public async findOneByCategoryName(name: string) {
-    return await this.createQueryBuilder('category')
-      .where('category.name = :name', { name })
-      .getOne();
+  public findOneByCategoryName(name: string) {
+    return this.findOne({
+      where: { name },
+    });
+  }
+
+  public findOneById(id: string) {
+    return this.findOne({
+      where: { id },
+    });
   }
 }
