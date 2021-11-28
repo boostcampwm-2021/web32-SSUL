@@ -18,7 +18,7 @@ import { GroupOwnerService } from '../service/GroupOwnerService';
 import { AlarmService } from '@domains/alarm/service/AlarmService';
 import { UpdateGroupDateDto, UpdateGroupIntroDto, UpdateGroupNameDto } from '../dto/updateGroup';
 import { GroupService } from '../service/GroupService';
-import { GroupParam } from '../dto/groupDto';
+import { GroupParam } from '../dto/GroupParam';
 import { ApplyParam } from '../dto/ApplyParam';
 import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
 import { AlarmType } from '@domains/alarm/models/Alarm';
@@ -44,7 +44,7 @@ export class GroupOwnerController {
   @Get('/:gid')
   public async getGroupInfo(@Session() session: any, @Params() { gid }: GroupParam) {
     await this.groupService.checkGroupOwner(session.user.id, gid);
-    return await this.groupOwnerService.getGroupInfoByGroupId(gid);
+    return await this.groupOwnerService.getGroupInfo(gid);
   }
 
   @OpenAPI({ summary: '그룹참가 요청 리스트를 가져오는 API' })
@@ -53,7 +53,7 @@ export class GroupOwnerController {
   @Get('/apply/:gid')
   public async getApplyList(@Session() session: any, @Params() { gid }: GroupParam) {
     await this.groupService.checkGroupOwner(session.user.id, gid);
-    return await this.groupOwnerService.getApplyListByGroupId(gid);
+    return await this.groupOwnerService.getApplyList(gid);
   }
 
   @OpenAPI({ summary: '그룹의 제목을 변경하는 API' })
