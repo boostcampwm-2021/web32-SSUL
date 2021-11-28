@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
+import { GroupState } from '../models/Group';
 import { GroupEnrollment, GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 @Service()
@@ -27,5 +28,9 @@ export class GroupEnrollmentRepository extends Repository<GroupEnrollment> {
     return this.findOne({
       where: { groupId, userId },
     });
+  }
+
+  findGroupByUserIdAndStatus(userId: number, status: GroupState) {
+    return this.find({ relations: ['group'], where: { userId, group: { status } } });
   }
 }

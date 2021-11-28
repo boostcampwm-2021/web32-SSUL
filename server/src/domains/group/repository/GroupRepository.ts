@@ -1,4 +1,4 @@
-import { Group } from '../models/Group';
+import { Group, GroupState } from '../models/Group';
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
 
@@ -57,14 +57,6 @@ export class GroupRepository extends Repository<Group> {
       .addSelect(['category.name'])
       .addSelect(['user.name', 'user.feverStack', 'user.avatarUrl', 'user.githubId'])
       .where('group.name like :filterdName', { filterdName: `%${name}%` })
-      .getMany();
-  }
-
-  public async findEndGroupByUserId(userId: number) {
-    return await this.createQueryBuilder('group')
-      .innerJoinAndSelect('group.groupEnrollments', 'group_enrollment')
-      .where('group.status = :status', { status: 'END' })
-      .andWhere('group_enrollment.user = :userId', { userId })
       .getMany();
   }
 

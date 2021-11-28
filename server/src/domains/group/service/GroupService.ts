@@ -3,11 +3,10 @@ import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
-import { UserRepository } from '@domains/user/repository/UserRepository';
 
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupDetailDto } from '../dto/groupDto';
-import { GroupUserDto } from '@domains/user/dto/UserDto';
+import { GroupUserDto } from '@domains/user/dto/GroupUserDto';
 
 import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
@@ -26,6 +25,7 @@ import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
 import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
+import { GroupActivityDto } from '../dto/GroupActivityDto';
 
 const EACH_PAGE_CNT = 12;
 
@@ -120,11 +120,11 @@ export class GroupService {
   }
 
   public async getEndGroupList(userId: number) {
-    const res = await this.groupRepository.findEndGroupByUserId(userId);
-
-    return res.map(({ name, startAt, endAt }) => {
-      return { name, startAt, endAt };
-    });
+    const endGroupList = await this.groupEnrollmentRepository.findGroupByUserIdAndStatus(
+      userId,
+      GroupState.END,
+    );
+    return endGroupList.map((groupEnrollment) => GroupActivityDto.from(groupEnrollment));
   }
 
   public async addGroupMentor(mentorId: number, groupId: number) {

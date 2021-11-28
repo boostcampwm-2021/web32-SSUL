@@ -1,5 +1,5 @@
 import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
-import { GroupUserDto } from '@domains/user/dto/UserDto';
+import { GroupUserDto } from '@domains/user/dto/GroupUserDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
 
 export enum GroupState {
