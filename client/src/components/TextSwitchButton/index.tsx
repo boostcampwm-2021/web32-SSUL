@@ -23,22 +23,22 @@ function TextSwitchButton({
 }: TextSwitchButtonProps): JSX.Element {
   const [selected, setSelected] = useState<LeftOrRight>(defaultSide);
 
-  const leftClickHandler = () => {
+  const handleLeftButtonClick = () => {
     onLeftClick();
     setSelected(LeftOrRight.LEFT);
   };
 
-  const rightClickHandler = () => {
+  const handleRightButtonClick = () => {
     onRightClick();
     setSelected(LeftOrRight.RIGHT);
   };
 
   return (
     <Container>
-      <TextButton selected={LeftOrRight.LEFT === selected} onClick={leftClickHandler}>
+      <TextButton selected={LeftOrRight.LEFT === selected} onClick={handleLeftButtonClick}>
         {leftText}
       </TextButton>
-      <TextButton selected={LeftOrRight.RIGHT === selected} onClick={rightClickHandler}>
+      <TextButton selected={LeftOrRight.RIGHT === selected} onClick={handleRightButtonClick}>
         {rightText}
       </TextButton>
     </Container>
