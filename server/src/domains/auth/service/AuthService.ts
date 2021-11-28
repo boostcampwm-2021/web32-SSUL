@@ -3,7 +3,7 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import axios from 'axios';
 import { UserRepository } from '@domains/user/repository/UserRepository';
 import { GithubUserDto } from '../dto/GithubUserDto';
-import { UserDto } from '@domains/user/dto/UserDto';
+import { UserResponse } from '@domains/user/dto/UserResponse';
 import { BusinessLogicError } from '@common/error/BusinessLogicError';
 import { ErrorCode } from '@error/ErrorCode';
 
@@ -37,20 +37,20 @@ export class AuthService {
       });
       const { login: githubId, name: name, avatar_url: avatarUrl } = userResponse.data;
 
-      return { githubId, name, avatarUrl };
+      return { githubId, name, avatarUrl } as GithubUserDto;
     } catch (err) {
       throw new BusinessLogicError(400, 'github api error', ErrorCode.OAUTH_ERROR);
     }
   }
 
-  public async findOrInsertUser(user: GithubUserDto): Promise<UserDto> {
+  public async findOrInsertUser(user: GithubUserDto): Promise<UserResponse> {
     const { githubId } = user;
     let userData = await this.userRepository.findOneById(githubId);
-    if (!userData) userData = await this.userRepository.insertUser(user);
-    return userData as UserDto;
+    if (!userData) userData = await this.userRepository.insertUser(user.toEntity());
+    return userData;
   }
 
-  public async getUserProfile(id: string): Promise<UserDto> {
-    return (await this.userRepository.findOneById(id)) as UserDto;
+  public async getUser(id: string): Promise<UserResponse> {
+    return (await this.userRepository.findOneById(id)) as UserResponse;
   }
 }

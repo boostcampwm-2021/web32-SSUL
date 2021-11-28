@@ -11,7 +11,7 @@ import {
 import { Inject, Service } from 'typedi';
 import { AuthService } from '../service/AuthService';
 import { GroupService } from '@domains/group/service/GroupService';
-import { UserDto } from '@domains/user/dto/UserDto';
+import { UserResponse } from '@domains/user/dto/UserResponse';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
 import config from '@config/index';
@@ -38,12 +38,12 @@ export class AuthController {
       },
     },
   })
-  @ResponseSchema(UserDto, { description: '유저 세션 정보 있음' })
+  @ResponseSchema(UserResponse, { description: '유저 세션 정보 있음' })
   async getAuthentification(@Session() session: any) {
     if (!session.user) return;
     const { githubId, role } = session.user;
-    const userData = await this.authService.getUserProfile(githubId);
-    return { ...userData, role } as UserDto;
+    const userData = await this.authService.getUser(githubId);
+    return { ...userData, role } as UserResponse;
   }
 
   @Post('/test-login')
@@ -58,7 +58,7 @@ export class AuthController {
 
   @Post('/login/social')
   @OpenAPI({ summary: 'Github OAuth 로그인 API' })
-  @ResponseSchema(UserDto)
+  @ResponseSchema(UserResponse)
   async socialLogin(@Session() session: any, @QueryParam('code') code: string) {
     const accessToken = await this.authService.getGithubAccessToken(code);
     const githubUserData = await this.authService.getGithubUserData(accessToken);
@@ -76,6 +76,7 @@ export class AuthController {
 
   @Get('/logout')
   @OnUndefined(204)
+  @UseBefore(isLoggedIn)
   @OpenAPI({
     summary: '사용자 로그아웃하는 API',
     responses: {
@@ -85,7 +86,7 @@ export class AuthController {
     },
   })
   async postLogout(@Session() session: any) {
-    session.destroy();
+    session.user = null;
   }
 
   @Get('/')

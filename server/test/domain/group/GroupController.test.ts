@@ -243,4 +243,34 @@ describe('그룹 컨트롤러', () => {
       expect(res.statusCode).toBe(400);
     });
   });
+
+  // describe('GET /activity/:uid', () => {
+  //   test('완료한 그룹이 있으면 참여했던 그룹 리스트 출력', async () => {
+  //     //when
+  //     const response = await request(app).get('/api/group/4');
+
+  //     //then
+  //     expect(response.statusCode).toBe(200);
+  //     expect(response.body.length).toBe(1);
+  //     expect(response.body[0].name).toBe('testgroup3');
+  //   });
+
+  //   test('완료한 그룹이 없으면 빈 그룹 리스트 출력', async () => {
+  //     //when
+  //     const response = await request(app).get('/api/group/3');
+
+  //     //then
+  //     expect(response.statusCode).toBe(200);
+  //     expect(response.body.length).toBe(0);
+  //   });
+
+  //   test('잘못된 유저id인 경우 빈 그룹 리스트 출력', async () => {
+  //     //when
+  //     const response = await request(app).get('/api/group/9999');
+
+  //     //then
+  //     expect(response.statusCode).toBe(200);
+  //     expect(response.body.length).toBe(0);
+  //   });
+  // });
 });
