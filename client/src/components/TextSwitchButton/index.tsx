@@ -60,7 +60,7 @@ const TextButton = styled.div<{ selected: boolean }>`
   align-items: center;
   width: 100%;
   color: ${(props) => (props.selected ? '#fff' : props.theme.Primary)};
-  background-color: ${(props) => (props.selected ? props.theme.Primary : '#fff')};
+  background-color: ${(props) => (props.selected ? props.theme.Primary : props.theme.White)};
   border-radius: 16px;
   cursor: pointer;
 `;
