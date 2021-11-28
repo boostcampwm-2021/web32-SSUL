@@ -155,7 +155,7 @@ export interface NotificationData {
   groupId: number;
   type: NotificationTypeEnum;
   createdAt: string;
-  readChk: number;
+  readChk: boolean;
   senderName: string;
   groupName: string;
 }

@@ -19,7 +19,7 @@ export class AlarmService {
   }
 
   public async readAlarm(alarmId: number, userId: number): Promise<void> {
-    if (await this.alarmRepository.existByIdAndReceiverId(alarmId, userId))
+    if (!(await this.alarmRepository.existByIdAndReceiverId(alarmId, userId)))
       throw new AlarmNotFoundError();
     await this.alarmRepository.updateReadCheck(alarmId);
   }
@@ -30,7 +30,7 @@ export class AlarmService {
   }
 
   public async deleteAlarm(alarmId: number, userId: number): Promise<void> {
-    if (await this.alarmRepository.existByIdAndReceiverId(alarmId, userId))
+    if (!(await this.alarmRepository.existByIdAndReceiverId(alarmId, userId)))
       throw new AlarmNotFoundError();
     await this.alarmRepository.delete({ id: alarmId });
   }

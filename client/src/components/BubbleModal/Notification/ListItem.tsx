@@ -10,6 +10,7 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@store/user/globalSlice';
 import { NotificationTypeEnum } from '@constants/enums';
+import { notificationHttpClient } from '@api';
 
 interface Props {
   idx: number;
@@ -26,13 +27,13 @@ function ListItem({ idx, data }: Props): JSX.Element {
     const newList = notificationList.map((notification) => {
       return { ...notification };
     });
-
+    
     switch (data.type) {
       case NotificationTypeEnum.JOIN_GROUP_ACCEPTED:
-        history.push('/group/status');
+        history.push('/group/my');
         break;
       case NotificationTypeEnum.MENTORING_ACCEPTED:
-        history.push('/group/status');
+        history.push('/group/my');
         break;
       case NotificationTypeEnum.JOIN_GROUP_REQUEST:
         history.push(`/group/owner/${data.groupId}`);
@@ -42,7 +43,8 @@ function ListItem({ idx, data }: Props): JSX.Element {
         break;
     }
 
-    newList[idx].readChk = 1;
+    notificationHttpClient.updateNotificationState(data.id);
+    newList[idx].readChk = true;
     dispatch(setNotificationList({ notificationList: newList }));
   };
 
@@ -51,11 +53,12 @@ function ListItem({ idx, data }: Props): JSX.Element {
     const newList = [...notificationList];
 
     //TODO: DELETE API REQUEST
+    notificationHttpClient.deleteNotification(data.id);
     newList.splice(idx, 1);
     dispatch(setNotificationList({ notificationList: newList }));
   };
   return (
-    <Item onClick={handleItemClick} isView={data.readChk !== 0}>
+    <Item onClick={handleItemClick} isView={data.readChk}>
       <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
       <Message data={data} />
       <DeleteButton src={cancelIcon} onClick={handleDeleteButtonClick}></DeleteButton>
