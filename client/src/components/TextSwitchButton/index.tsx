@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { LeftOrRight } from '@components';
+import { LeftOrRight } from '@constants/enums';
 
 interface TextSwitchButtonProps {
   leftText: string;
