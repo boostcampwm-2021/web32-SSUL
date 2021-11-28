@@ -1,5 +1,5 @@
 import { IsArray, IsDateString, IsNumber, IsString } from 'class-validator';
-import { Group } from '../models/Group';
+import { Group } from '../../models/Group';
 import { TechStack } from '@domains/techstack/models/TechStack';
 
 export class CreateGroupDto {

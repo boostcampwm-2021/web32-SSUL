@@ -1,7 +1,7 @@
 import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 import { GroupUserDto } from '@domains/user/dto/GroupUserDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
-import { Group } from '../models/Group';
+import { Group } from '../../models/Group';
 
 export enum GroupState {
   READY = 'READY',
@@ -9,7 +9,7 @@ export enum GroupState {
   END = 'END',
 }
 
-export class GroupDetailDto {
+export class GroupDetailResponse {
   @IsNumber()
   id: number;
   @IsNumber()
@@ -36,7 +36,7 @@ export class GroupDetailDto {
   groupEnrollments: GroupUserDto[];
 
   static from(group: Group) {
-    const dto = new GroupDetailDto();
+    const dto = new GroupDetailResponse();
     dto.id = group.id;
     dto.mentorId = group.mentorId!;
     dto.ownerId = group.ownerId;

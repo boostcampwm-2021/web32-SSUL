@@ -1,7 +1,7 @@
-import { IsDate, IsDateString, IsString } from 'class-validator';
-import { GroupEnrollment } from '../models/GroupEnrollment';
+import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
+import { IsDateString, IsString } from 'class-validator';
 
-export class GroupActivityDto {
+export class GroupActivityResponse {
   @IsString()
   name: string;
   @IsDateString()
@@ -10,7 +10,7 @@ export class GroupActivityDto {
   endAt: Date | null;
 
   static from({ group }: GroupEnrollment) {
-    const dto = new GroupActivityDto();
+    const dto = new GroupActivityResponse();
 
     dto.name = group.name;
     dto.startAt = group.startAt;

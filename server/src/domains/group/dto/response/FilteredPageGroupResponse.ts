@@ -1,9 +1,9 @@
 import { Category } from '@domains/category/models/Category';
+import { Group } from '@domains/group/models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { User } from '@domains/user/models/User';
 import { Type } from 'class-transformer';
 import { IsArray, IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { Group } from '../models/Group';
 
 class TechStackInfo {
   @IsNumber()
@@ -58,7 +58,7 @@ class OwnerInfo {
   }
 }
 
-export class FilteredGroupDto {
+export class FilteredGroup {
   @IsNumber()
   id: number;
   @IsNumber()
@@ -93,7 +93,7 @@ export class FilteredGroupDto {
   ownerInfo: OwnerInfo;
 
   static from(group: Group) {
-    const dto = new FilteredGroupDto();
+    const dto = new FilteredGroup();
     dto.id = group.id;
     dto.mentorId = group.mentorId;
     dto.ownerId = group.ownerId;
@@ -110,14 +110,14 @@ export class FilteredGroupDto {
   }
 }
 
-export class FilteredPageGroupDto {
+export class FilteredPageGroupResponse {
   @IsArray()
-  groups: FilteredGroupDto[];
+  groups: FilteredGroup[];
   @IsNumber()
   totalPages: number;
 
-  static from(groups: FilteredGroupDto[], totalPages: number) {
-    const dto = new FilteredPageGroupDto();
+  static from(groups: FilteredGroup[], totalPages: number) {
+    const dto = new FilteredPageGroupResponse();
     dto.groups = groups;
     dto.totalPages = totalPages;
     return dto;

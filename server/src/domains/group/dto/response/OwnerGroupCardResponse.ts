@@ -1,7 +1,7 @@
 import { Category } from '@domains/category/models/Category';
 import { Type } from 'class-transformer';
 import { IsDate, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { Group } from '../models/Group';
+import { Group } from '../../models/Group';
 
 class CategoryInfo {
   @IsString()

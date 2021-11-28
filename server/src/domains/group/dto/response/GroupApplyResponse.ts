@@ -1,5 +1,5 @@
 import { IsDate, IsNumber, IsString } from 'class-validator';
-import { ApplyGroup } from '../models/ApplyGroup';
+import { ApplyGroup } from '../../models/ApplyGroup';
 
 export class GroupApplyResponse {
   @IsNumber()
