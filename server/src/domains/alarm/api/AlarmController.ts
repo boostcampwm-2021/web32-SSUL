@@ -34,19 +34,19 @@ export class AlarmController {
     return await this.alarmService.getAlarms(session.user.id);
   }
 
-  @Patch('/:aid')
+  @Patch('/:alarmId')
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '알림을 읽음 처리하는 API' })
-  async readAlarm(@Session() session: any, @Params() { aid }: AlarmParams) {
-    await this.alarmService.readAlarm(aid, session.user.id);
+  async readAlarm(@Session() session: any, @Params() { alarmId }: AlarmParams) {
+    await this.alarmService.readAlarm(alarmId, session.user.id);
   }
 
-  @Delete('/:aid')
+  @Delete('/:alarmId')
   @OnUndefined(200)
   @UseBefore(isLoggedIn)
   @OpenAPI({ summary: '알림을 삭제하는 API' })
-  async deleteAlarm(@Session() session: any, @Params() { aid }: AlarmParams) {
-    await this.alarmService.deleteAlarm(aid, session.user.id);
+  async deleteAlarm(@Session() session: any, @Params() { alarmId }: AlarmParams) {
+    await this.alarmService.deleteAlarm(alarmId, session.user.id);
   }
 }
