@@ -1,5 +1,5 @@
-import { IsDate, IsString } from "class-validator";
-import { Group } from "../models/Group";
+import { IsDate, IsString } from 'class-validator';
+import { Group } from '../models/Group';
 
 export class SimpleGroupInfoResponse {
   @IsString()

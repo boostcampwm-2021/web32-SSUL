@@ -15,5 +15,6 @@ export class GroupActivityDto {
     dto.name = group.name;
     dto.startAt = group.startAt;
     dto.endAt = group.endAt;
+    return dto;
   }
 }
