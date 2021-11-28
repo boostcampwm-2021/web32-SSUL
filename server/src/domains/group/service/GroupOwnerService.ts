@@ -1,13 +1,13 @@
 import { Inject, Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
-import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 import { GroupService } from './GroupService';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
+import { SimpleGroupInfoResponse } from '../dto/response/SimpleGroupInfoResponse';
+import { GroupApplyResponse } from '../dto/response/GroupApplyResponse';
 
 @Service()
 export class GroupOwnerService {

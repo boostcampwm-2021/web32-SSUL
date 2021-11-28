@@ -4,26 +4,29 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { GroupEnrollmentRepository } from '../repository/GroupEnrollmentRepository';
 import { GroupTechStackRepository } from '@domains/techstack/repository/GroupTechStackRepository';
 
-import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupDetailDto } from '../dto/GroupDetailDto';
+import { CreateGroupDto } from '../dto/request/CreateGroupDto';
+import { GroupDetailResponse } from '../dto/response/GroupDetailResponse';
 
 import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
-import { FilteredGroupDto, FilteredPageGroupDto } from '../dto/FilteredPageGroupDto';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
 import { GroupInvalidError } from '../error/GroupInvalidError';
 import { DuplicateEnrollmentError } from '../error/DuplicateEnrollmentError';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
-import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
 import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
-import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
-import { GroupActivityDto } from '../dto/GroupActivityDto';
+import {
+  FilteredGroup,
+  FilteredPageGroupResponse,
+} from '../dto/response/FilteredPageGroupResponse';
+import { SimpleGroupCardResponse } from '../dto/response/SimpleGroupCardResponse';
+import { OwnerGroupCardResponse } from '../dto/response/OwnerGroupCardResponse';
+import { GroupActivityResponse } from '../dto/response/GroupActivityResponse';
 
 const EACH_PAGE_CNT = 12;
 
@@ -55,13 +58,13 @@ export class GroupService {
       userId,
       GroupState.END,
     );
-    return endGroupList.map((groupEnrollment) => GroupActivityDto.from(groupEnrollment));
+    return endGroupList.map((groupEnrollment) => GroupActivityResponse.from(groupEnrollment));
   }
 
-  public async getGroupDetail(gid: number): Promise<GroupDetailDto> {
+  public async getGroupDetail(gid: number): Promise<GroupDetailResponse> {
     const groupDetail = await this.groupRepository.findOneById(gid);
     if (!groupDetail || !groupDetail.groupEnrollments.length) throw new GroupInvalidError();
-    return GroupDetailDto.from(groupDetail);
+    return GroupDetailResponse.from(groupDetail);
   }
 
   public async getfilteredPageGroups(
@@ -69,7 +72,7 @@ export class GroupService {
     name: string = '',
     category: number,
     techstack: string,
-  ): Promise<FilteredPageGroupDto> {
+  ): Promise<FilteredPageGroupResponse> {
     const inputTechStackNames = techstack ? techstack.split(',') : [];
     const offset = (page - 1) * EACH_PAGE_CNT;
 
@@ -84,11 +87,11 @@ export class GroupService {
 
     const selectedPageGroups = filteredGroups
       .slice(offset, offset + EACH_PAGE_CNT)
-      .map((group) => FilteredGroupDto.from(group));
+      .map((group) => FilteredGroup.from(group));
 
     const totalPages: number = Math.ceil(selectedPageGroups.length / EACH_PAGE_CNT);
 
-    return FilteredPageGroupDto.from(selectedPageGroups, totalPages);
+    return FilteredPageGroupResponse.from(selectedPageGroups, totalPages);
   }
 
   public async getGroupRole(groupId: number, userId: number) {
