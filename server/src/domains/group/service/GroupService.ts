@@ -9,7 +9,7 @@ import { GroupDetailDto } from '../dto/GroupDetailDto';
 
 import { Group, GroupState } from '../models/Group';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
-import { FilterdGroupDto, FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { FilteredGroupDto, FilteredPageGroupDto } from '../dto/FilteredPageGroupDto';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 
 import { GroupNotFoundError } from '../error/GroupNotFoundError';
@@ -64,12 +64,12 @@ export class GroupService {
     return GroupDetailDto.from(groupDetail);
   }
 
-  public async getFilterdPageGroups(
+  public async getfilteredPageGroups(
     page: number = 1,
     name: string = '',
     category: number,
     techstack: string,
-  ): Promise<FilterdPageGroupDto> {
+  ): Promise<FilteredPageGroupDto> {
     const inputTechStackNames = techstack ? techstack.split(',') : [];
     const offset = (page - 1) * EACH_PAGE_CNT;
 
@@ -84,11 +84,11 @@ export class GroupService {
 
     const selectedPageGroups = filteredGroups
       .slice(offset, offset + EACH_PAGE_CNT)
-      .map((group) => FilterdGroupDto.from(group));
+      .map((group) => FilteredGroupDto.from(group));
 
     const totalPages: number = Math.ceil(selectedPageGroups.length / EACH_PAGE_CNT);
 
-    return FilterdPageGroupDto.from(selectedPageGroups, totalPages);
+    return FilteredPageGroupDto.from(selectedPageGroups, totalPages);
   }
 
   public async getGroupRole(groupId: number, userId: number) {

@@ -19,7 +19,7 @@ import { AlarmService } from '@domains/alarm/service/AlarmService';
 
 import { GroupDetailDto } from '../dto/GroupDetailDto';
 import { GroupParam } from '../dto/GroupParam';
-import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { FilteredPageGroupDto } from '../dto/FilteredPageGroupDto';
 import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
 import { ApplyGroupDto } from '../dto/ApplyGroupDto';
@@ -55,20 +55,20 @@ export class GroupController {
       },
     },
   })
-  @ResponseSchema(FilterdPageGroupDto, { description: '필터링 그룹 조회 결과' })
+  @ResponseSchema(FilteredPageGroupDto, { description: '필터링 그룹 조회 결과' })
   async getAll(
     @QueryParam('page') page: number,
     @QueryParam('name') name: string,
     @QueryParam('category') category: number,
     @QueryParam('techstack') techstack: string,
   ) {
-    const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
+    const filteredGroups: FilteredPageGroupDto = await this.groupService.getfilteredPageGroups(
       page,
       name,
       category,
       techstack,
     );
-    return filterdGroups;
+    return filteredGroups;
   }
 
   @Post('/')

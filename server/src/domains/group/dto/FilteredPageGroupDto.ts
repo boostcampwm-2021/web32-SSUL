@@ -58,7 +58,7 @@ class OwnerInfo {
   }
 }
 
-export class FilterdGroupDto {
+export class FilteredGroupDto {
   @IsNumber()
   id: number;
   @IsNumber()
@@ -93,7 +93,7 @@ export class FilterdGroupDto {
   ownerInfo: OwnerInfo;
 
   static from(group: Group) {
-    const dto = new FilterdGroupDto();
+    const dto = new FilteredGroupDto();
     dto.id = group.id;
     dto.mentorId = group.mentorId;
     dto.ownerId = group.ownerId;
@@ -110,14 +110,14 @@ export class FilterdGroupDto {
   }
 }
 
-export class FilterdPageGroupDto {
+export class FilteredPageGroupDto {
   @IsArray()
-  groups: FilterdGroupDto[];
+  groups: FilteredGroupDto[];
   @IsNumber()
   totalPages: number;
 
-  static from(groups: FilterdGroupDto[], totalPages: number) {
-    const dto = new FilterdPageGroupDto();
+  static from(groups: FilteredGroupDto[], totalPages: number) {
+    const dto = new FilteredPageGroupDto();
     dto.groups = groups;
     dto.totalPages = totalPages;
     return dto;
