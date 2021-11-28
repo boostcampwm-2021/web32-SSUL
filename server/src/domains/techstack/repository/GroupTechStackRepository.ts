@@ -1,4 +1,3 @@
-import { TechStack } from '../models/TechStack';
 import { GroupTechStack } from '../models/GroupTechStack';
 import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';

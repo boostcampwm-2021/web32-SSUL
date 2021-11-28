@@ -60,7 +60,7 @@ export class TechStackService {
       menteeTechStack.techStackId = techStack.id;
       menteeTechStack.name = techStack.name;
 
-      await this.menteeTechStackRepository.createMenteeTechStack(menteeTechStack);
+      await this.menteeTechStackRepository.save(menteeTechStack);
     });
   }
 }
