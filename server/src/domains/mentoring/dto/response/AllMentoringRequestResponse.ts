@@ -1,8 +1,8 @@
 import { Group } from '@domains/group/models/Group';
 import { Type } from 'class-transformer';
 import { IsNumber, IsString, ValidateNested } from 'class-validator';
-import { Mentor } from '../models/Mentor';
-import { MentoringRequest } from '../models/MentoringRequest';
+import { Mentor } from '../../models/Mentor';
+import { MentoringRequest } from '../../models/MentoringRequest';
 
 class MentorInfo {
   @IsString()
@@ -26,7 +26,7 @@ class GroupInfo {
   }
 }
 
-export class MentoringRequestResponse {
+export class AllMentoringRequestResponse {
   @IsNumber()
   id: number;
 
@@ -39,7 +39,7 @@ export class MentoringRequestResponse {
   group: GroupInfo;
 
   static from(mentoringRequest: MentoringRequest) {
-    const dto = new MentoringRequestResponse();
+    const dto = new AllMentoringRequestResponse();
     dto.id = mentoringRequest.id;
     dto.mentor = MentorInfo.from(mentoringRequest.mentor);
     dto.group = GroupInfo.from(mentoringRequest.group);

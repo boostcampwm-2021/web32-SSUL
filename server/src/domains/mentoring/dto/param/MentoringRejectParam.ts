@@ -1,6 +1,6 @@
 import { IsNumber } from 'class-validator';
 
-export class MentorInfoDto {
+export class MentoringRejectParam {
   @IsNumber()
-  mentorId: number;
+  id: number;
 }
