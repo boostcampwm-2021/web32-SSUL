@@ -7,6 +7,7 @@ import { MentorRepository } from '../repository/MentorRepository';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
 
 import { Mentor } from '../models/Mentor';
+import { Group } from '@domains/group/models/Group';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
@@ -77,14 +78,14 @@ export class MentoringService {
     techstack: string = '',
   ) {
     const namefilteredAllMentor = await this.mentorRepository.findAllByName(name);
-    const techStackfilteredAllMentor = this.filteredBytechStacks(namefilteredAllMentor, techstack);
+    const techStackfilteredAllMentor = this.filteredByTechStacks(namefilteredAllMentor, techstack);
     const offset = (page - 1) * EACH_PAGE_CNT;
     const filteredPageMentors = techStackfilteredAllMentor.slice(offset, offset + EACH_PAGE_CNT);
     const totalPages: number = Math.ceil(filteredPageMentors.length / EACH_PAGE_CNT);
     return { mentors: filteredPageMentors, totalPages };
   }
 
-  public filteredBytechStacks(mentors: Mentor[], filteredTechstack: string) {
+  public filteredByTechStacks(mentors: Mentor[], filteredTechstack: string) {
     if (!filteredTechstack) return mentors;
     const filteredTechstacks = filteredTechstack.split(',');
     return mentors
@@ -115,10 +116,11 @@ export class MentoringService {
     if (mentoringRequest) throw new MentorAlreadyRequestError();
 
     const mentor = new Mentor();
-    mentor.id = mentorId;
-    const group = new Mentor();
-    group.id = groupId;
+    const group = new Group();
     const createdAt = new Date();
+
+    mentor.id = mentorId;
+    group.id = groupId;
 
     const queryResult = await this.mentoringRequestRepository.save({
       createdAt,

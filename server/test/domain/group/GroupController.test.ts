@@ -1,4 +1,4 @@
-import { SimpleGroupCardResponse } from '@domains/group/dto/SimpleGroupCardResponse';
+import { SimpleGroupCardResponse } from '@domains/group/dto/response/SimpleGroupCardResponse';
 import { ApplyGroupState } from '@domains/group/models/ApplyGroup';
 import { GroupState } from '@domains/group/models/Group';
 import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';

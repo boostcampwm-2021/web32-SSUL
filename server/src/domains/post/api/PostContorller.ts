@@ -17,13 +17,13 @@ import { Inject, Service } from 'typedi';
 import { GroupService } from '@domains/group/service/GroupService';
 import { PostService } from '../service/PostService';
 
-import { GroupParam } from '@domains/group/dto/GroupParam';
 import { PostParam } from '../dto/PostParam';
 import { GroupPostParam } from '../dto/GroupPostParam';
 import { PostResponse } from '../dto/PostResponse';
 import { PostContentDto } from '../dto/PostContentDto';
 import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { GroupParam } from '@domains/group/dto/param/GroupParam';
 
 @OpenAPI({
   tags: ['게시글'],

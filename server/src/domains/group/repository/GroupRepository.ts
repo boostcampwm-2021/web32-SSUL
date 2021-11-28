@@ -23,7 +23,7 @@ export class GroupRepository extends Repository<Group> {
     });
   }
 
-  public async findOneById(groupId: number) {
+  public findOneById(groupId: number) {
     return this.findOne({
       relations: ['techStacks', 'groupEnrollments', 'user'],
       where: { id: groupId },
