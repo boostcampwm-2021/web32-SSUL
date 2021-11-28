@@ -90,7 +90,7 @@ const NotificationCircle = styled.div`
   margin-right: -4px;
   width: 10px;
   height: 10px;
-  background-color: ${(props) => props.theme.Fever};
+  background-color: ${(props) => props.theme.Primary};
   border-radius: 50%;
 `;
 const NotificationButton = styled.img`

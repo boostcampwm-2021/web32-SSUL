@@ -9,14 +9,11 @@ import { selectNotficationList, setNotificationList } from '@store/notification/
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@store/user/globalSlice';
+import { NotificationTypeEnum } from '@constants/enums';
 
 interface Props {
   idx: number;
   data: NotificationData;
-}
-
-interface StyledProps {
-  isView: boolean;
 }
 
 function ListItem({ idx, data }: Props): JSX.Element {
@@ -25,22 +22,22 @@ function ListItem({ idx, data }: Props): JSX.Element {
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
 
-  const handleItemClick = (e: React.MouseEvent) => {
+  const handleItemClick = () => {
     const newList = notificationList.map((notification) => {
       return { ...notification };
     });
 
     switch (data.type) {
-      case 'JOIN_GROUP_ACCEPTED':
+      case NotificationTypeEnum.JOIN_GROUP_ACCEPTED:
         history.push('/group/status');
         break;
-      case 'MENTORING_ACCEPTED':
+      case NotificationTypeEnum.MENTORING_ACCEPTED:
         history.push('/group/status');
         break;
-      case 'JOIN_GROUP_REQUEST':
+      case NotificationTypeEnum.JOIN_GROUP_REQUEST:
         history.push(`/group/owner/${data.groupId}`);
         break;
-      case 'MENTORING_REQUEST':
+      case NotificationTypeEnum.MENTORING_REQUEST:
         history.push(`/profile/${user.oAuthId}`);
         break;
     }
@@ -66,16 +63,18 @@ function ListItem({ idx, data }: Props): JSX.Element {
   );
 }
 
-const Item = styled.div`
+interface StyledProps {
+  isView: boolean;
+}
+
+const Item = styled.div<StyledProps>`
   display: flex;
   align-items: center;
   width: 100%;
   height: 60px;
   padding: 12px 15px 12px 15px;
   font-size: 0.8em;
-  color: ${(props) =>
-    ({ isView }: StyledProps) =>
-      isView ? props.theme.Gray4 : props.theme.Gray2};
+  color: ${(props) => (props.isView ? props.theme.Gray4 : props.theme.Gray2)};
   box-sizing: border-box;
   border: 1px solid ${(props) => props.theme.Gray6};
   cursor: pointer;

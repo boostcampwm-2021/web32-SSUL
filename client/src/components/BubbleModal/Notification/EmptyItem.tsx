@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import SearchIcon from '@assets/icon_search.png';
+import { NOTIFICATION_EMPTY_MESSAGE } from '@constants/consts';
 
 function EmptyItem(): JSX.Element {
   return (
     <Container>
-      <Icon src={SearchIcon} />
-      <EmptyText>아직 알림이 없어요...</EmptyText>
+      <EmptyText>{NOTIFICATION_EMPTY_MESSAGE}</EmptyText>
     </Container>
   );
 }
@@ -16,10 +15,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Icon = styled.img`
-  width: 15px;
-  height: 15px;
-`;
+
 const EmptyText = styled.p`
   margin: 0;
   margin-left: 10px;

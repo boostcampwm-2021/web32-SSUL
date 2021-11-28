@@ -1,40 +1,40 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NotificationData } from '@types';
+import {
+  NOTIFICATION_GROUP_ACCEPT,
+  NOTIFICATION_GROUP_APPLY,
+  NOTIFICATION_GROUP_DECLINE,
+  NOTIFICATION_MENTOR_ACCEPT,
+  NOTIFICATION_MENTOR_APPLY,
+  NOTIFICATION_MENTOR_DECLINE,
+} from '@constants/consts';
+import { applyText, resultText } from '@utils/Notification';
+import { NotificationTypeEnum } from '@constants/enums';
 
 interface Props {
   data: NotificationData;
 }
 
-const MAX_NAME_LENGTH = 10;
-
 function Message({ data }: Props): JSX.Element {
-  const getText = () => {
+  const getNotificationString = () => {
     switch (data.type) {
-      case 'JOIN_GROUP_ACCEPTED':
-        return resultText(data.groupName, '그룹참여가', '승인');
-      case 'JOIN_GROUP_DECLINED':
-        return resultText(data.groupName, '그룹참여가', '거절');
-      case 'MENTORING_ACCEPTED':
-        return resultText(data.groupName, '멘토요청이', '수락');
-      case 'METTORING_DECLIEND':
-        return resultText(data.groupName, '멘토요청이', '거절');
-      case 'JOIN_GROUP_REQUEST':
-        return applyText(data.senderName, '그룹참가 요청을');
-      case 'MENTORING_REQUEST':
-        return applyText(data.senderName, '그룹 멘토 요청을');
+      case NotificationTypeEnum.JOIN_GROUP_ACCEPTED:
+        return resultText(data.groupName, NOTIFICATION_GROUP_ACCEPT);
+      case NotificationTypeEnum.JOIN_GROUP_DECLINED:
+        return resultText(data.groupName, NOTIFICATION_GROUP_DECLINE);
+      case NotificationTypeEnum.MENTORING_ACCEPTED:
+        return resultText(data.groupName, NOTIFICATION_MENTOR_ACCEPT);
+      case NotificationTypeEnum.METTORING_DECLIEND:
+        return resultText(data.groupName, NOTIFICATION_MENTOR_DECLINE);
+      case NotificationTypeEnum.JOIN_GROUP_REQUEST:
+        return applyText(data.senderName, NOTIFICATION_GROUP_APPLY);
+      case NotificationTypeEnum.MENTORING_REQUEST:
+        return applyText(data.senderName, NOTIFICATION_MENTOR_APPLY);
     }
   };
 
-  const getFixedLengthName = (name: string) =>
-    name.length > MAX_NAME_LENGTH ? `"${name.slice(0, MAX_NAME_LENGTH)}..."` : `"${name}"`;
-
-  const resultText = (name: string, what: string, result: string) =>
-    `${getFixedLengthName(name)} \n${what} ${result} 되었습니다.`;
-
-  const applyText = (name: string, what: string) => `"${name}" 님이\n${what} 보냈습니다.`;
-
-  return <Container>{getText()}</Container>;
+  return <Container>{getNotificationString()}</Container>;
 }
 
 const Container = styled.span`

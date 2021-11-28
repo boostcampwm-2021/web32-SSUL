@@ -17,3 +17,12 @@ export const MSG_NOT_JOIN_ERROR = '아직 가입되지 않은 그룹이에요ㅠ
 // 디스크립션
 export const DESC_NOT_FOUND = '404 NOT FOUND';
 export const DESC_BAD_ACCESS = '4XX BAD ACCESS';
+
+// 알람 메세지
+export const NOTIFICATION_GROUP_ACCEPT = '그룹참여가 승인 되었습니다.';
+export const NOTIFICATION_GROUP_DECLINE = '그룹참여가 거절 되었습니다';
+export const NOTIFICATION_MENTOR_ACCEPT = '멘토요청이 승인 되었습니다.';
+export const NOTIFICATION_MENTOR_DECLINE = '멘토요청이 거절 되었습니다.';
+export const NOTIFICATION_GROUP_APPLY = '그룹 참가 요청을 보냈습니다.';
+export const NOTIFICATION_MENTOR_APPLY = '그룹 멘토 요청을 보냈습니다.';
+export const NOTIFICATION_EMPTY_MESSAGE = '아직 알림이 없어요...';
