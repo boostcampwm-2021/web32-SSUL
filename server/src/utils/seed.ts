@@ -10,6 +10,7 @@ import { Mentor } from '@domains/mentoring/models/Mentor';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
 import { Post } from '@domains/post/models/Post';
 import { ApplyGroup } from '@domains/group/models/ApplyGroup';
+import { Alarm } from '@domains/alarm/models/Alarm';
 
 import {
   catagorySeedData,
@@ -23,6 +24,7 @@ import {
   applyGroupSeedData,
   mentorTechStackSeedData,
   mentoringRequestSeedData,
+  alarmSeedData,
 } from '@root/db_seed';
 import { MentorTechStack } from '@domains/techstack/models/MentorTechStack';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
@@ -82,4 +84,5 @@ async function seedDatabase(connection: Connection) {
     .into(MentoringRequest)
     .values(mentoringRequestSeedData)
     .execute();
+  await connection.createQueryBuilder().insert().into(Alarm).values(alarmSeedData).execute();
 }

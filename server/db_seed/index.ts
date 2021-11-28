@@ -9,3 +9,4 @@ export { default as postSeedData } from './post.json';
 export { default as applyGroupSeedData } from './apply_group.json';
 export { default as mentorTechStackSeedData } from './mentor_tech_stack.json';
 export { default as mentoringRequestSeedData } from './mentoring_request.json';
+export { default as alarmSeedData } from './alram.json';

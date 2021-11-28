@@ -7,7 +7,7 @@ import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 import { GroupService } from './GroupService';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
-import { ApplyGroupState } from '../models/ApplyGroup';
+import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 
 @Service()
 export class GroupOwnerService {
@@ -44,7 +44,7 @@ export class GroupOwnerService {
   public updateGroupIntro(gid: number, intro: string) {
     return this.groupRepository.update({ id: gid }, { intro });
   }
-  public async acceptRequest(applyId: number, ownerId: number) {
+  public async acceptRequest(applyId: number, ownerId: number): Promise<ApplyGroup> {
     const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
     if (applyGroup.group.ownerId !== ownerId) {
@@ -54,9 +54,10 @@ export class GroupOwnerService {
     applyGroup.state = ApplyGroupState.ACCEPTED;
     await this.groupService.enroll(applyGroup.groupId, applyGroup.userId, GroupEnrollmentAs.MENTEE);
     await this.applyGroupRepository.save(applyGroup);
+    return applyGroup;
   }
 
-  public async declineRequest(applyId: number, ownerId: number) {
+  public async declineRequest(applyId: number, ownerId: number): Promise<ApplyGroup> {
     const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
     if (applyGroup.group.ownerId !== ownerId) {
@@ -64,5 +65,6 @@ export class GroupOwnerService {
     }
     applyGroup.state = ApplyGroupState.DECLINED;
     await this.applyGroupRepository.save(applyGroup);
+    return applyGroup;
   }
 }

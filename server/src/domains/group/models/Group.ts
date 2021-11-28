@@ -6,6 +6,7 @@ import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { Category } from '@domains/category/models/Category';
 import { User } from '@domains/user/models/User';
 import { Post } from '../../post/models/Post';
+import { Alarm } from '@domains/alarm/models/Alarm';
 
 export enum GroupState {
   READY = 'READY',
@@ -70,4 +71,7 @@ export class Group {
 
   @OneToMany(() => Post, (post) => post.group)
   posts: Post[];
+
+  @OneToMany(() => Alarm, (alarm) => alarm.group)
+  alarms: Alarm[];
 }

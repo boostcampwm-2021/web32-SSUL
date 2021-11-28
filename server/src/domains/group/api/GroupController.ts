@@ -15,6 +15,7 @@ import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 
 import { GroupService } from '../service/GroupService';
+import { AlarmService } from '@domains/alarm/service/AlarmService';
 
 import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
@@ -27,6 +28,8 @@ import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
 import { GroupRoleResponse } from '../dto/GroupRoleResponse';
 import { ApplyedGroupQuery } from '../dto/ApplyedGroupQuery';
 import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
+import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
+import { AlarmType } from '@domains/alarm/models/Alarm';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -37,6 +40,8 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
+    @Inject()
+    private readonly alarmService: AlarmService,
   ) {}
 
   @Get('/')
@@ -129,7 +134,8 @@ export class GroupController {
   })
   async applyGroup(@Body() { groupId, userId }: ApplyGroupDto) {
     await this.groupService.checkApplyGroup(groupId, userId);
-    await this.groupService.addApplyGroup(groupId, userId);
+    const applyGroup = await this.groupService.addApplyGroup(groupId, userId);
+    await this.alarmService.postAlarm(AlarmDto.fromApply(applyGroup, AlarmType.JOIN_GROUP_REQUEST));
   }
 
   @OnUndefined(200)
