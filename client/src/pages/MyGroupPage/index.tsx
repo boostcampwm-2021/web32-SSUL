@@ -4,13 +4,9 @@ import { useLoader } from '@hooks';
 import { groupHttpClient } from '@api';
 import { ApplyState, GroupState, SimpleGroupCardData } from '@types';
 import SimpleGroupCardList from './SimpleGroupCardList';
-import { TextSwitchButton, LeftOrRight } from '@components';
+import { TextSwitchButton } from '@components';
 import qs from 'qs';
-
-enum MentorOrMentee {
-  MENTOR = 'MENTOR',
-  MENTEE = 'MENTEE',
-}
+import { LeftOrRight, MentorOrMentee } from '@constants/enums';
 
 interface MyGroups {
   MENTOR: SimpleGroupCardData[];
@@ -22,7 +18,6 @@ function MyGroupPage(): JSX.Element {
   const [applyedGroups, setApplyedGroups] = useState<SimpleGroupCardData[]>([]);
   const [ownGroups, setOwnGroups] = useState<SimpleGroupCardData[]>([]);
   const [myGroups, setMyGroups] = useState<MyGroups>({ MENTOR: [], MENTEE: [] });
-
   const [toggleLoader, isLoading] = useLoader();
 
   const fetchApplyedGroups = async (state: ApplyState) => {

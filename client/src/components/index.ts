@@ -10,5 +10,5 @@ export { default as SearchBar } from './SearchBar';
 export { default as GroupCard } from './GroupCard';
 export { default as Pagination } from './Pagination';
 export { default as MentorCard } from './MentorCard';
-export { default as DatePicker} from './DatePicker';
-export { default as TextSwitchButton, LeftOrRight } from './TextSwitchButton';
+export { default as DatePicker } from './DatePicker';
+export { default as TextSwitchButton } from './TextSwitchButton';

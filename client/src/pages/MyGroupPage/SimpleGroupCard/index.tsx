@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { SimpleGroupCardData } from '@types';
 import { useToast } from '@hooks';
 import { ToastMessageEnum } from '@constants/enums';
+import { MSG_NOT_JOIN_ERROR } from '@constants/consts';
 
 interface SimpleGroupCardProps {
   group: SimpleGroupCardData;
@@ -21,7 +22,7 @@ function SimpleGroupCard(props: SimpleGroupCardProps): JSX.Element {
     if (isClickable) {
       history.push(`/group/${id}`);
     } else {
-      notify('아직 가입되지 않은 그룹이에요ㅠㅠ', ToastMessageEnum.ERROR);
+      notify(MSG_NOT_JOIN_ERROR, ToastMessageEnum.ERROR);
     }
   };
 
