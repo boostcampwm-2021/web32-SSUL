@@ -8,19 +8,6 @@ export enum GroupState {
   END = 'END',
 }
 
-export interface Group {
-  id: number;
-  mentorId: number;
-  ownerId: number;
-  name: string | null;
-  maxUserCnt: number | null;
-  curUserCnt: number | null;
-  intro: string | null;
-  startAt: Date | null;
-  endAt: Date | null;
-  status: GroupState;
-}
-
 export class GroupDetailDto {
   @IsNumber()
   id: number;
@@ -46,4 +33,21 @@ export class GroupDetailDto {
   techStacks: GroupUsingTechStackDto[];
   @IsArray()
   groupEnrollments: GroupUserDto[];
+}
+
+export class GroupParam {
+  @IsNumber()
+  gid: number;
+}
+
+export class GroupPostParam {
+  @IsNumber()
+  gid: number;
+  @IsNumber()
+  pid: number;
+}
+
+export class PostParam {
+  @IsNumber()
+  pid: number;
 }

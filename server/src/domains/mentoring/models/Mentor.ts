@@ -1,4 +1,4 @@
-import { JoinColumn, Entity, OneToOne, OneToMany, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, OneToOne, OneToMany, PrimaryGeneratedColumn, Column, JoinColumn } from 'typeorm';
 import { MentoringRequest } from './MentoringRequest';
 import { User } from '@domains/user/models/User';
 import { MentorTechStack } from '@domains/techstack/models/MentorTechStack';
@@ -11,6 +11,7 @@ export class Mentor {
   @Column('int', { name: 'user_id' })
   userId: number;
 
+  @JoinColumn({ name: 'user_id' })
   @OneToOne(() => User)
   user: User;
 

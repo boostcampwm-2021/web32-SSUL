@@ -1,0 +1,23 @@
+import { IsDate, IsNumber, IsString, IsEnum, MaxLength, MinLength } from 'class-validator';
+import { PostType } from '../models/Post';
+
+export class PostResponse {
+  @IsNumber()
+  id: number;
+  @IsNumber()
+  groupId: number;
+  @IsNumber()
+  userId: number;
+  @IsString()
+  writer: string;
+  @IsString()
+  title: string;
+  @IsString()
+  content: string;
+  @IsDate()
+  createdAt: Date | null;
+  @IsEnum(PostType)
+  type: PostType;
+  @IsNumber()
+  hit: number;
+}

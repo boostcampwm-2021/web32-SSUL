@@ -12,7 +12,9 @@ interface Props {
 const selectModalComponent = (type: string): JSX.Element | undefined => {
   switch (type) {
     case 'POST':
-      return <PostModal />;
+      return <PostModal mode={type} />;
+    case 'UPDATE':
+      return <PostModal mode={type} />;
     case 'READ':
       return <ReadModal />;
   }
@@ -27,7 +29,7 @@ function GroupPageModal({ type }: Props): JSX.Element {
     <>
       {type !== 'NONE' && (
         <BoxModal
-          style={{ height: '480px' }}
+          style={{ height: '520px' }}
           element={modalElement}
           onCancel={handleClickModalBackground}
         />

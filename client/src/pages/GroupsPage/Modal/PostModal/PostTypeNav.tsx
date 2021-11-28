@@ -14,7 +14,7 @@ interface Props {
 
 const typeButtons: PostTypeButton[] = [
   { type: 'NORMAL', content: '일반', color: 'Green' },
-  { type: 'NOTI', content: '공지', color: 'Red' },
+  { type: 'NOTICE', content: '공지', color: 'Red' },
 ];
 
 function PostTypeNav({ selectedType, handlePostNavItemClick }: Props): JSX.Element {

@@ -1,3 +1,4 @@
+import { NotificationTypeEnum } from '@constants/enums';
 import { GroupEnrollment, GroupUsingTechStack, TechStack } from '@types';
 
 export interface ExampleInterface {
@@ -87,4 +88,74 @@ export interface GroupDetailData {
   status: string;
   usingTechStacks: GroupUsingTechStack[];
   groupEnrollments: GroupEnrollment[];
+}
+
+export interface GroupApplyData {
+  groupId: number;
+  userId?: number;
+}
+
+export type RequestBody = ExampleInterface | GroupCreateInterface | null;
+
+export interface GroupPostDto {
+  id: number;
+  groupId: number;
+  userId: number;
+  title: string;
+  content: string;
+  createdAt: Date | null;
+  type: string;
+  hit: number;
+}
+
+export interface GroupPostRequestDto {
+  id?: number;
+  groupId: number;
+  title: string;
+  content: string;
+  type: string;
+}
+
+export interface SimpleGroupInfoResponse {
+  name: string;
+  intro: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface UpdateGroupNameData {
+  gid: number;
+  name: string;
+}
+
+export interface UpdateGroupDateData {
+  gid: number;
+  startAt: string;
+  endAt: string;
+}
+
+export interface UpdateGroupIntroData {
+  gid: number;
+  intro: string;
+}
+
+export interface ParticipationRequest {
+  id: number;
+  name: string;
+  githubId: string;
+  avatarUrl: string;
+  feverStack: number;
+  createdAt: Date;
+}
+
+export interface NotificationData {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  groupId: number;
+  type: NotificationTypeEnum;
+  createdAt: string;
+  readChk: boolean;
+  senderName: string;
+  groupName: string;
 }

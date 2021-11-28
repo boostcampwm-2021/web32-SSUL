@@ -1,12 +1,20 @@
-import styled from '@emotion/styled';
 import React from 'react';
-import AntDatePicker from './AntDatePicker';
+import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
+import { DatePicker } from '@components';
 
 function DateInput(): JSX.Element {
+  const { startAt, endAt } = useAppSelector(groupCreateDataState);
+  const dispatch = useAppDispatch();
+  const setDate = (startAt: string, endAt: string) => {
+    dispatch(setGroupData({ startAt, endAt }));
+  };
+
   return (
     <>
       <Title>시작일, 종료일을 선택해주세요.</Title>
-      <AntDatePicker />
+      <DatePicker startAt={startAt} endAt={endAt} setDate={setDate} />
     </>
   );
 }

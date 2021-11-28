@@ -1,12 +1,13 @@
 import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { User } from '@domains/user/models/User';
+import { Group } from '@domains/group/models/Group';
 
 export enum AlarmType {
   JOIN_GROUP_REQUEST = 'JOIN_GROUP_REQUEST',
   MENTORING_REQUEST = 'MENTORING_REQUEST',
   JOIN_GROUP_ACCEPTED = 'JOIN_GROUP_ACCEPTED',
-  JOIN_GROUP_DECLINED = 'JOIN_GROUP_DECLINED',
   MENTORING_ACCEPTED = 'MENTORING_ACCEPTED',
+  JOIN_GROUP_DECLINED = 'JOIN_GROUP_DECLINED',
   METTORING_DECLIEND = 'METTORING_DECLIEND',
 }
 
@@ -15,27 +16,33 @@ export class Alarm {
   @PrimaryGeneratedColumn({ name: 'alarm_id' })
   id: number;
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'sender_id' })
+  @Column({ name: 'sender_id' })
   senderId: number;
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'reciever_id' })
-  recieverId: number;
+  @Column({ name: 'receiver_id' })
+  receiverId: number;
 
-  @Column({
-    name: 'type',
-    type: 'enum',
-    enum: AlarmType,
-  })
-  type: AlarmType;
+  @Column({ name: 'group_id' })
+  groupId: number;
 
-  @Column('varchar', { name: 'content', nullable: true, length: 255 })
-  content: string | null;
+  @Column('varchar', { name: 'type', length: 100 })
+  type: AlarmType | string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
 
   @Column('tinyint', { name: 'read_chk', nullable: true, width: 1 })
   readChk: boolean | null;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'sender_id' })
+  sender: User;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'receiver_id' })
+  receiver: User;
+
+  @ManyToOne(() => Group)
+  @JoinColumn({ name: 'group_id' })
+  group: Group;
 }

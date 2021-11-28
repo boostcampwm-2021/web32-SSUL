@@ -1,4 +1,4 @@
-import { IsDateString, IsNumber, IsString } from "class-validator";
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class MentoringRequestListDto {
   @IsNumber()
@@ -12,5 +12,11 @@ export class MentoringRequestListDto {
   @IsString()
   ownerName: string;
   @IsDateString()
-  createdAt: string
+  createdAt: string;
+}
+
+export class MentoringRequestParam {
+  @IsOptional()
+  @IsNumber()
+  mid: number;
 }

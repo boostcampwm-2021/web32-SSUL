@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "groupId": 1,
+    "userId": 1,
+    "title": "그룹장이 쓴글",
+    "content": "내용은 뭐 별거 없습니다만",
+    "createdAt": "2021-11-17 12:06:55",
+    "type": "NOTICE",
+    "hit": 0
+  },
+  {
+    "id": 2,
+    "groupId": 1,
+    "userId": 2,
+    "title": "멘티가 쓴글",
+    "content": "멘티멘티멘티",
+    "createdAt": "2021-11-18 12:06:55",
+    "type": "NORMAL",
+    "hit": 0
+  },
+  {
+    "id": 3,
+    "groupId": 1,
+    "userId": 4,
+    "title": "판교로가는 유찬좌..",
+    "content": "GAZAAAAAAAAAAAAA",
+    "createdAt": "2021-11-19 12:06:55",
+    "type": "NORMAL",
+    "hit": 0
+  }
+]

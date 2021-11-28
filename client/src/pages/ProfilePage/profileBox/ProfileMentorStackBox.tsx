@@ -40,7 +40,9 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
             </MentoringRequestButton>
             <TechStackContainer>
               {profile.mentoringStack.map((techStack) => (
-                <TechStackItem key={techStack.id}>{techStack.name}</TechStackItem>
+                <TechStackItem data-test="mentor-techstack" key={techStack.id}>
+                  {techStack.name}
+                </TechStackItem>
               ))}
             </TechStackContainer>
           </ProfileContainer>

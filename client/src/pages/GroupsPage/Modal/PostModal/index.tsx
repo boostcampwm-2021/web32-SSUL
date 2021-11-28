@@ -1,30 +1,108 @@
-import React, { useState } from 'react';
-import PostTypeNav from './PostTypeNav';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, ChangeEvent } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch } from '@hooks';
+import { postHttpClient } from '@api';
+import { GroupPostRequestDto } from '@types';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
+import { selectGroupDetail } from '@store/group/detailSlice';
+import { setPosts, selectChoosenPost } from '@store/group/postSlice';
+import PostTypeNav from './PostTypeNav';
+import {
+  MSG_NEED_INFO,
+  MSG_POST_CREATE_SUCCESS,
+  MSG_POST_CREATE_ERROR,
+  MSG_POST_UPDATE_SUCCESS,
+  MSG_POST_UPDATE_ERROR,
+} from '@constants/consts';
 import CancelIcon from '@assets/icon_cancel.png';
 
-function PostModal(): JSX.Element {
+interface Props {
+  mode: string;
+}
+
+function PostModal({ mode }: Props): JSX.Element {
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
+  const group = useAppSelector(selectGroupDetail);
+  const post = useAppSelector(selectChoosenPost);
+  const [title, setTitle] = useState<string>((mode === 'UPDATE' ? post?.title : '') as string);
+  const [content, setContent] = useState<string>(
+    (mode === 'UPDATE' ? post?.content : '') as string,
+  );
   const [selectedType, setSelectedType] = useState<string>('NORMAL');
+  const isCompleted = title.length > 0 && content.length > 0;
+
   const handlePostNavItemClick =
     (type: string): (() => void) =>
     () =>
       setSelectedType(type);
+
+  const handleTitleInputChange = ({ target }: ChangeEvent<EventTarget & HTMLInputElement>) => {
+    setTitle(target.value);
+  };
+
+  const handleContentInputChange = ({ target }: ChangeEvent<EventTarget & HTMLTextAreaElement>) => {
+    setContent(target.value);
+  };
+
+  const handlePostButtonClick = async () => {
+    if (!isCompleted) {
+      toastify(MSG_NEED_INFO, 'INFO');
+      return;
+    }
+
+    try {
+      const postData: GroupPostRequestDto = {
+        id: mode === 'POST' ? undefined : post?.id,
+        groupId: group.id,
+        title,
+        content,
+        type: selectedType,
+      };
+
+      if (mode === 'POST') {
+        await postHttpClient.createPost(postData);
+        toastify(MSG_POST_CREATE_SUCCESS, 'SUCCESS');
+      } else if (mode === 'UPDATE') {
+        await postHttpClient.updatePost(postData);
+        toastify(MSG_POST_UPDATE_SUCCESS, 'SUCCESS');
+      }
+
+      dispatch(changeGroupModalState('NONE'));
+      const groupPosts = await postHttpClient.getGroupPosts(group.id);
+      dispatch(setPosts(groupPosts));
+    } catch (e: any) {
+      if (mode === 'POST') toastify(MSG_POST_CREATE_ERROR, 'ERROR');
+      else if (mode === 'UPDATE') toastify(MSG_POST_UPDATE_ERROR, 'ERROR');
+    }
+  };
+
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
+  if (!post && mode === 'UPDATE') return <></>;
   return (
     <Container>
       <Header>
-        <Title>글쓰기</Title>
+        <Title>{mode === 'UPDATE' ? '글수정' : '글쓰기'}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
       <Content>
         <PostTypeNav selectedType={selectedType} handlePostNavItemClick={handlePostNavItemClick} />
-        <TextInput placeholder="내용을 입력하세요." />
+        <TitleInput
+          onChange={handleTitleInputChange}
+          value={title}
+          placeholder="제목을 입력하세요."
+        ></TitleInput>
+        <ContentInput
+          onChange={handleContentInputChange}
+          value={content}
+          placeholder="내용을 입력하세요."
+        ></ContentInput>
       </Content>
-      <PostButton>작성</PostButton>
+      <PostButton active={isCompleted} onClick={handlePostButtonClick}>
+        {mode === 'UPDATE' ? '수정' : '작성'}
+      </PostButton>
     </Container>
   );
 }
@@ -61,17 +139,35 @@ const CancelButton = styled.img`
 const Content = styled.div`
   padding: 12px;
 `;
-const TextInput = styled.textarea`
+const TitleInput = styled.input`
+  width: 100%;
+  height: 36px;
+  padding: 8px 12px 8px 12px;
+  border: 0.025rem solid ${(props) => props.theme.Gray5};
+  border-radius: 18px;
+  margin-bottom: 12px;
+  resize: none;
+  box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  outline-color: ${(props) => props.theme.Primary};
+  outline-width: 0.025rem;
+`;
+
+const ContentInput = styled.textarea`
   width: 100%;
   height: 300px;
-  padding: 8px;
-  border: 1.75px solid ${(props) => props.theme.Gray4};
+  padding: 8px 12px 8px 12px;
+  border: 1.75px solid ${(props) => props.theme.Gray5};
   border-radius: 18px;
   resize: none;
   box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  outline-color: ${(props) => props.theme.Primary};
+  outline-width: 1px;
 `;
 
-const PostButton = styled.span`
+type PostButtonProps = {
+  active: boolean;
+};
+const PostButton = styled.span<PostButtonProps>`
   position: absolute;
   bottom: 16px;
   right: 36px;
@@ -81,7 +177,7 @@ const PostButton = styled.span`
   font-weight: 600;
   color: ${(props) => props.theme.White};
   border-radius: 12px;
-  background-color: ${(props) => props.theme.Primary};
+  background-color: ${(props) => (props.active ? props.theme.Primary : props.theme.Gray3)};
   cursor: pointer;
 `;
 

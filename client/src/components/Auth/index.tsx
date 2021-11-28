@@ -9,7 +9,7 @@ import { setUser } from '@store/user/globalSlice';
 function Auth(): JSX.Element {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const toggleLoader = useLoader();
+  const [toggleLoader] = useLoader();
 
   const getGithubToken = async () => {
     const query = qs.parse(location.search, {
@@ -21,14 +21,14 @@ function Auth(): JSX.Element {
       const data = await authHttpClient.login(code);
       const { id, githubId: oAuthId, name, avatarUrl: image, feverStack, shareStack } = data;
       dispatch(setUser({ id, oAuthId, name, image, feverStack, shareStack }));
-      toggleLoader();
+      toggleLoader(false);
       history.push('/');
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    toggleLoader();
+    toggleLoader(true);
     getGithubToken();
   }, []);
 

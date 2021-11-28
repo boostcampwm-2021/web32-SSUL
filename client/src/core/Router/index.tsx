@@ -1,17 +1,18 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { Auth as AuthCallback } from '@components';
 import MainPage from '@pages/MainPage';
 import GroupRecruitPage from '@pages/GroupRecruitPage';
 import MentorRecruitPage from '@pages/MentorRecruitPage';
 import GroupsPage from '@pages/GroupsPage';
-import GroupStatusPage from '@pages/GroupStatusPage';
+import MyGroupPage from '@pages/MyGroupPage';
 import GroupOwnerPage from '@pages/GroupOwnerPage';
 import EvaluateGroupPage from '@pages/EvaluateGroupPage';
 import ChatListPage from '@pages/ChatListPage';
 import ChatPage from '@pages/ChatPage';
 import ProfilePage from '@pages/ProfilePage';
-import { Auth as AuthCallback } from '@components';
 import GroupCreatePage from '../../pages/GroupCreatePage';
+import ExceptionPage from '@pages/ExceptionPage';
 import { AuthGuardRoute, GroupBelongGuardRoute, GroupOwnerGuardRoute } from './routes';
 
 function Router(): JSX.Element {
@@ -20,7 +21,7 @@ function Router(): JSX.Element {
       <Route path="/" component={MainPage} exact />
       <Route path="/recruit/group" component={GroupRecruitPage} exact />
       <Route path="/recruit/mentor" component={MentorRecruitPage} exact />
-      <Route path="/group/status" component={GroupStatusPage} />
+      <AuthGuardRoute path="/group/my" component={MyGroupPage} />
       <GroupOwnerGuardRoute path="/group/owner/:gid" component={GroupOwnerPage} />
       <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
       <GroupBelongGuardRoute path="/group/evaluate" component={EvaluateGroupPage} />
@@ -29,9 +30,9 @@ function Router(): JSX.Element {
       <Route path="/chat" component={ChatPage} />
       <Route path="/profile/:id" component={ProfilePage} />
       <Route path="/auth/callback" component={AuthCallback} />
-      <Redirect to="/" />
+      <Route path="*" component={ExceptionPage} />
     </Switch>
   );
 }
 
-export default Router;
+export default React.memo(Router);

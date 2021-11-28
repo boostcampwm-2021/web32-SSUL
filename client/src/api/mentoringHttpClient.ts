@@ -1,4 +1,12 @@
-import { AcceptRequestInfo, MentorInfo, MentoringRequestData, RegisterMentorData } from '@types';
+import {
+  AcceptRequestInfo,
+  MentorInfo,
+  MentoringRequest,
+  MentoringRequestData,
+  MentoringRequestPostData,
+  MentorListResponse,
+  RegisterMentorData,
+} from '@types';
 import HttpClient from './HttpClient';
 
 class MentoringHttpClient extends HttpClient {
@@ -6,12 +14,29 @@ class MentoringHttpClient extends HttpClient {
     super({ baseURL: '/api/mentoring' });
   }
 
+  public getFilterdMentorList = (query: string): Promise<MentorListResponse> =>
+    this.httpClient.get(`/mentor/list${query}`);
+
   public getMentorId = (userId: number): Promise<MentorInfo> => {
     return this.httpClient.get(`/mentor/${userId}`);
   };
 
   public registerMentor = (registerData: RegisterMentorData): Promise<null> => {
     return this.httpClient.post(`/mentor`, registerData);
+  };
+
+  public getAllMentoringRequests = (): Promise<MentoringRequest[]> => {
+    return this.httpClient.get(`/request`);
+  };
+
+  public deleteMentoringRequests = (deleteQuery: string): Promise<null> => {
+    return this.httpClient.delete(`/request${deleteQuery}`);
+  };
+
+  public postMentoringRequests = (
+    MentoringRequestData: MentoringRequestPostData,
+  ): Promise<null> => {
+    return this.httpClient.post(`/request`, MentoringRequestData);
   };
 
   public getMentoringRequest = (mentorId: number): Promise<MentoringRequestData[]> => {

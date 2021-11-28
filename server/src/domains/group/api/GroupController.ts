@@ -1,11 +1,35 @@
-import { Body, Controller, Get, OnUndefined, Param, Post, QueryParam } from 'routing-controllers';
-import { Inject, Service } from 'typedi';
-import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupService } from '../service/GroupService';
+import {
+  Body,
+  Controller,
+  Get,
+  OnUndefined,
+  Param,
+  Params,
+  Post,
+  QueryParam,
+  QueryParams,
+  Session,
+  UseBefore,
+} from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { Inject, Service } from 'typedi';
+
+import { GroupService } from '../service/GroupService';
+import { AlarmService } from '@domains/alarm/service/AlarmService';
+
+import { GroupDetailDto, GroupParam } from '../dto/groupDto';
 import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
+import { CreateGroupDto } from '../dto/CreateGroupDto';
 import { GroupActivityDto } from '../dto/GroupActivityDto';
-import { GroupDetailDto } from '../dto/groupDto';
+import { ApplyGroupDto } from '../dto/ApplyGroupDto';
+import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
+import { GroupRoleResponse } from '../dto/GroupRoleResponse';
+import { ApplyedGroupQuery } from '../dto/ApplyedGroupQuery';
+import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
+import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
+import { AlarmType } from '@domains/alarm/models/Alarm';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -16,6 +40,8 @@ export class GroupController {
   constructor(
     @Inject()
     private readonly groupService: GroupService,
+    @Inject()
+    private readonly alarmService: AlarmService,
   ) {}
 
   @Get('/')
@@ -44,13 +70,6 @@ export class GroupController {
     return filterdGroups;
   }
 
-  @Get('/:gid')
-  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
-  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
-  async getGroupData(@Param('gid') gid: number) {
-    return await this.groupService.getGroupDetails(gid);
-  }
-
   @Post('/')
   @OnUndefined(200)
   @OpenAPI({
@@ -65,5 +84,76 @@ export class GroupController {
   @Get('/activity/:uid')
   public async getGroupActivity(@Param('uid') userId: number) {
     return await this.groupService.getEndGroupList(userId);
+  }
+
+  @Get('/own')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(OwnerGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 가져오는 API' })
+  public async getMyGroups(@Session() session: any) {
+    return await this.groupService.getOwnGroups(session.user.id);
+  }
+
+  @Get('/own/simple')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 만든 그룹 목록을 간단한 내용만 가져오는 API' })
+  public async getMySimpleGroups(@Session() session: any) {
+    return await this.groupService.getOwnSimpleGroups(session.user.id);
+  }
+
+  @Get('/applyed')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({ summary: '내가 가입 신청한 그룹 목록을 신청 상태에 따라 가져오는 API' })
+  public async getMyApplyedGroups(
+    @Session() session: any,
+    @QueryParams() { state }: ApplyedGroupQuery,
+  ) {
+    return await this.groupService.getMyApplyedGroups(session.user.id, state);
+  }
+
+  //TODO: need unit test
+  @Get('/my')
+  @UseBefore(isLoggedIn)
+  @ResponseSchema(SimpleGroupCardResponse, { isArray: true })
+  @OpenAPI({
+    summary: '내가 참여한 그룹을 상태에따라 필터링하여 가져오는 API',
+  })
+  public async getEnrolledGroupByStatus(
+    @Session() session: any,
+    @QueryParams() { status, type }: EnrolledGroupQuery,
+  ) {
+    return await this.groupService.getEnrolledGroupByQuery(session.user.id, status, type);
+  }
+
+  @Post('/apply')
+  @OnUndefined(200)
+  @OpenAPI({
+    summary: '그룹 가입 신청 넣는 API',
+  })
+  async applyGroup(@Body() { groupId, userId }: ApplyGroupDto) {
+    await this.groupService.checkApplyGroup(groupId, userId);
+    const applyGroup = await this.groupService.addApplyGroup(groupId, userId);
+    await this.alarmService.postAlarm(AlarmDto.fromApply(applyGroup, AlarmType.JOIN_GROUP_REQUEST));
+  }
+
+  @OnUndefined(200)
+  @UseBefore(isLoggedIn)
+  @OpenAPI({
+    summary: '유저가 그룹에서 어떤 역할인지 가져오는 API',
+  })
+  @ResponseSchema(GroupRoleResponse)
+  @Get('/role/:gid')
+  public async getGroupEnroll(@Session() session: any, @Params() { gid: groupId }: GroupParam) {
+    const { id: userId } = session.user;
+    return await this.groupService.getGroupRole(groupId, userId);
+  }
+
+  @Get('/:gid')
+  @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
+  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
+  async getGroupData(@Param('gid') gid: number) {
+    return await this.groupService.getGroupDetails(gid);
   }
 }

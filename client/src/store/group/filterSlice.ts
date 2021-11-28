@@ -58,10 +58,12 @@ export const groupRecruitFilterSlice = createSlice({
     createdFilterdQuery(state) {
       const { groupNameInput, selectedCategoryId, selectedTechStack, selectedPage } = state;
       const pageQuery = `?page=${selectedPage}`;
-      const nameQuery = groupNameInput ? `&name=${groupNameInput}` : '';
+      const nameQuery = groupNameInput ? `&name=${encodeURIComponent(groupNameInput)}` : '';
       const categoryQuery = selectedCategoryId ? `&category=${selectedCategoryId}` : '';
       const techStackQuery =
-        selectedTechStack.length !== 0 ? `&techstack=${selectedTechStack.join(',')}` : '';
+        selectedTechStack.length !== 0
+          ? `&techstack=${encodeURIComponent(selectedTechStack.join(','))}`
+          : '';
       return {
         ...state,
         filterdQuery: `${pageQuery}${nameQuery}${categoryQuery}${techStackQuery}`,

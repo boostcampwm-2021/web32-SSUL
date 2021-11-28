@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { GroupCard, Pagination } from '@components';
-import { Group, GroupResponse } from '@types';
+import { BoxModal, GroupCard, Pagination } from '@components';
+import { Group, GroupCardDetail, GroupResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
-import { initFilterState, returnGroupRecruitFilterState } from '@store/group/filterSlice';
+import {
+  createdFilterdQuery,
+  initFilterState,
+  returnGroupRecruitFilterState,
+} from '@store/group/filterSlice';
 import { groupHttpClient } from '@api';
+import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
+import GroupModal from './GroupModal';
+import { groupCardDetailState } from '@store/group/cardDetailSlice';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
   const [filterdGroupList, setFilterdGroupList] = useState<Group[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const dispatch = useAppDispatch();
-  const toggleLoader = useLoader();
+  const [toggleLoader] = useLoader();
+  const groupCardContetns: GroupCardDetail = useAppSelector(groupCardDetailState);
+  const modalType = useAppSelector(selectGroupModalState);
 
   useEffect(() => {
     dispatch(initFilterState());
   }, []);
 
   useEffect(() => {
-    toggleLoader();
+    toggleLoader(true);
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
-      toggleLoader();
+      toggleLoader(false);
     };
     getGroupsList();
   }, [filterdQuery]);
@@ -32,10 +41,23 @@ function GroupCardList(): JSX.Element {
     return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
+  const handleModalBackgroundClick = () => dispatch(changeGroupModalState('NONE'));
+
   return (
     <>
       <CardList>{renderGroupCards}</CardList>
-      <Pagination totalPages={totalPages} curPage={selectedPage} />
+      <Pagination
+        totalPages={totalPages}
+        curPage={selectedPage}
+        createdQuery={createdFilterdQuery}
+      />
+      {modalType !== 'NONE' && (
+        <BoxModal
+          style={{ width: '650px', height: '550px' }}
+          element={<GroupModal contents={{ ...groupCardContetns }} />}
+          onCancel={handleModalBackgroundClick}
+        />
+      )}
     </>
   );
 }

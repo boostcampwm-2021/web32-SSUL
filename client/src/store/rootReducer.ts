@@ -5,6 +5,12 @@ import groupRecruit from './group/filterSlice';
 import createGroupData from './group/makerSlice';
 import groupDetail from './group/detailSlice';
 import profileDataSlice from './user/profileSlice';
+import groupCardDetail from './group/cardDetailSlice';
+import post from './group/postSlice';
+import mentorRecruit from './mentor/filterSlice';
+import groupAdminDataSlice from './group/adminSlice';
+import mentorCardDetail from './mentor/cardDetailSlice';
+import notificationSlice from './notification/slice';
 
 const reducer = combineReducers({
   util,
@@ -13,6 +19,12 @@ const reducer = combineReducers({
   groupRecruit,
   groupDetail,
   profileDataSlice,
+  groupCardDetail,
+  post,
+  mentorRecruit,
+  groupAdminDataSlice,
+  mentorCardDetail,
+  notificationSlice,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;

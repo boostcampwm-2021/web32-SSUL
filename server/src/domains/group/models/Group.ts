@@ -1,19 +1,12 @@
-import {
-  Column,
-  Entity,
-  OneToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { ApplyGroup } from './ApplyGroup';
 import { GroupEnrollment } from './GroupEnrollment';
 import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { Category } from '@domains/category/models/Category';
 import { User } from '@domains/user/models/User';
-import { Post } from './Post';
+import { Post } from '../../post/models/Post';
+import { Alarm } from '@domains/alarm/models/Alarm';
 
 export enum GroupState {
   READY = 'READY',
@@ -35,14 +28,14 @@ export class Group {
   @Column('int', { name: 'category_id', nullable: true })
   categoryId: number | null;
 
-  @Column('varchar', { name: 'name', nullable: true, length: 100 })
-  name: string | null;
+  @Column('varchar', { name: 'name', length: 100 })
+  name: string;
 
-  @Column('int', { name: 'max_user_cnt', nullable: true })
-  maxUserCnt: number | null;
+  @Column('int', { name: 'max_user_cnt' })
+  maxUserCnt: number;
 
-  @Column('int', { name: 'cur_user_cnt', nullable: true })
-  curUserCnt: number | null;
+  @Column('int', { name: 'cur_user_cnt' })
+  curUserCnt: number;
 
   @Column('varchar', { name: 'intro', nullable: true, length: 1023 })
   intro: string | null;
@@ -53,14 +46,14 @@ export class Group {
   @Column('datetime', { name: 'end_at', nullable: true })
   endAt: Date | null;
 
-  @Column('varchar', { name: 'status', nullable: true, length: 10, default: 'READY' })
-  status: string;
+  @Column('varchar', { name: 'status', length: 10, default: 'READY' })
+  status: GroupState | string;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (user) => user.groups)
+  @ManyToOne(() => User, (user) => user.groups, { eager: true })
   ownerInfo: User;
 
-  @ManyToOne((type) => Category)
+  @ManyToOne(() => Category, (category) => category.id, { eager: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
@@ -78,4 +71,7 @@ export class Group {
 
   @OneToMany(() => Post, (post) => post.group)
   posts: Post[];
+
+  @OneToMany(() => Alarm, (alarm) => alarm.group)
+  alarms: Alarm[];
 }

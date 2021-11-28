@@ -8,7 +8,7 @@ import {
 } from '@store/group/filterSlice';
 
 function SelectedTechList(): JSX.Element {
-  const selectedTechStack = useAppSelector(returnGroupRecruitFilterState).selectedTechStack;
+  const { selectedTechStack } = useAppSelector(returnGroupRecruitFilterState);
   const selectedTechStackDispatch = useAppDispatch();
 
   const handleEraseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {

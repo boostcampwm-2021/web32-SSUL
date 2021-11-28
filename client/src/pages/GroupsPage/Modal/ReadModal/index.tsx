@@ -1,43 +1,57 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch } from '@hooks';
+import { postHttpClient } from '@api';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
+import { selectUser } from '@store/user/globalSlice';
+import { selectGroupDetail } from '@store/group/detailSlice';
+import { setPosts, selectChoosenPost } from '@store/group/postSlice';
+import { formatDateToString } from '@utils/Date';
+import { MSG_POST_DELETE_SUCCESS, MSG_POST_DELETE_ERROR } from '@constants/consts';
 import CancelIcon from '@assets/icon_cancel.png';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
+  const user = useAppSelector(selectUser);
+  const group = useAppSelector(selectGroupDetail);
+  const post = useAppSelector(selectChoosenPost);
+  const handleModifyButtonClick = () => dispatch(changeGroupModalState('UPDATE'));
+  const handleDeleteButtonClick = async () => {
+    // TODO: double check user action
+    if (!post) return;
+    try {
+      await postHttpClient.deletePost(post?.id, group.id);
+      toastify(MSG_POST_DELETE_SUCCESS, 'SUCCESS');
+      dispatch(changeGroupModalState('NONE'));
+      const posts = await postHttpClient.getGroupPosts(group.id);
+      dispatch(setPosts(posts));
+    } catch (e: any) {
+      toastify(MSG_POST_DELETE_ERROR, 'ERROR');
+    }
+  };
   const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
 
+  if (!post) return <></>;
   return (
     <Container>
       <Header>
-        <Title>리액트 공부할 때 도움되는 레퍼런스 모음집</Title>
+        <Title>{post.title}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
       <SubInfoBar>
-        <Name>김동규</Name>
-        <Date>2021-11-16</Date>
+        <Name>{post.writer}</Name>
+        <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content>
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-        본문 내용은 다음과 같습니다. <br />
-      </Content>
-      <ButtonBox>
-        <ModifyButton>수정</ModifyButton>
-        <DeleteButton>삭제</DeleteButton>
-      </ButtonBox>
+      <Content readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
+      <Hit>조회수 {post.hit}</Hit>
+      {user.id === post.userId && (
+        <ButtonBox>
+          <ModifyButton onClick={handleModifyButtonClick}>수정</ModifyButton>
+          <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
+        </ButtonBox>
+      )}
     </Container>
   );
 }
@@ -51,13 +65,16 @@ const Header = styled.div`
   align-items: center;
   padding-bottom: 16px;
   border-bottom: 1.75px solid ${(props) => props.theme.Gray4};
-  margin-bottom: 7px;
+  margin-bottom: 12px;
 `;
 
 const Title = styled.span`
+  width: 85%;
+  height: 30px;
   font-size: 1.25rem;
   font-weight: 600;
   color: ${(props) => props.theme.Gray2};
+  overflow: hidden;
 `;
 
 const CancelButton = styled.img`
@@ -74,7 +91,16 @@ const SubInfoBar = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
-  margin-bottom: 7px;
+  margin-bottom: 20px;
+`;
+
+const Hit = styled.span`
+  position: absolute;
+  bottom: 10%;
+  left: 7%;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${(props) => props.theme.Gray4};
 `;
 
 const Name = styled.span`
@@ -89,14 +115,16 @@ const Date = styled.span`
   color: ${(props) => props.theme.Gray3};
 `;
 
-const Content = styled.div`
+const Content = styled.textarea`
+  width: 100%;
   height: 300px;
   padding: 12px;
   border: 1.75px solid ${(props) => props.theme.Gray2};
   border-radius: 18px;
-  overflow: scroll;
   box-shadow: inset 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
-  margin-bottom: 7px;
+  margin-bottom: 24px;
+  resize: none;
+  outline-width: 0px;
 `;
 
 const ButtonBox = styled.div`

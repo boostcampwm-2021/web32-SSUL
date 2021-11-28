@@ -16,8 +16,8 @@ export class User {
   @Column('varchar', { name: 'name', length: 50 })
   name: string;
 
-  @Column('varchar', { name: 'avatar_url', nullable: true, length: 511 })
-  avatarUrl: string | null;
+  @Column('varchar', { name: 'avatar_url', length: 511 })
+  avatarUrl: string;
 
   @Column('datetime', { name: 'created_at', nullable: true })
   createdAt: Date | null;
@@ -40,7 +40,7 @@ export class User {
   @OneToMany(() => GroupEnrollment, (groupEnrollment) => groupEnrollment.user)
   groupEnrollments: GroupEnrollment[];
 
-  @OneToMany(() => Alarm, (alarm) => alarm.recieverId)
+  @OneToMany(() => Alarm, (alarm) => alarm.receiverId)
   receivedAlarms: Alarm[];
 
   @OneToMany(() => MenteeTechStack, (menteeTechStack) => menteeTechStack.user)

@@ -7,11 +7,14 @@ import {
   Get,
   Param,
   UseBefore,
+  QueryParams,
+  Params,
+  Delete,
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { MentorInfoDto } from '../dto/MentorInfoDto';
-import { MentoringRequestListDto } from '../dto/MentoringRequestListDto';
+import { MentoringRequestListDto, MentoringRequestParam } from '../dto/MentoringRequestListDto';
 import { RegisterMentoDto } from '../dto/RegisterMentoDto';
 import { MentoringService } from '../service/MentoringService';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
@@ -21,6 +24,16 @@ import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
 import { GroupService } from '@domains/group/service/GroupService';
 import { TechStackService } from '@domains/techstack/service/TechStackService';
 import { UserService } from '@domains/user/service/UserService';
+import {
+  FilterdPageMentorListParams,
+  FilterdPageMentorListResponse,
+} from '../dto/FilterdPageMentorListResponse';
+import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
+import { MentoringCancelParam } from '../dto/MentoringCancelParam';
+import { MentoringRequestDto } from '../dto/MentoringRequestDto';
+import { AlarmService } from '@domains/alarm/service/AlarmService';
+import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
+import { AlarmType } from '@domains/alarm/models/Alarm';
 
 @OpenAPI({
   tags: ['멘토링'],
@@ -34,10 +47,27 @@ export class MentoringController {
     @Inject()
     private readonly techStackService: TechStackService,
     @Inject()
-    private readonly userService: UserService,
+    private readonly alarmService: AlarmService,
     @Inject()
     private readonly groupService: GroupService,
   ) {}
+
+  @Get('/mentor/list')
+  @OnUndefined(200)
+  @OpenAPI({
+    summary: '필터링된 멘토 리스트를 가져오는 API',
+    responses: {
+      '200': {
+        description: '그룹 조회 완료',
+      },
+    },
+  })
+  @ResponseSchema(FilterdPageMentorListResponse)
+  public async getFilterdMentorList(
+    @QueryParams() { page, name, techstack }: FilterdPageMentorListParams,
+  ) {
+    return await this.mentoringService.getFilterdPageMentorList(page, name, techstack);
+  }
 
   @Get('/mentor/:uid')
   @OpenAPI({ summary: '멘토 id를 가져오는 API' })
@@ -63,10 +93,38 @@ export class MentoringController {
     await this.techStackService.createMentorTechStack(mentorId, techStacks);
   }
 
+  @Get('/request')
+  @OpenAPI({ summary: '모든 멘토링 요청 리스트를 가져오는 API' })
+  @ResponseSchema(MentoringRequestResponse, { isArray: true })
+  public async getAllMentoringRequest() {
+    return await this.mentoringService.getAllRequestList();
+  }
+
+  @Post('/request')
+  @UseBefore(isLoggedIn)
+  @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
+  @OnUndefined(200)
+  public async postMentoringRequest(@Body() { mentorId, groupId }: MentoringRequestDto) {
+    const mentoringRequest = await this.mentoringService.saveMentoringRequest(mentorId, groupId);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromMentoringRequest(mentoringRequest, AlarmType.MENTORING_REQUEST),
+    );
+  }
+
+  @Delete('/request')
+  @UseBefore(isLoggedIn)
+  @OpenAPI({ summary: '멘토링 요청을 취소하는 API' })
+  @OnUndefined(204)
+  public async deleteRequest(
+    @QueryParams() { mentor: mentorId, group: groupId }: MentoringCancelParam,
+  ) {
+    await this.mentoringService.cancelMentoringRequest(mentorId, groupId);
+  }
+
   @Get('/request/:mid')
-  @OpenAPI({ summary: '멘토링 요청 리스트를 가져오는 API' })
+  @OpenAPI({ summary: '특정 멘토의 멘토링 요청 리스트를 가져오는 API' })
   @ResponseSchema(MentoringRequestListDto)
-  public async getRequest(@Param('mid') mentorId: number) {
+  public async getRequest(@Params() { mid: mentorId }: MentoringRequestParam) {
     return await this.mentoringService.getRequestListByMentorId(mentorId);
   }
 
@@ -74,7 +132,10 @@ export class MentoringController {
   @OpenAPI({ summary: '멘토링 요청을 거절하는 API' })
   @OnUndefined(200)
   public async rejectRequest(@Param('id') requestId: number) {
-    await this.mentoringService.deleteRequest(requestId);
+    const mentoringRequest = await this.mentoringService.deleteRequest(requestId);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromMentoringRequest(mentoringRequest, AlarmType.METTORING_DECLIEND),
+    );
   }
 
   @Post('/request/accept')
@@ -83,7 +144,8 @@ export class MentoringController {
   public async acceptRequest(@Body() { id, groupId, userId }: AcceptRequestDto) {
     const { mentorId } = await this.mentoringService.getMentorIdByUserId(userId);
     await this.groupService.addGroupMentor(mentorId, groupId);
-    await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
+    const group = await this.groupService.enroll(groupId, userId, GroupEnrollmentAs.MENTOR);
     await this.mentoringService.deleteRequest(id);
+    await this.alarmService.postAlarm(AlarmDto.fromGroup(group, AlarmType.MENTORING_ACCEPTED));
   }
 }
