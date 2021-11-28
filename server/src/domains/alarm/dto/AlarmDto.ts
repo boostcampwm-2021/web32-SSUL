@@ -1,5 +1,6 @@
 import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { Group } from '@domains/group/models/Group';
+import { MentoringRequest } from '@domains/mentoring/models/MentoringRequest';
 import { IsNumber, IsString } from 'class-validator';
 import { Alarm, AlarmType } from '../models/Alarm';
 
@@ -48,6 +49,20 @@ export class AlarmDto {
       dto.receiverId = group.ownerId;
     }
     dto.groupId = group.id;
+    dto.type = type;
+    return dto;
+  }
+
+  static fromMentoringRequest(mentoringRequeset: MentoringRequest, type: AlarmType) {
+    const dto = new AlarmDto();
+    if (type === AlarmType.MENTORING_REQUEST) {
+      dto.senderId = mentoringRequeset.group.ownerId;
+      dto.receiverId = mentoringRequeset.mentor.userId!;
+    } else {
+      dto.senderId = mentoringRequeset.mentor.userId!;
+      dto.receiverId = mentoringRequeset.group.ownerId;
+    }
+    dto.groupId = mentoringRequeset.groupId;
     dto.type = type;
     return dto;
   }

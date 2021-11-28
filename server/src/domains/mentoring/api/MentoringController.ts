@@ -105,7 +105,10 @@ export class MentoringController {
   @OpenAPI({ summary: '멘토링 요청을 보내는 API' })
   @OnUndefined(200)
   public async postMentoringRequest(@Body() { mentorId, groupId }: MentoringRequestDto) {
-    return await this.mentoringService.saveMentoringRequest(mentorId, groupId);
+    const mentoringRequest = await this.mentoringService.saveMentoringRequest(mentorId, groupId);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromMentoringRequest(mentoringRequest, AlarmType.MENTORING_REQUEST),
+    );
   }
 
   @Delete('/request')
@@ -129,7 +132,10 @@ export class MentoringController {
   @OpenAPI({ summary: '멘토링 요청을 거절하는 API' })
   @OnUndefined(200)
   public async rejectRequest(@Param('id') requestId: number) {
-    await this.mentoringService.deleteRequest(requestId);
+    const mentoringRequest = await this.mentoringService.deleteRequest(requestId);
+    await this.alarmService.postAlarm(
+      AlarmDto.fromMentoringRequest(mentoringRequest, AlarmType.METTORING_DECLIEND),
+    );
   }
 
   @Post('/request/accept')
