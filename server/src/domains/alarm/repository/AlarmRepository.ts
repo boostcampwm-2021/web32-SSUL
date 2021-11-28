@@ -6,7 +6,11 @@ import { Alarm } from '../models/Alarm';
 @EntityRepository(Alarm)
 export class AlarmRepository extends Repository<Alarm> {
   public findAllByReceiverId(receiverId: number) {
-    return this.find({ relations: ['sender', 'group'], where: { receiverId } });
+    return this.find({
+      relations: ['sender', 'group'],
+      where: { receiverId },
+      order: { createdAt: 'DESC' },
+    });
   }
 
   public updateReadCheck(alarmId: number) {

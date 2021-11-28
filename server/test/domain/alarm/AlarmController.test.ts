@@ -33,7 +33,7 @@ describe('알림 컨트롤러', () => {
       expect(response.statusCode).toBe(200);
       response = await request(app).get('/api/alarm').set('Cookie', [cookieSession]);
       expect(response.statusCode).toBe(200);
-      expect(response.body[0].readChk).toBe(1);
+      expect(response.body[1].readChk).toBe(1);
     });
 
     test('사용자 본인의 알림이 아닌데 수정을 하면 400 에러', async () => {

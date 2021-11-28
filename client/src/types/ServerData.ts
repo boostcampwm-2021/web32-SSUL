@@ -1,3 +1,4 @@
+import { NotificationTypeEnum } from '@constants/enums';
 import { GroupEnrollment, GroupUsingTechStack, TechStack } from '@types';
 
 export interface ExampleInterface {
@@ -145,4 +146,16 @@ export interface ParticipationRequest {
   avatarUrl: string;
   feverStack: number;
   createdAt: Date;
+}
+
+export interface NotificationData {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  groupId: number;
+  type: NotificationTypeEnum;
+  createdAt: string;
+  readChk: boolean;
+  senderName: string;
+  groupName: string;
 }
