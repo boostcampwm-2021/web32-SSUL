@@ -6,7 +6,6 @@ import {
   Param,
   Params,
   Post,
-  QueryParam,
   QueryParams,
   Session,
   UseBefore,
@@ -17,19 +16,21 @@ import { Inject, Service } from 'typedi';
 import { GroupService } from '../service/GroupService';
 import { AlarmService } from '@domains/alarm/service/AlarmService';
 
-import { GroupDetailDto, GroupParam } from '../dto/groupDto';
-import { FilterdPageGroupDto } from '../dto/FilterdGroupDto';
-import { CreateGroupDto } from '../dto/CreateGroupDto';
-import { GroupActivityDto } from '../dto/GroupActivityDto';
-import { ApplyGroupDto } from '../dto/ApplyGroupDto';
-import { SimpleGroupCardResponse } from '../dto/SimpleGroupCardResponse';
-import { isLoggedIn } from '@common/middleware/isLoggedIn';
-import { EnrolledGroupQuery } from '../dto/EnrolledGroupQuery';
-import { GroupRoleResponse } from '../dto/GroupRoleResponse';
-import { ApplyedGroupQuery } from '../dto/ApplyedGroupQuery';
-import { OwnerGroupCardResponse } from '../dto/OwnerGroupCardResponse';
 import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
 import { AlarmType } from '@domains/alarm/models/Alarm';
+import { FilteredPageGroupResponse } from '../dto/response/FilteredPageGroupResponse';
+import { GroupQuery } from '../dto/query/GroupQuery';
+import { GroupActivityResponse } from '../dto/response/GroupActivityResponse';
+import { CreateGroupDto } from '../dto/request/CreateGroupDto';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { OwnerGroupCardResponse } from '../dto/response/OwnerGroupCardResponse';
+import { SimpleGroupCardResponse } from '../dto/response/SimpleGroupCardResponse';
+import { ApplyedGroupQuery } from '../dto/query/ApplyedGroupQuery';
+import { EnrolledGroupQuery } from '../dto/query/EnrolledGroupQuery';
+import { GroupDetailResponse } from '../dto/response/GroupDetailResponse';
+import { ApplyGroupDto } from '../dto/request/ApplyGroupDto';
+import { GroupRoleResponse } from '../dto/response/GroupRoleResponse';
+import { GroupParam } from '../dto/param/GroupParam';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -54,20 +55,15 @@ export class GroupController {
       },
     },
   })
-  @ResponseSchema(FilterdPageGroupDto, { description: '필터링 그룹 조회 결과' })
-  async getAll(
-    @QueryParam('page') page: number,
-    @QueryParam('name') name: string,
-    @QueryParam('category') category: number,
-    @QueryParam('techstack') techstack: string,
-  ) {
-    const filterdGroups: FilterdPageGroupDto = await this.groupService.getFilterdPageGroups(
+  @ResponseSchema(FilteredPageGroupResponse, { description: '필터링 그룹 조회 결과' })
+  async getAll(@QueryParams() { page, name, category, techstack }: GroupQuery) {
+    const filteredGroups = await this.groupService.getfilteredPageGroups(
       page,
       name,
       category,
       techstack,
     );
-    return filterdGroups;
+    return filteredGroups;
   }
 
   @Post('/')
@@ -80,7 +76,7 @@ export class GroupController {
   }
 
   @OpenAPI({ summary: '그룹활동 리스트를 가져오는 API' })
-  @ResponseSchema(GroupActivityDto, { isArray: true })
+  @ResponseSchema(GroupActivityResponse, { isArray: true })
   @Get('/activity/:uid')
   public async getGroupActivity(@Param('uid') userId: number) {
     return await this.groupService.getEndGroupList(userId);
@@ -152,8 +148,8 @@ export class GroupController {
 
   @Get('/:gid')
   @OpenAPI({ summary: '그룹 정보를 가져오는 API' })
-  @ResponseSchema(GroupDetailDto, { description: '그룹 정보 조회 완료' })
+  @ResponseSchema(GroupDetailResponse, { description: '그룹 정보 조회 완료' })
   async getGroupData(@Param('gid') gid: number) {
-    return await this.groupService.getGroupDetails(gid);
+    return await this.groupService.getGroupDetail(gid);
   }
 }

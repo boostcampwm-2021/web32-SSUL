@@ -17,11 +17,13 @@ import { Inject, Service } from 'typedi';
 import { GroupService } from '@domains/group/service/GroupService';
 import { PostService } from '../service/PostService';
 
-import { GroupParam, GroupPostParam, PostParam } from '@domains/group/dto/groupDto';
+import { PostParam } from '../dto/PostParam';
+import { GroupPostParam } from '../dto/GroupPostParam';
 import { PostResponse } from '../dto/PostResponse';
 import { PostContentDto } from '../dto/PostContentDto';
 import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { isLoggedIn } from '@common/middleware/isLoggedIn';
+import { GroupParam } from '@domains/group/dto/param/GroupParam';
 
 @OpenAPI({
   tags: ['게시글'],
@@ -41,8 +43,7 @@ export class PostController {
   @Get('/:gid')
   @UseBefore(isLoggedIn)
   public async getPostsByGroupId(@Session() session: any, @Params() { gid }: GroupParam) {
-    const { id: userid } = session.user;
-    await this.groupService.checkGroupBelong(userid, gid);
+    await this.groupService.checkGroupBelong(session.user.id, gid);
     return await this.postService.getPostsByGroupId(gid);
   }
 

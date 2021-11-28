@@ -16,19 +16,11 @@ export class MentoringRequest {
   @Column('int', { name: 'group_id' })
   groupId: number;
 
-  @ManyToOne(() => Mentor, (mentor) => mentor.mentoringRequests, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-    eager: true,
-  })
+  @ManyToOne(() => Mentor, (mentor) => mentor.mentoringRequests, { eager: true })
   @JoinColumn({ name: 'mentor_id' })
   mentor: Mentor;
 
-  @ManyToOne(() => Group, (group) => group.mentoringRequests, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-    eager: true,
-  })
+  @ManyToOne(() => Group, (group) => group.mentoringRequests, { eager: true })
   @JoinColumn({ name: 'group_id' })
   group: Group;
 }

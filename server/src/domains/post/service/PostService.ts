@@ -3,6 +3,7 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { PostRepository } from '../repository/PostRepository';
 import { Post } from '../models/Post';
 import { PostUpdateDto } from '../dto/PostUpdateDto';
+import { PostResponse } from '../dto/PostResponse';
 
 @Service()
 export class PostService {
@@ -11,8 +12,9 @@ export class PostService {
     private readonly postRepository: PostRepository,
   ) {}
 
-  public async getPostsByGroupId(groupId: number): Promise<Post[]> {
-    return await this.postRepository.findByGroupId(groupId);
+  public async getPostsByGroupId(groupId: number): Promise<PostResponse[]> {
+    const posts = await this.postRepository.findAllByGroupId(groupId);
+    return posts.map((post) => PostResponse.from(post));
   }
 
   public async createPost(post: Post): Promise<void> {
@@ -23,7 +25,7 @@ export class PostService {
     const { id: postId } = post;
     await this.postRepository.findOneByPostIdOrFail(postId);
     await this.postRepository.findOneByWriterDataOrFail(postId, userId);
-    await this.postRepository.updateContentByPostId(post);
+    await this.postRepository.updateByPostId(post);
   }
 
   public async deletePost(userId: number, postId: number): Promise<void> {

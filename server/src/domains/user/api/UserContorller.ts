@@ -62,6 +62,6 @@ export class UserController {
   @OpenAPI({ summary: '유저 프로필 정보를 가져오는 API' })
   @ResponseSchema(String)
   public async getProfile(@Param('gid') githubId: string) {
-    return await this.authService.getUserProfile(githubId);
+    return await this.authService.getUser(githubId);
   }
 }

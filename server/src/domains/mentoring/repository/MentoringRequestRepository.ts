@@ -6,11 +6,11 @@ import { MentoringRequest } from '../models/MentoringRequest';
 @Service()
 @EntityRepository(MentoringRequest)
 export class MentoringRequestRepository extends Repository<MentoringRequest> {
-  public async findAllByMentorId(mentorId: number) {
-    return await this.createQueryBuilder('mentoring_request')
-      .innerJoinAndSelect('mentoring_request.group', 'group')
-      .where('mentoring_request.mentor = :id', { id: mentorId })
-      .getMany();
+  public findAllByMentorId(mentorId: number) {
+    return this.find({
+      relations: ['group', 'group.category', 'group.ownerInfo'],
+      where: { mentorId },
+    });
   }
 
   public findAll() {

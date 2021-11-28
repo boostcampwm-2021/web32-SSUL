@@ -1,5 +1,5 @@
-import { IsDate, IsNumber, IsString } from "class-validator";
-import { ApplyGroup } from "../models/ApplyGroup";
+import { IsDate, IsNumber, IsString } from 'class-validator';
+import { ApplyGroup } from '../../models/ApplyGroup';
 
 export class GroupApplyResponse {
   @IsNumber()
@@ -15,7 +15,7 @@ export class GroupApplyResponse {
   @IsDate()
   createdAt: Date | null;
 
-  static from(applyGroup: ApplyGroup){
+  static from(applyGroup: ApplyGroup) {
     const dto = new GroupApplyResponse();
 
     dto.id = applyGroup.id;

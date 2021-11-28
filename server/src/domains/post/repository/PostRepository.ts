@@ -15,25 +15,17 @@ export class PostRepository extends Repository<Post> {
     return this.findOneOrFail({ where: { id: postId, userId } });
   }
 
-  public findByGroupId(groupId: number) {
-    return this.createQueryBuilder('post')
-      .innerJoin(User, 'u', 'u.id = post.user_id')
-      .select('post.id', 'id')
-      .addSelect('post.group_id', 'groupId')
-      .addSelect('post.user_id', 'userId')
-      .addSelect('post.title', 'title')
-      .addSelect('post.content', 'content')
-      .addSelect('post.createdAt', 'createdAt')
-      .addSelect('post.type', 'type')
-      .addSelect('post.hit', 'hit')
-      .addSelect('u.name', 'writer')
-      .where('post.groupId = :groupId', { groupId: groupId })
-      .orderBy('type', 'DESC')
-      .addOrderBy('post.createdAt', 'DESC')
-      .getRawMany();
+  public findAllByGroupId(groupId: number) {
+    const test = this.find({
+      relations: ['user'],
+      order: { type: 'DESC', createdAt: 'DESC' },
+      where: { groupId },
+    });
+    test.then((data) => console.log(data));
+    return test;
   }
 
-  public updateContentByPostId(post: PostUpdateDto) {
+  public updateByPostId(post: PostUpdateDto) {
     const { id, title, content, type } = post;
     this.update({ id }, { title, content, type });
   }
