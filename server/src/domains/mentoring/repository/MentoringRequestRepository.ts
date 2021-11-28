@@ -7,7 +7,10 @@ import { MentoringRequest } from '../models/MentoringRequest';
 @EntityRepository(MentoringRequest)
 export class MentoringRequestRepository extends Repository<MentoringRequest> {
   public findAllByMentorId(mentorId: number) {
-    return this.find({ where: { mentorId } });
+    return this.find({
+      relations: ['group', 'group.category', 'group.ownerInfo'],
+      where: { mentorId },
+    });
   }
 
   public findAll() {
