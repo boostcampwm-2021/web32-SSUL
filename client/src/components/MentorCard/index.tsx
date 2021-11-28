@@ -12,7 +12,7 @@ function MentorCard({ contents }: CardProps): JSX.Element {
   return (
     <Card>
       <MentorContents {...{ contents }} />
-      <MentorFooter mentorUserId={contents.user.id} />
+      <MentorFooter mentorId={contents.id} />
     </Card>
   );
 }

@@ -1,4 +1,4 @@
-import { MentorUserInfo, TechStack } from '@types';
+import { MentorUserInfo, OnlyGroupId, TechStack } from '@types';
 
 export interface MentorListResponse {
   mentors: Mentor[];
@@ -9,4 +9,19 @@ export interface Mentor {
   id: number;
   techStacks: TechStack[];
   user: MentorUserInfo;
+}
+
+export interface OnlyMentorId {
+  id: number;
+}
+
+export interface MentoringRequest {
+  id: number;
+  group: OnlyGroupId;
+  mentor: OnlyMentorId;
+}
+
+export interface MentoringRequestPostData {
+  mentorId: number;
+  groupId: number;
 }

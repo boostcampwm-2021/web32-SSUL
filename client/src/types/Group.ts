@@ -1,4 +1,4 @@
-import { CategoryData, OwnerInfo } from '@types';
+import { Category, CategoryData, OwnerInfo } from '@types';
 
 export enum GroupState {
   READY = 'READY',
@@ -89,4 +89,18 @@ export interface SimpleGroupCardData {
   ownerInfo: {
     avatarUrl: string;
   };
+}
+
+export interface OwnGroupsInfo {
+  id: number;
+  name: string;
+  intro: string;
+  mentorId: number | null;
+  startAt: Date | null;
+  endAt: Date | null;
+  category: Category;
+}
+
+export interface OnlyGroupId {
+  id: number;
 }

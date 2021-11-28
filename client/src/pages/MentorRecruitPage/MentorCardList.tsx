@@ -10,7 +10,7 @@ import { Mentor, MentorListResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { mentoringHttpClient } from '@api';
 import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
-import MentorModal from './MetorModal';
+import MentorModal from './MentorModal';
 
 function MentorCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnMentorRecruitFilterState);
