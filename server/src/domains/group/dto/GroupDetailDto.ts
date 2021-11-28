@@ -1,6 +1,7 @@
 import { IsArray, IsDate, IsNumber, IsString, IsEnum } from 'class-validator';
 import { GroupUserDto } from '@domains/user/dto/GroupUserDto';
 import { GroupUsingTechStackDto } from '@domains/techstack/dto/usingTechStackDto';
+import { Group } from '../models/Group';
 
 export enum GroupState {
   READY = 'READY',
@@ -33,21 +34,26 @@ export class GroupDetailDto {
   techStacks: GroupUsingTechStackDto[];
   @IsArray()
   groupEnrollments: GroupUserDto[];
-}
 
-export class GroupParam {
-  @IsNumber()
-  gid: number;
-}
-
-export class GroupPostParam {
-  @IsNumber()
-  gid: number;
-  @IsNumber()
-  pid: number;
-}
-
-export class PostParam {
-  @IsNumber()
-  pid: number;
+  static from(group: Group) {
+    const dto = new GroupDetailDto();
+    dto.id = group.id;
+    dto.mentorId = group.mentorId!;
+    dto.ownerId = group.ownerId;
+    dto.name = group.name;
+    dto.maxUserCnt = group.maxUserCnt;
+    dto.curUserCnt = group.curUserCnt;
+    dto.intro = group.intro;
+    dto.startAt = group.startAt;
+    dto.endAt = group.endAt;
+    dto.status = group.status;
+    dto.techStacks = group.techStacks;
+    dto.groupEnrollments = group.groupEnrollments
+      .map((groupEnrollment) => GroupUserDto.from(groupEnrollment))
+      .sort((a, b) => {
+        if (a.type > b.type) return 1;
+        else return -1;
+      });
+    return dto;
+  }
 }
