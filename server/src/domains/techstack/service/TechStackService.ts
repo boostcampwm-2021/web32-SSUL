@@ -50,17 +50,9 @@ export class TechStackService {
     });
   }
 
-  public async updateMenteeTechStack(userInfo: User, techStacks: TechStack[]) {
-    await this.menteeTechStackRepository.deleteMenteeTechStackListByUserId(userInfo.id);
-
-    techStacks.forEach(async (techStack) => {
-      const menteeTechStack: MenteeTechStack = new MenteeTechStack();
-
-      menteeTechStack.userId = userInfo.id;
-      menteeTechStack.techStackId = techStack.id;
-      menteeTechStack.name = techStack.name;
-
-      await this.menteeTechStackRepository.save(menteeTechStack);
-    });
+  public async updateMenteeTechStack(userId: number, techStacks: TechStack[]) {
+    // TODO: need trasaction
+    await this.menteeTechStackRepository.deleteAllByUserId(userId);
+    await this.menteeTechStackRepository.saveAll(userId, techStacks);
   }
 }
