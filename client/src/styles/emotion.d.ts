@@ -24,5 +24,7 @@ declare module '@emotion/react' {
     Background: string;
     Box: string;
     TextColor: string;
+    Filter: string;
+    ColorFilter: string;
   }
 }

@@ -10,6 +10,11 @@ export enum LeftOrRight {
   RIGHT,
 }
 
+export enum ThemeModeEnum {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
 export enum MentorOrMentee {
   MENTOR = 'MENTOR',
   MENTEE = 'MENTEE',
