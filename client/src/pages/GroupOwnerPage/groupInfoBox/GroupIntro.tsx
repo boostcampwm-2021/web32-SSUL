@@ -3,9 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { groupOwnerHttpClient } from '@api';
-
-const MIN_INTRO_LENGTH = 1;
-const MAX_INTRO_LENGTH = 500;
+import { MAX_INTRO_LEN, MIN_INTRO_LEN } from '@constants/consts';
 
 function GroupIntro(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
@@ -18,10 +16,8 @@ function GroupIntro(): JSX.Element {
     const text = textInput.current;
 
     if (isEdit && text !== undefined) {
-      if (text.length < MIN_INTRO_LENGTH || text.length > MAX_INTRO_LENGTH) {
-        setNotificationText(
-          `소개글은 ${MIN_INTRO_LENGTH} ~ ${MAX_INTRO_LENGTH}자 내외로 작성해주세요!`,
-        );
+      if (text.length < MAX_INTRO_LEN || text.length > MIN_INTRO_LEN) {
+        setNotificationText(`소개글은 ${MIN_INTRO_LEN} ~ ${MAX_INTRO_LEN}자 내외로 작성해주세요!`);
         return;
       }
       dispatch(setGroupAdminData({ intro: text }));
@@ -46,7 +42,7 @@ function GroupIntro(): JSX.Element {
         <EditText
           onChange={handleEditTextChange}
           defaultValue={intro}
-          maxLength={MAX_INTRO_LENGTH}
+          maxLength={MIN_INTRO_LEN}
         ></EditText>
       ) : (
         <Text>{intro}</Text>

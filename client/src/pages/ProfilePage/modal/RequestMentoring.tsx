@@ -4,35 +4,38 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
 import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
-import { AcceptRequestInfo, MentoringRequestData } from '@types';
+import { MentoringAcceptRequestDto, MentoringRequest } from '@types';
 import { formatDateToString } from '@utils/Date';
+import {
+  MENTORIG_REQUEST_EMPTY_TEXT,
+  MENTORING_APPLY_LIST,
+  SUGGEST_UPDATE_PROFIE_INFO,
+} from '@constants/consts';
 
 function RequestMentoring(): JSX.Element {
-  const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
+  const [requestList, setRequestList] = useState<MentoringRequest[]>([]);
   const { mentorId, userId } = useAppSelector(selectProfileData);
 
   const fetchMentoringRequests = async () => {
-    const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(
-      mentorId,
-    );
+    const fetchedData: MentoringRequest[] = await mentoringHttpClient.getMentoringRequest(mentorId);
     setRequestList(fetchedData);
   };
 
-  const handleAcceptButtonClick = (data: MentoringRequestData) => async () => {
-    const acceptRequest: AcceptRequestInfo = {
+  const handleAcceptButtonClick = (data: MentoringRequest) => async () => {
+    const body: MentoringAcceptRequestDto = {
       id: data.id,
       groupId: data.groupId,
       userId: userId,
     };
     try {
-      await mentoringHttpClient.acceptMentoringRequest(acceptRequest);
+      await mentoringHttpClient.acceptMentoringRequest(body);
       fetchMentoringRequests();
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handleRejectButtonClick = (data: MentoringRequestData) => async () => {
+  const handleRejectButtonClick = (data: MentoringRequest) => async () => {
     try {
       await mentoringHttpClient.rejectMentoringRequest(data.id);
       fetchMentoringRequests();
@@ -41,7 +44,7 @@ function RequestMentoring(): JSX.Element {
     }
   };
 
-  const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
+  const makeRequestBox = (data: MentoringRequest, idx: number): JSX.Element => {
     return (
       <BoxContainer data-test="request-container" key={idx}>
         <ImageContainer>
@@ -65,15 +68,15 @@ function RequestMentoring(): JSX.Element {
   }, []);
   return (
     <Container>
-      <ModalTitle>멘토링 신청 리스트</ModalTitle>
+      <ModalTitle>{MENTORING_APPLY_LIST}</ModalTitle>
       {requestList.length > 0 ? (
         <ScrollContainer>
           {requestList.map((data, idx) => makeRequestBox(data, idx))}
         </ScrollContainer>
       ) : (
         <>
-          <EmptyMessage>아직 멘토링 요청이 없어요...</EmptyMessage>
-          <SubMessage>프로필을 업데이트 해보는건 어떨까요?</SubMessage>
+          <EmptyMessage>{MENTORIG_REQUEST_EMPTY_TEXT}</EmptyMessage>
+          <SubMessage>{SUGGEST_UPDATE_PROFIE_INFO}</SubMessage>
         </>
       )}
     </Container>

@@ -4,25 +4,23 @@ import { makeRangeNumberArray } from '@utils/Range';
 import { useAppDispatch } from '@hooks';
 import { checkPageNumber } from '@store/group/filterSlice';
 import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
+import { FIRST_PAGE_NUM, MAX_PAGE_CNT } from '@constants/consts';
 
-interface PaginationProps {
+interface Props {
   totalPages: number;
   curPage: number;
   createdQuery: ActionCreatorWithoutPayload<string>;
 }
 
-const FIRST_PAGE_NUM = 1;
-const PAGE_OFFSET_CNT = 5;
-
-function Pagination({ totalPages, curPage, createdQuery }: PaginationProps): JSX.Element {
+function Pagination({ totalPages, curPage, createdQuery }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const [isFirstPageNumber, setIsFirstPageNumber] = useState<boolean>(true);
   const [isLastPageNumber, setIsLastPageNumberstate] = useState<boolean>(true);
-  const firstPageNumber = Math.floor((curPage - 1) / PAGE_OFFSET_CNT) * PAGE_OFFSET_CNT + 1;
+  const firstPageNumber = Math.floor((curPage - 1) / MAX_PAGE_CNT) * MAX_PAGE_CNT + 1;
   const lastPageNumber =
-    firstPageNumber + PAGE_OFFSET_CNT - 1 > totalPages
+    firstPageNumber + MAX_PAGE_CNT - 1 > totalPages
       ? totalPages
-      : firstPageNumber + PAGE_OFFSET_CNT - 1;
+      : firstPageNumber + MAX_PAGE_CNT - 1;
   const pageCnt: number = lastPageNumber - firstPageNumber + 1;
 
   const handlePageNumberButton = (e: React.MouseEvent<HTMLButtonElement>) => {

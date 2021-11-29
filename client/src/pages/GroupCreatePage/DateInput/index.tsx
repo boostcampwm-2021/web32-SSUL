@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { DatePicker } from '@components';
+import { DATE_INTRO } from '@constants/consts';
 
 function DateInput(): JSX.Element {
   const { startAt, endAt } = useAppSelector(groupCreateDataState);
@@ -13,7 +14,7 @@ function DateInput(): JSX.Element {
 
   return (
     <>
-      <Title>시작일, 종료일을 선택해주세요.</Title>
+      <Title>{DATE_INTRO}</Title>
       <DatePicker startAt={startAt} endAt={endAt} setDate={setDate} />
     </>
   );

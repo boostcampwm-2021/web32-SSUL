@@ -23,18 +23,14 @@ export class GroupEnrollment {
   type: GroupEnrollmentAs | string;
 
   @ManyToOne(() => User, (user) => user.groupEnrollments, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
     eager: true,
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @JoinColumn({ name: 'group_id' })
   @ManyToOne(() => Group, (group) => group.groupEnrollments, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
     eager: true,
   })
-  @JoinColumn({ name: 'group_id' })
   group: Group;
 }

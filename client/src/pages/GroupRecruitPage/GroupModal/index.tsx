@@ -1,19 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { GroupCardDetail } from '@types';
+import { GroupCardDetail, GroupRoleResponse } from '@types';
 import GroupDetailHeader from './GroupDetailHeader';
 import GroupDetailStatus from './GroupDetailStatus';
 import GroupDetailTitle from './GroupDetailTitle';
 import GroupDetailFooter from './GroupDetailFooter';
 import { calculateRemainTimeFromNow } from '@utils/Date';
 import { groupHttpClient } from '@api';
+import { GroupEnrollmentState } from '@constants/enums';
+import { MSG_IS_GROUP_MENTEE, MSG_IS_GROUP_MENTOR, MSG_IS_GROUP_OWNER } from '@constants/consts';
 
 interface Props {
   contents: GroupCardDetail;
-}
-
-interface GroupEnrollment {
-  type?: string;
 }
 
 function GroupModal({ contents }: Props): JSX.Element {
@@ -34,12 +33,12 @@ function GroupModal({ contents }: Props): JSX.Element {
 
   const notificationMessage = (type: string) => {
     switch (type) {
-      case 'OWNER':
-        return `그룹장인 그룹입니다.`;
-      case 'MENTOR':
-        return `멘토인 그룹입니다.`;
-      case 'MENTEE':
-        return `멘티인 그룹입니다.`;
+      case GroupEnrollmentState.OWNER:
+        return MSG_IS_GROUP_OWNER;
+      case GroupEnrollmentState.MENTOR:
+        return MSG_IS_GROUP_MENTOR;
+      case GroupEnrollmentState.MENTEE:
+        return MSG_IS_GROUP_MENTEE;
       default:
         return '';
     }
@@ -48,7 +47,7 @@ function GroupModal({ contents }: Props): JSX.Element {
   useEffect(() => {
     const test = async () => {
       try {
-        const groupRole: GroupEnrollment = await groupHttpClient.getGroupRole(id);
+        const groupRole: GroupRoleResponse = await groupHttpClient.getGroupRole(id);
         setNotification(notificationMessage(String(groupRole.type)));
       } catch (e: any) {
         setNotification(e.description);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { PostTypeEnum } from '@constants/enums';
 
 interface PostTypeButton {
   type: string;
@@ -13,8 +14,8 @@ interface Props {
 }
 
 const typeButtons: PostTypeButton[] = [
-  { type: 'NORMAL', content: '일반', color: 'Green' },
-  { type: 'NOTICE', content: '공지', color: 'Red' },
+  { type: PostTypeEnum.NORMAL, content: '일반', color: 'Green' },
+  { type: PostTypeEnum.NOTICE, content: '공지', color: 'Red' },
 ];
 
 function PostTypeNav({ selectedType, handlePostNavItemClick }: Props): JSX.Element {
@@ -59,10 +60,8 @@ const SelectedTypeButton = styled(TypeButton)`
     switch (children) {
       case '일반':
         return props.theme.Green;
-        break;
       case '공지':
         return props.theme.Red;
-        break;
     }
   }};
 `;

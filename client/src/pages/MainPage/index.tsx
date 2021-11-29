@@ -6,11 +6,15 @@ import { LinkButton } from '../../components';
 import DeveloperImg from '../../assets/images/developer-img.jpg';
 import { categoryHttpClient } from '@api';
 import { Category } from '../../types/Category';
-
-const Tab = Object.freeze({
-  GROUP: 'GROUP',
-  MENTOR: 'MENTOR',
-});
+import {
+  MENTOR_RECRUIT,
+  GROUP_RECRUIT,
+  MAIN_MENTOR_INTRO1,
+  MAIN_MENTOR_INTRO2,
+  MAIN_GROUP_INTRO,
+  MENTOR_SEARCH,
+} from '@constants/consts';
+import { Tab } from '@constants/enums';
 
 function MainPage(): JSX.Element {
   const [tab, setTab] = useState(Tab.GROUP);
@@ -33,16 +37,16 @@ function MainPage(): JSX.Element {
         <InfoContainer>
           <Header>
             <TextBtn selected={tab === Tab.GROUP} onClick={handleGroupTabClick}>
-              그룹 찾기
+              {GROUP_RECRUIT}
             </TextBtn>
             <TextBtn selected={tab === Tab.MENTOR} onClick={handleMentorTabClick}>
-              멘토 찾기
+              {MENTOR_RECRUIT}
             </TextBtn>
           </Header>
 
           {tab === Tab.GROUP && (
             <GroupFindContainer>
-              <IntroText>함께 성장할 동료를 찾아보세요!</IntroText>
+              <IntroText>{MAIN_GROUP_INTRO}</IntroText>
               <GroupCatagoryContainer>
                 {categories.map(({ id, name, imageUrl }) => (
                   <CategoryItem key={id} id={id} name={name} url={imageUrl} />
@@ -52,10 +56,10 @@ function MainPage(): JSX.Element {
           )}
           {tab === Tab.MENTOR && (
             <MentorFindContainer>
-              <IntroText>인사이트를 넓힐 기회를 손쉽게</IntroText>
-              <IntroText>가져보세요!</IntroText>
+              <IntroText>{MAIN_MENTOR_INTRO1}</IntroText>
+              <IntroText>{MAIN_MENTOR_INTRO2}</IntroText>
               <LinkButton to="/recruit/mentor" width={300} height={50}>
-                멘토 찾기
+                {MENTOR_SEARCH}
               </LinkButton>
             </MentorFindContainer>
           )}
@@ -90,7 +94,7 @@ type TextBtnProp = {
 };
 const TextBtn = styled.button<TextBtnProp>`
   display: flex;
-  background: white;
+  background: ${(props) => props.theme.White};
   font-weight: ${(props) => (props.selected ? 600 : 400)};
   border: none;
   cursor: pointer;
@@ -98,11 +102,12 @@ const TextBtn = styled.button<TextBtnProp>`
 `;
 const GroupFindContainer = styled.div``;
 const IntroText = styled.h1`
-  margin-bottom: 32px;
+  margin-bottom: 4px;
 `;
 const GroupCatagoryContainer = styled.div`
   display: grid;
   width: 100%;
+  margin-top: 24px;
   grid-auto-rows: auto;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;

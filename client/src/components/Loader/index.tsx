@@ -5,8 +5,7 @@ import { keyframes } from '@emotion/react';
 const Loader = (): JSX.Element => {
   return (
     <Content>
-      <Spinner></Spinner>
-      <LoadingText>Loading...</LoadingText>
+      <Spinner />
     </Content>
   );
 };
@@ -42,15 +41,6 @@ const Spinner = styled.div`
   border-top-color: ${(props) => props.theme.Primary};
   border-bottom-color: ${(props) => props.theme.Primary};
   animation: ${rotate} 0.8s ease infinite;
-`;
-const LoadingText = styled.p`
-  position: absolute;
-  width: 100%;
-  top: 60vh;
-  margin-left: 10px;
-  text-align: center;
-  font-size: 3vh;
-  color: ${(props) => props.theme.Primary};
 `;
 
 export default Loader;

@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber } from "class-validator";
+import { IsBoolean, IsNumber } from 'class-validator';
 
 export class CheckMentorDto {
   @IsBoolean()

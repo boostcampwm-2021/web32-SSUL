@@ -1,10 +1,10 @@
 import HttpClient from './HttpClient';
 import {
   SimpleGroupInfoResponse,
-  UpdateGroupIntroData,
-  UpdateGroupDateData,
-  UpdateGroupNameData,
-  ParticipationRequest,
+  ParticipationDto,
+  GroupNameUpdateDto,
+  GroupDateUpdateDto,
+  GroupIntroUpdateDto,
 } from '@types';
 
 class GroupOwnerHttpClient extends HttpClient {
@@ -15,16 +15,16 @@ class GroupOwnerHttpClient extends HttpClient {
   public getGroupAdminInfo = (groupId: number): Promise<SimpleGroupInfoResponse> =>
     this.httpClient.get(`/${groupId}`);
 
-  public updateGroupName = (UpdateGroupNameData: UpdateGroupNameData): Promise<null> =>
+  public updateGroupName = (UpdateGroupNameData: GroupNameUpdateDto): Promise<null> =>
     this.httpClient.patch('/name', UpdateGroupNameData);
 
-  public updateGroupDate = (updateGroupDateData: UpdateGroupDateData): Promise<null> =>
+  public updateGroupDate = (updateGroupDateData: GroupDateUpdateDto): Promise<null> =>
     this.httpClient.patch('/date', updateGroupDateData);
 
-  public updateGroupIntro = (updateGroupIntroData: UpdateGroupIntroData): Promise<null> =>
+  public updateGroupIntro = (updateGroupIntroData: GroupIntroUpdateDto): Promise<null> =>
     this.httpClient.patch('/intro', updateGroupIntroData);
 
-  public getApplyGroupList = (groupId: number): Promise<ParticipationRequest[]> =>
+  public getApplyGroupList = (groupId: number): Promise<ParticipationDto[]> =>
     this.httpClient.get(`/apply/${groupId}`);
 
   public acceptApplyList = (applyId: number): Promise<null> =>

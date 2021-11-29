@@ -5,15 +5,16 @@ import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 @Service()
 @EntityRepository(ApplyGroup)
 export class ApplyGroupRepository extends Repository<ApplyGroup> {
-  findAllByUserIdAndState(userId: number, state: ApplyGroupState) {
+  public findAllByUserIdAndState(userId: number, state: ApplyGroupState) {
     return this.find({
       where: { userId, state },
     });
   }
 
-  findOneByGroupIdAndUserId(groupId: number, userId: number) {
+  public findOneByGroupIdAndUserId(groupId: number, userId: number) {
     return this.findOne({ where: { groupId, userId } });
   }
+
   public findAllByGroupIdAndState(groupId: number, state: ApplyGroupState) {
     return this.find({
       where: { groupId, state },

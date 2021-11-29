@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { NotificationData } from '@types';
+import { Notification } from '@types';
 import {
   NOTIFICATION_GROUP_ACCEPT,
   NOTIFICATION_GROUP_APPLY,
@@ -13,7 +13,7 @@ import { applyText, resultText } from '@utils/Notification';
 import { NotificationTypeEnum } from '@constants/enums';
 
 interface Props {
-  data: NotificationData;
+  data: Notification;
 }
 
 function Message({ data }: Props): JSX.Element {

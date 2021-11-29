@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Put, OnUndefined } from 'routing-controllers';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Put,
+  OnUndefined,
+  Session,
+  UseBefore,
+} from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Inject, Service } from 'typedi';
 import { updateTechStackDto } from '../dto/updateTechStackDto';
@@ -6,6 +15,7 @@ import { TechStack } from '../models/TechStack';
 import { TechStackService } from '../service/TechStackService';
 import { UserService } from '@domains/user/service/UserService';
 import { MentoringService } from '@domains/mentoring/service/MentoringService';
+import { isLoggedIn } from '@common/middleware/isLoggedIn';
 @OpenAPI({
   tags: ['기술스택'],
 })
@@ -42,9 +52,12 @@ export class TechStackController {
 
   @OpenAPI({ summary: '멘티 기술스택 리스트를 업데이트하는 API' })
   @Put('/mentee')
+  @UseBefore(isLoggedIn)
   @OnUndefined(200)
-  public async updateMenteeTechStack(@Body() { id, techStacks }: updateTechStackDto) {
-    const userInfo = await this.userService.getUserInfo(id);
-    await this.techStackService.updateMenteeTechStack(userInfo, techStacks);
+  public async updateMenteeTechStack(
+    @Session() session: any,
+    @Body() { techStacks }: updateTechStackDto,
+  ) {
+    await this.techStackService.updateMenteeTechStack(session.user.id, techStacks);
   }
 }

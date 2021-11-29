@@ -7,12 +7,12 @@ const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
 
 interface Props {
-  startAt: string,
-  endAt: string,
-  setDate : (startAt: string, endAt: string) => void;
+  startAt: string;
+  endAt: string;
+  setDate: (startAt: string, endAt: string) => void;
 }
-function AntDatePicker({startAt, endAt, setDate}:Props): JSX.Element {
 
+function AntDatePicker({ startAt, endAt, setDate }: Props): JSX.Element {
   const checkDate = (current: moment.Moment) => {
     const now = new Date();
     const year = now.getFullYear();

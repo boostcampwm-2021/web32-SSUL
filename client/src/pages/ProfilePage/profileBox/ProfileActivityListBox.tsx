@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useAppSelector } from '@hooks';
 import { selectProfileData } from '@store/user/profileSlice';
 import ProfileBoxContainer from './ProfileBoxContainer';
+import { ACTIVITY_LIST } from '@constants/consts';
 
 function ProfileActivityListBox(): JSX.Element {
   const { groupActivitys } = useAppSelector(selectProfileData);
@@ -20,7 +21,7 @@ function ProfileActivityListBox(): JSX.Element {
   };
   return (
     <>
-      <ProfileBoxContainer title="활동내역">{getActivityList()}</ProfileBoxContainer>
+      <ProfileBoxContainer title={ACTIVITY_LIST}>{getActivityList()}</ProfileBoxContainer>
     </>
   );
 }

@@ -1,11 +1,11 @@
 import {
-  AcceptRequestInfo,
-  MentorInfo,
-  MentoringRequest,
-  MentoringRequestData,
+  MentoringAcceptRequestDto,
+  MentorInfoResponse,
+  SimpleMentoringRequestResponse,
   MentoringRequestPostData,
   MentorListResponse,
-  RegisterMentorData,
+  MentoringRequestResponse,
+  RegisterMentorDto,
 } from '@types';
 import HttpClient from './HttpClient';
 
@@ -17,15 +17,15 @@ class MentoringHttpClient extends HttpClient {
   public getFilterdMentorList = (query: string): Promise<MentorListResponse> =>
     this.httpClient.get(`/mentor/list${query}`);
 
-  public getMentorId = (userId: number): Promise<MentorInfo> => {
+  public getMentorId = (userId: number): Promise<MentorInfoResponse> => {
     return this.httpClient.get(`/mentor/${userId}`);
   };
 
-  public registerMentor = (registerData: RegisterMentorData): Promise<null> => {
-    return this.httpClient.post(`/mentor`, registerData);
+  public registerMentor = (body: RegisterMentorDto): Promise<null> => {
+    return this.httpClient.post(`/mentor`, body);
   };
 
-  public getAllMentoringRequests = (): Promise<MentoringRequest[]> => {
+  public getAllMentoringRequests = (): Promise<SimpleMentoringRequestResponse[]> => {
     return this.httpClient.get(`/request`);
   };
 
@@ -39,15 +39,15 @@ class MentoringHttpClient extends HttpClient {
     return this.httpClient.post(`/request`, MentoringRequestData);
   };
 
-  public getMentoringRequest = (mentorId: number): Promise<MentoringRequestData[]> => {
+  public getMentoringRequest = (mentorId: number): Promise<MentoringRequestResponse[]> => {
     return this.httpClient.get(`/request/${mentorId}`);
   };
 
   public rejectMentoringRequest = (requestId: number) => {
     return this.httpClient.post(`/request/reject/${requestId}`);
   };
-  public acceptMentoringRequest = (requestData: AcceptRequestInfo) => {
-    return this.httpClient.post('/request/accept', requestData);
+  public acceptMentoringRequest = (body: MentoringAcceptRequestDto) => {
+    return this.httpClient.post('/request/accept', body);
   };
 }
 

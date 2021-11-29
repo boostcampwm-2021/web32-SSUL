@@ -14,7 +14,6 @@ export default function CategoryItem({ id, name, url }: Props): JSX.Element {
         pathname: `/recruit/group`,
         state: {
           id,
-          category: name,
         },
       }}
     >

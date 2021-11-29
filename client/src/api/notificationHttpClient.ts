@@ -1,4 +1,4 @@
-import { NotificationData } from '@types';
+import { NotificationResponse } from '@types';
 import HttpClient from './HttpClient';
 
 class NotificationHttpClient extends HttpClient {
@@ -6,12 +6,11 @@ class NotificationHttpClient extends HttpClient {
     super({ baseURL: '/api/alarm' });
   }
 
-  public getNotificationList = (): Promise<NotificationData[]> =>
-    this.httpClient.get(`/`);
+  public getNotificationList = (): Promise<NotificationResponse[]> => this.httpClient.get(`/`);
 
   public updateNotificationState = (alarmId: number): Promise<null> =>
     this.httpClient.patch(`/${alarmId}`);
-  
+
   public deleteNotification = (alarmId: number): Promise<null> =>
     this.httpClient.delete(`/${alarmId}`);
 }

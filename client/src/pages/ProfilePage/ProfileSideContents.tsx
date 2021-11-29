@@ -16,7 +16,7 @@ function ProfileSideContents(): JSX.Element {
         <GithubID data-test="github-id">{profile.gitHubId}</GithubID>
         <GithubURLContainer>
           <GithubIcon src={GithubLogo} alt="GithubIcon" />
-          <GithubURL href={`https://github.com/${profile.gitHubId}`}>GitHub Storage</GithubURL>
+          <GithubURL href={`https://github.com/${profile.gitHubId}`}>GitHub</GithubURL>
         </GithubURLContainer>
         <FeverSharingBar />
       </BaseInfo>

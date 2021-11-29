@@ -5,6 +5,7 @@ import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@store/user/globalSlice';
+import { TECH_STACK } from '@constants/consts';
 
 interface Props {
   showModal: () => void;
@@ -25,7 +26,7 @@ function ProfileTechStackBox({ showModal }: Props): JSX.Element {
 
   return (
     <>
-      <ProfileContainer title="기술스택">
+      <ProfileContainer title={TECH_STACK}>
         {getEditButtonElement()}
         <TechStackContainer>
           {techStacks.map((techStack) => (

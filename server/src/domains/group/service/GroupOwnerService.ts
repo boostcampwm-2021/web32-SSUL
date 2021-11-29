@@ -1,13 +1,13 @@
 import { Inject, Service } from 'typedi';
 import { GroupRepository } from '../repository/GroupRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { GroupApplyResponse } from '../dto/GroupApplyResponse';
 import { ApplyGroupRepository } from '../repository/ApplyGroupRepository';
-import { SimpleGroupInfoResponse } from '../dto/SimpleGroupInfoResponse';
 import { NotAuthorizedError } from '@common/error/NotAuthorizedError';
 import { GroupService } from './GroupService';
 import { GroupEnrollmentAs } from '../models/GroupEnrollment';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
+import { SimpleGroupInfoResponse } from '../dto/response/SimpleGroupInfoResponse';
+import { GroupApplyResponse } from '../dto/response/GroupApplyResponse';
 
 @Service()
 export class GroupOwnerService {
@@ -20,12 +20,12 @@ export class GroupOwnerService {
     private readonly groupService: GroupService,
   ) {}
 
-  public async getGroupInfoByGroupId(gid: number): Promise<SimpleGroupInfoResponse> {
+  public async getGroupInfo(gid: number): Promise<SimpleGroupInfoResponse> {
     const group = await this.groupRepository.findOneOrFailById(gid);
     return SimpleGroupInfoResponse.from(group);
   }
 
-  public async getApplyListByGroupId(gid: number): Promise<GroupApplyResponse[]> {
+  public async getApplyList(gid: number): Promise<GroupApplyResponse[]> {
     const applyGroupList = await this.applyGroupRepository.findAllByGroupIdAndState(
       gid,
       ApplyGroupState.PENDING,

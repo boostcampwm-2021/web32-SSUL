@@ -7,10 +7,12 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/user/profileSlice';
 import { selectUser } from '@store/user/globalSlice';
+import { TECH_STACK_INTRO } from '@constants/consts';
 
 interface Props {
   onCancel: () => void;
 }
+
 function EditTechStack({ onCancel }: Props): JSX.Element {
   const { techStacks } = useAppSelector(selectProfileData);
   const user = useAppSelector(selectUser);
@@ -45,7 +47,7 @@ function EditTechStack({ onCancel }: Props): JSX.Element {
 
   return (
     <Container>
-      <ModalTitle>기술스택을 선택해주세요!</ModalTitle>
+      <ModalTitle>{TECH_STACK_INTRO}</ModalTitle>
       <TechStackInput
         baseTechStackList={baseTechStacks}
         usingTechStacks={selectedTechStacks}

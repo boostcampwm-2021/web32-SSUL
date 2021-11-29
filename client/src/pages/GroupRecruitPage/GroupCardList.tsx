@@ -12,6 +12,7 @@ import { groupHttpClient } from '@api';
 import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
 import GroupModal from './GroupModal';
 import { groupCardDetailState } from '@store/group/cardDetailSlice';
+import { ModalTypeEnum } from '@constants/enums';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
@@ -30,6 +31,7 @@ function GroupCardList(): JSX.Element {
     toggleLoader(true);
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
+      console.log(allGroupList);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
       toggleLoader(false);
@@ -41,7 +43,7 @@ function GroupCardList(): JSX.Element {
     return <GroupCard key={groupData.id} groupContents={groupData} />;
   });
 
-  const handleModalBackgroundClick = () => dispatch(changeGroupModalState('NONE'));
+  const handleModalBackgroundClick = () => dispatch(changeGroupModalState(ModalTypeEnum.NONE));
 
   return (
     <>
@@ -51,7 +53,7 @@ function GroupCardList(): JSX.Element {
         curPage={selectedPage}
         createdQuery={createdFilterdQuery}
       />
-      {modalType !== 'NONE' && (
+      {modalType !== ModalTypeEnum.NONE && (
         <BoxModal
           style={{ width: '650px', height: '550px' }}
           element={<GroupModal contents={{ ...groupCardContetns }} />}

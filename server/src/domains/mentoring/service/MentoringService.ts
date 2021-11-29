@@ -6,18 +6,19 @@ import { UserRepository } from '@domains/user/repository/UserRepository';
 import { MentorRepository } from '../repository/MentorRepository';
 import { MentoringRequestRepository } from '../repository/MentoringRequestRepository';
 
-import { MentorInfoDto } from '../dto/MentorInfoDto';
-
 import { Mentor } from '../models/Mentor';
+import { Group } from '@domains/group/models/Group';
 
 import { UserIsNotMentorError } from '../error/UserIsNotMentorError';
 import { UserAlreadyMentorError } from '../error/UserAlreadyMentorError';
-import { MentoringRequestResponse } from '../dto/MentoringRequestResponse';
 import { MentorAlreadyRequestError } from '../error/MentorAlreadyRequestError';
 import { GroupRepository } from '@domains/group/repository/GroupRepository';
 import { MentorNotFoundError } from '../error/MentorNotFoundError';
 import { MentoringRequestNotFoundError } from '../error/MentoringRequestNotFoundError';
 import { MentoringRequest } from '../models/MentoringRequest';
+import { MentoringRequestResponse } from '../dto/response/MentoringRequestResponse';
+import { AllMentoringRequestResponse } from '../dto/response/AllMentoringRequestResponse';
+import { MentorInfoResponse } from '../dto/response/MentorInfoResponse';
 
 const EACH_PAGE_CNT = 12;
 const DEFAULT_PAGE_NUM = 1;
@@ -45,7 +46,7 @@ export class MentoringService {
     return await this.mentorRepository.save({ userId });
   }
 
-  public async getMentorIdByUserId(userId: number): Promise<MentorInfoDto> {
+  public async getMentorIdByUserId(userId: number): Promise<MentorInfoResponse> {
     const mentor = await this.mentorRepository.findOne({ where: { userId } });
     if (!mentor) {
       throw new UserIsNotMentorError(userId);
@@ -54,28 +55,14 @@ export class MentoringService {
   }
 
   public async getRequestListByMentorId(mentorId: number) {
-    const results = await this.mentoringRequestRepository.findAllByMentorId(mentorId);
-
-    return Promise.all<any>(
-      results.map(async ({ id, group, createdAt }) => {
-        const groupName = group.name;
-        const groupId = group.id;
-        const { imageUrl: categoryImage } = await this.categoryRepository.findOneOrFail({
-          where: { id: group.categoryId },
-        });
-        const { name: ownerName } = await this.userRepository.findOneOrFail({
-          where: { id: group.ownerId },
-        });
-
-        return { id, groupId, groupName, categoryImage, ownerName, createdAt };
-      }),
-    );
+    const mentoringRequests = await this.mentoringRequestRepository.findAllByMentorId(mentorId);
+    return mentoringRequests.map((request) => MentoringRequestResponse.from(request));
   }
 
-  public async getAllRequestList(): Promise<MentoringRequestResponse[]> {
+  public async getAllRequestList(): Promise<AllMentoringRequestResponse[]> {
     const mentoringRequests = await this.mentoringRequestRepository.findAll();
     return mentoringRequests.map((mentoringRequest) =>
-      MentoringRequestResponse.from(mentoringRequest),
+      AllMentoringRequestResponse.from(mentoringRequest),
     );
   }
 
@@ -85,27 +72,27 @@ export class MentoringService {
     return mentoringRequest;
   }
 
-  public async getFilterdPageMentorList(
+  public async getfilteredPageMentorList(
     page: number = DEFAULT_PAGE_NUM,
     name: string = '',
     techstack: string = '',
   ) {
-    const nameFilterdAllMentor = await this.mentorRepository.findAllByName(name);
-    const techStackFilterdAllMentor = this.filterdBytechStacks(nameFilterdAllMentor, techstack);
+    const namefilteredAllMentor = await this.mentorRepository.findAllByName(name);
+    const techStackfilteredAllMentor = this.filteredByTechStacks(namefilteredAllMentor, techstack);
     const offset = (page - 1) * EACH_PAGE_CNT;
-    const filterdPageMentors = techStackFilterdAllMentor.slice(offset, offset + EACH_PAGE_CNT);
-    const totalPages: number = Math.ceil(filterdPageMentors.length / EACH_PAGE_CNT);
-    return { mentors: filterdPageMentors, totalPages };
+    const filteredPageMentors = techStackfilteredAllMentor.slice(offset, offset + EACH_PAGE_CNT);
+    const totalPages: number = Math.ceil(filteredPageMentors.length / EACH_PAGE_CNT);
+    return { mentors: filteredPageMentors, totalPages };
   }
 
-  public filterdBytechStacks(mentors: Mentor[], filterdTechstack: string) {
-    if (!filterdTechstack) return mentors;
-    const filterdTechstacks = filterdTechstack.split(',');
+  public filteredByTechStacks(mentors: Mentor[], filteredTechstack: string) {
+    if (!filteredTechstack) return mentors;
+    const filteredTechstacks = filteredTechstack.split(',');
     return mentors
       .map((mentor) => {
         const mentorTechStacks = mentor.techStacks;
         const isIncludeTechStackList = mentorTechStacks.some((techstack) =>
-          filterdTechstacks.includes(techstack.name),
+          filteredTechstacks.includes(techstack.name),
         );
         if (isIncludeTechStackList) return mentor;
       })
@@ -129,10 +116,11 @@ export class MentoringService {
     if (mentoringRequest) throw new MentorAlreadyRequestError();
 
     const mentor = new Mentor();
-    mentor.id = mentorId;
-    const group = new Mentor();
-    group.id = groupId;
+    const group = new Group();
     const createdAt = new Date();
+
+    mentor.id = mentorId;
+    group.id = groupId;
 
     const queryResult = await this.mentoringRequestRepository.save({
       createdAt,

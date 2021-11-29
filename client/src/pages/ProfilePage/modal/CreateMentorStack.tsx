@@ -4,9 +4,14 @@ import TechStackInput from '@pages/GroupCreatePage/TechStackInput';
 import { TechStack } from '@types';
 import { mentoringHttpClient, techStackHttpClient } from '@api';
 import CustomButton from '@pages/GroupCreatePage/CustomButton';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
 import { setProfileData } from '@store/user/profileSlice';
+import {
+  MENTOR_TECH_STACK_INTRO,
+  MSG_MIN_TECH_STACK_INFO,
+  MSG_MENTOR_APPLY_ERROR,
+} from '@constants/consts';
 
 interface Props {
   onCancel: () => void;
@@ -14,28 +19,27 @@ interface Props {
 function CreateMentorStack({ onCancel }: Props): JSX.Element {
   const [baseTechStacks, setBaseTechStacks] = useState<TechStack[]>([]);
   const [selectedTechStacks, setSelectedTechStacks] = useState<TechStack[]>([]);
-  const [notificationText, setNotificationText] = useState<string>('');
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
   const checkMentorStack = () => selectedTechStacks.length > 0;
 
   const requestCreateMentor = async () => {
+    if (!user.id) return;
     if (!checkMentorStack()) {
-      setNotificationText('최소 1개 이상 기술스택을 선택해주세요!');
+      toastify(MSG_MIN_TECH_STACK_INFO, 'INFO');
       return;
     }
-    if (user.id === undefined) {
-      setNotificationText('로그인 정보가 없습니다!');
-      return;
-    }
-    setNotificationText('');
     try {
-      await mentoringHttpClient.registerMentor({ userId: user.id, techStacks: selectedTechStacks });
+      await mentoringHttpClient.registerMentor({
+        userId: user.id,
+        techStacks: selectedTechStacks,
+      });
       const { mentorId } = await mentoringHttpClient.getMentorId(user.id);
       dispatch(setProfileData({ mentorId, isMentor: true, mentoringStack: selectedTechStacks }));
       onCancel();
     } catch (e) {
-      setNotificationText('멘토 신청에 실패했습니다!');
+      toastify(MSG_MENTOR_APPLY_ERROR, 'ERROR');
     }
   };
 
@@ -50,7 +54,7 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
 
   return (
     <Container>
-      <ModalTitle>멘토링을 원하는 기술스택을 선택해주세요!</ModalTitle>
+      <ModalTitle>{MENTOR_TECH_STACK_INTRO}</ModalTitle>
       <TechStackInput
         baseTechStackList={baseTechStacks}
         usingTechStacks={selectedTechStacks}
@@ -60,7 +64,6 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
         <CustomButton label={'취소'} clickBtn={onCancel} />
         <CustomButton label={'확인'} clickBtn={requestCreateMentor} />
       </ButtonWrapper>
-      <Notification>{notificationText}</Notification>
     </Container>
   );
 }
@@ -84,13 +87,4 @@ const ModalTitle = styled.p`
   font-weight: bold;
 `;
 
-const Notification = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  line-height: 40px;
-  margin-left: 20px;
-  color: ${(props) => props.theme.Error};
-`;
 export default CreateMentorStack;

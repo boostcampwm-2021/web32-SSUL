@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
-import { SimpleGroupCardData } from '@types';
+import { SimpleGroupCard as SimpleGroupCardData } from '@types';
 import { useToast } from '@hooks';
 import { ToastMessageEnum } from '@constants/enums';
 import { MSG_NOT_JOIN_ERROR } from '@constants/consts';
@@ -49,7 +49,7 @@ const Container = styled.div<{ isClickable: boolean }>`
   border: 1px ${(props) => props.theme.Gray4} solid;
   margin-bottom: 16px;
   cursor: ${(props) => (props.isClickable ? 'pointer' : '')};
-  background-color: #fff;
+  background-color: ${(props) => props.theme.White};
 
   &:hover {
     border: 1px ${(props) => props.theme.Primary} solid;

@@ -4,11 +4,11 @@ import MentorContents from './MentorContents';
 import MentorFooter from './MentorFooter';
 import { Mentor } from '@types';
 
-interface CardProps {
+interface Props {
   contents: Mentor;
 }
 
-function MentorCard({ contents }: CardProps): JSX.Element {
+function MentorCard({ contents }: Props): JSX.Element {
   return (
     <Card>
       <MentorContents {...{ contents }} />

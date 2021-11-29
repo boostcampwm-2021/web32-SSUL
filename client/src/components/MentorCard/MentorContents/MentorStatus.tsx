@@ -2,8 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { MentorUserInfo, TechStack } from '@types';
 import { formatDateToString } from '@utils/Date';
-
-const MAX_SHOW_TECHSTACK = 3;
+import { MAX_SHOW_TECHSTACK } from '@constants/consts';
 
 interface Props {
   user: MentorUserInfo;

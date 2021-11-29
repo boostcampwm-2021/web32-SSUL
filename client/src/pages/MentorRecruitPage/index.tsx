@@ -9,6 +9,7 @@ import {
 import { useAppSelector } from '@hooks';
 import MentorSearchFilter from './MentorSearchFilter';
 import MentorCardList from './MentorCardList';
+import { SearchBarTypeEnum } from '@constants/enums';
 
 function MentorRecruitPage(): JSX.Element {
   const { mentorNameInput } = useAppSelector(returnMentorRecruitFilterState);
@@ -20,7 +21,7 @@ function MentorRecruitPage(): JSX.Element {
           searchBarInput={mentorNameInput}
           changeInputEvent={changeMentorNameInput}
           createdFilterdQuery={createdFilterdQuery}
-          inputValue={'MENTOR_NAME'}
+          inputValue={SearchBarTypeEnum.MENTOR_NAME}
         />
       </Header>
       <MentorSearchFilter />

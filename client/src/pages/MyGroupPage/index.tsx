@@ -2,21 +2,27 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLoader } from '@hooks';
 import { groupHttpClient } from '@api';
-import { ApplyState, GroupState, SimpleGroupCardData } from '@types';
+import { SimpleGroupCard } from '@types';
 import SimpleGroupCardList from './SimpleGroupCardList';
 import { TextSwitchButton } from '@components';
 import qs from 'qs';
-import { LeftOrRight, MentorOrMentee } from '@constants/enums';
+import { ApplyState, GroupState, LeftOrRight, MentorOrMentee } from '@constants/enums';
+import {
+  APPLIED_GROUP,
+  OWNED_GROUP,
+  CONTINUED_APPLY_GROUP,
+  FINISHED_APPLY_GROUP,
+} from '@constants/consts';
 
 interface MyGroups {
-  MENTOR: SimpleGroupCardData[];
-  MENTEE: SimpleGroupCardData[];
+  MENTOR: SimpleGroupCard[];
+  MENTEE: SimpleGroupCard[];
 }
 
 function MyGroupPage(): JSX.Element {
   const [role, setRole] = useState<MentorOrMentee>(MentorOrMentee.MENTEE);
-  const [applyedGroups, setApplyedGroups] = useState<SimpleGroupCardData[]>([]);
-  const [ownGroups, setOwnGroups] = useState<SimpleGroupCardData[]>([]);
+  const [applyedGroups, setApplyedGroups] = useState<SimpleGroupCard[]>([]);
+  const [ownGroups, setOwnGroups] = useState<SimpleGroupCard[]>([]);
   const [myGroups, setMyGroups] = useState<MyGroups>({ MENTOR: [], MENTEE: [] });
   const [toggleLoader, isLoading] = useLoader();
 
@@ -89,24 +95,24 @@ function MyGroupPage(): JSX.Element {
         {role === MentorOrMentee.MENTEE && (
           <>
             <SimpleGroupCardList
-              title="가입 신청한 그룹"
+              title={APPLIED_GROUP}
               groups={applyedGroups}
               isClickable={false}
             ></SimpleGroupCardList>
             <SimpleGroupCardList
-              title="내가 만든 그룹"
+              title={OWNED_GROUP}
               groups={ownGroups}
               isClickable={true}
             ></SimpleGroupCardList>
           </>
         )}
         <SimpleGroupCardList
-          title="진행중인 참여 그룹"
+          title={CONTINUED_APPLY_GROUP}
           groups={selectedMyGroups(GroupState.DOING)}
           isClickable={true}
         ></SimpleGroupCardList>
         <SimpleGroupCardList
-          title="완료된 참여 그룹"
+          title={FINISHED_APPLY_GROUP}
           groups={selectedMyGroups(GroupState.END)}
           isClickable={true}
         ></SimpleGroupCardList>

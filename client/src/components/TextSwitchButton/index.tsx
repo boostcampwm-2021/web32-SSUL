@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { LeftOrRight } from '@constants/enums';
 
-interface TextSwitchButtonProps {
+interface Props {
   leftText: string;
   rightText: string;
   defaultSide: LeftOrRight;
@@ -16,7 +16,7 @@ function TextSwitchButton({
   defaultSide,
   onLeftClick,
   onRightClick,
-}: TextSwitchButtonProps): JSX.Element {
+}: Props): JSX.Element {
   const [selected, setSelected] = useState<LeftOrRight>(defaultSide);
 
   const handleLeftButtonClick = () => {
@@ -55,7 +55,7 @@ const TextButton = styled.div<{ selected: boolean }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  color: ${(props) => (props.selected ? '#fff' : props.theme.Primary)};
+  color: ${(props) => (props.selected ? props.theme.White : props.theme.Primary)};
   background-color: ${(props) => (props.selected ? props.theme.Primary : props.theme.White)};
   border-radius: 16px;
   cursor: pointer;

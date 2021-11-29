@@ -3,17 +3,20 @@ import styled from '@emotion/styled';
 import { useAppDispatch } from '@hooks';
 import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import SearchIcon from '@assets/icon_search.png';
+import {
+  GROUP_NAME_SEARCH,
+  MAX_SEARCH_INPUT_LEN,
+  MENTOR_NAME_SEARCH,
+  TECH_NAME_SEARCH,
+  MSG_SEARCH_BAR_INPUT_LEN_ERROR,
+} from '@constants/consts';
+import { SearchBarTypeEnum } from '@constants/enums';
+import { useToast } from '@hooks';
 
-const MAX_INPUT_CNT = 10;
-
-interface searchBarProps {
+interface Props {
   searchBarInput: string;
   changeInputEvent: ActionCreatorWithPayload<string>;
   createdFilterdQuery: ActionCreatorWithoutPayload<string>;
-  inputValue: string;
-}
-
-interface StyledProps {
   inputValue: string;
 }
 
@@ -22,17 +25,18 @@ function SearchBar({
   changeInputEvent,
   inputValue,
   createdFilterdQuery,
-}: searchBarProps): JSX.Element {
+}: Props): JSX.Element {
   const dispatch = useAppDispatch();
+  const [toastify] = useToast();
 
   const returnPlaceholderText = (type: string) => {
     switch (type) {
-      case 'GROUP_NAME':
-        return '그룹 이름 검색';
-      case 'MENTOR_NAME':
-        return '멘토 이름 검색';
-      case 'TECH_STACK':
-        return '기술 이름 검색';
+      case SearchBarTypeEnum.GROUP_NAME:
+        return GROUP_NAME_SEARCH;
+      case SearchBarTypeEnum.MENTOR_NAME:
+        return MENTOR_NAME_SEARCH;
+      case SearchBarTypeEnum.TECH_STACK:
+        return TECH_NAME_SEARCH;
     }
   };
 
@@ -42,7 +46,8 @@ function SearchBar({
 
   const handleInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nowInputText = e.currentTarget.value;
-    if (nowInputText.length === MAX_INPUT_CNT) alert('10글자 이상 입력이 불가능합니다.');
+    if (nowInputText.length === MAX_SEARCH_INPUT_LEN)
+      toastify(MSG_SEARCH_BAR_INPUT_LEN_ERROR, 'ERROR');
     else dispatch(changeInputEvent(e.currentTarget.value));
   };
 
@@ -85,8 +90,12 @@ const InputValue = styled.input`
   }
 `;
 
-const SearchButton = styled.button`
-  display: ${(props: StyledProps) => (props.inputValue === 'TECH_STACK' ? 'none' : 'flex')};
+interface StyledProps {
+  inputValue: string;
+}
+
+const SearchButton = styled.button<StyledProps>`
+  display: ${(props) => (props.inputValue === SearchBarTypeEnum.TECH_STACK ? 'none' : 'flex')};
   background: ${(props) => props.theme.White};
   border: none;
   cursor: pointer;

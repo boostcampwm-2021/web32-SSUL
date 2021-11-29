@@ -4,6 +4,7 @@ import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { Category } from '@types';
 import CategoryItem from './CategoryItem';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { CATEGORY_INTRO } from '@constants/consts';
 
 interface Props {
   categorys: Category[];
@@ -26,7 +27,7 @@ function CategoryInput({ categorys }: Props): JSX.Element {
   };
   return (
     <>
-      <Title>카테고리를 선택해주세요.</Title>
+      <Title>{CATEGORY_INTRO}</Title>
       <CategoryWrapper>{getCategoryItemElements()}</CategoryWrapper>
     </>
   );

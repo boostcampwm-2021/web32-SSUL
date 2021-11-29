@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ParticipationRequest } from '@types';
+import { Participation } from '@types';
 import { RootState } from '../index';
 
 interface GroupAdminState {
@@ -8,7 +8,7 @@ interface GroupAdminState {
   intro: string;
   startAt: string;
   endAt: string;
-  requestList: ParticipationRequest[];
+  requestList: Participation[];
 }
 
 const INTIIAL_STATE: GroupAdminState = {

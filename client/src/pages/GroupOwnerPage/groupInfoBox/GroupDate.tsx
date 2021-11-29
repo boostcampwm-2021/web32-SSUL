@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { DatePicker } from '@components';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { groupOwnerHttpClient } from '@api';
+import { DATE_INTRO, DATE_TITLE } from '@constants/consts';
 
 function GroupDate(): JSX.Element {
+  const [toastify] = useToast();
   const { groupId, startAt, endAt } = useAppSelector(selectGroupAdminData);
-  const [notificationText, setNotificationText] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -18,22 +19,20 @@ function GroupDate(): JSX.Element {
   const handleEditButtonClick = () => {
     if (isEdit) {
       if (startAt === '' || endAt === '') {
-        setNotificationText('시작일/종료일을 선택해주세요!');
+        toastify(DATE_INTRO, 'ERROR');
         return;
       }
       dispatch(setGroupAdminData({ startAt, endAt }));
       groupOwnerHttpClient.updateGroupDate({ gid: groupId, startAt, endAt });
     }
 
-    setNotificationText('');
     setIsEdit(!isEdit);
   };
 
   return (
     <Container>
       <Header>
-        <BoxTitle>시작/종료일</BoxTitle>
-        <Notification>{notificationText}</Notification>
+        <BoxTitle>{DATE_TITLE}</BoxTitle>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
@@ -88,10 +87,5 @@ const Text = styled.p`
   white-space: pre-wrap;
   word-break: break-all;
   overflow: auto;
-`;
-
-const Notification = styled.div`
-  font-size: 13px;
-  color: ${(props) => props.theme.Error}; ;
 `;
 export default GroupDate;

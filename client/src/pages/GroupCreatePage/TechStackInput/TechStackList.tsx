@@ -10,6 +10,7 @@ interface Props {
   usingTechStacks: TechStack[];
   setUsingTechStacks: (newTechStacks: TechStack[]) => void;
 }
+
 function TechStackList({ techStackList, usingTechStacks, setUsingTechStacks }: Props): JSX.Element {
   const handleTechStackClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTechStack = e.target as HTMLButtonElement;

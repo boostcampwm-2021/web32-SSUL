@@ -7,6 +7,9 @@ import { postHttpClient } from '@api';
 import { Post as PostType } from '@types';
 import { getPostTypeString } from '@utils/Post';
 import { formatDateToString } from '@utils/Date';
+import { ModalTypeEnum } from '@constants/enums';
+import { HIT } from '@constants/consts';
+import { PostTypeEnum } from '@constants/enums';
 
 interface Props {
   post: PostType;
@@ -18,7 +21,7 @@ function Post({ post }: Props): JSX.Element {
   const handlePostItemClick = ({ currentTarget }: MouseEvent<EventTarget & HTMLDivElement>) => {
     const postId = Number(currentTarget.id);
     dispatch(selectPost(postId));
-    dispatch(changeGroupModalState('READ'));
+    dispatch(changeGroupModalState(ModalTypeEnum.READ));
     postHttpClient.increasePostHit(postId);
   };
 
@@ -27,7 +30,9 @@ function Post({ post }: Props): JSX.Element {
       <MainInfoBox>
         <MainSubInfoBox>
           <Type type={post.type}>{getPostTypeString(post.type)}</Type>
-          <Hit>조회수 {post.hit}</Hit>
+          <Hit>
+            {HIT} {post.hit}
+          </Hit>
         </MainSubInfoBox>
         <Title>{post.title}</Title>
       </MainInfoBox>
@@ -67,7 +72,7 @@ type TypeProps = {
 const Type = styled.span<TypeProps>`
   font-size: 0.8rem;
   font-weight: 600;
-  color: ${(props) => (props.type === 'NORMAL' ? props.theme.Green : props.theme.Red)};
+  color: ${(props) => (props.type === PostTypeEnum.NORMAL ? props.theme.Green : props.theme.Red)};
   margin-right: 12px;
 `;
 const Title = styled.span`

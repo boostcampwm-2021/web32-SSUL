@@ -5,5 +5,12 @@ export interface Category {
 }
 
 export interface CategoryData {
+  id: number;
   name: string;
+}
+
+export interface CategoryResponse {
+  id: number;
+  name: string;
+  imageUrl: string;
 }

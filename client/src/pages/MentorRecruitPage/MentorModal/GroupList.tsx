@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
 import { groupHttpClient, mentoringHttpClient } from '@api';
-import { MentoringRequest, MentoringRequestPostData, OwnGroupsInfo } from '@types';
+import { SimpleMentoringRequest, MentoringRequestPostData, OwnGroup } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 import { changeGroupModalState } from '@store/util/Slice';
 import { useHistory } from 'react-router';
+import { MentorButtonType, ModalTypeEnum } from '@constants/enums';
+import { APPLY_CANCEL, APPLY_TEXT, SHOW_GROUP } from '@constants/consts';
 
 function GroupList(): JSX.Element {
-  const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
-  const [allMentoringRequests, setAllMentoringRequests] = useState<MentoringRequest[]>([]);
+  const [ownGroups, setOwnGroups] = useState<OwnGroup[]>([]);
+  const [allMentoringRequests, setAllMentoringRequests] = useState<SimpleMentoringRequest[]>([]);
   const { mentorId } = useAppSelector(mentorCardDetailState);
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -28,16 +30,16 @@ function GroupList(): JSX.Element {
 
   const handleButtonClick = (type: string, groupId: number) => {
     return async () => {
-      if (type === 'GROUP_INFO') {
+      if (type === MentorButtonType.GROUP_INFO) {
         history.push({ pathname: `/group/${groupId}` });
-      } else if (type === 'APPLY_BUTTON') {
+      } else if (type === MentorButtonType.APPLY_BUTTON) {
         const postData: MentoringRequestPostData = { groupId, mentorId };
         await mentoringHttpClient.postMentoringRequests(postData);
-      } else if (type === 'CANCEL_BUTTON') {
+      } else if (type === MentorButtonType.CANCEL_BUTTON) {
         const deleteQuery = `?mentor=${mentorId}&group=${groupId}`;
         await mentoringHttpClient.deleteMentoringRequests(deleteQuery);
       }
-      dispatch(changeGroupModalState('NONE'));
+      dispatch(changeGroupModalState(ModalTypeEnum.NONE));
     };
   };
 
@@ -61,16 +63,16 @@ function GroupList(): JSX.Element {
           {formatDateToString(group.startAt)} ~ {formatDateToString(group.endAt)}
         </GroupDueDate>
         <ButtonWrapper>
-          <GroupInfoButton onClick={handleButtonClick('GROUP_INFO', group.id)}>
-            그룹 보기
+          <GroupInfoButton onClick={handleButtonClick(MentorButtonType.GROUP_INFO, group.id)}>
+            {SHOW_GROUP}
           </GroupInfoButton>
           {alreadyRequestMentoring ? (
-            <CancelButton onClick={handleButtonClick('CANCEL_BUTTON', group.id)}>
-              신청 취소
+            <CancelButton onClick={handleButtonClick(MentorButtonType.CANCEL_BUTTON, group.id)}>
+              {APPLY_CANCEL}
             </CancelButton>
           ) : (
-            <ApplyButton onClick={handleButtonClick('APPLY_BUTTON', group.id)}>
-              신청 하기
+            <ApplyButton onClick={handleButtonClick(MentorButtonType.APPLY_BUTTON, group.id)}>
+              {APPLY_TEXT}
             </ApplyButton>
           )}
         </ButtonWrapper>

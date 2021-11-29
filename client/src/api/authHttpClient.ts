@@ -1,14 +1,15 @@
 import HttpClient from './HttpClient';
-import { ResponseGithubUserData, ResponseUserData } from '@types';
+import { GithubUserResponse, AuthedUserResponse } from '@types';
 
 class AuthHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/auth' });
   }
 
-  public getSilentRefresh = (): Promise<ResponseUserData> => this.httpClient.get('/silent-refresh');
+  public getSilentRefresh = (): Promise<AuthedUserResponse> =>
+    this.httpClient.get('/silent-refresh');
 
-  public login = (code: string): Promise<ResponseGithubUserData> =>
+  public login = (code: string): Promise<GithubUserResponse> =>
     this.httpClient.post(`/login/social?code=${code}`);
 
   public logout = (): Promise<null> => this.httpClient.get('/logout');

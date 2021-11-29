@@ -8,8 +8,7 @@ import {
   createdFilterdQuery,
 } from '@store/group/filterSlice';
 import { TechStack } from '@types';
-
-const MAX_SELECTED_INDEX = 5;
+import { MAX_SELECT_TECHSTACK_CNT } from '@constants/consts';
 
 interface Props {
   listView: TechStack[];
@@ -25,7 +24,7 @@ function TechList({ listView }: Props): JSX.Element {
     clickedTechStack.classList.remove('shake');
     clickedTechStack.offsetWidth;
 
-    if (selectedTechStack.length >= MAX_SELECTED_INDEX) {
+    if (selectedTechStack.length >= MAX_SELECT_TECHSTACK_CNT) {
       clickedTechStack.classList.add('shake');
     } else {
       selectedTechStackDispatch(pushSelectedTechStack(techStackName));
