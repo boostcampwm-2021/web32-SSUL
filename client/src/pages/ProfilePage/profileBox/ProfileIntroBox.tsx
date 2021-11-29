@@ -70,13 +70,14 @@ function ProfileIntroBox(): JSX.Element {
   );
 }
 
-const ProfileText = styled.pre`
+const ProfileText = styled.p`
   width: 600px;
   min-height: 40px;
   margin: 20px;
   white-space: pre-wrap;
   word-break: break-all;
   overflow: auto;
+  padding: 8px;
   font-size: 14px;
 `;
 
@@ -85,6 +86,7 @@ const ProfileEditText = styled.textarea`
   margin: 20px;
   font-size: 14px;
   resize: none;
+  padding: 8px;
   border: 1px ${(props) => props.theme.Primary} solid;
   border-radius: 5px;
   &:focus {

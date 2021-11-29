@@ -46,14 +46,17 @@ const Container = styled.div`
   justify-content: space-around;
   width: 300px;
   height: 40px;
-  border: 1px ${(props) => props.theme.Primary} solid;
   border-radius: 16px;
+  border: 1px ${(props) => props.theme.Primary} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const TextButton = styled.div<{ selected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 700;
   width: 100%;
   color: ${(props) => (props.selected ? props.theme.White : props.theme.Primary)};
   background-color: ${(props) => (props.selected ? props.theme.Primary : props.theme.White)};

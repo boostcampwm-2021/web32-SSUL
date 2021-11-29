@@ -82,7 +82,7 @@ const TechListItem = styled.button`
   margin: 5px 5px;
   padding: 0px 10px;
 
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
 
   border-radius: 10px;
   border: none;

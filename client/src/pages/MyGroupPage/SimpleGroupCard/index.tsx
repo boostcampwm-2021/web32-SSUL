@@ -46,24 +46,26 @@ const Container = styled.div<{ isClickable: boolean }>`
   padding: 8px;
   height: 120px;
   border-radius: 8px;
-  border: 1px ${(props) => props.theme.Gray4} solid;
   margin-bottom: 16px;
   cursor: ${(props) => (props.isClickable ? 'pointer' : '')};
-  background-color: ${(props) => props.theme.White};
+  border: 1.75px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 
   &:hover {
-    border: 1px ${(props) => props.theme.Primary} solid;
+    border: 1.75px ${(props) => props.theme.Primary} solid;
   }
 `;
 
 const GroupName = styled.span`
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.9rem;
   word-break: break-all;
 `;
 
 const GroupUserCounter = styled.span`
   font-size: 0.7rem;
+  color: ${(props) => props.theme.Gray3};
 `;
 
 const GroupStatus = styled.span`

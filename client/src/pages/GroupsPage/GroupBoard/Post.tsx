@@ -53,7 +53,7 @@ const Container = styled.div`
   padding: 10px 48px 10px 48px;
   margin-bottom: 12px;
   border-radius: 12px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   cursor: pointer;
 `;
 const MainInfoBox = styled.div`

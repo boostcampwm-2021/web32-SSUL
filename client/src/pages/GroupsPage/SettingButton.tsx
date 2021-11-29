@@ -19,7 +19,7 @@ function SettingButton(): JSX.Element {
 
 const Container = styled.div`
   position: absolute;
-  top: 62px;
+  top: 70px;
   left: calc(50% + 480px);
 `;
 

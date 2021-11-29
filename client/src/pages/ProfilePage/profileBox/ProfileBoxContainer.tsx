@@ -21,6 +21,8 @@ const Container = styled.div`
   min-height: 100px;
   border-radius: 10px;
   border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const BoxTitle = styled.p`

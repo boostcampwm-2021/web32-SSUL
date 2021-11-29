@@ -18,6 +18,8 @@ const LinkButton = styled(Link)<Props>`
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 24px;
+  font-size: 1.11rem;
 `;
 
 export default LinkButton;

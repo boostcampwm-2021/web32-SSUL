@@ -55,8 +55,8 @@ const FloatingButton = styled(Link)`
   border-radius: 50px;
   cursor: pointer;
   text-align: center;
-
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
   color: ${(props) => props.theme.White};
   background-color: ${(props) => props.theme.Primary};
 

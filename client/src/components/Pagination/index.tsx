@@ -95,7 +95,7 @@ const PageNumber = styled.button`
   margin: 10px;
   padding: 10px;
   text-align: center;
-  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
+  box-shadow: ${(props) => props.theme.Shadow};
   border-radius: 10px;
   border: none;
   cursor: pointer;

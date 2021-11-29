@@ -78,9 +78,11 @@ const Container = styled.h3`
 
 const CategoryItem = styled.button`
   display: flex;
-  padding: 10px;
+  padding: 8px 10px 8px 10px;
+  font-size: 0.95rem;
+  border-radius: 10px;
 
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   border-radius: 10px;
   outline: none;
   border: none;
@@ -90,6 +92,7 @@ const CategoryItem = styled.button`
 const CategoryItemNonSelect = styled(CategoryItem)`
   color: ${(props) => props.theme.Gray3};
   background: ${(props) => props.theme.Gray6};
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 const CategoryItemSelect = styled(CategoryItem)`

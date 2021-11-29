@@ -35,7 +35,7 @@ const Container = styled.div`
   padding: 4px 8px 4px 8px;
   margin: 0px 24px 0px 24px;
   box-sizing: border-box;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   cursor: pointer;
 `;
 
@@ -46,7 +46,7 @@ const Range = styled.div`
   background-color: ${(props: StyledProps) => (props.role === 'MENTEE' ? '#F2F2F2' : '#BDBDBD')};
   border-radius: 24px;
   box-sizing: border-box;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   transition: all 0.75s ease-in;
 `;
 
@@ -59,7 +59,7 @@ const Button = styled.div`
   border-radius: 24px;
   box-sizing: border-box;
   z-index: 999;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   transition: left 0.5s ease-in;
 `;
 

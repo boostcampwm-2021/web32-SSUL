@@ -23,7 +23,7 @@ const Container = styled.div`
   padding: 16px;
   border: 1px solid ${(props) => props.theme.Gray6};
   border-radius: 8px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 export default GroupUserBox;

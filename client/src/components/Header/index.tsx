@@ -44,7 +44,9 @@ const Container = styled.div`
   padding: 12px 32px 0px 32px;
   background-color: ${(props) => props.theme.White};
   box-sizing: border-box;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  border-bottom: 1px solid ${(props) => props.theme.Gray5};
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.White};
   z-index: 9999;
 `;
 

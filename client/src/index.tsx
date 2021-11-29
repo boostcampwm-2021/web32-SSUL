@@ -10,7 +10,7 @@ import store from './store';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme.light}>
         <GlobalStyle />
         <App />
       </ThemeProvider>
