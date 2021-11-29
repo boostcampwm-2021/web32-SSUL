@@ -16,6 +16,7 @@ interface ProfileData {
   name: string;
   avatarUrl: string;
 }
+
 const initialState: ProfileData = {
   intro: '',
   techStacks: [],

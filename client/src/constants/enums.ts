@@ -23,3 +23,17 @@ export enum NotificationTypeEnum {
   MENTORING_ACCEPTED = 'MENTORING_ACCEPTED',
   METTORING_DECLIEND = 'METTORING_DECLIEND',
 }
+
+export enum ModalTypeEnum {
+  NONE = 'NONE',
+  READ = 'READ',
+  POST = 'POST',
+  GROUP_DETAIL = 'GROUP_DETAIL',
+  MENTOR_DETAIL = 'MENTOR_DETAIL',
+}
+
+export enum SearchBarTypeEnum {
+  GROUP_NAME = 'GROUP_NAME',
+  MENTOR_NAME = 'MENTOR_NAME',
+  TECH_STACK = 'TECH_STACK',
+}

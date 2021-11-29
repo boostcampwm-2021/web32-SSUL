@@ -1,22 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
-
-export enum ModalType {
-  NONE = 'NONE',
-  READ = 'READ',
-  POST = 'POST',
-  GROUP_DETAIL = 'GROUP_DETAIL',
-  MENTOR_DETAIL = 'MENTOR_DETAIL',
-}
+import { ModalTypeEnum } from '@constants/enums';
 
 export interface UtilState {
   isLoading: boolean;
-  groupModalState: ModalType;
+  groupModalState: ModalTypeEnum;
 }
 
 const initialState: UtilState = {
   isLoading: false,
-  groupModalState: ModalType.NONE,
+  groupModalState: ModalTypeEnum.NONE,
 };
 
 export const utilSlice = createSlice({
@@ -35,4 +28,5 @@ export const utilSlice = createSlice({
 export const { changeGroupModalState, setLoadingState } = utilSlice.actions;
 export default utilSlice.reducer;
 export const selectLoadingState = (state: RootState): boolean => state.util.isLoading;
-export const selectGroupModalState = (state: RootState): ModalType => state.util.groupModalState;
+export const selectGroupModalState = (state: RootState): ModalTypeEnum =>
+  state.util.groupModalState;

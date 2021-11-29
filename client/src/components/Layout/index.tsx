@@ -5,6 +5,7 @@ import { useAppSelector } from '@hooks';
 import { selectLoadingState } from '@store/util/Slice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ONE_SECOND } from '@constants/consts';
 
 const DefaultLayout = (): JSX.Element => {
   const isLoading = useAppSelector(selectLoadingState);
@@ -16,8 +17,7 @@ const DefaultLayout = (): JSX.Element => {
       <ToastContainer
         style={{ top: '90px' }}
         position="top-right"
-        autoClose={3000}
-        limit={1}
+        autoClose={3 * ONE_SECOND}
         hideProgressBar
         pauseOnFocusLoss
         draggable

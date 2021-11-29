@@ -8,21 +8,20 @@ import {
   checkCategory,
   createdFilterdQuery,
 } from '@store/group/filterSlice';
-import { useHistory } from 'react-router';
+import { useLocation } from 'react-router';
 
-interface CategorySate {
+interface CategoryState {
   id: number;
-  category: string;
 }
 
 function CategoryList(): JSX.Element {
   const [baseCategoryList, setBaseCategoryList] = useState<Category[]>([]);
   const { selectedCategoryId } = useAppSelector(returnGroupRecruitFilterState);
   const groupRecruitDispatch = useAppDispatch();
-  const history = useHistory();
+  const location = useLocation<CategoryState>();
 
   useEffect(() => {
-    const { id } = (history.location.state as CategorySate) ?? { id: 0 };
+    const { id } = location.state ?? { id: 0 };
 
     const getCategoryListData = async () => {
       const categoryList = await categoryHttpClient.getCategories();

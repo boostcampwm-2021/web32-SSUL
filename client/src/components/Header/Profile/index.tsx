@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { authHttpClient } from '@api';
 import { loginWithGithub } from '@utils/Auth';
 import { initUser, selectUser } from '@store/user/globalSlice';
-import BubbleModal from '../../BubbleModal';
+import { BubbleModal } from '@components';
 
 function Profile(): JSX.Element {
   const history = useHistory();

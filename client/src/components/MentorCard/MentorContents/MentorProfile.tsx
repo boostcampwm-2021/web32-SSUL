@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { MentorUserInfo } from '@types';
+import { GAUGE_BAR_DEFAULT_INDEX } from '@constants/consts';
 
 interface Props {
   user: MentorUserInfo;
 }
 
 function MentorProfile({ user }: Props): JSX.Element {
-  const DEFAULT_INDEX = 30;
   return (
     <Container>
       <Profile>
         <ProfileImage src={user.avatarUrl} />
         <ProfileName>{user.name}</ProfileName>
       </Profile>
-      <ShareStack style={{ width: `${DEFAULT_INDEX + user.shareStack}px` }}>
+      <ShareStack style={{ width: `${GAUGE_BAR_DEFAULT_INDEX + user.shareStack}px` }}>
         <ShareNum>{user.shareStack}</ShareNum>
       </ShareStack>
     </Container>

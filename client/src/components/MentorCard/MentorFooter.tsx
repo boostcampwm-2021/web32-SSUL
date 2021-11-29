@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { selectUser } from '@store/user/globalSlice';
 import { setMentorCardDetail } from '@store/mentor/cardDetailSlice';
+import { ModalTypeEnum } from '@constants/enums';
+import { MENTOR_APPLY_TEXT } from '@constants/consts';
 
 interface Props {
   mentorId: number;
@@ -15,12 +17,12 @@ function MentorFooter({ mentorId }: Props): JSX.Element {
 
   const handleShowDetailButtonClick = () => {
     dispatch(setMentorCardDetail(mentorId));
-    dispatch(changeGroupModalState('MENTOR_DETAIL'));
+    dispatch(changeGroupModalState(ModalTypeEnum.MENTOR_DETAIL));
   };
   return (
     <Container>
-      {id !== 0 && id !== mentorId && (
-        <ApplyButton onClick={handleShowDetailButtonClick}>멘토링 신청</ApplyButton>
+      {!id && id !== mentorId && (
+        <ApplyButton onClick={handleShowDetailButtonClick}>{MENTOR_APPLY_TEXT}</ApplyButton>
       )}
     </Container>
   );

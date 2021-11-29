@@ -7,6 +7,7 @@ interface Style {
   padding?: string;
   background?: string;
 }
+
 interface Props {
   style?: Style;
   element?: JSX.Element;

@@ -4,11 +4,11 @@ import MentorStatus from './MentorStatus';
 import MentorProfile from './MentorProfile';
 import { Mentor } from '@types';
 
-interface CardProps {
+interface Props {
   contents: Mentor;
 }
 
-function MentorContents({ contents }: CardProps): JSX.Element {
+function MentorContents({ contents }: Props): JSX.Element {
   return (
     <Container>
       <MentorProfile user={contents.user} />

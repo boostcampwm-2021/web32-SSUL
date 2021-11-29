@@ -8,6 +8,7 @@ import {
   createdFilterdQuery,
 } from '@store/group/filterSlice';
 import { SearchBar } from '@components';
+import { SearchBarTypeEnum } from '@constants/enums';
 
 function SearchFilterHeader(): JSX.Element {
   const { groupNameInput } = useAppSelector(returnGroupRecruitFilterState);
@@ -18,7 +19,7 @@ function SearchFilterHeader(): JSX.Element {
         searchBarInput={groupNameInput}
         changeInputEvent={changeGroupNameInput}
         createdFilterdQuery={createdFilterdQuery}
-        inputValue={'GROUP_NAME'}
+        inputValue={SearchBarTypeEnum.GROUP_NAME}
       />
     </Container>
   );

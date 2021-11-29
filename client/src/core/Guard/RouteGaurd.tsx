@@ -7,6 +7,7 @@ import { DESC_BAD_ACCESS, MSG_BAD_ACCESS } from '@constants/consts';
 interface ParamProps {
   gid: string;
 }
+
 export type authenficateReturnType = (gid?: string) => Promise<null>;
 
 /**

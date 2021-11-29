@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
-
-enum UserType {
-  MENTEE = 'MENTEE',
-  MENTOR = 'MENTOR',
-}
+import { MentorOrMentee } from '@constants/enums';
 
 export interface UserState {
   id?: number;
@@ -13,7 +9,7 @@ export interface UserState {
   image?: string;
   feverStack?: number;
   shareStack?: number;
-  role: UserType;
+  role: MentorOrMentee;
   isLogin: boolean;
 }
 
@@ -25,7 +21,7 @@ const initialState: UserState = {
   feverStack: 0,
   shareStack: 0,
   isLogin: false,
-  role: UserType.MENTEE,
+  role: MentorOrMentee.MENTEE,
 };
 
 export const userSlice = createSlice({
@@ -38,11 +34,12 @@ export const userSlice = createSlice({
         ...state,
         ...payload,
         isLogin: true,
-        role: payload.role ?? UserType.MENTEE,
+        role: payload.role ?? MentorOrMentee.MENTEE,
       };
     },
     changeUserRole(state) {
-      const role = state.role == UserType.MENTEE ? UserType.MENTOR : UserType.MENTEE;
+      const role =
+        state.role == MentorOrMentee.MENTEE ? MentorOrMentee.MENTOR : MentorOrMentee.MENTEE;
       return { ...state, role };
     },
   },
@@ -51,4 +48,4 @@ export const userSlice = createSlice({
 export const { initUser, setUser, changeUserRole } = userSlice.actions;
 export default userSlice.reducer;
 export const selectUser = (state: RootState): UserState => state.user;
-export const selectUserRole = (state: RootState): UserType => state.user.role;
+export const selectUserRole = (state: RootState): MentorOrMentee => state.user.role;

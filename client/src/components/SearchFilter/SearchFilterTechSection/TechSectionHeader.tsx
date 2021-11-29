@@ -8,6 +8,7 @@ import {
   createdFilterdQuery,
 } from '@store/group/filterSlice';
 import { SearchBar } from '@components';
+import { SearchBarTypeEnum } from '@constants/enums';
 
 function TechSectionHeader(): JSX.Element {
   const { techStackInput } = useAppSelector(returnGroupRecruitFilterState);
@@ -18,7 +19,7 @@ function TechSectionHeader(): JSX.Element {
         searchBarInput={techStackInput}
         changeInputEvent={changeTechStackInput}
         createdFilterdQuery={createdFilterdQuery}
-        inputValue={'TECH_STACK'}
+        inputValue={SearchBarTypeEnum.TECH_STACK}
       />
       <SelectedTechList />
     </Container>

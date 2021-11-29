@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import ChatIcon from '../../../assets/icon_chat.svg';
+import ChatIcon from '@assets/icon_chat.svg';
 
 function Messenger(): JSX.Element {
   return (
