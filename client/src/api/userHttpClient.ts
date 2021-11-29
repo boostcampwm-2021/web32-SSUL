@@ -7,9 +7,12 @@ class UserHttpClient extends HttpClient {
   }
 
   public patchRole = (): Promise<null> => this.httpClient.patch('/user/role');
+
   public getIntro = (userId: number): Promise<string> => this.httpClient.get(`/intro/${userId}`);
+
   public patchIntro = (body: IntroUpdateDto): Promise<null> =>
     this.httpClient.patch('/intro/', body);
+
   public getProfile = (githubId: string): Promise<AuthedUserResponse> =>
     this.httpClient.get(`/profile/${githubId}`);
 }

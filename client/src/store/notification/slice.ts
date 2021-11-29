@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NotificationData } from '@types';
+import { Notification } from '@types';
 import { RootState } from '../index';
 
 interface NotificationState {
-  notificationList: NotificationData[];
+  notificationList: Notification[];
 }
 export const notificationSlice = createSlice({
   name: 'notificationList',

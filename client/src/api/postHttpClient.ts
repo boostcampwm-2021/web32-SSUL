@@ -1,12 +1,12 @@
 import HttpClient from './HttpClient';
-import { GroupPostDto, GroupPostRequestDto } from '@types';
+import { GroupPostResponse, GroupPostRequestDto } from '@types';
 
 class PostHttpClient extends HttpClient {
   public constructor() {
     super({ baseURL: '/api/post' });
   }
 
-  public getGroupPosts = (groupId: number): Promise<GroupPostDto[]> =>
+  public getGroupPosts = (groupId: number): Promise<GroupPostResponse[]> =>
     this.httpClient.get(`/${groupId}`);
 
   public createPost = (groupPostData: GroupPostRequestDto): Promise<null> =>

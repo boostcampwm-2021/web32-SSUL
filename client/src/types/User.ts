@@ -1,3 +1,5 @@
+import { NotificationTypeEnum } from '@constants/enums';
+
 export interface OwnerInfo {
   githubId: string;
   name: string;
@@ -13,6 +15,18 @@ export interface MentorUserInfo {
   shareStack: number;
   intro: string | null;
   createdAt: Date | null;
+}
+
+export interface Notification {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  groupId: number;
+  type: NotificationTypeEnum;
+  createdAt: string;
+  readChk: boolean;
+  senderName: string;
+  groupName: string;
 }
 
 export interface IntroUpdateDto {
@@ -31,4 +45,16 @@ export interface GithubUserResponse {
 
 export interface AuthedUserResponse extends GithubUserResponse {
   role: string;
+}
+
+export interface NotificationResponse {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  groupId: number;
+  type: NotificationTypeEnum;
+  createdAt: string;
+  readChk: boolean;
+  senderName: string;
+  groupName: string;
 }

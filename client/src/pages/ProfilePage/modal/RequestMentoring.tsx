@@ -4,35 +4,33 @@ import CustomButton from '@pages/GroupCreatePage/CustomButton';
 import { mentoringHttpClient } from '@api';
 import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
-import { AcceptRequestInfo, MentoringRequestData } from '@types';
+import { MentoringAcceptRequestDto, MentoringRequest } from '@types';
 import { formatDateToString } from '@utils/Date';
 
 function RequestMentoring(): JSX.Element {
-  const [requestList, setRequestList] = useState<MentoringRequestData[]>([]);
+  const [requestList, setRequestList] = useState<MentoringRequest[]>([]);
   const { mentorId, userId } = useAppSelector(selectProfileData);
 
   const fetchMentoringRequests = async () => {
-    const fetchedData: MentoringRequestData[] = await mentoringHttpClient.getMentoringRequest(
-      mentorId,
-    );
+    const fetchedData: MentoringRequest[] = await mentoringHttpClient.getMentoringRequest(mentorId);
     setRequestList(fetchedData);
   };
 
-  const handleAcceptButtonClick = (data: MentoringRequestData) => async () => {
-    const acceptRequest: AcceptRequestInfo = {
+  const handleAcceptButtonClick = (data: MentoringRequest) => async () => {
+    const body: MentoringAcceptRequestDto = {
       id: data.id,
       groupId: data.groupId,
       userId: userId,
     };
     try {
-      await mentoringHttpClient.acceptMentoringRequest(acceptRequest);
+      await mentoringHttpClient.acceptMentoringRequest(body);
       fetchMentoringRequests();
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handleRejectButtonClick = (data: MentoringRequestData) => async () => {
+  const handleRejectButtonClick = (data: MentoringRequest) => async () => {
     try {
       await mentoringHttpClient.rejectMentoringRequest(data.id);
       fetchMentoringRequests();
@@ -41,7 +39,7 @@ function RequestMentoring(): JSX.Element {
     }
   };
 
-  const makeRequestBox = (data: MentoringRequestData, idx: number): JSX.Element => {
+  const makeRequestBox = (data: MentoringRequest, idx: number): JSX.Element => {
     return (
       <BoxContainer data-test="request-container" key={idx}>
         <ImageContainer>

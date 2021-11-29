@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import cancelIcon from '@assets/icon_cancel.png';
-import { NotificationData } from '@types';
+import { Notification } from '@types';
 import Message from './Message';
 import { calculateNotificationTime } from '@utils/Date';
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -14,7 +14,7 @@ import { notificationHttpClient } from '@api';
 
 interface Props {
   idx: number;
-  data: NotificationData;
+  data: Notification;
 }
 
 function ListItem({ idx, data }: Props): JSX.Element {
@@ -27,7 +27,7 @@ function ListItem({ idx, data }: Props): JSX.Element {
     const newList = notificationList.map((notification) => {
       return { ...notification };
     });
-    
+
     switch (data.type) {
       case NotificationTypeEnum.JOIN_GROUP_ACCEPTED:
         history.push('/group/my');
