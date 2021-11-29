@@ -2,7 +2,7 @@ import React, { useState, useEffect, MouseEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { BubbleModalProfileItem } from '@types';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { authHttpClient } from '@api';
 import { loginWithGithub } from '@utils/Auth';
 import { initUser, selectUser } from '@store/user/globalSlice';
@@ -12,12 +12,12 @@ function Profile(): JSX.Element {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const [toggleLoader] = useLoader();
   const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [auth, setAuth] = useState<boolean>(false);
 
   const handleLoginMenuClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setIsLogin(true);
     setIsModalClicked(false);
     loginWithGithub();
   };
@@ -28,10 +28,11 @@ function Profile(): JSX.Element {
   };
   const handleLogoutMenuClick = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+    toggleLoader(true);
     await authHttpClient.logout();
-    dispatch(initUser());
-    setIsLogin(false);
+    setAuth(false);
     setIsModalClicked(false);
+    toggleLoader(false);
     history.push('/');
   };
   const handleProfileButtonClick = () => setIsModalClicked(!isModalClicked);
@@ -46,7 +47,11 @@ function Profile(): JSX.Element {
   ];
 
   useEffect(() => {
-    user.isLogin ? setIsLogin(true) : setIsLogin(false);
+    if (!auth) dispatch(initUser());
+  }, [auth]);
+
+  useEffect(() => {
+    setAuth(user.isLogin);
   }, [user]);
 
   useEffect(() => {
@@ -59,7 +64,7 @@ function Profile(): JSX.Element {
 
   return (
     <Container>
-      {isLogin ? (
+      {user.isLogin ? (
         <UserImage color={user.image} onClick={handleProfileButtonClick} />
       ) : (
         <DefaultImage onClick={handleProfileButtonClick} />
@@ -67,8 +72,8 @@ function Profile(): JSX.Element {
       {isModalClicked && (
         <BubbleModal
           type="profile-modal"
-          items={isLogin ? signBubbleModalProfileItems : noSignBubbleModalProfileItems}
-          headerVisibility={isLogin}
+          items={user.isLogin ? signBubbleModalProfileItems : noSignBubbleModalProfileItems}
+          headerVisibility={user.isLogin}
         />
       )}
     </Container>
