@@ -2,6 +2,7 @@
 export const PERCENTAGE_UNIT = 100;
 export const ONE_SECOND = 1000;
 
+export const MAIN_IMAGE_CNT = 4;
 export const GAUGE_BAR_DEFAULT_INDEX = 30;
 export const MAX_SHOW_TECHSTACK = 3;
 export const MAX_SELECT_TECHSTACK_CNT = 5;

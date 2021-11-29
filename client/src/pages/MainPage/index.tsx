@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import CategoryItem from './CategoryItem';
 import { BaseLayout } from '@styles';
 import { LinkButton } from '../../components';
-import DeveloperImg from '../../assets/images/img_main4.png';
+import MainImage from './MainImage';
 import { categoryHttpClient } from '@api';
 import { Category } from '../../types/Category';
 import {
@@ -66,7 +66,7 @@ function MainPage(): JSX.Element {
         </InfoContainer>
 
         <ImageWrapper>
-          <DynamicImage src={DeveloperImg} alt="devloper" />
+          <MainImage />
         </ImageWrapper>
       </Container>
     </BaseLayout>
@@ -124,14 +124,9 @@ const GroupCatagoryContainer = styled.div`
 const MentorFindContainer = styled.div``;
 
 const ImageWrapper = styled.div`
+  position: relative;
   display: flex;
   width: 400px;
-`;
-
-const DynamicImage = styled.img`
-  /* width: 360px; */
-  height: 320px;
-  object-fit: cover;
 `;
 
 export default MainPage;
