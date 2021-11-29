@@ -62,6 +62,8 @@ export const APPLIED_GROUP = '가입 신청한 그룹';
 export const OWNED_GROUP = '내가 만든 그룹';
 export const MENTORIG_REQUEST_EMPTY_TEXT = '아직 멘토링 요청이 없어요...';
 export const SUGGEST_UPDATE_PROFIE_INFO = '프로필을 업데이트 해보는건 어떨까요?';
+export const MENTORIG_MODAL_EMPTY_TEXT = '멘토링 요청할 그룹이 없어요...';
+export const SUGGEST_CREATE_NEW_GROUP_INFO = '새 그룹을 만들어 보시는건 어떨까요?';
 
 // 메시지
 export const MSG_NOT_FOUND = '없는 페이지입니다';

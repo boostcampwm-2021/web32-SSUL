@@ -8,7 +8,13 @@ import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 import { changeGroupModalState } from '@store/util/Slice';
 import { useHistory } from 'react-router';
 import { MentorButtonType, ModalTypeEnum } from '@constants/enums';
-import { APPLY_CANCEL, APPLY_TEXT, SHOW_GROUP } from '@constants/consts';
+import {
+  APPLY_CANCEL,
+  APPLY_TEXT,
+  MENTORIG_MODAL_EMPTY_TEXT,
+  SHOW_GROUP,
+  SUGGEST_CREATE_NEW_GROUP_INFO,
+} from '@constants/consts';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroup[]>([]);
@@ -82,7 +88,16 @@ function GroupList(): JSX.Element {
 
   return (
     <Container>
-      <ScrollContainer>{makeRequestBox}</ScrollContainer>
+      <ScrollContainer>
+        {ownGroups.length === 0 ? (
+          <>
+            <EmptyMessage>{MENTORIG_MODAL_EMPTY_TEXT}</EmptyMessage>
+            <SubMessage>{SUGGEST_CREATE_NEW_GROUP_INFO}</SubMessage>
+          </>
+        ) : (
+          <>{makeRequestBox}</>
+        )}
+      </ScrollContainer>
     </Container>
   );
 }
@@ -199,6 +214,20 @@ const ButtonWrapper = styled.div`
   bottom: 10px;
   right: 10px;
   margin-left: auto;
+`;
+
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 100px;
+`;
+const SubMessage = styled.div`
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: ${(props) => props.theme.Gray3};
+  margin-top: 20px;
 `;
 
 export default GroupList;
