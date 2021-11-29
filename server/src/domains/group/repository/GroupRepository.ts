@@ -25,7 +25,7 @@ export class GroupRepository extends Repository<Group> {
 
   public findOneById(groupId: number) {
     return this.findOne({
-      relations: ['techStacks', 'groupEnrollments', 'user'],
+      relations: ['techStacks', 'groupEnrollments', 'groupEnrollments.user'],
       where: { id: groupId },
     });
   }
