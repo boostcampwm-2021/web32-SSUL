@@ -96,6 +96,7 @@ const TextBtn = styled.button<TextBtnProp>`
   display: flex;
   background: ${(props) => props.theme.Background};
   font-weight: ${(props) => (props.selected ? 700 : 400)};
+  color: ${({ theme }) => theme.TextColor};
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
@@ -107,11 +108,13 @@ const TextBtn = styled.button<TextBtnProp>`
 const GroupFindContainer = styled.div``;
 
 const IntroText = styled.span`
+  color: ${({ theme }) => theme.TextColor};
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 4px;
   display: block;
 `;
+
 const GroupCatagoryContainer = styled.div`
   display: grid;
   width: 100%;

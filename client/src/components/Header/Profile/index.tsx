@@ -94,7 +94,7 @@ const UserImage = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 70%;
-  border: 0.0625rem solid #f2f2f2;
+  border: 0.0625rem solid ${({ theme }) => theme.Gray4};
   overflow: hidden;
   box-shadow: ${(props) => props.theme.Shadow};
   background-size: cover;

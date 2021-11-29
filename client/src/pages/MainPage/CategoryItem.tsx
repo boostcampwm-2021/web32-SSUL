@@ -32,10 +32,9 @@ const LinkButton = styled(Link)`
   height: 80px;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: ${({ theme }) => theme.TextColor};
   &:hover {
-    color: ${(props) => props.theme.Primary};
-    filter: invert(56%) sepia(94%) saturate(1898%) hue-rotate(130deg) brightness(95%) contrast(101%);
+    color: ${({ theme }) => theme.Primary};
   }
 `;
 
@@ -43,6 +42,10 @@ const CategoryIcon = styled.img`
   width: 50px;
   height: 50px;
   margin-bottom: 8px;
+  filter: ${({ theme }) => theme.Filter};
+  &:hover {
+    filter: ${({ theme }) => theme.ColorFilter};
+  }
 `;
 
 const CategoryName = styled.span`
