@@ -1,28 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { userHttpClient } from '@api';
 import { useAppSelector, useAppDispatch } from '@hooks';
-import { selectUserRole, changeUserRole } from '@store/user/globalSlice';
+import { toggleTheme, selectTheme } from '@store/util/Slice';
 
-function RoleSwitch(): JSX.Element {
+function ThemeSwitch(): JSX.Element {
   const dispatch = useAppDispatch();
-  const role = useAppSelector(selectUserRole);
+  const mode = useAppSelector(selectTheme);
 
   const handleSwitchButtonClick = () => {
-    userHttpClient.patchRole();
-    dispatch(changeUserRole());
+    dispatch(toggleTheme());
   };
 
   return (
     <Container onClick={handleSwitchButtonClick}>
-      <Range role={role} />
-      <Button role={role} />
+      <Range />
+      <Button mode={mode} />
     </Container>
   );
-}
-
-interface StyledProps {
-  role: string;
 }
 
 const Container = styled.div`
@@ -34,8 +28,10 @@ const Container = styled.div`
   border-radius: 24px;
   padding: 4px 8px 4px 8px;
   margin: 0px 24px 0px 24px;
+  border: 1.5px solid ${({ theme }) => theme.Gray5};
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${({ theme }) => theme.Background};
   cursor: pointer;
 `;
 
@@ -43,16 +39,17 @@ const Range = styled.div`
   position: absolute;
   width: 32px;
   height: 12px;
-  background-color: ${(props: StyledProps) => (props.role === 'MENTEE' ? '#F2F2F2' : '#BDBDBD')};
+  background-color: ${({ theme }) => theme.Gray4};
   border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.Gray5};
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.Shadow};
   transition: all 0.75s ease-in;
 `;
 
-const Button = styled.div`
+const Button = styled.div<{ mode: string }>`
   position: absolute;
-  left: ${(props: StyledProps) => (props.role === 'MENTEE' ? '15%' : '55%')};
+  left: ${({ mode }) => (mode === 'light' ? '15%' : '55%')};
   width: 16px;
   height: 16px;
   background-color: ${(props) => props.theme.Primary};
@@ -63,4 +60,4 @@ const Button = styled.div`
   transition: left 0.5s ease-in;
 `;
 
-export default RoleSwitch;
+export default ThemeSwitch;
