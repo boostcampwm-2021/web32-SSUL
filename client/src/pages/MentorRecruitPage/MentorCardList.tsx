@@ -12,6 +12,8 @@ import { mentoringHttpClient } from '@api';
 import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
 import { ModalTypeEnum } from '@constants/enums';
 import MentorModal from './MentorModal';
+import { MENTOR_EMPTY_TEXT } from '@constants/consts';
+import CryingLogoImage from '@assets/logo_crying.png';
 
 function MentorCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnMentorRecruitFilterState);
@@ -45,18 +47,27 @@ function MentorCardList(): JSX.Element {
 
   return (
     <>
-      <CardList>{renderMentorCards}</CardList>
-      <Pagination
-        totalPages={totalPages}
-        curPage={selectedPage}
-        createdQuery={createdFilterdQuery}
-      />
-      {modalType !== ModalTypeEnum.NONE && (
-        <BoxModal
-          style={{ width: '550px', height: '550px' }}
-          element={<MentorModal />}
-          onCancel={handleModalBackgroundClick}
-        />
+      {filterdMentorList.length === 0 ? (
+        <>
+          <EmptyImage src={CryingLogoImage} alt="텅 빈 화면 로고" />
+          <EmptyMessage>{MENTOR_EMPTY_TEXT}</EmptyMessage>
+        </>
+      ) : (
+        <>
+          <CardList>{renderMentorCards}</CardList>
+          <Pagination
+            totalPages={totalPages}
+            curPage={selectedPage}
+            createdQuery={createdFilterdQuery}
+          />
+          {modalType !== ModalTypeEnum.NONE && (
+            <BoxModal
+              style={{ width: '550px', height: '550px' }}
+              element={<MentorModal />}
+              onCancel={handleModalBackgroundClick}
+            />
+          )}
+        </>
       )}
     </>
   );
@@ -69,6 +80,21 @@ const CardList = styled.div`
 
   grid-template-columns: repeat(3, minmax(250px, 2fr));
   grid-template-rows: repeat(auo-fit, minmax(100px, 2fr));
+`;
+
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: ${(props) => props.theme.Gray4};
+  margin-top: 20px;
+`;
+
+const EmptyImage = styled.img`
+  margin-top: 100px;
+
+  width: 250px;
+  height: 200px;
 `;
 
 export default MentorCardList;
