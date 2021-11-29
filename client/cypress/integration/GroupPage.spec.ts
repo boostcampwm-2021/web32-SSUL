@@ -6,15 +6,20 @@ const interceptAPI = () => {
   cy.authenficate();
   cy.intercept('GET', '/api/group/1', { fixture: 'group/my-group-info.json' });
   cy.intercept('GET', '/api/post/1', { fixture: 'group/post.json' });
-  cy.intercept('POST', '/api/post/1', { statusCode: 200 });
-  cy.intercept('PATCH', '/api/post', { statusCode: 200 });
 };
 
 describe('그룹 페이지', () => {
   before(() => {
     interceptAPI();
+    cy.ignoreAlarm();
     cy.visit('/group/1');
     cy.waitForReact();
+  });
+
+  beforeEach(() => {
+    cy.ignoreAlarm();
+    cy.intercept('PATCH', '/api/post/hit/*', { statusCode: 200 });
+    cy.intercept('PATCH', '/api/post', { statusCode: 200 });
   });
 
   it('그룹 페이지 세부 정보가 정상적으로 표시된다.', () => {
@@ -29,17 +34,6 @@ describe('그룹 페이지', () => {
       .should('have.length.at.least', 1)
       .should('have.length.at.most', 5);
   });
-  // it('유저 박스를 클릭하면 해당 유저의 프로필로 이동한다.', () => {
-  //   cy.react('GroupUserBoxItem').first().click();
-  //   cy.location('href').should('include', '/profile');
-  // });
-
-  // it('뒤로가면 다시 그룹 페이지로 이동한다.', () => {
-  //   interceptAPI();
-  //   cy.go('back');
-  //   cy.waitForReact();
-  //   cy.location('href').should('include', '/group/1');
-  // });
 
   it('그룹 게시판이 정상적으로 표시된다.', () => {
     cy.get('[data-test="my-group-title"]').should('be.visible');
@@ -101,9 +95,9 @@ describe('그룹 페이지', () => {
   it('글의 제목과 내용을 입력하고 작성 버튼을 누르면 글이 작성되고 모달창이 사라진다.', () => {
     cy.get('[data-test="post-modal-content-input"]').type('무엇이든 적어보세요. 테스트 중입니다.');
     cy.get('[data-test="post-modal-title-input"]').type('!!!');
-    // Why 가로채지 못하는 거야..
-    // cy.intercept('GET', '/api/post/1', { fixture: 'group/added-post.json' });
-    // cy.intercept('POST', '/api/post/1', { statusCode: 200 });
+    
+    cy.intercept('GET', '/api/post/1', { fixture: 'group/added-post.json' });
+    cy.intercept('POST', '/api/post', { statusCode: 200 });
     cy.get('[data-test="modal-post-btn"]').click();
   });
 
@@ -130,6 +124,7 @@ describe('그룹 페이지', () => {
     cy.get('[data-test="post-modal-content-input"]').type('\n수정을 테스트 중입니다..');
     cy.get('[data-test="post-modal-title-input"]').clear();
     cy.get('[data-test="post-modal-title-input"]').type('수정된 제목은 이렇다.');
+    cy.intercept('GET', '/api/post/1', { fixture: 'group/added-post.json' });
     cy.get('[data-test="modal-post-btn"]').click();
   });
 });
