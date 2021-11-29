@@ -6,6 +6,7 @@ import { selectProfileData, setProfileData } from '@store/user/profileSlice';
 import { userHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
 import { IntroUpdateDto } from '@types';
+import { USER_INTRO } from '@constants/consts';
 
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
@@ -61,7 +62,7 @@ function ProfileIntroBox(): JSX.Element {
 
   return (
     <>
-      <ProfileContainer title="자기소개">
+      <ProfileContainer title={USER_INTRO}>
         {getEditButtonElement()}
         {getTextElement()}
       </ProfileContainer>

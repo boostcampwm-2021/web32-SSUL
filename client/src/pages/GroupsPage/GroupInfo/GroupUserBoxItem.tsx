@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { GroupEnrollment } from '@types';
+import { GroupEnrollmentState } from '@constants/enums';
 
 interface Props {
   user: GroupEnrollment;
@@ -9,9 +10,9 @@ interface Props {
 
 const makeBadgeByRole = (role: string): string => {
   switch (role) {
-    case 'OWNER':
+    case GroupEnrollmentState.OWNER:
       return '👑';
-    case 'MENTOR':
+    case GroupEnrollmentState.MENTOR:
       return '💡';
     default:
       return '';

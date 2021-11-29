@@ -14,16 +14,8 @@ import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
-import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO } from '@constants/consts';
-
-const MAX_CONTENT_INDEX = 4;
-enum PAGE_NUMBER {
-  CATEGORY,
-  PERSONNEL,
-  GROUP_INFO,
-  DATE,
-  TECH_STACK,
-}
+import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO, MAX_CONTENT_INDEX } from '@constants/consts';
+import { GroupCreatePageEnum } from '@constants/enums';
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
@@ -38,15 +30,15 @@ function GroupCreatePage(): JSX.Element {
     dispatch(setGroupData({ techStacks: newTechStacks }));
   const getContents = (): JSX.Element | null => {
     switch (contentsNumber) {
-      case PAGE_NUMBER.CATEGORY:
+      case GroupCreatePageEnum.CATEGORY:
         return <CategoryInput categorys={categorys} />;
-      case PAGE_NUMBER.PERSONNEL:
+      case GroupCreatePageEnum.PERSONNEL:
         return <PersonnelInput />;
-      case PAGE_NUMBER.GROUP_INFO:
+      case GroupCreatePageEnum.GROUP_INFO:
         return <GroupInfoInput />;
-      case PAGE_NUMBER.DATE:
+      case GroupCreatePageEnum.DATE:
         return <DateInput />;
-      case PAGE_NUMBER.TECH_STACK:
+      case GroupCreatePageEnum.TECH_STACK:
         return (
           <TechStackInput
             baseTechStackList={techStacks}
@@ -61,13 +53,13 @@ function GroupCreatePage(): JSX.Element {
 
   const checkInput = () => {
     switch (contentsNumber) {
-      case PAGE_NUMBER.CATEGORY:
+      case GroupCreatePageEnum.CATEGORY:
         return groupData.categoryId !== 0;
-      case PAGE_NUMBER.GROUP_INFO:
+      case GroupCreatePageEnum.GROUP_INFO:
         return groupData.name !== '' && groupData.intro !== '';
-      case PAGE_NUMBER.DATE:
+      case GroupCreatePageEnum.DATE:
         return groupData.startAt !== '' && groupData.endAt !== '';
-      case PAGE_NUMBER.TECH_STACK:
+      case GroupCreatePageEnum.TECH_STACK:
         return groupData.techStacks.length > 0;
       default:
         return true;
@@ -75,7 +67,7 @@ function GroupCreatePage(): JSX.Element {
   };
 
   const clickPrevContents = () => {
-    if (contentsNumber > PAGE_NUMBER.CATEGORY) setContentsNumber(contentsNumber - 1);
+    if (contentsNumber > GroupCreatePageEnum.CATEGORY) setContentsNumber(contentsNumber - 1);
     else window.history.back();
   };
 

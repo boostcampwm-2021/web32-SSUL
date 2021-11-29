@@ -7,7 +7,7 @@ import GroupIntro from './GroupIntro';
 function GroupInfoBox(): JSX.Element {
   return (
     <Container>
-      <Title>⛏ 그룹 정보</Title>
+      <Title>그룹 정보</Title>
       <EditBoxContainer style={{ minHeight: '100px' }}>
         <GroupTitle />
       </EditBoxContainer>
@@ -17,7 +17,7 @@ function GroupInfoBox(): JSX.Element {
       </EditBoxContainer>
 
       <EditBoxContainer style={{ minHeight: '200px' }}>
-        <GroupIntro/>
+        <GroupIntro />
       </EditBoxContainer>
     </Container>
   );

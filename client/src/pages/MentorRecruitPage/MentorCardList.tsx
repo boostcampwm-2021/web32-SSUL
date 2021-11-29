@@ -10,6 +10,7 @@ import { Mentor, MentorListResponse } from '@types';
 import { useAppDispatch, useAppSelector, useLoader } from '@hooks';
 import { mentoringHttpClient } from '@api';
 import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice';
+import { ModalTypeEnum } from '@constants/enums';
 import MentorModal from './MentorModal';
 
 function MentorCardList(): JSX.Element {
@@ -40,7 +41,7 @@ function MentorCardList(): JSX.Element {
     return <MentorCard key={mentorData.id} contents={mentorData} />;
   });
 
-  const handleModalBackgroundClick = () => dispatch(changeGroupModalState('NONE'));
+  const handleModalBackgroundClick = () => dispatch(changeGroupModalState(ModalTypeEnum.NONE));
 
   return (
     <>
@@ -50,7 +51,7 @@ function MentorCardList(): JSX.Element {
         curPage={selectedPage}
         createdQuery={createdFilterdQuery}
       />
-      {modalType !== 'NONE' && (
+      {modalType !== ModalTypeEnum.NONE && (
         <BoxModal
           style={{ width: '550px', height: '550px' }}
           element={<MentorModal />}

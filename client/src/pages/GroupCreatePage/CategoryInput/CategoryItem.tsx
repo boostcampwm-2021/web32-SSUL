@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-interface ItemProp {
+interface Props {
   key: number;
   category: string;
   image: string;
@@ -9,7 +9,7 @@ interface ItemProp {
   handleCategoryClick: () => void;
 }
 
-function CategoryItem({ category, clicked, image, handleCategoryClick }: ItemProp): JSX.Element {
+function CategoryItem({ category, clicked, image, handleCategoryClick }: Props): JSX.Element {
   return (
     <div onClick={handleCategoryClick}>
       {clicked ? (

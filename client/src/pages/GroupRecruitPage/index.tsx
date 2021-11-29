@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { SearchFilter } from '@components';
 import GroupCardList from './GroupCardList';
-import ICON_PLUS from '@assets/icon_plus.png';
+import plusIcon from '@assets/icon_plus.png';
 import { Link } from 'react-router-dom';
 
 function GroupRecruitPage(): JSX.Element {
@@ -15,7 +15,7 @@ function GroupRecruitPage(): JSX.Element {
       </Contents>
       <SideLayout>
         <FloatingButton to={{ pathname: `/group/create` }}>
-          <FloatingImg src={ICON_PLUS} />
+          <FloatingImg src={plusIcon} />
         </FloatingButton>
       </SideLayout>
     </Container>

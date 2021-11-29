@@ -21,7 +21,7 @@ function MentorFooter({ mentorId }: Props): JSX.Element {
   };
   return (
     <Container>
-      {!id && id !== mentorId && (
+      {id !== 0 && id !== mentorId && (
         <ApplyButton onClick={handleShowDetailButtonClick}>{MENTOR_APPLY_TEXT}</ApplyButton>
       )}
     </Container>

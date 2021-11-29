@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { PERSONEEL_INTRO } from '@constants/consts';
 
 function PersonnelInput(): JSX.Element {
   const { maxUserCnt } = useAppSelector(groupCreateDataState);
@@ -13,7 +14,7 @@ function PersonnelInput(): JSX.Element {
 
   return (
     <>
-      <Title>그룹의 정원을 선택해주세요.</Title>
+      <Title>{PERSONEEL_INTRO}</Title>
       <RangeValue>{maxUserCnt}</RangeValue>
       <RangeBar type="range" min="1" max="30" onChange={onChangeBar} value={maxUserCnt} />
     </>

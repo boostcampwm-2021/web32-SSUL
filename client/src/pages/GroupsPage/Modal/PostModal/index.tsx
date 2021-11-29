@@ -14,7 +14,12 @@ import {
   MSG_POST_CREATE_ERROR,
   MSG_POST_UPDATE_SUCCESS,
   MSG_POST_UPDATE_ERROR,
+  TITLE_INTRO,
+  CONTENT_INTRO,
+  EDIT_POST,
+  WRITE_POST,
 } from '@constants/consts';
+import { ModalTypeEnum } from '@constants/enums';
 import CancelIcon from '@assets/icon_cancel.png';
 
 interface Props {
@@ -26,9 +31,11 @@ function PostModal({ mode }: Props): JSX.Element {
   const [toastify] = useToast();
   const group = useAppSelector(selectGroupDetail);
   const post = useAppSelector(selectChoosenPost);
-  const [title, setTitle] = useState<string>((mode === 'UPDATE' ? post?.title : '') as string);
+  const [title, setTitle] = useState<string>(
+    (mode === ModalTypeEnum.UPDATE ? post?.title : '') as string,
+  );
   const [content, setContent] = useState<string>(
-    (mode === 'UPDATE' ? post?.content : '') as string,
+    (mode === ModalTypeEnum.UPDATE ? post?.content : '') as string,
   );
   const [selectedType, setSelectedType] = useState<string>('NORMAL');
   const isCompleted = title.length > 0 && content.length > 0;
@@ -54,37 +61,37 @@ function PostModal({ mode }: Props): JSX.Element {
 
     try {
       const postData: GroupPostRequestDto = {
-        id: mode === 'POST' ? undefined : post?.id,
+        id: mode === ModalTypeEnum.POST ? undefined : post?.id,
         groupId: group.id,
         title,
         content,
         type: selectedType,
       };
 
-      if (mode === 'POST') {
+      if (mode === ModalTypeEnum.POST) {
         await postHttpClient.createPost(postData);
         toastify(MSG_POST_CREATE_SUCCESS, 'SUCCESS');
-      } else if (mode === 'UPDATE') {
+      } else if (mode === ModalTypeEnum.UPDATE) {
         await postHttpClient.updatePost(postData);
         toastify(MSG_POST_UPDATE_SUCCESS, 'SUCCESS');
       }
 
-      dispatch(changeGroupModalState('NONE'));
+      dispatch(changeGroupModalState(ModalTypeEnum.NONE));
       const groupPosts = await postHttpClient.getGroupPosts(group.id);
       dispatch(setPosts(groupPosts));
     } catch (e: any) {
-      if (mode === 'POST') toastify(MSG_POST_CREATE_ERROR, 'ERROR');
-      else if (mode === 'UPDATE') toastify(MSG_POST_UPDATE_ERROR, 'ERROR');
+      if (mode === ModalTypeEnum.POST) toastify(MSG_POST_CREATE_ERROR, 'ERROR');
+      else if (mode === ModalTypeEnum.UPDATE) toastify(MSG_POST_UPDATE_ERROR, 'ERROR');
     }
   };
 
-  const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
+  const handleCancelButtonClick = () => dispatch(changeGroupModalState(ModalTypeEnum.NONE));
 
-  if (!post && mode === 'UPDATE') return <></>;
+  if (!post && mode === ModalTypeEnum.UPDATE) return <></>;
   return (
     <Container>
       <Header>
-        <Title>{mode === 'UPDATE' ? '글수정' : '글쓰기'}</Title>
+        <Title>{mode === ModalTypeEnum.UPDATE ? EDIT_POST : WRITE_POST}</Title>
         <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
       </Header>
       <Content>
@@ -92,16 +99,16 @@ function PostModal({ mode }: Props): JSX.Element {
         <TitleInput
           onChange={handleTitleInputChange}
           value={title}
-          placeholder="제목을 입력하세요."
+          placeholder={TITLE_INTRO}
         ></TitleInput>
         <ContentInput
           onChange={handleContentInputChange}
           value={content}
-          placeholder="내용을 입력하세요."
+          placeholder={CONTENT_INTRO}
         ></ContentInput>
       </Content>
       <PostButton active={isCompleted} onClick={handlePostButtonClick}>
-        {mode === 'UPDATE' ? '수정' : '작성'}
+        {mode === ModalTypeEnum.UPDATE ? '수정' : '작성'}
       </PostButton>
     </Container>
   );

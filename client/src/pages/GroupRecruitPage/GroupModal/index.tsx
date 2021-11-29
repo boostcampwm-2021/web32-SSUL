@@ -8,6 +8,8 @@ import GroupDetailTitle from './GroupDetailTitle';
 import GroupDetailFooter from './GroupDetailFooter';
 import { calculateRemainTimeFromNow } from '@utils/Date';
 import { groupHttpClient } from '@api';
+import { GroupEnrollmentState } from '@constants/enums';
+import { MSG_IS_GROUP_MENTEE, MSG_IS_GROUP_MENTOR, MSG_IS_GROUP_OWNER } from '@constants/consts';
 
 interface Props {
   contents: GroupCardDetail;
@@ -31,12 +33,12 @@ function GroupModal({ contents }: Props): JSX.Element {
 
   const notificationMessage = (type: string) => {
     switch (type) {
-      case 'OWNER':
-        return `그룹장인 그룹입니다.`;
-      case 'MENTOR':
-        return `멘토인 그룹입니다.`;
-      case 'MENTEE':
-        return `멘티인 그룹입니다.`;
+      case GroupEnrollmentState.OWNER:
+        return MSG_IS_GROUP_OWNER;
+      case GroupEnrollmentState.MENTOR:
+        return MSG_IS_GROUP_MENTOR;
+      case GroupEnrollmentState.MENTEE:
+        return MSG_IS_GROUP_MENTEE;
       default:
         return '';
     }

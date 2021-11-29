@@ -16,6 +16,7 @@ import {
   ProfileState,
 } from './FetchProfileData';
 import { useParams } from 'react-router-dom';
+import { ProfilePageModalEnum } from '@constants/enums';
 
 export interface Param {
   id: string;
@@ -64,12 +65,12 @@ function ProfilePage(): JSX.Element {
           <ProfileSideContents />
           <MainContents>
             <ProfileIntroBox />
-            <ProfileTechStackBox showModal={showModal('EDIT_TECH_STACK')} />
+            <ProfileTechStackBox showModal={showModal(ProfilePageModalEnum.EDIT_TECH_STACK)} />
             <ProfileActivityListBox />
             <Divider />
             <ProfileMentorStackBox
-              showRequestModal={showModal('REQUEST_MENTORING')}
-              showCreateModal={showModal('CREATE_MENTOR_STACK')}
+              showRequestModal={showModal(ProfilePageModalEnum.REQUEST_MENTORING)}
+              showCreateModal={showModal(ProfilePageModalEnum.CREATE_MENTOR_STACK)}
             />
           </MainContents>
           <ProfilePageModal type={modalType} onCancel={showModal('NONE')} />

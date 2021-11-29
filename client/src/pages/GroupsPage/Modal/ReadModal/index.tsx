@@ -8,8 +8,9 @@ import { selectUser } from '@store/user/globalSlice';
 import { selectGroupDetail } from '@store/group/detailSlice';
 import { setPosts, selectChoosenPost } from '@store/group/postSlice';
 import { formatDateToString } from '@utils/Date';
-import { MSG_POST_DELETE_SUCCESS, MSG_POST_DELETE_ERROR } from '@constants/consts';
+import { MSG_POST_DELETE_SUCCESS, MSG_POST_DELETE_ERROR, HIT } from '@constants/consts';
 import CancelIcon from '@assets/icon_cancel.png';
+import { ModalTypeEnum } from '@constants/enums';
 
 function ReadModal(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,21 +18,21 @@ function ReadModal(): JSX.Element {
   const user = useAppSelector(selectUser);
   const group = useAppSelector(selectGroupDetail);
   const post = useAppSelector(selectChoosenPost);
-  const handleModifyButtonClick = () => dispatch(changeGroupModalState('UPDATE'));
+  const handleModifyButtonClick = () => dispatch(changeGroupModalState(ModalTypeEnum.UPDATE));
   const handleDeleteButtonClick = async () => {
     // TODO: double check user action
     if (!post) return;
     try {
       await postHttpClient.deletePost(post?.id, group.id);
       toastify(MSG_POST_DELETE_SUCCESS, 'SUCCESS');
-      dispatch(changeGroupModalState('NONE'));
+      dispatch(changeGroupModalState(ModalTypeEnum.NONE));
       const posts = await postHttpClient.getGroupPosts(group.id);
       dispatch(setPosts(posts));
     } catch (e: any) {
       toastify(MSG_POST_DELETE_ERROR, 'ERROR');
     }
   };
-  const handleCancelButtonClick = () => dispatch(changeGroupModalState('NONE'));
+  const handleCancelButtonClick = () => dispatch(changeGroupModalState(ModalTypeEnum.NONE));
 
   if (!post) return <></>;
   return (
@@ -45,7 +46,9 @@ function ReadModal(): JSX.Element {
         <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
       <Content readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
-      <Hit>조회수 {post.hit}</Hit>
+      <Hit>
+        {HIT} {post.hit}
+      </Hit>
       {user.id === post.userId && (
         <ButtonBox>
           <ModifyButton onClick={handleModifyButtonClick}>수정</ModifyButton>

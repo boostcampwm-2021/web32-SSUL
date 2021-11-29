@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { groupCreateDataState, setGroupData } from '@store/group/makerSlice';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { GROUP_NAME_INTRO, GROUP_INTRO } from '@constants/consts';
 
 function GroupInfoInput(): JSX.Element {
   const { name, intro } = useAppSelector(groupCreateDataState);
@@ -20,13 +21,13 @@ function GroupInfoInput(): JSX.Element {
         data-test="group-name"
         onChange={setGroupName}
         value={name}
-        placeholder="그룹명을 작성해주세요."
+        placeholder={GROUP_NAME_INTRO}
       />
       <InfoText
         data-test="group-intro"
         onChange={setGroupInfo}
         value={intro}
-        placeholder="그룹소개를 작성해주세요."
+        placeholder={GROUP_INTRO}
       />
     </>
   );

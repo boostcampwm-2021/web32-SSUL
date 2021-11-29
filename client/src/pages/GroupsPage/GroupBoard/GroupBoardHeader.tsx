@@ -3,14 +3,16 @@ import styled from '@emotion/styled';
 import PlusIcon from '@assets/icon_plus.png';
 import { useAppDispatch } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
+import { GROUP_BOARD_TITLE } from '@constants/consts';
+import { ModalTypeEnum } from '@constants/enums';
 
 function GroupBoardHeader(): JSX.Element {
   const dipatch = useAppDispatch();
-  const handlePostButtonClick = () => dipatch(changeGroupModalState('POST'));
+  const handlePostButtonClick = () => dipatch(changeGroupModalState(ModalTypeEnum.POST));
 
   return (
     <Container>
-      <GroupDate>그룹 게시판</GroupDate>
+      <GroupDate>{GROUP_BOARD_TITLE}</GroupDate>
       <Image src={PlusIcon} onClick={handlePostButtonClick} alt="그룹 게시판 글쓰기 버튼" />
     </Container>
   );

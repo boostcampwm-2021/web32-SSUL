@@ -3,9 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { groupOwnerHttpClient } from '@api';
-
-const MIN_TITLE_LENGTH = 1;
-const MAX_TITLE_LENGTH = 20;
+import { MIN_TITLE_LEN, MAX_TITLE_LEN } from '@constants/consts';
 
 function GroupTitle(): JSX.Element {
   const [notificationText, setNotificationText] = useState<string>('');
@@ -17,10 +15,8 @@ function GroupTitle(): JSX.Element {
   const handleEditButtonClick = () => {
     const text = textInput.current;
     if (isEdit && text !== undefined) {
-      if (text.length < MIN_TITLE_LENGTH || text.length > MAX_TITLE_LENGTH) {
-        setNotificationText(
-          `제목은 ${MIN_TITLE_LENGTH} ~ ${MAX_TITLE_LENGTH}자 내외로 작성해주세요!`,
-        );
+      if (text.length < MIN_TITLE_LEN || text.length > MAX_TITLE_LEN) {
+        setNotificationText(`제목은 ${MIN_TITLE_LEN} ~ ${MAX_TITLE_LEN}자 내외로 작성해주세요!`);
         return;
       }
       dispatch(setGroupAdminData({ name: text }));
@@ -41,11 +37,7 @@ function GroupTitle(): JSX.Element {
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
-        <EditText
-          onChange={handleEditTextChange}
-          defaultValue={name}
-          maxLength={MAX_TITLE_LENGTH}
-        />
+        <EditText onChange={handleEditTextChange} defaultValue={name} maxLength={MAX_TITLE_LEN} />
       ) : (
         <Text>{name}</Text>
       )}

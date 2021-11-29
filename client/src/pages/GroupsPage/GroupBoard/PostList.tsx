@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Post from './Post';
 import { useAppSelector } from '@hooks';
 import { selectAllPosts } from '@store/group/postSlice';
+import { POST_EMPTY_TEXT } from '@constants/consts';
 
 function PostList(): JSX.Element {
   const posts = useAppSelector(selectAllPosts);
@@ -10,7 +11,7 @@ function PostList(): JSX.Element {
 
   return (
     <Container>
-      {postList.length ? <>{postList}</> : <NoGroupNoti>아직 작성된 글이 없습니다!</NoGroupNoti>}
+      {postList.length ? <>{postList}</> : <NoGroupNoti>{POST_EMPTY_TEXT}</NoGroupNoti>}
     </Container>
   );
 }

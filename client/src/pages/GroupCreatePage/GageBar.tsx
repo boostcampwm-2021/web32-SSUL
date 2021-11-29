@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { MAX_CONTENT_INDEX, PERCENTAGE_UNIT } from '@constants/consts';
 
-interface GageProps {
+interface Props {
   contentsNumber: number;
 }
 
-function GageBar({ contentsNumber }: GageProps): JSX.Element {
-  const percentage = Math.floor(((contentsNumber + 1) / 5) * 100);
+function GageBar({ contentsNumber }: Props): JSX.Element {
+  const percentage = Math.floor(((contentsNumber + 1) / (MAX_CONTENT_INDEX + 1)) * PERCENTAGE_UNIT);
   const style = { width: `${percentage}%` };
   return (
     <>

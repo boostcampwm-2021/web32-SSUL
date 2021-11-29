@@ -6,6 +6,11 @@ import { selectProfileData } from '@store/user/profileSlice';
 import { useAppSelector } from '@hooks';
 import { MentoringAcceptRequestDto, MentoringRequest } from '@types';
 import { formatDateToString } from '@utils/Date';
+import {
+  MENTORIG_REQUEST_EMPTY_TEXT,
+  MENTORING_APPLY_LIST,
+  SUGGEST_UPDATE_PROFIE_INFO,
+} from '@constants/consts';
 
 function RequestMentoring(): JSX.Element {
   const [requestList, setRequestList] = useState<MentoringRequest[]>([]);
@@ -63,15 +68,15 @@ function RequestMentoring(): JSX.Element {
   }, []);
   return (
     <Container>
-      <ModalTitle>멘토링 신청 리스트</ModalTitle>
+      <ModalTitle>{MENTORING_APPLY_LIST}</ModalTitle>
       {requestList.length > 0 ? (
         <ScrollContainer>
           {requestList.map((data, idx) => makeRequestBox(data, idx))}
         </ScrollContainer>
       ) : (
         <>
-          <EmptyMessage>아직 멘토링 요청이 없어요...</EmptyMessage>
-          <SubMessage>프로필을 업데이트 해보는건 어떨까요?</SubMessage>
+          <EmptyMessage>{MENTORIG_REQUEST_EMPTY_TEXT}</EmptyMessage>
+          <SubMessage>{SUGGEST_UPDATE_PROFIE_INFO}</SubMessage>
         </>
       )}
     </Container>

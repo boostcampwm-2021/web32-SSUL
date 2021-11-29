@@ -6,6 +6,11 @@ import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice
 import { Participation } from '@types';
 import { groupOwnerHttpClient } from '@api';
 import { Link } from 'react-router-dom';
+import {
+  GROUP_APPLY_LIST_TITLE,
+  GROUP_APPLY_REQUEST_EMPTY_TEXT,
+  SUGGEST_UPDATE_GROUP_INTRO,
+} from '@constants/consts';
 
 function ParticipationRequestBox(): JSX.Element {
   const { groupId, requestList } = useAppSelector(selectGroupAdminData);
@@ -48,15 +53,15 @@ function ParticipationRequestBox(): JSX.Element {
   };
   return (
     <Container>
-      <Title>📃그룹참가 요청 리스트</Title>
+      <Title>{GROUP_APPLY_LIST_TITLE}</Title>
       {requestList.length > 0 ? (
         <ScrollContainer>
           {requestList.map((data, idx) => makeRequestBox(data, idx))}
         </ScrollContainer>
       ) : (
         <>
-          <EmptyMessage>아직 그룹 요청이 없어요...</EmptyMessage>
-          <SubMessage>그룹 소개를 업데이트 해보는건 어떨까요?</SubMessage>
+          <EmptyMessage>{GROUP_APPLY_REQUEST_EMPTY_TEXT}</EmptyMessage>
+          <SubMessage>{SUGGEST_UPDATE_GROUP_INTRO}</SubMessage>
         </>
       )}
     </Container>

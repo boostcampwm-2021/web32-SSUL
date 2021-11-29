@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { groupHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
+import { ModalTypeEnum } from '@constants/enums';
+import { APPLY_TEXT } from '@constants/consts';
 
 interface Props {
   notfication: string;
@@ -17,15 +19,15 @@ function GroupDetailFooter({ notfication, groupId, remainDate }: Props): JSX.Ele
 
   const handleApplyButtonClick = async () => {
     groupHttpClient.postApplyGroup({ groupId, userId });
-    dispatch(changeGroupModalState('NONE'));
+    dispatch(changeGroupModalState(ModalTypeEnum.NONE));
   };
 
   return (
     <Container>
       <RemainDays>D-{remainDate}</RemainDays>
       <Notification>{notfication}</Notification>
-      {userId !== 0 && !notfication && (
-        <GroupApplyButton onClick={handleApplyButtonClick}>신청하기</GroupApplyButton>
+      {!userId && !notfication && (
+        <GroupApplyButton onClick={handleApplyButtonClick}>{APPLY_TEXT}</GroupApplyButton>
       )}
     </Container>
   );
