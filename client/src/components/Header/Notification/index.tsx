@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import NotificationIcon from '../../../assets/icon_notification.svg';
 import { BubbleModal } from '@components';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { selectUser } from '@store/user/globalSlice';
 import { selectNotficationList, setNotificationList } from '@store/notification/slice';
 import { useSelector } from 'react-redux';
 import { notificationHttpClient } from '@api';
 
 function Notification(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { isLogin } = useAppSelector(selectUser);
   const { notificationList } = useSelector(selectNotficationList);
   const hasNewNotification = useRef<boolean>(false);
   const [isModalClicked, setIsModalClicked] = useState<boolean>(false);
@@ -24,6 +26,7 @@ function Notification(): JSX.Element {
   }, [isModalClicked]);
 
   const fetchNotificationList = async () => {
+    if (!isLogin) return;
     const notificationList = await notificationHttpClient.getNotificationList();
     dispatch(setNotificationList({ notificationList: notificationList }));
   };
