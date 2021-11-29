@@ -4,25 +4,40 @@
       "id": 8,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup8",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 8",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Vue.js",
-        "HTML",
-        "css",
-        "React",
-        "Express"
+        {
+          "id": 36,
+          "name": "Vue.js"
+        },
+        {
+          "id": 37,
+          "name": "HTML"
+        },
+        {
+          "id": 38,
+          "name": "css"
+        },
+        {
+          "id": 39,
+          "name": "React"
+        },
+        {
+          "id": 40,
+          "name": "Express"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -33,25 +48,40 @@
       "id": 16,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup16",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 16",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "typescript",
-        "R",
-        "C++",
-        "SQL",
-        "Vue.js"
+        {
+          "id": 76,
+          "name": "typescript"
+        },
+        {
+          "id": 77,
+          "name": "R"
+        },
+        {
+          "id": 78,
+          "name": "C++"
+        },
+        {
+          "id": 79,
+          "name": "SQL"
+        },
+        {
+          "id": 80,
+          "name": "Vue.js"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -62,25 +92,40 @@
       "id": 24,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup24",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 24",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Express",
-        "node.js",
-        "Java",
-        "javascript",
-        "typescript"
+        {
+          "id": 116,
+          "name": "Express"
+        },
+        {
+          "id": 117,
+          "name": "node.js"
+        },
+        {
+          "id": 118,
+          "name": "Java"
+        },
+        {
+          "id": 119,
+          "name": "javascript"
+        },
+        {
+          "id": 120,
+          "name": "typescript"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -91,25 +136,40 @@
       "id": 32,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup32",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 32",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Vue.js",
-        "HTML",
-        "css",
-        "React",
-        "Express"
+        {
+          "id": 156,
+          "name": "Vue.js"
+        },
+        {
+          "id": 157,
+          "name": "HTML"
+        },
+        {
+          "id": 158,
+          "name": "css"
+        },
+        {
+          "id": 159,
+          "name": "React"
+        },
+        {
+          "id": 160,
+          "name": "Express"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -120,25 +180,40 @@
       "id": 40,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup40",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 40",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "typescript",
-        "R",
-        "C++",
-        "SQL",
-        "Vue.js"
+        {
+          "id": 196,
+          "name": "typescript"
+        },
+        {
+          "id": 197,
+          "name": "R"
+        },
+        {
+          "id": 198,
+          "name": "C++"
+        },
+        {
+          "id": 199,
+          "name": "SQL"
+        },
+        {
+          "id": 200,
+          "name": "Vue.js"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -149,25 +224,40 @@
       "id": 48,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup48",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 48",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Express",
-        "node.js",
-        "Java",
-        "javascript",
-        "typescript"
+        {
+          "id": 236,
+          "name": "Express"
+        },
+        {
+          "id": 237,
+          "name": "node.js"
+        },
+        {
+          "id": 238,
+          "name": "Java"
+        },
+        {
+          "id": 239,
+          "name": "javascript"
+        },
+        {
+          "id": 240,
+          "name": "typescript"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -178,25 +268,40 @@
       "id": 56,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup56",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 56",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Vue.js",
-        "HTML",
-        "css",
-        "React",
-        "Express"
+        {
+          "id": 276,
+          "name": "Vue.js"
+        },
+        {
+          "id": 277,
+          "name": "HTML"
+        },
+        {
+          "id": 278,
+          "name": "css"
+        },
+        {
+          "id": 279,
+          "name": "React"
+        },
+        {
+          "id": 280,
+          "name": "Express"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -207,25 +312,40 @@
       "id": 64,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup64",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 64",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "typescript",
-        "R",
-        "C++",
-        "SQL",
-        "Vue.js"
+        {
+          "id": 316,
+          "name": "typescript"
+        },
+        {
+          "id": 317,
+          "name": "R"
+        },
+        {
+          "id": 318,
+          "name": "C++"
+        },
+        {
+          "id": 319,
+          "name": "SQL"
+        },
+        {
+          "id": 320,
+          "name": "Vue.js"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -236,25 +356,40 @@
       "id": 72,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup72",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 72",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Express",
-        "node.js",
-        "Java",
-        "javascript",
-        "typescript"
+        {
+          "id": 356,
+          "name": "Express"
+        },
+        {
+          "id": 357,
+          "name": "node.js"
+        },
+        {
+          "id": 358,
+          "name": "Java"
+        },
+        {
+          "id": 359,
+          "name": "javascript"
+        },
+        {
+          "id": 360,
+          "name": "typescript"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -265,25 +400,40 @@
       "id": 80,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup80",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 80",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Vue.js",
-        "HTML",
-        "css",
-        "React",
-        "Express"
+        {
+          "id": 396,
+          "name": "Vue.js"
+        },
+        {
+          "id": 397,
+          "name": "HTML"
+        },
+        {
+          "id": 398,
+          "name": "css"
+        },
+        {
+          "id": 399,
+          "name": "React"
+        },
+        {
+          "id": 400,
+          "name": "Express"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -294,25 +444,40 @@
       "id": 88,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup88",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 88",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "typescript",
-        "R",
-        "C++",
-        "SQL",
-        "Vue.js"
+        {
+          "id": 436,
+          "name": "typescript"
+        },
+        {
+          "id": 437,
+          "name": "R"
+        },
+        {
+          "id": 438,
+          "name": "C++"
+        },
+        {
+          "id": 439,
+          "name": "SQL"
+        },
+        {
+          "id": 440,
+          "name": "Vue.js"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
@@ -323,25 +488,40 @@
       "id": 96,
       "mentorId": null,
       "ownerId": 1,
-      "categoryId": 1,
       "name": "testgroup96",
       "maxUserCnt": 5,
       "curUserCnt": 1,
       "intro": "This is testgroup 96",
       "startAt": "2021-12-31T16:06:55.000Z",
       "endAt": "2022-08-31T21:44:08.000Z",
-      "status": "READY",
       "techStacks": [
-        "Express",
-        "node.js",
-        "Java",
-        "javascript",
-        "typescript"
+        {
+          "id": 476,
+          "name": "Express"
+        },
+        {
+          "id": 477,
+          "name": "node.js"
+        },
+        {
+          "id": 478,
+          "name": "Java"
+        },
+        {
+          "id": 479,
+          "name": "javascript"
+        },
+        {
+          "id": 480,
+          "name": "typescript"
+        }
       ],
       "category": {
+        "id": 1,
         "name": "대외활동"
       },
       "ownerInfo": {
+        "id": 1,
         "githubId": "yuchanleeme",
         "name": "이유찬",
         "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",

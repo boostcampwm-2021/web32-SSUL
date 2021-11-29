@@ -1,25 +1,14 @@
 [
   {
-    "id": 3,
+    "id": 4,
     "title": "제목은 아무렇게나 적어보세요!!!",
     "content": "무엇이든 적어보세요. 테스트 중입니다.",
     "createdAt": "2021-11-26T10:47:25.000Z",
     "type": "NORMAL",
     "hit": 1,
-    "writer": "김동규",
+    "writer": "유찬양",
     "groupId": 1,
-    "userId": 2
-  },
-  {
-    "id": 1,
-    "title": "그룹장이 쓴글",
-    "content": "내용은 뭐 별거 없습니다만",
-    "createdAt": "2021-11-17T03:06:55.000Z",
-    "type": "NOTICE",
-    "hit": 0,
-    "writer": "이유찬",
-    "groupId": 1,
-    "userId": 1
+    "userId": 4
   },
   {
     "id": 3,
@@ -42,5 +31,16 @@
     "writer": "김동규",
     "groupId": 1,
     "userId": 2
+  },
+  {
+    "id": 1,
+    "title": "그룹장이 쓴글",
+    "content": "내용은 뭐 별거 없습니다만",
+    "createdAt": "2021-11-17T03:06:55.000Z",
+    "type": "NOTICE",
+    "hit": 0,
+    "writer": "이유찬",
+    "groupId": 1,
+    "userId": 1
   }
 ]
