@@ -1,22 +1,5 @@
+import { GroupState } from '@constants/enums';
 import { Category, CategoryData, OwnerInfo, TechStack } from '@types';
-
-export enum GroupState {
-  READY = 'READY',
-  DOING = 'DOING',
-  END = 'END',
-}
-
-export enum ApplyState {
-  PENDING = 'PENDING',
-  DECLINED = 'DECLINED',
-  ACCEPTED = 'ACCEPTED',
-}
-
-export enum GroupEnrollmentState {
-  MENTOR = 'MENTOR',
-  MENTEE = 'MENTEE',
-  OWNER = 'OWNER',
-}
 
 export interface Group {
   id: number;
@@ -35,19 +18,6 @@ export interface Group {
   techStacks: TechStack[];
 }
 
-export interface GroupCardDetail {
-  id: number;
-  name: string | null;
-  maxUserCnt: number | null;
-  curUserCnt: number | null;
-  intro: string | null;
-  startAt: Date | null;
-  endAt: Date | null;
-  techStacks: TechStack[];
-  category: CategoryData;
-  ownerInfo: OwnerInfo;
-}
-
 export interface GroupDetail {
   id: number;
   mentorId?: number;
@@ -62,9 +32,91 @@ export interface GroupDetail {
   status: string;
 }
 
+export interface GroupCardDetail {
+  id: number;
+  name: string | null;
+  maxUserCnt: number | null;
+  curUserCnt: number | null;
+  intro: string | null;
+  startAt: Date | null;
+  endAt: Date | null;
+  techStacks: TechStack[];
+  category: CategoryData;
+  ownerInfo: OwnerInfo;
+}
+
+export interface SimpleGroupCard {
+  id: number;
+  name: string;
+  maxUserCnt: number;
+  curUserCnt: number;
+  status: string;
+  ownerInfo: {
+    avatarUrl: string;
+  };
+}
+
+export interface GroupActivity {
+  name: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface OwnGroup {
+  id: number;
+  name: string;
+  intro: string;
+  mentorId: number | null;
+  startAt: Date | null;
+  endAt: Date | null;
+  category: Category;
+}
+
+export interface GroupCreateDto {
+  ownerId: number;
+  name: string;
+  maxUserCnt: number;
+  curUserCnt: number;
+  intro: string;
+  startAt: string;
+  endAt: string;
+  categoryId: number;
+  techStacks: TechStack[];
+}
+
+export interface GroupApplyDto {
+  groupId: number;
+  userId?: number;
+}
+
 export interface GroupResponse {
   groups: Group[];
   totalPages: number;
+}
+
+export interface GroupDetailResponse extends GroupDetail {
+  usingTechStacks: GroupUsingTechStack[];
+  groupEnrollments: GroupEnrollment[];
+}
+
+export interface GroupActivityResponse {
+  name: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface OwnGroupResponse {
+  id: number;
+  name: string;
+  intro: string;
+  mentorId: number | null;
+  startAt: Date | null;
+  endAt: Date | null;
+  category: Category;
+}
+
+export interface GroupRoleResponse {
+  type?: string;
 }
 
 export interface GroupUsingTechStack {
@@ -80,7 +132,7 @@ export interface GroupEnrollment {
   type: string;
 }
 
-export interface SimpleGroupCardData {
+export interface SimpleGroupCardResponse {
   id: number;
   name: string;
   maxUserCnt: number;
@@ -91,14 +143,11 @@ export interface SimpleGroupCardData {
   };
 }
 
-export interface OwnGroupsInfo {
-  id: number;
+export interface SimpleGroupInfoResponse {
   name: string;
   intro: string;
-  mentorId: number | null;
-  startAt: Date | null;
-  endAt: Date | null;
-  category: Category;
+  startAt: string;
+  endAt: string;
 }
 
 export interface OnlyGroupId {

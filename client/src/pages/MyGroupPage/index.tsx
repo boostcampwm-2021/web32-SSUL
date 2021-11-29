@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLoader } from '@hooks';
 import { groupHttpClient } from '@api';
-import { ApplyState, GroupState, SimpleGroupCardData } from '@types';
+import { SimpleGroupCard } from '@types';
 import SimpleGroupCardList from './SimpleGroupCardList';
 import { TextSwitchButton } from '@components';
 import qs from 'qs';
-import { LeftOrRight, MentorOrMentee } from '@constants/enums';
+import { ApplyState, GroupState, LeftOrRight, MentorOrMentee } from '@constants/enums';
 
 interface MyGroups {
-  MENTOR: SimpleGroupCardData[];
-  MENTEE: SimpleGroupCardData[];
+  MENTOR: SimpleGroupCard[];
+  MENTEE: SimpleGroupCard[];
 }
 
 function MyGroupPage(): JSX.Element {
   const [role, setRole] = useState<MentorOrMentee>(MentorOrMentee.MENTEE);
-  const [applyedGroups, setApplyedGroups] = useState<SimpleGroupCardData[]>([]);
-  const [ownGroups, setOwnGroups] = useState<SimpleGroupCardData[]>([]);
+  const [applyedGroups, setApplyedGroups] = useState<SimpleGroupCard[]>([]);
+  const [ownGroups, setOwnGroups] = useState<SimpleGroupCard[]>([]);
   const [myGroups, setMyGroups] = useState<MyGroups>({ MENTOR: [], MENTEE: [] });
   const [toggleLoader, isLoading] = useLoader();
 

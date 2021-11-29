@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
-import { ParticipationRequest } from '@types';
+import { Participation } from '@types';
 import { groupOwnerHttpClient } from '@api';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ function ParticipationRequestBox(): JSX.Element {
     fetchApplyList();
   };
 
-  const makeRequestBox = (data: ParticipationRequest, idx: number): JSX.Element => {
+  const makeRequestBox = (data: Participation, idx: number): JSX.Element => {
     return (
       <BoxContainer key={idx}>
         <ProfileLink to={`/profile/${data.githubId}`}>

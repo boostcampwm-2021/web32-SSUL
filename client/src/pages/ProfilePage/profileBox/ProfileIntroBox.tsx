@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectProfileData, setProfileData } from '@store/user/profileSlice';
 import { userHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
-import { UpdateIntroData } from '@types';
+import { IntroUpdateDto } from '@types';
 
 function ProfileIntroBox(): JSX.Element {
   const { intro } = useAppSelector(selectProfileData);
@@ -17,12 +17,12 @@ function ProfileIntroBox(): JSX.Element {
 
   const handleEditButtonClick = async () => {
     if (editState === true && prevIntro !== intro) {
-      const request = {
-        id: user.id,
+      const updateIntroBody: IntroUpdateDto = {
+        id: user.id as number,
         intro: intro,
-      } as UpdateIntroData;
+      };
       setPrevIntro(intro);
-      userHttpClient.patchIntro(request);
+      userHttpClient.patchIntro(updateIntroBody);
     }
     setEditState(!editState);
   };
@@ -40,7 +40,8 @@ function ProfileIntroBox(): JSX.Element {
 
   const getTextElement = (): JSX.Element => {
     return editState ? (
-      <ProfileEditText data-test="edit-intro"
+      <ProfileEditText
+        data-test="edit-intro"
         onKeyDown={handleEditTextResize}
         onChange={handleEditTextChange}
         value={intro}

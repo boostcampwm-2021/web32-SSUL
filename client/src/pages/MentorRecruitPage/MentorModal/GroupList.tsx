@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
 import { groupHttpClient, mentoringHttpClient } from '@api';
-import { MentoringRequest, MentoringRequestPostData, OwnGroupsInfo } from '@types';
+import { MentoringRequest, MentoringRequestPostData, OwnGroup } from '@types';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 import { changeGroupModalState } from '@store/util/Slice';
 import { useHistory } from 'react-router';
 
 function GroupList(): JSX.Element {
-  const [ownGroups, setOwnGroups] = useState<OwnGroupsInfo[]>([]);
+  const [ownGroups, setOwnGroups] = useState<OwnGroup[]>([]);
   const [allMentoringRequests, setAllMentoringRequests] = useState<MentoringRequest[]>([]);
   const { mentorId } = useAppSelector(mentorCardDetailState);
   const dispatch = useAppDispatch();

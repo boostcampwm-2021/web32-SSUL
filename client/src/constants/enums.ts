@@ -37,3 +37,20 @@ export enum SearchBarTypeEnum {
   MENTOR_NAME = 'MENTOR_NAME',
   TECH_STACK = 'TECH_STACK',
 }
+export enum GroupState {
+  READY = 'READY',
+  DOING = 'DOING',
+  END = 'END',
+}
+
+export enum ApplyState {
+  PENDING = 'PENDING',
+  DECLINED = 'DECLINED',
+  ACCEPTED = 'ACCEPTED',
+}
+
+export enum GroupEnrollmentState {
+  MENTOR = 'MENTOR',
+  MENTEE = 'MENTEE',
+  OWNER = 'OWNER',
+}

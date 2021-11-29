@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
-import { SimpleGroupCardData } from '@types';
+import { SimpleGroupCard as SimpleGroupCardData } from '@types';
 import { useToast } from '@hooks';
 import { ToastMessageEnum } from '@constants/enums';
 import { MSG_NOT_JOIN_ERROR } from '@constants/consts';

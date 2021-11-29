@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { GroupCardDetail } from '@types';
+import { GroupCardDetail, GroupRoleResponse } from '@types';
 import GroupDetailHeader from './GroupDetailHeader';
 import GroupDetailStatus from './GroupDetailStatus';
 import GroupDetailTitle from './GroupDetailTitle';
@@ -10,10 +11,6 @@ import { groupHttpClient } from '@api';
 
 interface Props {
   contents: GroupCardDetail;
-}
-
-interface GroupEnrollment {
-  type?: string;
 }
 
 function GroupModal({ contents }: Props): JSX.Element {
@@ -48,7 +45,7 @@ function GroupModal({ contents }: Props): JSX.Element {
   useEffect(() => {
     const test = async () => {
       try {
-        const groupRole: GroupEnrollment = await groupHttpClient.getGroupRole(id);
+        const groupRole: GroupRoleResponse = await groupHttpClient.getGroupRole(id);
         setNotification(notificationMessage(String(groupRole.type)));
       } catch (e: any) {
         setNotification(e.description);

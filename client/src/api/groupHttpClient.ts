@@ -1,14 +1,15 @@
 import HttpClient from './HttpClient';
 import {
   GroupResponse,
-  GroupCreateInterface,
-  GroupActivity,
-  GroupDetailData,
-  GroupApplyData,
-  SimpleGroupCardData,
-  ApplyState,
-  OwnGroupsInfo,
+  GroupDetailResponse,
+  GroupApplyDto,
+  SimpleGroupCardResponse,
+  OwnGroupResponse,
+  GroupCreateDto,
+  GroupActivityResponse,
+  GroupRoleResponse,
 } from '@types';
+import { ApplyState } from '@constants/enums';
 
 class GroupHttpClient extends HttpClient {
   public constructor() {
@@ -18,30 +19,31 @@ class GroupHttpClient extends HttpClient {
   public getFilterdGroupList = (query: string): Promise<GroupResponse> =>
     this.httpClient.get(`${query}`);
 
-  public postGroupCreate = <T>(groupData: GroupCreateInterface): Promise<T> =>
+  public postGroupCreate = (groupData: GroupCreateDto): Promise<null> =>
     this.httpClient.post('/', groupData);
 
-  public getGroupActivity = (userId: number): Promise<GroupActivity[]> =>
+  public getGroupActivity = (userId: number): Promise<GroupActivityResponse[]> =>
     this.httpClient.get(`/activity/${userId}`);
 
-  public getGroupDetail = (groupId: number): Promise<GroupDetailData> =>
+  public getGroupDetail = (groupId: number): Promise<GroupDetailResponse> =>
     this.httpClient.get(`/${groupId}`);
 
-  public postApplyGroup = <T>(applyInfo: GroupApplyData): Promise<T> =>
+  public postApplyGroup = (applyInfo: GroupApplyDto): Promise<null> =>
     this.httpClient.post('/apply', applyInfo);
 
-  public getGroupRole = <T>(groupId: number): Promise<T> => this.httpClient.get(`/role/${groupId}`);
+  public getGroupRole = (groupId: number): Promise<GroupRoleResponse> =>
+    this.httpClient.get(`/role/${groupId}`);
 
-  public getOwnSimpleGroups = (): Promise<SimpleGroupCardData[]> =>
+  public getOwnSimpleGroups = (): Promise<SimpleGroupCardResponse[]> =>
     this.httpClient.get(`/own/simple`);
 
-  public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardData[]> =>
+  public getApplyedGroups = (applyState: ApplyState): Promise<SimpleGroupCardResponse[]> =>
     this.httpClient.get(`/applyed?state=${applyState}`);
 
-  public getMyGroups = (query: string): Promise<SimpleGroupCardData[]> =>
+  public getMyGroups = (query: string): Promise<SimpleGroupCardResponse[]> =>
     this.httpClient.get(`/my${query}`);
 
-  public getOwnGroups = (): Promise<OwnGroupsInfo[]> => this.httpClient.get(`/own`);
+  public getOwnGroups = (): Promise<OwnGroupResponse[]> => this.httpClient.get(`/own`);
 }
 
 export const groupHttpClient = new GroupHttpClient();

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GroupCreateInterface } from '@types';
+import { GroupCreateDto } from '@types';
 import { RootState } from '../index';
 
-const INTIIAL_STATE: GroupCreateInterface = {
+const INTIIAL_STATE: GroupCreateDto = {
   ownerId: 0,
   name: '',
   maxUserCnt: 1,
@@ -30,5 +30,4 @@ export const groupCreateDataSlice = createSlice({
 
 export const { setGroupData, clearGroupData } = groupCreateDataSlice.actions;
 export default groupCreateDataSlice.reducer;
-export const groupCreateDataState = (state: RootState): GroupCreateInterface =>
-  state.createGroupData;
+export const groupCreateDataState = (state: RootState): GroupCreateDto => state.createGroupData;

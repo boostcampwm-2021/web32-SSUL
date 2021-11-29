@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { SimpleGroupCardData } from '@types';
+import { SimpleGroupCard as SimpleGroupCardData } from '@types';
 import SimpleGroupCard from '../SimpleGroupCard';
 
 interface SimpleGroupCardListProps {

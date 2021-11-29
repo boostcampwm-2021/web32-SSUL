@@ -1,54 +1,9 @@
 import { NotificationTypeEnum } from '@constants/enums';
-import { GroupEnrollment, GroupUsingTechStack, TechStack } from '@types';
-
-export interface ExampleInterface {
-  somethingToRequestKey: number;
-}
-
-export interface GroupCreateInterface {
-  ownerId: number;
-  name: string;
-  maxUserCnt: number;
-  curUserCnt: number;
-  intro: string;
-  startAt: string;
-  endAt: string;
-  categoryId: number;
-  techStacks: TechStack[];
-}
-
-export interface ResponseGithubUserData {
-  id: number;
-  githubId: string;
-  name: string;
-  avatarUrl: string;
-  feverStack: number;
-  shareStack: number;
-}
-export interface ResponseUserData {
-  id: number;
-  githubId: string;
-  name: string;
-  avatarUrl: string;
-  feverStack: number;
-  shareStack: number;
-  role: string;
-}
-
-export interface UpdateIntroData {
-  id: number;
-  intro: string;
-}
+import { TechStack } from '@types';
 
 export interface UpdateTechStackData {
   id: number;
   techStacks: TechStack[];
-}
-
-export interface GroupActivity {
-  name: string;
-  startAt: string;
-  endAt: string;
 }
 
 export interface MentorInfo {
@@ -75,28 +30,6 @@ export interface AcceptRequestInfo {
   groupId: number;
 }
 
-export interface GroupDetailData {
-  id: number;
-  mentorId: number;
-  ownerId: number;
-  name: string;
-  maxUserCnt: number;
-  curUserCnt: number;
-  intro: string;
-  startAt: string;
-  endAt: string;
-  status: string;
-  usingTechStacks: GroupUsingTechStack[];
-  groupEnrollments: GroupEnrollment[];
-}
-
-export interface GroupApplyData {
-  groupId: number;
-  userId?: number;
-}
-
-export type RequestBody = ExampleInterface | GroupCreateInterface | null;
-
 export interface GroupPostDto {
   id: number;
   groupId: number;
@@ -114,38 +47,6 @@ export interface GroupPostRequestDto {
   title: string;
   content: string;
   type: string;
-}
-
-export interface SimpleGroupInfoResponse {
-  name: string;
-  intro: string;
-  startAt: string;
-  endAt: string;
-}
-
-export interface UpdateGroupNameData {
-  gid: number;
-  name: string;
-}
-
-export interface UpdateGroupDateData {
-  gid: number;
-  startAt: string;
-  endAt: string;
-}
-
-export interface UpdateGroupIntroData {
-  gid: number;
-  intro: string;
-}
-
-export interface ParticipationRequest {
-  id: number;
-  name: string;
-  githubId: string;
-  avatarUrl: string;
-  feverStack: number;
-  createdAt: Date;
 }
 
 export interface NotificationData {
