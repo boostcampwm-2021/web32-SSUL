@@ -89,7 +89,7 @@ export class GroupService {
       .slice(offset, offset + EACH_PAGE_CNT)
       .map((group) => FilteredGroup.from(group));
 
-    const totalPages: number = Math.ceil(selectedPageGroups.length / EACH_PAGE_CNT);
+    const totalPages: number = Math.ceil(filteredGroups.length / EACH_PAGE_CNT);
 
     return FilteredPageGroupResponse.from(selectedPageGroups, totalPages);
   }
