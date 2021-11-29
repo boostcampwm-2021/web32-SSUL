@@ -2,7 +2,13 @@
 /// <reference types="Cypress" />
 
 context('프로필 페이지', () => {
+  const iterativeTask = () => {
+    cy.ignoreAlarm();
+    cy.intercept('GET', '/api/techstack', { fixture: 'techstack.json' });
+  };
+
   before(() => {
+    iterativeTask();
     cy.set();
     cy.intercept('GET', '/api/user/profile/ChanYangYu', { fixture: 'profile/profile-info.json' });
     cy.intercept('GET', '/api/user/intro/4', '');
@@ -15,8 +21,7 @@ context('프로필 페이지', () => {
   });
 
   beforeEach(() => {
-    cy.intercept('GET', '/api/alarm/', []);
-    cy.intercept('GET', '/api/techstack', { fixture: 'techstack.json' });
+    iterativeTask();
   });
 
   describe('프로필 페이지 좌측 프로필 정보', () => {
@@ -54,7 +59,7 @@ context('프로필 페이지', () => {
     it('멘토 신청후 멘토링 스택이 정상 출력된다.', () => {
       cy.intercept('POST', 'api/mentoring/mentor', { statusCode: 200 });
       cy.intercept('GET', '/api/mentoring/mentor/4', { mentorId: 1 });
-      cy.contains('멘토 신청하기').click();
+      cy.get('[data-test="metor-apply"]').click();
       cy.get('[data-test="tech-item"]').first().click();
       cy.get('[data-test="tech-item"]').first().click();
       cy.contains('확인').click();
@@ -65,8 +70,8 @@ context('프로필 페이지', () => {
       cy.intercept('GET', '/api/mentoring/request/1', {
         fixture: 'profile/mentoring-request.json',
       });
-      cy.contains('멘토요청 리스트').should('be.exist');
-      cy.contains('멘토요청 리스트').click();
+      cy.get('[data-test="mentoring-request-list"]').should('be.exist');
+      cy.get('[data-test="mentoring-request-list"]').click();
       cy.get('[data-test="request-container"]').should('have.length', 3);
 
       cy.intercept('POST', '/api/mentoring/request/accept', { statusCode: 200 });
