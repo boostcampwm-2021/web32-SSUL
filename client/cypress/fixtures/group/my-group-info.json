@@ -1,0 +1,58 @@
+{
+  "id": 1,
+  "mentorId": 1,
+  "ownerId": 1,
+  "categoryId": 1,
+  "name": "testgroup1",
+  "maxUserCnt": 8,
+  "curUserCnt": 1,
+  "intro": "프로그래밍의 고수가 되고싶으신가요?\n 여기로 모시겠습니다.",
+  "startAt": "2021-12-16T16:06:55.000Z",
+  "endAt": "2022-09-02T21:44:08.000Z",
+  "status": "READY",
+  "techStacks": [
+    {
+      "techStackId": 3,
+      "name": "node.js"
+    },
+    {
+      "techStackId": 4,
+      "name": "Java"
+    },
+    {
+      "techStackId": 5,
+      "name": "javascript"
+    },
+    {
+      "techStackId": 6,
+      "name": "typescript"
+    },
+    {
+      "techStackId": 7,
+      "name": "R"
+    }
+  ],
+  "groupEnrollments": [
+    {
+      "userId": 2,
+      "type": "MENTEE",
+      "githubId": "Donggggg",
+      "name": "김동규",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4"
+    },
+    {
+      "userId": 4,
+      "type": "MENTOR",
+      "githubId": "ChanYangYu",
+      "name": "유찬양",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/55623688?v=4"
+    },
+    {
+      "userId": 1,
+      "type": "OWNER",
+      "githubId": "yuchanleeme",
+      "name": "이유찬",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4"
+    }
+  ]
+}
