@@ -5,6 +5,7 @@ declare namespace Cypress {
     set(): void;
     login(role: string): void;
     authenficate(): void;
+    ignoreAlarm(): void;
   }
 }
 
@@ -22,4 +23,8 @@ Cypress.Commands.add('authenficate', () => {
   cy.intercept('GET', '/api/auth', { statusCode: 200 });
   cy.intercept('GET', '/api/auth/group/belong?gid=1', { statusCode: 200 });
   cy.intercept('GET', '/api/auth/group/owner?gid=1', { statusCode: 200 });
+});
+
+Cypress.Commands.add('ignoreAlarm', () => {
+  cy.intercept('GET', '/api/alarm', []);
 });
