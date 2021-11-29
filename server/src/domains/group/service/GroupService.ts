@@ -100,7 +100,8 @@ export class GroupService {
       groupId,
       userId,
     );
-    if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
+    console.log(enrollmentType);
+    if (enrollmentType === undefined) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
   }
@@ -192,6 +193,7 @@ export class GroupService {
 
   public async checkApplyGroup(groupId: number, userId: number): Promise<void> {
     const applyInfo = await this.applyGroupRepository.findOneByGroupIdAndUserId(groupId, userId);
+    console.log('apply', applyInfo);
     if (applyInfo?.state === ApplyGroupState.PENDING) throw new GroupAlreadyApplyError();
     else if (applyInfo?.state === ApplyGroupState.ACCEPTED) throw new GroupAlreadyJoinError();
     else if (applyInfo?.state === ApplyGroupState.DECLINED) throw new GroupAlreadyDeclineError();
