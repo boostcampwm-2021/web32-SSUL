@@ -4,7 +4,7 @@ import GroupInfoBox from './groupInfoBox';
 import ParticipationRequestBox from './ParticipationRequestBox';
 import { useParams } from 'react-router';
 import { groupOwnerHttpClient } from '@api';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useLoader } from '@hooks';
 import { clearGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { formatDateToString } from '@utils/Date';
 
@@ -16,6 +16,7 @@ function GroupOwnerPage(): JSX.Element {
   const { gid } = useParams<Param>();
   const [fetchState, setFetchState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const [toggleLoader] = useLoader();
 
   const fetchGroupInfo = async (groupId: number) => {
     const groupInfo = await groupOwnerHttpClient.getGroupAdminInfo(groupId);
@@ -30,11 +31,13 @@ function GroupOwnerPage(): JSX.Element {
   };
 
   useEffect(() => {
+    toggleLoader(true);
     (async () => {
       const groupId = Number(gid);
       try {
         await Promise.all([fetchGroupInfo(groupId), fetchApplyList(groupId)]);
         setFetchState(true);
+        toggleLoader(false);
       } catch (e) {
         location.href = '/';
       }
