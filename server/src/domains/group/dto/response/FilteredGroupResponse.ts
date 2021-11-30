@@ -110,15 +110,15 @@ export class FilteredGroup {
   }
 }
 
-export class FilteredPageGroupResponse {
+export class FilteredGroupResponse {
   @IsArray()
   groups: FilteredGroup[];
   @IsNumber()
   totalPages: number;
 
-  static from(groups: FilteredGroup[], totalPages: number) {
-    const dto = new FilteredPageGroupResponse();
-    dto.groups = groups;
+  static from(groups: Group[], totalPages: number) {
+    const dto = new FilteredGroupResponse();
+    dto.groups = groups.map((group) => FilteredGroup.from(group));
     dto.totalPages = totalPages;
     return dto;
   }

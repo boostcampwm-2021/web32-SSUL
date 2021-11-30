@@ -1,19 +1,47 @@
 import { Group, GroupState } from '../models/Group';
 import { Service } from 'typedi';
-import { Repository, EntityRepository, Like } from 'typeorm';
+import { Repository, EntityRepository, Like, In } from 'typeorm';
+
+const ROW_PER_PAGE = 10;
 
 @Service()
 @EntityRepository(Group)
 export class GroupRepository extends Repository<Group> {
-  public findAll() {
-    return this.find();
-  }
+  public async findAll(
+    filters: { name: string; category: number; inputTechStackNames: string[] },
+    curPage: number,
+  ) {
+    const { name, category, inputTechStackNames } = filters;
+    const numTotalRows = await this.count();
+    const totalPage = Math.floor(numTotalRows / ROW_PER_PAGE);
+    const query = this.createQueryBuilder('group').innerJoin('group.techStacks', 'techStacks');
 
-  public findAllByNameAndCategoryId(name: string, categoryId?: number) {
-    return this.find({
+    if (category !== undefined) {
+      query.where('group.categoryId = :category', { category });
+    }
+
+    if (name !== '') {
+      query.andWhere('group.name LIKE :name', { name: `%${name}%` });
+    }
+
+    if (inputTechStackNames.length != 0) {
+      query.andWhere('techStacks.name IN (:...techStackName)', {
+        techStackName: inputTechStackNames,
+      });
+    }
+
+    const filteredGroups = await query
+      .take(ROW_PER_PAGE)
+      .skip(ROW_PER_PAGE * (curPage - 1))
+      .getMany();
+    const groupIds = filteredGroups.map((group) => group.id);
+
+    const page = await this.find({
       relations: ['techStacks', 'category', 'ownerInfo'],
-      where: { name: Like(`%${name}%`), categoryId },
+      where: { id: In(groupIds) },
     });
+
+    return { groups: page, totalPage };
   }
 
   public findAllByName(name: string) {

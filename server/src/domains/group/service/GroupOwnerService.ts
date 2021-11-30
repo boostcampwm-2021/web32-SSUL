@@ -44,13 +44,14 @@ export class GroupOwnerService {
   public updateGroupIntro(gid: number, intro: string) {
     return this.groupRepository.update({ id: gid }, { intro });
   }
+
   public async acceptRequest(applyId: number, ownerId: number): Promise<ApplyGroup> {
     const applyGroup = await this.applyGroupRepository.findOneOrFailById(applyId);
 
     if (applyGroup.group.ownerId !== ownerId) {
       throw new NotAuthorizedError();
     }
-    //TODO transaction
+
     applyGroup.state = ApplyGroupState.ACCEPTED;
     await this.groupService.enroll(applyGroup.groupId, applyGroup.userId, GroupEnrollmentAs.MENTEE);
     await this.applyGroupRepository.save(applyGroup);
