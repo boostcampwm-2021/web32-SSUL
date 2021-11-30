@@ -16,6 +16,7 @@ interface Props {
 
 function BubbleModal({ type, items, headerVisibility }: Props): JSX.Element {
   const { notificationList } = useAppSelector(selectNotficationList);
+
   if (type === 'profile-modal') {
     const ProfileModalItemList = items.map((item, idx) => {
       return <MenuItem name={item.name} onClick={item.handleModalItemClick} key={idx} />;
@@ -35,7 +36,7 @@ function BubbleModal({ type, items, headerVisibility }: Props): JSX.Element {
         <EmptyItem />
       </NotificationModalContainer>
     );
-  
+
   return (
     <NotificationModalContainer>
       {notificationList.map((notificationData, idx) => (
