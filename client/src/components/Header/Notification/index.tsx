@@ -45,7 +45,11 @@ function Notification(): JSX.Element {
 
   return (
     <Container>
-      <NotificationButton src={NotificationIcon} onClick={handleNotificationButtonClick} />
+      <NotificationButton
+        src={NotificationIcon}
+        onClick={handleNotificationButtonClick}
+        alt="알림 버튼"
+      />
       {hasNewNotification.current && <NotificationCircle />}
       {isModalClicked && (
         <BubbleModal type="notification-modal" items={[]} headerVisibility={true} />
