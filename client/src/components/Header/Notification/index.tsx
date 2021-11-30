@@ -77,6 +77,7 @@ const NotificationCircle = styled.div`
 `;
 const NotificationButton = styled.img`
   width: 16px;
+  height: 16px;
   filter: ${({ theme }) => theme.Filter};
 `;
 

@@ -19,6 +19,7 @@ const Container = styled(Link)`
 const ChatButton = styled.img`
   filter: ${({ theme }) => theme.Filter};
   width: 19px;
+  height: 19px;
 `;
 
 export default Messenger;
