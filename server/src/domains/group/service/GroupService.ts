@@ -20,10 +20,7 @@ import { GroupAlreadyApplyError } from '../error/GroupAlreadyApplyError';
 import { ApplyGroup, ApplyGroupState } from '../models/ApplyGroup';
 import { GroupAlreadyJoinError } from '../error/GroupAlreadyJoinError';
 import { GroupAlreadyDeclineError } from '../error/GroupAlreadyDecline';
-import {
-  FilteredGroup,
-  FilteredPageGroupResponse,
-} from '../dto/response/FilteredPageGroupResponse';
+import { FilteredGroupResponse } from '../dto/response/FilteredGroupResponse';
 import { SimpleGroupCardResponse } from '../dto/response/SimpleGroupCardResponse';
 import { OwnerGroupCardResponse } from '../dto/response/OwnerGroupCardResponse';
 import { GroupActivityResponse } from '../dto/response/GroupActivityResponse';
@@ -67,31 +64,22 @@ export class GroupService {
     return GroupDetailResponse.from(groupDetail);
   }
 
-  public async getfilteredPageGroups(
+  public async getFilteredGroups(
     page: number = 1,
     name: string = '',
     category: number,
     techstack: string,
-  ): Promise<FilteredPageGroupResponse> {
+  ): Promise<any> {
     const inputTechStackNames = techstack ? techstack.split(',') : [];
-    const offset = (page - 1) * EACH_PAGE_CNT;
-
-    const groups =
-      category === undefined
-        ? await this.groupRepository.findAllByName(name)
-        : await this.groupRepository.findAllByNameAndCategoryId(name, category);
-
-    const filteredGroups: Group[] = inputTechStackNames.length
-      ? groups.filter((group) => group.techStacks.some((t) => inputTechStackNames.includes(t.name)))
-      : groups;
-
-    const selectedPageGroups = filteredGroups
-      .slice(offset, offset + EACH_PAGE_CNT)
-      .map((group) => FilteredGroup.from(group));
-
-    const totalPages: number = Math.ceil(filteredGroups.length / EACH_PAGE_CNT);
-
-    return FilteredPageGroupResponse.from(selectedPageGroups, totalPages);
+    const { groups, totalPage } = await this.groupRepository.findAll(
+      {
+        name,
+        category,
+        inputTechStackNames,
+      },
+      page,
+    );
+    return FilteredGroupResponse.from(groups, totalPage);
   }
 
   public async getGroupRole(groupId: number, userId: number) {

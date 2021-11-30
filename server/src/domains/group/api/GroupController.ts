@@ -18,7 +18,6 @@ import { AlarmService } from '@domains/alarm/service/AlarmService';
 
 import { AlarmDto } from '@domains/alarm/dto/AlarmDto';
 import { AlarmType } from '@domains/alarm/models/Alarm';
-import { FilteredPageGroupResponse } from '../dto/response/FilteredPageGroupResponse';
 import { GroupQuery } from '../dto/query/GroupQuery';
 import { GroupActivityResponse } from '../dto/response/GroupActivityResponse';
 import { CreateGroupDto } from '../dto/request/CreateGroupDto';
@@ -31,6 +30,7 @@ import { GroupDetailResponse } from '../dto/response/GroupDetailResponse';
 import { ApplyGroupDto } from '../dto/request/ApplyGroupDto';
 import { GroupRoleResponse } from '../dto/response/GroupRoleResponse';
 import { GroupParam } from '../dto/param/GroupParam';
+import { FilteredGroupResponse } from '../dto/response/FilteredGroupResponse';
 
 @OpenAPI({
   tags: ['그룹'],
@@ -47,22 +47,16 @@ export class GroupController {
 
   @Get('/')
   @OnUndefined(200)
-  @OpenAPI({
-    summary: '필터링된 그룹을 조회하는 API',
-    responses: {
-      '200': {
-        description: '그룹 조회 완료',
-      },
-    },
-  })
-  @ResponseSchema(FilteredPageGroupResponse, { description: '필터링 그룹 조회 결과' })
+  @OpenAPI({ summary: '필터링된 그룹을 조회하는 API' })
+  @ResponseSchema(FilteredGroupResponse, { description: '필터링 그룹 조회 결과' })
   async getAll(@QueryParams() { page, name, category, techstack }: GroupQuery) {
-    const filteredGroups = await this.groupService.getfilteredPageGroups(
+    const filteredGroups = await this.groupService.getFilteredGroups(
       page,
       name,
       category,
       techstack,
     );
+
     return filteredGroups;
   }
 
