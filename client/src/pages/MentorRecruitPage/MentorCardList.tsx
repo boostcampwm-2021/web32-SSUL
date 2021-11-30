@@ -79,7 +79,7 @@ const CardList = styled.div`
   min-width: 1000px;
 
   grid-template-columns: repeat(3, minmax(250px, 2fr));
-  grid-template-rows: repeat(auo-fit, minmax(100px, 2fr));
+  grid-template-rows: repeat(auto-fit, minmax(100px, 2fr));
 `;
 
 const EmptyMessage = styled.div`
