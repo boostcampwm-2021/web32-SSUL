@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { groupOwnerHttpClient } from '@api';
 import { MAX_INTRO_LEN, MIN_INTRO_LEN } from '@constants/consts';
 
 function GroupIntro(): JSX.Element {
-  const [notificationText, setNotificationText] = useState<string>('');
+  const [toastify] = useToast();
   const { groupId, intro } = useAppSelector(selectGroupAdminData);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -16,14 +16,13 @@ function GroupIntro(): JSX.Element {
     const text = textInput.current;
 
     if (isEdit && text !== undefined) {
-      if (text.length < MAX_INTRO_LEN || text.length > MIN_INTRO_LEN) {
-        setNotificationText(`소개글은 ${MIN_INTRO_LEN} ~ ${MAX_INTRO_LEN}자 내외로 작성해주세요!`);
+      if (text.length < MIN_INTRO_LEN || text.length > MAX_INTRO_LEN) {
+        toastify(`그룹 소개는 ${MIN_INTRO_LEN}~${MAX_INTRO_LEN}자 내외로 작성해주세요!`, 'ERROR');
         return;
       }
       dispatch(setGroupAdminData({ intro: text }));
       groupOwnerHttpClient.updateGroupIntro({ gid: groupId, intro: text });
     }
-    setNotificationText('');
     setIsEdit(!isEdit);
   };
 
@@ -35,7 +34,6 @@ function GroupIntro(): JSX.Element {
     <Container>
       <Header>
         <BoxTitle>소개</BoxTitle>
-        <Notification>{notificationText}</Notification>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
@@ -103,11 +101,6 @@ const EditText = styled.textarea`
   &:focus {
     outline: 2px ${(props) => props.theme.Primary} solid;
   }
-`;
-
-const Notification = styled.div`
-  font-size: 13px;
-  color: ${(props) => props.theme.Error}; ;
 `;
 
 export default GroupIntro;

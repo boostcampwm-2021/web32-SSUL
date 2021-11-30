@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectGroupAdminData, setGroupAdminData } from '@store/group/adminSlice';
 import { groupOwnerHttpClient } from '@api';
 import { MIN_TITLE_LEN, MAX_TITLE_LEN } from '@constants/consts';
 
 function GroupTitle(): JSX.Element {
-  const [notificationText, setNotificationText] = useState<string>('');
+  const [toastify] = useToast();
   const { groupId, name } = useAppSelector(selectGroupAdminData);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -16,13 +16,13 @@ function GroupTitle(): JSX.Element {
     const text = textInput.current;
     if (isEdit && text !== undefined) {
       if (text.length < MIN_TITLE_LEN || text.length > MAX_TITLE_LEN) {
-        setNotificationText(`제목은 ${MIN_TITLE_LEN} ~ ${MAX_TITLE_LEN}자 내외로 작성해주세요!`);
+        toastify(`제목은 ${MIN_TITLE_LEN}~${MAX_TITLE_LEN}자 내외로 작성해주세요!`, 'ERROR');
         return;
       }
+
       dispatch(setGroupAdminData({ name: text }));
       groupOwnerHttpClient.updateGroupName({ gid: groupId, name: text });
     }
-    setNotificationText('');
     setIsEdit(!isEdit);
   };
 
@@ -33,7 +33,6 @@ function GroupTitle(): JSX.Element {
     <Container>
       <Header>
         <BoxTitle>제목</BoxTitle>
-        <Notification>{notificationText}</Notification>
         <EditButton onClick={handleEditButtonClick}>{isEdit ? '저장' : '편집'}</EditButton>
       </Header>
       {isEdit ? (
@@ -97,11 +96,6 @@ const EditText = styled.textarea`
   &:focus {
     outline: 2px ${(props) => props.theme.Primary} solid;
   }
-`;
-
-const Notification = styled.div`
-  font-size: 13px;
-  color: ${(props) => props.theme.Error}; ;
 `;
 
 export default GroupTitle;
