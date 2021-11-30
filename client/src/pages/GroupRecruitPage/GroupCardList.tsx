@@ -55,7 +55,7 @@ function GroupCardList(): JSX.Element {
         </>
       ) : (
         <>
-          (<CardList>{renderGroupCards}</CardList>
+          <CardList>{renderGroupCards}</CardList>
           <Pagination
             totalPages={totalPages}
             curPage={selectedPage}

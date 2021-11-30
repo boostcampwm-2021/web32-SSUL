@@ -7,6 +7,7 @@ import { selectUser } from '@store/user/globalSlice';
 import { selectNotficationList, setNotificationList } from '@store/notification/slice';
 import { useSelector } from 'react-redux';
 import { notificationHttpClient } from '@api';
+import { ONE_SECOND } from '@constants/consts';
 
 function Notification(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ function Notification(): JSX.Element {
     fetchNotificationList();
     const refreshIntervalId = setInterval(() => {
       fetchNotificationList();
-    }, 1000);
+    }, 30 * ONE_SECOND);
     return () => clearInterval(refreshIntervalId);
   }, []);
 

@@ -45,7 +45,7 @@ function ReadModal(): JSX.Element {
         <Name>{post.writer}</Name>
         <Date>{formatDateToString(post.createdAt)}</Date>
       </SubInfoBar>
-      <Content data-test="read-modal-content" readOnly>{post.content.replaceAll('\r\n', '<br/>')}</Content>
+      <Content data-test="read-modal-content" value={post.content} readOnly></Content>
       <Hit>
         {HIT} {post.hit}
       </Hit>
