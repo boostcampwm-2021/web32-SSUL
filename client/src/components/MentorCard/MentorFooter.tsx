@@ -8,20 +8,20 @@ import { ModalTypeEnum } from '@constants/enums';
 import { MENTOR_APPLY_TEXT } from '@constants/consts';
 
 interface Props {
-  mentorId: number;
+  mentorUserId: number;
 }
 
-function MentorFooter({ mentorId }: Props): JSX.Element {
+function MentorFooter({ mentorUserId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(selectUser);
 
   const handleShowDetailButtonClick = () => {
-    dispatch(setMentorCardDetail(mentorId));
+    dispatch(setMentorCardDetail(mentorUserId));
     dispatch(changeGroupModalState(ModalTypeEnum.MENTOR_DETAIL));
   };
   return (
     <Container>
-      {id !== 0 && id !== mentorId && (
+      {id !== 0 && id !== mentorUserId && (
         <ApplyButton onClick={handleShowDetailButtonClick}>{MENTOR_APPLY_TEXT}</ApplyButton>
       )}
     </Container>

@@ -89,7 +89,7 @@ export class GroupService {
       .slice(offset, offset + EACH_PAGE_CNT)
       .map((group) => FilteredGroup.from(group));
 
-    const totalPages: number = Math.ceil(selectedPageGroups.length / EACH_PAGE_CNT);
+    const totalPages: number = Math.ceil(filteredGroups.length / EACH_PAGE_CNT);
 
     return FilteredPageGroupResponse.from(selectedPageGroups, totalPages);
   }
@@ -100,7 +100,7 @@ export class GroupService {
       groupId,
       userId,
     );
-    if (!enrollmentType) await this.checkApplyGroup(groupId, userId);
+    if (enrollmentType === undefined) await this.checkApplyGroup(groupId, userId);
 
     return enrollmentType;
   }

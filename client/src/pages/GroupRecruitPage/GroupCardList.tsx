@@ -13,6 +13,8 @@ import { changeGroupModalState, selectGroupModalState } from '@store/util/Slice'
 import GroupModal from './GroupModal';
 import { groupCardDetailState } from '@store/group/cardDetailSlice';
 import { ModalTypeEnum } from '@constants/enums';
+import { GROUP_EMPTY_TEXT } from '@constants/consts';
+import CryingLogoImage from '@assets/logo_crying.png';
 
 function GroupCardList(): JSX.Element {
   const { filterdQuery, selectedPage } = useAppSelector(returnGroupRecruitFilterState);
@@ -31,7 +33,6 @@ function GroupCardList(): JSX.Element {
     toggleLoader(true);
     const getGroupsList = async () => {
       const allGroupList: GroupResponse = await groupHttpClient.getFilterdGroupList(filterdQuery);
-      console.log(allGroupList);
       setFilterdGroupList(allGroupList.groups);
       setTotalPages(allGroupList.totalPages);
       toggleLoader(false);
@@ -47,18 +48,27 @@ function GroupCardList(): JSX.Element {
 
   return (
     <>
-      <CardList>{renderGroupCards}</CardList>
-      <Pagination
-        totalPages={totalPages}
-        curPage={selectedPage}
-        createdQuery={createdFilterdQuery}
-      />
-      {modalType !== ModalTypeEnum.NONE && (
-        <BoxModal
-          style={{ width: '650px', height: '550px' }}
-          element={<GroupModal contents={{ ...groupCardContetns }} />}
-          onCancel={handleModalBackgroundClick}
-        />
+      {filterdGroupList.length === 0 ? (
+        <>
+          <EmptyImage src={CryingLogoImage} alt="텅 빈 화면 로고" />
+          <EmptyMessage>{GROUP_EMPTY_TEXT}</EmptyMessage>
+        </>
+      ) : (
+        <>
+          (<CardList>{renderGroupCards}</CardList>
+          <Pagination
+            totalPages={totalPages}
+            curPage={selectedPage}
+            createdQuery={createdFilterdQuery}
+          />
+          {modalType !== ModalTypeEnum.NONE && (
+            <BoxModal
+              style={{ width: '650px', height: '550px' }}
+              element={<GroupModal contents={{ ...groupCardContetns }} />}
+              onCancel={handleModalBackgroundClick}
+            />
+          )}
+        </>
       )}
     </>
   );
@@ -73,4 +83,18 @@ const CardList = styled.div`
   grid-template-rows: repeat(auo-fit, minmax(100px, 2fr));
 `;
 
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: ${(props) => props.theme.Gray4};
+  margin-top: 20px;
+`;
+
+const EmptyImage = styled.img`
+  align-self: center;
+  margin-top: 100px;
+  width: 250px;
+  height: 200px;
+`;
 export default GroupCardList;

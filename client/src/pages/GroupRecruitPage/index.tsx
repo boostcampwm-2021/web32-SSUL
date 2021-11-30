@@ -4,8 +4,12 @@ import { SearchFilter } from '@components';
 import GroupCardList from './GroupCardList';
 import plusIcon from '@assets/icon_plus.png';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '@hooks';
+import { selectUser } from '@store/user/globalSlice';
 
 function GroupRecruitPage(): JSX.Element {
+  const { id } = useAppSelector(selectUser);
+
   return (
     <Container>
       <SideLayout />
@@ -14,9 +18,11 @@ function GroupRecruitPage(): JSX.Element {
         <GroupCardList />
       </Contents>
       <SideLayout>
-        <FloatingButton to={{ pathname: `/group/create` }}>
-          <FloatingImg src={plusIcon} />
-        </FloatingButton>
+        {!!id && (
+          <FloatingButton to={{ pathname: `/group/create` }}>
+            <FloatingImg src={plusIcon} />
+          </FloatingButton>
+        )}
       </SideLayout>
     </Container>
   );

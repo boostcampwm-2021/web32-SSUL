@@ -1,32 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { groupHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
-import { ModalTypeEnum } from '@constants/enums';
-import { APPLY_TEXT } from '@constants/consts';
+import { GroupEnrollmentState, ModalTypeEnum } from '@constants/enums';
+import {
+  APPLY_TEXT,
+  MSG_IS_GROUP_MENTEE,
+  MSG_IS_GROUP_MENTOR,
+  MSG_IS_GROUP_OWNER,
+} from '@constants/consts';
+import { GroupRoleResponse } from '@types';
 
 interface Props {
-  notfication: string;
   groupId: number;
   remainDate: number | null;
 }
 
-function GroupDetailFooter({ notfication, groupId, remainDate }: Props): JSX.Element {
+function GroupDetailFooter({ groupId, remainDate }: Props): JSX.Element {
+  const [notification, setNotification] = useState<string>('');
+  const [isLoadding, setIsLoadding] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const { id: userId } = useAppSelector(selectUser);
 
+  const notificationMessage = (type: string) => {
+    switch (type) {
+      case GroupEnrollmentState.OWNER:
+        return MSG_IS_GROUP_OWNER;
+      case GroupEnrollmentState.MENTOR:
+        return MSG_IS_GROUP_MENTOR;
+      case GroupEnrollmentState.MENTEE:
+        return MSG_IS_GROUP_MENTEE;
+      default:
+        return '';
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const groupRole: GroupRoleResponse = await groupHttpClient.getGroupRole(groupId);
+        setIsLoadding(false);
+        setNotification(notificationMessage(String(groupRole.type)));
+      } catch (e: any) {
+        setNotification(e.description);
+      }
+    })();
+  }, []);
+
   const handleApplyButtonClick = async () => {
-    groupHttpClient.postApplyGroup({ groupId, userId });
+    await groupHttpClient.postApplyGroup({ groupId, userId });
     dispatch(changeGroupModalState(ModalTypeEnum.NONE));
   };
 
   return (
     <Container>
       <RemainDays>D-{remainDate}</RemainDays>
-      <Notification>{notfication}</Notification>
-      {!userId && !notfication && (
+      <Notification>{notification}</Notification>
+      {!notification && !isLoadding && (
         <GroupApplyButton onClick={handleApplyButtonClick}>{APPLY_TEXT}</GroupApplyButton>
       )}
     </Container>
