@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import firstMainImage from '../../assets/images/img_main1.png';
-import secondMainImage from '../../assets/images/img_main2.png';
-import thirdMainImage from '../../assets/images/img_main3.png';
-import fourthMainImage from '../../assets/images/img_main4.png';
+import firstMainImage from '../../assets/images/img_main1.svg';
+import secondMainImage from '../../assets/images/img_main2.svg';
+import thirdMainImage from '../../assets/images/img_main3.svg';
+import fourthMainImage from '../../assets/images/img_main4.svg';
 import { ONE_SECOND, MAIN_IMAGE_CNT } from '@constants/consts';
 
 function MainImage(): JSX.Element {
@@ -32,7 +32,6 @@ const DynamicImage = styled.img<{ current: number; order: number }>`
   position: absolute;
   top: 0px;
   height: 320px;
-  object-fit: cover;
   opacity: ${({ current, order }) => (current === order ? 1 : 0)};
 
   transition: opacity 4s ease;
