@@ -16,7 +16,9 @@ const Container = styled.div`
   width: 1080px;
   min-height: 360px;
   padding: 20px 24px 20px 24px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  border-radius: 24px;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 export default GroupBoard;

@@ -19,7 +19,7 @@ const Container = styled.div`
   width: 200px;
 
   background: ${(props) => props.theme.White};
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.25), inset -2.5px -2.5px 5px #ffffff;
   border-radius: 30px 30px 30px 30px;
 `;
 

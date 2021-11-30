@@ -41,9 +41,10 @@ const TechStackSection = styled.div`
   width: 1000px;
   padding: 10px;
 
-  background: ${(props) => props.theme.White};
-  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
+  border-radius: 20px;
 `;
 
 export default SearchFilterTechSection;

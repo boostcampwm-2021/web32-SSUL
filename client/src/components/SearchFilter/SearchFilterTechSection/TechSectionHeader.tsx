@@ -30,9 +30,10 @@ const Container = styled.div`
   display: flex;
   margin: 10px;
 
-  background: ${(props) => props.theme.White};
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 40px;
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
+  border-radius: 20px;
 `;
 
 export default TechSectionHeader;

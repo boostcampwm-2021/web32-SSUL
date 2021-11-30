@@ -42,8 +42,9 @@ const SelectItem = styled.div`
   margin-left: 10px;
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 2px 2px 4px 0px rgba(41, 36, 36, 0.25);
   border-radius: 10px;
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 const TechStackName = styled.span`

@@ -35,7 +35,7 @@ const TechListItem = styled.button`
   padding: 0px 8px;
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   border-radius: 10px;
   border: none;
 `;

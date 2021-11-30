@@ -61,7 +61,9 @@ const Card = styled.div`
   min-width: 280px;
   margin: 10px;
   padding: 10px;
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
   border-radius: 10px 10px 10px 10px;
 `;
 

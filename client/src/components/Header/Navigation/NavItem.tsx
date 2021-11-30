@@ -17,7 +17,7 @@ const Item = styled(Link)`
   align-items: center;
   height: 32px;
   margin: 0px 24px 0px 24px;
-  color: ${(props) => props.theme.LightBlack};
+  color: ${(props) => props.theme.TextColor};
   font-size: 1.05em;
   box-sizing: border-box;
   cursor: pointer;

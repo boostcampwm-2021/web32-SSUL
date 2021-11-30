@@ -32,15 +32,23 @@ const LinkButton = styled(Link)`
   height: 80px;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: ${({ theme }) => theme.TextColor};
+  &:hover {
+    color: ${({ theme }) => theme.Primary};
+  }
 `;
 
 const CategoryIcon = styled.img`
   width: 50px;
   height: 50px;
   margin-bottom: 8px;
+  filter: ${({ theme }) => theme.Filter};
+  &:hover {
+    filter: ${({ theme }) => theme.ColorFilter};
+  }
 `;
 
 const CategoryName = styled.span`
-  font-size: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
 `;

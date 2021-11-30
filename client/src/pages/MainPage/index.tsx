@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import CategoryItem from './CategoryItem';
 import { BaseLayout } from '@styles';
 import { LinkButton } from '../../components';
-import DeveloperImg from '../../assets/images/developer-img.jpg';
+import MainImage from './MainImage';
 import { categoryHttpClient } from '@api';
 import { Category } from '../../types/Category';
 import {
@@ -66,7 +66,7 @@ function MainPage(): JSX.Element {
         </InfoContainer>
 
         <ImageWrapper>
-          <DynamicImage src={DeveloperImg} alt="devloper" />
+          <MainImage />
         </ImageWrapper>
       </Container>
     </BaseLayout>
@@ -80,12 +80,12 @@ const Container = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 580px;
 `;
 const Header = styled.div`
   display: flex;
   width: 300px;
-  padding: 8px 0;
+  padding-top: 8px;
   margin-bottom: 16px;
   border-bottom: 1px solid ${(props) => props.theme.Gray3};
 `;
@@ -94,16 +94,27 @@ type TextBtnProp = {
 };
 const TextBtn = styled.button<TextBtnProp>`
   display: flex;
-  background: ${(props) => props.theme.White};
-  font-weight: ${(props) => (props.selected ? 600 : 400)};
-  border: none;
+  background: ${(props) => props.theme.Background};
+  font-weight: ${(props) => (props.selected ? 700 : 400)};
+  color: ${({ theme }) => theme.TextColor};
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: ${(props) => (props.selected ? `1px soild ${props.theme.Black}` : 'none')};
   cursor: pointer;
+  font-size: 1.025rem;
   margin-right: 16px;
 `;
 const GroupFindContainer = styled.div``;
-const IntroText = styled.h1`
+
+const IntroText = styled.span`
+  color: ${({ theme }) => theme.TextColor};
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 4px;
+  display: block;
 `;
+
 const GroupCatagoryContainer = styled.div`
   display: grid;
   width: 100%;
@@ -116,13 +127,9 @@ const GroupCatagoryContainer = styled.div`
 const MentorFindContainer = styled.div``;
 
 const ImageWrapper = styled.div`
+  position: relative;
   display: flex;
   width: 400px;
-`;
-
-const DynamicImage = styled.img`
-  height: 400px;
-  object-fit: cover;
 `;
 
 export default MainPage;

@@ -45,9 +45,9 @@ const Button = styled.button`
   height: 40px;
   font-weight: bold;
   border-radius: 10px;
-  box-shadow: 0px 5px 7px #8f8f8f, -5px -5px 10px #ffffff;
+  box-shadow: 0px 2.5px 3.5px #8f8f8f, -2.5px -2.5px 5px #ffffff;
   &:active {
-    box-shadow: inset 5px 5px 10px #8f8f8f, inset -5px -5px 10px #ffffff;
+    box-shadow: inset 2.5px 2.5px 5px #8f8f8f, inset -2.5px -2.5px 5px #ffffff;
   }
 `;
 

@@ -4,7 +4,7 @@ import { useAppSelector } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
 import Logo from './Logo';
 import Navigation from './Navigation';
-import RoleSwitch from './RoleSwitch';
+import ThemeSwitch from './ThemeSwitch';
 import Notification from './Notification';
 import Messenger from './Messenger';
 import Profile from './Profile';
@@ -19,7 +19,7 @@ function Header(): JSX.Element {
         <ControllContent>
           {user.isLogin && (
             <>
-              <RoleSwitch />
+              <ThemeSwitch />
               <Messenger />
               <Notification />
             </>
@@ -42,9 +42,10 @@ const Container = styled.div`
   min-width: 1040px;
   height: 80px;
   padding: 12px 32px 0px 32px;
-  background-color: ${(props) => props.theme.White};
+  background-color: ${(props) => props.theme.Box};
   box-sizing: border-box;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  border-bottom: 1px solid ${(props) => props.theme.Gray5};
+  box-shadow: ${(props) => props.theme.Shadow};
   z-index: 9999;
 `;
 

@@ -30,9 +30,10 @@ const Container = styled.div`
   height: 100%;
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid ${(props) => props.theme.Gray4};
   margin-right: 32px;
-  background-color: #f6f8fa;
+  border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const CardListHeader = styled.span`

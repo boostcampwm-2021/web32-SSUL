@@ -57,9 +57,7 @@ const Container = styled.div`
   margin: auto 10px;
 
   grid-template-rows: repeat(auto-fill);
-
-  background: ${(props) => props.theme.White};
-
+  background-color: ${(props) => props.theme.Box};
   border-radius: 10px;
 `;
 

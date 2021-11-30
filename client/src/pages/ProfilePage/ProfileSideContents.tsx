@@ -28,10 +28,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin-top: 40px;
-  margin-right: 40px;
+  margin: 40px 40px 0px 0px;
   border-radius: 10px;
   border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const ProfileImage = styled.img`
@@ -39,6 +40,7 @@ const ProfileImage = styled.img`
   width: 180px;
   height: 180px;
   border-radius: 50%;
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 const BaseInfo = styled.div`

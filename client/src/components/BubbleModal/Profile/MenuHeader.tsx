@@ -101,7 +101,7 @@ const PassionGraph = styled.div`
   padding: 4px 8px 4px 4px;
   background-color: #ee7262;
   border-radius: 24px 0px 0px 24px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 const ShareGraph = styled.div`
@@ -112,7 +112,7 @@ const ShareGraph = styled.div`
   padding: 4px 4px 4px 8px;
   background-color: #9cde84;
   border-radius: 0px 24px 24px 0px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 export default MenuHeader;

@@ -41,7 +41,7 @@ const SelectItem = styled.div`
 
   color: ${(props) => props.theme.White};
   background: ${(props) => props.theme.Primary};
-  box-shadow: 4px 4px 10px 0px rgba(41, 36, 36, 0.25);
+  box-shadow: ${(props) => props.theme.Shadow};
   border-radius: 10px;
 `;
 

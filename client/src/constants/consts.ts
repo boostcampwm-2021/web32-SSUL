@@ -2,6 +2,7 @@
 export const PERCENTAGE_UNIT = 100;
 export const ONE_SECOND = 1000;
 
+export const MAIN_IMAGE_CNT = 4;
 export const GAUGE_BAR_DEFAULT_INDEX = 30;
 export const MAX_SHOW_TECHSTACK = 3;
 export const MAX_SELECT_TECHSTACK_CNT = 5;
@@ -53,8 +54,8 @@ export const MENTOR_TECH_STACK_INTRO = '멘토링을 원하는 기술스택을 �
 export const HIT = '조회수';
 export const EDIT_POST = '글수정';
 export const WRITE_POST = '글쓰기';
-export const MAIN_MENTOR_INTRO1 = '인사이트를 넓힐 기회를 손쉽게';
-export const MAIN_MENTOR_INTRO2 = '가져보세요';
+export const MAIN_MENTOR_INTRO1 = '인사이트를 넓힐 기회를 ';
+export const MAIN_MENTOR_INTRO2 = '손쉽게 가져보세요!';
 export const MAIN_GROUP_INTRO = '함께 성장할 동료를 찾아보세요!';
 export const CONTINUED_APPLY_GROUP = '진행중인 참여 그룹';
 export const FINISHED_APPLY_GROUP = '완료된 참여 그룹';

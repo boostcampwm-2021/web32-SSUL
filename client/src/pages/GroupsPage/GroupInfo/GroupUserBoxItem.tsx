@@ -49,7 +49,7 @@ const Image = styled.div<ImageProps>`
   border-radius: 70%;
   border: 0.0625rem solid '#f2f2f2';
   overflow: hidden;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   background-size: cover;
   cursor: pointer;
   background-image: url(${(props) => props.url});

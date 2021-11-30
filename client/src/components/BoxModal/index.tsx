@@ -53,7 +53,7 @@ const Modal = styled.div`
   height: ${(props) => props?.style?.height ?? '600px'};
   background: ${(props) => props?.style?.background ?? 'white'};
   border-radius: 28px;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
   padding: ${(props) => props?.style?.padding ?? '24px'};
   box-sizing: border-box;
   z-index: 9999;

@@ -34,11 +34,11 @@ const Item = styled.div`
 `;
 
 const ClickedItem = styled(Item)`
-  box-shadow: inset 2px 2px 5px #8f8f8f, inset -5px -5px 10px #ffffff;
+  box-shadow: inset 2px 2px 5px #8f8f8f, inset -2.5px -2.5px 5px #ffffff;
 `;
 
 const UnClickedItem = styled(Item)`
-  box-shadow: 2px 2px 5px #8f8f8f, -5px -5px 10px #ffffff;
+  box-shadow: 2px 2px 5px #8f8f8f, -2.5px -2.5px 5px #ffffff;
 `;
 const ItemName = styled.p`
   width: 80px;

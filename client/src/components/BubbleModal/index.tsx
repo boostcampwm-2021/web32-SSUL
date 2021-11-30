@@ -53,10 +53,10 @@ const ProfileModalContainer = styled.div`
   top: 52px;
   right: -200%;
   width: 200px;
-  background: ${(props) => props.theme.White};
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.Gray6};
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.White};
   z-index: 9999;
 `;
 
