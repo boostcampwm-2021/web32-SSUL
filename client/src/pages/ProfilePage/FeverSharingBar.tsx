@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { selectUser } from '@store/user/globalSlice';
 import { useAppSelector } from '@hooks';
 import { GAGE_DEFAULT_INDEX } from '@constants/consts';
+import { selectProfileData } from '@store/user/profileSlice';
 
 function FeverSharingBar(): JSX.Element {
-  const { feverStack, shareStack } = useAppSelector(selectUser);
+  const { feverStack, shareStack } = useAppSelector(selectProfileData);
   const feverIndex = feverStack ? feverStack + GAGE_DEFAULT_INDEX : GAGE_DEFAULT_INDEX;
   const shareIndex = shareStack ? shareStack + GAGE_DEFAULT_INDEX : GAGE_DEFAULT_INDEX;
   return (
