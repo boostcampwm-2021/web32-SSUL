@@ -25,8 +25,6 @@ import { SimpleGroupCardResponse } from '../dto/response/SimpleGroupCardResponse
 import { OwnerGroupCardResponse } from '../dto/response/OwnerGroupCardResponse';
 import { GroupActivityResponse } from '../dto/response/GroupActivityResponse';
 
-const EACH_PAGE_CNT = 12;
-
 @Service()
 export class GroupService {
   constructor(

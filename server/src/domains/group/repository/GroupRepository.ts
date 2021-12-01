@@ -1,8 +1,8 @@
-import { Group, GroupState } from '../models/Group';
+import { Group } from '../models/Group';
 import { Service } from 'typedi';
 import { Repository, EntityRepository, Like, In } from 'typeorm';
 
-const ROW_PER_PAGE = 10;
+const ROW_PER_PAGE = 9;
 
 @Service()
 @EntityRepository(Group)
