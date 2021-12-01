@@ -5,6 +5,8 @@ import { useAppDispatch } from '@hooks';
 import { checkPageNumber } from '@store/group/filterSlice';
 import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import { FIRST_PAGE_NUM, MAX_PAGE_CNT } from '@constants/consts';
+import LeftButton from '@assets/left_button.png';
+import RightButton from '@assets/right_button.png';
 
 interface Props {
   totalPages: number;
@@ -76,13 +78,13 @@ function Pagination({ totalPages, curPage, createdQuery }: Props): JSX.Element {
     <Container>
       {!isFirstPageNumber && (
         <PageHadleButton data-test="prev-btn" onClick={handleMovePageButtonClick('PREV')}>
-          {'<'}
+          <HandleImg src={LeftButton} alt="페이지 이전 버튼" />
         </PageHadleButton>
       )}
       {renderPagination}
       {!isLastPageNumber && (
         <PageHadleButton data-test="next-btn" onClick={handleMovePageButtonClick('NEXT')}>
-          {'>'}
+          <HandleImg src={RightButton} alt="페이지 다음 버튼" />
         </PageHadleButton>
       )}
     </Container>
@@ -120,4 +122,8 @@ const PageHadleButton = styled(PageNumber)`
   background: ${(props) => props.theme.Gray5};
 `;
 
+const HandleImg = styled.img`
+  width: 10px;
+  height: 10px;
+`;
 export default Pagination;
