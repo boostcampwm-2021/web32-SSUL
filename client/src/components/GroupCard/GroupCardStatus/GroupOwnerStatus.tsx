@@ -11,7 +11,7 @@ function GroupOwnerStatus({ ownerInfo }: Props): JSX.Element {
   return (
     <Container>
       <GroupOwnerProfile>
-        <ProfileImage src={ownerInfo.avatarUrl} />
+        <ProfileImage src={ownerInfo.avatarUrl} alt="프로필 이미지" />
         <ProfileName>{ownerInfo.name}</ProfileName>
       </GroupOwnerProfile>
       <GroupOwnerFeverStack style={{ width: `${ownerInfo.feverStack + DEFAULT_INDEX}px` }}>

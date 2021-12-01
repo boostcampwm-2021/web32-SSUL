@@ -48,7 +48,7 @@ function RequestMentoring(): JSX.Element {
     return (
       <BoxContainer data-test="request-container" key={idx}>
         <ImageContainer>
-          <CategoryImage src={data.categoryImage} />
+          <CategoryImage src={data.categoryImage} alt="카테고리 이미지" />
         </ImageContainer>
         <GroupInfo>
           <GroupText>{data.groupName}</GroupText>

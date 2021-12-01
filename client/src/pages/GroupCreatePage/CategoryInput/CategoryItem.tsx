@@ -14,11 +14,11 @@ function CategoryItem({ category, clicked, image, handleCategoryClick }: Props):
     <div onClick={handleCategoryClick}>
       {clicked ? (
         <ClickedItem>
-          <CategoryIcon src={image} />
+          <CategoryIcon src={image} alt="카테고리 아이콘" />
         </ClickedItem>
       ) : (
         <UnClickedItem>
-          <CategoryIcon src={image} />
+          <CategoryIcon src={image} alt="카테고리 아이콘" />
         </UnClickedItem>
       )}
       <ItemName>{category}</ItemName>

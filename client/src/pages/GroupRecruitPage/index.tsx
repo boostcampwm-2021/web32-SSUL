@@ -20,7 +20,7 @@ function GroupRecruitPage(): JSX.Element {
       <SideLayout>
         {!!id && (
           <FloatingButton to={{ pathname: `/group/create` }}>
-            <FloatingImg src={plusIcon} />
+            <FloatingImg src={plusIcon} alt="더하기 아이콘" />
           </FloatingButton>
         )}
       </SideLayout>

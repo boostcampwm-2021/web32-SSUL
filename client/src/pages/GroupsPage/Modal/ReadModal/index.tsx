@@ -39,7 +39,7 @@ function ReadModal(): JSX.Element {
     <Container>
       <Header>
         <Title data-test="read-modal-title">{post.title}</Title>
-        <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
+        <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} alt="취소 아이콘" />
       </Header>
       <SubInfoBar data-test="read-modal-info">
         <Name>{post.writer}</Name>

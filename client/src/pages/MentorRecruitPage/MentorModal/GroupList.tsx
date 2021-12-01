@@ -58,7 +58,7 @@ function GroupList(): JSX.Element {
     return (
       <BoxContainer key={group.id}>
         <CategoryContainer>
-          <CategoryImage src={group.category.imageUrl} />
+          <CategoryImage src={group.category.imageUrl} alt="카테고리 이미지" />
           <CategoryText>{group.category.name}</CategoryText>
         </CategoryContainer>
         <GroupInfo>

@@ -34,7 +34,7 @@ function SimpleGroupCard(props: SimpleGroupCardProps): JSX.Element {
       </GroupUserCounter>
       <GroupStatus>{status}</GroupStatus>
       <GroupFooter>
-        <GroupOwnerAvatar src={ownerInfo.avatarUrl} />
+        <GroupOwnerAvatar src={ownerInfo.avatarUrl} alt="깃허브 프로필 이미지" />
       </GroupFooter>
     </Container>
   );
