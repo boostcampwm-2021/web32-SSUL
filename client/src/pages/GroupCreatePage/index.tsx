@@ -134,7 +134,8 @@ const CreateForm = styled.div`
   margin: 70px auto 0 auto;
   width: 600px;
   height: 500px;
-  box-shadow: 5px 5px 10px 1px rgba(41, 36, 36, 0.25), -10px -10px 0px 3px #ffffff;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
   border-radius: 40px;
 `;
 

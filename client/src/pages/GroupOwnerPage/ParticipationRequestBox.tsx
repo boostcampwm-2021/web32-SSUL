@@ -74,6 +74,8 @@ const Container = styled.div`
   height: 600px;
   border: 1px ${(props) => props.theme.Gray5} solid;
   border-radius: 5px;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const ScrollContainer = styled.div`
@@ -98,6 +100,8 @@ const BoxContainer = styled.div`
   border-radius: 5px;
   margin: 0 auto 30px auto;
   border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 const ProfileImage = styled.img`

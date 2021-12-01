@@ -28,6 +28,8 @@ const Container = styled.div`
   height: 600px;
   overflow-y: scroll;
   border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
   border-radius: 5px;
 
   &::-webkit-scrollbar {
@@ -48,6 +50,8 @@ const EditBoxContainer = styled.div`
   padding: 10px;
   border-radius: 10px;
   border: 1px ${(props) => props.theme.Gray5} solid;
+  box-shadow: ${(props) => props.theme.Shadow};
+  background-color: ${(props) => props.theme.Box};
 `;
 
 export default GroupInfoBox;
