@@ -22,7 +22,7 @@ function SelectedTechList(): JSX.Element {
     return (
       <SelectItem key={idx}>
         <TechStackName>{techStack}</TechStackName>
-        <EraseButton onClick={handleEraseButtonClick}>X</EraseButton>
+        <EraseButton data-test="erase-btn" onClick={handleEraseButtonClick}>X</EraseButton>
       </SelectItem>
     );
   });

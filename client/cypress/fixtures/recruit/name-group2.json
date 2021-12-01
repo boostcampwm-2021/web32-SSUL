@@ -1,0 +1,489 @@
+{
+  "groups": [
+    {
+      "id": 2,
+      "mentorId": null,
+      "ownerId": 3,
+      "name": "testgroup2",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 2",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 6,
+          "name": "Java"
+        },
+        {
+          "id": 7,
+          "name": "javascript"
+        },
+        {
+          "id": 8,
+          "name": "typescript"
+        },
+        {
+          "id": 9,
+          "name": "R"
+        },
+        {
+          "id": 10,
+          "name": "C++"
+        }
+      ],
+      "category": {
+        "id": 3,
+        "name": "스터디"
+      },
+      "ownerInfo": {
+        "id": 3,
+        "githubId": "who-is-hu",
+        "name": "김용후",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/6914465?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 20,
+      "mentorId": null,
+      "ownerId": 1,
+      "name": "testgroup20",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 20",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 96,
+          "name": "Vue.js"
+        },
+        {
+          "id": 97,
+          "name": "HTML"
+        },
+        {
+          "id": 98,
+          "name": "css"
+        },
+        {
+          "id": 99,
+          "name": "React"
+        },
+        {
+          "id": 100,
+          "name": "Express"
+        }
+      ],
+      "category": {
+        "id": 5,
+        "name": "면접"
+      },
+      "ownerInfo": {
+        "id": 1,
+        "githubId": "yuchanleeme",
+        "name": "이유찬",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 21,
+      "mentorId": null,
+      "ownerId": 2,
+      "name": "testgroup21",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 21",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 101,
+          "name": "HTML"
+        },
+        {
+          "id": 102,
+          "name": "css"
+        },
+        {
+          "id": 103,
+          "name": "React"
+        },
+        {
+          "id": 104,
+          "name": "Express"
+        },
+        {
+          "id": 105,
+          "name": "node.js"
+        }
+      ],
+      "category": {
+        "id": 6,
+        "name": "프로젝트"
+      },
+      "ownerInfo": {
+        "id": 2,
+        "githubId": "Donggggg",
+        "name": "김동규",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 22,
+      "mentorId": null,
+      "ownerId": 3,
+      "name": "testgroup22",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 22",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 106,
+          "name": "css"
+        },
+        {
+          "id": 107,
+          "name": "React"
+        },
+        {
+          "id": 108,
+          "name": "Express"
+        },
+        {
+          "id": 109,
+          "name": "node.js"
+        },
+        {
+          "id": 110,
+          "name": "Java"
+        }
+      ],
+      "category": {
+        "id": 7,
+        "name": "구인구직"
+      },
+      "ownerInfo": {
+        "id": 3,
+        "githubId": "who-is-hu",
+        "name": "김용후",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/6914465?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 23,
+      "mentorId": null,
+      "ownerId": 4,
+      "name": "testgroup23",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 23",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 111,
+          "name": "React"
+        },
+        {
+          "id": 112,
+          "name": "Express"
+        },
+        {
+          "id": 113,
+          "name": "node.js"
+        },
+        {
+          "id": 114,
+          "name": "Java"
+        },
+        {
+          "id": 115,
+          "name": "javascript"
+        }
+      ],
+      "category": {
+        "id": 8,
+        "name": "기타"
+      },
+      "ownerInfo": {
+        "id": 4,
+        "githubId": "ChanYangYu",
+        "name": "유찬양",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/55623688?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 24,
+      "mentorId": null,
+      "ownerId": 1,
+      "name": "testgroup24",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 24",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 116,
+          "name": "Express"
+        },
+        {
+          "id": 117,
+          "name": "node.js"
+        },
+        {
+          "id": 118,
+          "name": "Java"
+        },
+        {
+          "id": 119,
+          "name": "javascript"
+        },
+        {
+          "id": 120,
+          "name": "typescript"
+        }
+      ],
+      "category": {
+        "id": 1,
+        "name": "대외활동"
+      },
+      "ownerInfo": {
+        "id": 1,
+        "githubId": "yuchanleeme",
+        "name": "이유찬",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 25,
+      "mentorId": null,
+      "ownerId": 2,
+      "name": "testgroup25",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 25",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 121,
+          "name": "node.js"
+        },
+        {
+          "id": 122,
+          "name": "Java"
+        },
+        {
+          "id": 123,
+          "name": "javascript"
+        },
+        {
+          "id": 124,
+          "name": "typescript"
+        },
+        {
+          "id": 125,
+          "name": "R"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "공모전"
+      },
+      "ownerInfo": {
+        "id": 2,
+        "githubId": "Donggggg",
+        "name": "김동규",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 26,
+      "mentorId": null,
+      "ownerId": 3,
+      "name": "testgroup26",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 26",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 126,
+          "name": "Java"
+        },
+        {
+          "id": 127,
+          "name": "javascript"
+        },
+        {
+          "id": 128,
+          "name": "typescript"
+        },
+        {
+          "id": 129,
+          "name": "R"
+        },
+        {
+          "id": 130,
+          "name": "C++"
+        }
+      ],
+      "category": {
+        "id": 3,
+        "name": "스터디"
+      },
+      "ownerInfo": {
+        "id": 3,
+        "githubId": "who-is-hu",
+        "name": "김용후",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/6914465?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 27,
+      "mentorId": null,
+      "ownerId": 4,
+      "name": "testgroup27",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 27",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 131,
+          "name": "javascript"
+        },
+        {
+          "id": 132,
+          "name": "typescript"
+        },
+        {
+          "id": 133,
+          "name": "R"
+        },
+        {
+          "id": 134,
+          "name": "C++"
+        },
+        {
+          "id": 135,
+          "name": "SQL"
+        }
+      ],
+      "category": {
+        "id": 4,
+        "name": "동아리"
+      },
+      "ownerInfo": {
+        "id": 4,
+        "githubId": "ChanYangYu",
+        "name": "유찬양",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/55623688?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 28,
+      "mentorId": null,
+      "ownerId": 1,
+      "name": "testgroup28",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 28",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 136,
+          "name": "typescript"
+        },
+        {
+          "id": 137,
+          "name": "R"
+        },
+        {
+          "id": 138,
+          "name": "C++"
+        },
+        {
+          "id": 139,
+          "name": "SQL"
+        },
+        {
+          "id": 140,
+          "name": "Vue.js"
+        }
+      ],
+      "category": {
+        "id": 5,
+        "name": "면접"
+      },
+      "ownerInfo": {
+        "id": 1,
+        "githubId": "yuchanleeme",
+        "name": "이유찬",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/48426909?v=4",
+        "feverStack": 37.5
+      }
+    },
+    {
+      "id": 29,
+      "mentorId": null,
+      "ownerId": 2,
+      "name": "testgroup29",
+      "maxUserCnt": 5,
+      "curUserCnt": 1,
+      "intro": "This is testgroup 29",
+      "startAt": "2021-12-31T16:06:55.000Z",
+      "endAt": "2022-08-31T21:44:08.000Z",
+      "techStacks": [
+        {
+          "id": 141,
+          "name": "R"
+        },
+        {
+          "id": 142,
+          "name": "C++"
+        },
+        {
+          "id": 143,
+          "name": "SQL"
+        },
+        {
+          "id": 144,
+          "name": "Vue.js"
+        },
+        {
+          "id": 145,
+          "name": "HTML"
+        }
+      ],
+      "category": {
+        "id": 6,
+        "name": "프로젝트"
+      },
+      "ownerInfo": {
+        "id": 2,
+        "githubId": "Donggggg",
+        "name": "김동규",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/54929514?v=4",
+        "feverStack": 37.5
+      }
+    }
+  ],
+  "totalPages": 1
+}

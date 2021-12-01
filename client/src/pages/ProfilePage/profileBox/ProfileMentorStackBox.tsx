@@ -37,7 +37,7 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
       case ProfileViewType.MENTOR:
         return (
           <ProfileContainer title={MENTORING_TECH_STACK}>
-            <MentoringRequestButton onClick={showRequestModal}>
+            <MentoringRequestButton data-test="mentoring-request-list" onClick={showRequestModal}>
               {MENTORING_REQUEST_LIST}
             </MentoringRequestButton>
             <TechStackContainer>
@@ -54,7 +54,7 @@ function ProfileMentorStackBox({ showCreateModal, showRequestModal }: Props): JS
           <ProfileContainer title="">
             <MentorRegisterTitle>{SUGGEST_BE_MENTOR}</MentorRegisterTitle>
             <MentorRegisterDesc>{DESC_APPLY_MENTOR}</MentorRegisterDesc>
-            <MentorRegisterButton onClick={showCreateModal}>
+            <MentorRegisterButton data-test="metor-apply" onClick={showCreateModal}>
               {MENTOR_APPLY_TEXT}
             </MentorRegisterButton>
           </ProfileContainer>

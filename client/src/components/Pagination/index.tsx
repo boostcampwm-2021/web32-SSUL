@@ -53,7 +53,7 @@ function Pagination({ totalPages, curPage, createdQuery }: Props): JSX.Element {
   const renderPagination = makeRangeNumberArray(pageCnt, firstPageNumber).map((pageNum: number) => {
     if (pageNum === curPage)
       return (
-        <SelectedPageNumber onClick={handlePageNumberButton} key={pageNum}>
+        <SelectedPageNumber data-test="selected-btn" onClick={handlePageNumberButton} key={pageNum}>
           {pageNum}
         </SelectedPageNumber>
       );
@@ -75,11 +75,15 @@ function Pagination({ totalPages, curPage, createdQuery }: Props): JSX.Element {
   return (
     <Container>
       {!isFirstPageNumber && (
-        <PageHadleButton onClick={handleMovePageButtonClick('PREV')}>{'<'}</PageHadleButton>
+        <PageHadleButton data-test="prev-btn" onClick={handleMovePageButtonClick('PREV')}>
+          {'<'}
+        </PageHadleButton>
       )}
       {renderPagination}
       {!isLastPageNumber && (
-        <PageHadleButton onClick={handleMovePageButtonClick('NEXT')}>{'>'}</PageHadleButton>
+        <PageHadleButton data-test="next-btn" onClick={handleMovePageButtonClick('NEXT')}>
+          {'>'}
+        </PageHadleButton>
       )}
     </Container>
   );
