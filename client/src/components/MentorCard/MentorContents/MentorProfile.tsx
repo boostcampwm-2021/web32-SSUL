@@ -11,7 +11,7 @@ function MentorProfile({ user }: Props): JSX.Element {
   return (
     <Container>
       <Profile>
-        <ProfileImage src={user.avatarUrl} />
+        <ProfileImage src={user.avatarUrl} alt="프로필 이미지" />
         <ProfileName>{user.name}</ProfileName>
       </Profile>
       <ShareStack style={{ width: `${GAUGE_BAR_DEFAULT_INDEX + user.shareStack}px` }}>

@@ -61,7 +61,11 @@ function ListItem({ idx, data }: Props): JSX.Element {
     <Item onClick={handleItemClick} isView={data.readChk}>
       <CreatedDate>{calculateNotificationTime(data.createdAt)}</CreatedDate>
       <Message data={data} />
-      <DeleteButton src={cancelIcon} onClick={handleDeleteButtonClick}></DeleteButton>
+      <DeleteButton
+        src={cancelIcon}
+        onClick={handleDeleteButtonClick}
+        alt="삭제 버튼"
+      ></DeleteButton>
     </Item>
   );
 }

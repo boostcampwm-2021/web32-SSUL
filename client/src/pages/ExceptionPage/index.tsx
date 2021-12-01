@@ -14,7 +14,7 @@ function ExceptionPage({
 }: Props): JSX.Element {
   return (
     <Container>
-      <WarningImage src={WarningLogo}></WarningImage>
+      <WarningImage src={WarningLogo} alt="경고 로고 이미지"></WarningImage>
       <WarningTextBox>
         <WarningCode>{description}</WarningCode>
         <WarningText>{message}</WarningText>

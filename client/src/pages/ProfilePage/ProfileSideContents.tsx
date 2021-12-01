@@ -10,12 +10,12 @@ function ProfileSideContents(): JSX.Element {
 
   return (
     <Container>
-      <ProfileImage data-test="profile-image" src={profile.avatarUrl} alt="GithubProfifleImage" />
+      <ProfileImage data-test="profile-image" src={profile.avatarUrl} alt="깃허브 프로필 이미지" />
       <BaseInfo>
         <GithubName>{profile.name}</GithubName>
         <GithubID data-test="github-id">{profile.gitHubId}</GithubID>
         <GithubURLContainer>
-          <GithubIcon src={GithubLogo} alt="GithubIcon" />
+          <GithubIcon src={GithubLogo} alt="깃허브 아이콘" />
           <GithubURL href={`https://github.com/${profile.gitHubId}`}>GitHub</GithubURL>
         </GithubURLContainer>
         <FeverSharingBar />

@@ -58,8 +58,12 @@ function SearchBar({
         value={searchBarInput}
         onChange={handleInputText}
       />
-      <SearchButton data-test="search-btn" inputValue={inputValue} onClick={handleSearchButtonClick}>
-        <Image src={SearchIcon} />
+      <SearchButton
+        data-test="search-btn"
+        inputValue={inputValue}
+        onClick={handleSearchButtonClick}
+      >
+        <Image src={SearchIcon} alt="검색 버튼" />
       </SearchButton>
     </Container>
   );

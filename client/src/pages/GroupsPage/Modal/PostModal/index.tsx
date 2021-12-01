@@ -92,7 +92,7 @@ function PostModal({ mode }: Props): JSX.Element {
     <Container>
       <Header>
         <Title>{mode === ModalTypeEnum.UPDATE ? EDIT_POST : WRITE_POST}</Title>
-        <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} />
+        <CancelButton src={CancelIcon} onClick={handleCancelButtonClick} alt="취소 아이콘" />
       </Header>
       <Content>
         <PostTypeNav selectedType={selectedType} handlePostNavItemClick={handlePostNavItemClick} />
