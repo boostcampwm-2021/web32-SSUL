@@ -7,8 +7,8 @@ export interface UserState {
   oAuthId?: string;
   name?: string;
   image?: string;
-  feverStack?: number;
-  shareStack?: number;
+  feverStack: number;
+  shareStack: number;
   role: MentorOrMentee;
   isLogin: boolean;
 }
