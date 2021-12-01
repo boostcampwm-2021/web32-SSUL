@@ -12,8 +12,6 @@ export class GroupRepository extends Repository<Group> {
     curPage: number,
   ) {
     const { name, category, inputTechStackNames } = filters;
-    const numTotalRows = await this.count();
-    const totalPage = Math.floor(numTotalRows / ROW_PER_PAGE);
     const query = this.createQueryBuilder('group').innerJoin('group.techStacks', 'techStacks');
 
     if (category !== undefined) {
@@ -29,6 +27,9 @@ export class GroupRepository extends Repository<Group> {
         techStackName: inputTechStackNames,
       });
     }
+
+    const totalRows = await query.getCount();
+    const totalPage = Math.ceil(totalRows / ROW_PER_PAGE);
 
     const filteredGroups = await query
       .take(ROW_PER_PAGE)
