@@ -23,8 +23,8 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 48px;
-  height: 24px;
+  width: 40px;
+  height: 20px;
   border-radius: 24px;
   padding: 4px 8px 4px 8px;
   margin: 0px 24px 0px 24px;
@@ -37,8 +37,8 @@ const Container = styled.div`
 
 const Range = styled.div`
   position: absolute;
-  width: 32px;
-  height: 12px;
+  width: 22px;
+  height: 10px;
   background-color: ${({ theme }) => theme.Gray4};
   border-radius: 24px;
   border: 1px solid ${({ theme }) => theme.Gray5};
@@ -49,9 +49,9 @@ const Range = styled.div`
 
 const Button = styled.div<{ mode: string }>`
   position: absolute;
-  left: ${({ mode }) => (mode === 'light' ? '15%' : '55%')};
-  width: 16px;
-  height: 16px;
+  left: ${({ mode }) => (mode === 'light' ? '15%' : '50%')};
+  width: 14px;
+  height: 14px;
   background-color: ${(props) => props.theme.Primary};
   border-radius: 24px;
   box-sizing: border-box;

@@ -6,7 +6,6 @@ import Logo from './Logo';
 import Navigation from './Navigation';
 import ThemeSwitch from './ThemeSwitch';
 import Notification from './Notification';
-import Messenger from './Messenger';
 import Profile from './Profile';
 
 function Header(): JSX.Element {
@@ -14,18 +13,15 @@ function Header(): JSX.Element {
   return (
     <Container>
       <Content>
-        <Logo />
-        <Navigation />
-        <ControllContent>
-          {user.isLogin && (
-            <>
-              <ThemeSwitch />
-              <Messenger />
-              <Notification />
-            </>
-          )}
-        </ControllContent>
-        <Profile />
+        <LeftSideNav>
+          <Logo />
+          <Navigation />
+        </LeftSideNav>
+        <RightSideNav>
+          <ThemeSwitch />
+          {user.isLogin && <Notification />}
+          <Profile />
+        </RightSideNav>
       </Content>
     </Container>
   );
@@ -52,19 +48,28 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 75vw;
+  width: 65vw;
   min-width: 1040px;
 `;
 
-const ControllContent = styled.div`
+const LeftSideNav = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: start;
   align-items: center;
-  width: 20vw;
-  min-width: 240px;
+  width: 50vw;
+  min-width: 480x;
+`;
+
+const RightSideNav = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 10vw;
+  min-width: 190px;
 `;
 
 export default React.memo(Header);
