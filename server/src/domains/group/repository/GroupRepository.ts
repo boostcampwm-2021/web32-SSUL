@@ -12,7 +12,7 @@ export class GroupRepository extends Repository<Group> {
     curPage: number,
   ) {
     const { name, category, inputTechStackNames } = filters;
-    const query = this.createQueryBuilder('group').innerJoin('group.techStacks', 'techStacks');
+    const query = this.createQueryBuilder('group');
 
     if (category !== undefined) {
       query.where('group.categoryId = :category', { category });
@@ -23,23 +23,26 @@ export class GroupRepository extends Repository<Group> {
     }
 
     if (inputTechStackNames.length != 0) {
-      query.andWhere('techStacks.name IN (:...techStackName)', {
-        techStackName: inputTechStackNames,
-      });
+      query
+        .innerJoin('group.techStacks', 'techStacks')
+        .andWhere('techStacks.name IN (:...techStackName)', {
+          techStackName: inputTechStackNames,
+        });
     }
 
     const totalRows = await query.getCount();
     const totalPage = Math.ceil(totalRows / ROW_PER_PAGE);
 
-    const filteredGroups = await query
+    const groups = await query
+      .select(['group.id'])
       .take(ROW_PER_PAGE)
       .skip(ROW_PER_PAGE * (curPage - 1))
       .getMany();
-    const groupIds = filteredGroups.map((group) => group.id);
+    const ids = groups.map((g) => g.id);
 
     const page = await this.find({
-      relations: ['techStacks', 'category', 'ownerInfo'],
-      where: { id: In(groupIds) },
+      relations: ['techStacks', 'category'],
+      where: { id: In(ids) },
     });
 
     return { groups: page, totalPage };
