@@ -95,7 +95,7 @@ const Container = styled.div`
 `;
 
 const PageNumber = styled.button`
-  width: 40px;
+  width: 50px;
   margin: 10px;
   padding: 10px;
   text-align: center;
