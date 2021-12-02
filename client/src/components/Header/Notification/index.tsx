@@ -60,7 +60,7 @@ function Notification(): JSX.Element {
 
 const Container = styled.div`
   position: relative;
-  margin: 0px 24px 0px 0px;
+  margin-right: 20px;
   cursor: pointer;
 `;
 
@@ -76,8 +76,8 @@ const NotificationCircle = styled.div`
   border-radius: 50%;
 `;
 const NotificationButton = styled.img`
-  width: 16px;
-  height: 19px;
+  width: 17px;
+  height: 22px;
   filter: ${({ theme }) => theme.Filter};
 `;
 

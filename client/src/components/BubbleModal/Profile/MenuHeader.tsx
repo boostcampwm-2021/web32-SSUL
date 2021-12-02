@@ -3,9 +3,10 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { useAppSelector } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
+import { getStackGage } from '@utils/Range';
 
 function MenuHeader(): JSX.Element {
-  const user = useAppSelector(selectUser);
+  const { name, feverStack, shareStack } = useAppSelector(selectUser);
   const handler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -14,12 +15,16 @@ function MenuHeader(): JSX.Element {
     <Container onClick={handler}>
       <Introduction>
         <IntroText>안녕하세요,</IntroText>
-        <NameText>{user.name}</NameText>
+        <NameText>{name}</NameText>
         <IntroText>님</IntroText>
       </Introduction>
       <ScoreGraph>
-        <PassionGraph>열정</PassionGraph>
-        <ShareGraph>나눔</ShareGraph>
+        <RightBar>
+          <PassionGraph range={getStackGage(feverStack)}>열정</PassionGraph>
+        </RightBar>
+        <LeftBar>
+          <ShareGraph range={getStackGage(shareStack)}>나눔</ShareGraph>
+        </LeftBar>
       </ScoreGraph>
     </Container>
   );
@@ -88,31 +93,42 @@ const ScoreGraph = styled.div`
   width: 200px;
   height: 80px;
   font-size: 0.5em;
+  padding: 0px 4px 0px 4px;
   color: ${(props) => props.theme.White};
   box-sizing: border-box;
   animation: ${fillFrame} 1s ease infinite;
 `;
 
-const PassionGraph = styled.div`
-  width: 80px;
+const RightBar = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100px;
+`;
+
+const LeftBar = styled.div`
+  width: 100px;
+`;
+
+const Graph = styled.div`
   height: 20px;
   box-sizing: border-box;
+  box-shadow: ${(props) => props.theme.Shadow};
+`;
+
+const PassionGraph = styled(Graph)<{ range: number }>`
+  width: ${(props) => props.range}px;
   text-align: right;
   padding: 4px 8px 4px 4px;
   background-color: #ee7262;
   border-radius: 24px 0px 0px 24px;
-  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
-const ShareGraph = styled.div`
-  width: 60px;
-  height: 20px;
-  box-sizing: border-box;
+const ShareGraph = styled(Graph)<{ range: number }>`
+  width: ${(props) => props.range}px;
   text-align: left;
   padding: 4px 4px 4px 8px;
   background-color: #9cde84;
   border-radius: 0px 24px 24px 0px;
-  box-shadow: ${(props) => props.theme.Shadow};
 `;
 
 export default MenuHeader;

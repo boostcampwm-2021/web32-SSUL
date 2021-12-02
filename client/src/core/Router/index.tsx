@@ -2,9 +2,6 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Auth as AuthCallback } from '@components';
 import ExceptionPage from '@pages/ExceptionPage';
-import EvaluateGroupPage from '@pages/EvaluateGroupPage';
-import ChatListPage from '@pages/ChatListPage';
-import ChatPage from '@pages/ChatPage';
 import { AuthGuardRoute, GroupBelongGuardRoute, GroupOwnerGuardRoute } from './routes';
 
 const MainPage = lazy(() => import('@pages/MainPage'));
@@ -26,10 +23,7 @@ function Router(): JSX.Element {
         <AuthGuardRoute path="/group/my" component={MyGroupPage} />
         <GroupOwnerGuardRoute path="/group/owner/:gid" component={GroupOwnerPage} />
         <AuthGuardRoute path="/group/create" component={GroupCreatePage} />
-        <GroupBelongGuardRoute path="/group/evaluate" component={EvaluateGroupPage} />
         <GroupBelongGuardRoute path="/group/:gid" component={GroupsPage} exact />
-        <Route path="/chat/list" component={ChatListPage} />
-        <Route path="/chat" component={ChatPage} />
         <Route path="/profile/:id" component={ProfilePage} />
         <Route path="/auth/callback" component={AuthCallback} />
         <Route path="*" component={ExceptionPage} />

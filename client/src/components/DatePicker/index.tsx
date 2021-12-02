@@ -1,9 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import DatePicker from 'antd/es/date-picker';
 import styled from '@emotion/styled';
+import DatePicker from 'antd/es/date-picker';
 import { RangeValue } from 'rc-picker/lib/interface';
-const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
 
 interface Props {
@@ -43,7 +42,7 @@ function AntDatePicker({ startAt, endAt, setDate }: Props): JSX.Element {
   );
 }
 
-const CustomPicker = styled(RangePicker)`
+const CustomPicker = styled(DatePicker.RangePicker)`
   &.ant-picker-focused {
     border-color: #00c5aa;
   }
