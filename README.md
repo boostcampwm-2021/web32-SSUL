@@ -43,15 +43,15 @@
 <br>
 
 ## 🔥 '개인사'의 프로젝트 중점사항
-- 대용량 트래픽에 유연하게 대응 할 수 있는 서버
+- 트래픽 변동에 유연하게 대응 할 수 있는 서버
 - 사용자 애플리케이션 렌더링 최적화
 - 안전한 서비스를 위한 테스트 코드 
 
 <br>
 
 ## 📖 우리의 기록들
-|[기획서](https://github.com/boostcampwm-2021/web32-SSUL/wiki/presentation)|[디자인](https://www.figma.com/file/HhISNb5VOEJcImzU7MLNzx/%EA%B0%9C%EC%9D%B8%EC%82%AC-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0%3A1) |[유스케이스](https://github.com/boostcampwm-2021/web32-SSUL/wiki/usecase) |[백로그](https://docs.google.com/spreadsheets/d/13m40j3O4UW8cnAGXQQES4ArYoOeRdhcYtkemZihU6RI/edit?usp=sharing) |[API문서](https://github.com/boostcampwm-2021/web32-SSUL/wiki/API) |
-|-|-|-|-|-|
+|[디자인](https://www.figma.com/file/HhISNb5VOEJcImzU7MLNzx/%EA%B0%9C%EC%9D%B8%EC%82%AC-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0%3A1) |[유스케이스](https://github.com/boostcampwm-2021/web32-SSUL/wiki/usecase) |[백로그](https://docs.google.com/spreadsheets/d/13m40j3O4UW8cnAGXQQES4ArYoOeRdhcYtkemZihU6RI/edit?usp=sharing) |[API문서](https://github.com/boostcampwm-2021/web32-SSUL/wiki/API) |
+|-|-|-|-|
 
 '개인사' 팀의 더 자세한 기술적 고민과 해결 과정을 보시고 싶다면 ['개인사'의 위키](https://github.com/boostcampwm-2021/web32-SSUL/wiki) 에서 확인해주세요 🏷
 <br>
