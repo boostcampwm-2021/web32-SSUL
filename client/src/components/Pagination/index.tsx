@@ -5,8 +5,8 @@ import { useAppDispatch } from '@hooks';
 import { checkPageNumber } from '@store/group/filterSlice';
 import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import { FIRST_PAGE_NUM, MAX_PAGE_CNT } from '@constants/consts';
-import LeftButton from '@assets/left_button.png';
-import RightButton from '@assets/right_button.png';
+import LeftButton from '@assets/icon_arrow_left.png';
+import RightButton from '@assets/icon_arrow_right.png';
 
 interface Props {
   totalPages: number;

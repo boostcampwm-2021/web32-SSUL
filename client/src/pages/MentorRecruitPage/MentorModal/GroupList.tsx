@@ -11,6 +11,7 @@ import { MentorButtonType, ModalTypeEnum } from '@constants/enums';
 import {
   APPLY_CANCEL,
   APPLY_TEXT,
+  LOADING_LIST_TEXT,
   MENTORIG_MODAL_EMPTY_TEXT,
   SHOW_GROUP,
   SUGGEST_CREATE_NEW_GROUP_INFO,
@@ -100,7 +101,7 @@ function GroupList(): JSX.Element {
     <Container>
       <ScrollContainer>
         {isLoading ? (
-          <LoadingText>목록 불러오는 중</LoadingText>
+          <LoadingText>{LOADING_LIST_TEXT}</LoadingText>
         ) : (
           <>{ownGroups.length === 0 ? <>{renderEmptyMessage}</> : <>{makeRequestBox}</>}</>
         )}

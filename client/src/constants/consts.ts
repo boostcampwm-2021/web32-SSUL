@@ -67,6 +67,7 @@ export const MENTORIG_MODAL_EMPTY_TEXT = '멘토링 요청할 그룹이 없어�
 export const SUGGEST_CREATE_NEW_GROUP_INFO = '새 그룹을 만들어 보시는건 어떨까요?';
 export const MENTOR_EMPTY_TEXT = '해당하는 멘토가 없어요...';
 export const GROUP_EMPTY_TEXT = '해당하는 그룹이 없어요...';
+export const LOADING_LIST_TEXT = '목록을 불러오는 중';
 
 // 메시지
 export const MSG_NOT_FOUND = '없는 페이지입니다';
