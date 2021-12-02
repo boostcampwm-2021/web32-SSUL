@@ -37,6 +37,7 @@ export class GroupRepository extends Repository<Group> {
       .select(['group.id'])
       .take(ROW_PER_PAGE)
       .skip(ROW_PER_PAGE * (curPage - 1))
+      .orderBy('group.id','ASC')
       .getMany();
     const ids = groups.map((g) => g.id);
 
