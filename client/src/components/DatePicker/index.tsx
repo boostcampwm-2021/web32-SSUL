@@ -1,10 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import DatePicker from 'antd/es/date-picker';
 import styled from '@emotion/styled';
 import { RangeValue } from 'rc-picker/lib/interface';
-const { RangePicker } = DatePicker;
 import 'antd/es/date-picker/style/css';
+
+const DatePicker = React.lazy(() => import('antd/es/date-picker'));
+const { RangePicker } = DatePicker._result;
 
 interface Props {
   startAt: string;
