@@ -33,7 +33,6 @@ function MentorStatus({ user, techStacks }: Props): JSX.Element {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
   justify-content: space-between;
 `;
 
@@ -57,7 +56,7 @@ const MentorIntro = styled.div`
 
 const TechList = styled.div`
   display: flex;
-  margin: 10px;
+  margin: 15px 10px;
 `;
 
 const TechListItem = styled.button`

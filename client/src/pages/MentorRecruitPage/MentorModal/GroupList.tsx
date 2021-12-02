@@ -11,14 +11,17 @@ import { MentorButtonType, ModalTypeEnum } from '@constants/enums';
 import {
   APPLY_CANCEL,
   APPLY_TEXT,
+  LOADING_LIST_TEXT,
   MENTORIG_MODAL_EMPTY_TEXT,
   SHOW_GROUP,
   SUGGEST_CREATE_NEW_GROUP_INFO,
 } from '@constants/consts';
+import { keyframes } from '@emotion/react';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroup[]>([]);
   const [allMentoringRequests, setAllMentoringRequests] = useState<SimpleMentoringRequest[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { mentorId } = useAppSelector(mentorCardDetailState);
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -28,6 +31,7 @@ function GroupList(): JSX.Element {
     const allMentoringRequests = await mentoringHttpClient.getAllMentoringRequests();
     setOwnGroups(allOwnGroups);
     setAllMentoringRequests(allMentoringRequests);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -48,6 +52,13 @@ function GroupList(): JSX.Element {
       dispatch(changeGroupModalState(ModalTypeEnum.NONE));
     };
   };
+
+  const renderEmptyMessage = (
+    <>
+      <EmptyMessage>{MENTORIG_MODAL_EMPTY_TEXT}</EmptyMessage>
+      <SubMessage>{SUGGEST_CREATE_NEW_GROUP_INFO}</SubMessage>
+    </>
+  );
 
   const makeRequestBox = ownGroups.map((group) => {
     const alreadyRequestMentoring = allMentoringRequests.find(
@@ -89,13 +100,10 @@ function GroupList(): JSX.Element {
   return (
     <Container>
       <ScrollContainer>
-        {ownGroups.length === 0 ? (
-          <>
-            <EmptyMessage>{MENTORIG_MODAL_EMPTY_TEXT}</EmptyMessage>
-            <SubMessage>{SUGGEST_CREATE_NEW_GROUP_INFO}</SubMessage>
-          </>
+        {isLoading ? (
+          <LoadingText>{LOADING_LIST_TEXT}</LoadingText>
         ) : (
-          <>{makeRequestBox}</>
+          <>{ownGroups.length === 0 ? <>{renderEmptyMessage}</> : <>{makeRequestBox}</>}</>
         )}
       </ScrollContainer>
     </Container>
@@ -214,6 +222,41 @@ const ButtonWrapper = styled.div`
   bottom: 10px;
   right: 10px;
   margin-left: auto;
+`;
+
+const dots = keyframes`
+  0%, 20% {
+    text-shadow:
+      .25em 0 0 rgba(0,0,0,0),
+      .5em 0 0 rgba(0,0,0,0);
+  }
+  40% {
+    text-shadow:
+      .25em 0 0 rgba(0,0,0,0),
+      .5em 0 0 rgba(0,0,0,0);
+  }
+  60% {
+    text-shadow:
+      .25em 0 0 Black,
+      .5em 0 0 rgba(0,0,0,0);
+  }
+  80%, 100% {
+    text-shadow:
+      .25em 0 0 Black,
+      .5em 0 0 Black;
+  }
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 150px;
+
+  &::after {
+    content: ' .';
+    animation: ${dots} 0.15s steps(5, end) infinite;
+  }
 `;
 
 const EmptyMessage = styled.div`
