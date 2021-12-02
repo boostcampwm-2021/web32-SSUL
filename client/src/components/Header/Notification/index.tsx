@@ -36,7 +36,7 @@ function Notification(): JSX.Element {
     fetchNotificationList();
     const refreshIntervalId = setInterval(() => {
       fetchNotificationList();
-    }, 30 * ONE_SECOND);
+    }, 1 * ONE_SECOND);
     return () => clearInterval(refreshIntervalId);
   }, []);
 
