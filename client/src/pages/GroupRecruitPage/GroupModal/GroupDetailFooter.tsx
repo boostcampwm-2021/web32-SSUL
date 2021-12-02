@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { changeGroupModalState } from '@store/util/Slice';
 import { groupHttpClient } from '@api';
 import { selectUser } from '@store/user/globalSlice';
 import { GroupEnrollmentState, ModalTypeEnum } from '@constants/enums';
 import {
   APPLY_TEXT,
+  MSG_GROUP_APPLY_SUCCESS,
   MSG_IS_GROUP_MENTEE,
   MSG_IS_GROUP_MENTOR,
   MSG_IS_GROUP_OWNER,
@@ -22,6 +23,7 @@ interface Props {
 function GroupDetailFooter({ groupId, remainDate }: Props): JSX.Element {
   const [notification, setNotification] = useState<string>('');
   const [isLoadding, setIsLoadding] = useState<boolean>(true);
+  const [toastify] = useToast();
   const dispatch = useAppDispatch();
   const { id: userId } = useAppSelector(selectUser);
 
@@ -52,6 +54,7 @@ function GroupDetailFooter({ groupId, remainDate }: Props): JSX.Element {
 
   const handleApplyButtonClick = async () => {
     await groupHttpClient.postApplyGroup({ groupId, userId });
+    toastify(MSG_GROUP_APPLY_SUCCESS, 'SUCCESS');
     dispatch(changeGroupModalState(ModalTypeEnum.NONE));
   };
 
