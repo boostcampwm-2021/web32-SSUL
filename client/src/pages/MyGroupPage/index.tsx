@@ -75,8 +75,8 @@ function MyGroupPage(): JSX.Element {
     fetchDataAsMentee();
   }, []);
 
-  const selectedMyGroups = (status: GroupState) => {
-    return myGroups[role].filter((group) => group.status === status);
+  const selectedMyGroups = (status: GroupState[]) => {
+    return myGroups[role].filter((group) => status.includes(group.status as GroupState));
   };
 
   if (isLoading) return <></>;
@@ -108,12 +108,12 @@ function MyGroupPage(): JSX.Element {
         )}
         <SimpleGroupCardList
           title={CONTINUED_APPLY_GROUP}
-          groups={selectedMyGroups(GroupState.DOING)}
+          groups={selectedMyGroups([GroupState.DOING, GroupState.READY])}
           isClickable={true}
         ></SimpleGroupCardList>
         <SimpleGroupCardList
           title={FINISHED_APPLY_GROUP}
-          groups={selectedMyGroups(GroupState.END)}
+          groups={selectedMyGroups([GroupState.END])}
           isClickable={true}
         ></SimpleGroupCardList>
       </GroupCardListContainer>

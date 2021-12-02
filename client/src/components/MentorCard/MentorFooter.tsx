@@ -9,14 +9,15 @@ import { MENTOR_APPLY_TEXT } from '@constants/consts';
 
 interface Props {
   mentorUserId: number;
+  mentorId: number;
 }
 
-function MentorFooter({ mentorUserId }: Props): JSX.Element {
+function MentorFooter({ mentorUserId, mentorId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(selectUser);
 
   const handleShowDetailButtonClick = () => {
-    dispatch(setMentorCardDetail(mentorUserId));
+    dispatch(setMentorCardDetail(mentorId));
     dispatch(changeGroupModalState(ModalTypeEnum.MENTOR_DETAIL));
   };
   return (

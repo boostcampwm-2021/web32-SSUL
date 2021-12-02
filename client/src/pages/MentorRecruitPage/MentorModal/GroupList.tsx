@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { formatDateToString } from '@utils/Date';
 import { groupHttpClient, mentoringHttpClient } from '@api';
 import { SimpleMentoringRequest, MentoringRequestPostData, OwnGroup } from '@types';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { mentorCardDetailState } from '@store/mentor/cardDetailSlice';
 import { changeGroupModalState } from '@store/util/Slice';
 import { useHistory } from 'react-router';
@@ -13,6 +13,8 @@ import {
   APPLY_TEXT,
   LOADING_LIST_TEXT,
   MENTORIG_MODAL_EMPTY_TEXT,
+  MSG_MENTOR_APPLY_SUCCESS,
+  MSG_MENTOR_CANCEL_SUCCESS,
   SHOW_GROUP,
   SUGGEST_CREATE_NEW_GROUP_INFO,
 } from '@constants/consts';
@@ -20,6 +22,7 @@ import { keyframes } from '@emotion/react';
 
 function GroupList(): JSX.Element {
   const [ownGroups, setOwnGroups] = useState<OwnGroup[]>([]);
+  const [toastify] = useToast();
   const [allMentoringRequests, setAllMentoringRequests] = useState<SimpleMentoringRequest[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { mentorId } = useAppSelector(mentorCardDetailState);
@@ -45,10 +48,14 @@ function GroupList(): JSX.Element {
       } else if (type === MentorButtonType.APPLY_BUTTON) {
         const postData: MentoringRequestPostData = { groupId, mentorId };
         await mentoringHttpClient.postMentoringRequests(postData);
+        toastify(MSG_MENTOR_APPLY_SUCCESS, 'SUCCESS');
       } else if (type === MentorButtonType.CANCEL_BUTTON) {
         const deleteQuery = `?mentor=${mentorId}&group=${groupId}`;
         await mentoringHttpClient.deleteMentoringRequests(deleteQuery);
+        toastify(MSG_MENTOR_CANCEL_SUCCESS, 'SUCCESS');
       }
+
+      
       dispatch(changeGroupModalState(ModalTypeEnum.NONE));
     };
   };

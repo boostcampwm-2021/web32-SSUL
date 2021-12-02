@@ -9,8 +9,9 @@ import { selectUser } from '@store/user/globalSlice';
 import { setProfileData } from '@store/user/profileSlice';
 import {
   MENTOR_TECH_STACK_INTRO,
+  MSG_MENTOR_REGISTER_SUCCESS,
+  MSG_MENTOR_RIGISTER_ERROR,
   MSG_MIN_TECH_STACK_INFO,
-  MSG_MENTOR_APPLY_ERROR,
 } from '@constants/consts';
 
 interface Props {
@@ -37,9 +38,10 @@ function CreateMentorStack({ onCancel }: Props): JSX.Element {
       });
       const { mentorId } = await mentoringHttpClient.getMentorId(user.id);
       dispatch(setProfileData({ mentorId, isMentor: true, mentoringStack: selectedTechStacks }));
+      toastify(MSG_MENTOR_REGISTER_SUCCESS, 'SUCCESS');
       onCancel();
     } catch (e) {
-      toastify(MSG_MENTOR_APPLY_ERROR, 'ERROR');
+      toastify(MSG_MENTOR_RIGISTER_ERROR, 'ERROR');
     }
   };
 

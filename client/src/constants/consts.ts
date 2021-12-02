@@ -57,7 +57,7 @@ export const WRITE_POST = '글쓰기';
 export const MAIN_MENTOR_INTRO1 = '인사이트를 넓힐 기회를 ';
 export const MAIN_MENTOR_INTRO2 = '손쉽게 가져보세요!';
 export const MAIN_GROUP_INTRO = '함께 성장할 동료를 찾아보세요!';
-export const CONTINUED_APPLY_GROUP = '진행중인 참여 그룹';
+export const CONTINUED_APPLY_GROUP = '참여중인 그룹';
 export const FINISHED_APPLY_GROUP = '완료된 참여 그룹';
 export const APPLIED_GROUP = '가입 신청한 그룹';
 export const OWNED_GROUP = '내가 만든 그룹';
@@ -90,7 +90,12 @@ export const MSG_POST_UPDATE_ERROR = '게시글 수정이 실패했습니다.';
 export const MSG_POST_DELETE_ERROR = '게시글 삭제가 실패했습니다.';
 
 export const MSG_NOT_JOIN_ERROR = '아직 가입되지 않은 그룹이에요ㅠㅠ';
-export const MSG_MENTOR_APPLY_ERROR = '멘토 신청에 실패했습니다!';
+export const MSG_MENTOR_RIGISTER_ERROR = '멘토 신청에 실패했습니다!';
+export const MSG_MENTOR_REGISTER_SUCCESS = '멘토 신청이 완료되었습니다!';
+export const MSG_GROUP_APPLY_SUCCESS = '그룹 신청이 완료되었습니다!';
+export const MSG_MENTOR_CANCEL_SUCCESS = '그룹 신청이 취소되었습니다!';
+export const MSG_MENTOR_APPLY_SUCCESS = '그룹 멘토 신청이 완료되었습니다.'
+
 
 // 디스크립션
 export const DESC_NOT_FOUND = '404 NOT FOUND';
