@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { MentorUserInfo } from '@types';
 import { GAUGE_BAR_DEFAULT_INDEX } from '@constants/consts';
+import { Link } from 'react-router-dom';
 
 interface Props {
   user: MentorUserInfo;
@@ -11,7 +12,9 @@ function MentorProfile({ user }: Props): JSX.Element {
   return (
     <Container>
       <Profile>
-        <ProfileImage src={user.avatarUrl} alt="프로필 이미지" />
+        <Link to={`/profile/${user.githubId}`}>
+          <ProfileImage src={user.avatarUrl} alt="프로필 이미지" />
+        </Link>
         <ProfileName>{user.name}</ProfileName>
       </Profile>
       <ShareStack style={{ width: `${GAUGE_BAR_DEFAULT_INDEX + user.shareStack}px` }}>
