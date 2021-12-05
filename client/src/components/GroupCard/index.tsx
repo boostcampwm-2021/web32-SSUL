@@ -59,6 +59,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 280px;
+  max-width: 310px;
   margin: 10px;
   padding: 10px;
   border: 1px ${(props) => props.theme.Gray5} solid;
