@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CategoryInput from './CategoryInput';
 import PersonnelInput from './PersonnelInput';
 import TechStackInput from './TechStackInput';
@@ -14,13 +14,14 @@ import { techStackHttpClient } from '@api';
 import { groupHttpClient } from '@api';
 import { useAppDispatch, useAppSelector, useToast } from '@hooks';
 import { selectUser } from '@store/user/globalSlice';
-import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO, MAX_CONTENT_INDEX } from '@constants/consts';
+import { MSG_GROUP_CREATE_ERROR, MSG_NEED_INFO, MAX_CONTENT_INDEX, MSG_DUP_CREATE_ERROR } from '@constants/consts';
 import { GroupCreatePageEnum } from '@constants/enums';
 
 function GroupCreatePage(): JSX.Element {
   const [contentsNumber, setContentsNumber] = useState<number>(0);
   const [categorys, setCategorys] = useState<Category[]>([]);
   const [techStacks, setTechStacks] = useState<TechStack[]>([]);
+  const createdState = useRef<boolean>(false);
   const groupData = useAppSelector(groupCreateDataState);
   const { id: ownerId } = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -82,10 +83,16 @@ function GroupCreatePage(): JSX.Element {
   };
 
   const requestGroupCreate = async () => {
+    if(createdState.current){
+      toastify(MSG_DUP_CREATE_ERROR, 'ERROR');
+      return;
+    }
+  
     try {
       if (!ownerId) return;
       const postGroupData = { ...groupData };
       postGroupData.ownerId = ownerId;
+      createdState.current = true;
       await groupHttpClient.postGroupCreate(postGroupData);
       window.location.href = '/';
     } catch (e) {

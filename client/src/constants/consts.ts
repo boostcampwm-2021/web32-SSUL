@@ -88,6 +88,7 @@ export const MSG_GROUP_CREATE_ERROR = '그룹생성에 실패했습니다.';
 export const MSG_POST_CREATE_ERROR = '게시글 작성이 실패했습니다.';
 export const MSG_POST_UPDATE_ERROR = '게시글 수정이 실패했습니다.';
 export const MSG_POST_DELETE_ERROR = '게시글 삭제가 실패했습니다.';
+export const MSG_DUP_CREATE_ERROR = '이미 그룹 생성이 진행중 입니다.'
 
 export const MSG_NOT_JOIN_ERROR = '아직 가입되지 않은 그룹이에요ㅠㅠ';
 export const MSG_MENTOR_RIGISTER_ERROR = '멘토 신청에 실패했습니다!';
