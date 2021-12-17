@@ -1,4 +1,5 @@
 import { getLoginCookie } from '@root/test/util/cookieSession';
+import { testConnection } from '@root/test/util/testConnection';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -7,7 +8,12 @@ describe('그룹 관리 컨트롤러', () => {
   let app: express.Application;
 
   beforeAll(async () => {
+    await testConnection.create();
     app = await appWrapper.getInstance();
+  });
+
+  afterAll(async () => {
+    await testConnection.close();
   });
 
   describe('[GET /api/group-owner/:gid] 그룹 id로 그룹 정보를 가져옴', () => {
