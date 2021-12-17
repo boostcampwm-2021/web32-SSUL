@@ -55,18 +55,18 @@ export class PostController {
     const { id: userId } = session.user;
     const { groupId } = postContent;
     await this.groupService.checkGroupBelong(userId, groupId);
-    await this.postService.createPost(postContent.toEntity(userId));
+    return await this.postService.createPost(postContent.toEntity(userId));
   }
 
   @OpenAPI({ summary: '그룹 게시글을 수정하는 API' })
   @Patch('/')
   @UseBefore(isLoggedIn)
   @OnUndefined(200)
-  public async updatePost(@Session() session: any, @Body() postContent: PostUpdateDto) {
+  public async updatePost(@Session() session: any, @Body() postUpdateDto: PostUpdateDto) {
     const { id: userId } = session.user;
-    const { groupId } = postContent;
+    const { groupId } = postUpdateDto;
     await this.groupService.checkGroupBelong(userId, groupId);
-    await this.postService.updatePost(userId, postContent);
+    return await this.postService.updatePost(userId, postUpdateDto);
   }
 
   @OpenAPI({ summary: '그룹 게시글을 삭제하는 API' })
