@@ -2,16 +2,15 @@ import { Service } from 'typedi';
 import { Repository, EntityRepository } from 'typeorm';
 import { PostUpdateDto } from '../dto/PostUpdateDto';
 import { Post } from '../models/Post';
-import { User } from '@domains/user/models/User';
 
 @Service()
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {
-  public findOneByPostIdOrFail(postId: number) {
+  public findOneByIdOrFail(postId: number) {
     return this.findOneOrFail({ where: { id: postId } });
   }
 
-  public findOneByWriterDataOrFail(postId: number, userId: number) {
+  public findOneByIdAndUserIdOrFail(postId: number, userId: number) {
     return this.findOneOrFail({ where: { id: postId, userId } });
   }
 
@@ -21,13 +20,16 @@ export class PostRepository extends Repository<Post> {
       order: { type: 'DESC', createdAt: 'DESC' },
       where: { groupId },
     });
-    test.then((data) => console.log(data));
     return test;
   }
 
-  public updateByPostId(post: PostUpdateDto) {
-    const { id, title, content, type } = post;
-    this.update({ id }, { title, content, type });
+  public async updateById(postId: number, postDto: PostUpdateDto) {
+    const { title, content, type } = postDto;
+    const existPost = await this.findOneOrFail(postId);
+    existPost.title = title;
+    existPost.content = content;
+    existPost.type = type;
+    return this.save(existPost);
   }
 
   public increaseHit(post: Post) {
@@ -35,7 +37,7 @@ export class PostRepository extends Repository<Post> {
     this.update({ id }, { hit: hit + 1 });
   }
 
-  public deleteByPostId(postId: number) {
+  public async deleteById(postId: number) {
     this.delete({ id: postId });
   }
 }
