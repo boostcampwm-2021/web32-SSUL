@@ -8,5 +8,4 @@ module.exports = {
     '^@config/(.*)$': '<rootDir>/src/config/$1',
     '^@error/(.*)$': '<rootDir>/src/common/error/$1',
   },
-  reporters: ['jest-silent-reporter'],
 };

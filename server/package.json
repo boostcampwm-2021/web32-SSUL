@@ -6,6 +6,7 @@
     "dev": "cp .env.dev .env && nodemon",
     "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
     "test": "cp .env.test .env && jest --runInBand --forceExit",
+    "test:silent": "cp .env.test .env && jest --reporters=jest-silent-reporter --runInBand --forceExit",
     "seed:dev": "cp .env.dev .env && ts-node -r tsconfig-paths/register ./bin/seed.ts"
   },
   "dependencies": {
