@@ -2,6 +2,7 @@ import { SimpleGroupCardResponse } from '@domains/group/dto/response/SimpleGroup
 import { ApplyGroupState } from '@domains/group/models/ApplyGroup';
 import { GroupState } from '@domains/group/models/Group';
 import { GroupEnrollmentAs } from '@domains/group/models/GroupEnrollment';
+import { testConnection } from '@root/test/util/testConnection';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -10,7 +11,12 @@ import { getLoginCookie } from '../../util/cookieSession';
 describe('그룹 컨트롤러', () => {
   let app: express.Application;
   beforeAll(async () => {
+    await testConnection.create();
     app = await appWrapper.getInstance();
+  });
+
+  afterAll(async () => {
+    await testConnection.close();
   });
 
   describe('GET /own/simple', () => {

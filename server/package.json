@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cp .env.dev .env && nodemon",
     "prod": "ts-node -r tsconfig-paths/register ./bin/www.ts",
-    "test": "cp .env.test .env && jest --setupFiles dotenv/config --forceExit",
+    "test": "cp .env.test .env && jest --runInBand --forceExit",
+    "test:silent": "cp .env.test .env && jest --reporters=jest-silent-reporter --runInBand --forceExit",
     "seed:dev": "cp .env.dev .env && ts-node -r tsconfig-paths/register ./bin/seed.ts"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "@types/swagger-ui-express": "^4.1.3",
     "@types/winston": "^2.4.4",
     "jest": "^27.3.1",
+    "jest-silent-reporter": "^0.5.0",
     "nodemon": "^2.0.13",
     "supertest": "^6.1.6",
     "ts-jest": "^27.0.7",

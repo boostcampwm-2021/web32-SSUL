@@ -4,14 +4,17 @@ import { Post, PostType } from '../models/Post';
 export class PostContentDto {
   @IsNumber()
   groupId: number;
+
   @IsString()
   @MinLength(1)
   @MaxLength(100)
   title: string;
+
   @IsString()
   @MinLength(1)
   @MaxLength(1023)
   content: string;
+
   @IsEnum(PostType)
   type: PostType;
 

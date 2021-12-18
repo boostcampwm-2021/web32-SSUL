@@ -1,3 +1,4 @@
+import { testConnection } from '@root/test/util/testConnection';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -6,7 +7,12 @@ import { getLoginCookie } from '../../util/cookieSession';
 describe('/mentoring', () => {
   let app: express.Application;
   beforeAll(async () => {
+    await testConnection.create();
     app = await appWrapper.getInstance();
+  });
+
+  afterAll(async () => {
+    await testConnection.close();
   });
 
   describe('[GET /mentor/:uid] 유저 id로 멘토링 id 가져옴', () => {

@@ -8,7 +8,6 @@ import { GroupTechStack } from '@domains/techstack/models/GroupTechStack';
 import { User } from '@domains/user/models/User';
 import { Mentor } from '@domains/mentoring/models/Mentor';
 import { GroupEnrollment } from '@domains/group/models/GroupEnrollment';
-import { Post } from '@domains/post/models/Post';
 import { ApplyGroup } from '@domains/group/models/ApplyGroup';
 import { Alarm } from '@domains/alarm/models/Alarm';
 
@@ -20,7 +19,6 @@ import {
   groupTechStackSeedData,
   groupEnrollmentSeedData,
   mentorSeedData,
-  postSeedData,
   applyGroupSeedData,
   mentorTechStackSeedData,
   mentoringRequestSeedData,
@@ -43,17 +41,36 @@ export async function seedWithConnection(connection: Connection) {
 }
 
 async function seedDatabase(connection: Connection) {
-  await connection.createQueryBuilder().insert().into(User).values(userSeedData).execute();
-  await connection.createQueryBuilder().insert().into(Category).values(catagorySeedData).execute();
-  await connection.createQueryBuilder().insert().into(Group).values(groupSeedData).execute();
-  await connection.createQueryBuilder().insert().into(Post).values(postSeedData).execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(User)
+    .values(userSeedData)
+    .execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(Category)
+    .values(catagorySeedData)
+    .execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(Group)
+    .values(groupSeedData)
+    .execute();
   await connection
     .createQueryBuilder()
     .insert()
     .into(TechStack)
     .values(techStackSeedData)
     .execute();
-  await connection.createQueryBuilder().insert().into(Mentor).values(mentorSeedData).execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(Mentor)
+    .values(mentorSeedData)
+    .execute();
   await connection
     .createQueryBuilder()
     .insert()
@@ -84,5 +101,10 @@ async function seedDatabase(connection: Connection) {
     .into(MentoringRequest)
     .values(mentoringRequestSeedData)
     .execute();
-  await connection.createQueryBuilder().insert().into(Alarm).values(alarmSeedData).execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(Alarm)
+    .values(alarmSeedData)
+    .execute();
 }

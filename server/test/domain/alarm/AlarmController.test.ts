@@ -1,4 +1,5 @@
 import { getLoginCookie } from '@root/test/util/cookieSession';
+import { testConnection } from '@root/test/util/testConnection';
 import express from 'express';
 import request from 'supertest';
 import appWrapper from '../../../src/app';
@@ -6,7 +7,12 @@ import appWrapper from '../../../src/app';
 describe('알림 컨트롤러', () => {
   let app: express.Application;
   beforeAll(async () => {
+    await testConnection.create();
     app = await appWrapper.getInstance();
+  });
+
+  afterAll(async () => {
+    await testConnection.close();
   });
 
   describe('GET /alarm', () => {
